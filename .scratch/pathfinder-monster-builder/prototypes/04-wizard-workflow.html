@@ -1,0 +1,1192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prototype — Pathfinder Monster Builder Wizard</title>
+  <style>
+    :root {
+      --paper: #f6f7fb;
+      --surface: #ffffff;
+      --surface-2: #eef1f7;
+      --ink: #172033;
+      --muted: #67728a;
+      --line: #d9deea;
+      --line-strong: #bdc6d8;
+      --accent: #3159c7;
+      --accent-soft: #e7edff;
+      --accent-ink: #203d91;
+      --good: #16734b;
+      --good-soft: #e3f6eb;
+      --warn: #a15c08;
+      --warn-soft: #fff3dc;
+      --bad: #a63142;
+      --bad-soft: #fff0f2;
+      --purple: #6944a3;
+      --purple-soft: #f1ebff;
+      --shadow: 0 14px 34px rgba(32, 47, 84, .08);
+      --radius: 14px;
+      --radius-sm: 9px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; background: var(--paper); }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    button:disabled { cursor: not-allowed; opacity: .52; }
+    a { color: var(--accent); }
+
+    .prototype-banner {
+      padding: 11px 24px;
+      color: #eef3ff;
+      background: #17264e;
+      font-size: 12px;
+      letter-spacing: .01em;
+    }
+    .prototype-banner strong { color: #fff; }
+    .prototype-banner .banner-question { max-width: 1240px; margin: 0 auto; }
+    .prototype-banner .banner-meta { color: #b9c8f4; margin-left: 8px; }
+
+    .app { max-width: 1440px; margin: 0 auto; padding: 22px 24px 100px; }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .eyebrow, .section-kicker {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 10px;
+      font-weight: 800;
+    }
+    h1, h2, h3, h4, p { margin-top: 0; }
+    h1 { margin-bottom: 5px; font-size: clamp(24px, 3vw, 38px); letter-spacing: -.035em; }
+    h2 { margin-bottom: 8px; font-size: 24px; letter-spacing: -.025em; }
+    h3 { margin-bottom: 5px; font-size: 16px; }
+    h4 { margin-bottom: 4px; font-size: 13px; }
+    .subtitle, .muted, .helper { color: var(--muted); }
+    .subtitle { margin-bottom: 0; font-size: 14px; }
+    .helper { font-size: 12px; line-height: 1.5; }
+    .top-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+
+    .button {
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      padding: 9px 13px;
+      color: var(--ink);
+      background: var(--surface);
+      transition: border-color .15s, background .15s, color .15s;
+    }
+    .button:hover { border-color: var(--accent); background: var(--accent-soft); }
+    .button.primary { border-color: var(--accent); color: #fff; background: var(--accent); }
+    .button.primary:hover { background: var(--accent-ink); }
+    .button.ghost { border-color: transparent; background: transparent; }
+    .button.danger { color: var(--bad); border-color: #edbbc5; background: var(--bad-soft); }
+    .button.ai { color: var(--purple); border-color: #c9b8ec; background: var(--purple-soft); }
+    .button.small { padding: 6px 9px; font-size: 12px; }
+
+    .pill, .status, .source-chip, .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .pill { padding: 5px 9px; font-size: 11px; font-weight: 750; color: var(--muted); background: var(--surface-2); }
+    .pill.good, .status.done { color: var(--good); background: var(--good-soft); }
+    .pill.warn, .status.attention, .status.optional { color: var(--warn); background: var(--warn-soft); }
+    .pill.bad, .status.blocked, .status.invalid { color: var(--bad); background: var(--bad-soft); }
+    .pill.ai { color: var(--purple); background: var(--purple-soft); }
+    .status { padding: 4px 8px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+    .status.current { color: var(--accent-ink); background: var(--accent-soft); }
+    .status.done::before, .status.blocked::before, .status.invalid::before,
+    .status.attention::before, .status.optional::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .source-chip { padding: 4px 8px; color: var(--accent-ink); background: var(--accent-soft); font-size: 10px; line-height: 1.3; }
+    .tag { padding: 3px 7px; color: var(--muted); background: var(--surface-2); font-size: 10px; font-weight: 700; }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .panel.pad { padding: 19px; }
+    .panel-head { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; }
+    .panel-head .helper { margin-bottom: 0; }
+    .divider { height: 1px; margin: 16px 0; background: var(--line); }
+    .stack { display: grid; gap: 12px; }
+    .stack-sm { display: grid; gap: 7px; }
+    .two-up { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .three-up { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+
+    /* Variant A: a conventional guided wizard. */
+    .variant-label { margin-bottom: 10px; color: var(--muted); font-size: 11px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    .layout-a { display: grid; grid-template-columns: 220px minmax(0, 1fr) 310px; gap: 16px; align-items: start; }
+    .rail { position: sticky; top: 16px; padding: 14px; }
+    .rail-title { padding: 4px 8px 12px; color: var(--muted); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; }
+    .rail-list { display: grid; gap: 4px; }
+    .rail-item {
+      display: grid; grid-template-columns: 27px minmax(0, 1fr) auto; gap: 8px; align-items: center;
+      width: 100%; padding: 8px; border: 1px solid transparent; border-radius: 9px; color: var(--ink); background: transparent; text-align: left;
+    }
+    .rail-item:hover { background: var(--surface-2); }
+    .rail-item.current { border-color: #b9c9ff; background: var(--accent-soft); }
+    .rail-number { display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; color: var(--muted); background: var(--surface-2); font-size: 11px; font-weight: 850; }
+    .rail-item.current .rail-number { color: #fff; background: var(--accent); }
+    .rail-item.done .rail-number { color: #fff; background: var(--good); }
+    .rail-item.blocked .rail-number, .rail-item.invalid .rail-number { color: #fff; background: var(--bad); }
+    .rail-copy { min-width: 0; }
+    .rail-copy strong { display: block; overflow: hidden; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+    .rail-copy span { display: block; color: var(--muted); font-size: 10px; }
+    .rail-item .mini-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line-strong); }
+    .rail-item.done .mini-dot { background: var(--good); }
+    .rail-item.blocked .mini-dot, .rail-item.invalid .mini-dot { background: var(--bad); }
+    .rail-note { margin: 13px 7px 2px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; line-height: 1.45; }
+
+    .main-column, .right-column { display: grid; gap: 14px; min-width: 0; }
+    .live-note { padding: 11px 13px; border: 1px solid #cbd7ff; border-radius: 10px; color: var(--accent-ink); background: var(--accent-soft); font-size: 12px; line-height: 1.45; }
+    .step-panel { overflow: hidden; }
+    .step-panel > .step-content { padding: 22px; }
+    .step-panel-footer { display: flex; justify-content: space-between; gap: 10px; padding: 13px 18px; border-top: 1px solid var(--line); background: #fbfcff; }
+    .step-panel-footer .footer-right { display: flex; gap: 8px; }
+    .source-row { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 16px; }
+
+    /* Variant B: a dependency graph and workbench. */
+    .layout-b { display: grid; gap: 15px; }
+    .dependency-board { padding: 19px 20px 20px; overflow-x: auto; }
+    .dependency-board .board-intro { display: flex; justify-content: space-between; gap: 20px; align-items: flex-end; margin-bottom: 18px; min-width: 760px; }
+    .dependency-board .board-intro p { max-width: 670px; margin-bottom: 0; }
+    .node-row { display: grid; grid-template-columns: repeat(10, minmax(105px, 1fr)); min-width: 1100px; gap: 0; }
+    .node-wrap { position: relative; padding-right: 13px; }
+    .node-wrap::after { content: ""; position: absolute; top: 23px; right: 0; width: 14px; height: 2px; background: var(--line-strong); }
+    .node-wrap:last-child::after { display: none; }
+    .node {
+      position: relative; z-index: 1; display: grid; gap: 5px; width: 100%; min-height: 77px; padding: 10px; border: 1px solid var(--line); border-radius: 11px; color: var(--ink); background: var(--surface); text-align: left;
+    }
+    .node:hover { border-color: var(--accent); }
+    .node.current { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .node.invalid, .node.blocked { border-color: #eab8c1; background: #fffafb; }
+    .node.done { border-color: #b9e5cf; background: #f7fffa; }
+    .node-number { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 10px; font-weight: 850; }
+    .node-title { font-size: 11px; font-weight: 800; line-height: 1.18; }
+    .node-state { color: var(--muted); font-size: 10px; }
+    .board-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; color: var(--muted); font-size: 11px; }
+    .legend-item { display: inline-flex; align-items: center; gap: 5px; }
+    .legend-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line-strong); }
+    .legend-dot.green { background: var(--good); }
+    .legend-dot.red { background: var(--bad); }
+    .legend-dot.blue { background: var(--accent); }
+    .workbench-b { display: grid; grid-template-columns: minmax(0, 1fr) 370px; gap: 15px; align-items: start; }
+    .b-side, .b-main { display: grid; gap: 15px; min-width: 0; }
+    .dependency-detail { padding: 17px 19px; }
+    .dependency-row { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; align-items: center; gap: 8px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 12px; }
+    .dependency-row:first-child { border-top: 0; }
+    .dependency-icon { display: grid; place-items: center; width: 21px; height: 21px; border-radius: 50%; color: #fff; background: var(--good); font-size: 11px; font-weight: 900; }
+    .dependency-icon.blocked { background: var(--bad); }
+    .dependency-icon.optional { color: var(--warn); background: var(--warn-soft); }
+
+    /* Variant C: a dense decision worksheet. */
+    .layout-c { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 15px; align-items: start; }
+    .worksheet, .provenance { display: grid; gap: 12px; min-width: 0; }
+    .worksheet-intro { padding: 20px 22px; }
+    .worksheet-row { display: grid; grid-template-columns: 42px minmax(0, 1fr) auto 22px; gap: 12px; align-items: center; width: 100%; padding: 13px 17px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); background: var(--surface); text-align: left; }
+    .worksheet-row:hover { border-color: var(--accent); }
+    .worksheet-row.current { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .worksheet-row.done { background: #fbfffc; }
+    .worksheet-row.blocked, .worksheet-row.invalid { background: #fffafb; }
+    .worksheet-number { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; color: var(--muted); background: var(--surface-2); font-size: 12px; font-weight: 900; }
+    .worksheet-row.done .worksheet-number { color: #fff; background: var(--good); }
+    .worksheet-row.blocked .worksheet-number, .worksheet-row.invalid .worksheet-number { color: #fff; background: var(--bad); }
+    .worksheet-copy strong { display: block; font-size: 13px; }
+    .worksheet-copy span { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+    .worksheet-arrow { color: var(--muted); font-size: 19px; }
+    .worksheet-detail { padding: 20px 22px; border: 1px solid #b9c9ff; border-radius: 12px; background: #fbfcff; }
+    .provenance-card { padding: 17px; }
+    .source-ledger { display: grid; gap: 8px; }
+    .source-ledger-row { display: grid; gap: 3px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+    .source-ledger-row:last-child { padding-bottom: 0; border-bottom: 0; }
+    .source-ledger-row strong { font-size: 11px; }
+    .source-ledger-row span { color: var(--muted); font-size: 10px; line-height: 1.3; }
+
+    /* Step forms and shared contents. */
+    .step-heading { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; }
+    .step-heading .helper { max-width: 660px; margin-bottom: 0; }
+    .step-title { margin-bottom: 4px; }
+    .field-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(130px, .6fr); gap: 12px; margin-top: 18px; }
+    .field { display: grid; gap: 6px; }
+    .field label, .field > span { color: var(--muted); font-size: 11px; font-weight: 800; }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 10px 11px; border: 1px solid var(--line-strong); border-radius: 8px; outline: 0; color: var(--ink); background: #fff;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .choice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 17px; }
+    .choice-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .choice {
+      display: grid; gap: 7px; min-height: 106px; padding: 13px; border: 1px solid var(--line); border-radius: 11px; color: var(--ink); background: var(--surface); text-align: left;
+    }
+    .choice:hover { border-color: var(--accent); }
+    .choice.selected { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 2px #d7e0ff; }
+    .choice strong { font-size: 13px; }
+    .choice p { margin-bottom: 0; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .choice .choice-meta { color: var(--accent-ink); font-size: 10px; font-weight: 800; }
+    .inline-choices { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+    .chip-button { padding: 7px 10px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--ink); background: var(--surface); font-size: 12px; }
+    .chip-button:hover, .chip-button.selected { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+    .chip-button.selected { font-weight: 800; }
+    .info-box { margin-top: 16px; padding: 12px 13px; border-left: 3px solid var(--accent); color: var(--muted); background: #f7f9ff; font-size: 12px; line-height: 1.5; }
+    .info-box.warn { border-left-color: var(--warn); background: var(--warn-soft); }
+    .info-box.ai { border-left-color: var(--purple); background: var(--purple-soft); }
+    .selection-list { display: grid; gap: 7px; margin-top: 13px; }
+    .selection-row { display: flex; justify-content: space-between; gap: 10px; align-items: center; padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px; background: #fff; font-size: 12px; }
+    .selection-row .selection-text { display: flex; gap: 8px; align-items: center; }
+    .selection-row .selection-text strong { font-size: 12px; }
+    .selection-row .selection-text span { color: var(--muted); font-size: 11px; }
+    .selection-row.active { border-color: #b8c9ff; background: #fafbff; }
+    .counter { display: inline-flex; gap: 5px; align-items: baseline; color: var(--muted); font-size: 11px; }
+    .counter strong { color: var(--ink); font-size: 16px; }
+    .baseline-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 16px; }
+    .metric { padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: #fcfdff; }
+    .metric span { display: block; color: var(--muted); font-size: 10px; }
+    .metric strong { display: block; margin-top: 3px; font-size: 14px; }
+    .metric small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
+    .step-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 17px; }
+
+    /* Validation, trace, AI, and reality check. */
+    .validation-panel, .reality-panel, .state-panel { padding: 16px; }
+    .validation-summary { margin: 10px 0 13px; padding: 9px 10px; border-radius: 8px; color: var(--muted); background: var(--surface-2); font-size: 11px; line-height: 1.45; }
+    .issue-stack { display: grid; gap: 8px; }
+    .issue { padding: 10px; border: 1px solid var(--line); border-radius: 9px; background: #fff; }
+    .issue.incomplete { border-color: #f0d29d; background: #fffdf7; }
+    .issue.invalid { border-color: #edbbc5; background: var(--bad-soft); }
+    .issue.review { border-color: #c9b8ec; background: var(--purple-soft); }
+    .issue-head { display: flex; justify-content: space-between; gap: 8px; align-items: flex-start; }
+    .issue-code { color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .05em; }
+    .issue p { margin: 5px 0 7px; font-size: 11px; line-height: 1.4; }
+    .issue-footer { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .issue-footer .source-chip { font-size: 9px; }
+    .result-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+    .result-card { padding: 10px; border: 1px solid var(--line); border-radius: 8px; }
+    .result-card span { display: block; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; }
+    .result-card strong { display: block; margin-top: 4px; font-size: 13px; }
+    .result-card small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.35; }
+    .trace { display: grid; gap: 6px; margin-top: 13px; padding-top: 12px; border-top: 1px solid var(--line); }
+    .trace-row { display: flex; gap: 8px; align-items: baseline; font-size: 10px; line-height: 1.4; }
+    .trace-row code { color: var(--accent-ink); background: var(--accent-soft); padding: 2px 4px; border-radius: 4px; }
+    .reality-list { display: grid; gap: 8px; margin-top: 11px; }
+    .reality-item { padding: 10px; border: 1px solid #c9b8ec; border-radius: 9px; background: var(--purple-soft); }
+    .reality-item strong { display: block; font-size: 12px; }
+    .reality-item p { margin: 5px 0 8px; color: #57417c; font-size: 11px; line-height: 1.4; }
+    .reality-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+    .state-list { display: grid; gap: 5px; margin: 10px 0 0; padding: 0; list-style: none; }
+    .state-list li { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 11px; }
+    .state-list strong { color: var(--ink); font-weight: 800; text-align: right; }
+    details summary { cursor: pointer; color: var(--accent-ink); font-size: 11px; font-weight: 750; }
+    .state-json { max-height: 240px; overflow: auto; margin: 10px 0 0; padding: 10px; border-radius: 8px; color: #e9efff; background: #1d2740; font-size: 10px; line-height: 1.45; }
+    .activity { display: grid; gap: 7px; margin-top: 11px; }
+    .activity-row { display: flex; gap: 7px; align-items: baseline; color: var(--muted); font-size: 10px; line-height: 1.35; }
+    .activity-row b { color: var(--ink); }
+
+    .modal-backdrop { position: fixed; z-index: 10; inset: 0; display: grid; place-items: center; padding: 20px; background: rgba(18, 27, 52, .46); }
+    .proposal-modal { width: min(760px, 100%); max-height: min(850px, calc(100vh - 40px)); overflow: auto; padding: 20px; border: 1px solid #c9b8ec; border-radius: 16px; background: var(--surface); box-shadow: 0 24px 70px rgba(23, 28, 57, .25); }
+    .proposal-head { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; }
+    .proposal-head h2 { color: var(--purple); }
+    .proposal-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
+    .proposal-change { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 9px; padding: 12px 0; border-top: 1px solid var(--line); }
+    .proposal-change:first-child { border-top: 0; }
+    .proposal-change input { margin-top: 3px; accent-color: var(--purple); }
+    .proposal-change strong { display: block; font-size: 12px; }
+    .proposal-change p { margin: 4px 0 5px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .diff { display: inline-flex; flex-wrap: wrap; gap: 4px; align-items: center; color: var(--muted); font-size: 10px; }
+    .diff code { padding: 3px 5px; border-radius: 4px; font-size: 10px; }
+    .diff .from { color: var(--bad); background: var(--bad-soft); }
+    .diff .to { color: var(--good); background: var(--good-soft); }
+    .proposal-footer { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding-top: 15px; border-top: 1px solid var(--line); }
+    .proposal-footer label { display: flex; gap: 7px; align-items: flex-start; color: var(--muted); font-size: 11px; line-height: 1.35; }
+    .proposal-footer input { margin-top: 2px; accent-color: var(--purple); }
+    .proposal-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 7px; }
+    .stale-box { margin: 12px 0; padding: 10px; border: 1px solid #edbbc5; border-radius: 8px; color: var(--bad); background: var(--bad-soft); font-size: 11px; line-height: 1.4; }
+
+    .toast { position: fixed; z-index: 20; right: 22px; bottom: 83px; max-width: 360px; padding: 11px 14px; border: 1px solid var(--line-strong); border-radius: 10px; color: var(--ink); background: var(--surface); box-shadow: var(--shadow); font-size: 12px; line-height: 1.4; }
+    .toast.good { border-color: #b9e5cf; background: var(--good-soft); }
+    .toast.bad { border-color: #edbbc5; background: var(--bad-soft); }
+
+    .variant-switcher { position: fixed; z-index: 30; left: 50%; bottom: 17px; display: flex; transform: translateX(-50%); align-items: center; gap: 8px; padding: 7px 9px; border: 1px solid #101b3b; border-radius: 999px; color: #eff3ff; background: #17264e; box-shadow: 0 12px 30px rgba(18, 27, 52, .24); }
+    .variant-switcher button { display: grid; place-items: center; width: 28px; height: 28px; border: 0; border-radius: 50%; color: #eff3ff; background: #2c4075; font-size: 16px; }
+    .variant-switcher button:hover { background: var(--accent); }
+    .variant-switcher .switcher-label { min-width: 145px; text-align: center; font-size: 11px; font-weight: 750; }
+
+    @media (max-width: 1180px) {
+      .layout-a { grid-template-columns: 190px minmax(0, 1fr); }
+      .layout-a .right-column { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+    }
+    @media (max-width: 920px) {
+      .topbar { display: grid; }
+      .top-actions { justify-content: flex-start; }
+      .layout-a, .workbench-b, .layout-c { grid-template-columns: 1fr; }
+      .rail { position: static; }
+      .rail-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .layout-a .right-column { grid-column: auto; grid-template-columns: 1fr; }
+      .layout-c .provenance { order: 2; }
+    }
+    @media (max-width: 620px) {
+      .app { padding: 16px 12px 100px; }
+      .prototype-banner { padding: 10px 12px; }
+      .banner-meta { display: block; margin: 4px 0 0 !important; }
+      .field-grid, .choice-grid, .choice-grid.two, .two-up, .three-up { grid-template-columns: 1fr; }
+      .baseline-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .rail-list { grid-template-columns: 1fr; }
+      .step-heading, .panel-head, .proposal-footer { display: grid; }
+      .step-panel > .step-content { padding: 17px; }
+      .step-panel-footer { display: grid; }
+      .step-panel-footer .footer-right { justify-content: stretch; }
+      .step-panel-footer .footer-right .button { flex: 1; }
+      .variant-switcher .switcher-label { min-width: 113px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    /*
+     * PROTOTYPE QUESTION
+     * Can an English wizard make all nine rule steps visible, allow safe back-jumping,
+     * explain live dependencies, and keep AI proposals / Reality Check review separate
+     * from authoritative strict selections?
+     *
+     * This is deliberately in-memory throwaway UI code. It is not the rules engine.
+     */
+
+    const SOURCE = {
+      concept: "Pathfinder Unchained.pdf, printed pp. 194–195 (viewer pp. 1–2); TXT lines 28–187",
+      array: "Pathfinder Unchained.pdf, printed pp. 196–203 (viewer pp. 3–10); TXT lines 188–801",
+      type: "Pathfinder Unchained.pdf, printed pp. 204–213 (viewer pp. 11–20); TXT lines 802–1750",
+      subtype: "Pathfinder Unchained.pdf, printed pp. 214–215 (viewer pp. 21–22); TXT lines 1751–1938",
+      template: "Pathfinder Unchained.pdf, printed p. 216 (viewer p. 23); TXT lines 1939–2090",
+      size: "Pathfinder Unchained.pdf, printed p. 217 (viewer p. 24); TXT lines 2091–2135",
+      spells: "Pathfinder Unchained.pdf, printed pp. 218–227 (viewer pp. 25–34); TXT lines 2136–3131",
+      options: "Pathfinder Unchained.pdf, printed pp. 228–239 (viewer pp. 35–46); TXT lines 3132–4333",
+      skills: "Pathfinder Unchained.pdf, printed p. 240 (viewer p. 47); TXT lines 4334–4409",
+      damage: "Pathfinder Unchained.pdf, printed p. 241 (viewer p. 48); TXT lines 4410–4497",
+      bestiary: "beastiary.txt, Table 1–1 lines 5–24; Table 3–1 lines 148–160"
+    };
+
+    const STEPS = [
+      { id: "concept", number: "B", label: "Before You Begin", short: "Concept", source: SOURCE.concept },
+      { id: "array", number: "1", label: "Array", short: "Baseline", source: SOURCE.array },
+      { id: "type", number: "2", label: "Creature / Class Graft", short: "Graft", source: SOURCE.type },
+      { id: "subtype", number: "3", label: "Subtype Graft", short: "Optional subtype", source: SOURCE.subtype, optional: true },
+      { id: "template", number: "4", label: "Template Graft", short: "Optional template", source: SOURCE.template, optional: true },
+      { id: "size", number: "5", label: "Size Graft", short: "Size", source: SOURCE.size, optional: true },
+      { id: "spells", number: "6", label: "Spells", short: "Spell access", source: SOURCE.spells, optional: true },
+      { id: "options", number: "7", label: "Monster Options", short: "Abilities", source: SOURCE.options },
+      { id: "skills", number: "8", label: "Skills", short: "Good / master", source: SOURCE.skills },
+      { id: "damage", number: "9", label: "Damage", short: "Attack profile", source: SOURCE.damage }
+    ];
+
+    const ARRAYS = {
+      combatant: {
+        label: "Combatant", description: "High attacks, defenses, and hit points; mostly combat options.",
+        ac: "23", touch: "13", flat: "17", saves: "Fort +9 · Ref +9 · Will +7", cmd: "26", hp: "110", abilityDC: "16", spellDC: "13",
+        modifiers: "+6, +4, +2", master: "+16 (1)", good: "+13 (2)", slots: ["1 combat", "1 any"],
+        attacks: { weaponHigh: "+15 (26)", weaponLow: "+11/+6 (19)", naturalTwo: "2 at +15 (20)", naturalThree: "1 at +15 (26), 2 at +10 (13)" }
+      },
+      expert: {
+        label: "Expert", description: "Strong skills, interaction, and flexible or cunning options.",
+        ac: "21", touch: "12", flat: "15", saves: "Fort +7 · Ref +7 · Will +11", cmd: "24", hp: "100", abilityDC: "18", spellDC: "15",
+        modifiers: "+6, +4, +2", master: "+16 (3)", good: "+13 (2)", slots: ["1 any", "1 social"],
+        attacks: { weaponHigh: "+15 (23)", weaponLow: "+11/+6 (17)", naturalTwo: "2 at +11 (18)", naturalThree: "1 at +11 (24), 2 at +6 (12)" }
+      },
+      spellcaster: {
+        label: "Spellcaster", description: "Magic-first; weaker physical combat and automatic access to Step 6.",
+        ac: "19", touch: "11", flat: "14", saves: "Fort +7 · Ref +7 · Will +11", cmd: "22", hp: "90", abilityDC: "18", spellDC: "17",
+        modifiers: "+6, +4, +2", master: "+16 (2)", good: "+13 (1)", slots: ["1 magic", "1 any"],
+        attacks: { weaponHigh: "+15 (21)", weaponLow: "+11/+6 (16)", naturalTwo: "2 at +11 (16)", naturalThree: "1 at +11 (21), 2 at +6 (11)" }
+      }
+    };
+
+    const INITIAL_STATE = {
+      variant: new URLSearchParams(location.search).get("variant") || "A",
+      currentStep: 0,
+      revision: 3,
+      fingerprint: "draft-3-ashen-tide",
+      finalized: false,
+      lastAction: "Prototype opened with an incomplete but inspectable draft.",
+      concept: {
+        name: "Ashen Tide Oracle",
+        targetCR: 8,
+        role: "Controller",
+        theme: "An undead seer who turns forgotten prophecy into battlefield control."
+      },
+      selections: {
+        array: "spellcaster",
+        creatureType: "undead",
+        classGraft: "none",
+        subtype: "none",
+        template: "none",
+        size: "Medium",
+        spellList: null,
+        options: [],
+        skills: { master: [], good: [] },
+        attackProfile: null
+      },
+      proposal: {
+        id: "proposal-17",
+        baseRevision: 3,
+        baseFingerprint: "draft-3-ashen-tide",
+        status: "ready",
+        selected: ["spell-list", "master-skills", "good-skill", "options"],
+        confirmed: false,
+        changes: [
+          {
+            id: "spell-list", path: "selections.spellList", label: "Choose the Divination spell list",
+            from: "Not selected", to: "Divination", rationale: "The oracle's prophecy theme maps to the source's divination list; the list also supplies a visible thematic benefit.", source: SOURCE.spells,
+            apply: function (s) { s.selections.spellList = "divination"; }
+          },
+          {
+            id: "master-skills", path: "selections.skills.master", label: "Assign two master skills",
+            from: "None", to: "Spellcraft · Knowledge (religion)", rationale: "These make the draft's magical and undead identity legible without changing array bonuses.", source: SOURCE.skills,
+            apply: function (s) { s.selections.skills.master = ["Spellcraft", "Knowledge (religion)"]; }
+          },
+          {
+            id: "good-skill", path: "selections.skills.good", label: "Assign the remaining good skill",
+            from: "None", to: "Sense Motive", rationale: "Perception already uses the good modifier automatically; Sense Motive gives the oracle a deliberate social read.", source: SOURCE.skills,
+            apply: function (s) { s.selections.skills.good = ["Sense Motive"]; }
+          },
+          {
+            id: "options", path: "selections.options", label: "Fill the magic and any option slots",
+            from: "0 selected", to: "Bestow minor condition · Channel resistance", rationale: "One magic option and one any option complete the CR 8 spellcaster budget while keeping the encounter focused.", source: SOURCE.options,
+            apply: function (s) { s.selections.options = ["Bestow minor condition", "Channel resistance"]; }
+          }
+        ],
+        assumptions: [
+          "The creature is primarily defined by its undead type, not by a class graft.",
+          "Medium size and no template are intentional.",
+          "The player-facing attack is a weapon profile; the option set carries the encounter identity."
+        ],
+        nonCanonicalSuggestions: [
+          "If the finished encounter still feels too passive, consider a source-defined extra attack or a different option; do not edit attack bonuses in Strict Mode."
+        ]
+      },
+      reality: { visible: false, status: "not-run", items: [] },
+      ui: { proposalOpen: false, toast: null },
+      events: [
+        { actor: "system", text: "Draft created from a concept fixture.", revision: 3 },
+        { actor: "ai", text: "Proposal-17 is ready but has not changed the Draft.", revision: 3 }
+      ]
+    };
+
+    const state = JSON.parse(JSON.stringify(INITIAL_STATE));
+    // Restore proposal functions after the JSON clone removes functions.
+    state.proposal.changes.forEach(function (change, index) {
+      change.apply = INITIAL_STATE.proposal.changes[index].apply;
+    });
+
+    const VARIANTS = [
+      { key: "A", name: "Guided rail", description: "A linear wizard with a visible step rail and live side checks." },
+      { key: "B", name: "Dependency workbench", description: "A graph-first layout that makes prerequisites and back-jumps explicit." },
+      { key: "C", name: "Decision worksheet", description: "A dense review sheet with inline step summaries and a provenance ledger." }
+    ];
+
+    const DEPENDENCIES = [
+      [], [0], [0, 1], [0, 1, 2], [0, 1, 2], [0, 1], [1], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6, 7], [1]
+    ];
+
+    function esc(value) {
+      return String(value == null ? "" : value)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    function currentArray() { return ARRAYS[state.selections.array] || ARRAYS.spellcaster; }
+    function currentCR() { return Number(state.concept.targetCR) || 0; }
+    function expectedSkills() {
+      const master = Number((currentArray().master.match(/\((\d+)\)/) || [0, 0])[1]);
+      const good = Number((currentArray().good.match(/\((\d+)\)/) || [0, 0])[1]);
+      return { master: master, good: good };
+    }
+    function expectedOptionCount() { return currentArray().slots.length; }
+
+    function issue(step, type, code, message, fix, source, path) {
+      return { step: step, type: type, code: code, message: message, fix: fix, source: source, path: path || "draft" };
+    }
+
+    function evaluate() {
+      const issues = [];
+      if (!state.concept.name.trim()) issues.push(issue(0, "incomplete", "CONCEPT_NAME_REQUIRED", "Give the monster a working name. Concept text is input, not a derived statistic.", "Name the monster", SOURCE.concept, "concept.name"));
+      if (!state.concept.role) issues.push(issue(0, "incomplete", "CONCEPT_ROLE_REQUIRED", "Choose the role this creature is meant to play in the encounter.", "Choose a role", SOURCE.concept, "concept.role"));
+      if (!state.concept.targetCR) issues.push(issue(0, "incomplete", "TARGET_CR_REQUIRED", "Choose a target CR before the array and CR-gated grafts can be evaluated.", "Choose a target CR", SOURCE.concept, "concept.targetCR"));
+
+      if (!state.selections.array) issues.push(issue(1, "incomplete", "ARRAY_REQUIRED", "Exactly one baseline array is required; later grafts do not invent a baseline.", "Choose an array", SOURCE.array, "selections.array"));
+      if (!state.selections.creatureType) issues.push(issue(2, "incomplete", "CREATURE_TYPE_REQUIRED", "Choose a creature type, even when a class graft is the primary definition.", "Choose a creature type", SOURCE.type, "selections.creatureType"));
+      if (state.selections.classGraft === "oracle" && state.selections.array !== "spellcaster") issues.push(issue(2, "invalid", "CLASS_ARRAY_MISMATCH", "The Oracle class graft requires the Spellcaster array; choose that array or remove the class graft.", "Resolve the required array", SOURCE.type, "selections.classGraft"));
+      if (state.selections.template === "lich" && state.selections.creatureType !== "undead") issues.push(issue(4, "invalid", "TEMPLATE_TYPE_MISMATCH", "The Lich template requires the Undead creature type.", "Choose Undead or remove the template", SOURCE.template, "selections.template"));
+      if (state.selections.template === "lich" && currentCR() < 2) issues.push(issue(4, "invalid", "TEMPLATE_CR_TOO_LOW", "The Lich template requires CR 2 or higher.", "Raise CR or remove the template", SOURCE.template, "concept.targetCR"));
+
+      const size = state.selections.size;
+      const cr = currentCR();
+      const limits = { Fine: { max: 2 }, Diminutive: { max: 4 }, Tiny: { max: 6 }, Large: { min: 2 }, Huge: { min: 4 }, Gargantuan: { min: 6 }, Colossal: { min: 8 } };
+      const limit = limits[size];
+      if (limit && limit.max && cr > limit.max) issues.push(issue(5, "invalid", "SIZE_CR_TOO_HIGH", `${size} is limited to CR ${limit.max} or lower, but this draft is CR ${cr}.`, "Choose a legal size or change CR", SOURCE.size, "selections.size"));
+      if (limit && limit.min && cr < limit.min) issues.push(issue(5, "invalid", "SIZE_CR_TOO_LOW", `${size} requires CR ${limit.min} or higher, but this draft is CR ${cr}.`, "Choose a legal size or change CR", SOURCE.size, "selections.size"));
+      if (size === "Huge" || size === "Gargantuan" || size === "Colossal") {
+        if (state.selections.skills.master.indexOf("Stealth") >= 0) issues.push(issue(5, "invalid", "SIZE_STEALTH_MASTER_FORBIDDEN", `${size} cannot use Stealth as a master skill in this source graft.`, "Move Stealth out of master skills", SOURCE.size, "selections.skills.master"));
+      }
+      if (size === "Gargantuan" || size === "Colossal") {
+        if (state.selections.skills.master.indexOf("Fly") >= 0) issues.push(issue(5, "invalid", "SIZE_FLY_MASTER_FORBIDDEN", `${size} cannot use Fly as a master skill in this source graft.`, "Move Fly out of master skills", SOURCE.size, "selections.skills.master"));
+      }
+
+      if (state.selections.array === "spellcaster" && !state.selections.spellList) {
+        issues.push(issue(6, "incomplete", "SPELL_LIST_REQUIRED", "The Spellcaster array automatically reaches Step 6. Select a themed spell list before spells can be derived.", "Choose a spell list", SOURCE.spells, "selections.spellList"));
+      }
+
+      const optionCount = expectedOptionCount();
+      if (state.selections.options.length < optionCount) issues.push(issue(7, "incomplete", "OPTION_SLOTS_OPEN", `${optionCount - state.selections.options.length} option slot${optionCount - state.selections.options.length === 1 ? " is" : "s are"} still open for the selected array and CR.`, "Fill the option slots", SOURCE.options, "selections.options"));
+      if (state.selections.options.length > optionCount) issues.push(issue(7, "invalid", "OPTION_BUDGET_EXCEEDED", `This draft has ${state.selections.options.length} selected options but the current array fixture exposes ${optionCount} slots before grafts.`, "Remove an option or choose a source-defined grant", SOURCE.options, "selections.options"));
+
+      const skillNeeds = expectedSkills();
+      if (state.selections.skills.master.length < skillNeeds.master) issues.push(issue(8, "incomplete", "MASTER_SKILLS_OPEN", `${skillNeeds.master - state.selections.skills.master.length} master skill choice${skillNeeds.master - state.selections.skills.master.length === 1 ? " is" : "s are"} still open.`, "Assign master skills", SOURCE.skills, "selections.skills.master"));
+      if (state.selections.skills.good.length < skillNeeds.good) issues.push(issue(8, "incomplete", "GOOD_SKILLS_OPEN", `${skillNeeds.good - state.selections.skills.good.length} good skill choice${skillNeeds.good - state.selections.skills.good.length === 1 ? " is" : "s are"} still open. Perception already uses the good modifier automatically.`, "Assign good skills", SOURCE.skills, "selections.skills.good"));
+      if (state.selections.skills.master.length > skillNeeds.master) issues.push(issue(8, "invalid", "MASTER_SKILL_BUDGET_EXCEEDED", `The current array fixture provides ${skillNeeds.master} master skill slots before grafts, but ${state.selections.skills.master.length} are selected.`, "Remove a master skill or use a source-defined grant", SOURCE.skills, "selections.skills.master"));
+      if (state.selections.skills.good.length > skillNeeds.good) issues.push(issue(8, "invalid", "GOOD_SKILL_BUDGET_EXCEEDED", `The current array fixture provides ${skillNeeds.good} good skill slot${skillNeeds.good === 1 ? "" : "s"} before grafts, but ${state.selections.skills.good.length} are selected.`, "Remove a good skill or use a source-defined grant", SOURCE.skills, "selections.skills.good"));
+
+      if (!state.selections.attackProfile) issues.push(issue(9, "incomplete", "ATTACK_PROFILE_REQUIRED", "Choose the source attack presentation before Step 9 can map average damage to dice.", "Choose an attack profile", SOURCE.damage, "selections.attackProfile"));
+
+      const invalid = issues.some(function (item) { return item.type === "invalid"; });
+      const incomplete = issues.some(function (item) { return item.type === "incomplete"; });
+      return {
+        status: invalid ? "invalid" : incomplete ? "incomplete" : "valid",
+        issues: issues,
+        warningCount: state.reality.items.length,
+        canonicalAvailable: !invalid && !incomplete,
+        effectiveAvailable: !invalid && !incomplete,
+        baseline: currentArray()
+      };
+    }
+
+    function stepStatus(index) {
+      const evaluation = evaluate();
+      const own = evaluation.issues.filter(function (item) { return item.step === index; });
+      const step = STEPS[index];
+      if (own.some(function (item) { return item.type === "invalid"; })) return "invalid";
+      if (own.some(function (item) { return item.type === "incomplete"; })) return "blocked";
+      if (step.optional && optionalStepEmpty(index)) return "optional";
+      return "done";
+    }
+
+    function optionalStepEmpty(index) {
+      if (index === 3) return state.selections.subtype === "none";
+      if (index === 4) return state.selections.template === "none";
+      if (index === 5) return state.selections.size === "Medium";
+      if (index === 6) return state.selections.array !== "spellcaster";
+      return false;
+    }
+
+    function statusLabel(status) {
+      return { done: "Ready", blocked: "Needs input", invalid: "Invalid", optional: "Optional", attention: "Review", current: "Here" }[status] || status;
+    }
+
+    function statusBadge(status) { return `<span class="status ${esc(status)}">${esc(statusLabel(status))}</span>`; }
+
+    function recordDraftChange(text, actor) {
+      state.revision += 1;
+      state.fingerprint = `draft-${state.revision}-${state.concept.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "unnamed"}`;
+      state.finalized = false;
+      state.lastAction = text;
+      state.events.unshift({ actor: actor || "user", text: text, revision: state.revision });
+      if (state.proposal.baseRevision !== state.revision) state.proposal.status = "stale";
+      state.proposal.confirmed = false;
+      state.reality.visible = false;
+      state.reality.status = "not-run";
+      state.reality.items = [];
+      state.ui.toast = null;
+    }
+
+    function setVariant(key) {
+      state.variant = key;
+      const url = new URL(location.href);
+      url.searchParams.set("variant", key);
+      history.replaceState({}, "", url);
+      render();
+    }
+
+    function navigate(delta) {
+      const next = Math.max(0, Math.min(STEPS.length - 1, state.currentStep + delta));
+      if (next === state.currentStep && delta > 0) return;
+      if (delta > 0) {
+        const own = evaluate().issues.filter(function (item) { return item.step === state.currentStep; });
+        if (own.some(function (item) { return item.type === "invalid" || item.type === "incomplete"; })) {
+          state.ui.toast = { kind: "bad", text: "This step stays open. You can still jump forward to inspect later steps, but finalization remains blocked." };
+          render();
+          return;
+        }
+      }
+      state.currentStep = next;
+      state.lastAction = `Opened ${STEPS[next].label}.`;
+      state.ui.toast = null;
+      render();
+    }
+
+    function mutate(text, fn, actor) {
+      fn(state);
+      recordDraftChange(text, actor);
+      render();
+    }
+
+    function toggleArray(value) {
+      mutate(`Selected the ${ARRAYS[value].label} array.`, function (s) {
+        s.selections.array = value;
+        if (value !== "spellcaster") s.selections.spellList = null;
+      });
+    }
+
+    function toggleSkill(kind, value) {
+      mutate(`${kind === "master" ? "Took" : "Assigned"} ${value} as a ${kind} skill.`, function (s) {
+        const list = s.selections.skills[kind];
+        const at = list.indexOf(value);
+        if (at >= 0) list.splice(at, 1); else list.push(value);
+      });
+    }
+
+    function toggleOption(value) {
+      mutate(`${state.selections.options.indexOf(value) >= 0 ? "Removed" : "Selected"} the ${value} option.`, function (s) {
+        const list = s.selections.options;
+        const at = list.indexOf(value);
+        if (at >= 0) list.splice(at, 1); else list.push(value);
+      });
+    }
+
+    function renderTopbar() {
+      const evaluation = evaluate();
+      const status = evaluation.status;
+      return `
+        <header class="topbar">
+          <div>
+            <div class="eyebrow">Pathfinder Unchained · Simple Monster Creation</div>
+            <h1>${esc(state.concept.name || "Untitled monster")}</h1>
+            <p class="subtitle">Draft revision ${state.revision} · CR ${esc(state.concept.targetCR)} · ${esc(currentArray().label)} array · ${esc(state.selections.creatureType)}</p>
+          </div>
+          <div class="top-actions">
+            <span class="pill ${status === "valid" ? "good" : status === "invalid" ? "bad" : "warn"}">Strict evaluation: ${esc(status)}</span>
+            <button class="button ai" data-action="toggle-proposal">✦ AI proposal <span class="tag">not applied</span></button>
+            <button class="button primary" data-action="finalize">Validate &amp; finalize</button>
+            <button class="button ghost small" data-action="reset">Reset fixture</button>
+          </div>
+        </header>`;
+    }
+
+    function renderRail() {
+      return `
+        <aside class="panel rail">
+          <div class="rail-title">Creation path</div>
+          <div class="rail-list">
+            ${STEPS.map(function (step, index) {
+              const status = stepStatus(index);
+              const current = state.currentStep === index ? " current" : "";
+              return `<button class="rail-item ${status}${current}" data-action="jump" data-step="${index}">
+                <span class="rail-number">${esc(step.number)}</span>
+                <span class="rail-copy"><strong>${esc(step.label)}</strong><span>${esc(statusLabel(status))}</span></span>
+                <span class="mini-dot"></span>
+              </button>`;
+            }).join("")}
+          </div>
+          <p class="rail-note"><strong>Back-jump is safe.</strong><br>Selections are revisioned. A later dependency is re-evaluated immediately when an earlier choice changes.</p>
+        </aside>`;
+    }
+
+    function renderStepHeader(index) {
+      const step = STEPS[index];
+      return `
+        <div class="step-heading">
+          <div>
+            <div class="section-kicker">${step.number === "B" ? "Before You Begin" : `Step ${step.number}`}</div>
+            <h2 class="step-title">${esc(step.label)}</h2>
+            <p class="helper">${esc(stepDescription(index))}</p>
+          </div>
+          ${statusBadge(state.currentStep === index ? "current" : stepStatus(index))}
+        </div>`;
+    }
+
+    function stepDescription(index) {
+      return [
+        "Capture intent first. The concept guides the choices but never becomes a hidden numeric adjustment.",
+        "Choose exactly one CR-based baseline array. Its numbers are already total values, not formulas to recalculate.",
+        "Choose the creature type and, if appropriate, one primary class graft. Automatic traits and statistic adjustments stay distinguishable.",
+        "Apply every relevant subtype ability automatically. Subtype-granted skills and options are free of the normal budget.",
+        "Optional template traits are visible as automatic grants and still count against normal option and skill limits.",
+        "Use the size graft only for its listed adjustments and CR limits; do not import normal size recalculations.",
+        "A Spellcaster array opens this step. The selected list determines the CR-banded spells and its list benefit.",
+        "Choose catalogued combat, magic, social, or universal options within the slots supplied by the array and grafts.",
+        "Assign good and master skills directly. Perception is automatically good and does not consume a good slot.",
+        "Choose an attack presentation, then map array average damage to dice using the source damage tables."
+      ][index];
+    }
+
+    function renderSourceRow(source) {
+      return `<div class="source-row"><span class="source-chip">Source evidence</span><span class="helper">${esc(source)}</span></div>`;
+    }
+
+    function renderStepContent(index) {
+      const selection = state.selections;
+      if (index === 0) return renderConceptStep();
+      if (index === 1) return renderArrayStep();
+      if (index === 2) return renderTypeStep();
+      if (index === 3) return renderSubtypeStep();
+      if (index === 4) return renderTemplateStep();
+      if (index === 5) return renderSizeStep();
+      if (index === 6) return renderSpellStep();
+      if (index === 7) return renderOptionsStep();
+      if (index === 8) return renderSkillsStep();
+      if (index === 9) return renderDamageStep();
+      return "";
+    }
+
+    function renderConceptStep() {
+      return `
+        ${renderStepHeader(0)}
+        <div class="field-grid">
+          <div class="field"><label for="monster-name">Monster name</label><input id="monster-name" data-field="name" value="${esc(state.concept.name)}"></div>
+          <div class="field"><label for="target-cr">Target CR</label><select id="target-cr" data-field="targetCR">
+            ${[1, 2, 4, 6, 8, 10, 12, 16].map(function (cr) { return `<option value="${cr}" ${Number(state.concept.targetCR) === cr ? "selected" : ""}>CR ${cr}</option>`; }).join("")}
+          </select></div>
+        </div>
+        <div class="field" style="margin-top: 13px"><span>Encounter role</span><div class="inline-choices">
+          ${["Brute", "Controller", "Skirmisher", "Support", "Social threat"].map(function (role) { return `<button class="chip-button ${state.concept.role === role ? "selected" : ""}" data-action="role" data-value="${esc(role)}">${esc(role)}</button>`; }).join("")}
+        </div></div>
+        <div class="field" style="margin-top: 13px"><label for="theme">Concept note</label><textarea id="theme" rows="3" data-field="theme">${esc(state.concept.theme)}</textarea></div>
+        <div class="info-box">The wizard stores these as concept intent. It should surface a mismatch later, but it must not silently turn a narrative phrase into an AC, attack, or damage override.</div>
+        ${renderSourceRow(SOURCE.concept)}`;
+    }
+
+    function renderArrayStep() {
+      const data = currentArray();
+      return `
+        ${renderStepHeader(1)}
+        <div class="choice-grid">
+          ${Object.keys(ARRAYS).map(function (key) {
+            const array = ARRAYS[key];
+            return `<button class="choice ${state.selections.array === key ? "selected" : ""}" data-action="select-array" data-value="${key}">
+              <span class="choice-meta">${state.selections.array === key ? "SELECTED" : "BASELINE"}</span><strong>${esc(array.label)}</strong><p>${esc(array.description)}</p><span class="helper">Slots at CR 8: ${esc(array.slots.join(" · "))}</span>
+            </button>`;
+          }).join("")}
+        </div>
+        <div class="info-box">One array supplies the baseline. Later grafts and options adjust only the values they name; the UI should never expose a “recalculate from ability scores” escape hatch.</div>
+        <div class="divider"></div>
+        <div class="panel-head"><div><h3>Baseline preview · CR ${esc(state.concept.targetCR)}</h3><p class="helper">Illustrative catalog fixture for the selected array. This is not the final evaluation until all required selections exist.</p></div><span class="pill">Array totals</span></div>
+        <div class="baseline-grid">
+          ${[["AC", data.ac, `touch ${data.touch} · flat ${data.flat}`], ["Saves", data.saves, "swap allowed once"], ["CMD / hp", `${data.cmd} / ${data.hp}`, "array values"], ["DCs", `${data.abilityDC} / ${data.spellDC}`, "ability / spell"], ["Abilities", data.modifiers, "three modifiers"], ["Skills", data.master, `good ${data.good}`], ["Options", data.slots.join(" · "), "category slots"], ["Attacks", data.attacks.weaponHigh, "high weapon profile"]].map(function (metric) { return `<div class="metric"><span>${esc(metric[0])}</span><strong>${esc(metric[1])}</strong><small>${esc(metric[2])}</small></div>`; }).join("")}
+        </div>
+        ${renderSourceRow(SOURCE.array)}`;
+    }
+
+    function renderTypeStep() {
+      const types = [
+        ["undead", "Undead", "Darkvision; undead immunities; Constitution modifier set to —; Will +2."],
+        ["outsider", "Outsider", "Darkvision; one save +2; attack bonus +2."],
+        ["aberration", "Aberration", "Darkvision; Will save +2; aberrant list suggested."],
+        ["humanoid", "Humanoid", "No automatic traits; one saving throw +2."],
+      ];
+      return `
+        ${renderStepHeader(2)}
+        <div class="choice-grid two">
+          ${types.map(function (type) { return `<button class="choice ${state.selections.creatureType === type[0] ? "selected" : ""}" data-action="select-type" data-value="${type[0]}"><span class="choice-meta">${state.selections.creatureType === type[0] ? "SELECTED" : "TYPE GRAFT"}</span><strong>${esc(type[1])}</strong><p>${esc(type[2])}</p></button>`; }).join("")}
+        </div>
+        <div class="divider"></div>
+        <div class="panel-head"><div><h3>Primary class graft</h3><p class="helper">A class graft is optional here, but the strict product supports at most one. It can impose a required array.</p></div><span class="pill">One maximum</span></div>
+        <div class="inline-choices">
+          ${[["none", "No class graft"], ["oracle", "Oracle · Spellcaster required"]].map(function (item) { return `<button class="chip-button ${state.selections.classGraft === item[0] ? "selected" : ""}" data-action="select-class" data-value="${item[0]}">${esc(item[1])}</button>`; }).join("")}
+        </div>
+        <div class="info-box">${state.selections.classGraft === "none" ? "This fixture is primarily defined by its undead type. The type graft's statistic adjustment is therefore active." : "The type's automatic traits remain, but its statistic adjustments are suppressed when the class graft is primary. The required Spellcaster array is satisfied."}</div>
+        ${renderSourceRow(SOURCE.type)}`;
+    }
+
+    function renderSubtypeStep() {
+      const options = [["none", "No subtype", "No additional subtype graft."], ["incorporeal", "Incorporeal", "Touch AC equals AC; immunity to weapon critical / precision effects; incorporeal option."], ["aquatic", "Aquatic", "Swim 30 ft.; Swim as an additional master skill."]];
+      return `
+        ${renderStepHeader(3)}
+        <div class="choice-grid two">
+          ${options.map(function (item) { return `<button class="choice ${state.selections.subtype === item[0] ? "selected" : ""}" data-action="select-subtype" data-value="${item[0]}"><span class="choice-meta">${state.selections.subtype === item[0] ? "SELECTED" : "OPTIONAL"}</span><strong>${esc(item[1])}</strong><p>${esc(item[2])}</p></button>`; }).join("")}
+        </div>
+        <div class="info-box">Subtype abilities are automatic. Subtype-granted options and skills are added on top of the normal budget, unlike template automatic traits.</div>
+        ${renderSourceRow(SOURCE.subtype)}`;
+    }
+
+    function renderTemplateStep() {
+      const selected = state.selections.template;
+      return `
+        ${renderStepHeader(4)}
+        <div class="choice-grid two">
+          <button class="choice ${selected === "none" ? "selected" : ""}" data-action="select-template" data-value="none"><span class="choice-meta">${selected === "none" ? "SELECTED" : "OPTIONAL"}</span><strong>No template</strong><p>Keep the type and array as the primary identity.</p></button>
+          <button class="choice ${selected === "lich" ? "selected" : ""}" data-action="select-template" data-value="lich"><span class="choice-meta">${selected === "lich" ? "SELECTED" : "OPTIONAL"}</span><strong>Lich · CR 2+</strong><p>Requires Undead; suggests Spellcaster; adds automatic options and master skills.</p></button>
+        </div>
+        ${selected === "lich" ? `<div class="info-box ai"><strong>Automatic grants preview.</strong> Increase AC by 2; add channel resistance, damage reduction, fear aura, immunity, paralyzing touch, rejuvenation; add Perception, Sense Motive, and Stealth as master skills. In the real engine these would be typed graft effects, not free text.</div>` : `<div class="info-box">Template prerequisites and automatic grants should be visible before the user commits. Selecting a template must not hide the fact that its options and skills replace normal allotments.</div>`}
+        ${renderSourceRow(SOURCE.template)}`;
+    }
+
+    function renderSizeStep() {
+      const sizes = ["Fine", "Diminutive", "Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan", "Colossal"];
+      return `
+        ${renderStepHeader(5)}
+        <div class="inline-choices">
+          ${sizes.map(function (size) { return `<button class="chip-button ${state.selections.size === size ? "selected" : ""}" data-action="select-size" data-value="${size}">${size}</button>`; }).join("")}
+        </div>
+        <div class="info-box warn"><strong>Try the invalid path:</strong> choose Fine while the draft is CR 8. The restriction should appear immediately, while the rest of the draft remains inspectable.</div>
+        <div class="selection-list">
+          <div class="selection-row"><div class="selection-text"><strong>Current size</strong><span>${esc(state.selections.size)}</span></div><span class="tag">Only listed adjustments</span></div>
+          <div class="selection-row"><div class="selection-text"><strong>CR gate</strong><span>Fine ≤ 2 · Diminutive ≤ 4 · Tiny ≤ 6 · Large ≥ 2 · Huge ≥ 4 · Gargantuan ≥ 6 · Colossal ≥ 8</span></div><span class="tag">Source constraint</span></div>
+        </div>
+        ${renderSourceRow(SOURCE.size)}`;
+    }
+
+    function renderSpellStep() {
+      const lists = [
+        ["divination", "Divination", "Prophecy, knowledge, and seeing through surprise."],
+        ["death", "Death", "Necromantic pressure and death effects."],
+        ["madness", "Madness", "Mental disruption and instability."],
+        ["knowledge", "Knowledge", "A lorekeeper's broad arcane reach."]
+      ];
+      const locked = state.selections.array !== "spellcaster";
+      return `
+        ${renderStepHeader(6)}
+        ${locked ? `<div class="info-box">The current array is not Spellcaster, so this step is optional. A few spells would normally be represented by the secondary magic option in Step 7.</div>` : `<div class="info-box ai"><strong>Dependency from Step 1:</strong> Spellcaster automatically opens this step. Pick a list; the engine then derives primary / secondary spell uses by CR band and applies the list benefit.</div>`}
+        <div class="choice-grid two" style="margin-top: 15px">
+          ${lists.map(function (list) { return `<button class="choice ${state.selections.spellList === list[0] ? "selected" : ""}" data-action="select-spell-list" data-value="${list[0]}" ${locked ? "disabled" : ""}><span class="choice-meta">${state.selections.spellList === list[0] ? "SELECTED" : "SPELL LIST"}</span><strong>${esc(list[1])}</strong><p>${esc(list[2])}</p></button>`; }).join("")}
+        </div>
+        <div class="selection-list">
+          <div class="selection-row"><div class="selection-text"><strong>CR ${esc(state.concept.targetCR)} band</strong><span>Primary spells 1/day; lower-band primary + secondary 3/day; two-bands-lower primary at will.</span></div><span class="tag">Derived after selection</span></div>
+          <div class="selection-row"><div class="selection-text"><strong>Spell DC</strong><span>Array spell DC + spell level; no manual DC entry.</span></div><span class="tag">Traceable</span></div>
+        </div>
+        ${renderSourceRow(SOURCE.spells)}`;
+    }
+
+    function renderOptionsStep() {
+      const options = [
+        ["Bestow minor condition", "Magic", "One magic slot; applies a catalogued condition effect."],
+        ["Channel resistance", "Combat", "A source option that fits an any slot for this fixture."],
+        ["Fear aura", "Combat", "A source-defined aura; useful for a different strict build."],
+        ["Secondary magic", "Universal", "A universal option that can be chosen in place of any category."],
+        ["Extra hit points", "Combat", "A source-defined defensive option."],
+        ["At-will magic", "Magic", "A source option with its own CR and spell parameters."]
+      ];
+      const expected = expectedOptionCount();
+      return `
+        ${renderStepHeader(7)}
+        <div class="panel-head"><div><h3>Option budget from the current array</h3><p class="helper">${esc(currentArray().slots.join(" · "))}. Universal options may fill any category; “any” is not an untyped free slot.</p></div><span class="counter"><strong>${state.selections.options.length}</strong> / ${expected} selected</span></div>
+        <div class="choice-grid two" style="margin-top: 14px">
+          ${options.map(function (item) { const selected = state.selections.options.indexOf(item[0]) >= 0; return `<button class="choice ${selected ? "selected" : ""}" data-action="select-option" data-value="${esc(item[0])}"><span class="choice-meta">${selected ? "SELECTED" : esc(item[1])}</span><strong>${esc(item[0])}</strong><p>${esc(item[2])}</p></button>`; }).join("")}
+        </div>
+        <div class="info-box">The user can save an incomplete draft with open slots. The engine reports the missing decisions live; finalization waits. A selected option is a typed catalog ID, never an instruction to execute arbitrary text.</div>
+        ${renderSourceRow(SOURCE.options)}`;
+    }
+
+    function renderSkillsStep() {
+      const need = expectedSkills();
+      const skills = ["Spellcraft", "Knowledge (religion)", "Knowledge (arcana)", "Sense Motive", "Perception", "Stealth", "Bluff", "Heal"];
+      return `
+        ${renderStepHeader(8)}
+        <div class="two-up">
+          <div class="panel pad"><div class="panel-head"><div><h3>Master skills</h3><p class="helper">Array bonus ${esc(currentArray().master)}</p></div><span class="counter"><strong>${state.selections.skills.master.length}</strong> / ${need.master}</span></div><div class="inline-choices">${skills.map(function (skill) { return `<button class="chip-button ${state.selections.skills.master.indexOf(skill) >= 0 ? "selected" : ""}" data-action="select-skill" data-kind="master" data-value="${esc(skill)}">${esc(skill)}</button>`; }).join("")}</div></div>
+          <div class="panel pad"><div class="panel-head"><div><h3>Good skills</h3><p class="helper">Array bonus ${esc(currentArray().good)}</p></div><span class="counter"><strong>${state.selections.skills.good.length}</strong> / ${need.good}</span></div><div class="inline-choices">${skills.map(function (skill) { return `<button class="chip-button ${state.selections.skills.good.indexOf(skill) >= 0 ? "selected" : ""}" data-action="select-skill" data-kind="good" data-value="${esc(skill)}">${esc(skill)}</button>`; }).join("")}</div></div>
+        </div>
+        <div class="info-box">Perception automatically uses the good skill modifier without spending a good-skill slot. A listed good or master bonus is already the total bonus; do not add the ability modifier again.</div>
+        ${renderSourceRow(SOURCE.skills)}`;
+    }
+
+    function renderDamageStep() {
+      const attacks = currentArray().attacks;
+      const profiles = [
+        ["weapon-high", "High weapon attack", attacks.weaponHigh, "Use for the main weapon attack; average damage is mapped in Step 9."],
+        ["weapon-low", "Low weapon attack", attacks.weaponLow, "Use for a weaker or secondary weapon attack."],
+        ["natural-two", "Two natural attacks", attacks.naturalTwo, "Natural-attack presentation; use Bestiary Table 3–1 for die size."],
+        ["natural-three", "One primary + two secondary", attacks.naturalThree, "Three-attack presentation; primary / secondary status stays visible."]
+      ];
+      return `
+        ${renderStepHeader(9)}
+        <div class="choice-grid two">
+          ${profiles.map(function (profile) { return `<button class="choice ${state.selections.attackProfile === profile[0] ? "selected" : ""}" data-action="select-attack" data-value="${profile[0]}"><span class="choice-meta">${state.selections.attackProfile === profile[0] ? "SELECTED" : "ATTACK PROFILE"}</span><strong>${esc(profile[1])}</strong><p>${esc(profile[3])}</p><span class="helper">CR ${esc(state.concept.targetCR)} fixture: ${esc(profile[2])}</span></button>`; }).join("")}
+        </div>
+        <div class="selection-list">
+          <div class="selection-row"><div class="selection-text"><strong>Damage provenance</strong><span>Array average → weapon / natural-attack die → Table 5–9 expression.</span></div><span class="tag">No manual average</span></div>
+          <div class="selection-row"><div class="selection-text"><strong>Extra attacks</strong><span>Requires the source's damage-total process or the extra attack option; it is not a free text field.</span></div><span class="tag">Strict boundary</span></div>
+        </div>
+        ${renderSourceRow(SOURCE.damage)} <div class="source-row"><span class="source-chip">Supplemental</span><span class="helper">${esc(SOURCE.bestiary)}</span></div>`;
+    }
+
+    function renderStepPanel(index, showFooter) {
+      return `<section class="panel step-panel"><div class="step-content">${renderStepContent(index)}</div>${showFooter ? `<div class="step-panel-footer"><button class="button" data-action="back" ${index === 0 ? "disabled" : ""}>← Back</button><div class="footer-right"><button class="button ghost" data-action="jump" data-step="${Math.min(index + 1, STEPS.length - 1)}">Inspect next →</button><button class="button primary" data-action="next">Continue →</button></div></div>` : ""}</section>`;
+    }
+
+    function renderValidationPanel() {
+      const evaluation = evaluate();
+      const statusClass = evaluation.status === "valid" ? "good" : evaluation.status === "invalid" ? "bad" : "warn";
+      const problems = evaluation.issues;
+      return `<section class="panel validation-panel">
+        <div class="panel-head"><div><div class="section-kicker">Live validation</div><h3>Deterministic evaluation</h3></div><span class="pill ${statusClass}">${esc(evaluation.status)}</span></div>
+        <div class="validation-summary">Runs after every edit. Incomplete and invalid drafts remain inspectable; only finalization is a hard stop. Revision ${state.revision} is the current authoritative Draft.</div>
+        ${problems.length ? `<div class="issue-stack">${problems.slice(0, 6).map(renderIssue).join("")}${problems.length > 6 ? `<div class="helper">+ ${problems.length - 6} more issue${problems.length - 6 === 1 ? "" : "s"} below the fold.</div>` : ""}</div>` : `<div class="info-box" style="margin-top: 0"><strong>No blocking issues.</strong> The canonical Strict result can be calculated.</div>`}
+        <div class="result-grid"><div class="result-card"><span>Canonical</span><strong>${evaluation.canonicalAvailable ? "Available" : "Not available"}</strong><small>${evaluation.canonicalAvailable ? "All strict selections are complete." : "No authoritative values are exposed until the draft is complete and valid."}</small></div><div class="result-card"><span>Effective</span><strong>${evaluation.effectiveAvailable ? "Same as canonical" : "Not available"}</strong><small>Free overrides are not part of this Strict prototype.</small></div></div>
+        ${renderTrace(evaluation)}
+      </section>`;
+    }
+
+    function renderIssue(item) {
+      return `<div class="issue ${esc(item.type)}"><div class="issue-head"><strong>${esc(item.message)}</strong><span class="tag">${esc(item.type)}</span></div><p><span class="issue-code">${esc(item.code)}</span> · path <code>${esc(item.path)}</code></p><div class="issue-footer"><button class="button small" data-action="jump" data-step="${item.step}">${esc(item.fix)} ↗</button><span class="source-chip">${esc(shortSource(item.source))}</span></div></div>`;
+    }
+
+    function shortSource(source) {
+      return source.replace("Pathfinder Unchained.pdf, ", "").replace(" (viewer ", " · viewer ").replace("); TXT", " · TXT");
+    }
+
+    function renderTrace(evaluation) {
+      const traceItems = [
+        ["Draft", `revision ${state.revision} · ${state.fingerprint}`],
+        ["Array", `array.${state.selections.array}.cr.${state.concept.targetCR}`],
+        ["Grafts", `${state.selections.creatureType} type · ${state.selections.size} size${state.selections.template !== "none" ? ` · ${state.selections.template} template` : ""}`],
+        ["Evaluation", evaluation.canonicalAvailable ? "canonical → effective (strict identity)" : "blocked before canonical result"]
+      ];
+      return `<div class="trace"><div class="section-kicker">Trace preview</div>${traceItems.map(function (row) { return `<div class="trace-row"><strong>${esc(row[0])}</strong><code>${esc(row[1])}</code></div>`; }).join("")}</div>`;
+    }
+
+    function renderRealityPanel() {
+      const evaluation = evaluate();
+      if (!evaluation.canonicalAvailable) return `<section class="panel reality-panel"><div class="panel-head"><div><div class="section-kicker">After strict validity</div><h3>Reality Check</h3></div><span class="pill">Waiting</span></div><p class="helper" style="margin-top: 10px">This review cannot invent missing values. Complete a valid Strict Evaluation first; then compare concept, action economy, defenses, damage, skills, spells, and Bestiary benchmarks.</p><button class="button small" disabled>Run Reality Check</button></section>`;
+      const items = state.reality.items;
+      return `<section class="panel reality-panel"><div class="panel-head"><div><div class="section-kicker">Review, not repair</div><h3>Reality Check</h3></div><span class="pill ai">${state.reality.status === "open" ? "Open" : "Available"}</span></div><p class="helper" style="margin-top: 10px">A Reality-Check item records a finding. It does not mutate the canonical result and it is not a hidden override.</p>${items.length ? `<div class="reality-list">${items.map(function (item) { return `<div class="reality-item"><strong>${esc(item.title)}</strong><p>${esc(item.text)}</p><div class="reality-actions"><button class="button small" data-action="reality-action" data-value="acknowledged">Acknowledge</button><button class="button small" data-action="jump" data-step="${item.step}">Resolve through Step ${item.step}</button><button class="button small" disabled title="Free Mode is backlog work">Accept free override</button></div><div class="helper" style="margin-top: 7px">${esc(item.source)}</div></div>`; }).join("")}</div>` : `<button class="button ai small" data-action="run-reality">Run Reality Check</button>`}<div class="info-box ai">Strict MVP rule: no user-defined Reality-Check adjustment layer. Free Mode, when designed, must be a separate explicit layer over a valid canonical result.</div></section>`;
+    }
+
+    function renderStatePanel() {
+      const evaluation = evaluate();
+      const selected = state.selections;
+      const snapshot = { revision: state.revision, fingerprint: state.fingerprint, currentStep: STEPS[state.currentStep].label, concept: state.concept, selections: selected, evaluation: evaluation.status, proposal: { id: state.proposal.id, baseRevision: state.proposal.baseRevision, status: proposalStatus() } };
+      return `<section class="panel state-panel"><div class="panel-head"><div><div class="section-kicker">Visible state</div><h3>Draft snapshot</h3></div><span class="tag">in memory</span></div><ul class="state-list"><li><span>Revision</span><strong>${state.revision}</strong></li><li><span>Fingerprint</span><strong>${esc(state.fingerprint)}</strong></li><li><span>Current step</span><strong>${esc(STEPS[state.currentStep].label)}</strong></li><li><span>Selected options</span><strong>${selected.options.length}</strong></li><li><span>Master / good skills</span><strong>${selected.skills.master.length} / ${selected.skills.good.length}</strong></li><li><span>Last action</span><strong>${esc(state.lastAction)}</strong></li></ul><details style="margin-top: 12px"><summary>Show structured draft state</summary><pre class="state-json">${esc(JSON.stringify(snapshot, null, 2))}</pre></details><div class="activity"><div class="section-kicker">Revision history</div>${state.events.slice(0, 4).map(function (event) { return `<div class="activity-row"><b>r${event.revision}</b><span>${esc(event.actor)} · ${esc(event.text)}</span></div>`; }).join("")}</div></section>`;
+    }
+
+    function proposalStatus() {
+      if (state.proposal.status === "accepted") return "accepted";
+      return state.proposal.baseRevision === state.revision ? "ready" : "stale";
+    }
+
+    function renderProposalOverlay() {
+      if (!state.ui.proposalOpen) return "";
+      const stale = proposalStatus() === "stale";
+      const selectedCount = state.proposal.changes.filter(function (change) { return state.proposal.selected.indexOf(change.id) >= 0; }).length;
+      return `<div class="modal-backdrop" data-action="close-proposal"><section class="proposal-modal" role="dialog" aria-modal="true" aria-label="AI proposal">
+        <div class="proposal-head"><div><div class="section-kicker">Non-authoritative suggestion</div><h2>AI Proposal ${esc(state.proposal.id)}</h2><p class="helper">The AI can propose typed changes and rationale. It cannot mutate this Draft directly.</p></div><button class="button ghost" data-action="close-proposal">Close</button></div>
+        <div class="proposal-meta"><span class="pill ai">${esc(proposalStatus())}</span><span class="pill">Base revision ${state.proposal.baseRevision}</span><span class="pill">Current revision ${state.revision}</span><span class="pill">${selectedCount} changes selected</span></div>
+        ${stale ? `<div class="stale-box"><strong>This proposal is stale.</strong> The Draft changed after it was generated. Regenerate against revision ${state.revision}; no automatic rebase or overwrite is offered.</div>` : ""}
+        <div class="divider"></div><div class="section-kicker">Typed changes</div><div class="stack-sm" style="margin-top: 7px">${state.proposal.changes.map(function (change) { const checked = state.proposal.selected.indexOf(change.id) >= 0; return `<label class="proposal-change"><input type="checkbox" data-change-select="${change.id}" ${checked ? "checked" : ""} ${stale ? "disabled" : ""}><span><strong>${esc(change.label)}</strong><p>${esc(change.rationale)}</p><span class="diff"><code class="from">${esc(change.from)}</code><span>→</span><code class="to">${esc(change.to)}</code><span class="source-chip">${esc(shortSource(change.source))}</span></span></span></label>`; }).join("")}</div>
+        <div class="info-box ai"><strong>Assumptions shown, not hidden.</strong><ul style="margin: 6px 0 0; padding-left: 18px">${state.proposal.assumptions.map(function (item) { return `<li>${esc(item)}</li>`; }).join("")}</ul></div>
+        <details style="margin-top: 13px"><summary>Non-canonical suggestions (plain text only)</summary><div class="helper" style="margin-top: 8px">${state.proposal.nonCanonicalSuggestions.map(esc).join("<br>")}</div></details>
+        <div class="proposal-footer"><label><input type="checkbox" data-action="confirm-proposal" ${state.proposal.confirmed ? "checked" : ""} ${stale ? "disabled" : ""}> I confirm these selected typed changes should be revalidated and applied atomically to the current Draft.</label><div class="proposal-actions">${stale ? `<button class="button ai" data-action="regenerate-proposal">Regenerate for r${state.revision}</button>` : `<button class="button ai" data-action="accept-proposal" ${state.proposal.confirmed && selectedCount ? "" : "disabled"}>Accept selected changes</button>`}</div></div>
+      </section></div>`;
+    }
+
+    function renderDependencyDetail() {
+      const index = state.currentStep;
+      const deps = DEPENDENCIES[index];
+      return `<section class="panel dependency-detail"><div class="panel-head"><div><div class="section-kicker">Why can I be here?</div><h3>Dependencies for ${esc(STEPS[index].label)}</h3></div><span class="pill">Jumpable</span></div><p class="helper" style="margin-top: 9px">Every node is inspectable. A blocked prerequisite explains itself; it does not disappear from the path.</p><div style="margin-top: 10px">${deps.length ? deps.map(function (dep) { const status = stepStatus(dep); return `<div class="dependency-row"><span class="dependency-icon ${status === "blocked" || status === "invalid" ? "blocked" : status === "optional" ? "optional" : ""}">${status === "done" ? "✓" : status === "optional" ? "·" : "!"}</span><span><strong>${esc(STEPS[dep].label)}</strong><br><span class="helper">${status === "done" ? "Satisfied" : status === "optional" ? "Optional and skipped" : "Must be resolved before finalization"}</span></span>${statusBadge(status)}</div>`; }).join("") : `<div class="info-box" style="margin-top: 0">No prerequisites. This is the concept entry point.</div>`}</div></section>`;
+    }
+
+    function renderDependencyBoard() {
+      return `<section class="panel dependency-board"><div class="board-intro"><div><div class="section-kicker">Variant B · Dependency workbench</div><h2>See the whole path before committing</h2><p class="helper">The graph is not a lock-step tunnel. Click any node to inspect or edit it; validation explains why downstream work is incomplete.</p></div><span class="pill">Back-jump supported</span></div><div class="node-row">${STEPS.map(function (step, index) { const status = stepStatus(index); return `<div class="node-wrap"><button class="node ${status} ${state.currentStep === index ? "current" : ""}" data-action="jump" data-step="${index}"><span class="node-number"><span>${esc(step.number)}</span><span>${status === "done" ? "✓" : status === "blocked" || status === "invalid" ? "!" : "·"}</span></span><span class="node-title">${esc(step.label)}</span><span class="node-state">${esc(statusLabel(status))}</span></button></div>`; }).join("")}</div><div class="board-legend"><span class="legend-item"><i class="legend-dot blue"></i> current</span><span class="legend-item"><i class="legend-dot green"></i> satisfied</span><span class="legend-item"><i class="legend-dot red"></i> blocked / invalid</span><span class="legend-item"><i class="legend-dot"></i> optional or not yet visited</span></div></section>`;
+    }
+
+    function renderWorksheet() {
+      const index = state.currentStep;
+      return `<div class="worksheet"><section class="panel worksheet-intro"><div class="section-kicker">Variant C · Decision worksheet</div><h2>Review every decision in one surface</h2><p class="helper">Each row shows the current selection and status. Expand one row to edit it; the right-hand ledger keeps source evidence beside the decisions.</p><div class="live-note">Live behavior in this variant: edits create a new Draft revision, downstream rows re-evaluate, and the final result never hides its canonical / effective boundary.</div></section>${STEPS.map(function (step, rowIndex) { const status = stepStatus(rowIndex); const summary = stepSummary(rowIndex); return `<div><div class="worksheet-row ${status} ${index === rowIndex ? "current" : ""}" data-action="jump" data-step="${rowIndex}"><span class="worksheet-number">${esc(step.number)}</span><span class="worksheet-copy"><strong>${esc(step.label)}</strong><span>${esc(summary)}</span></span>${statusBadge(status)}<span class="worksheet-arrow">${index === rowIndex ? "⌃" : "⌄"}</span></div>${index === rowIndex ? `<div class="worksheet-detail">${renderStepContent(rowIndex)}<div class="step-actions"><button class="button" data-action="back" ${rowIndex === 0 ? "disabled" : ""}>← Previous</button><button class="button primary" data-action="next">Continue to next →</button></div></div>` : ""}</div>`; }).join("")}</div>`;
+    }
+
+    function stepSummary(index) {
+      if (index === 0) return `${state.concept.role || "Role not selected"} · target CR ${state.concept.targetCR || "—"}`;
+      if (index === 1) return `${currentArray().label} · ${currentArray().slots.join(" · ")}`;
+      if (index === 2) return `${state.selections.creatureType} type · ${state.selections.classGraft === "none" ? "no class graft" : state.selections.classGraft}`;
+      if (index === 3) return state.selections.subtype === "none" ? "No subtype graft" : state.selections.subtype;
+      if (index === 4) return state.selections.template === "none" ? "No template graft" : state.selections.template;
+      if (index === 5) return `${state.selections.size} · CR gate checked live`;
+      if (index === 6) return state.selections.spellList ? `${state.selections.spellList} list` : "Spell list not selected";
+      if (index === 7) return `${state.selections.options.length} of ${expectedOptionCount()} option slots`;
+      if (index === 8) return `${state.selections.skills.master.length}/${expectedSkills().master} master · ${state.selections.skills.good.length}/${expectedSkills().good} good`;
+      if (index === 9) return state.selections.attackProfile || "Attack profile not selected";
+      return "";
+    }
+
+    function renderSourceLedger() {
+      return `<section class="panel provenance-card"><div class="panel-head"><div><div class="section-kicker">Evidence ledger</div><h3>Where each decision comes from</h3></div><span class="tag">provenance</span></div><div class="source-ledger" style="margin-top: 13px">${STEPS.map(function (step, index) { return `<div class="source-ledger-row"><strong>${esc(step.number)} · ${esc(step.label)}</strong><span>${esc(step.source)}</span></div>`; }).join("")}</div></section>`;
+    }
+
+    function renderVariantA() {
+      return `<div class="variant-label">Variant A · Guided rail — current step gets the room; all steps remain one click away.</div><div class="layout-a">${renderRail()}<main class="main-column"><div class="live-note"><strong>Live rule:</strong> edit any previous selection. The engine increments the Draft revision and recalculates dependency statuses immediately; it never silently repairs a later choice.</div>${renderStepPanel(state.currentStep, true)}</main><aside class="right-column">${renderValidationPanel()}${renderRealityPanel()}${renderStatePanel()}</aside></div>`;
+    }
+
+    function renderVariantB() {
+      return `<div class="layout-b">${renderDependencyBoard()}<div class="workbench-b"><main class="b-main"><div class="live-note"><strong>Current workbench:</strong> ${esc(STEPS[state.currentStep].label)}. Forward inspection is allowed even when a prerequisite is blocked; only finalization is guarded.</div>${renderStepPanel(state.currentStep, true)}${renderDependencyDetail()}</main><aside class="b-side">${renderValidationPanel()}${renderRealityPanel()}${renderStatePanel()}</aside></div></div>`;
+    }
+
+    function renderVariantC() {
+      return `<div class="layout-c">${renderWorksheet()}<aside class="provenance">${renderValidationPanel()}${renderRealityPanel()}${renderSourceLedger()}${renderStatePanel()}</aside></div>`;
+    }
+
+    function renderSwitcher() {
+      const index = VARIANTS.findIndex(function (variant) { return variant.key === state.variant; });
+      const current = VARIANTS[index >= 0 ? index : 0];
+      return `<nav class="variant-switcher" aria-label="Prototype variants"><button data-action="variant-prev" aria-label="Previous variant">←</button><span class="switcher-label">${esc(current.key)} · ${esc(current.name)}</span><button data-action="variant-next" aria-label="Next variant">→</button></nav>`;
+    }
+
+    function renderToast() {
+      if (!state.ui.toast) return "";
+      return `<div class="toast ${esc(state.ui.toast.kind || "")}">${esc(state.ui.toast.text)}</div>`;
+    }
+
+    function render() {
+      const root = document.getElementById("app");
+      let variant = state.variant;
+      if (!["A", "B", "C"].includes(variant)) variant = "A";
+      state.variant = variant;
+      const body = variant === "A" ? renderVariantA() : variant === "B" ? renderVariantB() : renderVariantC();
+      root.innerHTML = `<div class="prototype-banner"><div class="banner-question"><strong>Throwaway prototype.</strong> ${esc("Question: should the wizard show the full path, live dependencies, safe back-jumps, and an auditable AI / Reality Check boundary?")}<span class="banner-meta">No persistence · English UI · source-linked fixture</span></div></div><div class="app">${renderTopbar()}${body}</div>${renderProposalOverlay()}${renderToast()}${renderSwitcher()}`;
+    }
+
+    function acceptProposal() {
+      if (proposalStatus() === "stale") {
+        state.ui.toast = { kind: "bad", text: "This proposal is stale. Regenerate it against the current Draft revision first." };
+        render(); return;
+      }
+      if (!state.proposal.confirmed) {
+        state.ui.toast = { kind: "bad", text: "Explicit user confirmation is required before typed AI changes can be applied." };
+        render(); return;
+      }
+      const changes = state.proposal.changes.filter(function (change) { return state.proposal.selected.indexOf(change.id) >= 0; });
+      if (!changes.length) {
+        state.ui.toast = { kind: "bad", text: "Select at least one typed change. Plain-text suggestions cannot be applied." };
+        render(); return;
+      }
+      changes.forEach(function (change) { change.apply(state); });
+      state.proposal.status = "accepted";
+      state.proposal.confirmed = false;
+      state.revision += 1;
+      state.fingerprint = `draft-${state.revision}-ashen-tide`;
+      state.finalized = false;
+      state.lastAction = `Accepted ${changes.length} typed AI change${changes.length === 1 ? "" : "s"} after confirmation.`;
+      state.events.unshift({ actor: "user", text: state.lastAction, revision: state.revision });
+      state.reality.visible = false; state.reality.status = "not-run"; state.reality.items = [];
+      state.ui.proposalOpen = false;
+      state.ui.toast = { kind: "good", text: "Typed changes were applied atomically, revisioned, and re-evaluated by the same engine boundary." };
+      render();
+    }
+
+    function runReality() {
+      const evaluation = evaluate();
+      if (!evaluation.canonicalAvailable) {
+        state.ui.toast = { kind: "bad", text: "Reality Check waits for a valid canonical Strict result." };
+        render(); return;
+      }
+      state.reality.visible = true;
+      state.reality.status = "open";
+      state.reality.items = [{
+        title: "Review action economy against the concept",
+        text: "The canonical result now exists. Compare the oracle's spell access, selected options, attacks, defenses, and CR-based benchmark before exporting. This is a review finding, not a request to type a new attack bonus.",
+        step: 7,
+        source: `${SOURCE.concept} · ${SOURCE.options} · ${SOURCE.bestiary}`
+      }];
+      state.lastAction = "Reality Check opened a review item; no values changed.";
+      state.events.unshift({ actor: "engine", text: state.lastAction, revision: state.revision });
+      render();
+    }
+
+    function finalize() {
+      const evaluation = evaluate();
+      if (!evaluation.canonicalAvailable) {
+        state.ui.toast = { kind: "bad", text: `Cannot finalize: the Draft is ${evaluation.status}. Use the issue links to jump to missing or invalid decisions.` };
+        render(); return;
+      }
+      state.finalized = true;
+      state.lastAction = "Strict Evaluation finalized; canonical and effective are identical.";
+      state.events.unshift({ actor: "engine", text: state.lastAction, revision: state.revision });
+      state.ui.toast = { kind: "good", text: "Valid Strict result finalized. The next step could be Reality Check, then Monster Sheet export." };
+      render();
+    }
+
+    function reset() {
+      const fresh = JSON.parse(JSON.stringify(INITIAL_STATE));
+      Object.keys(fresh).forEach(function (key) { state[key] = fresh[key]; });
+      state.proposal.changes.forEach(function (change, index) { change.apply = INITIAL_STATE.proposal.changes[index].apply; });
+      state.ui.toast = { kind: "good", text: "Fixture reset. No local persistence was touched." };
+      render();
+    }
+
+    document.addEventListener("click", function (event) {
+      const target = event.target.closest("[data-action]");
+      if (!target) return;
+      const action = target.dataset.action;
+      if (action === "close-proposal" && target.classList.contains("modal-backdrop")) { state.ui.proposalOpen = false; render(); return; }
+      if (action === "toggle-proposal") { state.ui.proposalOpen = true; render(); return; }
+      if (action === "close-proposal") { state.ui.proposalOpen = false; render(); return; }
+      if (action === "variant-prev" || action === "variant-next") {
+        const index = VARIANTS.findIndex(function (variant) { return variant.key === state.variant; });
+        const next = action === "variant-next" ? (index + 1) % VARIANTS.length : (index - 1 + VARIANTS.length) % VARIANTS.length;
+        setVariant(VARIANTS[next].key); return;
+      }
+      if (action === "jump") { state.currentStep = Number(target.dataset.step); state.lastAction = `Opened ${STEPS[state.currentStep].label}; earlier choices remain editable.`; state.ui.toast = null; render(); return; }
+      if (action === "back") { navigate(-1); return; }
+      if (action === "next") { navigate(1); return; }
+      if (action === "role") { mutate(`Set the encounter role to ${target.dataset.value}.`, function (s) { s.concept.role = target.dataset.value; }); return; }
+      if (action === "select-array") { toggleArray(target.dataset.value); return; }
+      if (action === "select-type") { mutate(`Selected the ${target.dataset.value} creature type graft.`, function (s) { s.selections.creatureType = target.dataset.value; }); return; }
+      if (action === "select-class") { mutate(`Set the primary class graft to ${target.dataset.value}.`, function (s) { s.selections.classGraft = target.dataset.value; }); return; }
+      if (action === "select-subtype") { mutate(`Set the subtype graft to ${target.dataset.value}.`, function (s) { s.selections.subtype = target.dataset.value; }); return; }
+      if (action === "select-template") { mutate(`Set the template graft to ${target.dataset.value}.`, function (s) { s.selections.template = target.dataset.value; }); return; }
+      if (action === "select-size") { mutate(`Selected ${target.dataset.value} size.`, function (s) { s.selections.size = target.dataset.value; }); return; }
+      if (action === "select-spell-list") { mutate(`Selected the ${target.dataset.value} spell list.`, function (s) { s.selections.spellList = target.dataset.value; }); return; }
+      if (action === "select-option") { toggleOption(target.dataset.value); return; }
+      if (action === "select-skill") { toggleSkill(target.dataset.kind, target.dataset.value); return; }
+      if (action === "select-attack") { mutate(`Selected the ${target.dataset.value} attack profile.`, function (s) { s.selections.attackProfile = target.dataset.value; }); return; }
+      if (action === "toggle-change") { return; }
+      if (action === "accept-proposal") { acceptProposal(); return; }
+      if (action === "regenerate-proposal") {
+        state.proposal.baseRevision = state.revision; state.proposal.baseFingerprint = state.fingerprint; state.proposal.status = "ready"; state.proposal.confirmed = false; state.lastAction = `Regenerated ${state.proposal.id} against revision ${state.revision}.`; state.events.unshift({ actor: "ai", text: state.lastAction, revision: state.revision }); state.ui.toast = { kind: "good", text: "Proposal regenerated against the current Draft; inspect the diff before accepting." }; render(); return;
+      }
+      if (action === "run-reality") { runReality(); return; }
+      if (action === "reality-action") { state.reality.status = target.dataset.value; state.reality.items = []; state.lastAction = `Reality-Check item marked ${target.dataset.value}; no statistic changed.`; state.events.unshift({ actor: "user", text: state.lastAction, revision: state.revision }); state.ui.toast = { kind: "good", text: "Review state changed; the canonical result was not mutated." }; render(); return; }
+      if (action === "finalize") { finalize(); return; }
+      if (action === "reset") { reset(); return; }
+    });
+
+    document.addEventListener("change", function (event) {
+      const target = event.target;
+      if (target.matches("[data-field]")) {
+        const field = target.dataset.field;
+        const value = field === "targetCR" ? Number(target.value) : target.value;
+        mutate(`Edited concept ${field}.`, function (s) { s.concept[field] = value; });
+        return;
+      }
+      if (target.matches("[data-change-select]")) {
+        const id = target.dataset.changeSelect;
+        const at = state.proposal.selected.indexOf(id);
+        if (target.checked && at < 0) state.proposal.selected.push(id);
+        if (!target.checked && at >= 0) state.proposal.selected.splice(at, 1);
+        state.proposal.confirmed = false;
+        render(); return;
+      }
+      if (target.matches("[data-action='confirm-proposal']")) {
+        state.proposal.confirmed = target.checked;
+        render(); return;
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      const tag = document.activeElement && document.activeElement.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || document.activeElement && document.activeElement.isContentEditable) return;
+      if (event.key === "ArrowLeft") { event.preventDefault(); document.querySelector("[data-action='variant-prev']").click(); }
+      if (event.key === "ArrowRight") { event.preventDefault(); document.querySelector("[data-action='variant-next']").click(); }
+    });
+
+    render();
+  </script>
+</body>
+</html>

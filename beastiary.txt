@@ -1,0 +1,165 @@
+paizo.com #1276082, D M <dm_123_456@yahoo.com>, Oct 20, 2009
+paizo.com #1276082, D M <dm_123_456@yahoo.com>, Oct 20, 2009
+Appendices
+Appendices
+Table 1–1: Monster Statistics by CR
+hit Armor high Low Average Damage Primary Secondary good Poor
+CR Points Class Attack Attack high Low Ability DC Ability DC Save Save
+1/2 10 11 1 0 4 3 11 8 3 0
+1 15 12 2 1 7 5 12 9 4 1
+2 20 14 4 3 10 7 13 9 5 1
+3 30 15 6 4 13 9 14 10 6 2
+4 40 17 8 6 16 12 15 10 7 3
+5 55 18 10 7 20 15 15 11 8 4
+6 70 19 12 8 25 18 16 11 9 5
+7 85 20 13 10 30 22 17 12 10 6
+8 100 21 15 11 35 26 18 12 11 7
+9 115 23 17 12 40 30 18 13 12 8
+10 130 24 18 13 45 33 19 13 13 9
+11 145 25 19 14 50 37 20 14 14 10
+12 160 27 21 15 55 41 21 15 15 11
+13 180 28 22 16 60 45 21 15 16 12
+14 200 29 23 17 65 48 22 16 17 12
+15 220 30 24 18 70 52 23 16 18 13
+16 240 31 26 19 80 60 24 17 19 14
+17 270 32 27 20 90 67 24 18 20 15
+18 300 33 28 21 100 75 25 18 20 16
+19 330 34 29 22 110 82 26 19 21 16
+20 370 36 30 23 120 90 27 20 22 17
+Table 1–2: Creature Hit Dice
+Challenge Rating
+Creature Type 1/2 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Aberration 1 2 3 4 5 7 9 10 12 14 15 16 17 19 20 22 24 26 28 30 34
+Animal 1 2 3 4 5 7 9 10 12 14 15 16 17 19 20 22 24 26 28 30 34
+Construct 1 2 3 4 5 6 8 9 10 12 13 14 16 18 19 20 21 23 25 28 31
+Dragon 1 2 3 4 5 6 7 8 9 11 12 13 14 16 17 18 19 21 23 25 29
+Fey 2 3 4 5 6 8 10 12 13 15 17 18 20 22 23 25 26 28 31 33 37
+Humanoid 1 2 3 4 5 7 9 10 12 14 15 16 17 19 20 22 24 26 28 30 34
+Magical beast 1 2 3 4 5 6 8 9 10 12 13 14 16 18 19 20 21 23 25 28 31
+Monstrous humanoid 1 2 3 4 5 6 8 9 10 12 13 14 16 18 19 20 21 23 25 28 31
+Ooze 1 2 3 4 5 7 9 10 12 14 15 16 17 19 20 22 24 26 28 30 34
+Outsider 1 2 3 4 5 6 8 9 10 12 13 14 16 18 19 20 21 23 25 28 31
+Plant 1 2 3 4 5 7 9 10 12 14 15 16 17 19 20 22 24 26 28 30 34
+Undead 1 2 3 4 5 7 9 10 12 14 15 16 17 19 20 22 24 26 28 30 34
+Vermin 1 2 3 4 5 7 9 10 12 14 15 16 17 19 20 22 24 26 28 30 32
+the creature’s intended role in the game and Challenge
+Rating. If you decide to give a creature an unusual size for
+its CR or HD, you should justify the unusual choice in the
+monster’s description to account for the discrepancy—in
+mostcases,suchunusuallysizedmonstersshouldbehighly
+magical in nature. See Table 1–3 for more information on
+creature sizes and expected scores.
+Minimum/Maximum CR: These values list the
+minimum and the maximum challenge ratings a creature
+of the indicated size should fall between.
+Base Str, Base Dex, Base Con: These list the average
+scores for a creature of this size. Your specific monster’s
+Strength, Dexterity, or Constitution might vary greatly
+from these numbers, but if they do, you should pay close
+attention to how these variances affect its other statistics.
+Step 5: Abilities
+Once you have determined a creature’s size, type, and
+Hit Dice, it’s time to move on to its ability scores. The
+bonuses granted from these ability scores should increase
+291
+291
+paizo.com #1276082, D M <dm_123_456@yahoo.com>, Oct 20, 2009
+paizo.com #1276082, D M <dm_123_456@yahoo.com>, Oct 20, 2009
+paizo.com #1276082, D M <dm_123_456@yahoo.com>, Oct 20, 2009
+paizo.com #1276082, D M <dm_123_456@yahoo.com>, Oct 20, 2009
+attacks fall into one of two categories, primary and
+secondary attacks. Primary attacks are made using the
+creature’s full base attack bonus and add the creature’s
+full Strength bonus on damage rolls. Secondary attacks
+are made using the creature’s base attack bonus –5 and
+add only 1/2 the creature’s Strength bonus on damage
+rolls. If a creature has only one natural attack, it is always
+made using the creature’s full base attack bonus and adds
+1-1/2 the creature’s Strength bonus on attack rolls. This
+increase does not apply if the creature has multiple attacks
+but only takes one. If a creature has only one type of attack,
+but has multiple attacks per round, that attack is treated
+as a primary attack, regardless of its type. Table 3–1 lists
+some of the most common types of natural attacks and
+their classifications.
+Some creatures treat one or more of their attacks
+differently, such as dragons, which always receive 1-1/2
+times their Strength bonus on damage rolls with their
+bite attack. These exceptions are noted in the creature’s
+description.
+Creatures with natural attacks and attacks made with
+weapons can use both as part of a full attack action
+(although often a creature must forgo one natural
+attack for each weapon clutched in that limb, be it a
+claw, tentacle, or slam). Such creatures attack with their
+weapons normally but treat all of their natural attacks
+as secondary attacks during that attack, regardless of the
+attack’s original type.
+The Damage Type column refers to the sort of damage
+that the natural attack typically deals: bludgeoning (B),
+slashing (S), or piercing (P). Some attacks deal damage of
+more than one type, depending on the creature. In such
+cases all the damage is considered to be of all listed types
+for the purpose of overcoming damage reduction.
+Some fey, humanoids, monstrous humanoids, and
+outsiders do not possess natural attacks. These creatures
+can make unarmed strikes, but treat them as weapons
+for the purpose of determining attack bonuses, and they
+must use the two-weapon fighting rules when making
+attacks with both hands. See Table 3–1 for typical damage
+values for natural attacks by creature size.
+Format: bite +5 (1d6+1), 2 claws +5 (1d4+2), 4 tentacles +0
+(1d4+1); Location: Melee and Ranged.
+Paralysis (Ex or Su) This special attack renders the
+victim immobile. Paralyzed creatures cannot move,
+speak, or take any physical actions. The creature is rooted
+to the spot, frozen and helpless. Paralysis works on the
+body, and a character can usually resist it with a Fortitude
+saving throw (DC 10 + 1/2 paralyzing creature’s racial HD
++ paralyzing creature’s Con modifier; the DC is given in
+the creature’s description). Unlike hold person and similar
+effects, a paralysis effect does not allow a new save each
+round. A winged creature flying in the air at the time that
+it is paralyzed cannot flap its wings and falls. A swimmer
+can’t swim and may drown. The duration of the paralysis
+varies and is included in the creature’s description.
+Format: paralysis (1d4 rounds, DC 18); Location: Special
+Attacks and individual attacks.
+Plant Traits (Ex) Plants are immune to all mind-affecting
+effects (charms, compulsions, morale effects, patterns, and
+phantasms), paralysis, poison, polymorph, sleep, and stun.
+Format: plant traits; Location: Immune.
+Poison (Ex or Su) A creature with this ability can poison
+those it attacks. The effects of the poison, including its
+save, frequency, and cure, are included in the creature’s
+description. The saving throw to resist a poison is usually
+a Fort save (DC 10 + 1/2 poisoning creature’s racial HD
++ creature’s Con modifier; the exact DC is given in the
+creature’s descriptive text). Poisons can be removed
+through neutralize poison and similar effects.
+Format: Poison Name (Ex) Sting—injury; save Fort
+DC 22, frequency 1/round for 6 rounds, effect 1d4 Con,
+cure 2 consecutive saves; Location: Special Attacks and
+individual attacks.
+Pounce (Ex) When a creature with this special attack
+makes a charge, it can make a full attack (including rake
+attacks if the creature also has the rake ability).
+Format: pounce; Location: Special Attacks.
+Table 3–1: Natural Attacks by Size
+Base Damage by Size* Damage Attack
+natural Attack fine Dim. Tiny Small Med. Large huge garg. Col. Type Type
+Bite 1 1d2 1d3 1d4 1d6 1d8 2d6 2d8 4d6 B/S/P Primary
+Claw — 1 1d2 1d3 1d4 1d6 1d8 2d6 2d8 B/S Primary
+Gore 1 1d2 1d3 1d4 1d6 1d8 2d6 2d8 4d6 P Primary
+Hoof, Tentacle, Wing — 1 1d2 1d3 1d4 1d6 1d8 2d6 2d8 B Secondary
+Pincers, Tail Slap 1 1d2 1d3 1d4 1d6 1d8 2d6 2d8 4d6 B Secondary
+Slam — 1 1d2 1d3 1d4 1d6 1d8 2d6 2d8 B Primary
+Sting — 1 1d2 1d3 1d4 1d6 1d8 2d6 2d8 P Primary
+Talons — 1 1d2 1d3 1d4 1d6 1d8 2d6 2d8 S Primary
+Other — 1 1d2 1d3 1d4 1d6 1d8 2d6 2d8 B/S/P Secondary
+* Individual creatures vary from this value as appropriate.
+302
+302
+paizo.com #1276082, D M <dm_123_456@yahoo.com>, Oct 20, 2009
+paizo.com #1276082, D M <dm_123_456@yahoo.com>, Oct 20, 2009
+
