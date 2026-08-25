@@ -22,7 +22,7 @@ class Catalog:
     @classmethod
     def load(cls, path: str | Path | None = None) -> "Catalog":
         if path is None:
-            path = Path(__file__).resolve().parents[1] / "catalog" / "catalog-v1.json"
+            path = Path(__file__).resolve().parents[1] / "catalog" / "catalog.json"
         catalog_path = Path(path).resolve()
         try:
             data = json.loads(catalog_path.read_text())
@@ -47,8 +47,8 @@ class Catalog:
             schema_required = set()
         required = (
             "schemaVersion", "catalogVersion", "sources", "arrays", "grafts",
-            "options", "skills", "damage", "naturalAttacksBySize", "spellLists",
-            "spells", "metamagic", "metamagicRules",
+            "options", "skills", "damage", "naturalAttacksBySize", "spellBands",
+            "spellLists", "spells", "metamagic", "metamagicRules",
         )
         missing = [key for key in required if key not in self.data]
         missing.extend(key for key in schema_required if key not in self.data and key not in missing)
@@ -58,6 +58,12 @@ class Catalog:
             raise CatalogError(f"unsupported catalog schema: {self.schema_version!r}")
         if not isinstance(self.version, str) or not self.version:
             raise CatalogError("catalogVersion must be a non-empty string")
+        fingerprint = "sha256:" + hashlib.sha256(json.dumps(
+            {key: value for key, value in self.data.items() if key != "catalogVersion"},
+            ensure_ascii=False, sort_keys=True, separators=(",", ":"),
+        ).encode()).hexdigest()
+        if self.version != fingerprint:
+            raise CatalogError("catalogVersion does not match catalog contents")
 
         for source_id, source in self.data["sources"].items():
             if source.get("sourceId") != source_id:
@@ -114,6 +120,27 @@ class Catalog:
                 if rule is None or rule.get("levelIncrease") != increase:
                     raise CatalogError(f"metamagic rule mismatch: {rule_id}")
 
+        expected_bands = {band["id"] for band in self.data["spellBands"]}
+        if len(expected_bands) != len(self.data["spellBands"]):
+            raise CatalogError("spell bands must have unique IDs")
+        for list_key, spell_list in self.data["spellLists"].items():
+            if spell_list.get("id") != f"spell-list.{list_key}":
+                raise CatalogError(f"spell-list id mismatch: {list_key}")
+            if set(spell_list.get("bands", {})) != expected_bands:
+                raise CatalogError(f"spell-list bands incomplete: {list_key}")
+            if not spell_list.get("benefit", {}).get("text"):
+                raise CatalogError(f"spell-list benefit missing: {list_key}")
+            for band in spell_list["bands"].values():
+                for role in ("primary", "secondary"):
+                    if not band.get(role):
+                        raise CatalogError(f"spell-list {role} spells missing: {list_key}")
+                    for entry in band[role]:
+                        spell_id = entry.get("spellId")
+                        if spell_id not in self.data["spells"]:
+                            raise CatalogError(f"spell-list references unknown spell: {spell_id}")
+                        if any(rule not in self.data["metamagic"] for rule in entry.get("metamagic", [])):
+                            raise CatalogError(f"spell-list references unknown metamagic: {spell_id}")
+
         for spell_id, spell in self.data["spells"].items():
             if spell.get("id") != spell_id:
                 raise CatalogError(f"spell id mismatch: {spell_id}")
@@ -140,9 +167,13 @@ class Catalog:
         grafts = self.data["grafts"]
         for group in grafts.values():
             yield from group.values()
-        for group_name in ("options", "skills", "naturalAttacksBySize", "spellLists", "spells", "metamagicRules"):
+        for group_name in ("options", "skills", "naturalAttacksBySize", "spells", "metamagicRules"):
             if group_name in self.data:
                 yield from self.data[group_name].values()
+        for spell_list in self.data["spellLists"].values():
+            yield spell_list
+            yield spell_list["benefit"]
+            yield from spell_list["bands"].values()
         yield from self.data["damage"].values()
 
     def entries(self, kind: str) -> dict[str, Any]:

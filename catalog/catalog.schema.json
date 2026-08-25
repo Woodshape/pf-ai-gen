@@ -3,7 +3,7 @@
   "$id": "https://pf-ai-gen.local/catalog.schema.json",
   "title": "Pathfinder Simple Monster Creation catalog",
   "type": "object",
-  "required": ["schemaVersion", "catalogVersion", "sources", "arrays", "grafts", "options", "skills", "damage", "naturalAttacksBySize", "spellLists", "spells", "metamagic", "metamagicRules"],
+  "required": ["schemaVersion", "catalogVersion", "sources", "arrays", "grafts", "options", "skills", "damage", "naturalAttacksBySize", "spellBands", "spellLists", "spells", "metamagic", "metamagicRules"],
   "properties": {
     "schemaVersion": {"const": "1"},
     "catalogVersion": {"type": "string", "minLength": 1},
@@ -15,7 +15,8 @@
     "skills": {"type": "object", "additionalProperties": {"$ref": "#/$defs/catalogEntry"}},
     "damage": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "object", "required": ["min", "max", "expressions", "sourceRef"]}},
     "naturalAttacksBySize": {"type": "object", "additionalProperties": {"type": "object", "required": ["id", "bySize", "damageType", "classification", "sourceRef"]}},
-    "spellLists": {"type": "object", "additionalProperties": {"type": "object", "required": ["id", "bands", "sourceRef"]}},
+    "spellBands": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/spellBandRange"}},
+    "spellLists": {"type": "object", "additionalProperties": {"$ref": "#/$defs/spellList"}},
     "spells": {"type": "object", "additionalProperties": {"$ref": "#/$defs/spell"}},
     "metamagic": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
     "metamagicRules": {"type": "object", "additionalProperties": {"$ref": "#/$defs/catalogEntry"}}
@@ -72,6 +73,49 @@
         "subtypes": {"type": "object"},
         "templates": {"type": "object"},
         "sizes": {"type": "object"}
+      }
+    },
+    "spellBandRange": {
+      "type": "object",
+      "required": ["id", "minCR", "maxCR"],
+      "properties": {
+        "id": {"type": "string"},
+        "minCR": {"type": "number"},
+        "maxCR": {"type": ["number", "null"]}
+      }
+    },
+    "spellList": {
+      "type": "object",
+      "required": ["id", "name", "bands", "benefit", "sourceRef"],
+      "properties": {
+        "id": {"type": "string"},
+        "name": {"type": "string"},
+        "bands": {"type": "object", "minProperties": 5, "additionalProperties": {"$ref": "#/$defs/spellBand"}},
+        "benefit": {
+          "type": "object",
+          "required": ["text", "sourceRef"],
+          "properties": {"text": {"type": "string", "minLength": 1}, "sourceRef": {"$ref": "#/$defs/sourceRef"}}
+        },
+        "sourceRef": {"$ref": "#/$defs/sourceRef"}
+      }
+    },
+    "spellBand": {
+      "type": "object",
+      "required": ["primary", "secondary", "sourceRef"],
+      "properties": {
+        "primary": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/spellListEntry"}},
+        "secondary": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/spellListEntry"}},
+        "sourceRef": {"$ref": "#/$defs/sourceRef"}
+      }
+    },
+    "spellListEntry": {
+      "type": "object",
+      "required": ["spellId", "name", "sourceText", "metamagic"],
+      "properties": {
+        "spellId": {"type": "string"},
+        "name": {"type": "string"},
+        "sourceText": {"type": "string"},
+        "metamagic": {"type": "array", "items": {"type": "string"}}
       }
     },
     "spell": {

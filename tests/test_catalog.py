@@ -7,7 +7,7 @@ class CatalogTests(unittest.TestCase):
     def test_versioned_catalog_has_source_backed_spell_inventory(self):
         catalog = Catalog.load()
         spells = catalog.data["spells"].values()
-        self.assertEqual(catalog.version, "catalog-1")
+        self.assertRegex(catalog.version, r"^sha256:[0-9a-f]{64}$")
         self.assertEqual(sum(spell["sourceBook"] in {"APG", "UM", "UC"} for spell in spells), 39)
         self.assertEqual(sum(spell["sourceBook"] == "ACG" for spell in spells), 5)
         self.assertIn("spell.apg.lead-blades", catalog.data["spells"])
@@ -20,6 +20,13 @@ class CatalogTests(unittest.TestCase):
             {"count": 2, "attackBonuses": [-3], "averageDamage": 4},
         ])
         self.assertEqual(catalog.data["damage"]["99-101"]["expressions"]["d6"], "1d6+97")
+        self.assertEqual(len(catalog.data["spellLists"]), 60)
+        for spell_list in catalog.data["spellLists"].values():
+            self.assertEqual(set(spell_list["bands"]), {"0–3", "4–7", "8–11", "12–15", "16+"})
+            self.assertTrue(spell_list["benefit"]["text"])
+            for band in spell_list["bands"].values():
+                self.assertTrue(band["primary"])
+                self.assertTrue(band["secondary"])
         for spell in catalog.data["spells"].values():
             self.assertEqual(spell["highest"], max(spell["levelsByClass"].values()))
             self.assertTrue(spell["sourceRef"])

@@ -477,8 +477,8 @@ class Engine:
             pass
 
         attacks = self._evaluate_attacks(selections["attacks"], attack_table, size_id, attack_adjustment, issues)
-        spells = self._evaluate_spells(selections, array_id, cr, main, issues)
-        if array_id != "array.spellcaster" and selections.get("spells"):
+        spells, spell_list_benefit = self._evaluate_spells(selections, array_id, cr, main, issues)
+        if array_id != "array.spellcaster" and (selections.get("spells") or selections.get("spellListId")):
             issues.append(self._issue("spells.array-required", "/selections/spells", "Step 6 spells require the spellcaster array", "source-rule", "error"))
 
         errors = [issue for issue in issues if issue["severity"] == "error"]
@@ -513,6 +513,7 @@ class Engine:
             "senses": list(dict.fromkeys(creature_type.get("automaticTraits", []))),
             "speed": copy.deepcopy(selections["speed"]),
             "spells": spells,
+            "spellListBenefit": spell_list_benefit,
         }
         trace = self._trace(draft, main, attack_table, creature_type, size, canonical)
         return {
@@ -592,35 +593,68 @@ class Engine:
         return row["expressions"].get(die) if row else None
 
     def _evaluate_spells(self, selections, array_id, cr, main, issues):
-        if not selections.get("spells"):
-            return []
         if array_id != "array.spellcaster":
-            return []
+            return [], None
+        if selections.get("spellListId"):
+            spell_list_id, spell_list = self._resolve("spellList", selections["spellListId"], "/selections/spellListId")
+            bands = self.catalog.data["spellBands"]
+            band_index = next(index for index, band in enumerate(bands) if band["minCR"] <= cr and (band["maxCR"] is None or cr <= band["maxCR"]))
+            sets = [(band_index, "primary", "1/day")]
+            if band_index >= 1:
+                sets.extend(((band_index - 1, "primary", "3/day"), (band_index - 1, "secondary", "3/day")))
+            if band_index >= 2:
+                sets.append((band_index - 2, "primary", "at will"))
+            output = []
+            for source_band_index, role, frequency in sets:
+                source_band = bands[source_band_index]["id"]
+                for entry in spell_list["bands"][source_band][role]:
+                    result = self._spell_result(entry["spellId"], entry.get("metamagic", []), None, main, issues, "/selections/spellListId")
+                    if result:
+                        result.update({
+                            "frequency": frequency,
+                            "sourceBand": source_band,
+                            "role": role,
+                            "sourceText": entry["sourceText"],
+                        })
+                        output.append(result)
+            return output, {
+                "spellListId": spell_list_id,
+                "name": spell_list["name"],
+                "text": spell_list["benefit"]["text"],
+            }
+        if not selections.get("spells"):
+            return [], None
         output = []
         for index, selected in enumerate(selections["spells"]):
-            spell_id, spell = self._resolve("spell", selected["spellId"], f"/selections/spells/{index}/spellId")
-            metamagic = selected.get("metamagic", [])
-            if not isinstance(metamagic, list):
-                issues.append(self._issue("spell.metamagic-invalid", f"/selections/spells/{index}/metamagic", "metamagic must be an array", "catalog-data", "error"))
-                continue
-            level_source = selected.get("spellLevelSource", selections.get("spellLevelSource"))
+            result = self._spell_result(
+                selected["spellId"], selected.get("metamagic", []),
+                selected.get("spellLevelSource", selections.get("spellLevelSource")),
+                main, issues, f"/selections/spells/{index}",
+            )
+            if result:
+                output.append(result)
+        return output, None
+
+    def _spell_result(self, selected_spell_id, metamagic, level_source, main, issues, path):
+        spell_id, spell = self._resolve("spell", selected_spell_id, f"{path}/spellId")
+        if level_source is None:
+            level_source = next((source for source in ("cleric", "sorcerer", "wizard") if source in spell["levelsByClass"]), None)
             if level_source is None:
-                if "cleric" in spell["levelsByClass"]:
-                    level_source = "cleric"
-                elif "sorcerer" in spell["levelsByClass"]:
-                    level_source = "sorcerer"
-                elif "wizard" in spell["levelsByClass"]:
-                    level_source = "wizard"
-                else:
-                    level_source = max(spell["levelsByClass"], key=spell["levelsByClass"].get)
-            if level_source not in spell["levelsByClass"]:
-                issues.append(self._issue("spell.level-source-invalid", f"/selections/spells/{index}", "requested spell level source is not present", "source-rule", "error", spell.get("sourceRef")))
-                continue
-            base_level = spell["levelsByClass"][level_source]
-            metamagic_increase = sum(self.catalog.data["metamagic"][value] for value in metamagic)
-            effective_level = base_level + metamagic_increase
-            output.append({"spellId": spell_id, "name": spell["name"], "spellLevelSource": level_source, "baseLevel": base_level, "metamagic": list(metamagic), "effectiveLevel": effective_level, "spellDC": main["spellDC"] + effective_level})
-        return output
+                level_source = max(spell["levelsByClass"], key=spell["levelsByClass"].get)
+        if level_source not in spell["levelsByClass"]:
+            issues.append(self._issue("spell.level-source-invalid", path, "requested spell level source is not present", "source-rule", "error", spell.get("sourceRef")))
+            return None
+        base_level = spell["levelsByClass"][level_source]
+        effective_level = base_level + sum(self.catalog.data["metamagic"][value] for value in metamagic)
+        return {
+            "spellId": spell_id,
+            "name": spell["name"],
+            "spellLevelSource": level_source,
+            "baseLevel": base_level,
+            "metamagic": list(metamagic),
+            "effectiveLevel": effective_level,
+            "spellDC": main["spellDC"] + effective_level,
+        }
 
     def _trace(self, draft, main, attack_table, creature_type, size, canonical):
         trace = []
@@ -649,7 +683,10 @@ class Engine:
             spell_refs = []
             for spell in canonical["spells"]:
                 spell_refs.extend(self.catalog.data["spells"][spell["spellId"]].get("sourceRef", []))
-            add("/canonical/spells", "step6.spellLevel + metamagic + spellDC", canonical["spells"], spell_refs)
+            add("/canonical/spells", "step6.crBand + frequency + spellLevel + metamagic + spellDC", canonical["spells"], spell_refs)
+        if canonical.get("spellListBenefit"):
+            _, spell_list = self._resolve("spellList", draft["selections"]["spellListId"], "/selections/spellListId")
+            add("/canonical/spellListBenefit", "step6.spellListBenefit", canonical["spellListBenefit"], [spell_list["benefit"]["sourceRef"]])
         add("/canonical/cmb", "otherCalculations.cmb", canonical["cmb"], [main_ref])
         if canonical.get("maneuverBonuses"):
             add("/canonical/maneuverBonuses", "option.improvedCombatManeuver", canonical["maneuverBonuses"], [self.catalog.data["options"]["option.improved-combat-maneuver"]["sourceRef"]])

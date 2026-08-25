@@ -12,5 +12,9 @@ printf '%s\n' '{"protocolVersion":"1","requestId":"r1","operation":"draft.create
 
 JSONL is only CLI framing; the operation contract is the same in-process.
 The current slice covers the versioned catalog, Worg CR 2, typed draft changes,
-strict evaluation, provenance traces, and individual Step-6 spell level/metamagic
-resolution. Spell-list CR bands, frequencies, and list benefits remain open.
+strict evaluation, provenance traces, and all 60 Step-6 spell lists with CR-band
+frequencies, spell DCs, metamagic, and source-backed list benefits. Typed effects
+for numeric/choice-based list benefits remain part of broader effect coverage.
+
+Runtime is Python/stdlib only. Regenerating the checked-in catalog additionally
+requires the `pdftotext` executable for source table coordinates.

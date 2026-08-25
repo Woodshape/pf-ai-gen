@@ -237,6 +237,73 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         self.assertTrue(response["ok"], response)
         self.assertEqual(response["result"]["evaluation"]["status"], "valid")
 
+    def test_step6_spell_list_resolves_cr_bands_frequencies_and_benefit(self):
+        spellcaster = copy.deepcopy(WORG_DRAFT)
+        spellcaster["concept"] = {"name": "Aberrant Caster", "targetCR": 9}
+        spellcaster["selections"].update({
+            "cr": 9,
+            "arrayId": "array.spellcaster",
+            "options": [
+                {"optionId": "option.at-will-magic", "parameters": {}},
+                {"optionId": "option.secondary-magic", "parameters": {"spellListId": "spell-list.aberrant"}},
+            ],
+            "skills": {"master": ["perception", "stealth"], "good": ["survival"]},
+            "spellListId": "spell-list.aberrant",
+            "spells": [],
+        })
+        response = self.engine.execute(request("aberrant-list", "draft.create", {"draft": spellcaster}))
+        self.assertTrue(response["ok"], response)
+        evaluation = response["result"]["evaluation"]
+        self.assertEqual(evaluation["status"], "valid")
+        self.assertEqual(
+            [(spell["name"], spell["frequency"], spell["sourceBand"], spell["spellDC"]) for spell in evaluation["canonical"]["spells"]],
+            [
+                ("Feeblemind", "1/day", "8–11", 22),
+                ("Spell Resistance", "1/day", "8–11", 22),
+                ("Beast Shape I", "3/day", "4–7", 20),
+                ("Major Image", "3/day", "4–7", 20),
+                ("Acid Arrow", "3/day", "4–7", 19),
+                ("See Invisibility", "3/day", "4–7", 19),
+                ("Cause Fear", "at will", "0–3", 18),
+                ("Long Arm", "at will", "0–3", 18),
+            ],
+        )
+        self.assertEqual(evaluation["canonical"]["spellListBenefit"], {
+            "spellListId": "spell-list.aberrant",
+            "name": "Aberrant",
+            "text": "The monster gains the benefit of the fortification universal monster rule (Bestiary 4 294).",
+        })
+        trace_paths = {entry["path"] for entry in evaluation["derivationTrace"]}
+        self.assertIn("/canonical/spellListBenefit", trace_paths)
+
+    def test_step6_frequency_rules_hold_at_cr_band_boundaries(self):
+        expected = {
+            3: {"1/day": 2},
+            4: {"1/day": 2, "3/day": 4},
+            8: {"1/day": 2, "3/day": 4, "at will": 2},
+            12: {"1/day": 2, "3/day": 4, "at will": 2},
+            16: {"1/day": 2, "3/day": 4, "at will": 2},
+        }
+        for cr, frequencies in expected.items():
+            with self.subTest(cr=cr):
+                draft = copy.deepcopy(WORG_DRAFT)
+                draft["concept"]["targetCR"] = cr
+                magic_slots = 2 if cr < 12 else 3
+                options = [{"optionId": "option.at-will-magic", "parameters": {}} for _ in range(magic_slots - 1)]
+                options.append({"optionId": "option.secondary-magic", "parameters": {"spellListId": "spell-list.aberrant"}})
+                draft["selections"].update({
+                    "cr": cr,
+                    "arrayId": "array.spellcaster",
+                    "options": options,
+                    "skills": {"master": ["perception", "stealth"], "good": ["survival"]},
+                    "spellListId": "spell-list.aberrant",
+                    "spells": [],
+                })
+                response = self.engine.execute(request(f"band-{cr}", "draft.create", {"draft": draft}))
+                self.assertTrue(response["ok"], response)
+                spells = response["result"]["evaluation"]["canonical"]["spells"]
+                self.assertEqual({frequency: sum(spell["frequency"] == frequency for spell in spells) for frequency in frequencies}, frequencies)
+
     def test_step6_resolves_class_level_and_metamagic_from_catalog(self):
         spellcaster = copy.deepcopy(WORG_DRAFT)
         spellcaster["concept"] = {"name": "Serenity Caster", "targetCR": 2}

@@ -1,13 +1,16 @@
+import csv
 import hashlib
+import io
 import json
 import re
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 UNCHAINED = ROOT / "Pathfinder Unchained.txt"
 CORE = ROOT / "Pathfinder_RPG_Core_Rulebook.txt"
 BESTIARY = ROOT / "beastiary.txt"
-OUT = ROOT / "catalog/catalog-v1.json"
+OUT = ROOT / "catalog/catalog.json"
 
 unchained_lines = UNCHAINED.read_text().splitlines()
 core_lines = CORE.read_text().splitlines()
@@ -395,25 +398,13 @@ for index, line in enumerate(core_lines, 1):
     core_page_by_line[index] = current_core_page
 core_spells = {}
 class_header = re.compile(r"^[A-Za-z/ ]+ speLLs$|^[A-Za-z/ ]+ Spells$")
-level_header = re.compile(r"^(\d+)(?:st|nd|rd|th)-Level (.+?) Spells(?: \(.+\))?$")
+level_header = re.compile(r"^(\d+)(?:st|nd|rd|th)?[-–]Level (.+?) Spells(?: \(.+\))?$")
 current_class = None
 current_level = None
-for line_number, line in enumerate(core_lines, 1):
-    stripped = line.strip()
-    if class_header.match(stripped):
-        current_class = stripped.replace("speLLs", "").replace("Spells", "").strip().lower()
-        current_level = None
-        continue
-    level_match = level_header.match(stripped)
-    if level_match and current_class:
-        current_level = int(level_match.group(1))
-        continue
-    if not current_class or current_level is None or ":" not in stripped:
-        continue
-    spell_name = stripped.split(":", 1)[0].strip()
-    if not spell_name or len(spell_name) > 80 or spell_name[0].isdigit():
-        continue
-    spell_name = re.sub(r"[MF]$", "", spell_name).strip()
+pending_spell = None
+
+
+def add_core_spell(spell_name, line_number):
     classes = ["sorcerer", "wizard"] if current_class == "sorcerer/wizard" else [current_class]
     spell_id = f"spell.core.{slug(spell_name)}"
     record = core_spells.setdefault(
@@ -447,42 +438,209 @@ for line_number, line in enumerate(core_lines, 1):
             provenance_status="local-source",
         )
     )
+
+
+for line_number, line in enumerate(core_lines, 1):
+    stripped = line.strip()
+    if class_header.match(stripped):
+        current_class = re.sub(r"\s+(?:speLLs|Spells)$", "", stripped).strip().lower()
+        current_level = None
+        pending_spell = None
+        continue
+    level_match = level_header.match(stripped)
+    if level_match and current_class:
+        current_level = int(level_match.group(1))
+        pending_spell = None
+        continue
+    if not current_class or current_level is None:
+        continue
+    if pending_spell and stripped.startswith(":"):
+        add_core_spell(pending_spell, line_number - 1)
+        pending_spell = None
+        continue
+    if ":" in stripped:
+        spell_name = re.sub(r"[MF]+$", "", stripped.split(":", 1)[0].strip()).strip()
+        if spell_name and len(spell_name) <= 80 and not spell_name[0].isdigit():
+            add_core_spell(spell_name, line_number)
+    elif re.match(r"^[A-Z][A-Za-z’' /,–-]+[MF]$", stripped):
+        pending_spell = re.sub(r"[MF]+$", "", stripped).strip()
 spells.update(core_spells)
 
-# Keep spell-list source text separate from spell identity/metadata.
+# Extract Step-6 table columns from the PDF's word coordinates. The ordinary
+# TXT extraction collapses Primary and Secondary into one stream; TSV retains
+# the source table layout without making runtime PDF parsing necessary.
 spell_lists = {}
 current_list = None
+current_band = None
 for line_number, line in enumerate(unchained_lines, 1):
-    if not 2230 <= line_number <= 3131:
+    if not 2230 <= line_number <= 3190:
         continue
-    header = re.match(r"^([A-Za-z][A-Za-z ]+) Spell List$", line.strip())
+    stripped = line.strip()
+    if stripped == "Step 7: Monster Options":
+        break
+    header = re.match(r"^([A-Za-z][A-Za-z ]+) Spell List$", stripped)
     if header:
-        current_list = header.group(1).lower().replace(" ", "-")
-        current_list = {"ransmutation": "transmutation", "ravel": "travel", "rickery": "trickery"}.get(current_list, current_list)
+        display_name = {"ransmutation": "Transmutation", "ravel": "Travel", "rickery": "Trickery"}.get(header.group(1), header.group(1))
+        current_list = display_name.lower().replace(" ", "-")
+        current_band = None
         spell_lists[current_list] = {
             "id": f"spell-list.{current_list}",
-            "name": header.group(1),
+            "name": display_name,
             "bands": {},
+            "benefit": None,
             "sourceRef": unchained_ref(
                 "Step 6: Spells", line_number, step6_page(line_number),
-                entry=header.group(1), table="Spell Lists",
+                entry=display_name, table="Spell Lists",
             ),
         }
         continue
     if not current_list:
         continue
-    match = re.match(r"^(0–3|4–7|8–11|12–15|16\+) (.*)$", line.strip())
-    if match and "Benefit:" not in line:
-        band, rest = match.groups()
-        # Source extraction collapses columns; preserve it as source text rather
-        # than trying to manufacture IDs from metamagic/descriptor variants.
-        spell_lists[current_list]["bands"][band] = {
-            "sourceText": rest.strip(),
+    match = re.match(r"^(0–3|4–7|8–11|12–15|16\+) (.*)$", stripped)
+    if match:
+        current_band = match.group(1)
+        spell_lists[current_list]["bands"][current_band] = {
+            "primary": [],
+            "secondary": [],
             "sourceRef": unchained_ref(
                 "Step 6: Spells", line_number, step6_page(line_number),
-                entry=band, table=f"{current_list} spell list",
+                entry=current_band, table=f"{current_list} spell list",
             ),
         }
+    elif stripped.startswith("Benefit:"):
+        current_band = None
+        spell_lists[current_list]["benefit"] = {
+            "text": stripped.removeprefix("Benefit:").strip(),
+            "sourceRef": unchained_ref(
+                "Step 6: Spells", line_number, step6_page(line_number),
+                entry="Benefit", table=f"{current_list} spell list",
+            ),
+        }
+    elif current_band is None and spell_lists[current_list]["benefit"] and stripped and stripped != "T" and not stripped.isdigit() and not stripped.startswith("Monsters"):
+        spell_lists[current_list]["benefit"]["text"] += " " + stripped
+
+step6_tsv = subprocess.check_output([
+    "pdftotext", "-f", "25", "-l", "34", "-tsv", str(ROOT / "Pathfinder Unchained.pdf"), "-",
+], text=True)
+words = []
+for word in csv.DictReader(io.StringIO(step6_tsv), delimiter="\t"):
+    if word["level"] == "5" and word["text"] not in {"Monsters", "5"} and not word["text"].isdigit():
+        words.append({
+            "page": int(word["page_num"]),
+            "x": float(word["left"]),
+            "y": round(float(word["top"]), 1),
+            "text": word["text"],
+        })
+
+layout_columns = []
+for page in range(25, 35):
+    for side in ("left", "right"):
+        x_min, x_max = ((0, 298) if side == "left" else (298, 596))
+        primary_x, secondary_x = ((108, 212) if side == "left" else (348, 452))
+        page_words = [word for word in words if word["page"] == page and x_min <= word["x"] < x_max]
+        rows = []
+        for y in sorted({word["y"] for word in page_words}):
+            row = sorted((word for word in page_words if word["y"] == y), key=lambda word: word["x"])
+            rows.append({
+                "all": " ".join(word["text"] for word in row),
+                "cr": " ".join(word["text"] for word in row if word["x"] < primary_x),
+                "primary": " ".join(word["text"] for word in row if primary_x <= word["x"] < secondary_x),
+                "secondary": " ".join(word["text"] for word in row if word["x"] >= secondary_x),
+            })
+        layout_columns.append(rows)
+
+def spell_alias_name(value):
+    return re.sub(r"[^a-z0-9]+", " ", normalized_spell_name(value)).strip()
+
+
+spell_aliases = {}
+for spell_id, spell in spells.items():
+    names = {spell_alias_name(spell["name"])}
+    if "," in spell["name"]:
+        base, modifier = (part.strip() for part in spell["name"].split(",", 1))
+        if modifier.lower() in {"greater", "lesser", "mass"}:
+            names.add(spell_alias_name(f"{modifier} {base}"))
+    for name in names:
+        spell_aliases[name] = spell_id
+for combined, variants in {
+    "protection from chaos/evil/good/law": ("protection from chaos", "protection from evil", "protection from good", "protection from law", "protection from good or law"),
+    "magic circle against chaos/evil/good/law": ("magic circle against chaos", "magic circle against evil", "magic circle against good", "magic circle against law"),
+    "dispel chaos/evil/good/law": ("dispel chaos", "dispel evil", "dispel good", "dispel law"),
+}.items():
+    spell_id = spell_aliases.get(spell_alias_name(combined))
+    if spell_id:
+        spell_aliases.update({spell_alias_name(variant): spell_id for variant in variants})
+spell_aliases["control wind"] = spell_aliases["control winds"]
+
+metamagic_prefixes = {
+    "empowered": "empower", "extended": "extend", "maximized": "maximize",
+    "quickened": "quicken", "widened": "widen", "enlarged": "enlarge",
+}
+
+
+def resolve_spell_list_cell(text, list_id):
+    expressions = [expression.strip() for expression in text.split(",") if expression.strip()]
+    if not expressions:
+        raise ValueError(f"spell-list cell has no spells: {list_id}: {text}")
+    output = []
+    for source_text in expressions:
+        lookup_text = re.sub(r"\b(?:APG|UM|UC|ACG)\b", "", source_text, flags=re.IGNORECASE)
+        lookup_text = re.sub(r"\*.*$|\bgood creatures only\.?$", "", lookup_text, flags=re.IGNORECASE).strip()
+        metamagic = []
+        while True:
+            match = re.match(r"^(empowered|extended|maximized|quickened|widened|enlarged)\s+", lookup_text, re.IGNORECASE)
+            if not match:
+                break
+            metamagic.append(metamagic_prefixes[match.group(1).lower()])
+            lookup_text = lookup_text[match.end():]
+        lookup_text = re.sub(r"\s*\([^)]*\)\s*$", "", lookup_text).strip()
+        normalized = spell_alias_name(lookup_text)
+        spell_id = spell_aliases.get(normalized)
+        if spell_id is None:
+            raise ValueError(f"unresolved Step-6 spell: {list_id}: {source_text!r} ({normalized!r})")
+        spell = spells[spell_id]
+        list_name = list_id.removeprefix("spell-list.")
+        if list_name not in spell["listMemberships"]:
+            spell["listMemberships"].append(list_name)
+            spell["listMemberships"].sort()
+        output.append({
+            "spellId": spell_id,
+            "name": spell["name"],
+            "sourceText": source_text,
+            "metamagic": metamagic,
+        })
+    return output
+
+current_layout_list = None
+current_layout_band = None
+for rows in layout_columns:
+    for row in rows:
+        list_key = next((key for key, value in spell_lists.items() if f'{value["name"]} Spell List' in row["all"]), None)
+        if list_key:
+            current_layout_list = list_key
+            current_layout_band = None
+            continue
+        if not current_layout_list:
+            continue
+        band = next((band for band in ("0–3", "4–7", "8–11", "12–15", "16+") if re.search(rf"(?<!\S){re.escape(band)}(?!\S)", row["cr"])), None)
+        if band:
+            current_layout_band = band
+            spell_lists[current_layout_list]["bands"][band].setdefault("primaryText", "")
+            spell_lists[current_layout_list]["bands"][band].setdefault("secondaryText", "")
+        elif row["all"].startswith("Benefit:"):
+            current_layout_band = None
+            continue
+        if current_layout_band:
+            values = spell_lists[current_layout_list]["bands"][current_layout_band]
+            values["primaryText"] = " ".join(filter(None, (values["primaryText"], row["primary"])))
+            values["secondaryText"] = " ".join(filter(None, (values["secondaryText"], row["secondary"])))
+
+for list_key, spell_list in spell_lists.items():
+    if set(spell_list["bands"]) != {"0–3", "4–7", "8–11", "12–15", "16+"} or not spell_list["benefit"]:
+        raise ValueError(f"incomplete Step-6 spell list: {list_key}")
+    for band in spell_list["bands"].values():
+        band["primary"] = resolve_spell_list_cell(band.pop("primaryText"), spell_list["id"])
+        band["secondary"] = resolve_spell_list_cell(band.pop("secondaryText"), spell_list["id"])
 
 # Base grafts and option data needed by the first executable slice.
 type_specs = {
@@ -615,12 +773,12 @@ for skill in ("perception", "stealth", "survival", "climb", "fly", "swim", "inti
 
 catalog = {
     "schemaVersion": "1",
-    "catalogVersion": "catalog-1",
+    "catalogVersion": None,
     "catalogStatus": {
         "step1": "complete",
         "worgVerticalSlice": "complete",
         "spellMetadata": "APG/UM/UC complete; ACG follow-up metadata with local vendoring pending",
-        "spellListEvaluation": "catalogued; CR-band/frequency/list-benefit resolver pending",
+        "spellListEvaluation": "structured primary/secondary bands and benefits complete",
         "coreSpellLists": "source-backed class-list metadata",
         "grafts": "Worg path plus type/size baseline",
         "options": "Worg path plus typed option metadata",
@@ -641,9 +799,16 @@ catalog = {
     "skills": skills,
     "damage": damage_table,
     "naturalAttacksBySize": natural_attacks,
+    "spellBands": [
+        {"id": "0–3", "minCR": 0, "maxCR": 3},
+        {"id": "4–7", "minCR": 4, "maxCR": 7},
+        {"id": "8–11", "minCR": 8, "maxCR": 11},
+        {"id": "12–15", "minCR": 12, "maxCR": 15},
+        {"id": "16+", "minCR": 16, "maxCR": None},
+    ],
     "spellLists": spell_lists,
     "spells": spells,
-    "metamagic": {"empower": 2, "extend": 1, "maximize": 3, "quicken": 4, "widen": 3},
+    "metamagic": {"empower": 2, "enlarge": 1, "extend": 1, "maximize": 3, "quicken": 4, "widen": 3},
     "metamagicRules": {
         key: {
             "id": f"metamagic.{key}",
@@ -653,6 +818,7 @@ catalog = {
         }
         for key, name, increase in (
             ("empower", "Empower Spell", 2),
+            ("enlarge", "Enlarge Spell", 1),
             ("extend", "Extend Spell", 1),
             ("maximize", "Maximize Spell", 3),
             ("quicken", "Quicken Spell", 4),
@@ -662,6 +828,10 @@ catalog = {
     "derivedRules": {"cmb": "highAttackBonus", "concentration": "crPlusAbilityModifier", "hitDice": "max(1,cr)", "initiative": "dexterityModifier", "perception": "goodSkillUnlessMaster", "speed": "conceptSelection"},
     "aliases": {"arrays": {"combatant": "array.combatant", "expert": "array.expert", "spellcaster": "array.spellcaster"}, "grafts": {"magical-beast": "graft.creature-type.magical-beast", "medium": "graft.size.medium"}, "options": {"improved-combat-maneuver": "option.improved-combat-maneuver"}},
 }
+catalog["catalogVersion"] = "sha256:" + hashlib.sha256(json.dumps(
+    {key: value for key, value in catalog.items() if key != "catalogVersion"},
+    ensure_ascii=False, sort_keys=True, separators=(",", ":"),
+).encode()).hexdigest()
 OUT.parent.mkdir(parents=True, exist_ok=True)
 OUT.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n")
 print(f"wrote {OUT}: {len(spells)} spells, {len(spell_lists)} spell lists")
