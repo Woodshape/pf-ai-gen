@@ -41,7 +41,7 @@ class Engine:
     }
     _ABILITY_NAMES = {"strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"}
     _ATTACK_PROFILES = {"weapon.high", "weapon.low", "natural.two", "natural.three"}
-    _DAMAGE_DICE = {"d4", "d6", "d8", "d10", "d12", "2d6", "3d6"}
+    _DAMAGE_DICE = {"d4", "d6", "d8", "d10", "d12", "2d6", "2d8", "3d6"}
 
     def __init__(self, catalog: Catalog | None = None):
         self.catalog = catalog or Catalog.load()
@@ -308,8 +308,13 @@ class Engine:
                 expected = parameter_definitions.get(parameter_name)
                 if expected is None:
                     raise BoundaryError("selection.parameter-unknown", "option parameter is not catalogued", f"/selections/options/{index}/parameters/{parameter_name}")
-                if expected.get("type") in {"string", "enum"} and not isinstance(parameter_value, str):
+                parameter_type = expected.get("type")
+                if parameter_type in {"string", "enum"} and not isinstance(parameter_value, str):
                     raise BoundaryError("selection.parameter-type-invalid", "option parameter must be a string", f"/selections/options/{index}/parameters/{parameter_name}")
+                if parameter_type in {"enum-array", "selected-attacks"} and (
+                    not isinstance(parameter_value, list) or any(not isinstance(value, str) for value in parameter_value)
+                ):
+                    raise BoundaryError("selection.parameter-type-invalid", "option parameter must be an array of strings", f"/selections/options/{index}/parameters/{parameter_name}")
         for index, skill in enumerate(selections.get("skills", {}).get("master", []) + selections.get("skills", {}).get("good", [])):
             self._resolve("skill", skill, f"/selections/skills/{index}")
         for index, attack in enumerate(selections.get("attacks", [])):
@@ -440,16 +445,52 @@ class Engine:
                 issues.append(self._issue("option-slot.invalid", f"/selections/options/{index}", "option category exceeds its budget", "source-rule", "error", main.get("sourceRef")))
             else:
                 remaining_slots[assigned_slot] -= 1
-            selected_options.append({"optionId": option_id, "parameters": copy.deepcopy(parameters)})
+            parameter_definitions = option.get("parameters", {})
+            selected_attack_names = {attack.get("name") for attack in selections["attacks"]}
+            for name, definition in parameter_definitions.items():
+                path = f"/selections/options/{index}/parameters/{name}"
+                if name not in parameters and not definition.get("optional"):
+                    issues.append(self._issue("option.parameter-required", path, "option parameter is required", "source-rule", "error", option.get("sourceRef")))
+                    continue
+                value = parameters.get(name)
+                if definition["type"] == "enum" and value not in definition["values"]:
+                    issues.append(self._issue("option.parameter-invalid", path, "option parameter is not allowed", "source-rule", "error", option.get("sourceRef")))
+                elif definition["type"] == "enum-array" and any(item not in definition["values"] for item in (value or [])):
+                    issues.append(self._issue("option.parameter-invalid", path, "option parameter contains an unallowed value", "source-rule", "error", option.get("sourceRef")))
+                elif definition["type"] == "selected-attacks" and (not value or any(item not in selected_attack_names for item in value)):
+                    issues.append(self._issue("option.parameter-invalid", path, "option attacks must name selected attacks", "source-rule", "error", option.get("sourceRef")))
+
+            selected_option = {"optionId": option_id, "parameters": copy.deepcopy(parameters)}
             if option_id == "option.improved-combat-maneuver":
                 maneuver = parameters.get("maneuver")
-                if not isinstance(maneuver, str) or maneuver not in option["parameters"]["maneuver"]["values"]:
-                    issues.append(self._issue("option.parameter-invalid", f"/selections/options/{index}/parameters/maneuver", "unknown combat maneuver", "source-rule", "error", option.get("sourceRef")))
-                else:
+                if maneuver in option["parameters"]["maneuver"]["values"]:
                     attack_type = parameters.get("attackType")
-                    if attack_type is not None and attack_type not in {attack.get("name") for attack in selections["attacks"]}:
+                    if attack_type is not None and attack_type not in selected_attack_names:
                         issues.append(self._issue("option.parameter-invalid", f"/selections/options/{index}/parameters/attackType", "option attackType must name a selected attack", "source-rule", "error", option.get("sourceRef")))
                     maneuver_bonuses[maneuver] = {"cmb": cmb + option["effects"]["cmb"], "cmd": cmd + option["effects"]["cmd"]}
+            elif option_id == "option.gaze":
+                selected_option["effect"] = {"type": "gaze", **copy.deepcopy(parameters), "dc": main["abilityDC"]}
+            elif option_id == "option.poison":
+                advantages = parameters.get("advantages", [])
+                advantage_budget = 2 + int(cr / 3)
+                if len(advantages) != advantage_budget:
+                    issues.append(self._issue("option.poison-advantage-budget", f"/selections/options/{index}/parameters/advantages", f"poison grants {advantage_budget} advantages at CR {cr:g}", "source-rule", "error", option.get("sourceRef")))
+                if any(advantages.count(value) > 1 for value in ("no-onset", "round-frequency", "two-consecutive-saves")) or advantages.count("increase-damage") > 4:
+                    issues.append(self._issue("option.poison-advantage-invalid", f"/selections/options/{index}/parameters/advantages", "poison advantage cannot be applied that many times", "source-rule", "error", option.get("sourceRef")))
+                damage_steps = ["1d2", "1d3", "1d4", "1d6", "1d8"]
+                selected_option["effect"] = {
+                    "type": "poison",
+                    "attackTypes": copy.deepcopy(parameters.get("attackTypes", [])),
+                    "save": "fortitude",
+                    "dc": main["abilityDC"],
+                    "poisonType": "injury",
+                    "onset": "—" if "no-onset" in advantages else "1 minute",
+                    "frequency": "1/round for 6 rounds" if "round-frequency" in advantages else "1/minute for 6 minutes",
+                    "ability": parameters.get("ability"),
+                    "damage": damage_steps[min(advantages.count("increase-damage"), 4)],
+                    "cure": "2 consecutive saves" if "two-consecutive-saves" in advantages else "1 save",
+                }
+            selected_options.append(selected_option)
         expected_slots = sum(slot_counts.values())
         if len(options) != expected_slots:
             issues.append(self._issue("option-budget.mismatch", "/selections/options", f"array grants {expected_slots} option slot(s), received {len(options)}", "source-rule", "error", main.get("sourceRef")))
@@ -591,7 +632,13 @@ class Engine:
                     source_refs.append(damage_row["sourceRef"])
                 if not source_refs:
                     source_refs.append(attack_table.get("sourceRef"))
-                issues.append(self._issue("damage.unresolved", f"/selections/attacks/{index}", f"no source damage expression for average damage {average_damage} and damage die {die}", "catalog-data", "error", source_refs))
+                code = "damage.natural-die-unsupported" if natural and selected.get("damageDie") is None else "damage.unresolved"
+                message = (
+                    f"source natural-attack die {natural_die} has no Table 5-9 column or published alternative for average damage {average_damage}"
+                    if code == "damage.natural-die-unsupported" else
+                    f"no source damage expression for average damage {average_damage} and damage die {die}"
+                )
+                issues.append(self._issue(code, f"/selections/attacks/{index}", message, "catalog-data", "error", source_refs))
                 expression = None
             attack = {
                 "name": selected["name"],
@@ -787,7 +834,18 @@ class Engine:
         add("/canonical/abilityDC", "array.abilityDC", canonical["abilityDC"], [main_ref])
         add("/canonical/spellDC", "array.spellDC", canonical["spellDC"], [main_ref])
         add("/canonical/abilityModifiers", "draft.abilityModifierAssignments", canonical["abilityModifiers"], [main_ref])
-        add("/canonical/attacks", "array.attackStatistics + graft adjustments + damage table", canonical["attacks"], [attack_table["sourceRef"]])
+        attack_refs = [attack_table["sourceRef"]]
+        for selected, attack in zip(draft["selections"]["attacks"], canonical["attacks"]):
+            if selected.get("naturalAttackId"):
+                _, natural = self._resolve("naturalAttack", selected["naturalAttackId"], "/selections/attacks")
+                if natural["sourceRef"] not in attack_refs:
+                    attack_refs.append(natural["sourceRef"])
+            row = next((row for row in self.catalog.data["damage"].values() if row["min"] <= attack["averageDamage"] <= row["max"]), None)
+            if row:
+                ref = row.get("expressionSourceRefs", {}).get(attack["damageDie"], row["sourceRef"])
+                if ref not in attack_refs:
+                    attack_refs.append(ref)
+        add("/canonical/attacks", "array.attackStatistics + graft adjustments + damage table", canonical["attacks"], attack_refs)
         add("/canonical/senses", "creatureTypeGraft.automaticTraits", canonical["senses"], [creature_type["sourceRef"]])
         add("/canonical/skills", "array.skillBonuses + skill selections", canonical["skills"], [main_ref])
         add("/canonical/initiative", "otherCalculations.initiative", canonical["initiative"], [main_ref])
@@ -799,7 +857,8 @@ class Engine:
         for option in canonical.get("options", []):
             definition = self.catalog.data["options"].get(option["optionId"])
             if definition and definition.get("sourceRef"):
-                option_refs.append(definition["sourceRef"])
+                refs = definition["sourceRef"]
+                option_refs.extend(refs if isinstance(refs, list) else [refs])
         add("/canonical/options", "array.optionSlots + option selections", canonical["options"], option_refs)
         if canonical.get("spells"):
             spell_refs = []

@@ -62,22 +62,22 @@ Die Issues 01–09 beschreiben die fachlichen Verträge. Dieses Issue übersetzt
 
 ## Konkreter nächster Schritt
 
-Als Nächstes den pre-Reality-Check-Medusa-Pfad für Monstrous-Humanoid-Graft, Gaze, Poison, Skills und Damage umsetzen und dabei die breitere Graft-/Optionseffekt-Abdeckung beginnen.
+Als Nächstes die Class-/Subtype-/Template-Grafts und weitere Monster-Optionseffekte vertikal erweitern; der pre-Reality-Check-Medusa-Pfad ist umgesetzt.
 
 ## Umsetzungsstand
 
-**Milestone:** Worg, Griffon, Step-6 list-band resolution, and typed numeric/choice list-benefit effects complete; Medusa and small-size fixed natural damage remain explicitly open.
+**Milestone:** Worg, Griffon, Medusa, Step-6 list-band resolution, typed numeric/choice list-benefit effects, and explicit natural-damage source gaps complete; broader graft/option coverage remains open.
 
 Der erste vertikale Slice ist begonnen und lokal ausführbar:
 
-- `catalog/catalog.json` und `catalog/catalog.schema.json` enthalten die CR-Arrays, Damage-/Natural-Attack-Tabellen, Type-/Size-Grafts, die Worg-/Griffon-Optionspfade, alle 60 strukturierten Step-6-Listen sowie 39 APG/UM/UC- und fünf ACG-Spell-Metadaten. Die Katalogversion ist ein inhaltsbasierter Fingerprint; es gibt noch keine Kompatibilitätsschicht für alte Entwicklungskataloge.
+- `catalog/catalog.json` und `catalog/catalog.schema.json` enthalten die CR-Arrays, Damage-/Natural-Attack-Tabellen, Type-/Size-Grafts, die Worg-/Griffon-/Medusa-Optionspfade, alle 60 strukturierten Step-6-Listen sowie 39 APG/UM/UC- und fünf ACG-Spell-Metadaten. Die Katalogversion ist ein inhaltsbasierter Fingerprint; es gibt noch keine Kompatibilitätsschicht für alte Entwicklungskataloge.
 - `monster_builder.Engine.execute` unterstützt `draft.create`, `draft.get`, `draft.applyChanges` und `draft.evaluate` mit Revision/Fingerprint-Guard, Idempotency-Key, Boundary-/Domain-Fehlertrennung und stabilem Trace.
-- Worg CR 2, Griffon CR 4, ein separater Metadaten-/Metamagie-Fall und das CR-9-Aberrant-Beispiel sind als öffentliche `execute`-Tests abgesichert; JSONL läuft über `python -m monster_builder`.
+- Worg CR 2, Griffon CR 4, Medusa CR 7 vor dem Reality Check, ein separater Metadaten-/Metamagie-Fall und das CR-9-Aberrant-Beispiel sind als öffentliche `execute`-Tests abgesichert; JSONL läuft über `python -m monster_builder`.
 - Step-6-Listen werden nach CR-Band in Primary/Secondary und `1/day`/`3/day`/`at will` aufgelöst. Alle 51 numerischen bzw. auswahlabhängigen List-Benefits besitzen typisierte Katalogeffekte; direkt bestimmbare Feldänderungen werden angewandt, kontextabhängige Modifikatoren bleiben explizit. Fehlende dynamische Choices halten den Draft sichtbar `incomplete`.
-- Fixed-1-Natural-Damage bei sehr kleinen Größen wird als expliziter `catalog-data`-Source-Gap gemeldet, nicht geraten.
+- Fixed-1- und nicht von Table 5-9 abgedeckte kleine Natural-Damage-Dice werden als explizite `catalog-data`-Source-Gaps gemeldet, nicht geraten.
 - `README.md` und `pyproject.toml` dokumentieren den dependency-freien lokalen Start; nur die Katalog-Regeneration benötigt zusätzlich `pdftotext`.
 
-Noch nicht umgesetzt sind Persistenz, Finalisierung/Exporte, UI, KI, Medusa sowie die vollständigen Class-/Subtype-/Template-Grafts und Optionseffekte.
+Noch nicht umgesetzt sind Persistenz, Finalisierung/Exporte, UI, KI sowie die vollständigen Class-/Subtype-/Template-Grafts und Optionseffekte.
 
 ## Fertig-Kriterium für diesen Plan
 

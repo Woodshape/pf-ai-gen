@@ -1,0 +1,58 @@
+{
+  "concept": {
+    "name": "Medusa",
+    "targetCR": 7,
+    "role": "petrifying archer",
+    "creatureType": "monstrous humanoid"
+  },
+  "selections": {
+    "cr": 7,
+    "arrayId": "array.combatant",
+    "creatureTypeGraftId": "graft.creature-type.monstrous-humanoid",
+    "classGraftId": null,
+    "subtypeGraftIds": [],
+    "templateGraftId": null,
+    "sizeId": "graft.size.medium",
+    "abilityModifiers": {
+      "dexterity": 6,
+      "constitution": 4,
+      "charisma": 2
+    },
+    "options": [
+      {
+        "optionId": "option.gaze",
+        "parameters": {
+          "range": "30 ft.",
+          "effect": "turn-to-stone-permanently",
+          "save": "fortitude-negates"
+        }
+      },
+      {
+        "optionId": "option.poison",
+        "parameters": {
+          "attackTypes": ["snake bite", "longbow"],
+          "ability": "strength",
+          "advantages": ["no-onset", "round-frequency", "increase-damage", "two-consecutive-saves"]
+        }
+      }
+    ],
+    "skills": {
+      "master": ["perception"],
+      "good": ["intimidate", "stealth"]
+    },
+    "attacks": [
+      {
+        "name": "snake bite",
+        "attackProfile": "weapon.low",
+        "damageDie": "d4"
+      },
+      {
+        "name": "longbow",
+        "attackProfile": "weapon.high",
+        "damageDie": "2d8"
+      }
+    ],
+    "speed": {"land": 30},
+    "spells": []
+  }
+}

@@ -8,6 +8,7 @@ from monster_builder import Engine
 
 WORG_DRAFT = json.loads((Path(__file__).parent / "fixtures" / "worg-cr2.json").read_text())
 GRIFFON_DRAFT = json.loads((Path(__file__).parent / "fixtures" / "griffon-cr4.json").read_text())
+MEDUSA_DRAFT = json.loads((Path(__file__).parent / "fixtures" / "medusa-cr7.json").read_text())
 
 
 def request(request_id, operation, payload):
@@ -55,7 +56,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         }]
         response = self.engine.execute(request("tiny-natural", "draft.create", {"draft": draft}))
         evaluation = response["result"]["evaluation"]
-        issue = next(issue for issue in evaluation["issues"] if issue["code"] == "damage.unresolved")
+        issue = next(issue for issue in evaluation["issues"] if issue["code"] == "damage.natural-die-unsupported")
         self.assertTrue(issue["sourceRefs"])
         self.assertIn("6–8", {ref.get("entry") for ref in issue["sourceRefs"]})
 
@@ -127,6 +128,86 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             },
         ])
         self.assertEqual([option["optionId"] for option in canonical["options"]], ["option.pounce", "option.rake"])
+
+    def test_medusa_cr7_preserves_the_strict_pre_reality_check_result(self):
+        response = self.engine.execute(request("create-medusa", "draft.create", {"draft": MEDUSA_DRAFT}))
+        self.assertTrue(response["ok"], response)
+        evaluation = response["result"]["evaluation"]
+        canonical = evaluation["canonical"]
+
+        self.assertEqual(evaluation["status"], "valid")
+        self.assertEqual(canonical["defenses"], {
+            "ac": 22, "touchAC": 13, "flatFootedAC": 16,
+            "fortitude": 8, "reflex": 10, "will": 8, "cmd": 24, "hp": 93,
+        })
+        self.assertEqual(canonical["cmb"], 13)
+        self.assertEqual(canonical["skills"], {"perception": 15, "intimidate": 12, "stealth": 12})
+        self.assertEqual(canonical["attacks"], [
+            {
+                "name": "snake bite", "count": 1, "attackBonus": [12, 7], "attackBonusText": "+12/+7",
+                "averageDamage": 16, "damageDie": "d4", "damageExpression": "1d4+14",
+            },
+            {
+                "name": "longbow", "count": 1, "attackBonus": [15, 10], "attackBonusText": "+15/+10",
+                "averageDamage": 22, "damageDie": "2d8", "damageExpression": "2d8+12",
+            },
+        ])
+        self.assertEqual(canonical["options"], [
+            {
+                "optionId": "option.gaze",
+                "parameters": {"range": "30 ft.", "effect": "turn-to-stone-permanently", "save": "fortitude-negates"},
+                "effect": {"type": "gaze", "range": "30 ft.", "effect": "turn-to-stone-permanently", "save": "fortitude-negates", "dc": 15},
+            },
+            {
+                "optionId": "option.poison",
+                "parameters": {
+                    "attackTypes": ["snake bite", "longbow"], "ability": "strength",
+                    "advantages": ["no-onset", "round-frequency", "increase-damage", "two-consecutive-saves"],
+                },
+                "effect": {
+                    "type": "poison", "attackTypes": ["snake bite", "longbow"], "save": "fortitude", "dc": 15,
+                    "poisonType": "injury", "onset": "—", "frequency": "1/round for 6 rounds",
+                    "ability": "strength", "damage": "1d3", "cure": "2 consecutive saves",
+                },
+            },
+        ])
+        self.assertEqual(canonical["senses"], ["darkvision 60 ft."])
+        self.assertNotIn("2d8+6", {attack["damageExpression"] for attack in canonical["attacks"]})
+        option_trace = next(entry for entry in evaluation["derivationTrace"] if entry["path"] == "/canonical/options")
+        self.assertTrue(all(isinstance(ref, dict) for ref in option_trace["sourceRefs"]))
+        attack_trace = next(entry for entry in evaluation["derivationTrace"] if entry["path"] == "/canonical/attacks")
+        self.assertIn("2d8+12", {ref.get("entry") for ref in attack_trace["sourceRefs"]})
+
+    def test_poison_advantage_budget_is_enforced_at_the_public_boundary(self):
+        draft = copy.deepcopy(MEDUSA_DRAFT)
+        draft["selections"]["options"][1]["parameters"]["advantages"].pop()
+        response = self.engine.execute(request("bad-medusa-poison", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        self.assertEqual(response["result"]["evaluation"]["status"], "invalid")
+        self.assertIn("option.poison-advantage-budget", {
+            issue["code"] for issue in response["result"]["evaluation"]["issues"]
+        })
+
+    def test_fixed_creature_type_adjustments_share_the_graft_effect_path(self):
+        cases = {
+            "aberration": ({"fortitude": 3, "reflex": 3, "will": 3}, [4]),
+            "animal": ({"fortitude": 5, "reflex": 5, "will": 1}, [4]),
+            "construct": ({"fortitude": 1, "reflex": 1, "will": -1}, [6]),
+            "fey": ({"fortitude": 3, "reflex": 5, "will": 3}, [2]),
+            "ooze": ({"fortitude": 5, "reflex": 1, "will": -1}, [4]),
+            "plant": ({"fortitude": 5, "reflex": 3, "will": 1}, [4]),
+            "undead": ({"fortitude": 3, "reflex": 3, "will": 3}, [4]),
+            "vermin": ({"fortitude": 5, "reflex": 3, "will": 1}, [4]),
+        }
+        for graft, (saves, attack_bonus) in cases.items():
+            with self.subTest(graft=graft):
+                draft = copy.deepcopy(WORG_DRAFT)
+                draft["selections"]["creatureTypeGraftId"] = f"graft.creature-type.{graft}"
+                response = Engine().execute(request(f"graft-{graft}", "draft.create", {"draft": draft}))
+                self.assertTrue(response["ok"], response)
+                canonical = response["result"]["evaluation"]["canonical"]
+                self.assertEqual({key: canonical["defenses"][key] for key in saves}, saves)
+                self.assertEqual(canonical["attacks"][0]["attackBonus"], attack_bonus)
 
     def test_evaluation_is_deterministic_and_does_not_mutate_draft(self):
         created = self.create_worg()

@@ -237,6 +237,12 @@ for index in range(damage_start, damage_start + 33):
             entry=f"{low}–{high}", table="Table 5-9: Damage Dice Values",
         ),
     }
+# The Medusa example explicitly replaces the table's 1d8+18 with this
+# pre-Reality-Check expression; it is valid only for the published 21–23 row.
+damage_table["21-23"]["expressions"]["2d8"] = "2d8+12"
+damage_table["21-23"]["expressionSourceRefs"] = {
+    "2d8": unchained_ref("Extended Example: Medusa", 4589, 243, entry="2d8+12"),
+}
 
 
 def slug(value):
@@ -842,6 +848,32 @@ options = {
         "effects": {"cmb": 4, "cmd": 4},
         "sourceRef": unchained_ref("Step 7: Monster Options", 3325, 229, entry="Improved Combat Maneuver"),
     },
+    "option.gaze": {
+        "id": "option.gaze", "name": "Gaze", "category": "combat",
+        "parameters": {
+            "range": {"type": "enum", "values": ["30 ft."]},
+            "effect": {"type": "enum", "values": ["turn-to-stone-permanently"]},
+            "save": {"type": "enum", "values": ["fortitude-negates"]},
+        },
+        "effects": {"type": "gaze"},
+        "sourceRef": [
+            unchained_ref("Step 7: Monster Options", 3311, 228, entry="Gaze"),
+            unchained_ref("Extended Example: Medusa", 4556, 243, entry="Petrifying Gaze"),
+        ],
+    },
+    "option.poison": {
+        "id": "option.poison", "name": "Poison", "category": "combat",
+        "parameters": {
+            "attackTypes": {"type": "selected-attacks"},
+            "ability": {"type": "enum", "values": ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]},
+            "advantages": {"type": "enum-array", "values": ["no-onset", "round-frequency", "increase-damage", "two-consecutive-saves"]},
+        },
+        "effects": {"type": "poison"},
+        "sourceRef": [
+            unchained_ref("Step 7: Monster Options", 3343, 230, entry="Poison"),
+            unchained_ref("Extended Example: Medusa", 4562, 243, entry="Medusa Poison"),
+        ],
+    },
     "option.pounce": {
         "id": "option.pounce", "name": "Pounce", "category": "combat", "parameters": {},
         "effects": {"ability": "pounce"},
@@ -877,8 +909,8 @@ catalog = {
         "spellMetadata": "APG/UM/UC complete; ACG follow-up metadata with local vendoring pending",
         "spellListEvaluation": "structured primary/secondary bands and typed numeric/choice benefits complete",
         "coreSpellLists": "source-backed class-list metadata",
-        "grafts": "Worg path plus type/size baseline",
-        "options": "Worg and Griffon paths plus typed option metadata",
+        "grafts": "Worg, Griffon, and Medusa paths plus fixed type/size statistic adjustments",
+        "options": "Worg, Griffon, and Medusa paths plus typed option metadata",
     },
     "sources": {
         "pathfinder-unchained-txt": {"sourceId": "pathfinder-unchained-txt", "file": "Pathfinder Unchained.txt", "sha256": unchained_hash, "description": "Local extracted Pathfinder Unchained source"},
