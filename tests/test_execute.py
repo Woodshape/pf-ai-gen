@@ -7,6 +7,7 @@ from monster_builder import Engine
 
 
 WORG_DRAFT = json.loads((Path(__file__).parent / "fixtures" / "worg-cr2.json").read_text())
+GRIFFON_DRAFT = json.loads((Path(__file__).parent / "fixtures" / "griffon-cr4.json").read_text())
 
 
 def request(request_id, operation, payload):
@@ -100,6 +101,32 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             "/canonical/speed", "/canonical/options", "/canonical/cmb",
             "/canonical/maneuverBonuses",
         } <= trace_paths)
+
+    def test_griffon_cr4_covers_large_multiattack_and_combat_options(self):
+        response = self.engine.execute(request("create-griffon", "draft.create", {"draft": GRIFFON_DRAFT}))
+        self.assertTrue(response["ok"], response)
+        canonical = response["result"]["evaluation"]["canonical"]
+
+        self.assertEqual(response["result"]["evaluation"]["status"], "valid")
+        self.assertEqual(canonical["defenses"], {
+            "ac": 19, "touchAC": 11, "flatFootedAC": 15,
+            "fortitude": 7, "reflex": 7, "will": 3, "cmd": 21, "hp": 44,
+        })
+        self.assertEqual(canonical["cmb"], 10)
+        self.assertEqual(canonical["skills"], {"perception": 12, "acrobatics": 9, "fly": 9})
+        self.assertEqual(canonical["attacks"], [
+            {
+                "name": "bite", "count": 1, "attackBonus": [10], "attackBonusText": "+10",
+                "averageDamage": 12, "damageDie": "d8", "damageExpression": "1d8+9",
+                "naturalAttackId": "natural-attack.bite", "damageType": "B/S/P", "classification": "primary",
+            },
+            {
+                "name": "talons", "count": 2, "attackBonus": [5], "attackBonusText": "+5",
+                "averageDamage": 6, "damageDie": "d6", "damageExpression": "1d6+4",
+                "naturalAttackId": "natural-attack.talons", "damageType": "S", "classification": "primary",
+            },
+        ])
+        self.assertEqual([option["optionId"] for option in canonical["options"]], ["option.pounce", "option.rake"])
 
     def test_evaluation_is_deterministic_and_does_not_mutate_draft(self):
         created = self.create_worg()
@@ -303,6 +330,48 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
                 self.assertTrue(response["ok"], response)
                 spells = response["result"]["evaluation"]["canonical"]["spells"]
                 self.assertEqual({frequency: sum(spell["frequency"] == frequency for spell in spells) for frequency in frequencies}, frequencies)
+
+    def test_step6_choice_and_scaled_numeric_benefit_is_applied(self):
+        for cr, resistance in ((11, 5), (12, 10), (16, 20)):
+            with self.subTest(cr=cr):
+                draft = copy.deepcopy(WORG_DRAFT)
+                draft["concept"]["targetCR"] = cr
+                option_count = 2 if cr < 12 else 3
+                draft["selections"].update({
+                    "cr": cr,
+                    "arrayId": "array.spellcaster",
+                    "options": [{"optionId": "option.at-will-magic", "parameters": {}}] * option_count,
+                    "skills": {"master": ["perception", "stealth"], "good": ["survival"]},
+                    "spellListId": "spell-list.abjuration",
+                    "spellListBenefitChoices": {"energyType": "cold"},
+                    "spells": [],
+                })
+                response = self.engine.execute(request(f"abjuration-{cr}", "draft.create", {"draft": draft}))
+                self.assertTrue(response["ok"], response)
+                canonical = response["result"]["evaluation"]["canonical"]
+                self.assertEqual(canonical["resistances"], {"cold": resistance})
+                self.assertEqual(canonical["spellListBenefit"]["effects"], [
+                    {"type": "resistance", "energyType": "cold", "value": resistance}
+                ])
+                self.assertIn("/canonical/resistances", {
+                    entry["path"] for entry in response["result"]["evaluation"]["derivationTrace"]
+                })
+
+    def test_step6_missing_benefit_choice_keeps_draft_incomplete(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["selections"].update({
+            "arrayId": "array.spellcaster",
+            "options": [{"optionId": "option.at-will-magic", "parameters": {}}],
+            "skills": {"master": ["perception", "stealth"], "good": ["survival"]},
+            "spellListId": "spell-list.abjuration",
+            "spells": [],
+        })
+        response = self.engine.execute(request("abjuration-choice", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        self.assertEqual(response["result"]["evaluation"]["status"], "incomplete")
+        self.assertIn("spell-list-benefit.choice-required", {
+            issue["code"] for issue in response["result"]["evaluation"]["issues"]
+        })
 
     def test_step6_resolves_class_level_and_metamagic_from_catalog(self):
         spellcaster = copy.deepcopy(WORG_DRAFT)

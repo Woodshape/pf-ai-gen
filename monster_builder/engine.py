@@ -30,8 +30,8 @@ class Engine:
     _SELECTION_FIELDS = {
         "cr", "arrayId", "creatureTypeGraftId", "classGraftId", "subtypeGraftIds",
         "templateGraftId", "sizeId", "saveSwap", "abilityModifiers", "options",
-        "skills", "attacks", "speed", "spells", "spellListId", "spellLevelSource",
-        "spellcastingAbility",
+        "skills", "attacks", "speed", "spells", "spellListId", "spellListBenefitChoices",
+        "spellLevelSource", "spellcastingAbility",
     }
     _COMPUTED_SELECTION_FIELDS = {
         "ac", "touchAC", "flatFootedAC", "fortitude", "reflex", "will", "cmd", "cmb",
@@ -279,6 +279,8 @@ class Engine:
         if "speed" in selections:
             if not isinstance(selections["speed"], dict) or any(not isinstance(value, int) or isinstance(value, bool) or value < 0 for value in selections["speed"].values()):
                 raise BoundaryError("selection.type-invalid", "speed values must be non-negative integers", "/selections/speed")
+        if "spellListBenefitChoices" in selections and not isinstance(selections["spellListBenefitChoices"], dict):
+            raise BoundaryError("selection.type-invalid", "spellListBenefitChoices must be an object", "/selections/spellListBenefitChoices")
         if "saveSwap" in selections and selections["saveSwap"] is not None:
             swap = selections["saveSwap"]
             if not isinstance(swap, dict) or not isinstance(swap.get("from"), str) or not isinstance(swap.get("to"), str):
@@ -337,6 +339,21 @@ class Engine:
                 for metamagic in spell["metamagic"]:
                     if metamagic not in self.catalog.data["metamagic"]:
                         raise BoundaryError("catalog.unknown-id", f"unknown metamagic rule: {metamagic}", f"/selections/spells/{index}/metamagic", kind="catalog-data")
+        choices = selections.get("spellListBenefitChoices", {})
+        if choices:
+            if not selections.get("spellListId"):
+                raise BoundaryError("selection.parameter-without-parent", "spellListBenefitChoices requires spellListId", "/selections/spellListBenefitChoices")
+            _, spell_list = self._resolve("spellList", selections["spellListId"], "/selections/spellListId")
+            parameters = spell_list["benefit"].get("parameters", {})
+            unknown = set(choices) - set(parameters)
+            if unknown:
+                name = sorted(unknown)[0]
+                raise BoundaryError("selection.parameter-unknown", "spell-list benefit parameter is not catalogued", f"/selections/spellListBenefitChoices/{name}")
+            for name, value in choices.items():
+                parameter_type = parameters[name]["type"]
+                valid_shape = isinstance(value, str) if parameter_type in {"enum", "selected-speed"} else isinstance(value, list) and all(isinstance(item, str) for item in value)
+                if not valid_shape:
+                    raise BoundaryError("selection.parameter-type-invalid", "spell-list benefit parameter has the wrong type", f"/selections/spellListBenefitChoices/{name}")
 
     def _resolve(self, kind: str, value: str, path: str) -> tuple[str, dict[str, Any]]:
         try:
@@ -481,18 +498,6 @@ class Engine:
         if array_id != "array.spellcaster" and (selections.get("spells") or selections.get("spellListId")):
             issues.append(self._issue("spells.array-required", "/selections/spells", "Step 6 spells require the spellcaster array", "source-rule", "error"))
 
-        errors = [issue for issue in issues if issue["severity"] == "error"]
-        if errors:
-            return self._evaluation("invalid", issues)
-
-        concentration = None
-        if array_id == "array.spellcaster":
-            spellcasting_ability = selections.get("spellcastingAbility")
-            if spellcasting_ability is None:
-                candidates = [ability for ability in ("intelligence", "wisdom", "charisma") if ability in abilities]
-                spellcasting_ability = max(candidates, key=lambda ability: abilities[ability]) if candidates else "charisma"
-            concentration = cr + abilities.get(spellcasting_ability, 0)
-
         canonical = {
             "cr": cr,
             "arrayId": array_id,
@@ -505,7 +510,7 @@ class Engine:
             "skills": skill_values,
             "initiative": abilities.get("dexterity", 0),
             "hitDice": int(max(1, cr)),
-            "concentration": concentration,
+            "concentration": None,
             "cmb": cmb,
             "maneuverBonuses": maneuver_bonuses,
             "attacks": attacks,
@@ -513,8 +518,24 @@ class Engine:
             "senses": list(dict.fromkeys(creature_type.get("automaticTraits", []))),
             "speed": copy.deepcopy(selections["speed"]),
             "spells": spells,
-            "spellListBenefit": spell_list_benefit,
+            "spellListBenefit": None,
         }
+        if spell_list_benefit:
+            canonical["spellListBenefit"] = self._apply_spell_list_benefit(
+                spell_list_benefit, selections.get("spellListBenefitChoices", {}), cr, main, canonical, issues
+            )
+        if array_id == "array.spellcaster":
+            spellcasting_ability = selections.get("spellcastingAbility")
+            if spellcasting_ability is None:
+                candidates = [ability for ability in ("intelligence", "wisdom", "charisma") if ability in canonical["abilityModifiers"]]
+                spellcasting_ability = max(candidates, key=lambda ability: canonical["abilityModifiers"][ability]) if candidates else "charisma"
+            canonical["concentration"] = cr + canonical["abilityModifiers"].get(spellcasting_ability, 0)
+
+        errors = [issue for issue in issues if issue["severity"] == "error"]
+        if errors:
+            status = "incomplete" if all(issue["code"] == "spell-list-benefit.choice-required" for issue in errors) else "invalid"
+            return self._evaluation(status, issues)
+
         trace = self._trace(draft, main, attack_table, creature_type, size, canonical)
         return {
             "status": "valid",
@@ -621,6 +642,7 @@ class Engine:
                 "spellListId": spell_list_id,
                 "name": spell_list["name"],
                 "text": spell_list["benefit"]["text"],
+                "definition": spell_list["benefit"],
             }
         if not selections.get("spells"):
             return [], None
@@ -634,6 +656,106 @@ class Engine:
             if result:
                 output.append(result)
         return output, None
+
+    def _apply_spell_list_benefit(self, benefit, choices, cr, main, canonical, issues):
+        definition = benefit.pop("definition")
+        parameters = definition.get("parameters", {})
+        invalid = False
+        for name, parameter in parameters.items():
+            path = f"/selections/spellListBenefitChoices/{name}"
+            if name not in choices:
+                issues.append(self._issue("spell-list-benefit.choice-required", path, "spell-list benefit choice is required", "source-rule", "error", definition["sourceRef"]))
+                invalid = True
+                continue
+            value = choices[name]
+            if parameter["type"] in {"enum", "enum-array"}:
+                values = value if isinstance(value, list) else [value]
+                if any(item not in parameter["values"] for item in values) or (parameter["type"] == "enum-array" and (len(values) != parameter["count"] or len(set(values)) != len(values))):
+                    issues.append(self._issue("spell-list-benefit.choice-invalid", path, "spell-list benefit choice is not allowed", "source-rule", "error", definition["sourceRef"]))
+                    invalid = True
+            elif parameter["type"] == "selected-speed" and value not in canonical["speed"]:
+                issues.append(self._issue("spell-list-benefit.choice-invalid", path, "speed choice must name a selected movement speed", "source-rule", "error", definition["sourceRef"]))
+                invalid = True
+        if invalid:
+            return benefit
+
+        def selected(value):
+            return choices[value["parameter"]] if isinstance(value, dict) and "parameter" in value else value
+
+        def scaled(effect):
+            values = effect.get("values")
+            if values is None:
+                return effect.get("value")
+            return values[max((threshold for threshold in values if cr >= int(threshold)), key=int)]
+
+        applied = []
+        conditional = canonical.setdefault("conditionalModifiers", [])
+        for effect in definition.get("effects", []):
+            effect_type = effect["type"]
+            value = scaled(effect)
+            if effect_type == "resistance":
+                energy = selected(effect["energyType"])
+                if effect.get("immunityAt") is not None and cr >= effect["immunityAt"]:
+                    canonical.setdefault("immunities", []).append(energy)
+                    result = {"type": "immunity", "energyType": energy}
+                else:
+                    canonical.setdefault("resistances", {})[energy] = value
+                    result = {"type": effect_type, "energyType": energy, "value": value}
+            elif effect_type == "abilityModifier":
+                ability = selected(effect["ability"])
+                canonical["abilityModifiers"][ability] = canonical["abilityModifiers"].get(ability, 0) + value
+                result = {"type": effect_type, "ability": ability, "value": value}
+            elif effect_type == "speedBonus":
+                speed_type = selected(effect["speedType"])
+                canonical["speed"][speed_type] += value
+                result = {"type": effect_type, "speedType": speed_type, "value": value}
+            elif effect_type == "movementChoice":
+                speed_type = choices[effect["parameter"]]
+                movement = effect["choices"][speed_type]
+                if movement["operation"] == "add":
+                    canonical["speed"][speed_type] = canonical["speed"].get(speed_type, 0) + movement["value"]
+                else:
+                    canonical["speed"][speed_type] = movement["value"]
+                result = {"type": effect_type, "speedType": speed_type, **movement}
+            elif effect_type == "allSavesBonus":
+                for save in ("fortitude", "reflex", "will"):
+                    canonical["defenses"][save] += value
+                result = {"type": effect_type, "value": value}
+            elif effect_type == "attackBonus":
+                for attack in canonical["attacks"]:
+                    attack["attackBonus"] = [bonus + value for bonus in attack["attackBonus"]]
+                    attack["attackBonusText"] = "/".join(_signed(bonus) for bonus in attack["attackBonus"])
+                result = {"type": effect_type, "value": value}
+            elif effect_type == "defenseBonus":
+                for field in effect["fields"]:
+                    canonical["defenses"][field] += value
+                result = {"type": effect_type, "fields": effect["fields"], "value": value}
+            elif effect_type in {"masterSkill", "masterSkills"}:
+                skill_ids = selected(effect.get("skillIds", effect.get("skillId")))
+                skill_ids = skill_ids if isinstance(skill_ids, list) else [skill_ids]
+                for skill_id in skill_ids:
+                    canonical["skills"][skill_id.removeprefix("skill.")] = main["masterBonus"]
+                result = {"type": effect_type, "skillIds": skill_ids}
+            elif effect_type == "spellDCBonus" and effect["condition"] in {"metamagic", "from this spell list"}:
+                for spell in canonical["spells"]:
+                    if effect["condition"] != "metamagic" or spell["metamagic"]:
+                        spell["spellDC"] += value
+                result = {"type": effect_type, "condition": effect["condition"], "value": value}
+            else:
+                result = {key: selected(item) for key, item in effect.items() if key != "values"}
+                if "valueFormula" in effect:
+                    result["value"] = int(cr / 2) if effect["valueFormula"] == "halfCR" else effect["valueFormula"]
+                elif value is not None:
+                    result["value"] = value
+                conditional.append(copy.deepcopy(result))
+            applied.append(result)
+        if not conditional:
+            canonical.pop("conditionalModifiers")
+        if choices:
+            benefit["choices"] = copy.deepcopy(choices)
+        if applied:
+            benefit["effects"] = applied
+        return benefit
 
     def _spell_result(self, selected_spell_id, metamagic, level_source, main, issues, path):
         spell_id, spell = self._resolve("spell", selected_spell_id, f"{path}/spellId")
@@ -686,7 +808,22 @@ class Engine:
             add("/canonical/spells", "step6.crBand + frequency + spellLevel + metamagic + spellDC", canonical["spells"], spell_refs)
         if canonical.get("spellListBenefit"):
             _, spell_list = self._resolve("spellList", draft["selections"]["spellListId"], "/selections/spellListId")
-            add("/canonical/spellListBenefit", "step6.spellListBenefit", canonical["spellListBenefit"], [spell_list["benefit"]["sourceRef"]])
+            benefit_ref = spell_list["benefit"]["sourceRef"]
+            add("/canonical/spellListBenefit", "step6.spellListBenefit", canonical["spellListBenefit"], [benefit_ref])
+            effect_paths = {
+                "resistance": "resistances", "immunity": "immunities",
+                "abilityModifier": "abilityModifiers", "speedBonus": "speed", "movementChoice": "speed",
+                "allSavesBonus": "defenses", "defenseBonus": "defenses", "attackBonus": "attacks",
+                "masterSkill": "skills", "masterSkills": "skills", "spellDCBonus": "spells",
+            }
+            traced = set()
+            for effect in canonical["spellListBenefit"].get("effects", []):
+                field = effect_paths.get(effect["type"], "conditionalModifiers")
+                if effect["type"] == "spellDCBonus" and effect.get("condition") not in {"metamagic", "from this spell list"}:
+                    field = "conditionalModifiers"
+                if field in canonical and field not in traced:
+                    add(f"/canonical/{field}", f"step6.spellListBenefit.{effect['type']}", canonical[field], [benefit_ref])
+                    traced.add(field)
         add("/canonical/cmb", "otherCalculations.cmb", canonical["cmb"], [main_ref])
         if canonical.get("maneuverBonuses"):
             add("/canonical/maneuverBonuses", "option.improvedCombatManeuver", canonical["maneuverBonuses"], [self.catalog.data["options"]["option.improved-combat-maneuver"]["sourceRef"]])

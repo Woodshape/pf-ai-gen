@@ -642,6 +642,87 @@ for list_key, spell_list in spell_lists.items():
         band["primary"] = resolve_spell_list_cell(band.pop("primaryText"), spell_list["id"])
         band["secondary"] = resolve_spell_list_cell(band.pop("secondaryText"), spell_list["id"])
 
+energy_parameter = {"type": "enum", "values": ["acid", "cold", "electricity", "fire", "sonic"]}
+speed_parameter = {"type": "selected-speed"}
+skill_parameter = lambda values: {"type": "enum", "values": [f"skill.{value}" for value in values]}
+resistance = lambda energy, values, immunity_at=None: {
+    "type": "resistance", "energyType": energy, "values": values,
+    **({"immunityAt": immunity_at} if immunity_at else {}),
+}
+# Benefits remain source text first. These records only type the numeric and
+# user-choice consequences that the engine can apply without interpreting prose.
+benefit_specs = {
+    "abjuration": ({"energyType": energy_parameter}, [resistance({"parameter": "energyType"}, {"0": 5, "12": 10, "16": 20})]),
+    "abyssal": ({}, [{"type": "abilityModifier", "ability": "strength", "values": {"0": 1, "13": 2, "17": 3}}]),
+    "acid": ({}, [resistance("acid", {"0": 5, "12": 10}, 16)]),
+    "air": ({"speedType": speed_parameter}, [{"type": "speedBonus", "speedType": {"parameter": "speedType"}, "value": 10}]),
+    "alchemy": ({}, [{"type": "conditionalSaveBonus", "conditions": ["disease", "poison"], "value": 2}]),
+    "animal": ({}, [{"type": "auraAttackBonus", "targets": "animal allies within 20 feet", "value": 1}]),
+    "arcane": ({}, [{"type": "spellDCBonus", "condition": "metamagic", "value": 1}]),
+    "artifice": ({}, [{"type": "conditionalDefenseBonus", "field": "ac", "condition": "after casting a spell from this list for 1 round", "valueFormula": "spellLevel"}]),
+    "battle": ({}, [{"type": "attackBonus", "value": 1}]),
+    "celestial": ({}, [resistance("acid", {"0": 5, "12": 10}), resistance("cold", {"0": 5, "12": 10})]),
+    "charm": ({}, [{"type": "conditionalSaveBonus", "conditions": ["charm"], "value": 4}]),
+    "cold": ({}, [resistance("cold", {"0": 5, "12": 10}, 16)]),
+    "community": ({}, [{"type": "masterSkill", "skillId": "skill.diplomacy"}]),
+    "conjuration": ({}, [{"type": "spellDurationMultiplier", "condition": "conjuration (summoning)", "value": 2}]),
+    "darkness": ({}, [{"type": "spellLevelBonus", "condition": "darkness descriptor", "value": 1}]),
+    "death": ({}, [{"type": "spellDCBonus", "condition": "death spell", "value": 1}]),
+    "destined": ({}, [{"type": "allSavesBonus", "value": 1}]),
+    "destruction": ({}, [{"type": "spellDCBonus", "condition": "spell deals damage", "value": 1}]),
+    "draconic": ({"energyType": {"type": "enum", "values": ["acid", "cold", "electricity", "fire"]}}, [
+        {"type": "defenseBonus", "fields": ["ac", "flatFootedAC"], "value": 2},
+        resistance({"parameter": "energyType"}, {"0": 5}),
+    ]),
+    "earth": ({}, [resistance("acid", {"0": 5, "12": 10}, 16)]),
+    "electricity": ({}, [resistance("electricity", {"0": 5, "12": 10}, 16)]),
+    "elemental": ({"movementMode": {"type": "enum", "values": ["fly", "burrow", "land", "swim"]}}, [
+        {"type": "movementChoice", "parameter": "movementMode", "choices": {
+            "fly": {"operation": "set", "value": 60}, "burrow": {"operation": "set", "value": 30},
+            "land": {"operation": "add", "value": 30}, "swim": {"operation": "set", "value": 60},
+        }},
+    ]),
+    "enchantment": ({"skillId": skill_parameter(["bluff", "diplomacy"])}, [{"type": "masterSkill", "skillId": {"parameter": "skillId"}}]),
+    "evocation": ({}, [{"type": "spellDamageBonus", "condition": "evocation", "valueFormula": "halfCR"}]),
+    "fey": ({}, [{"type": "spellDCBonus", "condition": "compulsion", "value": 2}]),
+    "fire": ({}, [resistance("fire", {"0": 5, "12": 10}, 16)]),
+    "glory": ({}, [{"type": "conditionalSaveBonus", "conditions": ["fear"], "value": 4}]),
+    "healing": ({"skillId": skill_parameter(["diplomacy", "heal"])}, [{"type": "masterSkill", "skillId": {"parameter": "skillId"}}]),
+    "illusion": ({}, [{"type": "spellDCBonus", "condition": "illusion", "value": 1}]),
+    "infernal": ({}, [
+        resistance("fire", {"0": 5, "9": 10}),
+        {"type": "conditionalSaveBonus", "conditions": ["poison"], "values": {"0": 2, "9": 4}},
+    ]),
+    "knowledge": ({"skillIds": {"type": "enum-array", "count": 2, "values": [f"skill.knowledge-{name}" for name in ("arcana", "dungeoneering", "engineering", "geography", "history", "local", "nature", "nobility", "planes", "religion")]}}, [
+        {"type": "masterSkills", "skillIds": {"parameter": "skillIds"}},
+    ]),
+    "liberation": ({}, [{"type": "masterSkill", "skillId": "skill.escape-artist"}]),
+    "luck": ({}, [{"type": "allSavesBonus", "value": 1}]),
+    "madness": ({}, [{"type": "conditionalSaveBonus", "conditions": ["mind-affecting"], "value": 2}]),
+    "magic": ({}, [{"type": "casterLevelCheckBonus", "condition": "overcome spell resistance", "value": 2}]),
+    "metal": ({"speedType": speed_parameter}, [{"type": "speedBonus", "speedType": {"parameter": "speedType"}, "value": 10}]),
+    "nobility": ({"skillId": skill_parameter(["diplomacy", "sense-motive"])}, [{"type": "masterSkill", "skillId": {"parameter": "skillId"}}]),
+    "protection": ({}, [{"type": "allSavesBonus", "value": 1}]),
+    "repose": ({}, [{"type": "conditionalSaveBonus", "conditions": ["death spells and effects"], "value": 4}]),
+    "rune": ({"energyType": energy_parameter}, [resistance({"parameter": "energyType"}, {"0": 5, "12": 10, "16": 20})]),
+    "sonic": ({}, [resistance("sonic", {"0": 5, "12": 10}, 16)]),
+    "stealth": ({}, [{"type": "masterSkill", "skillId": "skill.stealth"}]),
+    "strength": ({}, [{"type": "abilityModifier", "ability": "strength", "values": {"0": 1, "12": 2, "16": 3}}]),
+    "sun": ({}, [{"type": "spellDCBonus", "condition": "from this spell list", "value": 1}]),
+    "transmutation": ({"ability": {"type": "enum", "values": ["strength", "dexterity", "constitution"]}}, [
+        {"type": "abilityModifier", "ability": {"parameter": "ability"}, "values": {"0": 1, "12": 2}},
+    ]),
+    "travel": ({"speedType": speed_parameter}, [{"type": "speedBonus", "speedType": {"parameter": "speedType"}, "value": 10}]),
+    "trickery": ({"skillId": skill_parameter(["bluff", "stealth"])}, [{"type": "masterSkill", "skillId": {"parameter": "skillId"}}]),
+    "undead": ({}, [{"type": "damageReduction", "against": "nonlethal damage", "bypass": "—", "values": {"0": 5, "8": 10}}]),
+    "war": ({}, [{"type": "attackBonus", "value": 1}]),
+    "water": ({}, [resistance("cold", {"0": 5, "12": 10}, 16)]),
+    "weather": ({}, [resistance("electricity", {"0": 5, "12": 10}, 16)]),
+}
+for list_key, spell_list in spell_lists.items():
+    parameters, effects = benefit_specs.get(list_key, ({}, []))
+    spell_list["benefit"].update({"parameters": parameters, "effects": effects})
+
 # Base grafts and option data needed by the first executable slice.
 type_specs = {
     "aberration": (["darkvision 60 ft."], {"will": 2}, []),
@@ -760,10 +841,26 @@ options = {
         },
         "effects": {"cmb": 4, "cmd": 4},
         "sourceRef": unchained_ref("Step 7: Monster Options", 3325, 229, entry="Improved Combat Maneuver"),
-    }
+    },
+    "option.pounce": {
+        "id": "option.pounce", "name": "Pounce", "category": "combat", "parameters": {},
+        "effects": {"ability": "pounce"},
+        "sourceRef": unchained_ref("Step 7: Monster Options", 3311, 228, entry="Pounce"),
+    },
+    "option.rake": {
+        "id": "option.rake", "name": "Rake", "category": "combat", "parameters": {},
+        "effects": {"ability": "rake", "attacks": 2, "attackType": "claw", "damageProfile": "weapon.low"},
+        "sourceRef": unchained_ref("Step 7: Monster Options", 3708, 233, entry="Rake"),
+    },
 }
 skills = {}
-for skill in ("perception", "stealth", "survival", "climb", "fly", "swim", "intimidate", "acrobatics"):
+for skill in (
+    "perception", "stealth", "survival", "climb", "fly", "swim", "intimidate", "acrobatics",
+    "bluff", "diplomacy", "escape-artist", "heal", "sense-motive",
+    "knowledge-arcana", "knowledge-dungeoneering", "knowledge-engineering", "knowledge-geography",
+    "knowledge-history", "knowledge-local", "knowledge-nature", "knowledge-nobility", "knowledge-planes",
+    "knowledge-religion",
+):
     skills[f"skill.{skill}"] = {
         "id": f"skill.{skill}",
         "name": skill.title(),
@@ -778,10 +875,10 @@ catalog = {
         "step1": "complete",
         "worgVerticalSlice": "complete",
         "spellMetadata": "APG/UM/UC complete; ACG follow-up metadata with local vendoring pending",
-        "spellListEvaluation": "structured primary/secondary bands and benefits complete",
+        "spellListEvaluation": "structured primary/secondary bands and typed numeric/choice benefits complete",
         "coreSpellLists": "source-backed class-list metadata",
         "grafts": "Worg path plus type/size baseline",
-        "options": "Worg path plus typed option metadata",
+        "options": "Worg and Griffon paths plus typed option metadata",
     },
     "sources": {
         "pathfinder-unchained-txt": {"sourceId": "pathfinder-unchained-txt", "file": "Pathfinder Unchained.txt", "sha256": unchained_hash, "description": "Local extracted Pathfinder Unchained source"},

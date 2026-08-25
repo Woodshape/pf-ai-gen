@@ -128,8 +128,21 @@ class Catalog:
                 raise CatalogError(f"spell-list id mismatch: {list_key}")
             if set(spell_list.get("bands", {})) != expected_bands:
                 raise CatalogError(f"spell-list bands incomplete: {list_key}")
-            if not spell_list.get("benefit", {}).get("text"):
+            benefit = spell_list.get("benefit", {})
+            if not benefit.get("text"):
                 raise CatalogError(f"spell-list benefit missing: {list_key}")
+            for name, parameter in benefit.get("parameters", {}).items():
+                if parameter.get("type") not in {"enum", "enum-array", "selected-speed"}:
+                    raise CatalogError(f"spell-list benefit parameter invalid: {list_key}.{name}")
+            for effect in benefit.get("effects", []):
+                if effect.get("type") not in {
+                    "resistance", "abilityModifier", "speedBonus", "movementChoice",
+                    "conditionalSaveBonus", "auraAttackBonus", "spellDCBonus",
+                    "conditionalDefenseBonus", "attackBonus", "defenseBonus", "masterSkill",
+                    "masterSkills", "spellDurationMultiplier", "spellLevelBonus", "allSavesBonus",
+                    "spellDamageBonus", "casterLevelCheckBonus", "damageReduction",
+                }:
+                    raise CatalogError(f"spell-list benefit effect invalid: {list_key}")
             for band in spell_list["bands"].values():
                 for role in ("primary", "secondary"):
                     if not band.get(role):

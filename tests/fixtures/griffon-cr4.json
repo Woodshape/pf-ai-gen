@@ -1,0 +1,47 @@
+{
+  "concept": {
+    "name": "Griffon",
+    "targetCR": 4,
+    "role": "aerial hunter",
+    "creatureType": "magical beast"
+  },
+  "selections": {
+    "cr": 4,
+    "arrayId": "array.combatant",
+    "creatureTypeGraftId": "graft.creature-type.magical-beast",
+    "classGraftId": null,
+    "subtypeGraftIds": [],
+    "templateGraftId": null,
+    "sizeId": "graft.size.large",
+    "abilityModifiers": {
+      "strength": 4,
+      "dexterity": 2,
+      "constitution": 2,
+      "intelligence": -3
+    },
+    "options": [
+      {"optionId": "option.pounce", "parameters": {}},
+      {"optionId": "option.rake", "parameters": {}}
+    ],
+    "skills": {
+      "master": ["perception"],
+      "good": ["acrobatics", "fly"]
+    },
+    "attacks": [
+      {
+        "name": "bite",
+        "naturalAttackId": "natural-attack.bite",
+        "attackProfile": "natural.three",
+        "profileEntry": 0
+      },
+      {
+        "name": "talons",
+        "naturalAttackId": "natural-attack.talons",
+        "attackProfile": "natural.three",
+        "profileEntry": 1
+      }
+    ],
+    "speed": {"land": 30, "fly": 80},
+    "spells": []
+  }
+}

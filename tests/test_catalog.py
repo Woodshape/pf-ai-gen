@@ -21,6 +21,8 @@ class CatalogTests(unittest.TestCase):
         ])
         self.assertEqual(catalog.data["damage"]["99-101"]["expressions"]["d6"], "1d6+97")
         self.assertEqual(len(catalog.data["spellLists"]), 60)
+        self.assertEqual(sum(bool(spell_list["benefit"]["effects"]) for spell_list in catalog.data["spellLists"].values()), 51)
+        self.assertEqual(set(catalog.data["options"]) & {"option.pounce", "option.rake"}, {"option.pounce", "option.rake"})
         for spell_list in catalog.data["spellLists"].values():
             self.assertEqual(set(spell_list["bands"]), {"0–3", "4–7", "8–11", "12–15", "16+"})
             self.assertTrue(spell_list["benefit"]["text"])

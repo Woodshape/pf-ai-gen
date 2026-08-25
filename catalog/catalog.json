@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1",
-  "catalogVersion": "sha256:daa83c4afb613964ecaff614bac1cb513e126e08fb1ad46c606bc8fe209bda87",
+  "catalogVersion": "sha256:24692f7bce65db13887ea808f5a6c1ee223e43d44418d07f018e5d149f76af34",
   "catalogStatus": {
     "step1": "complete",
     "worgVerticalSlice": "complete",
     "spellMetadata": "APG/UM/UC complete; ACG follow-up metadata with local vendoring pending",
-    "spellListEvaluation": "structured primary/secondary bands and benefits complete",
+    "spellListEvaluation": "structured primary/secondary bands and typed numeric/choice benefits complete",
     "coreSpellLists": "source-backed class-list metadata",
     "grafts": "Worg path plus type/size baseline",
-    "options": "Worg path plus typed option metadata"
+    "options": "Worg and Griffon paths plus typed option metadata"
   },
   "sources": {
     "pathfinder-unchained-txt": {
@@ -15369,6 +15369,61 @@
         ],
         "entry": "Improved Combat Maneuver"
       }
+    },
+    "option.pounce": {
+      "id": "option.pounce",
+      "name": "Pounce",
+      "category": "combat",
+      "parameters": {},
+      "effects": {
+        "ability": "pounce"
+      },
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 7: Monster Options",
+        "txtLines": [
+          3311,
+          3311
+        ],
+        "printedPages": [
+          228
+        ],
+        "viewerPages": [
+          35
+        ],
+        "entry": "Pounce"
+      }
+    },
+    "option.rake": {
+      "id": "option.rake",
+      "name": "Rake",
+      "category": "combat",
+      "parameters": {},
+      "effects": {
+        "ability": "rake",
+        "attacks": 2,
+        "attackType": "claw",
+        "damageProfile": "weapon.low"
+      },
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 7: Monster Options",
+        "txtLines": [
+          3708,
+          3708
+        ],
+        "printedPages": [
+          233
+        ],
+        "viewerPages": [
+          40
+        ],
+        "entry": "Rake"
+      }
     }
   },
   "skills": {
@@ -15546,6 +15601,336 @@
           47
         ],
         "entry": "Acrobatics"
+      }
+    },
+    "skill.bluff": {
+      "id": "skill.bluff",
+      "name": "Bluff",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Bluff"
+      }
+    },
+    "skill.diplomacy": {
+      "id": "skill.diplomacy",
+      "name": "Diplomacy",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Diplomacy"
+      }
+    },
+    "skill.escape-artist": {
+      "id": "skill.escape-artist",
+      "name": "Escape-Artist",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Escape-Artist"
+      }
+    },
+    "skill.heal": {
+      "id": "skill.heal",
+      "name": "Heal",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Heal"
+      }
+    },
+    "skill.sense-motive": {
+      "id": "skill.sense-motive",
+      "name": "Sense-Motive",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Sense-Motive"
+      }
+    },
+    "skill.knowledge-arcana": {
+      "id": "skill.knowledge-arcana",
+      "name": "Knowledge-Arcana",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Knowledge-Arcana"
+      }
+    },
+    "skill.knowledge-dungeoneering": {
+      "id": "skill.knowledge-dungeoneering",
+      "name": "Knowledge-Dungeoneering",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Knowledge-Dungeoneering"
+      }
+    },
+    "skill.knowledge-engineering": {
+      "id": "skill.knowledge-engineering",
+      "name": "Knowledge-Engineering",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Knowledge-Engineering"
+      }
+    },
+    "skill.knowledge-geography": {
+      "id": "skill.knowledge-geography",
+      "name": "Knowledge-Geography",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Knowledge-Geography"
+      }
+    },
+    "skill.knowledge-history": {
+      "id": "skill.knowledge-history",
+      "name": "Knowledge-History",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Knowledge-History"
+      }
+    },
+    "skill.knowledge-local": {
+      "id": "skill.knowledge-local",
+      "name": "Knowledge-Local",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Knowledge-Local"
+      }
+    },
+    "skill.knowledge-nature": {
+      "id": "skill.knowledge-nature",
+      "name": "Knowledge-Nature",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Knowledge-Nature"
+      }
+    },
+    "skill.knowledge-nobility": {
+      "id": "skill.knowledge-nobility",
+      "name": "Knowledge-Nobility",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Knowledge-Nobility"
+      }
+    },
+    "skill.knowledge-planes": {
+      "id": "skill.knowledge-planes",
+      "name": "Knowledge-Planes",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Knowledge-Planes"
+      }
+    },
+    "skill.knowledge-religion": {
+      "id": "skill.knowledge-religion",
+      "name": "Knowledge-Religion",
+      "default": "abilityModifier",
+      "sourceRef": {
+        "sourceId": "pathfinder-unchained-txt",
+        "file": "Pathfinder Unchained.txt",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "section": "Step 8: Skills",
+        "txtLines": [
+          4334,
+          4334
+        ],
+        "printedPages": [
+          240
+        ],
+        "viewerPages": [
+          47
+        ],
+        "entry": "Knowledge-Religion"
       }
     }
   },
@@ -17288,7 +17673,9 @@
           ],
           "entry": "Benefit",
           "table": "aberrant spell list"
-        }
+        },
+        "parameters": {},
+        "effects": []
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -17573,7 +17960,32 @@
           ],
           "entry": "Benefit",
           "table": "abjuration spell list"
-        }
+        },
+        "parameters": {
+          "energyType": {
+            "type": "enum",
+            "values": [
+              "acid",
+              "cold",
+              "electricity",
+              "fire",
+              "sonic"
+            ]
+          }
+        },
+        "effects": [
+          {
+            "type": "resistance",
+            "energyType": {
+              "parameter": "energyType"
+            },
+            "values": {
+              "0": 5,
+              "12": 10,
+              "16": 20
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -17858,7 +18270,19 @@
           ],
           "entry": "Benefit",
           "table": "abyssal spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "abilityModifier",
+            "ability": "strength",
+            "values": {
+              "0": 1,
+              "13": 2,
+              "17": 3
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -18153,7 +18577,19 @@
           ],
           "entry": "Benefit",
           "table": "acid spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "resistance",
+            "energyType": "acid",
+            "values": {
+              "0": 5,
+              "12": 10
+            },
+            "immunityAt": 16
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -18442,7 +18878,21 @@
           ],
           "entry": "Benefit",
           "table": "air spell list"
-        }
+        },
+        "parameters": {
+          "speedType": {
+            "type": "selected-speed"
+          }
+        },
+        "effects": [
+          {
+            "type": "speedBonus",
+            "speedType": {
+              "parameter": "speedType"
+            },
+            "value": 10
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -18727,7 +19177,18 @@
           ],
           "entry": "Benefit",
           "table": "alchemy spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "conditionalSaveBonus",
+            "conditions": [
+              "disease",
+              "poison"
+            ],
+            "value": 2
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -19014,7 +19475,15 @@
           ],
           "entry": "Benefit",
           "table": "animal spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "auraAttackBonus",
+            "targets": "animal allies within 20 feet",
+            "value": 1
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -19309,7 +19778,15 @@
           ],
           "entry": "Benefit",
           "table": "arcane spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "spellDCBonus",
+            "condition": "metamagic",
+            "value": 1
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -19594,7 +20071,16 @@
           ],
           "entry": "Benefit",
           "table": "artifice spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "conditionalDefenseBonus",
+            "field": "ac",
+            "condition": "after casting a spell from this list for 1 round",
+            "valueFormula": "spellLevel"
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -19879,7 +20365,14 @@
           ],
           "entry": "Benefit",
           "table": "battle spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "attackBonus",
+            "value": 1
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -20168,7 +20661,26 @@
           ],
           "entry": "Benefit",
           "table": "celestial spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "resistance",
+            "energyType": "acid",
+            "values": {
+              "0": 5,
+              "12": 10
+            }
+          },
+          {
+            "type": "resistance",
+            "energyType": "cold",
+            "values": {
+              "0": 5,
+              "12": 10
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -20453,7 +20965,9 @@
           ],
           "entry": "Benefit",
           "table": "chaos spell list"
-        }
+        },
+        "parameters": {},
+        "effects": []
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -20738,7 +21252,17 @@
           ],
           "entry": "Benefit",
           "table": "charm spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "conditionalSaveBonus",
+            "conditions": [
+              "charm"
+            ],
+            "value": 4
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -21029,7 +21553,19 @@
           ],
           "entry": "Benefit",
           "table": "cold spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "resistance",
+            "energyType": "cold",
+            "values": {
+              "0": 5,
+              "12": 10
+            },
+            "immunityAt": 16
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -21314,7 +21850,14 @@
           ],
           "entry": "Benefit",
           "table": "community spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "masterSkill",
+            "skillId": "skill.diplomacy"
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -21599,7 +22142,15 @@
           ],
           "entry": "Benefit",
           "table": "conjuration spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "spellDurationMultiplier",
+            "condition": "conjuration (summoning)",
+            "value": 2
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -21888,7 +22439,15 @@
           ],
           "entry": "Benefit",
           "table": "darkness spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "spellLevelBonus",
+            "condition": "darkness descriptor",
+            "value": 1
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -22173,7 +22732,15 @@
           ],
           "entry": "Benefit",
           "table": "death spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "spellDCBonus",
+            "condition": "death spell",
+            "value": 1
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -22462,7 +23029,14 @@
           ],
           "entry": "Benefit",
           "table": "destined spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "allSavesBonus",
+            "value": 1
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -22755,7 +23329,15 @@
           ],
           "entry": "Benefit",
           "table": "destruction spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "spellDCBonus",
+            "condition": "spell deals damage",
+            "value": 1
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -23040,7 +23622,9 @@
           ],
           "entry": "Benefit",
           "table": "divination spell list"
-        }
+        },
+        "parameters": {},
+        "effects": []
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -23325,7 +23909,37 @@
           ],
           "entry": "Benefit",
           "table": "draconic spell list"
-        }
+        },
+        "parameters": {
+          "energyType": {
+            "type": "enum",
+            "values": [
+              "acid",
+              "cold",
+              "electricity",
+              "fire"
+            ]
+          }
+        },
+        "effects": [
+          {
+            "type": "defenseBonus",
+            "fields": [
+              "ac",
+              "flatFootedAC"
+            ],
+            "value": 2
+          },
+          {
+            "type": "resistance",
+            "energyType": {
+              "parameter": "energyType"
+            },
+            "values": {
+              "0": 5
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -23610,7 +24224,19 @@
           ],
           "entry": "Benefit",
           "table": "earth spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "resistance",
+            "energyType": "acid",
+            "values": {
+              "0": 5,
+              "12": 10
+            },
+            "immunityAt": 16
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -23904,7 +24530,19 @@
           ],
           "entry": "Benefit",
           "table": "electricity spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "resistance",
+            "energyType": "electricity",
+            "values": {
+              "0": 5,
+              "12": 10
+            },
+            "immunityAt": 16
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -24191,7 +24829,42 @@
           ],
           "entry": "Benefit",
           "table": "elemental spell list"
-        }
+        },
+        "parameters": {
+          "movementMode": {
+            "type": "enum",
+            "values": [
+              "fly",
+              "burrow",
+              "land",
+              "swim"
+            ]
+          }
+        },
+        "effects": [
+          {
+            "type": "movementChoice",
+            "parameter": "movementMode",
+            "choices": {
+              "fly": {
+                "operation": "set",
+                "value": 60
+              },
+              "burrow": {
+                "operation": "set",
+                "value": 30
+              },
+              "land": {
+                "operation": "add",
+                "value": 30
+              },
+              "swim": {
+                "operation": "set",
+                "value": 60
+              }
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -24476,7 +25149,24 @@
           ],
           "entry": "Benefit",
           "table": "enchantment spell list"
-        }
+        },
+        "parameters": {
+          "skillId": {
+            "type": "enum",
+            "values": [
+              "skill.bluff",
+              "skill.diplomacy"
+            ]
+          }
+        },
+        "effects": [
+          {
+            "type": "masterSkill",
+            "skillId": {
+              "parameter": "skillId"
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -24761,7 +25451,9 @@
           ],
           "entry": "Benefit",
           "table": "evil spell list"
-        }
+        },
+        "parameters": {},
+        "effects": []
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -25054,7 +25746,15 @@
           ],
           "entry": "Benefit",
           "table": "evocation spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "spellDamageBonus",
+            "condition": "evocation",
+            "valueFormula": "halfCR"
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -25339,7 +26039,15 @@
           ],
           "entry": "Benefit",
           "table": "fey spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "spellDCBonus",
+            "condition": "compulsion",
+            "value": 2
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -25632,7 +26340,19 @@
           ],
           "entry": "Benefit",
           "table": "fire spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "resistance",
+            "energyType": "fire",
+            "values": {
+              "0": 5,
+              "12": 10
+            },
+            "immunityAt": 16
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -25917,7 +26637,17 @@
           ],
           "entry": "Benefit",
           "table": "glory spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "conditionalSaveBonus",
+            "conditions": [
+              "fear"
+            ],
+            "value": 4
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -26202,7 +26932,9 @@
           ],
           "entry": "Benefit",
           "table": "good spell list"
-        }
+        },
+        "parameters": {},
+        "effects": []
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -26491,7 +27223,24 @@
           ],
           "entry": "Benefit",
           "table": "healing spell list"
-        }
+        },
+        "parameters": {
+          "skillId": {
+            "type": "enum",
+            "values": [
+              "skill.diplomacy",
+              "skill.heal"
+            ]
+          }
+        },
+        "effects": [
+          {
+            "type": "masterSkill",
+            "skillId": {
+              "parameter": "skillId"
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -26778,7 +27527,15 @@
           ],
           "entry": "Benefit",
           "table": "illusion spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "spellDCBonus",
+            "condition": "illusion",
+            "value": 1
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -27070,7 +27827,28 @@
           ],
           "entry": "Benefit",
           "table": "infernal spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "resistance",
+            "energyType": "fire",
+            "values": {
+              "0": 5,
+              "9": 10
+            }
+          },
+          {
+            "type": "conditionalSaveBonus",
+            "conditions": [
+              "poison"
+            ],
+            "values": {
+              "0": 2,
+              "9": 4
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -27355,7 +28133,33 @@
           ],
           "entry": "Benefit",
           "table": "knowledge spell list"
-        }
+        },
+        "parameters": {
+          "skillIds": {
+            "type": "enum-array",
+            "count": 2,
+            "values": [
+              "skill.knowledge-arcana",
+              "skill.knowledge-dungeoneering",
+              "skill.knowledge-engineering",
+              "skill.knowledge-geography",
+              "skill.knowledge-history",
+              "skill.knowledge-local",
+              "skill.knowledge-nature",
+              "skill.knowledge-nobility",
+              "skill.knowledge-planes",
+              "skill.knowledge-religion"
+            ]
+          }
+        },
+        "effects": [
+          {
+            "type": "masterSkills",
+            "skillIds": {
+              "parameter": "skillIds"
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -27640,7 +28444,9 @@
           ],
           "entry": "Benefit",
           "table": "law spell list"
-        }
+        },
+        "parameters": {},
+        "effects": []
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -27931,7 +28737,14 @@
           ],
           "entry": "Benefit",
           "table": "liberation spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "masterSkill",
+            "skillId": "skill.escape-artist"
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -28218,7 +29031,14 @@
           ],
           "entry": "Benefit",
           "table": "luck spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "allSavesBonus",
+            "value": 1
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -28503,7 +29323,17 @@
           ],
           "entry": "Benefit",
           "table": "madness spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "conditionalSaveBonus",
+            "conditions": [
+              "mind-affecting"
+            ],
+            "value": 2
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -28788,7 +29618,15 @@
           ],
           "entry": "Benefit",
           "table": "magic spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "casterLevelCheckBonus",
+            "condition": "overcome spell resistance",
+            "value": 2
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -29073,7 +29911,21 @@
           ],
           "entry": "Benefit",
           "table": "metal spell list"
-        }
+        },
+        "parameters": {
+          "speedType": {
+            "type": "selected-speed"
+          }
+        },
+        "effects": [
+          {
+            "type": "speedBonus",
+            "speedType": {
+              "parameter": "speedType"
+            },
+            "value": 10
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -29358,7 +30210,9 @@
           ],
           "entry": "Benefit",
           "table": "nature spell list"
-        }
+        },
+        "parameters": {},
+        "effects": []
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -29645,7 +30499,9 @@
           ],
           "entry": "Benefit",
           "table": "necromancy spell list"
-        }
+        },
+        "parameters": {},
+        "effects": []
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -29930,7 +30786,24 @@
           ],
           "entry": "Benefit",
           "table": "nobility spell list"
-        }
+        },
+        "parameters": {
+          "skillId": {
+            "type": "enum",
+            "values": [
+              "skill.diplomacy",
+              "skill.sense-motive"
+            ]
+          }
+        },
+        "effects": [
+          {
+            "type": "masterSkill",
+            "skillId": {
+              "parameter": "skillId"
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -30217,7 +31090,9 @@
           ],
           "entry": "Benefit",
           "table": "plant spell list"
-        }
+        },
+        "parameters": {},
+        "effects": []
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -30502,7 +31377,14 @@
           ],
           "entry": "Benefit",
           "table": "protection spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "allSavesBonus",
+            "value": 1
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -30787,7 +31669,17 @@
           ],
           "entry": "Benefit",
           "table": "repose spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "conditionalSaveBonus",
+            "conditions": [
+              "death spells and effects"
+            ],
+            "value": 4
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -31072,7 +31964,32 @@
           ],
           "entry": "Benefit",
           "table": "rune spell list"
-        }
+        },
+        "parameters": {
+          "energyType": {
+            "type": "enum",
+            "values": [
+              "acid",
+              "cold",
+              "electricity",
+              "fire",
+              "sonic"
+            ]
+          }
+        },
+        "effects": [
+          {
+            "type": "resistance",
+            "energyType": {
+              "parameter": "energyType"
+            },
+            "values": {
+              "0": 5,
+              "12": 10,
+              "16": 20
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -31367,7 +32284,19 @@
           ],
           "entry": "Benefit",
           "table": "sonic spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "resistance",
+            "energyType": "sonic",
+            "values": {
+              "0": 5,
+              "12": 10
+            },
+            "immunityAt": 16
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -31657,7 +32586,14 @@
           ],
           "entry": "Benefit",
           "table": "stealth spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "masterSkill",
+            "skillId": "skill.stealth"
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -31942,7 +32878,19 @@
           ],
           "entry": "Benefit",
           "table": "strength spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "abilityModifier",
+            "ability": "strength",
+            "values": {
+              "0": 1,
+              "12": 2,
+              "16": 3
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -32233,7 +33181,15 @@
           ],
           "entry": "Benefit",
           "table": "sun spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "spellDCBonus",
+            "condition": "from this spell list",
+            "value": 1
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -32518,7 +33474,29 @@
           ],
           "entry": "Benefit",
           "table": "transmutation spell list"
-        }
+        },
+        "parameters": {
+          "ability": {
+            "type": "enum",
+            "values": [
+              "strength",
+              "dexterity",
+              "constitution"
+            ]
+          }
+        },
+        "effects": [
+          {
+            "type": "abilityModifier",
+            "ability": {
+              "parameter": "ability"
+            },
+            "values": {
+              "0": 1,
+              "12": 2
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -32803,7 +33781,21 @@
           ],
           "entry": "Benefit",
           "table": "travel spell list"
-        }
+        },
+        "parameters": {
+          "speedType": {
+            "type": "selected-speed"
+          }
+        },
+        "effects": [
+          {
+            "type": "speedBonus",
+            "speedType": {
+              "parameter": "speedType"
+            },
+            "value": 10
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -33088,7 +34080,24 @@
           ],
           "entry": "Benefit",
           "table": "trickery spell list"
-        }
+        },
+        "parameters": {
+          "skillId": {
+            "type": "enum",
+            "values": [
+              "skill.bluff",
+              "skill.stealth"
+            ]
+          }
+        },
+        "effects": [
+          {
+            "type": "masterSkill",
+            "skillId": {
+              "parameter": "skillId"
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -33377,7 +34386,19 @@
           ],
           "entry": "Benefit",
           "table": "undead spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "damageReduction",
+            "against": "nonlethal damage",
+            "bypass": "—",
+            "values": {
+              "0": 5,
+              "8": 10
+            }
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -33662,7 +34683,14 @@
           ],
           "entry": "Benefit",
           "table": "war spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "attackBonus",
+            "value": 1
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -33947,7 +34975,19 @@
           ],
           "entry": "Benefit",
           "table": "water spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "resistance",
+            "energyType": "cold",
+            "values": {
+              "0": 5,
+              "12": 10
+            },
+            "immunityAt": 16
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -34234,7 +35274,19 @@
           ],
           "entry": "Benefit",
           "table": "weather spell list"
-        }
+        },
+        "parameters": {},
+        "effects": [
+          {
+            "type": "resistance",
+            "energyType": "electricity",
+            "values": {
+              "0": 5,
+              "12": 10
+            },
+            "immunityAt": 16
+          }
+        ]
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",

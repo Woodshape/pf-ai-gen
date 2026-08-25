@@ -26,8 +26,8 @@ The repository has moved from planning into a dependency-free Python vertical sl
 
 - `catalog/catalog.json` and `catalog/catalog.schema.json` load and validate against local source hashes. The catalog uses a content-derived version fingerprint rather than maintained compatibility branches. The catalog contains the three CR arrays, baseline creature-type/size data, the Worg-path options/skills/attacks/damage, all 60 structured Step-6 spell lists, and 659 spell records (including 39 APG/UM/UC plus five ACG follow-up records). Non-Core spell sources are still marked external/not vendored.
 - `monster_builder.Engine.execute` supports `draft.create`, `draft.get`, `draft.applyChanges`, and `draft.evaluate` with typed selection validation, revision/fingerprint guards, idempotency, incomplete/invalid separation, and derivation traces.
-- Worg CR 2, individual spell/metamagic resolution, and the source's CR 9 Aberrant-list example are covered through the public interface. Spell lists now resolve Primary/Secondary bands, `1/day`/`3/day`/`at will` frequencies, spell DCs, benefits, and traces across the CR-band boundaries. The offline test suite currently has 18 passing tests.
-- This is not yet a full Steps 1–9 engine: typed numeric/choice effects for list benefits, broad graft/option effects, complete fixture/table coverage, persistence, finalization, exports, UI, and AI are still outstanding.
+- Worg CR 2, Griffon CR 4, individual spell/metamagic resolution, and the source's CR 9 Aberrant-list example are covered through the public interface. Spell lists resolve Primary/Secondary bands, `1/day`/`3/day`/`at will` frequencies, spell DCs, benefits, and traces across the CR-band boundaries. All 51 numeric or choice-based list benefits have catalogued typed effects; direct field changes are applied and context-dependent effects remain explicit conditional modifiers. The offline test suite currently has 21 passing tests.
+- This is not yet a full Steps 1–9 engine: broad class/subtype/template graft and monster-option effects, the Medusa fixture, complete table coverage, persistence, finalization, exports, UI, and AI are still outstanding.
 
 ## Decisions so far
 
@@ -46,8 +46,8 @@ The repository has moved from planning into a dependency-free Python vertical sl
 
 ## Next implementation milestone
 
-- **Expand strict engine coverage:** add typed effects for numeric/choice-based spell-list benefits, complete source-backed class/subtype/template grafts and monster-option effects, and resolve or explicitly preserve the remaining natural-damage boundary gaps.
-- **Prove the public interface:** add the Griffon CR 4 and pre-Reality-Check Medusa fixtures plus independent table and boundary regressions.
+- **Expand strict engine coverage:** complete source-backed class/subtype/template grafts and monster-option effects, starting with the pre-Reality-Check Medusa path, and resolve or explicitly preserve the remaining natural-damage boundary gaps.
+- **Prove the public interface:** add the Medusa golden fixture plus independent table and boundary regressions for the newly typed spell-list benefits and graft/option effects.
 - **Close provenance:** vendor or otherwise locally anchor the remaining external APG/UM/UC/ACG spell metadata before claiming fully local non-Core coverage.
 - Then follow Issue 10's delivery order for JSON persistence, finalization/exports, the Guided-Rail UI, and the optional Pi adapter.
 
