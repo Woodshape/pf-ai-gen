@@ -32,11 +32,14 @@ A local-first browser tool that guides a user through *Pathfinder Unchained* Sim
 - [Welche Monster-Sheet- und Export-Verträge sind verbindlich?](issues/06-monster-sheet-and-export-contract.md): Export only valid immutable FinishedMonster snapshots. Use Unchained's three-section statblock plus optional Special Abilities, deterministic field annotations for numeric derivations, explicit spell frequencies/caster metadata, and a separate Concept/AI/Steps 1–9 audit. HTML, print/PDF, Markdown, and JSON are deterministic projections of the same structured export; Draft JSON remains separate.
 - [Welche lokale KI-Integration wird zuerst unterstützt?](issues/07-first-ai-adapter.md): Use an in-process Pi SDK adapter with Pi/provider defaults and an `openai-codex/gpt-5.6-luna` fallback. Require a hard-gated `catalog_list` call before read-only catalog tools and a typed terminating `emit_proposal`; Ollama is backlog, CR inference is visible `sum(class levels) - 1`, and user confirmation remains in `proposal.accept`.
 - [Welche Tests beweisen die 1:1-Regeltreue?](issues/08-rule-fidelity-acceptance-tests.md): Test only the public `execute` interfaces with independent source expectations. Use Worg, Griffon, and pre-Reality-Check Medusa as strict golden fixtures; cover all tables, CR bands, grafts, options, spells, skills, damage, and exports. The Goblin Druid 4 / Rogue 1 case is represented with one primary class graft and visible secondary-class concept guidance; Reality Check and Free remain deferred.
+- [Welche nicht im Core Rulebook enthaltenen Spell-Metadaten braucht der Katalog?](issues/09-non-core-spell-metadata.md): Add 39 APG/UM/UC base spells with source-qualified IDs, printed source pages, original `levelsByClass`, derived `highest`, Unchained list memberships, and a separate metamagic-variant model. Resolve Step-6 DCs from an explicit cleric/sorcerer/wizard source when needed, then the declared cleric→sorcerer→wizard fallback, then the highest class level; preserve the source when cleric and sorcerer/wizard levels differ. Five additional ACG tags were found and remain a follow-up inventory, not a silent Core fallback.
+- [Welche konkreten Implementierungsschritte folgen nach den Regelentscheidungen?](issues/10-implementation-roadmap.md): Build the versioned local catalog first, then the public `execute` engine vertical slice, source-backed regression coverage, JSON Draft/Snapshot persistence, deterministic FinishedMonster exports, Guided-Rail UI, and finally the optional Pi AI adapter. The ACG follow-up is resolved before claiming complete non-Core catalog coverage.
 
-## Not yet specified
+## Next implementation milestone
 
-- [Welche nicht im Core Rulebook enthaltenen Spell-Metadaten braucht der Katalog?](issues/09-non-core-spell-metadata.md)
-- The first implementation milestone after the route is clear.
+- **Start with the catalog:** create the versioned JSON schema/catalog, import the Issue 01 rule data and all 39 APG/UM/UC spell records, then complete the five-spell ACG follow-up.
+- **Then build one vertical slice:** expose `draft.create`, `draft.applyChanges`, and `draft.evaluate` through `execute`, and prove it end-to-end with the Worg CR 2 fixture including Step-6 spell/DC resolution.
+- Follow the remaining delivery order and acceptance criteria in [Issue 10](issues/10-implementation-roadmap.md).
 
 ## Out of scope
 
