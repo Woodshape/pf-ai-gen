@@ -1,7 +1,7 @@
 # Welche konkreten Implementierungsschritte folgen nach den Regelentscheidungen?
 
 Type: implementation-plan
-Status: open
+Status: in progress
 Blocked by: 01, 02, 03, 05, 06, 08, 09
 
 ## Ziel
@@ -63,6 +63,21 @@ Die Issues 01–09 beschreiben die fachlichen Verträge. Dieses Issue übersetzt
 ## Konkreter nächster Schritt
 
 Mit Schritt 1 beginnen: Katalogdatei, Schema und den vollständigen APG/UM/UC-Datensatz (einschließlich der ACG-Nachprüfung) anlegen. Danach den Worg-Vertical-Slice über `execute` implementieren.
+
+## Umsetzungsstand
+
+**Milestone:** Worg/typed engine slice complete; Step-6 list-band resolution and small-size fixed natural damage remain explicitly out of scope.
+
+Der erste vertikale Slice ist begonnen und lokal ausführbar:
+
+- `catalog/catalog-v1.json` und `catalog/catalog.schema.json` enthalten die CR-Arrays, Damage-/Natural-Attack-Tabellen, Type-/Size-Grafts, den Worg-Optionspfad sowie 39 APG/UM/UC- und fünf ACG-Spell-Metadaten.
+- `monster_builder.Engine.execute` unterstützt `draft.create`, `draft.get`, `draft.applyChanges` und `draft.evaluate` mit Revision/Fingerprint-Guard, Idempotency-Key, Boundary-/Domain-Fehlertrennung und stabilem Trace.
+- Der Worg CR 2 und ein separater Step-6-Metadaten-/Metamagie-Fall sind als öffentliche `execute`-Tests abgesichert; JSONL läuft über `python -m monster_builder`.
+- Step-6-Spell-Listen sind im Katalog quellenbelegt, werden im Slice aber noch nicht nach CR-Band in Primary/Secondary/Frequency samt List-Benefit ausgewertet.
+- Fixed-1-Natural-Damage bei sehr kleinen Größen wird als expliziter `catalog-data`-Source-Gap gemeldet, nicht geraten.
+- `README.md` und `pyproject.toml` dokumentieren den dependency-freien lokalen Start.
+
+Noch nicht umgesetzt sind Step-6-Listenauflösung, Persistenz, Finalisierung/Exporte, UI, KI sowie die vollständigen Class-/Subtype-/Template-Grafts und Optionseffekte.
 
 ## Fertig-Kriterium für diesen Plan
 

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pf-ai-gen.local/catalog.schema.json",
+  "title": "Pathfinder Simple Monster Creation catalog",
+  "type": "object",
+  "required": ["schemaVersion", "catalogVersion", "sources", "arrays", "grafts", "options", "skills", "damage", "naturalAttacksBySize", "spellLists", "spells", "metamagic", "metamagicRules"],
+  "properties": {
+    "schemaVersion": {"const": "1"},
+    "catalogVersion": {"type": "string", "minLength": 1},
+    "catalogStatus": {"type": "object"},
+    "sources": {"type": "object", "additionalProperties": {"$ref": "#/$defs/source"}},
+    "arrays": {"type": "object", "minProperties": 3, "additionalProperties": {"$ref": "#/$defs/array"}},
+    "grafts": {"$ref": "#/$defs/grafts"},
+    "options": {"type": "object", "additionalProperties": {"$ref": "#/$defs/catalogEntry"}},
+    "skills": {"type": "object", "additionalProperties": {"$ref": "#/$defs/catalogEntry"}},
+    "damage": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "object", "required": ["min", "max", "expressions", "sourceRef"]}},
+    "naturalAttacksBySize": {"type": "object", "additionalProperties": {"type": "object", "required": ["id", "bySize", "damageType", "classification", "sourceRef"]}},
+    "spellLists": {"type": "object", "additionalProperties": {"type": "object", "required": ["id", "bands", "sourceRef"]}},
+    "spells": {"type": "object", "additionalProperties": {"$ref": "#/$defs/spell"}},
+    "metamagic": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "metamagicRules": {"type": "object", "additionalProperties": {"$ref": "#/$defs/catalogEntry"}}
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "required": ["sourceId", "file", "sha256"],
+      "properties": {
+        "sourceId": {"type": "string"},
+        "file": {"type": ["string", "null"]},
+        "sha256": {"type": ["string", "null"]},
+        "description": {"type": "string"}
+      }
+    },
+    "sourceRef": {
+      "type": "object",
+      "required": ["sourceId", "section", "txtLines"],
+      "properties": {
+        "sourceId": {"type": "string"},
+        "file": {"type": ["string", "null"]},
+        "sha256": {"type": ["string", "null"]},
+        "section": {"type": "string"},
+        "txtLines": {"type": "array", "items": {"type": "integer", "minimum": 1}},
+        "printedPages": {"type": "array", "items": {"type": "integer", "minimum": 1}},
+        "viewerPages": {"type": "array", "items": {"type": "integer", "minimum": 1}},
+        "entry": {"type": "string"},
+        "table": {"type": "string"},
+        "officialUrl": {"type": "string", "format": "uri"},
+        "provenanceStatus": {"type": "string"}
+      }
+    },
+    "catalogEntry": {
+      "type": "object",
+      "required": ["id", "sourceRef"],
+      "properties": {"id": {"type": "string"}, "sourceRef": {"type": ["object", "array"]}}
+    },
+    "array": {
+      "type": "object",
+      "required": ["id", "mainStatistics", "attackStatistics"],
+      "properties": {
+        "id": {"type": "string"},
+        "name": {"type": "string"},
+        "mainStatistics": {"type": "object", "minProperties": 1},
+        "attackStatistics": {"type": "object", "minProperties": 1}
+      }
+    },
+    "grafts": {
+      "type": "object",
+      "required": ["creatureTypes", "classGrafts", "subtypes", "templates", "sizes"],
+      "properties": {
+        "creatureTypes": {"type": "object"},
+        "classGrafts": {"type": "object"},
+        "subtypes": {"type": "object"},
+        "templates": {"type": "object"},
+        "sizes": {"type": "object"}
+      }
+    },
+    "spell": {
+      "type": "object",
+      "required": ["id", "name", "sourceBook", "sourceRef", "levelsByClass", "highest", "listMemberships"],
+      "properties": {
+        "id": {"type": "string"},
+        "name": {"type": "string"},
+        "sourceBook": {"type": "string"},
+        "sourceRef": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/sourceRef"}},
+        "levelsByClass": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0, "maximum": 9}},
+        "highest": {"type": "integer", "minimum": 0, "maximum": 9},
+        "listMemberships": {"type": "array", "items": {"type": "string"}},
+        "aliases": {"type": "array", "items": {"type": "string"}},
+        "metamagicVariants": {"type": "array"},
+        "catalogStatus": {"type": "string"}
+      }
+    }
+  }
+}
