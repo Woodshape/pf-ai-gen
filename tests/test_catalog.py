@@ -1,9 +1,25 @@
 import unittest
+from pathlib import Path
 
 from monster_builder import Catalog
 
 
 class CatalogTests(unittest.TestCase):
+    def test_graft_provenance_uses_physical_txt_line_numbers(self):
+        catalog = Catalog.load().data
+        lines = (Path(__file__).parents[1] / "Pathfinder Unchained.txt").read_text().split("\n")
+        refs = {
+            "Druid": catalog["grafts"]["classGrafts"]["graft.class.druid"]["sourceRef"],
+            "Goblinoid:": catalog["grafts"]["subtypes"]["graft.subtype.goblinoid"]["sourceRef"],
+            "Shapechanger:": catalog["grafts"]["subtypes"]["graft.subtype.shapechanger"]["sourceRef"],
+            "LYCANTHROPE": catalog["grafts"]["templates"]["graft.template.lycanthrope"]["sourceRef"],
+            "Curse of Lycanthropy:": catalog["options"]["option.curse-of-lycanthropy"]["sourceRef"],
+        }
+        for text, source_ref in refs.items():
+            source_ref = source_ref[0] if isinstance(source_ref, list) else source_ref
+            start, end = source_ref["txtLines"]
+            self.assertIn(text, "\n".join(lines[start - 1:end]))
+
     def test_versioned_catalog_has_source_backed_spell_inventory(self):
         catalog = Catalog.load()
         spells = catalog.data["spells"].values()

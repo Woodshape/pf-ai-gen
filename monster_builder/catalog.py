@@ -93,6 +93,23 @@ class Catalog:
             if len(array["mainStatistics"]) != 31:
                 raise CatalogError(f"array must contain CR 1/2 through 30: {array_name}")
 
+        grafts = self.data["grafts"]
+        options = self.data["options"]
+        skill_ids = set(self.data["skills"])
+        for class_id, graft in grafts["classGrafts"].items():
+            if graft.get("requiredArrayId") not in {array["id"] for array in arrays.values()}:
+                raise CatalogError(f"class graft requires unknown array: {class_id}")
+            self._validate_graft_grants(class_id, graft, options, skill_ids)
+            for entry in graft.get("crEntries", []):
+                self._validate_graft_grants(class_id, entry, options, skill_ids)
+        for group_name in ("subtypes", "templates"):
+            for graft_id, graft in grafts[group_name].items():
+                self._validate_graft_grants(graft_id, graft, options, skill_ids)
+                if graft.get("requiredCreatureTypeId") and graft["requiredCreatureTypeId"] not in grafts["creatureTypes"]:
+                    raise CatalogError(f"template requires unknown creature type: {graft_id}")
+                if graft.get("requiredSubtypeId") and graft["requiredSubtypeId"] not in grafts["subtypes"]:
+                    raise CatalogError(f"template requires unknown subtype: {graft_id}")
+
         if "99-101" not in self.data["damage"]:
             raise CatalogError("damage table must include the 99-101 boundary")
 
@@ -173,6 +190,33 @@ class Catalog:
         if len(acg) != 5:
             raise CatalogError(f"expected five ACG follow-up spells, found {len(acg)}")
 
+    @staticmethod
+    def _validate_graft_grants(graft_id, graft, options, skill_ids):
+        for grant in graft.get("optionGrants", []):
+            option = options.get(grant.get("optionId"))
+            if option is None:
+                raise CatalogError(f"graft references unknown option: {graft_id}")
+            parameters = grant.get("parameters", {})
+            definitions = option.get("parameters", {})
+            if set(parameters) - set(definitions):
+                raise CatalogError(f"graft has unknown option parameter: {graft_id}")
+            for name, definition in definitions.items():
+                if name not in parameters and not definition.get("optional"):
+                    raise CatalogError(f"graft is missing option parameter: {graft_id}.{name}")
+                if name not in parameters:
+                    continue
+                value = parameters[name]
+                parameter_type = definition["type"]
+                if parameter_type in {"string", "enum"} and not isinstance(value, str):
+                    raise CatalogError(f"graft option parameter has wrong type: {graft_id}.{name}")
+                if parameter_type in {"string-array", "enum-array"} and (not isinstance(value, list) or any(not isinstance(item, str) for item in value)):
+                    raise CatalogError(f"graft option parameter has wrong type: {graft_id}.{name}")
+                if parameter_type == "enum" and value not in definition["values"]:
+                    raise CatalogError(f"graft option parameter is not allowed: {graft_id}.{name}")
+        for grant in graft.get("skillGrants", []):
+            if grant.get("skillId") not in skill_ids:
+                raise CatalogError(f"graft references unknown skill: {graft_id}")
+
     def _all_entries_with_refs(self):
         for array in self.data["arrays"].values():
             yield from array["mainStatistics"].values()
@@ -180,6 +224,8 @@ class Catalog:
         grafts = self.data["grafts"]
         for group in grafts.values():
             yield from group.values()
+        for class_graft in grafts["classGrafts"].values():
+            yield from class_graft.get("crEntries", [])
         for group_name in ("options", "skills", "naturalAttacksBySize", "spells", "metamagicRules"):
             if group_name in self.data:
                 yield from self.data[group_name].values()

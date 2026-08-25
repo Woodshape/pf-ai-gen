@@ -26,8 +26,8 @@ The repository has moved from planning into a dependency-free Python vertical sl
 
 - `catalog/catalog.json` and `catalog/catalog.schema.json` load and validate against local source hashes. The catalog uses a content-derived version fingerprint rather than maintained compatibility branches. The catalog contains the three CR arrays, baseline creature-type/size data, the Worg/Griffon/Medusa-path options, skills, attacks, and damage, all 60 structured Step-6 spell lists, and 659 spell records (including 39 APG/UM/UC plus five ACG follow-up records). Non-Core spell sources are still marked external/not vendored.
 - `monster_builder.Engine.execute` supports `draft.create`, `draft.get`, `draft.applyChanges`, and `draft.evaluate` with typed selection validation, revision/fingerprint guards, idempotency, incomplete/invalid separation, and derivation traces.
-- Worg CR 2, Griffon CR 4, pre-Reality-Check Medusa CR 7, individual spell/metamagic resolution, and the source's CR 9 Aberrant-list example are covered through the public interface. Medusa includes Monstrous-Humanoid save/attack adjustments, typed gaze and poison effects, skills, and the source's `2d8+12` pre-Reality-Check damage. Spell lists resolve Primary/Secondary bands, frequencies, spell DCs, benefits, and traces. Unsupported fixed or sub-d4 natural-attack dice remain explicit source gaps. The offline test suite currently has 24 passing tests.
-- This is not yet a full Steps 1–9 engine: class/subtype/template grafts, broad monster-option effects, complete table coverage, persistence, finalization, exports, UI, and AI are still outstanding.
+- Worg CR 2, Griffon CR 4, pre-Reality-Check Medusa CR 7, the Goblin Druid CR 4 class/subtype path, individual spell/metamagic resolution, and the source's CR 9 Aberrant-list example are covered through the public interface. The Druid graft enforces its Spellcaster array, suppresses type statistic adjustments, applies replacement skills/options and only its highest applicable CR entry; Goblinoid/Shapechanger grants are additional, while Lycanthrope enforces its type/subtype/CR prerequisites and consumes a normal option slot. Unsupported fixed or sub-d4 natural-attack dice remain explicit source gaps. The offline test suite currently has 28 passing tests.
+- This is not yet a full Steps 1–9 engine: the remaining class/subtype/template grafts, broad monster-option effects, complete table coverage, persistence, finalization, exports, UI, and AI are still outstanding.
 
 ## Decisions so far
 
@@ -46,8 +46,8 @@ The repository has moved from planning into a dependency-free Python vertical sl
 
 ## Next implementation milestone
 
-- **Expand strict engine coverage:** continue with source-backed class/subtype/template grafts and the remaining monster-option effects; the pre-Reality-Check Medusa path and explicit natural-damage source-gap handling are now complete.
-- **Prove the public interface:** add independent full-table and CR-boundary regressions beyond the Worg, Griffon, Medusa, spell-band, fixed type-adjustment, poison-budget, and natural-damage cases already covered.
+- **Expand strict engine coverage:** extend the new Druid/Goblinoid/Shapechanger/Lycanthrope graft path to the remaining source-backed class/subtype/template grafts and monster-option effects.
+- **Prove the public interface:** add independent full-table and CR-boundary regressions beyond the Worg, Griffon, Medusa, Goblin Druid, Lycanthrope, spell-band, fixed type-adjustment, poison-budget, and natural-damage cases already covered.
 - **Close provenance:** vendor or otherwise locally anchor the remaining external APG/UM/UC/ACG spell metadata before claiming fully local non-Core coverage.
 - Then follow Issue 10's delivery order for JSON persistence, finalization/exports, the Guided-Rail UI, and the optional Pi adapter.
 

@@ -311,7 +311,7 @@ class Engine:
                 parameter_type = expected.get("type")
                 if parameter_type in {"string", "enum"} and not isinstance(parameter_value, str):
                     raise BoundaryError("selection.parameter-type-invalid", "option parameter must be a string", f"/selections/options/{index}/parameters/{parameter_name}")
-                if parameter_type in {"enum-array", "selected-attacks"} and (
+                if parameter_type in {"enum-array", "selected-attacks", "string-array"} and (
                     not isinstance(parameter_value, list) or any(not isinstance(value, str) for value in parameter_value)
                 ):
                     raise BoundaryError("selection.parameter-type-invalid", "option parameter must be an array of strings", f"/selections/options/{index}/parameters/{parameter_name}")
@@ -388,10 +388,31 @@ class Engine:
         attack_table = array["attackStatistics"][cr_key]
         type_id, creature_type = self._resolve("creatureType", selections["creatureTypeGraftId"], "/selections/creatureTypeGraftId")
         size_id, size = self._resolve("size", selections["sizeId"], "/selections/sizeId")
-
+        class_id = None
+        class_graft = None
         if selections.get("classGraftId") is not None:
-            # Class graft data is deliberately not silently approximated in this slice.
-            issues.append(self._issue("class-graft.unsupported", "/selections/classGraftId", "class grafts are not in the first catalog slice", "product-constraint", "error"))
+            class_id, class_graft = self._resolve("classGraft", selections["classGraftId"], "/selections/classGraftId")
+            if array_id != class_graft["requiredArrayId"]:
+                issues.append(self._issue("class-graft.required-array", "/selections/arrayId", f"class graft requires {class_graft['requiredArrayId']}", "source-rule", "error", class_graft.get("sourceRef")))
+            if class_graft.get("maxImplementedCR") is not None and cr > class_graft["maxImplementedCR"]:
+                issues.append(self._issue("class-graft.cr-unsupported", "/selections/cr", "class graft CR entries above this CR are not catalogued yet", "catalog-data", "error", class_graft.get("sourceRef")))
+        subtype_grafts = [self._resolve("subtype", value, f"/selections/subtypeGraftIds/{index}") for index, value in enumerate(selections.get("subtypeGraftIds", []))]
+        subtype_ids = [entry_id for entry_id, _ in subtype_grafts]
+        if len(subtype_ids) != len(set(subtype_ids)):
+            issues.append(self._issue("subtype.duplicate", "/selections/subtypeGraftIds", "a subtype graft can be selected only once", "product-constraint", "error"))
+        template_id = None
+        template = None
+        if selections.get("templateGraftId") is not None:
+            template_id, template = self._resolve("template", selections["templateGraftId"], "/selections/templateGraftId")
+            if template.get("minCR") is not None and cr < template["minCR"]:
+                issues.append(self._issue("template.cr-too-low", "/selections/templateGraftId", "template graft is below its minimum CR", "source-rule", "error", template.get("sourceRef")))
+            if template.get("maxCR") is not None and cr > template["maxCR"]:
+                issues.append(self._issue("template.cr-too-high", "/selections/templateGraftId", "template graft is above its maximum CR", "source-rule", "error", template.get("sourceRef")))
+            if template.get("requiredCreatureTypeId") not in {None, type_id}:
+                issues.append(self._issue("template.creature-type-required", "/selections/creatureTypeGraftId", "template graft requires a different creature type", "source-rule", "error", template.get("sourceRef")))
+            required_subtype = template.get("requiredSubtypeId")
+            if required_subtype and required_subtype not in subtype_ids:
+                issues.append(self._issue("template.subtype-required", "/selections/subtypeGraftIds", "template graft requires a subtype", "source-rule", "error", template.get("sourceRef")))
         if size.get("minCR") is not None and cr < size["minCR"]:
             issues.append(self._issue("size.cr-too-low", "/selections/sizeId", "size graft is below its minimum CR", "source-rule", "error", size.get("sourceRef")))
         if size.get("maxCR") is not None and cr > size["maxCR"]:
@@ -400,13 +421,13 @@ class Engine:
         if target_cr is not None and target_cr != cr:
             issues.append(self._issue("concept.target-cr-mismatch", "/concept/targetCR", "concept target CR differs from the selected CR", "product-constraint", "warning"))
 
-        abilities = selections["abilityModifiers"]
+        abilities = copy.deepcopy(selections["abilityModifiers"])
         if len(abilities) < 3:
             issues.append(self._issue("ability-modifiers.incomplete", "/selections/abilityModifiers", "three important ability modifiers are required", "source-rule", "error", main.get("sourceRef")))
         if len(abilities) > 6:
             issues.append(self._issue("ability-modifiers.too-many", "/selections/abilityModifiers", "there are only six ability modifiers", "product-constraint", "error", main.get("sourceRef")))
 
-        adjustments = {} if selections.get("classGraftId") else creature_type.get("statisticAdjustments", {})
+        adjustments = class_graft.get("statisticAdjustments", {}) if class_graft else creature_type.get("statisticAdjustments", {})
         fortitude = main["fortitude"] + adjustments.get("fortitude", 0)
         reflex = main["reflex"] + adjustments.get("reflex", 0)
         will = main["will"] + adjustments.get("will", 0)
@@ -428,9 +449,33 @@ class Engine:
         cmd = main["cmd"] + size_adjustments.get("cmd", 0)
 
         options = selections["options"]
-        slot_counts = {slot["category"]: slot["count"] for slot in main["options"]}
+        option_slots = class_graft.get("optionSlots", []) if class_graft else main["options"]
+        slot_counts = {slot["category"]: slot["count"] for slot in option_slots}
         remaining_slots = dict(slot_counts)
-        selected_options = []
+        granted_options = []
+        if class_graft:
+            granted_options.extend(copy.deepcopy(class_graft.get("optionGrants", [])))
+            cr_entry = max(
+                (entry for entry in class_graft.get("crEntries", []) if cr >= entry["minCR"]),
+                key=lambda entry: entry["minCR"], default=None,
+            )
+            if cr_entry:
+                granted_options.extend(copy.deepcopy(cr_entry.get("optionGrants", [])))
+        for _, subtype in subtype_grafts:
+            granted_options.extend(copy.deepcopy(subtype.get("optionGrants", [])))
+        if template:
+            template_options = copy.deepcopy(template.get("optionGrants", []))
+            granted_options.extend(template_options)
+            # Template grants replace normal slots when possible, but all are
+            # retained even when the template exceeds the normal allotment.
+            for grant in template_options:
+                category = self.catalog.data["options"][grant["optionId"]]["category"]
+                choices = ("universal", "combat", "magic", "social", "any") if category == "universal" else (category, "any")
+                assigned_slot = next((slot for slot in choices if remaining_slots.get(slot, 0) > 0), None)
+                if assigned_slot:
+                    remaining_slots[assigned_slot] -= 1
+        selected_slot_budget = sum(remaining_slots.values())
+        selected_options = granted_options
         maneuver_bonuses = {}
         for index, selected in enumerate(options):
             option_id, option = self._resolve("option", selected["optionId"], f"/selections/options/{index}/optionId")
@@ -491,29 +536,51 @@ class Engine:
                     "cure": "2 consecutive saves" if "two-consecutive-saves" in advantages else "1 save",
                 }
             selected_options.append(selected_option)
-        expected_slots = sum(slot_counts.values())
-        if len(options) != expected_slots:
-            issues.append(self._issue("option-budget.mismatch", "/selections/options", f"array grants {expected_slots} option slot(s), received {len(options)}", "source-rule", "error", main.get("sourceRef")))
+        if len(options) != selected_slot_budget:
+            refs = [class_graft["sourceRef"] if class_graft else main["sourceRef"]]
+            if template:
+                refs.append(template["sourceRef"])
+            issues.append(self._issue("option-budget.mismatch", "/selections/options", f"active array and grafts leave {selected_slot_budget} selectable option slot(s), received {len(options)}", "source-rule", "error", refs))
 
         skills_selection = selections["skills"]
         master = list(skills_selection.get("master", []))
         good = list(skills_selection.get("good", []))
+        skill_grants = copy.deepcopy(class_graft.get("skillGrants", [])) if class_graft else []
+        for _, subtype in subtype_grafts:
+            skill_grants.extend(copy.deepcopy(subtype.get("skillGrants", [])))
         if len(set(master)) != len(master) or len(set(good)) != len(good) or set(master) & set(good):
             issues.append(self._issue("skills.duplicate", "/selections/skills", "a skill cannot occupy more than one slot", "source-rule", "error", main.get("sourceRef")))
         extra_master = size.get("additionalMasterSkills", [])
         extra_good = size.get("additionalGoodSkills", [])
         effective_master = list(master)
         effective_good = list(good)
+        for grant in skill_grants:
+            skill = grant["skillId"].removeprefix("skill.")
+            if grant["rank"] == "master" and skill not in effective_master:
+                effective_master.append(skill)
+                if skill in effective_good:
+                    effective_good.remove(skill)
+            elif grant["rank"] == "good" and skill not in effective_master and skill not in effective_good:
+                effective_good.append(skill)
         for skill in extra_master:
             if skill not in effective_master:
                 effective_master.append(skill)
         for skill in extra_good:
             if skill not in effective_master and skill not in effective_good:
                 effective_good.append(skill)
-        if len(master) != main["masterCount"]:
-            issues.append(self._issue("skills.master-budget", "/selections/skills/master", "master skill count does not match the array", "source-rule", "error", main.get("sourceRef")))
-        if len(good) != main["goodCount"]:
-            issues.append(self._issue("skills.good-budget", "/selections/skills/good", "good skill count does not match the array", "source-rule", "error", main.get("sourceRef")))
+        expected_master = main["masterCount"]
+        expected_good = main["goodCount"]
+        for grant in skill_grants:
+            if not grant.get("additional"):
+                if grant["rank"] == "master":
+                    expected_master = max(0, expected_master - 1)
+                else:
+                    expected_good = max(0, expected_good - 1)
+        skill_budget_ref = class_graft.get("sourceRef") if class_graft else main.get("sourceRef")
+        if len(master) != expected_master:
+            issues.append(self._issue("skills.master-budget", "/selections/skills/master", "master skill count does not match the active graft budget", "source-rule", "error", skill_budget_ref))
+        if len(good) != expected_good:
+            issues.append(self._issue("skills.good-budget", "/selections/skills/good", "good skill count does not match the active graft budget", "source-rule", "error", skill_budget_ref))
         restrictions = size.get("restrictions", {})
         if restrictions.get("stealthMasterForbidden") and "stealth" in master:
             issues.append(self._issue("size.skill-forbidden", "/selections/skills/master", "Stealth cannot be a master skill at this size", "source-rule", "error", size.get("sourceRef")))
@@ -530,26 +597,32 @@ class Engine:
             skill_values[skill] = main["goodBonus"]
         if "perception" not in skill_values:
             skill_values["perception"] = main["goodBonus"]
-        else:
-            # Perception is automatically good, but an explicit master choice wins.
-            pass
 
         attacks = self._evaluate_attacks(selections["attacks"], attack_table, size_id, attack_adjustment, issues)
-        spells, spell_list_benefit = self._evaluate_spells(selections, array_id, cr, main, issues)
+        spell_level_source = class_graft.get("spellcastingClassId") if class_graft else None
+        spells, spell_list_benefit = self._evaluate_spells(selections, array_id, cr, main, issues, spell_level_source)
         if array_id != "array.spellcaster" and (selections.get("spells") or selections.get("spellListId")):
             issues.append(self._issue("spells.array-required", "/selections/spells", "Step 6 spells require the spellcaster array", "source-rule", "error"))
+
+        initiative_bonus = sum(
+            self.catalog.data["options"][option["optionId"]].get("effects", {}).get("initiative", 0)
+            for option in selected_options
+        )
 
         canonical = {
             "cr": cr,
             "arrayId": array_id,
             "creatureTypeGraftId": type_id,
+            "classGraftId": class_id,
+            "subtypeGraftIds": subtype_ids,
+            "templateGraftId": template_id,
             "sizeId": size_id,
             "defenses": {"ac": ac, "touchAC": touch_ac, "flatFootedAC": flat_footed_ac, **saves, "cmd": cmd, "hp": main["hp"]},
             "abilityDC": main["abilityDC"],
             "spellDC": main["spellDC"],
             "abilityModifiers": copy.deepcopy(abilities),
             "skills": skill_values,
-            "initiative": abilities.get("dexterity", 0),
+            "initiative": abilities.get("dexterity", 0) + initiative_bonus,
             "hitDice": int(max(1, cr)),
             "concentration": None,
             "cmb": cmb,
@@ -660,7 +733,7 @@ class Engine:
         row = next((row for row in self.catalog.data["damage"].values() if row["min"] <= average_damage <= row["max"]), None)
         return row["expressions"].get(die) if row else None
 
-    def _evaluate_spells(self, selections, array_id, cr, main, issues):
+    def _evaluate_spells(self, selections, array_id, cr, main, issues, default_level_source=None):
         if array_id != "array.spellcaster":
             return [], None
         if selections.get("spellListId"):
@@ -676,7 +749,7 @@ class Engine:
             for source_band_index, role, frequency in sets:
                 source_band = bands[source_band_index]["id"]
                 for entry in spell_list["bands"][source_band][role]:
-                    result = self._spell_result(entry["spellId"], entry.get("metamagic", []), None, main, issues, "/selections/spellListId")
+                    result = self._spell_result(entry["spellId"], entry.get("metamagic", []), default_level_source, main, issues, "/selections/spellListId")
                     if result:
                         result.update({
                             "frequency": frequency,
@@ -697,7 +770,7 @@ class Engine:
         for index, selected in enumerate(selections["spells"]):
             result = self._spell_result(
                 selected["spellId"], selected.get("metamagic", []),
-                selected.get("spellLevelSource", selections.get("spellLevelSource")),
+                selected.get("spellLevelSource") or selections.get("spellLevelSource") or default_level_source,
                 main, issues, f"/selections/spells/{index}",
             )
             if result:
@@ -847,8 +920,39 @@ class Engine:
                     attack_refs.append(ref)
         add("/canonical/attacks", "array.attackStatistics + graft adjustments + damage table", canonical["attacks"], attack_refs)
         add("/canonical/senses", "creatureTypeGraft.automaticTraits", canonical["senses"], [creature_type["sourceRef"]])
-        add("/canonical/skills", "array.skillBonuses + skill selections", canonical["skills"], [main_ref])
-        add("/canonical/initiative", "otherCalculations.initiative", canonical["initiative"], [main_ref])
+        if canonical.get("classGraftId"):
+            _, class_graft = self._resolve("classGraft", canonical["classGraftId"], "/selections/classGraftId")
+            refs = [class_graft["sourceRef"]]
+            cr_entry = max(
+                (entry for entry in class_graft.get("crEntries", []) if canonical["cr"] >= entry["minCR"]),
+                key=lambda entry: entry["minCR"], default=None,
+            )
+            if cr_entry:
+                refs.append(cr_entry["sourceRef"])
+            add("/canonical/classGraftId", "classGraft.requiredArray + adjustments + highestCREntry", canonical["classGraftId"], refs)
+        if canonical.get("subtypeGraftIds"):
+            refs = [self._resolve("subtype", subtype_id, "/selections/subtypeGraftIds")[1]["sourceRef"] for subtype_id in canonical["subtypeGraftIds"]]
+            add("/canonical/subtypeGraftIds", "subtypeGraft.additionalGrants", canonical["subtypeGraftIds"], refs)
+        if canonical.get("templateGraftId"):
+            _, template = self._resolve("template", canonical["templateGraftId"], "/selections/templateGraftId")
+            add("/canonical/templateGraftId", "templateGraft.automaticTraits", canonical["templateGraftId"], [template["sourceRef"]])
+        skill_refs = [main_ref]
+        if canonical.get("classGraftId"):
+            skill_refs.append(self._resolve("classGraft", canonical["classGraftId"], "/selections/classGraftId")[1]["sourceRef"])
+        skill_refs.extend(
+            self._resolve("subtype", subtype_id, "/selections/subtypeGraftIds")[1]["sourceRef"]
+            for subtype_id in canonical.get("subtypeGraftIds", [])
+        )
+        if size.get("additionalMasterSkills") or size.get("additionalGoodSkills"):
+            skill_refs.append(size["sourceRef"])
+        add("/canonical/skills", "array.skillBonuses + graft grants + skill selections", canonical["skills"], skill_refs)
+        initiative_refs = [main_ref]
+        for option in canonical.get("options", []):
+            definition = self.catalog.data["options"][option["optionId"]]
+            if definition.get("effects", {}).get("initiative"):
+                refs = definition["sourceRef"]
+                initiative_refs.extend(refs if isinstance(refs, list) else [refs])
+        add("/canonical/initiative", "otherCalculations.initiative + option adjustments", canonical["initiative"], initiative_refs)
         add("/canonical/hitDice", "otherCalculations.hitDice", canonical["hitDice"], [main_ref])
         add("/canonical/speed", "draft.speed", canonical["speed"], [])
         if canonical.get("concentration") is not None:
@@ -859,7 +963,22 @@ class Engine:
             if definition and definition.get("sourceRef"):
                 refs = definition["sourceRef"]
                 option_refs.extend(refs if isinstance(refs, list) else [refs])
-        add("/canonical/options", "array.optionSlots + option selections", canonical["options"], option_refs)
+        if canonical.get("classGraftId"):
+            _, class_graft = self._resolve("classGraft", canonical["classGraftId"], "/selections/classGraftId")
+            option_refs.append(class_graft["sourceRef"])
+            cr_entry = max(
+                (entry for entry in class_graft.get("crEntries", []) if canonical["cr"] >= entry["minCR"]),
+                key=lambda entry: entry["minCR"], default=None,
+            )
+            if cr_entry:
+                option_refs.append(cr_entry["sourceRef"])
+        for subtype_id in canonical.get("subtypeGraftIds", []):
+            refs = self._resolve("subtype", subtype_id, "/selections/subtypeGraftIds")[1]["sourceRef"]
+            option_refs.extend(refs if isinstance(refs, list) else [refs])
+        if canonical.get("templateGraftId"):
+            refs = self._resolve("template", canonical["templateGraftId"], "/selections/templateGraftId")[1]["sourceRef"]
+            option_refs.extend(refs if isinstance(refs, list) else [refs])
+        add("/canonical/options", "array/graft option slots + automatic grants + option selections", canonical["options"], option_refs)
         if canonical.get("spells"):
             spell_refs = []
             for spell in canonical["spells"]:

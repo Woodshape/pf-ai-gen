@@ -1,0 +1,43 @@
+{
+  "concept": {
+    "name": "Goblin Druid 4 / Rogue 1",
+    "targetCR": 4,
+    "role": "wilderness ambusher",
+    "classLevels": {"druid": 4, "rogue": 1},
+    "secondaryClass": "rogue"
+  },
+  "selections": {
+    "cr": 4,
+    "arrayId": "array.spellcaster",
+    "creatureTypeGraftId": "graft.creature-type.humanoid",
+    "classGraftId": "graft.class.druid",
+    "subtypeGraftIds": ["graft.subtype.goblinoid"],
+    "templateGraftId": null,
+    "sizeId": "graft.size.small",
+    "abilityModifiers": {
+      "wisdom": 4,
+      "constitution": 3,
+      "charisma": 1,
+      "dexterity": 0,
+      "intelligence": 0
+    },
+    "options": [
+      {"optionId": "option.improved-initiative", "parameters": {}}
+    ],
+    "skills": {
+      "master": [],
+      "good": ["acrobatics"]
+    },
+    "attacks": [
+      {
+        "name": "sickle",
+        "attackProfile": "weapon.high",
+        "damageDie": "d6"
+      }
+    ],
+    "speed": {"land": 20},
+    "spellListId": "spell-list.nature",
+    "spells": [],
+    "spellcastingAbility": "wisdom"
+  }
+}

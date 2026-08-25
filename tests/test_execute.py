@@ -9,6 +9,7 @@ from monster_builder import Engine
 WORG_DRAFT = json.loads((Path(__file__).parent / "fixtures" / "worg-cr2.json").read_text())
 GRIFFON_DRAFT = json.loads((Path(__file__).parent / "fixtures" / "griffon-cr4.json").read_text())
 MEDUSA_DRAFT = json.loads((Path(__file__).parent / "fixtures" / "medusa-cr7.json").read_text())
+GOBLIN_DRUID_DRAFT = json.loads((Path(__file__).parent / "fixtures" / "goblin-druid-cr4.json").read_text())
 
 
 def request(request_id, operation, payload):
@@ -208,6 +209,123 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
                 canonical = response["result"]["evaluation"]["canonical"]
                 self.assertEqual({key: canonical["defenses"][key] for key in saves}, saves)
                 self.assertEqual(canonical["attacks"][0]["attackBonus"], attack_bonus)
+
+    def test_goblin_druid_class_and_subtype_grafts_apply_through_execute(self):
+        response = self.engine.execute(request("goblin-druid", "draft.create", {"draft": GOBLIN_DRUID_DRAFT}))
+        self.assertTrue(response["ok"], response)
+        evaluation = response["result"]["evaluation"]
+        canonical = evaluation["canonical"]
+
+        self.assertEqual(evaluation["status"], "valid")
+        self.assertEqual(canonical["classGraftId"], "graft.class.druid")
+        self.assertEqual(canonical["subtypeGraftIds"], ["graft.subtype.goblinoid"])
+        self.assertEqual(canonical["defenses"], {
+            "ac": 15, "touchAC": 9, "flatFootedAC": 12,
+            "fortitude": 5, "reflex": 3, "will": 7, "cmd": 15, "hp": 36,
+        })
+        self.assertEqual(canonical["skills"], {
+            "knowledge-nature": 12, "survival": 12, "acrobatics": 9,
+            "stealth": 9, "perception": 9,
+        })
+        self.assertEqual(canonical["initiative"], 4)
+        self.assertEqual(canonical["concentration"], 8)
+        self.assertEqual(canonical["cmb"], 6)
+        self.assertEqual(canonical["attacks"][0]["damageExpression"], "1d6+10")
+        self.assertEqual(
+            [(spell["name"], spell["spellLevelSource"], spell["spellDC"], spell["frequency"]) for spell in canonical["spells"]],
+            [
+                ("Call Lightning", "druid", 19, "1/day"),
+                ("Sleet Storm", "druid", 19, "1/day"),
+                ("Entangle", "druid", 17, "3/day"),
+                ("Shillelagh", "druid", 17, "3/day"),
+                ("Charm Animal", "druid", 17, "3/day"),
+                ("Obscuring Mist", "druid", 17, "3/day"),
+            ],
+        )
+        self.assertEqual([option["optionId"] for option in canonical["options"]], [
+            "option.spontaneous-casting", "option.change-shape",
+            "option.terrain-stride", "option.improved-initiative",
+        ])
+        self.assertEqual(canonical["options"][1]["parameters"]["forms"], [
+            "Small animal", "Medium animal",
+        ])
+        self.assertIn("/canonical/classGraftId", {entry["path"] for entry in evaluation["derivationTrace"]})
+        self.assertIn("/canonical/subtypeGraftIds", {entry["path"] for entry in evaluation["derivationTrace"]})
+        skill_trace = next(entry for entry in evaluation["derivationTrace"] if entry["path"] == "/canonical/skills")
+        self.assertIn("Goblinoid", {ref.get("entry") for ref in skill_trace["sourceRefs"]})
+        option_trace = next(entry for entry in evaluation["derivationTrace"] if entry["path"] == "/canonical/options")
+        self.assertIn("Druid CR 3", {ref.get("entry") for ref in option_trace["sourceRefs"]})
+        initiative_trace = next(entry for entry in evaluation["derivationTrace"] if entry["path"] == "/canonical/initiative")
+        self.assertIn("Improved Initiative", {ref.get("entry") for ref in initiative_trace["sourceRefs"]})
+
+    def test_class_graft_enforces_its_required_array(self):
+        draft = copy.deepcopy(GOBLIN_DRUID_DRAFT)
+        draft["selections"]["arrayId"] = "array.expert"
+        response = self.engine.execute(request("bad-druid-array", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        self.assertEqual(response["result"]["evaluation"]["status"], "invalid")
+        self.assertIn("class-graft.required-array", {
+            issue["code"] for issue in response["result"]["evaluation"]["issues"]
+        })
+
+        draft["selections"]["arrayId"] = "array.spellcaster"
+        draft["selections"]["cr"] = 5
+        draft["concept"]["targetCR"] = 5
+        response = Engine().execute(request("druid-cr5-gap", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "invalid")
+        self.assertIn("class-graft.cr-unsupported", {
+            issue["code"] for issue in response["result"]["evaluation"]["issues"]
+        })
+
+    def test_lycanthrope_template_enforces_prerequisites_and_consumes_a_slot(self):
+        draft = copy.deepcopy(GOBLIN_DRUID_DRAFT)
+        draft["concept"] = {"name": "Goblin Werewolf Druid", "targetCR": 4}
+        draft["selections"].update({
+            "subtypeGraftIds": ["graft.subtype.goblinoid", "graft.subtype.shapechanger"],
+            "templateGraftId": "graft.template.lycanthrope",
+            "options": [],
+        })
+        response = self.engine.execute(request("lycanthrope", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        evaluation = response["result"]["evaluation"]
+        self.assertEqual(evaluation["status"], "valid")
+        self.assertEqual([option["optionId"] for option in evaluation["canonical"]["options"]], [
+            "option.spontaneous-casting", "option.change-shape", "option.terrain-stride",
+            "option.change-shape", "option.curse-of-lycanthropy",
+        ])
+        option_trace = next(entry for entry in evaluation["derivationTrace"] if entry["path"] == "/canonical/options")
+        self.assertIn("Lycanthrope", {ref.get("entry") for ref in option_trace["sourceRefs"]})
+
+        draft["selections"]["options"] = [{"optionId": "option.improved-initiative", "parameters": {}}]
+        response = Engine().execute(request("lycanthrope-extra-option", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "invalid")
+        self.assertIn("option-budget.mismatch", {
+            issue["code"] for issue in response["result"]["evaluation"]["issues"]
+        })
+        draft["selections"]["options"] = []
+
+        draft["selections"]["subtypeGraftIds"] = ["graft.subtype.goblinoid"]
+        response = Engine().execute(request("lycanthrope-no-shapechanger", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "invalid")
+        self.assertIn("template.subtype-required", {
+            issue["code"] for issue in response["result"]["evaluation"]["issues"]
+        })
+
+        draft["selections"]["subtypeGraftIds"] = ["graft.subtype.shapechanger", "graft.subtype.shapechanger"]
+        response = Engine().execute(request("duplicate-subtype", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "invalid")
+        self.assertIn("subtype.duplicate", {
+            issue["code"] for issue in response["result"]["evaluation"]["issues"]
+        })
+
+        draft["selections"]["subtypeGraftIds"] = ["graft.subtype.goblinoid", "graft.subtype.shapechanger"]
+        draft["selections"]["cr"] = 0.5
+        draft["concept"]["targetCR"] = 0.5
+        response = Engine().execute(request("lycanthrope-cr-half", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "invalid")
+        self.assertIn("template.cr-too-low", {
+            issue["code"] for issue in response["result"]["evaluation"]["issues"]
+        })
 
     def test_evaluation_is_deterministic_and_does_not_mutate_draft(self):
         created = self.create_worg()

@@ -12,8 +12,10 @@ CORE = ROOT / "Pathfinder_RPG_Core_Rulebook.txt"
 BESTIARY = ROOT / "beastiary.txt"
 OUT = ROOT / "catalog/catalog.json"
 
-unchained_lines = UNCHAINED.read_text().splitlines()
-core_lines = CORE.read_text().splitlines()
+# Keep form-feed characters inside their physical TXT lines so provenance
+# line numbers match editors, `rg -n`, and the documented source map.
+unchained_lines = UNCHAINED.read_text().split("\n")
+core_lines = CORE.read_text().split("\n")
 step6_page_by_line = {}
 current_step6_page = None
 for index, line in enumerate(unchained_lines, 1):
@@ -55,13 +57,13 @@ def source_ref(*, source_id, file, sha256, section, txt_lines, printed_pages=Non
     return result
 
 
-def unchained_ref(section, line, printed, *, entry=None, table=None):
+def unchained_ref(section, line, printed, *, end_line=None, entry=None, table=None):
     return source_ref(
         source_id="pathfinder-unchained-txt",
         file="Pathfinder Unchained.txt",
         sha256=unchained_hash,
         section=section,
-        txt_lines=(line, line),
+        txt_lines=(line, end_line or line),
         printed_pages=(printed,),
         viewer_pages=(printed - 193,),
         entry=entry,
@@ -104,10 +106,18 @@ def number(value):
     return int(value.replace("−", "-").replace("–", "-"))
 
 
-# The array tables are transcribed from their contiguous source rows. Keeping
-# the rows as data makes the catalog auditable and avoids runtime PDF parsing.
-main_starts = [375, 557, 703]  # zero-based indexes immediately before CR 1/2
-attack_starts = [449, 596, 742]
+# Locate contiguous 31-row CR tables by row shape so extraction order and page
+# markers cannot stale either parsing or provenance line numbers.
+def table_starts(pattern):
+    rows = [index for index, line in enumerate(unchained_lines) if re.match(pattern, line)]
+    starts = [index for position, index in enumerate(rows) if position == 0 or index != rows[position - 1] + 1]
+    return [start for start in starts if all(start + offset in rows for offset in range(31))]
+
+
+main_starts = table_starts(r"^(?:1/2|\d+) \d+, t \d+, f \d+ ")
+attack_starts = table_starts(r"^(?:1/2|\d+) [ +−-].*\(\d+\) ")
+if len(main_starts) != 3 or len(attack_starts) != 3:
+    raise ValueError("cannot locate the six Step-1 CR tables")
 array_names = ["combatant", "expert", "spellcaster"]
 arrays = {}
 for name, main_start, attack_start, printed in zip(
@@ -761,6 +771,67 @@ for key, (traits, adjustments, elective) in type_specs.items():
         "sourceRef": unchained_ref("Step 2: Creature Type Graft", type_lines[key], 204, entry=key.title()),
     }
 
+# First source-complete vertical grafts: the roadmap's Goblin Druid fixture,
+# plus a template that proves type/subtype prerequisites and budget semantics.
+class_grafts = {
+    "graft.class.druid": {
+        "id": "graft.class.druid",
+        "name": "Druid",
+        "requiredArrayId": "array.spellcaster",
+        "spellcastingClassId": "druid",
+        "statisticAdjustments": {"fortitude": 2},
+        "skillGrants": [
+            {"skillId": "skill.knowledge-nature", "rank": "master", "additional": False},
+            {"skillId": "skill.survival", "rank": "master", "additional": False},
+        ],
+        "optionGrants": [
+            {"optionId": "option.spontaneous-casting", "parameters": {"spellType": "summon-natures-ally"}},
+        ],
+        "optionSlots": [{"category": "any", "count": 1}],
+        "crEntries": [
+            {
+                "minCR": 1,
+                "optionGrants": [
+                    {"optionId": "option.terrain-stride", "parameters": {"terrain": "undergrowth"}},
+                ],
+                "sourceRef": unchained_ref("Step 2: Class Graft", 1201, 208, entry="Druid CR 1"),
+            },
+            {
+                "minCR": 3,
+                "optionGrants": [
+                    {"optionId": "option.change-shape", "parameters": {"forms": ["Small animal", "Medium animal"]}},
+                    {"optionId": "option.terrain-stride", "parameters": {"terrain": "undergrowth"}},
+                ],
+                "sourceRef": unchained_ref("Step 2: Class Graft", 1202, 208, end_line=1203, entry="Druid CR 3"),
+            },
+        ],
+        "maxImplementedCR": 4,
+        "sourceRef": unchained_ref("Step 2: Class Graft", 1184, 208, end_line=1203, entry="Druid"),
+    },
+}
+subtypes = {
+    "graft.subtype.goblinoid": {
+        "id": "graft.subtype.goblinoid", "name": "Goblinoid",
+        "skillGrants": [{"skillId": "skill.stealth", "rank": "good", "additional": True}],
+        "optionGrants": [],
+        "sourceRef": unchained_ref("Step 3: Subtype Graft", 1846, 215, entry="Goblinoid"),
+    },
+    "graft.subtype.shapechanger": {
+        "id": "graft.subtype.shapechanger", "name": "Shapechanger", "skillGrants": [],
+        "optionGrants": [{"optionId": "option.change-shape", "parameters": {}}],
+        "sourceRef": unchained_ref("Step 3: Subtype Graft", 1887, 215, entry="Shapechanger"),
+    },
+}
+templates = {
+    "graft.template.lycanthrope": {
+        "id": "graft.template.lycanthrope", "name": "Lycanthrope", "minCR": 1,
+        "requiredCreatureTypeId": "graft.creature-type.humanoid",
+        "requiredSubtypeId": "graft.subtype.shapechanger",
+        "optionGrants": [{"optionId": "option.curse-of-lycanthropy", "parameters": {}}],
+        "sourceRef": unchained_ref("Step 4: Template Graft", 2048, 217, end_line=2054, entry="Lycanthrope"),
+    },
+}
+
 size_specs = [
     ("fine", 2, None, {"touchAC": 8, "flatFootedAC": 8, "cmb": -16, "cmd": -8}, ["fly", "stealth"], []),
     ("diminutive", 4, None, {"touchAC": 4, "flatFootedAC": 4, "cmb": -8, "cmd": -4}, ["fly", "stealth"], []),
@@ -884,6 +955,36 @@ options = {
         "effects": {"ability": "rake", "attacks": 2, "attackType": "claw", "damageProfile": "weapon.low"},
         "sourceRef": unchained_ref("Step 7: Monster Options", 3708, 233, entry="Rake"),
     },
+    "option.improved-initiative": {
+        "id": "option.improved-initiative", "name": "Improved Initiative", "category": "combat",
+        "parameters": {}, "effects": {"initiative": 4},
+        "sourceRef": unchained_ref("Step 7: Monster Options", 3862, 235, end_line=3863, entry="Improved Initiative"),
+    },
+    "option.spontaneous-casting": {
+        "id": "option.spontaneous-casting", "name": "Spontaneous Casting", "category": "magic",
+        "parameters": {"spellType": {"type": "enum", "values": ["summon-natures-ally"]}},
+        "effects": {"ability": "spontaneous-casting"},
+        "sourceRef": unchained_ref("Step 7: Monster Options", 4159, 238, end_line=4165, entry="Spontaneous Casting"),
+    },
+    "option.change-shape": {
+        "id": "option.change-shape", "name": "Change Shape", "category": "universal",
+        "parameters": {"forms": {"type": "string-array", "optional": True}},
+        "effects": {"ability": "change-shape"},
+        "sourceRef": [
+            unchained_ref("Step 2: Class Graft", 1189, 208, end_line=1192, entry="Druid Change Shape"),
+            unchained_ref("Step 3: Subtype Graft", 1887, 215, entry="Shapechanger"),
+        ],
+    },
+    "option.terrain-stride": {
+        "id": "option.terrain-stride", "name": "Terrain Stride", "category": "universal",
+        "parameters": {"terrain": {"type": "string"}}, "effects": {"ability": "terrain-stride"},
+        "sourceRef": unchained_ref("Step 7: Monster Options", 4328, 239, end_line=4331, entry="Terrain Stride"),
+    },
+    "option.curse-of-lycanthropy": {
+        "id": "option.curse-of-lycanthropy", "name": "Curse of Lycanthropy", "category": "combat",
+        "parameters": {}, "effects": {"ability": "curse-of-lycanthropy"},
+        "sourceRef": unchained_ref("Step 7: Monster Options", 3598, 232, end_line=3604, entry="Curse of Lycanthropy"),
+    },
 }
 skills = {}
 for skill in (
@@ -909,8 +1010,8 @@ catalog = {
         "spellMetadata": "APG/UM/UC complete; ACG follow-up metadata with local vendoring pending",
         "spellListEvaluation": "structured primary/secondary bands and typed numeric/choice benefits complete",
         "coreSpellLists": "source-backed class-list metadata",
-        "grafts": "Worg, Griffon, and Medusa paths plus fixed type/size statistic adjustments",
-        "options": "Worg, Griffon, and Medusa paths plus typed option metadata",
+        "grafts": "Worg, Griffon, Medusa, Goblin Druid CR 4, Goblinoid/Shapechanger subtype, and Lycanthrope template vertical paths",
+        "options": "Vertical-path options have typed metadata; broad Step-7 coverage remains open",
     },
     "sources": {
         "pathfinder-unchained-txt": {"sourceId": "pathfinder-unchained-txt", "file": "Pathfinder Unchained.txt", "sha256": unchained_hash, "description": "Local extracted Pathfinder Unchained source"},
@@ -923,7 +1024,7 @@ catalog = {
         "core-rulebook-feats": {"sourceId": "core-rulebook-feats", "file": None, "sha256": None, "description": "Official Core metamagic feat metadata; local feat excerpt pending"},
     },
     "arrays": arrays,
-    "grafts": {"creatureTypes": creature_types, "classGrafts": {}, "subtypes": {}, "templates": {}, "sizes": sizes},
+    "grafts": {"creatureTypes": creature_types, "classGrafts": class_grafts, "subtypes": subtypes, "templates": templates, "sizes": sizes},
     "options": options,
     "skills": skills,
     "damage": damage_table,
