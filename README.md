@@ -24,8 +24,10 @@ simulations. Sheet-changing option effects now include additional master skills,
 scaled caster-level checks, healing, defenses, resistances, and immunities. The
 engine also covers all 60 Step-6 spell lists and 51 typed numeric or choice-based
 list benefits. APG/UM/UC/ACG spell and Core metamagic metadata are locally
-hash-anchored with their official-source URLs. Public tests cover array, size,
-spell-band, and damage-table boundaries. The Witch graft is deliberately rejected
+hash-anchored with their official-source URLs. Public `execute` tests cover all
+93 Step-1 rows, every attack profile, all 231 Table 5-9 cells, all 162 options on
+a valid path, prerequisites, typed scaling, size limits, and spell-band edges.
+The Witch graft is deliberately rejected
 because its source omits the rank of Knowledge (arcana); unsupported natural-attack
 dice remain explicit source gaps rather than guesses.
 

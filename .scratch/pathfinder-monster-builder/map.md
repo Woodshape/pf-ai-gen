@@ -26,8 +26,8 @@ The repository has moved from planning into a dependency-free Python vertical sl
 
 - `catalog/catalog.json` and `catalog/catalog.schema.json` load and validate against local source hashes. The catalog uses a content-derived version fingerprint rather than maintained compatibility branches. It contains the three CR arrays, all 19 class grafts, 41 source-listed subtype grafts, all 10 templates, nine size grafts, all 159 Step-7 table options plus three required unmodified-rule options, skills, attacks, damage, all 60 structured Step-6 spell lists, and 659 spell records. All 39 APG/UM/UC spells, five ACG spells, and Core metamagic rules are now locally hash-anchored with official-source URLs.
 - `monster_builder.Engine.execute` supports `draft.create`, `draft.get`, `draft.applyChanges`, and `draft.evaluate` with typed selection validation, revision/fingerprint guards, idempotency, incomplete/invalid separation, and derivation traces.
-- Worg CR 2, Griffon CR 4, pre-Reality-Check Medusa CR 7, Goblin Druid, Fighter, Sorcerer save-choice, Clockwork, Skeleton, and Lycanthrope paths are covered through the public interface. The engine applies required arrays, highest-only class CR entries, option/skill replacement and additional budgets, template prerequisites, as-if-CR spellcasting, and stable source traces. Twenty-eight options now have typed effects, including direct numeric defenses, healing, resistances, additional master skills, and scaled caster-level checks; complex encounter actions remain explicit source-rule effects rather than guessed simulations. Array transition CRs, all size-graft limits, both sides of every spell band, damage-table endpoints, and unsupported CR/damage limits are public-interface regressions. The Witch graft’s source-omitted skill rank and unsupported fixed or sub-d4 natural-attack dice remain explicit source gaps. The offline test suite currently has 62 passing tests.
-- This is not yet a full Steps 1–9 application: exhaustive every-row/every-option fidelity coverage, persistence, finalization, exports, UI, and AI are still outstanding.
+- Worg CR 2, Griffon CR 4, pre-Reality-Check Medusa CR 7, Goblin Druid, Fighter, Sorcerer save-choice, Clockwork, Skeleton, and Lycanthrope paths are covered through the public interface. The engine applies required arrays, highest-only class CR entries, option/skill replacement and additional budgets, template prerequisites, as-if-CR spellcasting, and stable source traces. Twenty-eight options have typed effects; complex encounter actions remain explicit source-rule effects rather than guessed simulations. Public `execute` regressions now cover all 93 Step-1 rows, every weapon/natural attack profile, all 231 cells of Table 5-9, every one of the 162 options on a valid path, hard prerequisites, typed scaling thresholds, all size limits, and both sides of every spell band. The matrix exposed and fixed negative damage modifiers and now rejects invalid array ability-modifier totals while retaining the source’s Griffon redistribution. The Witch graft’s source-omitted skill rank and unsupported fixed or sub-d4 natural-attack dice remain explicit source gaps. The offline test suite has 70 passing tests.
+- This is not yet a full Steps 1–9 application: persistence, finalization, exports, UI, and AI are still outstanding.
 
 ## Decisions so far
 
@@ -46,9 +46,8 @@ The repository has moved from planning into a dependency-free Python vertical sl
 
 ## Next implementation milestone
 
-- **Finish the fidelity matrix:** extend the new boundary suite to every published CR row, damage interval, and remaining option prerequisite/scaling threshold through `execute`.
-- **Preserve the strict seam:** keep encounter-time actions as source-rule abilities unless they deterministically change the Monster Sheet; add typed effects only for direct canonical fields.
-- Then follow Issue 10's delivery order for JSON persistence, finalization/exports, the Guided-Rail UI, and the optional Pi adapter.
+- **Implement JSON persistence:** add the configurable workspace, atomic writes, current-plus-20-history Draft snapshots, and active/finalized/archived lifecycle through the shared interface.
+- Then follow Issue 10's delivery order for finalization/exports, the Guided-Rail UI, and the optional Pi adapter.
 
 ## Out of scope
 

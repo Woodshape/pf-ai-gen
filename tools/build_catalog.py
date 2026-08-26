@@ -242,11 +242,11 @@ for index in range(damage_start, damage_start + 33):
     if not match:
         raise ValueError(f"Cannot parse damage row {index + 1}: {line}")
     low, high, expression_text = match.groups()
-    expressions = re.findall(r"(?:(?:\d+d\d+)|d\d+)(?:[+−-]\d+)?", expression_text)
+    expressions = re.findall(r"(?:(?:\d+d\d+)|d\d+)(?:[+−–-]\d+)?", expression_text)
     damage_table[f"{low}-{high}"] = {
         "min": int(low),
         "max": int(high),
-        "expressions": dict(zip(dice_names, [value.replace("−", "-") for value in expressions])),
+        "expressions": dict(zip(dice_names, [value.replace("−", "-").replace("–", "-") for value in expressions])),
         "sourceRef": unchained_ref(
             "Step 9: Damage", index + 1, 241,
             entry=f"{low}–{high}", table="Table 5-9: Damage Dice Values",

@@ -542,6 +542,19 @@ class Engine:
             issues.append(self._issue("concept.target-cr-mismatch", "/concept/targetCR", "concept target CR differs from the selected CR", "product-constraint", "warning"))
 
         abilities = copy.deepcopy(selections["abilityModifiers"])
+        positive_abilities = [value for value in abilities.values() if value > 0]
+        # Preserve the array's power budget while allowing the source's Griffon
+        # redistribution from +4/+3/+1 to +4/+2/+2.
+        if (
+            len(positive_abilities) != 3
+            or max(positive_abilities, default=0) != max(main["abilityModifiers"])
+            or sum(positive_abilities) != sum(main["abilityModifiers"])
+        ):
+            issues.append(self._issue(
+                "ability-modifiers.invalid", "/selections/abilityModifiers",
+                "three positive ability modifiers must preserve the selected array row's maximum and total",
+                "source-rule", "error", main.get("sourceRef"),
+            ))
         active_grafts = [graft for _, graft in subtype_grafts] + ([template] if template else [])
         for graft in active_grafts:
             abilities.update(graft.get("abilityModifierOverrides", {}))

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "catalogVersion": "sha256:248f42916006dfcb1239b35e8c27a3060096d1ae9c5ff21ebc752bf5935072e3",
+  "catalogVersion": "sha256:ac565b6fdec0a0b35549acc840332c69760ec022f42835b47526002664b77688",
   "catalogStatus": {
     "step1": "complete",
     "worgVerticalSlice": "complete",
@@ -32,31 +32,31 @@
     "advanced-players-guide": {
       "sourceId": "advanced-players-guide",
       "file": "tools/build_catalog.py",
-      "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+      "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
       "description": "Locally anchored official Paizo PRD APG spell metadata"
     },
     "ultimate-magic": {
       "sourceId": "ultimate-magic",
       "file": "tools/build_catalog.py",
-      "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+      "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
       "description": "Locally anchored official Paizo PRD UM spell metadata"
     },
     "ultimate-combat": {
       "sourceId": "ultimate-combat",
       "file": "tools/build_catalog.py",
-      "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+      "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
       "description": "Locally anchored official Paizo PRD UC spell metadata"
     },
     "advanced-class-guide": {
       "sourceId": "advanced-class-guide",
       "file": "tools/build_catalog.py",
-      "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+      "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
       "description": "Locally anchored official Paizo PRD ACG spell metadata"
     },
     "core-rulebook-feats": {
       "sourceId": "core-rulebook-feats",
       "file": "tools/build_catalog.py",
-      "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+      "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
       "description": "Locally anchored official Core metamagic feat metadata"
     }
   },
@@ -29607,10 +29607,10 @@
         "d4": "1d4+2",
         "d6": "1d6+1",
         "d8": "1d8+0",
-        "d10": "1d10",
-        "d12": "1d12",
-        "2d6": "2d6",
-        "3d6": "3d6"
+        "d10": "1d10-1",
+        "d12": "1d12-2",
+        "2d6": "2d6-3",
+        "3d6": "3d6-5"
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -29641,7 +29641,7 @@
         "d10": "1d10+2",
         "d12": "1d12+1",
         "2d6": "2d6+0",
-        "3d6": "3d6"
+        "3d6": "3d6-2"
       },
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -49020,7 +49020,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             276,
@@ -49074,7 +49074,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             277,
@@ -49113,7 +49113,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             278,
@@ -49165,7 +49165,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             279,
@@ -49220,7 +49220,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             280,
@@ -49271,7 +49271,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             281,
@@ -49323,7 +49323,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             282,
@@ -49376,7 +49376,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             283,
@@ -49429,7 +49429,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             284,
@@ -49482,7 +49482,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             285,
@@ -49535,7 +49535,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             286,
@@ -49588,7 +49588,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             287,
@@ -49624,7 +49624,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             288,
@@ -49658,7 +49658,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             289,
@@ -49711,7 +49711,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             290,
@@ -49763,7 +49763,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             291,
@@ -49814,7 +49814,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             292,
@@ -49849,7 +49849,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             293,
@@ -49903,7 +49903,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             294,
@@ -49956,7 +49956,7 @@
         {
           "sourceId": "advanced-players-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             295,
@@ -50007,7 +50007,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             296,
@@ -50061,7 +50061,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             297,
@@ -50096,7 +50096,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             298,
@@ -50149,7 +50149,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             299,
@@ -50201,7 +50201,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             300,
@@ -50254,7 +50254,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             301,
@@ -50310,7 +50310,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             302,
@@ -50346,7 +50346,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             303,
@@ -50400,7 +50400,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             304,
@@ -50456,7 +50456,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             305,
@@ -50492,7 +50492,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             306,
@@ -50545,7 +50545,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             307,
@@ -50597,7 +50597,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             308,
@@ -50631,7 +50631,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             309,
@@ -50665,7 +50665,7 @@
         {
           "sourceId": "ultimate-magic",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             310,
@@ -50720,7 +50720,7 @@
         {
           "sourceId": "ultimate-combat",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             311,
@@ -50772,7 +50772,7 @@
         {
           "sourceId": "ultimate-combat",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             312,
@@ -50805,7 +50805,7 @@
         {
           "sourceId": "ultimate-combat",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             313,
@@ -50859,7 +50859,7 @@
         {
           "sourceId": "ultimate-combat",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             314,
@@ -50914,7 +50914,7 @@
         {
           "sourceId": "advanced-class-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             317,
@@ -50968,7 +50968,7 @@
         {
           "sourceId": "advanced-class-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             318,
@@ -51020,7 +51020,7 @@
         {
           "sourceId": "advanced-class-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             319,
@@ -51072,7 +51072,7 @@
         {
           "sourceId": "advanced-class-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             320,
@@ -51124,7 +51124,7 @@
         {
           "sourceId": "advanced-class-guide",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             321,
@@ -81469,7 +81469,7 @@
         {
           "sourceId": "core-rulebook-feats",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             1521,
@@ -81489,7 +81489,7 @@
         {
           "sourceId": "core-rulebook-feats",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             1522,
@@ -81509,7 +81509,7 @@
         {
           "sourceId": "core-rulebook-feats",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             1523,
@@ -81529,7 +81529,7 @@
         {
           "sourceId": "core-rulebook-feats",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             1524,
@@ -81549,7 +81549,7 @@
         {
           "sourceId": "core-rulebook-feats",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             1525,
@@ -81569,7 +81569,7 @@
         {
           "sourceId": "core-rulebook-feats",
           "file": "tools/build_catalog.py",
-          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "sha256": "e3756cf18ea7103c797db51440b42fd89a61aa2543c864e1ff1dddbda8da278f",
           "section": "vendored rules metadata",
           "txtLines": [
             1526,

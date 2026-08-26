@@ -62,7 +62,7 @@ Die Issues 01–09 beschreiben die fachlichen Verträge. Dieses Issue übersetzt
 
 ## Konkreter nächster Schritt
 
-Die neue Grenztest-Suite auf jede veröffentlichte CR-Zeile, jedes Damage-Intervall und die übrigen Option-Prärequisiten/-Skalierungen ausweiten; danach folgt die JSON-Persistenz. Komplexe Encounter-Aktionen bleiben explizite Source-Rule-Fähigkeiten.
+Die JSON-Persistenz aus Issue 05 über die gemeinsame `execute`-Schnittstelle umsetzen: konfigurierbarer Workspace, atomare Writes, Current-plus-20-History und Draft-Lifecycle. Komplexe Encounter-Aktionen bleiben explizite Source-Rule-Fähigkeiten.
 
 ## Umsetzungsstand
 
@@ -72,12 +72,12 @@ Der erste vertikale Slice ist begonnen und lokal ausführbar:
 
 - `catalog/catalog.json` und `catalog/catalog.schema.json` enthalten die CR-Arrays, Damage-/Natural-Attack-Tabellen, Type-/Size-Grafts, die Worg-/Griffon-/Medusa-Optionspfade, alle 60 strukturierten Step-6-Listen sowie 39 APG/UM/UC- und fünf ACG-Spell-Metadaten. Nicht-Core-Spells und Core-Metamagie sind lokal mit Hash und offizieller Quellen-URL verankert. Die Katalogversion ist ein inhaltsbasierter Fingerprint; es gibt noch keine Kompatibilitätsschicht für alte Entwicklungskataloge.
 - `monster_builder.Engine.execute` unterstützt `draft.create`, `draft.get`, `draft.applyChanges` und `draft.evaluate` mit Revision/Fingerprint-Guard, Idempotency-Key, Boundary-/Domain-Fehlertrennung und stabilem Trace. Class-Grafts erzwingen Required Arrays, unterdrücken Type-Statistikänderungen, wenden nur den höchsten CR-Eintrag an und unterstützen Slots, Replacements, Save-Choices und As-if-CR-Spellcasting. Subtype-Grants sind zusätzlich; Template-Grants verbrauchen normale Slots und prüfen Voraussetzungen.
-- Worg, Griffon, Medusa, Goblin Druid, Fighter, Sorcerer, Clockwork, Skeleton, Lycanthrope, Metadaten-/Metamagie und das CR-9-Aberrant-Beispiel sind in 62 öffentlichen `execute`-/Katalogtests abgesichert. Die Tests decken Array-Übergänge, alle Size-Grenzen, beide Seiten aller Spell-Bänder, die Damage-Tabellenenden und nicht veröffentlichte CR-/Damage-Werte ab; JSONL läuft über `python -m monster_builder`.
+- Worg, Griffon, Medusa, Goblin Druid, Fighter, Sorcerer, Clockwork, Skeleton, Lycanthrope, Metadaten-/Metamagie und das CR-9-Aberrant-Beispiel sind in 70 öffentlichen `execute`-/Katalogtests abgesichert. Die Matrix deckt alle 93 Step-1-Zeilen, jedes Attack-Profil, alle 231 Zellen von Table 5-9, alle 162 Options auf einem gültigen Pfad, harte Prärequisiten, typisierte Skalierungsgrenzen, alle Size-Grenzen und beide Seiten aller Spell-Bänder ab; JSONL läuft über `python -m monster_builder`.
 - Step-6-Listen werden nach CR-Band in Primary/Secondary und `1/day`/`3/day`/`at will` aufgelöst. Alle 51 numerischen bzw. auswahlabhängigen List-Benefits besitzen typisierte Katalogeffekte; direkt bestimmbare Feldänderungen werden angewandt, kontextabhängige Modifikatoren bleiben explizit. Fehlende dynamische Choices halten den Draft sichtbar `incomplete`.
 - Fixed-1- und nicht von Table 5-9 abgedeckte kleine Natural-Damage-Dice werden als explizite `catalog-data`-Source-Gaps gemeldet, nicht geraten.
 - `README.md` und `pyproject.toml` dokumentieren den dependency-freien lokalen Start; nur die Katalog-Regeneration benötigt zusätzlich `pdftotext`.
 
-Noch nicht umgesetzt sind die exhaustive Every-Row-/Every-Option-Regressionsmatrix, Persistenz, Finalisierung/Exporte, UI und KI. Komplexe Encounter-Aktionen bleiben bewusst als Source-Regeln im kanonischen Ergebnis, solange sie keine deterministische Monster-Sheet-Statistik verändern.
+Noch nicht umgesetzt sind Persistenz, Finalisierung/Exporte, UI und KI. Komplexe Encounter-Aktionen bleiben bewusst als Source-Regeln im kanonischen Ergebnis, solange sie keine deterministische Monster-Sheet-Statistik verändern.
 
 ## Fertig-Kriterium für diesen Plan
 

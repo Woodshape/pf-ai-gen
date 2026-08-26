@@ -1,5 +1,6 @@
 import copy
 import json
+import re
 import unittest
 from pathlib import Path
 
@@ -25,12 +26,15 @@ def boundary_draft(cr, array="combatant"):
     """A complete public-interface draft using source-literal slot counts."""
     ability_values = {
         0.5: [3, 2, 1], 1: [3, 2, 1], 2: [3, 2, 1], 3: [4, 2, 1],
-        4: [4, 3, 1], 5: [5, 3, 2], 6: [5, 4, 2], 7: [6, 4, 2],
-        8: [6, 4, 2], 10: [7, 5, 3], 11: [7, 5, 4], 12: [8, 5, 4],
-        15: [10, 7, 5], 16: [11, 7, 5], 20: [13, 9, 6], 21: [14, 10, 7],
-        27: [17, 13, 9], 30: [18, 15, 10],
+        4: [4, 3, 1], 5: [5, 3, 2], 6: [5, 3, 2], 7: [6, 4, 2],
+        8: [6, 4, 2], 9: [7, 4, 3], 10: [7, 5, 3], 11: [8, 5, 3],
+        12: [8, 5, 4], 13: [9, 6, 4], 14: [9, 6, 4], 15: [10, 7, 5],
+        16: [11, 7, 5], 17: [11, 8, 5], 18: [12, 8, 6], 19: [13, 9, 6],
+        20: [13, 9, 6], 21: [14, 10, 7], 22: [14, 10, 7], 23: [15, 11, 7],
+        24: [15, 11, 8], 25: [16, 12, 8], 26: [16, 12, 8], 27: [17, 13, 9],
+        28: [17, 13, 9], 29: [18, 14, 10], 30: [18, 15, 10],
     }[cr]
-    option_count = 1 if cr < 3 else 2 if cr < 12 else 3 if cr < 20 else 4
+    option_count = 1 if cr < 3 else 2 if cr < 12 else 3 if cr < 18 else 4
     if array == "combatant":
         options = [{"optionId": "option.blind-fight", "parameters": {}}] * option_count
         skills = {"master": ["perception"], "good": ["survival", "climb"]}
@@ -62,7 +66,11 @@ def boundary_draft(cr, array="combatant"):
             "subtypeGraftIds": [],
             "templateGraftId": None,
             "sizeId": "graft.size.medium",
-            "abilityModifiers": dict(zip(("strength", "dexterity", "constitution"), ability_values)),
+            "abilityModifiers": dict(zip(
+                ("intelligence", "wisdom", "charisma") if array == "spellcaster" else
+                ("strength", "dexterity", "constitution"),
+                ability_values,
+            )),
             "options": options,
             "skills": skills,
             "attacks": [attack],
@@ -70,6 +78,153 @@ def boundary_draft(cr, array="combatant"):
             "spells": [],
         },
     }
+
+
+def assign_source_ability_modifiers(draft, cr, array=None):
+    array = array or draft["selections"]["arrayId"].removeprefix("array.")
+    draft["selections"]["abilityModifiers"] = boundary_draft(cr, array)["selections"]["abilityModifiers"]
+
+
+def source_array_tables():
+    """Independently parse the six published Step-1 tables used as expectations."""
+    lines = (Path(__file__).parents[1] / "Pathfinder Unchained.txt").read_text().split("\n")
+    arrays = {}
+    main_starts = {"combatant": 372, "expert": 552, "spellcaster": 696}
+    attack_starts = {"combatant": 445, "expert": 590, "spellcaster": 734}
+    main_pattern = re.compile(
+        r"^(1/2|\d+) (\d+), t (\d+), f (\d+) ([+−-]\d+) ([+−-]\d+) ([+−-]\d+) "
+        r"(\d+) (\d+) (\d+) (\d+) ([+−-]\d+), ([+−-]\d+), ([+−-]\d+) "
+        r"\+?(\d+) \((\d+)\) \+?(\d+) \((\d+)\) (.*)$"
+    )
+    attack_pattern = re.compile(
+        r"^(1/2|\d+) (.*?)\s*\((\d+)\) (.*?)\s*\((\d+)\) "
+        r"(.*?)\s*\((\d+)\) (.*?)\s*\((\d+)\)$"
+    )
+
+    def integer(value):
+        return int(value.replace("−", "-").replace("–", "-"))
+
+    for array in main_starts:
+        main_rows = {}
+        attack_rows = {}
+        for line in lines[main_starts[array] - 1:main_starts[array] + 30]:
+            values = main_pattern.match(line).groups()
+            cr = 0.5 if values[0] == "1/2" else int(values[0])
+            main_rows[cr] = {
+                "defenses": {
+                    "ac": int(values[1]), "touchAC": int(values[2]), "flatFootedAC": int(values[3]),
+                    "fortitude": integer(values[4]), "reflex": integer(values[5]), "will": integer(values[6]),
+                    "cmd": int(values[7]), "hp": int(values[8]),
+                },
+                "abilityDC": int(values[9]), "spellDC": int(values[10]),
+                "abilityModifiers": [integer(value) for value in values[11:14]],
+                "masterBonus": int(values[14]), "masterCount": int(values[15]),
+                "goodBonus": int(values[16]), "goodCount": int(values[17]),
+                "optionCount": sum(int(count) for count in re.findall(r"(\d+) (?:combat|magic|social|universal|any)", values[18])),
+            }
+        for line in lines[attack_starts[array] - 1:attack_starts[array] + 30]:
+            cr_text, high, high_damage, low, low_damage, two, two_damage, three, three_damage = attack_pattern.match(line).groups()
+            cr = 0.5 if cr_text == "1/2" else int(cr_text)
+
+            def bonuses(text):
+                return [integer(value) for value in re.findall(r"[+−-]\d+", text)]
+
+            def natural_entries(text, final_damage):
+                return [
+                    {"count": int(count), "attackBonuses": [integer(bonus)], "averageDamage": int(damage)}
+                    for count, bonus, damage in re.findall(
+                        r"(\d+)\s+at\s+([+−-]\d+)\s*\((\d+)\)", f"{text} ({final_damage})"
+                    )
+                ]
+
+            attack_rows[cr] = {
+                "weapon.high": [{"count": 1, "attackBonuses": bonuses(high), "averageDamage": int(high_damage)}],
+                "weapon.low": [{"count": 1, "attackBonuses": bonuses(low), "averageDamage": int(low_damage)}],
+                "natural.two": natural_entries(two, two_damage),
+                "natural.three": natural_entries(three, three_damage),
+            }
+        arrays[array] = {"main": main_rows, "attacks": attack_rows}
+    return arrays
+
+
+def source_damage_table():
+    """Read the published Table 5-9 columns without consulting the catalog."""
+    lines = (Path(__file__).parents[1] / "Pathfinder Unchained.txt").read_text().split("\n")
+    start = lines.index("Table 5–9: Damage Dice Values") + 2
+    dice = ("d4", "d6", "d8", "d10", "d12", "2d6", "3d6")
+    rows = []
+    for line in lines[start:start + 33]:
+        interval, *expressions = line.split()
+        low, high = map(int, interval.split("–"))
+        rows.append({
+            "min": low, "max": high,
+            "expressions": dict(zip(dice, [value.replace("−", "-").replace("–", "-") for value in expressions])),
+        })
+    return rows
+
+
+OPTION_PARAMETERS = {
+    "option.ability-damage": {"ability": "strength", "mode": "damage", "scope": "all-attacks"},
+    "option.at-will-magic": {"spellId": "spell.core.detect-magic"},
+    "option.aura-of-resistance": {"descriptors": ["fear", "poison"]},
+    "option.bestow-major-condition": {"condition": "dazed"},
+    "option.bestow-minor-condition": {"condition": "dazzled"},
+    "option.bestow-moderate-condition": {"condition": "blinded"},
+    "option.breath-weapon": {"shape": "cone", "damageType": "fire"},
+    "option.bypass-dr": {"bypass": ["magic", "silver"]},
+    "option.channel-destruction": {"energyType": "fire"},
+    "option.channel-energy": {"energy": "positive", "targets": "undead"},
+    "option.combatants-touch": {"ability": "strength"},
+    "option.contingent-spell": {"spellId": "spell.core.detect-magic", "trigger": "when attacked"},
+    "option.critical-striker": {"attackType": "weapon"},
+    "option.damage-reduction": {"bypass": ["magic"]},
+    "option.damaging-body": {"damageType": "fire"},
+    "option.disease": {"ability": "constitution", "attackType": "weapon"},
+    "option.draining-touch": {"ability": "strength"},
+    "option.energy-drain": {"attackType": "weapon"},
+    "option.energy-explosion": {"energyType": "fire"},
+    "option.energy-infusion": {"energyType": "fire"},
+    "option.energy-resistance": {"energyTypes": ["acid", "cold"], "resistanceValue": 10},
+    "option.engulf": {"mode": "high-damage"},
+    "option.evil-eye": {"penalty": "attack-rolls"},
+    "option.extra-armor": {"armorSource": "natural"},
+    "option.extra-attack": {"attackMode": "melee"},
+    "option.favored-enemy": {"targets": [
+        "graft.creature-type.undead", "graft.creature-type.dragon", "graft.creature-type.outsider",
+        "humanoid:orc", "outsider:demon",
+    ]},
+    "option.fear-attack": {"area": "cone"},
+    "option.gaze": {"range": "30 ft.", "effect": "turn-to-stone-permanently", "save": "fortitude-negates"},
+    "option.immunity": {"immunities": ["acid", "cold", "electricity", "fire", "poison"]},
+    "option.improved-combat-maneuver": {"maneuver": "grapple", "attackType": "weapon"},
+    "option.inspire-competence": {"skillId": "skill.perception"},
+    "option.magic-attack": {"damageType": "fire"},
+    "option.magic-weapon": {"property": "bane"},
+    "option.metamagic-spell": {"spellId": "spell.core.detect-magic", "metamagic": "extend"},
+    "option.mobile-attack": {"attackMode": "melee"},
+    "option.mutagen": {"package": "strength"},
+    "option.paralysis": {"attackType": "weapon"},
+    "option.poison": {
+        "attackTypes": ["weapon"], "ability": "strength",
+        "advantages": ["no-onset", "round-frequency", "increase-damage", "two-consecutive-saves"],
+    },
+    "option.potent-magic-damage": {"descriptor": "fire"},
+    "option.power-attack": {"attackType": "weapon"},
+    "option.powerful-charge": {"attackType": "weapon"},
+    "option.quivering-palm": {"attackType": "weapon"},
+    "option.rage": {"trigger": "voluntary"},
+    "option.regeneration": {"bypass": ["acid", "fire"]},
+    "option.repositioning-attack": {"attackType": "weapon", "direction": "push"},
+    "option.save-boost": {"save": "fortitude"},
+    "option.secondary-magic": {"spellListId": "spell-list.water"},
+    "option.slaying-attack": {"save": "fortitude"},
+    "option.smite": {"alignment": "evil"},
+    "option.spontaneous-casting": {"spellType": "cure"},
+    "option.stun-attack": {"attackType": "weapon"},
+    "option.terrain-stride": {"terrain": "forest"},
+    "option.transfer-hit-points": {"direction": "self-to-ally"},
+    "option.trap-squares": {"kind": "mundane", "damageType": "piercing"},
+}
 
 
 class ExecuteVerticalSliceTests(unittest.TestCase):
@@ -326,6 +481,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             {"optionId": "option.improved-initiative", "parameters": {}},
             {"optionId": "option.at-will-magic", "parameters": {"spellId": "spell.core.detect-magic"}},
         ]
+        assign_source_ability_modifiers(draft, 5, "spellcaster")
         response = Engine().execute(request("druid-cr5", "draft.create", {"draft": draft}))
         self.assertEqual(response["result"]["evaluation"]["status"], "valid")
         self.assertIn("Tiny, Small, Medium", next(
@@ -401,6 +557,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
                 "good": ["survival", "climb"],
             },
         })
+        assign_source_ability_modifiers(draft, 6, "expert")
         response = self.engine.execute(request("bard-levels", "draft.create", {"draft": draft}))
         self.assertTrue(response["ok"], response)
         spell = next(spell for spell in response["result"]["evaluation"]["canonical"]["spells"] if spell["spellId"] == "spell.core.hideous-laughter")
@@ -420,6 +577,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             "options": [{"optionId": "option.blind-fight", "parameters": {}}],
             "skills": {"master": ["perception", "knowledge-arcana"], "good": ["stealth", "survival"]},
         })
+        assign_source_ability_modifiers(draft, 3, "expert")
         response = self.engine.execute(request("alchemist-missing-list", "draft.create", {"draft": draft}))
         self.assertIn("class-graft.spell-list-required", {issue["code"] for issue in response["result"]["evaluation"]["issues"]})
 
@@ -447,6 +605,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             "skills": {"master": [], "good": ["stealth", "survival"]},
             "attacks": [{"name": "unarmed strike", "attackProfile": "weapon.high"}],
         })
+        assign_source_ability_modifiers(draft, 7)
         response = self.engine.execute(request("monk", "draft.create", {"draft": draft}))
         self.assertTrue(response["ok"], response)
         canonical = response["result"]["evaluation"]["canonical"]
@@ -473,6 +632,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
                 {"optionId": "option.power-attack", "parameters": {"attackType": "bite"}},
             ],
         })
+        assign_source_ability_modifiers(draft, 3)
         response = self.engine.execute(request("fighter", "draft.create", {"draft": draft}))
         self.assertTrue(response["ok"], response)
         canonical = response["result"]["evaluation"]["canonical"]
@@ -587,6 +747,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             "spellListId": "spell-list.water",
             "spells": [],
         })
+        assign_source_ability_modifiers(draft, 7)
         response = self.engine.execute(request("ranger", "draft.create", {"draft": draft}))
         self.assertTrue(response["ok"], response)
         canonical = response["result"]["evaluation"]["canonical"]
@@ -685,6 +846,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             "options": [],
             "skills": {"master": [], "good": ["survival", "climb"]},
         })
+        assign_source_ability_modifiers(draft, 6)
         response = self.engine.execute(request("ghost", "draft.create", {"draft": draft}))
         self.assertTrue(response["ok"], response)
         canonical = response["result"]["evaluation"]["canonical"]
@@ -731,6 +893,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             "options": [{"optionId": "option.blind-fight", "parameters": {}}],
             "skills": {"master": [], "good": ["stealth", "survival"]},
         })
+        assign_source_ability_modifiers(draft, 5)
         response = self.engine.execute(request("graveknight", "draft.create", {"draft": draft}))
         canonical = response["result"]["evaluation"]["canonical"]
         breath = next(option for option in canonical["options"] if option["optionId"] == "option.breath-weapon")
@@ -757,6 +920,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
                 "option.energy-drain": {"attackType": "bite"},
             }},
         })
+        assign_source_ability_modifiers(draft, 5)
         response = self.engine.execute(request("vampire", "draft.create", {"draft": draft}))
         self.assertEqual(response["result"]["evaluation"]["status"], "valid")
         self.assertEqual(response["result"]["evaluation"]["canonical"]["graftTraits"], [
@@ -787,6 +951,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             "options": [],
             "skills": {"master": ["perception", "intimidate"], "good": ["stealth", "survival"]},
         })
+        assign_source_ability_modifiers(draft, 3)
         response = self.engine.execute(request("half-dragon-no-choice", "draft.create", {"draft": draft}))
         self.assertEqual(response["result"]["evaluation"]["status"], "incomplete")
         draft["selections"]["templateGraftChoices"] = {"energyType": "fire", "breathShape": "cone"}
@@ -806,6 +971,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             "classGraftId": "graft.class.paladin",
             "spellListId": "spell-list.good",
         })
+        assign_source_ability_modifiers(draft, 7)
         response = self.engine.execute(request("paladin-no-choices", "draft.create", {"draft": draft}))
         self.assertIn("graft-option.choice-required", {issue["code"] for issue in response["result"]["evaluation"]["issues"]})
         draft["selections"]["graftOptionChoices"] = {"graft.class.paladin": {
@@ -906,14 +1072,121 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
                     )
                     self.assertEqual(actual, values)
 
+    def test_every_published_array_row_matches_the_source_tables(self):
+        for array, tables in source_array_tables().items():
+            for cr, expected in tables["main"].items():
+                with self.subTest(array=array, cr=cr):
+                    draft = boundary_draft(cr, array)
+                    profile, entry_index, _ = next(
+                        (profile, index, entry)
+                        for profile, entries in tables["attacks"][cr].items()
+                        for index, entry in enumerate(entries)
+                        if 4 <= entry["averageDamage"] <= 101
+                    )
+                    draft["selections"]["attacks"] = [{
+                        "name": "weapon", "attackProfile": profile,
+                        "profileEntry": entry_index, "damageDie": "d6",
+                    }]
+                    response = self.engine.execute(request(f"all-array-{array}-{cr}", "draft.create", {"draft": draft}))
+                    self.assertTrue(response["ok"], response)
+                    evaluation = response["result"]["evaluation"]
+                    self.assertEqual(evaluation["status"], "valid", evaluation["issues"])
+                    canonical = evaluation["canonical"]
+                    self.assertEqual(canonical["defenses"], expected["defenses"])
+                    self.assertEqual(canonical["abilityDC"], expected["abilityDC"])
+                    self.assertEqual(canonical["spellDC"], expected["spellDC"])
+                    self.assertEqual(sorted(canonical["abilityModifiers"].values(), reverse=True), expected["abilityModifiers"])
+                    self.assertEqual(len(canonical["options"]), expected["optionCount"])
+                    self.assertEqual(canonical["cmb"], tables["attacks"][cr]["weapon.high"][0]["attackBonuses"][0])
+                    self.assertEqual(
+                        sum(value == expected["masterBonus"] for value in canonical["skills"].values()),
+                        expected["masterCount"],
+                    )
+                    self.assertEqual(
+                        sum(value == expected["goodBonus"] for value in canonical["skills"].values()),
+                        expected["goodCount"],
+                    )
+
+    def test_every_published_attack_profile_is_observable_through_execute(self):
+        for array, tables in source_array_tables().items():
+            for cr, profiles in tables["attacks"].items():
+                for profile, entries in profiles.items():
+                    for entry_index, expected in enumerate(entries):
+                        with self.subTest(array=array, cr=cr, profile=profile, entry=entry_index):
+                            draft = boundary_draft(cr, array)
+                            draft["selections"]["attacks"] = [{
+                                "name": "weapon", "attackProfile": profile,
+                                "profileEntry": entry_index, "damageDie": "d6",
+                            }]
+                            evaluation = self.engine.execute(request(
+                                f"all-attack-{array}-{cr}-{profile}-{entry_index}", "draft.create", {"draft": draft},
+                            ))["result"]["evaluation"]
+                            if not 4 <= expected["averageDamage"] <= 101:
+                                self.assertEqual(evaluation["status"], "invalid")
+                                self.assertIn("damage.unresolved", {issue["code"] for issue in evaluation["issues"]})
+                                continue
+                            self.assertEqual(evaluation["status"], "valid", evaluation["issues"])
+                            actual = evaluation["canonical"]["attacks"][0]
+                            self.assertEqual(actual["count"], expected["count"])
+                            self.assertEqual(actual["attackBonus"], expected["attackBonuses"])
+                            self.assertEqual(actual["averageDamage"], expected["averageDamage"])
+
+    def test_every_damage_interval_and_die_column_matches_table_5_9(self):
+        arrays = source_array_tables()
+        candidates = [
+            (entry["averageDamage"], cr, array, profile, index)
+            for array, tables in arrays.items()
+            for cr, profiles in tables["attacks"].items()
+            for profile, entries in profiles.items()
+            for index, entry in enumerate(entries)
+            if 4 <= entry["averageDamage"] <= 101
+        ]
+        for row in source_damage_table():
+            _, cr, array, profile, entry_index = next(
+                candidate for candidate in candidates if row["min"] <= candidate[0] <= row["max"]
+            )
+            for die, expression in row["expressions"].items():
+                with self.subTest(interval=(row["min"], row["max"]), die=die):
+                    draft = boundary_draft(cr, array)
+                    draft["selections"]["attacks"] = [{
+                        "name": "weapon", "attackProfile": profile,
+                        "profileEntry": entry_index, "damageDie": die,
+                    }]
+                    evaluation = self.engine.execute(request(
+                        f"all-damage-{row['min']}-{die}", "draft.create", {"draft": draft},
+                    ))["result"]["evaluation"]
+                    self.assertEqual(evaluation["status"], "valid", evaluation["issues"])
+                    self.assertEqual(evaluation["canonical"]["attacks"][0]["damageExpression"], expression)
+
+    def test_invalid_array_ability_modifiers_are_rejected(self):
+        draft = boundary_draft(4)
+        draft["selections"]["abilityModifiers"] = {"strength": 99, "dexterity": 3, "constitution": 1}
+        evaluation = self.engine.execute(request("invalid-array-abilities", "draft.create", {"draft": draft}))["result"]["evaluation"]
+        self.assertEqual(evaluation["status"], "invalid")
+        self.assertIn("ability-modifiers.invalid", {issue["code"] for issue in evaluation["issues"]})
+
+    def test_save_swap_and_other_calculations_follow_the_source_rules(self):
+        draft = boundary_draft(4)
+        draft["selections"]["saveSwap"] = {"from": "fortitude", "to": "will"}
+        canonical = self.engine.execute(request("save-swap", "draft.create", {"draft": draft}))["result"]["evaluation"]["canonical"]
+        self.assertEqual((canonical["defenses"]["fortitude"], canonical["defenses"]["will"]), (3, 5))
+
+        half = boundary_draft(0.5, "spellcaster")
+        half["selections"]["skills"] = {"master": ["stealth", "survival"], "good": ["climb"]}
+        canonical = self.engine.execute(request("other-calculations-half", "draft.create", {"draft": half}))["result"]["evaluation"]["canonical"]
+        self.assertEqual(canonical["hitDice"], 1)
+        self.assertEqual(canonical["concentration"], 9.5)
+        self.assertEqual(canonical["skills"]["perception"], 5)
+        self.assertEqual(canonical["skills"]["stealth"], 8)
+
     def test_damage_table_lower_and_upper_boundaries_use_source_literals(self):
         expected = {
             0.5: {
                 "profile": "weapon.high",
                 "array": "expert",
                 "expressions": {
-                    "d4": "1d4+2", "d6": "1d6+1", "d8": "1d8+0", "d10": "1d10",
-                    "d12": "1d12", "2d6": "2d6", "3d6": "3d6",
+                    "d4": "1d4+2", "d6": "1d6+1", "d8": "1d8+0", "d10": "1d10-1",
+                    "d12": "1d12-2", "2d6": "2d6-3", "3d6": "3d6-5",
                 },
             },
             27: {
@@ -987,6 +1260,94 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         fine["selections"]["sizeId"] = "graft.size.fine"
         canonical = self.engine.execute(request("size-fine-cap", "draft.create", {"draft": fine}))["result"]["evaluation"]["canonical"]
         self.assertEqual(canonical["defenses"]["touchAC"], canonical["defenses"]["ac"])
+
+    def test_every_catalogued_option_has_a_valid_public_interface_path(self):
+        options = self.engine.catalog.data["options"]
+        self.assertEqual(len(options), 162)
+        self.assertEqual(set(OPTION_PARAMETERS), {
+            option_id for option_id, option in options.items()
+            if any(not spec.get("optional") and not spec.get("internal") for spec in option.get("parameters", {}).values())
+        })
+        for option_id, option in options.items():
+            with self.subTest(option=option_id):
+                cr = 7 if option_id == "option.poison" else 21
+                array = "spellcaster" if option["category"] == "magic" else "expert" if option["category"] in {"social", "universal"} else "combatant"
+                if option_id == "option.spontaneous-casting":
+                    array = "spellcaster"
+                draft = boundary_draft(cr, array)
+                selected = [{"optionId": option_id, "parameters": copy.deepcopy(OPTION_PARAMETERS.get(option_id, {}))}]
+                if option_id == "option.snatch":
+                    selected.insert(0, {
+                        "optionId": "option.improved-combat-maneuver",
+                        "parameters": {"maneuver": "grapple", "attackType": "weapon"},
+                    })
+                if option_id == "option.corrupting-touch":
+                    draft["selections"]["subtypeGraftIds"] = ["graft.subtype.incorporeal"]
+                filler = {"optionId": "option.combat-casting", "parameters": {}} if array == "spellcaster" else {"optionId": "option.blind-fight", "parameters": {}}
+                selected.extend(copy.deepcopy(filler) for _ in range(len(draft["selections"]["options"]) - len(selected)))
+                draft["selections"]["options"] = selected
+                evaluation = self.engine.execute(request(f"all-option-{option_id}", "draft.create", {"draft": draft}))["result"]["evaluation"]
+                self.assertEqual(evaluation["status"], "valid", evaluation["issues"])
+                self.assertIn(option_id, {entry["optionId"] for entry in evaluation["canonical"]["options"]})
+                trace = next(entry for entry in evaluation["derivationTrace"] if entry["path"] == "/canonical/options")
+                self.assertTrue(trace["sourceRefs"])
+
+    def test_option_prerequisites_fail_without_the_required_selection(self):
+        cases = [
+            ("option.corrupting-touch", "combatant", "option.prerequisite-missing"),
+            ("option.spontaneous-casting", "combatant", "option.prerequisite-missing"),
+        ]
+        for option_id, array, code in cases:
+            with self.subTest(option=option_id):
+                draft = boundary_draft(21, array)
+                draft["selections"]["options"][0] = {
+                    "optionId": option_id,
+                    "parameters": copy.deepcopy(OPTION_PARAMETERS.get(option_id, {})),
+                }
+                evaluation = self.engine.execute(request(f"missing-prerequisite-{option_id}", "draft.create", {"draft": draft}))["result"]["evaluation"]
+                self.assertEqual(evaluation["status"], "invalid")
+                issue = next(issue for issue in evaluation["issues"] if issue["code"] == code)
+                self.assertTrue(issue["sourceRefs"])
+
+    def test_typed_option_scaling_thresholds_match_source_literals(self):
+        dr_values = {5: 5, 6: 10, 10: 10, 11: 10, 15: 10, 16: 20, 20: 20, 21: 30}
+        for cr, expected in dr_values.items():
+            with self.subTest(option="damage-reduction", cr=cr):
+                draft = boundary_draft(cr)
+                draft["selections"]["options"][0] = {
+                    "optionId": "option.damage-reduction", "parameters": {"bypass": ["magic"]},
+                }
+                canonical = self.engine.execute(request(f"dr-threshold-{cr}", "draft.create", {"draft": draft}))["result"]["evaluation"]["canonical"]
+                self.assertEqual(canonical["damageReduction"], [{"value": expected, "bypass": ["magic"]}])
+
+        for cr in (4, 5, 9, 10, 14, 15, 19, 20):
+            with self.subTest(option="immunity", cr=cr):
+                count = 1 + int(cr / 5)
+                draft = boundary_draft(cr)
+                draft["selections"]["options"][0] = {
+                    "optionId": "option.immunity",
+                    "parameters": {"immunities": [f"source-choice-{index}" for index in range(count)]},
+                }
+                evaluation = self.engine.execute(request(f"immunity-threshold-{cr}", "draft.create", {"draft": draft}))["result"]["evaluation"]
+                self.assertEqual(evaluation["status"], "valid", evaluation["issues"])
+                self.assertEqual(len(evaluation["canonical"]["immunities"]), count)
+
+        favored_targets = OPTION_PARAMETERS["option.favored-enemy"]["targets"]
+        for cr, count in ((3, 1), (4, 2), (8, 2), (9, 3), (13, 3), (14, 4), (18, 4), (19, 5)):
+            with self.subTest(option="favored-enemy", cr=cr):
+                draft = boundary_draft(cr)
+                draft["selections"]["options"][0] = {
+                    "optionId": "option.favored-enemy", "parameters": {"targets": favored_targets[:count]},
+                }
+                evaluation = self.engine.execute(request(f"favored-enemy-threshold-{cr}", "draft.create", {"draft": draft}))["result"]["evaluation"]
+                self.assertEqual(evaluation["status"], "valid", evaluation["issues"])
+
+        for cr, expected in ((10, 2), (11, 4)):
+            with self.subTest(option="spell-penetration", cr=cr):
+                draft = boundary_draft(cr, "spellcaster")
+                draft["selections"]["options"][0] = {"optionId": "option.spell-penetration", "parameters": {}}
+                canonical = self.engine.execute(request(f"spell-penetration-{cr}", "draft.create", {"draft": draft}))["result"]["evaluation"]["canonical"]
+                self.assertEqual(canonical["casterLevelCheckBonuses"], [{"value": expected, "against": "spell resistance"}])
 
     def test_direct_numeric_option_effects_share_the_catalog_effect_path(self):
         cases = {
@@ -1172,6 +1533,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             "arrayId": "array.expert",
             "skills": {"master": ["perception", "stealth", "survival"], "good": ["climb", "swim"]},
         })
+        assign_source_ability_modifiers(base, 3, "expert")
         universal = {"optionId": "option.secondary-magic", "parameters": {"spellListId": "spell-list.water"}}
         maneuver = {"optionId": "option.improved-combat-maneuver", "parameters": {"maneuver": "trip", "attackType": "bite"}}
         first_draft = copy.deepcopy(base)
@@ -1213,6 +1575,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             "spellListId": "spell-list.aberrant",
             "spells": [],
         })
+        assign_source_ability_modifiers(spellcaster, 9, "spellcaster")
         response = self.engine.execute(request("aberrant-list", "draft.create", {"draft": spellcaster}))
         self.assertTrue(response["ok"], response)
         evaluation = response["result"]["evaluation"]
@@ -1264,6 +1627,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
                     "spellListId": "spell-list.aberrant",
                     "spells": [],
                 })
+                assign_source_ability_modifiers(draft, cr, "spellcaster")
                 response = self.engine.execute(request(f"band-{cr}", "draft.create", {"draft": draft}))
                 self.assertTrue(response["ok"], response)
                 spells = response["result"]["evaluation"]["canonical"]["spells"]
@@ -1284,6 +1648,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
                     "spellListBenefitChoices": {"energyType": "cold"},
                     "spells": [],
                 })
+                assign_source_ability_modifiers(draft, cr, "spellcaster")
                 response = self.engine.execute(request(f"abjuration-{cr}", "draft.create", {"draft": draft}))
                 self.assertTrue(response["ok"], response)
                 canonical = response["result"]["evaluation"]["canonical"]
