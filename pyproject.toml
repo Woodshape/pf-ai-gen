@@ -11,3 +11,6 @@ dependencies = []
 
 [tool.setuptools.packages.find]
 include = ["monster_builder*"]
+
+[tool.setuptools.package-data]
+monster_builder = ["web/dist/*.html", "web/dist/assets/*"]

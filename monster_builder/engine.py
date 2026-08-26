@@ -40,6 +40,7 @@ class Engine:
         "damageExpression", "averageDamage", "attackBonus", "initiative", "hitDice",
         "concentration", "evaluation", "defenses",
     }
+    _CONCEPT_FIELDS = {"name", "targetCR", "role", "creatureType", "description"}
     _ABILITY_NAMES = {"strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"}
     _ATTACK_PROFILES = {"weapon.high", "weapon.low", "natural.two", "natural.three"}
     _DAMAGE_DICE = {"d4", "d6", "d8", "d10", "d12", "2d6", "2d8", "3d6"}
@@ -539,21 +540,29 @@ class Engine:
         path = f"/payload/changes/{index}"
         if not isinstance(change, dict):
             raise BoundaryError("change.invalid", "change must be an object", path)
-        if change.get("type") not in {"set-selection", "set_selection", "unset-selection", "unset_selection"}:
-            raise BoundaryError("change.type-invalid", "only typed selection changes are supported", f"{path}/type")
+        change_type = change.get("type")
+        if change_type not in {
+            "set-selection", "set_selection", "unset-selection", "unset_selection",
+            "set-concept", "set_concept", "unset-concept", "unset_concept",
+        }:
+            raise BoundaryError("change.type-invalid", "only typed selection or concept changes are supported", f"{path}/type")
         field = change.get("field", change.get("key"))
-        if isinstance(field, str) and field.startswith("selections."):
-            field = field[len("selections."):]
-        if isinstance(field, str) and field.startswith("selection."):
-            field = field[len("selection."):]
-        if field not in self._SELECTION_FIELDS:
-            raise BoundaryError("change.field-invalid", "field is not a supported draft selection", f"{path}/field")
-        if change["type"] in {"set-selection", "set_selection"}:
+        concept_change = change_type in {"set-concept", "set_concept", "unset-concept", "unset_concept"}
+        prefixes = ("concept.",) if concept_change else ("selections.", "selection.")
+        for prefix in prefixes:
+            if isinstance(field, str) and field.startswith(prefix):
+                field = field[len(prefix):]
+        allowed = self._CONCEPT_FIELDS if concept_change else self._SELECTION_FIELDS
+        if field not in allowed:
+            noun = "concept field" if concept_change else "draft selection"
+            raise BoundaryError("change.field-invalid", f"field is not a supported {noun}", f"{path}/field")
+        target = draft["concept"] if concept_change else draft["selections"]
+        if change_type in {"set-selection", "set_selection", "set-concept", "set_concept"}:
             if "value" not in change:
-                raise BoundaryError("change.value-required", "set-selection requires value", f"{path}/value")
-            draft["selections"][field] = copy.deepcopy(change["value"])
+                raise BoundaryError("change.value-required", "set change requires value", f"{path}/value")
+            target[field] = copy.deepcopy(change["value"])
         else:
-            draft["selections"].pop(field, None)
+            target.pop(field, None)
 
     def _new_draft(self, raw: Any) -> dict[str, Any]:
         if not isinstance(raw, dict):
@@ -623,6 +632,14 @@ class Engine:
         return draft
 
     def _validate_draft_input(self, draft: dict[str, Any], *, include_system: bool = False) -> None:
+        concept = draft.get("concept")
+        if not isinstance(concept, dict):
+            raise BoundaryError("draft.concept-invalid", "concept must be an object", "/concept")
+        for field in ("name", "role", "creatureType", "description"):
+            if field in concept and not isinstance(concept[field], str):
+                raise BoundaryError("draft.concept-invalid", f"{field} must be a string", f"/concept/{field}")
+        if "targetCR" in concept and (not isinstance(concept["targetCR"], (int, float)) or isinstance(concept["targetCR"], bool)):
+            raise BoundaryError("draft.concept-invalid", "targetCR must be numeric", "/concept/targetCR")
         selections = draft.get("selections")
         if not isinstance(selections, dict):
             raise BoundaryError("draft.selections-invalid", "selections must be an object", "/selections")
@@ -777,6 +794,17 @@ class Engine:
             if field not in selections or selections[field] is None:
                 issues.append(self._issue("draft.missing-selection", f"/selections/{field}", "required selection is missing", "source-rule", "error", default_source_ref))
         if issues:
+            selected_array = selections.get("arrayId")
+            selected_class = selections.get("classGraftId")
+            if selected_array and selected_class:
+                array_id, _ = self._resolve("array", selected_array, "/selections/arrayId")
+                _, class_graft = self._resolve("classGraft", selected_class, "/selections/classGraftId")
+                if array_id != class_graft["requiredArrayId"]:
+                    issues.append(self._issue(
+                        "class-graft.required-array", "/selections/arrayId",
+                        f"class graft requires {class_graft['requiredArrayId']}",
+                        "source-rule", "error", class_graft.get("sourceRef"),
+                    ))
             return self._evaluation("incomplete", issues)
 
         cr = selections["cr"]
@@ -1265,10 +1293,23 @@ class Engine:
             expected_master = template["skillBudgetOverride"]["master"]
             expected_good = template["skillBudgetOverride"]["good"]
         skill_budget_ref = class_graft.get("sourceRef") if class_graft else main.get("sourceRef")
+        automatic_skills = {
+            rank: [
+                self.catalog.data["skills"].get(grant["skillId"], {}).get("name", grant["skillId"].removeprefix("skill."))
+                for grant in skill_grants if grant["rank"] == rank
+            ]
+            for rank in ("master", "good")
+        }
         if len(master) != expected_master:
-            issues.append(self._issue("skills.master-budget", "/selections/skills/master", "master skill count does not match the active graft budget", "source-rule", "error", skill_budget_ref))
+            message = f"choose exactly {expected_master} {'master skill' if expected_master == 1 else 'master skills'}; received {len(master)}"
+            if automatic_skills["master"]:
+                message += f"; the active graft automatically grants {_human_join(automatic_skills['master'])} as master skills"
+            issues.append(self._issue("skills.master-budget", "/selections/skills/master", message, "source-rule", "error", skill_budget_ref))
         if len(good) != expected_good:
-            issues.append(self._issue("skills.good-budget", "/selections/skills/good", "good skill count does not match the active graft budget", "source-rule", "error", skill_budget_ref))
+            message = f"choose exactly {expected_good} {'good skill' if expected_good == 1 else 'good skills'}; received {len(good)}; Perception is automatic and does not consume a slot"
+            if automatic_skills["good"]:
+                message += f"; the active graft automatically grants {_human_join(automatic_skills['good'])} as good skills"
+            issues.append(self._issue("skills.good-budget", "/selections/skills/good", message, "source-rule", "error", skill_budget_ref))
         restrictions = size.get("restrictions", {})
         if restrictions.get("stealthMasterForbidden") and "stealth" in master:
             issues.append(self._issue("size.skill-forbidden", "/selections/skills/master", "Stealth cannot be a master skill at this size", "source-rule", "error", size.get("sourceRef")))
@@ -1972,6 +2013,10 @@ class Engine:
         if error.details is not None:
             value["details"] = error.details
         return {"ok": False, "requestId": request_id, "error": value}
+
+
+def _human_join(values: list[str]) -> str:
+    return values[0] if len(values) == 1 else f"{', '.join(values[:-1])} and {values[-1]}"
 
 
 def _signed(value: int | float) -> str:

@@ -464,6 +464,33 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         initiative_trace = next(entry for entry in evaluation["derivationTrace"] if entry["path"] == "/canonical/initiative")
         self.assertIn("Improved Initiative", {ref.get("entry") for ref in initiative_trace["sourceRefs"]})
 
+    def test_incomplete_draft_still_reports_a_class_required_array_mismatch(self):
+        response = self.engine.execute(request("partial-bad-druid-array", "draft.create", {"draft": {
+            "concept": {"name": "Gobak", "targetCR": 4, "role": "caster"},
+            "selections": {
+                "cr": 4,
+                "arrayId": "array.expert",
+                "creatureTypeGraftId": "graft.creature-type.humanoid",
+                "classGraftId": "graft.class.druid",
+            },
+        }}))
+        evaluation = response["result"]["evaluation"]
+        self.assertEqual(evaluation["status"], "incomplete")
+        self.assertIn("class-graft.required-array", {issue["code"] for issue in evaluation["issues"]})
+
+    def test_skill_budget_issues_explain_expected_selected_counts_and_automatic_grants(self):
+        draft = copy.deepcopy(GOBLIN_DRUID_DRAFT)
+        draft["selections"]["skills"] = {
+            "master": ["skill.knowledge-nature"],
+            "good": ["skill.perception", "skill.stealth", "skill.survival"],
+        }
+        evaluation = self.engine.execute(request("druid-skill-budget", "draft.create", {"draft": draft}))["result"]["evaluation"]
+        messages = {issue["code"]: issue["message"] for issue in evaluation["issues"]}
+        self.assertIn("choose exactly 0 master skills; received 1", messages["skills.master-budget"])
+        self.assertIn("automatically grants Knowledge-Nature and Survival as master skills", messages["skills.master-budget"])
+        self.assertIn("choose exactly 1 good skill; received 3", messages["skills.good-budget"])
+        self.assertIn("Perception is automatic and does not consume a slot", messages["skills.good-budget"])
+
     def test_class_graft_enforces_its_required_array(self):
         draft = copy.deepcopy(GOBLIN_DRUID_DRAFT)
         draft["selections"]["arrayId"] = "array.expert"
@@ -1456,6 +1483,22 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         stale = self.engine.execute(request("apply-stale", "draft.applyChanges", payload))
         self.assertFalse(stale["ok"])
         self.assertEqual(stale["error"]["code"], "draft.revision-conflict")
+
+    def test_apply_changes_can_edit_concept_through_the_shared_interface(self):
+        created = self.create_worg()
+        draft = created["result"]["draft"]
+        response = self.engine.execute(request("rename-worg", "draft.applyChanges", {
+            "draftId": draft["draftId"],
+            "baseRevision": draft["revision"],
+            "baseFingerprint": draft["fingerprint"],
+            "changes": [
+                {"changeId": "name", "type": "set-concept", "field": "name", "value": "Dire Worg"},
+                {"changeId": "cr", "type": "set-concept", "field": "targetCR", "value": 3},
+            ],
+        }))
+        self.assertTrue(response["ok"], response)
+        self.assertEqual(response["result"]["draft"]["concept"]["name"], "Dire Worg")
+        self.assertEqual(response["result"]["evaluation"]["issues"][0]["code"], "concept.target-cr-mismatch")
 
     def test_unknown_catalog_id_is_a_boundary_error(self):
         bad = copy.deepcopy(WORG_DRAFT)

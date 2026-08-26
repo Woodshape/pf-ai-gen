@@ -1,2 +1,4 @@
 __pycache__/
 *.py[cod]
+.monster-builder/
+node_modules/

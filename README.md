@@ -1,17 +1,30 @@
 # Pathfinder Simple Monster Builder
 
-The first local vertical slice is Python/stdlib and exposes one public seam:
-`monster_builder.Engine.execute(request) -> response`.
+The local Python application exposes one rules seam:
+`monster_builder.Engine.execute(request) -> response`, plus a Preact/TypeScript Guided-Rail UI that calls it directly.
 
 ## Run
 
 ```bash
 python3 -m unittest discover -s tests -v
+python3 -m monster_builder.web --workspace .monster-builder
 printf '%s\n' '{"protocolVersion":"1","requestId":"r1","operation":"draft.create","payload":{"draft":{}}}' | python3 -m monster_builder
 MONSTER_BUILDER_WORKSPACE=.monster-builder python3 -m monster_builder
 ```
 
-JSONL is only CLI framing; the operation contract is the same in-process.
+Open `http://127.0.0.1:8000/` for the browser workspace. It keeps Before You Begin and Steps 1–9 visible, applies revision-guarded edits, shows live engine findings/provenance, finalizes valid Strict drafts, and downloads JSON, Markdown, or HTML exports. Use `--host` and `--port` to change the local bind address.
+
+The checked-in production assets run without Node. To change the frontend:
+
+```bash
+npm ci
+npm run typecheck
+npm run build
+```
+
+TypeScript source lives in `monster_builder/web/src`; the small shell is `monster_builder/web/index.html`, and Vite writes deployable assets to `monster_builder/web/dist`.
+
+JSONL is only CLI framing; the operation contract is the same in-process and over the local browser transport.
 Pass `workspace=...` to `Engine`, or set `MONSTER_BUILDER_WORKSPACE` for the
 CLI, to persist atomic JSON Draft snapshots. Persistent operations include
 history/restore, duplication, and archive/restore; at most 20 older revisions
@@ -39,5 +52,5 @@ The Witch graft is deliberately rejected
 because its source omits the rank of Knowledge (arcana); unsupported natural-attack
 dice remain explicit source gaps rather than guesses.
 
-Runtime is Python/stdlib only. Regenerating the checked-in catalog additionally
+Runtime is Python/stdlib plus the checked-in bundled browser assets. Frontend builds use Preact, TypeScript, and Vite. Regenerating the checked-in catalog additionally
 requires the `pdftotext` executable for source table coordinates.

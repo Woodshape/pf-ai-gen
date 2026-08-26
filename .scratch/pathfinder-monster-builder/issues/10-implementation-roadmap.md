@@ -49,7 +49,7 @@ Die Issues 01–09 beschreiben die fachlichen Verträge. Dieses Issue übersetzt
 - Das strukturierte Monster-Sheet erzeugen und daraus JSON, Markdown, HTML/Print deterministisch projizieren.
 - Den Audit-Abschnitt für Concept, AI und Steps 1–9 aus Issue 06 mitschreiben.
 
-### 6. Guided-Rail-UI
+### 6. Guided-Rail-UI — umgesetzt
 
 - Einen lokalen Browser-Workspace mit sichtbaren Steps 1–9, editierbaren vorherigen Entscheidungen und Live-Validierung bauen.
 - Draft, Evaluation, Fehlercodes und Provenienz anzeigen; die UI darf keine Regelwerte selbst berechnen.
@@ -62,7 +62,7 @@ Die Issues 01–09 beschreiben die fachlichen Verträge. Dieses Issue übersetzt
 
 ## Konkreter nächster Schritt
 
-Die Guided-Rail-UI aus Issue 04 auf die gemeinsame `execute`-Schnittstelle setzen: sichtbare Steps 1–9, editierbare frühere Entscheidungen, Live-Evaluation, Finalisierung und Exporte. Komplexe Encounter-Aktionen bleiben explizite Source-Rule-Fähigkeiten.
+Den optionalen Pi-SDK-Adapter aus Issue 07 mit immutable Proposal-Persistenz und expliziter, erneut durch die Engine validierter Annahme anschließen. Komplexe Encounter-Aktionen bleiben explizite Source-Rule-Fähigkeiten.
 
 ## Umsetzungsstand
 
@@ -72,13 +72,13 @@ Der erste vertikale Slice ist begonnen und lokal ausführbar:
 
 - `catalog/catalog.json` und `catalog/catalog.schema.json` enthalten die CR-Arrays, Damage-/Natural-Attack-Tabellen, Type-/Size-Grafts, die Worg-/Griffon-/Medusa-Optionspfade, alle 60 strukturierten Step-6-Listen sowie 39 APG/UM/UC- und fünf ACG-Spell-Metadaten. Nicht-Core-Spells und Core-Metamagie sind lokal mit Hash und offizieller Quellen-URL verankert. Die Katalogversion ist ein inhaltsbasierter Fingerprint; es gibt noch keine Kompatibilitätsschicht für alte Entwicklungskataloge.
 - `monster_builder.Engine.execute` unterstützt `draft.create`, `draft.get`, `draft.applyChanges` und `draft.evaluate` mit Revision/Fingerprint-Guard, Idempotency-Key, Boundary-/Domain-Fehlertrennung und stabilem Trace. Class-Grafts erzwingen Required Arrays, unterdrücken Type-Statistikänderungen, wenden nur den höchsten CR-Eintrag an und unterstützen Slots, Replacements, Save-Choices und As-if-CR-Spellcasting. Subtype-Grants sind zusätzlich; Template-Grants verbrauchen normale Slots und prüfen Voraussetzungen.
-- Worg, Griffon, Medusa, Goblin Druid, Fighter, Sorcerer, Clockwork, Skeleton, Lycanthrope, Metadaten-/Metamagie, das CR-9-Aberrant-Beispiel, Draft-/FinishedMonster-Persistenz und Exporte sind in 95 öffentlichen bzw. offline ausführbaren Tests abgesichert. Die Matrix deckt alle 93 Step-1-Zeilen, jedes Attack-Profil, alle 231 Zellen von Table 5-9, alle 162 Options auf einem gültigen Pfad, harte Prärequisiten, typisierte Skalierungsgrenzen, alle Size-Grenzen und beide Seiten aller Spell-Bänder ab; JSONL läuft über `python -m monster_builder`.
+- Worg, Griffon, Medusa, Goblin Druid, Fighter, Sorcerer, Clockwork, Skeleton, Lycanthrope, Metadaten-/Metamagie, das CR-9-Aberrant-Beispiel, Draft-/FinishedMonster-Persistenz, Exporte und Browser-Transport sind in 102 öffentlichen bzw. offline ausführbaren Tests abgesichert. Die Matrix deckt alle 93 Step-1-Zeilen, jedes Attack-Profil, alle 231 Zellen von Table 5-9, alle 162 Options auf einem gültigen Pfad, harte Prärequisiten, typisierte Skalierungsgrenzen, alle Size-Grenzen und beide Seiten aller Spell-Bänder ab; JSONL läuft über `python -m monster_builder`.
 - Step-6-Listen werden nach CR-Band in Primary/Secondary und `1/day`/`3/day`/`at will` aufgelöst. Alle 51 numerischen bzw. auswahlabhängigen List-Benefits besitzen typisierte Katalogeffekte; direkt bestimmbare Feldänderungen werden angewandt, kontextabhängige Modifikatoren bleiben explizit. Fehlende dynamische Choices halten den Draft sichtbar `incomplete`.
 - Fixed-1- und nicht von Table 5-9 abgedeckte kleine Natural-Damage-Dice werden als explizite `catalog-data`-Source-Gaps gemeldet, nicht geraten.
 - `README.md` und `pyproject.toml` dokumentieren den dependency-freien lokalen Start; nur die Katalog-Regeneration benötigt zusätzlich `pdftotext`.
 
-Draft- und FinishedMonster-Persistenz sind mit konfigurierbarem JSON-Workspace, atomaren Writes, Lifecycle, Duplizieren und immutable Snapshots umgesetzt. Gültige Strict-Drafts können finalisiert und aus derselben strukturierten Quelle als JSON, Markdown und standalone HTML/Print mit Sheet-/Audit-Profil exportiert werden. Noch nicht umgesetzt sind Proposal-Persistenz, UI und KI. Komplexe Encounter-Aktionen bleiben bewusst als Source-Regeln im kanonischen Ergebnis, solange sie keine deterministische Monster-Sheet-Statistik verändern.
+Draft- und FinishedMonster-Persistenz sind mit konfigurierbarem JSON-Workspace, atomaren Writes, Lifecycle, Duplizieren und immutable Snapshots umgesetzt. Gültige Strict-Drafts können finalisiert und aus derselben strukturierten Quelle als JSON, Markdown und standalone HTML/Print mit Sheet-/Audit-Profil exportiert werden. Die Preact/TypeScript-Guided-Rail-UI läuft über den stdlib-Transport mit `python3 -m monster_builder.web --workspace .monster-builder`; sie zeigt Before You Begin und Steps 1–9, lässt frühere Entscheidungen über revisionierte Changes bearbeiten und bietet Live-Validation, Provenienz, Finalisierung und Downloads über `execute`. Vite erzeugt eingecheckte Offline-Runtime-Assets. Noch nicht umgesetzt sind Proposal-Persistenz und KI. Komplexe Encounter-Aktionen bleiben bewusst als Source-Regeln im kanonischen Ergebnis, solange sie keine deterministische Monster-Sheet-Statistik verändern.
 
 ## Fertig-Kriterium für diesen Plan
 
-Der MVP ist lieferbar, wenn ein lokaler Nutzer einen Strict-Draft vollständig durch Steps 1–9 führen, deterministisch evaluieren, als immutable Monster finalisieren und exportieren kann; KI bleibt bis dahin optional.
+Der MVP ist lieferbar, wenn ein lokaler Nutzer einen Strict-Draft vollständig durch Steps 1–9 führen, deterministisch evaluieren, als immutable Monster finalisieren und exportieren kann; KI bleibt bis dahin optional. Dieses MVP-Kriterium ist mit der Guided-Rail-UI erreicht; der optionale Pi-Adapter bleibt der nächste Ausbau.
