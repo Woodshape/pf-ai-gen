@@ -20,6 +20,55 @@ class CatalogTests(unittest.TestCase):
             start, end = source_ref["txtLines"]
             self.assertIn(text, "\n".join(lines[start - 1:end]))
 
+    def test_all_subtype_and_template_grafts_are_catalogued(self):
+        grafts = Catalog.load().data["grafts"]
+        self.assertEqual(len(grafts["classGrafts"]), 19)
+        self.assertEqual(len(grafts["subtypes"]), 41)
+        self.assertEqual(len(grafts["templates"]), 10)
+        self.assertIn("graft.subtype.clockwork", grafts["subtypes"])
+        self.assertIn("graft.template.zombie", grafts["templates"])
+        self.assertEqual(grafts["subtypes"]["graft.subtype.human"]["optionSlots"], [{"category": "combat/social", "count": 1}])
+        self.assertEqual(grafts["subtypes"]["graft.subtype.dwarf"]["conditionalSaveBonuses"][0]["bonus"], 2)
+        self.assertEqual(grafts["classGrafts"]["graft.class.alchemist"]["requiredSpellListId"], "spell-list.alchemy")
+        self.assertEqual(grafts["classGrafts"]["graft.class.monk"]["unarmedDamage"], "1d6")
+        self.assertEqual(grafts["templates"]["graft.template.half-celestial"]["conditionalSaveBonuses"], [{"bonus": 4, "against": ["poison"]}])
+        paladin_smite = next(grant for grant in grafts["classGrafts"]["graft.class.paladin"]["optionGrants"] if grant["optionId"] == "option.smite")
+        self.assertEqual(paladin_smite["parameters"], {"alignment": "evil"})
+        monk_cr3 = next(entry for entry in grafts["classGrafts"]["graft.class.monk"]["crEntries"] if entry["minCR"] == 3)
+        self.assertEqual(next(grant for grant in monk_cr3["optionGrants"] if grant["optionId"] == "option.bypass-dr")["parameters"], {"bypass": ["magic"]})
+        vampire_at_will = next(grant for grant in grafts["templates"]["graft.template.vampire"]["optionGrants"] if grant["optionId"] == "option.at-will-magic")
+        self.assertEqual(vampire_at_will["parameters"], {"spellId": "spell.core.dominate-person", "maxSpellLevel": 5})
+        druid_cr5 = next(entry for entry in grafts["classGrafts"]["graft.class.druid"]["crEntries"] if entry["minCR"] == 5)
+        self.assertEqual(next(grant for grant in druid_cr5["optionGrants"] if grant["optionId"] == "option.change-shape")["parameters"]["forms"], ["Tiny animal", "Small animal", "Medium animal", "Large animal", "Small elemental"])
+        psychopomp_dr = next(grant for grant in grafts["subtypes"]["graft.subtype.psychopomp"]["optionGrants"] if grant["optionId"] == "option.damage-reduction")
+        self.assertEqual((psychopomp_dr["value"], psychopomp_dr["parameters"]), (5, {"bypass": ["adamantine"]}))
+        graveknight = grafts["templates"]["graft.template.graveknight"]
+        graveknight_immunity = next(grant for grant in graveknight["optionGrants"] if grant["optionId"] == "option.immunity")
+        self.assertEqual(graveknight_immunity["parameters"], {"immunities": ["cold", "electricity"]})
+        for template_id in ("graft.template.half-celestial", "graft.template.half-fiend"):
+            reduction = next(grant for grant in grafts["templates"][template_id]["optionGrants"] if grant["optionId"] == "option.damage-reduction")
+            self.assertEqual((reduction["value"], reduction["parameters"], reduction["valueByCR"]), (5, {"bypass": ["magic"]}, [{"minCR": 12, "value": 10}]))
+        for subtype, bypass in (("asura", "good"), ("inevitable", "chaotic")):
+            regeneration = next(grant for grant in grafts["subtypes"][f"graft.subtype.{subtype}"]["optionGrants"] if grant["optionId"] == "option.regeneration")
+            self.assertEqual(regeneration["parameters"], {"bypass": [bypass]})
+        sense_subtypes = {
+            "devil", "div", "dwarf", "earth", "elf", "giant", "gnome", "half-elf",
+            "half-orc", "inevitable", "nightshade", "orc", "protean", "psychopomp",
+        }
+        self.assertTrue(all(grafts["subtypes"][f"graft.subtype.{name}"].get("senses") for name in sense_subtypes))
+        self.assertTrue(all(graft.get("ruleText") for group in ("subtypes", "templates") for graft in grafts[group].values()))
+
+    def test_all_step7_table_options_are_catalogued(self):
+        options = Catalog.load().data["options"]
+        self.assertGreaterEqual(len(options), 162)
+        self.assertTrue({
+            "option.ability-damage", "option.challenge", "option.breath-weapon",
+            "option.accuracy", "option.damage-reduction", "option.magic-attack",
+            "option.combat-casting", "option.inspire-courage", "option.alertness",
+            "option.save-boost", "option.secondary-magic", "option.summon-allies",
+        } <= set(options))
+        self.assertTrue(all(option.get("ruleText") for option in options.values()))
+
     def test_versioned_catalog_has_source_backed_spell_inventory(self):
         catalog = Catalog.load()
         spells = catalog.data["spells"].values()

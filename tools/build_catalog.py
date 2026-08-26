@@ -771,66 +771,227 @@ for key, (traits, adjustments, elective) in type_specs.items():
         "sourceRef": unchained_ref("Step 2: Creature Type Graft", type_lines[key], 204, entry=key.title()),
     }
 
-# First source-complete vertical grafts: the roadmap's Goblin Druid fixture,
-# plus a template that proves type/subtype prerequisites and budget semantics.
-class_grafts = {
-    "graft.class.druid": {
-        "id": "graft.class.druid",
-        "name": "Druid",
-        "requiredArrayId": "array.spellcaster",
-        "spellcastingClassId": "druid",
-        "statisticAdjustments": {"fortitude": 2},
-        "skillGrants": [
-            {"skillId": "skill.knowledge-nature", "rank": "master", "additional": False},
-            {"skillId": "skill.survival", "rank": "master", "additional": False},
-        ],
-        "optionGrants": [
-            {"optionId": "option.spontaneous-casting", "parameters": {"spellType": "summon-natures-ally"}},
-        ],
-        "optionSlots": [{"category": "any", "count": 1}],
-        "crEntries": [
-            {
-                "minCR": 1,
-                "optionGrants": [
-                    {"optionId": "option.terrain-stride", "parameters": {"terrain": "undergrowth"}},
-                ],
-                "sourceRef": unchained_ref("Step 2: Class Graft", 1201, 208, entry="Druid CR 1"),
-            },
-            {
-                "minCR": 3,
-                "optionGrants": [
-                    {"optionId": "option.change-shape", "parameters": {"forms": ["Small animal", "Medium animal"]}},
-                    {"optionId": "option.terrain-stride", "parameters": {"terrain": "undergrowth"}},
-                ],
-                "sourceRef": unchained_ref("Step 2: Class Graft", 1202, 208, end_line=1203, entry="Druid CR 3"),
-            },
-        ],
-        "maxImplementedCR": 4,
-        "sourceRef": unchained_ref("Step 2: Class Graft", 1184, 208, end_line=1203, entry="Druid"),
-    },
+class_names = [
+    "Alchemist", "Barbarian", "Bard", "Cavalier", "Cleric", "Druid", "Fighter",
+    "Gunslinger", "Inquisitor", "Magus", "Monk", "Oracle", "Paladin", "Ranger",
+    "Rogue", "Sorcerer", "Summoner", "Witch", "Wizard",
+]
+class_starts = {name: unchained_lines.index(name, 975, 1750) + 1 for name in class_names}
+class_ordered_starts = sorted(class_starts.values())
+class_page_starts = [(975, 206), (1051, 207), (1155, 208), (1258, 209), (1363, 210), (1437, 211), (1542, 212), (1646, 213)]
+class_page = lambda line: max(page for page_start, page in class_page_starts if line >= page_start)
+class_grafts = {}
+for name in class_names:
+    start = class_starts[name]
+    end = next((line - 1 for line in class_ordered_starts if line > start), 1750)
+    lines = unchained_lines[start - 1:end]
+    text = " ".join(line.strip("\f") for line in lines if line.strip("\f") and not line.strip().isdigit() and line.strip() not in {"Monsters", "Monsters 5"})
+    required = re.search(r"Required Array: (Combatant|Expert|Spellcaster)", text)
+    printed = class_page(start)
+    graft_id = f"graft.class.{slug(name)}"
+    graft = {
+        "id": graft_id, "name": name, "requiredArrayId": f"array.{required.group(1).lower()}",
+        "ruleText": text, "statisticAdjustments": {}, "skillGrants": [],
+        "optionGrants": [], "optionSlots": [], "crEntries": [],
+        "sourceRef": unchained_ref("Step 2: Class Graft", start, printed, end_line=end, entry=name),
+    }
+    statistics_start = next((index for index, line in enumerate(lines) if line.startswith("Statistic Adjustments:")), None)
+    if statistics_start is not None:
+        paragraph = []
+        for line in lines[statistics_start:]:
+            if paragraph and (line.startswith("CR ") or line.startswith("Suggested ")):
+                break
+            paragraph.append(line.strip("\f"))
+        graft["optionRuleText"] = " ".join(paragraph)
+    sidebar_headings = {"Domain Options", "Mystery Options", "Bloodline Options", "Arcane School Options", "Animal Companions and Mounts", "Advanced Class Guide Classes"}
+    for index, line in enumerate(lines):
+        match = re.match(r"^CR (\d+):", line)
+        if not match:
+            continue
+        paragraph = [line]
+        for following in lines[index + 1:]:
+            if re.match(r"^CR \d+:", following) or following.startswith("Suggested ") or following in sidebar_headings:
+                break
+            paragraph.append(following.strip("\f"))
+        line_number = start + index
+        graft["crEntries"].append({
+            "minCR": int(match.group(1)), "ruleText": " ".join(paragraph),
+            "optionGrants": [], "optionSlots": [],
+            "sourceRef": unchained_ref("Step 2: Class Graft", line_number, class_page(line_number), end_line=line_number + len(paragraph) - 1, entry=f"{name} CR {match.group(1)}"),
+        })
+    class_grafts[graft_id] = graft
+
+class_adjustments = {
+    "alchemist": {"saveSourceArrayId": "array.combatant"},
+    "barbarian": {"fortitude": 2, "speed": 10},
+    "bard": {"reflex": 2}, "cavalier": {"fortitude": 1, "reflex": 1},
+    "cleric": {"fortitude": 2}, "druid": {"fortitude": 2},
+    "fighter": {"fortitude": 1, "reflex": 1}, "gunslinger": {"fortitude": 1, "reflex": 1},
+    "inquisitor": {"fortitude": 1, "reflex": 1, "will": 2}, "magus": {"fortitude": 2},
+    "monk": {"fortitude": 1, "reflex": 1, "will": 2}, "oracle": {"reflex": 1, "will": 1},
+    "paladin": {"fortitude": 2, "will": 3}, "ranger": {"fortitude": 1, "reflex": 1},
+    "rogue": {"reflex": 3}, "summoner": {"fortitude": 1, "reflex": 1},
+    "witch": {"fortitude": 1, "reflex": 1},
 }
-subtypes = {
-    "graft.subtype.goblinoid": {
-        "id": "graft.subtype.goblinoid", "name": "Goblinoid",
-        "skillGrants": [{"skillId": "skill.stealth", "rank": "good", "additional": True}],
-        "optionGrants": [],
-        "sourceRef": unchained_ref("Step 3: Subtype Graft", 1846, 215, entry="Goblinoid"),
-    },
-    "graft.subtype.shapechanger": {
-        "id": "graft.subtype.shapechanger", "name": "Shapechanger", "skillGrants": [],
-        "optionGrants": [{"optionId": "option.change-shape", "parameters": {}}],
-        "sourceRef": unchained_ref("Step 3: Subtype Graft", 1887, 215, entry="Shapechanger"),
-    },
+class_skills = {
+    "alchemist": [("craft-alchemy", "master", False)], "barbarian": [("intimidate", "master", False)],
+    "bard": [("perform", "master", False)], "cavalier": [("ride", "master", False)],
+    "cleric": [("knowledge-religion", "master", False)],
+    "druid": [("knowledge-nature", "master", False), ("survival", "master", False)],
+    "inquisitor": [("intimidate", "master", False), ("sense-motive", "master", False)],
+    "monk": [("acrobatics", "master", False)],
+    "ranger": [("perception", "master", False)],
+    "rogue": [("perception", "master", False), ("stealth", "master", False)],
+    "sorcerer": [("knowledge-arcana", "master", False)],
+    "summoner": [("knowledge-planes", "master", False)],
+    "wizard": [("knowledge-arcana", "master", False)],
 }
-templates = {
-    "graft.template.lycanthrope": {
-        "id": "graft.template.lycanthrope", "name": "Lycanthrope", "minCR": 1,
-        "requiredCreatureTypeId": "graft.creature-type.humanoid",
-        "requiredSubtypeId": "graft.subtype.shapechanger",
-        "optionGrants": [{"optionId": "option.curse-of-lycanthropy", "parameters": {}}],
-        "sourceRef": unchained_ref("Step 4: Template Graft", 2048, 217, end_line=2054, entry="Lycanthrope"),
-    },
+for key, values in class_adjustments.items():
+    graft = class_grafts[f"graft.class.{key}"]
+    graft["speedAdjustment"] = values.get("speed", 0)
+    if "saveSourceArrayId" in values:
+        graft["saveSourceArrayId"] = values["saveSourceArrayId"]
+    graft["statisticAdjustments"].update({field: value for field, value in values.items() if field not in {"saveSourceArrayId", "speed"}})
+for key, grants in class_skills.items():
+    class_grafts[f"graft.class.{key}"]["skillGrants"] = [
+        {"skillId": f"skill.{skill}", "rank": rank, "additional": additional}
+        for skill, rank, additional in grants
+    ]
+for key in ("sorcerer", "wizard"):
+    class_grafts[f"graft.class.{key}"]["saveChoiceBonus"] = {"choices": ["fortitude", "reflex"], "value": 1}
+class_grafts["graft.class.witch"]["unresolvedRules"] = ["Knowledge (arcana) skill rank is omitted by the source"]
+oracle = class_grafts["graft.class.oracle"]
+oracle["choiceSpec"] = {"name": "curse", "values": ["clouded-vision", "deaf", "haunted", "lame", "tongues", "wasting"]}
+oracle["abilityChoiceSpecs"] = [{"name": "mystery", "values": ["battle", "bones", "flame", "heavens", "life", "lore", "nature", "stone", "waves", "wind"]}]
+oracle["choiceEffects"] = {
+    "clouded-vision": {"senses": [{"minCR": 0, "value": "darkvision 30 ft."}, {"minCR": 4, "replace": "darkvision 30 ft.", "value": "darkvision 60 ft."}, {"minCR": 9, "value": "blindsense 30 ft."}, {"minCR": 14, "value": "blindsight 15 ft."}], "limitations": ["cannot see beyond darkvision range"]},
+    "deaf": {"conditions": ["permanently deafened"], "traits": ["ignores verbal spell components"], "senses": [{"minCR": 9, "value": "scent"}, {"minCR": 14, "value": "tremorsense 30 ft."}], "conditionalMasterSkills": [{"minCR": 4, "skillId": "skill.perception", "condition": "checks that do not rely on hearing"}]},
+    "haunted": {"traits": ["stored items require a standard action to retrieve; dropped items land 10 feet away in a random direction"], "atWillSpellIds": ["spell.core.mage-hand", "spell.core.ghost-sound"]},
+    "lame": {"speedAdjustment": -10, "immunities": [{"minCR": 4, "value": "fatigued"}, {"minCR": 14, "value": "exhausted"}]},
+    "tongues": {"languageValues": ["abyssal", "aklo", "aquan", "auran", "celestial", "ignan", "infernal", "terran"], "traits": ["in combat can speak and understand only the selected curse languages"], "stages": [{"minCR": 9, "value": "understands any spoken language"}, {"minCR": 14, "value": "can speak any language outside combat"}]},
+    "wasting": {"abilityModifierAdjustments": {"charisma": -4}, "immunities": [{"minCR": 4, "value": "sickened"}, {"minCR": 9, "value": "disease"}, {"minCR": 14, "value": "nauseated"}]},
 }
+class_grafts["graft.class.cleric"]["optionChoiceSpecs"] = [{
+    "name": "spontaneousCasting", "optionId": "option.spontaneous-casting",
+    "parameter": "spellType", "values": ["cure", "inflict"],
+}]
+
+for key in ("bard", "cleric", "druid", "inquisitor", "magus", "sorcerer", "summoner", "witch", "wizard"):
+    class_grafts[f"graft.class.{key}"]["spellcastingClassId"] = key
+alchemist = class_grafts["graft.class.alchemist"]
+alchemist["spellcastingClassId"] = "alchemist"
+alchemist["requiredSpellListId"] = "spell-list.alchemy"
+alchemist["spellcastingMode"] = "supernatural-extracts"
+class_grafts["graft.class.summoner"]["companionSpec"] = {
+    "choiceName": "eidolonName", "arrayId": "array.combatant",
+    "creatureTypeGraftId": "graft.creature-type.outsider", "crAdjustment": 0,
+    "combinedCRAdjustment": 2, "awardsIndependentXP": True,
+}
+monk = class_grafts["graft.class.monk"]
+monk["unarmedDamage"] = "1d6"
+for entry in monk["crEntries"]:
+    match = re.search(r"unarmed damage (\d+d\d+)", entry["ruleText"], re.IGNORECASE)
+    if match:
+        entry["unarmedDamage"] = match.group(1).lower()
+def graft_records(names, section, prefix, first_line, last_line, printed_page):
+    starts = {}
+    for name in names:
+        starts[name] = next(
+            line_number for line_number, line in enumerate(unchained_lines, 1)
+            if first_line <= line_number <= last_line
+            and (line.lower().startswith(name.lower() + ":") or line.lower().startswith(name.lower() + " ("))
+        )
+    ordered = sorted(starts.values())
+    records = {}
+    for name, start in starts.items():
+        end = next((line - 1 for line in ordered if line > start), last_line)
+        text = " ".join(
+            line.strip("\f") for line in unchained_lines[start - 1:end]
+            if line.strip("\f") and line.strip() not in {"Monsters", "Monsters 5"}
+            and not line.strip().isdigit()
+        )
+        graft_id = f"graft.{prefix}.{slug(name)}"
+        records[graft_id] = {
+            "id": graft_id, "name": name, "ruleText": text,
+            "skillGrants": [], "optionGrants": [],
+            "sourceRef": unchained_ref(section, start, printed_page(start), end_line=end, entry=name),
+        }
+    return records
+
+
+subtype_names = [
+    "Aeon", "Agathion", "Air", "Angel", "Aquatic", "Archon", "Asura", "Azata",
+    "Clockwork", "Cold", "Daemon", "Demodand", "Demon", "Devil", "Div", "Dwarf",
+    "Earth", "Elemental", "Elf", "Fire", "Giant", "Gnome", "Goblinoid", "Half-Elf",
+    "Half-Orc", "Halfling", "Human", "Incorporeal", "Inevitable", "Kami", "Leshy",
+    "Nightshade", "Oni", "Orc", "Protean", "Psychopomp", "Qlippoth", "Rakshasa",
+    "Shapechanger", "Swarm", "Water",
+]
+subtypes = graft_records(
+    subtype_names, "Step 3: Subtype Graft", "subtype", 1751, 1938,
+    lambda line: 214 if line < 1817 else 215,
+)
+subtype_overrides = {
+    "aeon": {"scaledStatisticAdjustments": {"ac": {"formula": "quarterCR"}}},
+    "agathion": {"conditionalSaveBonuses": [{"bonus": 4, "against": ["poison"]}]},
+    "air": {"movement": {"fly": 60}, "movementManeuverability": {"fly": "perfect"}, "skillGrants": [{"skillId": "skill.fly", "rank": "master", "additional": True}]},
+    "angel": {"conditionalSaveBonuses": [{"bonus": 4, "against": ["poison"]}]},
+    "aquatic": {"movement": {"swim": 30}, "skillGrants": [{"skillId": "skill.swim", "rank": "master", "additional": True}]},
+    "archon": {"conditionalSaveBonuses": [{"bonus": 4, "against": ["poison"]}]},
+    "asura": {"conditionalSaveBonuses": [{"bonus": 2, "against": ["enchantment spells"]}], "skillGrants": [{"skillId": f"skill.{skill}", "rank": "master", "additional": True} for skill in ("escape-artist", "perception")]},
+    "clockwork": {"statisticAdjustments": {"ac": 2, "touchAC": 2, "reflex": 2}, "vulnerabilities": ["electricity"]},
+    "cold": {"vulnerabilities": ["fire"]},
+    "dwarf": {
+        "senses": ["darkvision 60 ft."],
+        "conditionalSaveBonuses": [{"bonus": 2, "against": ["poison", "spells", "spell-like abilities"]}],
+    },
+    "devil": {"senses": ["see in darkness"]},
+    "div": {"senses": ["see in darkness"]},
+    "earth": {"movement": {"burrow": 20}, "senses": ["tremorsense (range varies)"]},
+    "elf": {"senses": ["low-light vision"], "skillChoiceGrant": {"name": "masterSkill", "rank": "master", "skillIds": ["skill.perception", "skill.spellcraft"]}},
+    "fire": {"vulnerabilities": ["cold"]},
+    "giant": {"senses": ["low-light vision"], "skillGrants": [{"skillId": "skill.intimidate", "rank": "good", "additional": True}]},
+    "gnome": {"requiredSizeId": "graft.size.small", "senses": ["low-light vision"], "spellChoiceGrant": {"name": "spellId", "spellListId": "spell-list.illusion", "role": "primary", "frequency": "1/day"}},
+    "goblinoid": {"skillGrants": [{"skillId": "skill.stealth", "rank": "good", "additional": True}]},
+    "half-elf": {"senses": ["low-light vision"], "skillSlots": [{"rank": "master", "count": 1}]},
+    "half-orc": {"senses": ["darkvision 60 ft."], "skillGrants": [{"skillId": "skill.intimidate", "rank": "good", "additional": True}]},
+    "halfling": {"requiredSizeId": "graft.size.small", "conditionalSaveBonuses": [{"bonus": 2, "against": ["fear"]}]},
+    "human": {"optionSlots": [{"category": "combat/social", "count": 1}]},
+    "incorporeal": {"touchACEqualsAC": True},
+    "inevitable": {"senses": ["low-light vision"]},
+    "nightshade": {"senses": ["darksense", "low-light vision"], "traits": ["light aversion"]},
+    "orc": {"senses": ["darkvision 60 ft."], "traits": ["light sensitivity"]},
+    "protean": {"senses": ["blindsense (range varies)"]},
+    "psychopomp": {"senses": ["spiritsense"]},
+    "swarm": {"damageRules": ["takes 50% additional damage from area effects", "Tiny swarms take half damage from slashing and piercing weapons", "Fine or Diminutive swarms are immune to weapon damage"]},
+    "water": {"movement": {"swim": 30}, "skillGrants": [{"skillId": "skill.swim", "rank": "master", "additional": True}]},
+}
+for key, values in subtype_overrides.items():
+    subtypes[f"graft.subtype.{key}"].update(values)
+
+
+template_names = [
+    "Ghost", "Graveknight", "Half-Celestial", "Half-Dragon", "Half-Fiend",
+    "Lich", "Lycanthrope", "Skeleton", "Vampire", "Zombie",
+]
+templates = graft_records(
+    template_names, "Step 4: Template Graft", "template", 1939, 2090,
+    lambda line: 216 if line < 2040 else 217,
+)
+template_overrides = {
+    "ghost": {"minCR": 2, "requiredCreatureTypeId": "graft.creature-type.undead", "requiredSubtypeId": "graft.subtype.incorporeal", "movement": {"fly": 30}, "movementManeuverability": {"fly": "perfect"}, "abilityModifierOverrides": {"strength": None}, "abilityModifierAdjustments": {"charisma": 2}, "skillGrants": [{"skillId": f"skill.{skill}", "rank": "master", "additional": False} for skill in ("perception", "stealth")]},
+    "graveknight": {"minCR": 5, "requiredCreatureTypeId": "graft.creature-type.undead", "linkedOptionChoiceSpec": {"energyName": "energyType", "energyValues": ["acid", "cold", "electricity", "fire"], "fixedShape": "cone"}, "statisticAdjustments": {"ac": 2, "touchAC": 4, "flatFootedAC": -6}, "skillGrants": [{"skillId": f"skill.{skill}", "rank": "master", "additional": False} for skill in ("intimidate", "perception", "ride")]},
+    "half-celestial": {"minCR": 1, "requiredCreatureTypeId": "graft.creature-type.outsider", "movementMultiplier": {"from": "land", "to": "fly", "value": 2}, "movementManeuverability": {"fly": "good"}, "conditionalSaveBonuses": [{"bonus": 4, "against": ["poison"]}], "skillSlots": [{"rank": "master", "count": 1}]},
+    "half-dragon": {"minCR": 3, "requiredCreatureTypeId": "graft.creature-type.dragon", "linkedOptionChoiceSpec": {"energyName": "energyType", "energyValues": ["acid", "cold", "electricity", "fire"], "shapeName": "breathShape", "shapeValues": ["cone", "line"]}, "skillSlots": [{"rank": "master", "count": 1}]},
+    "half-fiend": {"minCR": 1, "requiredCreatureTypeId": "graft.creature-type.outsider", "movementMultiplier": {"from": "land", "to": "fly", "value": 2}, "movementManeuverability": {"fly": "good"}, "skillSlots": [{"rank": "master", "count": 1}]},
+    "lich": {"minCR": 2, "requiredCreatureTypeId": "graft.creature-type.undead", "statisticAdjustments": {"ac": 2}, "skillGrants": [{"skillId": f"skill.{skill}", "rank": "master", "additional": False} for skill in ("perception", "sense-motive", "stealth")]},
+    "lycanthrope": {"minCR": 1, "requiredCreatureTypeId": "graft.creature-type.humanoid", "requiredSubtypeId": "graft.subtype.shapechanger"},
+    "skeleton": {"maxCR": 8, "requiredCreatureTypeId": "graft.creature-type.undead", "abilityModifierOverrides": {"intelligence": None}},
+    "vampire": {"minCR": 5, "requiredCreatureTypeId": "graft.creature-type.undead", "statisticAdjustments": {"ac": 2, "flatFootedAC": 2}, "traits": ["spider climb (constant)", "vampire weaknesses"], "skillGrants": [{"skillId": f"skill.{skill}", "rank": "master", "additional": False} for skill in ("bluff", "perception", "sense-motive", "stealth")]},
+    "zombie": {"maxCR": 9, "requiredCreatureTypeId": "graft.creature-type.undead", "abilityModifierOverrides": {"intelligence": None}, "conditions": ["staggered"], "traits": ["can perform only a single move action or standard action each round"], "skillBudgetOverride": {"master": 0, "good": 0}, "suppressAutomaticPerception": True},
+}
+for key, values in template_overrides.items():
+    templates[f"graft.template.{key}"].update(values)
 
 size_specs = [
     ("fine", 2, None, {"touchAC": 8, "flatFootedAC": 8, "cmb": -16, "cmd": -8}, ["fly", "stealth"], []),
@@ -891,20 +1052,65 @@ for key, (dice, damage_type, classification) in natural_rows.items():
         "sourceRef": bestiary_ref(key),
     }
 
-options = {
+option_rows = []
+for line_number, line in enumerate(unchained_lines, 1):
+    if 3132 <= line_number <= 4333:
+        match = re.match(r"^(.*?) (Combat|Magic|Social|Universal) (\d+)$", line.strip())
+        if match:
+            option_rows.append((match.group(1), match.group(2).lower(), int(match.group(3))))
+
+
+def option_slug(name):
+    return slug(name.replace("’s", "s").replace("'s", "s"))
+
+
+option_starts = {}
+for name, _, _ in option_rows:
+    option_starts[name] = next(
+        line_number for line_number, line in enumerate(unchained_lines, 1)
+        if 3132 <= line_number <= 4333 and line.lower().startswith(name.lower() + ":")
+    )
+sorted_option_starts = sorted(option_starts.values())
+table_row = re.compile(r"^.*? (?:Combat|Magic|Social|Universal) \d+$")
+options = {}
+for name, category, printed_page in option_rows:
+    start = option_starts[name]
+    end = next((line - 1 for line in sorted_option_starts if line > start), 4333)
+    text_lines = [
+        line.strip("\f") for line in unchained_lines[start - 1:end]
+        if line.strip("\f") and not table_row.match(line.strip())
+        and line.strip() not in {"Monsters", "Monsters 5", "T", "ough"}
+        and not line.strip().isdigit()
+    ]
+    option_id = f"option.{option_slug(name)}"
+    options[option_id] = {
+        "id": option_id,
+        "name": name,
+        "category": category,
+        "parameters": {},
+        "effects": {"ability": option_slug(name)},
+        "effectMode": "source-rule",
+        "ruleText": " ".join(text_lines),
+        "sourceRef": unchained_ref(
+            "Step 7: Monster Options", start, printed_page, end_line=end, entry=name
+        ),
+    }
+
+# Typed overrides for options already exercised by the deterministic engine.
+typed_options = {
     "option.at-will-magic": {
         "id": "option.at-will-magic",
         "name": "At-Will Magic",
         "category": "magic",
-        "parameters": {},
-        "effects": {},
+        "parameters": {"spellId": {"type": "string", "catalogKind": "spell"}, "maxSpellLevel": {"type": "integer", "optional": True, "internal": True}},
+        "effects": {"ability": "at-will-magic"},
         "sourceRef": unchained_ref("Step 7: Monster Options", 4126, 237, entry="At-Will Magic"),
     },
     "option.secondary-magic": {
         "id": "option.secondary-magic",
         "name": "Secondary Magic",
         "category": "universal",
-        "parameters": {"spellListId": {"type": "string"}},
+        "parameters": {"spellListId": {"type": "string", "catalogKind": "spellList"}},
         "effects": {},
         "sourceRef": unchained_ref("Step 7: Monster Options", 4320, 239, entry="Secondary Magic"),
     },
@@ -962,7 +1168,7 @@ options = {
     },
     "option.spontaneous-casting": {
         "id": "option.spontaneous-casting", "name": "Spontaneous Casting", "category": "magic",
-        "parameters": {"spellType": {"type": "enum", "values": ["summon-natures-ally"]}},
+        "parameters": {"spellType": {"type": "enum", "values": ["cure", "inflict", "summon-monster", "summon-natures-ally"]}},
         "effects": {"ability": "spontaneous-casting"},
         "sourceRef": unchained_ref("Step 7: Monster Options", 4159, 238, end_line=4165, entry="Spontaneous Casting"),
     },
@@ -986,10 +1192,260 @@ options = {
         "sourceRef": unchained_ref("Step 7: Monster Options", 3598, 232, end_line=3604, entry="Curse of Lycanthropy"),
     },
 }
+for option_id, definition in typed_options.items():
+    options[option_id] = {**options.get(option_id, {}), **definition, "effectMode": "typed"}
+    options[option_id].setdefault("ruleText", definition["name"])
+
+direct_option_effects = {
+    "option.accuracy": {"type": "attackBonus", "value": 2},
+    "option.dodge-expert": {"type": "defenseBonuses", "values": {"ac": 2, "touchAC": 4, "flatFootedAC": -6}},
+    "option.extra-armor": {"type": "defenseBonuses", "values": {"ac": 2, "touchAC": -6, "flatFootedAC": 4}},
+    "option.combat-casting": {"type": "concentrationBonus", "value": 6},
+    "option.spell-resistance": {"type": "spellResistance", "formula": "cr+11"},
+    "option.save-boost": {"type": "saveChoice"},
+}
+for option_id, effect in direct_option_effects.items():
+    options[option_id].update({"effectMode": "typed", "effects": effect})
+options["option.save-boost"]["parameters"] = {
+    "save": {"type": "enum", "values": ["all", "fortitude", "reflex", "will"]},
+}
+options["option.extra-armor"]["parameters"] = {
+    "armorSource": {"type": "enum", "values": ["natural", "manufactured"]},
+}
+energy_types = ["acid", "cold", "electricity", "fire", "force", "sonic"]
+ability_names = ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]
+humanoid_favored_enemy_subtypes = ["aquatic", "dwarf", "elf", "giant", "gnome", "goblinoid", "half-elf", "half-orc", "halfling", "human", "orc", "shapechanger"]
+outsider_favored_enemy_subtypes = ["aeon", "agathion", "air", "angel", "archon", "asura", "azata", "cold", "daemon", "demodand", "demon", "devil", "div", "earth", "elemental", "fire", "inevitable", "kami", "nightshade", "oni", "protean", "psychopomp", "qlippoth", "rakshasa", "water"]
+favored_enemy_targets = [
+    *creature_types,
+    *(f"humanoid:{name}" for name in humanoid_favored_enemy_subtypes),
+    *(f"outsider:{name}" for name in outsider_favored_enemy_subtypes),
+]
+parameter_specs = {
+    "option.ability-damage": {"ability": {"type": "enum", "values": ability_names}, "mode": {"type": "enum", "values": ["damage", "drain"]}, "scope": {"type": "enum", "values": ["all-attacks", "weapons", "melee-touch"]}},
+    "option.combatants-touch": {"ability": {"type": "enum", "values": ["strength", "dexterity", "constitution"]}},
+    "option.favored-enemy": {"targets": {"type": "enum-array", "minCount": 1, "values": favored_enemy_targets}},
+    "option.repositioning-attack": {"attackType": {"type": "selected-attack"}, "direction": {"type": "enum", "values": ["push", "pull"]}},
+    "option.trap-squares": {"kind": {"type": "enum", "values": ["mundane", "magical"]}, "damageType": {"type": "enum", "values": ["bludgeoning", "piercing", "slashing", "acid", "cold", "electricity", "fire"]}},
+    "option.breath-weapon": {"shape": {"type": "enum", "values": ["cone", "line"]}, "damageType": {"type": "enum", "values": energy_types}},
+    "option.damaging-body": {"damageType": {"type": "enum", "values": ["bludgeoning", "piercing", "slashing", *energy_types]}},
+    "option.disease": {"ability": {"type": "enum", "values": ability_names}, "attackType": {"type": "selected-attack"}},
+    "option.draining-touch": {"ability": {"type": "enum", "values": ability_names}},
+    "option.engulf": {"mode": {"type": "enum", "values": ["high-damage", "bleed", "blinded", "deafened", "energy-drain", "frightened", "nauseated", "paralyzed"]}},
+    "option.fear-attack": {"area": {"type": "enum", "values": ["cone", "burst", "ray"]}},
+    "option.energy-drain": {"attackType": {"type": "selected-attack"}},
+    "option.paralysis": {"attackType": {"type": "selected-attack"}},
+    "option.regeneration": {"bypass": {"type": "enum-array", "minCount": 1, "sourceDefaultCount": 2, "values": ["acid", "cold", "electricity", "fire", "sonic", "chaotic", "evil", "good", "lawful"]}},
+    "option.critical-striker": {"attackType": {"type": "selected-attack"}},
+    "option.power-attack": {"attackType": {"type": "selected-attack"}},
+    "option.powerful-charge": {"attackType": {"type": "selected-attack"}},
+    "option.quivering-palm": {"attackType": {"type": "selected-attack"}},
+    "option.rage": {"trigger": {"type": "enum", "values": ["voluntary", "after-damage"]}},
+    "option.slaying-attack": {"save": {"type": "enum", "values": ["fortitude", "will"]}},
+    "option.stun-attack": {"attackType": {"type": "selected-attack"}},
+    "option.extra-attack": {"attackMode": {"type": "enum", "values": ["melee", "ranged"]}},
+    "option.mobile-attack": {"attackMode": {"type": "enum", "values": ["melee", "ranged"]}},
+    "option.damage-reduction": {"bypass": {"type": "enum-array", "minCount": 1, "values": ["bludgeoning", "piercing", "slashing", "adamantine", "cold-iron", "silver", "magic", "chaotic", "evil", "good", "lawful", "none"]}},
+    "option.energy-resistance": {"energyTypes": {"type": "enum-array", "minCount": 2, "values": ["acid", "cold", "electricity", "fire", "sonic"]}, "resistanceValue": {"type": "integer", "optional": True}},
+    "option.immunity": {"immunities": {"type": "string-array", "minCount": 1}},
+    "option.bestow-major-condition": {"condition": {"type": "enum", "values": ["dazed", "paralyzed", "stunned"]}},
+    "option.bestow-minor-condition": {"condition": {"type": "enum", "values": ["dazzled", "deafened", "fatigued", "shaken", "sickened"]}},
+    "option.bestow-moderate-condition": {"condition": {"type": "enum", "values": ["blinded", "exhausted", "frightened", "nauseated"]}},
+    "option.bypass-dr": {"bypass": {"type": "enum-array", "minCount": 1, "sourceDefaultCount": 2, "values": ["adamantine", "chaotic", "cold-iron", "evil", "good", "lawful", "magic", "silver"]}},
+    "option.channel-destruction": {"energyType": {"type": "enum", "values": energy_types[:4]}},
+    "option.energy-explosion": {"energyType": {"type": "enum", "values": energy_types}},
+    "option.energy-infusion": {"energyType": {"type": "enum", "values": energy_types}},
+    "option.evil-eye": {"penalty": {"type": "enum", "values": ["ability-checks", "attack-rolls", "saving-throws", "skill-checks", "ac"]}},
+    "option.magic-attack": {"damageType": {"type": "enum", "values": ["bludgeoning", "piercing", "slashing", "cold", "electricity", "fire", "force", "sonic"]}},
+    "option.potent-magic-damage": {"descriptor": {"type": "string"}},
+    "option.smite": {"alignment": {"type": "enum", "values": ["chaotic", "evil", "good", "lawful"]}},
+    "option.channel-energy": {"energy": {"type": "enum", "values": ["positive", "negative"]}, "targets": {"type": "enum", "values": ["living", "undead"]}},
+    "option.transfer-hit-points": {"direction": {"type": "enum", "values": ["self-to-ally", "ally-to-self"]}},
+    "option.contingent-spell": {"spellId": {"type": "string", "catalogKind": "spell"}, "trigger": {"type": "string"}},
+    "option.metamagic-spell": {"spellId": {"type": "string", "catalogKind": "spell"}, "metamagic": {"type": "enum", "values": ["empower", "enlarge", "extend", "maximize", "quicken", "widen"]}},
+    "option.mutagen": {"package": {"type": "enum", "values": ["dexterity", "strength", "constitution"]}},
+    "option.aura-of-resistance": {"descriptors": {"type": "string-array", "minCount": 1, "sourceDefaultCount": 2}},
+    "option.inspire-competence": {"skillId": {"type": "string", "catalogKind": "skill"}},
+    "option.magic-weapon": {"property": {"type": "enum", "values": ["bane", "energy", "keen", "returning", "seeking", "vicious", "aligned", "energy-burst"]}},
+}
+for option_id, parameters in parameter_specs.items():
+    options[option_id]["parameters"] = parameters
+class_grafts["graft.class.ranger"]["optionChoiceSpecs"] = [{
+    "name": "favoredEnemyTargets", "optionId": "option.favored-enemy", "parameter": "targets",
+    "type": "enum-array", "values": options["option.favored-enemy"]["parameters"]["targets"]["values"],
+    "countThresholds": [4, 9, 14, 19],
+}]
+options["option.corrupting-touch"]["prerequisites"] = [{"type": "subtype", "id": "graft.subtype.incorporeal"}]
+options["option.snatch"]["prerequisites"] = [{"type": "option", "id": "option.improved-combat-maneuver"}]
+options["option.spontaneous-casting"]["prerequisites"] = [{"type": "array", "id": "array.spellcaster"}]
+
+# Graft option text is source-controlled; variants remain verbatim while IDs
+# and flexible slots become deterministic engine inputs.
+option_names = sorted(
+    [(definition["name"].lower(), option_id) for option_id, definition in options.items()]
+    + [("mounted mastery", "option.mounted-master"), ("devastating blast", "option.breath-weapon")],
+    key=lambda item: len(item[0]), reverse=True,
+)
+number_words = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6}
+
+
+def parse_graft_options(text):
+    parts = re.split(r"options?—", text.lower(), maxsplit=1)
+    if len(parts) == 1:
+        return [], []
+    option_text = parts[1].replace("inf lict", "inflict")
+    search_text = option_text
+    matches_by_position = []
+    occupied = []
+    for name, option_id in option_names:
+        matches = re.finditer(rf"(?<![a-z]){re.escape(name)}(?![a-z])", search_text)
+        match = next((
+            match for match in matches
+            if search_text[:match.start()].count("(") == search_text[:match.start()].count(")")
+            and not any(match.start() < end and match.end() > start for start, end in occupied)
+        ), None)
+        if match:
+            occupied.append((match.start(), match.end()))
+            parameters = {}
+            argument_match = re.match(r"\s*\*?\s*(?:(\d+)\s*)?\(([^)]*)\)", option_text[match.end():])
+            numeric_value = int(argument_match.group(1)) if argument_match and argument_match.group(1) else None
+            argument = argument_match.group(2).strip().lower() if argument_match else None
+            argument_items = [
+                slug(item.strip()) for item in re.split(r",|\band\b", argument or "") if item.strip()
+            ]
+            if option_id == "option.immunity" and argument_items:
+                parameters["immunities"] = [item.replace("-", " ") for item in argument_items]
+            elif option_id == "option.energy-resistance" and argument_items and all(item in {"acid", "cold", "electricity", "fire", "sonic"} for item in argument_items):
+                parameters["energyTypes"] = argument_items
+            elif option_id == "option.smite" and argument_items and argument_items[0] in {"chaotic", "evil", "good", "lawful"}:
+                parameters["alignment"] = argument_items[0]
+            elif option_id == "option.bypass-dr" and argument_items and all(item in {"adamantine", "chaotic", "cold-iron", "evil", "good", "lawful", "magic", "silver"} for item in argument_items):
+                parameters["bypass"] = argument_items
+            elif option_id == "option.damage-reduction" and argument:
+                fixed_dr = re.match(r"(\d+)\s*/\s*([a-z -]+)$", argument)
+                if fixed_dr:
+                    numeric_value = int(fixed_dr.group(1))
+                    parameters["bypass"] = [slug(item.strip()) for item in re.split(r"\band\b", fixed_dr.group(2)) if item.strip()]
+                elif argument_items and all(item in {"bludgeoning", "piercing", "slashing", "adamantine", "cold-iron", "silver", "magic", "chaotic", "evil", "good", "lawful", "none"} for item in argument_items):
+                    parameters["bypass"] = argument_items
+            elif option_id == "option.regeneration" and argument.startswith("overcome by "):
+                bypass = [slug(item.strip()) for item in re.split(r"\bor\b|\band\b", argument.removeprefix("overcome by ")) if item.strip()]
+                if all(item in {"acid", "cold", "electricity", "fire", "sonic", "chaotic", "evil", "good", "lawful"} for item in bypass):
+                    parameters["bypass"] = bypass
+            elif option_id == "option.aura-of-resistance" and argument_items:
+                parameters["descriptors"] = [item.replace("-", " ") for item in argument_items]
+            elif option_id == "option.magic-weapon" and argument_items and ("energy" in argument_items or argument_items[0] in {"bane", "keen", "returning", "seeking", "vicious", "aligned", "energy-burst"}):
+                parameters["property"] = "energy" if "energy" in argument_items else argument_items[0]
+            elif option_id == "option.slaying-attack" and argument_items and argument_items[0] in {"fortitude", "will"}:
+                parameters["save"] = argument_items[0]
+            elif option_id == "option.mobile-attack" and argument_items and argument_items[0] in {"melee", "ranged"}:
+                parameters["attackMode"] = argument_items[0]
+            elif option_id == "option.at-will-magic" and argument:
+                spell = next((spell for spell in spells.values() if spell["name"].lower() == argument), None)
+                if spell:
+                    parameters["spellId"] = spell["id"]
+                    if spell["highest"] > 1:
+                        parameters["maxSpellLevel"] = spell["highest"]
+            elif option_id == "option.change-shape" and argument:
+                if argument == "small or medium animal":
+                    parameters["forms"] = ["Small animal", "Medium animal"]
+                else:
+                    forms = re.split(r"\bor\b", argument.split(",", 1)[0])
+                    parameters["forms"] = [form.strip().title() for form in forms if form.strip()]
+            elif option_id == "option.secondary-magic":
+                list_name = "good" if "secondary magic (good)" in option_text else "evil" if "secondary magic (evil)" in option_text else None
+                if list_name:
+                    parameters["spellListId"] = f"spell-list.{list_name}"
+            elif option_id == "option.improved-combat-maneuver":
+                parameters["maneuver"] = "grapple"
+            elif option_id == "option.spontaneous-casting":
+                choices = [
+                    value for source_name, value in (("summon nature’s ally", "summon-natures-ally"), ("summon monster", "summon-monster"), ("cure", "cure"), ("inflict", "inflict"))
+                    if source_name in option_text
+                ]
+                if len(choices) == 1:
+                    parameters["spellType"] = choices[0]
+            elif option_id == "option.change-shape" and "small or medium animal" in option_text:
+                parameters["forms"] = ["Small animal", "Medium animal"]
+            elif option_id == "option.terrain-stride" and "undergrowth" in option_text:
+                parameters["terrain"] = "undergrowth"
+            grant = {"optionId": option_id, "parameters": parameters, "sourceText": text}
+            if numeric_value is not None and option_id in {"option.damage-reduction", "option.energy-resistance"}:
+                grant["value"] = numeric_value
+            elif option_id == "option.fast-healing":
+                value_match = re.match(r"\s*(\d+)", option_text[match.end():])
+                if value_match:
+                    grant["value"] = int(value_match.group(1))
+            matches_by_position.append((match.start(), grant))
+    grants = [grant for _, grant in sorted(matches_by_position)]
+    dr_match = re.search(r"\bdr (\d+)/([a-z -]+?)(?=\s*\(|,|;|\.|$)", option_text)
+    if dr_match and not any(grant["optionId"] == "option.damage-reduction" for grant in grants):
+        bypass = [slug(item.strip()) for item in re.split(r"\band\b", dr_match.group(2)) if item.strip()]
+        grant = {"optionId": "option.damage-reduction", "parameters": {"bypass": bypass}, "value": int(dr_match.group(1)), "sourceText": text}
+        increase = re.search(r"increases to dr (\d+)/[a-z -]+ at cr (\d+)", option_text)
+        if increase:
+            grant["valueByCR"] = [{"minCR": int(increase.group(2)), "value": int(increase.group(1))}]
+        grants.append(grant)
+    slots = [
+        {"category": category, "count": number_words[count]}
+        for count, category in re.findall(r"\b(one|two|three|four|five|six) (?:additional )?(combat|magic|social|any)(?! or\b)\b", option_text)
+    ]
+    return grants, slots
+
+
+for graft in [*subtypes.values(), *templates.values()]:
+    graft["optionGrants"], parsed_slots = parse_graft_options(graft["ruleText"])
+    graft.setdefault("optionSlots", []).extend(parsed_slots)
+half_dragon = templates["graft.template.half-dragon"]
+next(grant for grant in half_dragon["optionGrants"] if grant["optionId"] == "option.immunity")["parameters"] = {"immunities": ["sleep", "paralysis"]}
+next(grant for grant in half_dragon["optionGrants"] if grant["optionId"] == "option.breath-weapon")["frequency"] = "1/day"
+ghost = templates["graft.template.ghost"]
+ghost_choice_ids = [
+    "option.at-will-magic", "option.corrupting-gaze", "option.draining-touch",
+    "option.frightful-presence", "option.malevolence",
+]
+ghost["optionGrants"] = [grant for grant in ghost["optionGrants"] if grant["optionId"] not in ghost_choice_ids]
+ghost["optionChoiceGrant"] = {
+    "minCR": 6, "perCR": 3, "optionIds": ghost_choice_ids,
+    "parametersByOption": {
+        "option.at-will-magic": {"spellId": "spell.core.telekinesis", "maxSpellLevel": 5},
+    },
+}
+for graft in class_grafts.values():
+    graft["optionGrants"], graft["optionSlots"] = parse_graft_options(graft.get("optionRuleText", ""))
+    for entry in graft.get("crEntries", []):
+        entry["optionGrants"], entry["optionSlots"] = parse_graft_options(entry["ruleText"])
+        if "replace secondary magic with spellcasting" in entry["ruleText"].lower():
+            entry["removeOptionGrantIds"] = ["option.secondary-magic"]
+        spellcasting = re.search(r"spellcasting \(as if CR (\d+)\)", entry["ruleText"], re.IGNORECASE)
+        if spellcasting:
+            entry["spellcastingAsCR"] = int(spellcasting.group(1))
+        secondary_magic = re.search(r"secondary magic \(as if CR (\d+)\)", entry["ruleText"], re.IGNORECASE)
+        if secondary_magic:
+            entry["secondaryMagicAsCR"] = int(secondary_magic.group(1))
+        speed = re.search(r"Increase speed by (\d+) feet", entry["ruleText"], re.IGNORECASE)
+        if speed:
+            entry["speedAdjustment"] = int(speed.group(1))
+class_grafts["graft.class.bard"]["skillSlots"] = [{"rank": "master", "count": 1}]
+class_grafts["graft.class.ranger"]["skillSlots"] = [{"rank": "master", "count": 1}]
+druid_forms = {
+    3: ["Small animal", "Medium animal"],
+    5: ["Tiny animal", "Small animal", "Medium animal", "Large animal", "Small elemental"],
+    7: ["Any size animal", "Medium or smaller elemental", "Small plant", "Medium plant"],
+    9: ["Any size animal", "Large or smaller elemental", "Large or smaller plant"],
+    11: ["Any size animal", "Huge or smaller elemental", "Huge or smaller plant"],
+    18: ["Any size animal", "Huge or smaller elemental", "Huge or smaller plant"],
+}
+for entry in class_grafts["graft.class.druid"]["crEntries"]:
+    if entry["minCR"] in druid_forms:
+        next(grant for grant in entry["optionGrants"] if grant["optionId"] == "option.change-shape")["parameters"] = {"forms": druid_forms[entry["minCR"]]}
+
 skills = {}
 for skill in (
     "perception", "stealth", "survival", "climb", "fly", "swim", "intimidate", "acrobatics",
-    "bluff", "diplomacy", "escape-artist", "heal", "sense-motive",
+    "appraise", "bluff", "craft-alchemy", "diplomacy", "disable-device", "disguise",
+    "escape-artist", "handle-animal", "heal", "perform", "ride", "sense-motive", "spellcraft",
+    "use-magic-device",
     "knowledge-arcana", "knowledge-dungeoneering", "knowledge-engineering", "knowledge-geography",
     "knowledge-history", "knowledge-local", "knowledge-nature", "knowledge-nobility", "knowledge-planes",
     "knowledge-religion",
@@ -1010,8 +1466,8 @@ catalog = {
         "spellMetadata": "APG/UM/UC complete; ACG follow-up metadata with local vendoring pending",
         "spellListEvaluation": "structured primary/secondary bands and typed numeric/choice benefits complete",
         "coreSpellLists": "source-backed class-list metadata",
-        "grafts": "Worg, Griffon, Medusa, Goblin Druid CR 4, Goblinoid/Shapechanger subtype, and Lycanthrope template vertical paths",
-        "options": "Vertical-path options have typed metadata; broad Step-7 coverage remains open",
+        "grafts": "all 19 class, 41 source-listed subtype, 10 template, and nine size grafts catalogued",
+        "options": "all 159 Step-7 table options plus gaze, pounce, and change shape; direct numeric effects typed, complex actions retained as source rules",
     },
     "sources": {
         "pathfinder-unchained-txt": {"sourceId": "pathfinder-unchained-txt", "file": "Pathfinder Unchained.txt", "sha256": unchained_hash, "description": "Local extracted Pathfinder Unchained source"},

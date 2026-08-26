@@ -62,22 +62,22 @@ Die Issues 01–09 beschreiben die fachlichen Verträge. Dieses Issue übersetzt
 
 ## Konkreter nächster Schritt
 
-Den neuen Druid-/Goblinoid-/Shapechanger-/Lycanthrope-Pfad auf die übrigen Class-/Subtype-/Template-Grafts und weitere Monster-Optionseffekte ausweiten.
+Die vollständig katalogisierten Grafts und Step-7-Optionen mit weiteren direkten typisierten Berechnungen und vollständigen CR-/Tabellen-Grenztests vertiefen; komplexe Encounter-Aktionen bleiben explizite Source-Rule-Fähigkeiten.
 
 ## Umsetzungsstand
 
-**Milestone:** Worg, Griffon, Medusa, Goblin Druid CR 4, Goblinoid/Shapechanger and Lycanthrope vertical paths, Step-6 list-band resolution, typed numeric/choice list-benefit effects, and explicit natural-damage source gaps complete; broader graft/option coverage remains open.
+**Milestone:** all 19 class, 41 source-listed subtype, 10 template, and 162 Step-7/unmodified-rule option records are catalogued; direct typed effects cover numeric paths and prerequisites while complex encounter actions remain source-rule abilities. The Witch class is an explicit strict-mode source gap because its Knowledge (arcana) rank is omitted.
 
 Der erste vertikale Slice ist begonnen und lokal ausführbar:
 
 - `catalog/catalog.json` und `catalog/catalog.schema.json` enthalten die CR-Arrays, Damage-/Natural-Attack-Tabellen, Type-/Size-Grafts, die Worg-/Griffon-/Medusa-Optionspfade, alle 60 strukturierten Step-6-Listen sowie 39 APG/UM/UC- und fünf ACG-Spell-Metadaten. Die Katalogversion ist ein inhaltsbasierter Fingerprint; es gibt noch keine Kompatibilitätsschicht für alte Entwicklungskataloge.
-- `monster_builder.Engine.execute` unterstützt `draft.create`, `draft.get`, `draft.applyChanges` und `draft.evaluate` mit Revision/Fingerprint-Guard, Idempotency-Key, Boundary-/Domain-Fehlertrennung und stabilem Trace. Der Druid-Graft erzwingt sein Required Array, unterdrückt Type-Statistikänderungen, ersetzt Skills/Options und wendet nur den höchsten passenden CR-Eintrag an; Subtype-Grants sind zusätzlich, Template-Grants verbrauchen normale Slots.
-- Worg CR 2, Griffon CR 4, Medusa CR 7 vor dem Reality Check, Goblin Druid CR 4, Lycanthrope-Prärequisiten/CR-Grenze, ein separater Metadaten-/Metamagie-Fall und das CR-9-Aberrant-Beispiel sind in 28 öffentlichen `execute`-/Katalogtests abgesichert; JSONL läuft über `python -m monster_builder`.
+- `monster_builder.Engine.execute` unterstützt `draft.create`, `draft.get`, `draft.applyChanges` und `draft.evaluate` mit Revision/Fingerprint-Guard, Idempotency-Key, Boundary-/Domain-Fehlertrennung und stabilem Trace. Class-Grafts erzwingen Required Arrays, unterdrücken Type-Statistikänderungen, wenden nur den höchsten CR-Eintrag an und unterstützen Slots, Replacements, Save-Choices und As-if-CR-Spellcasting. Subtype-Grants sind zusätzlich; Template-Grants verbrauchen normale Slots und prüfen Voraussetzungen.
+- Worg, Griffon, Medusa, Goblin Druid, Fighter, Sorcerer, Clockwork, Skeleton, Lycanthrope, Metadaten-/Metamagie und das CR-9-Aberrant-Beispiel sind in 57 öffentlichen `execute`-/Katalogtests abgesichert; JSONL läuft über `python -m monster_builder`.
 - Step-6-Listen werden nach CR-Band in Primary/Secondary und `1/day`/`3/day`/`at will` aufgelöst. Alle 51 numerischen bzw. auswahlabhängigen List-Benefits besitzen typisierte Katalogeffekte; direkt bestimmbare Feldänderungen werden angewandt, kontextabhängige Modifikatoren bleiben explizit. Fehlende dynamische Choices halten den Draft sichtbar `incomplete`.
 - Fixed-1- und nicht von Table 5-9 abgedeckte kleine Natural-Damage-Dice werden als explizite `catalog-data`-Source-Gaps gemeldet, nicht geraten.
 - `README.md` und `pyproject.toml` dokumentieren den dependency-freien lokalen Start; nur die Katalog-Regeneration benötigt zusätzlich `pdftotext`.
 
-Noch nicht umgesetzt sind Persistenz, Finalisierung/Exporte, UI, KI sowie die übrigen Class-/Subtype-/Template-Grafts und die breite Optionseffekt-Abdeckung.
+Noch nicht umgesetzt sind Persistenz, Finalisierung/Exporte, UI und KI. Bei Step-7-Optionen fehlen noch direkte Berechnungen für komplexe Encounter-Aktionen; ihre Source-Regeln und Provenienz sind bereits explizit im kanonischen Ergebnis vorhanden.
 
 ## Fertig-Kriterium für diesen Plan
 

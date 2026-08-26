@@ -271,11 +271,16 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         draft["selections"]["arrayId"] = "array.spellcaster"
         draft["selections"]["cr"] = 5
         draft["concept"]["targetCR"] = 5
-        response = Engine().execute(request("druid-cr5-gap", "draft.create", {"draft": draft}))
-        self.assertEqual(response["result"]["evaluation"]["status"], "invalid")
-        self.assertIn("class-graft.cr-unsupported", {
-            issue["code"] for issue in response["result"]["evaluation"]["issues"]
-        })
+        draft["selections"]["options"] = [
+            {"optionId": "option.improved-initiative", "parameters": {}},
+            {"optionId": "option.at-will-magic", "parameters": {"spellId": "spell.core.detect-magic"}},
+        ]
+        response = Engine().execute(request("druid-cr5", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "valid")
+        self.assertIn("Tiny, Small, Medium", next(
+            option["sourceText"] for option in response["result"]["evaluation"]["canonical"]["options"]
+            if option["optionId"] == "option.change-shape"
+        ))
 
     def test_lycanthrope_template_enforces_prerequisites_and_consumes_a_slot(self):
         draft = copy.deepcopy(GOBLIN_DRUID_DRAFT)
@@ -326,6 +331,531 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         self.assertIn("template.cr-too-low", {
             issue["code"] for issue in response["result"]["evaluation"]["issues"]
         })
+
+    def test_bard_spellcasting_uses_bard_spell_levels(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["concept"] = {"name": "Bard", "targetCR": 6}
+        draft["selections"].update({
+            "cr": 6,
+            "arrayId": "array.expert",
+            "classGraftId": "graft.class.bard",
+            "spellListId": "spell-list.enchantment",
+            "spellListBenefitChoices": {"skillId": "skill.bluff"},
+            "options": [
+                {"optionId": "option.alertness", "parameters": {}},
+                {"optionId": "option.blind-fight", "parameters": {}},
+            ],
+            "skills": {
+                "master": ["perception", "stealth", "knowledge-arcana"],
+                "good": ["survival", "climb"],
+            },
+        })
+        response = self.engine.execute(request("bard-levels", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        spell = next(spell for spell in response["result"]["evaluation"]["canonical"]["spells"] if spell["spellId"] == "spell.core.hideous-laughter")
+        self.assertEqual((spell["spellLevelSource"], spell["baseLevel"]), ("bard", 1))
+
+    def test_alchemist_requires_alchemy_list_and_extract_mode(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["concept"] = {"name": "Alchemist", "targetCR": 3}
+        draft["selections"].update({
+            "cr": 3,
+            "arrayId": "array.expert",
+            "classGraftId": "graft.class.alchemist",
+            "graftOptionChoices": {"graft.class.alchemist": {
+                "option.mutagen": {"package": "strength"},
+                "option.energy-infusion": {"energyType": "acid"},
+            }},
+            "options": [{"optionId": "option.blind-fight", "parameters": {}}],
+            "skills": {"master": ["perception", "knowledge-arcana"], "good": ["stealth", "survival"]},
+        })
+        response = self.engine.execute(request("alchemist-missing-list", "draft.create", {"draft": draft}))
+        self.assertIn("class-graft.spell-list-required", {issue["code"] for issue in response["result"]["evaluation"]["issues"]})
+
+        draft["selections"]["spellListId"] = "alchemy"
+        response = Engine().execute(request("alchemist-list", "draft.create", {"draft": draft}))
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertEqual(canonical["spellcastingClassId"], "alchemist")
+        self.assertEqual(canonical["spellcastingMode"], "supernatural-extracts")
+        self.assertTrue(canonical["spells"])
+
+    def test_monk_unarmed_damage_uses_highest_cr_progression(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["concept"] = {"name": "Monk", "targetCR": 7}
+        draft["selections"].update({
+            "cr": 7,
+            "classGraftId": "graft.class.monk",
+            "graftOptionChoices": {"graft.class.monk": {
+                "option.extra-attack": {"attackMode": "melee"},
+                "option.stun-attack": {"attackType": "unarmed strike"},
+            }},
+            "options": [
+                {"optionId": "option.blind-fight", "parameters": {}},
+                {"optionId": "option.accuracy", "parameters": {}},
+            ],
+            "skills": {"master": [], "good": ["stealth", "survival"]},
+            "attacks": [{"name": "unarmed strike", "attackProfile": "weapon.high"}],
+        })
+        response = self.engine.execute(request("monk", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertEqual(canonical["classAttackDamage"], "1d10")
+        self.assertEqual(canonical["attacks"][0]["damageDie"], "d10")
+
+        draft["selections"]["attacks"] = copy.deepcopy(WORG_DRAFT["selections"]["attacks"])
+        draft["selections"]["graftOptionChoices"]["graft.class.monk"]["option.stun-attack"] = {"attackType": "bite"}
+        response = Engine().execute(request("armed-monk", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "valid")
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertEqual(canonical["classAttackDamage"], "1d10")
+        self.assertEqual(canonical["attacks"][0]["damageDie"], "d6")
+
+    def test_fighter_uses_base_plus_highest_cr_option_slots(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["concept"] = {"name": "Fighter", "targetCR": 3}
+        draft["selections"].update({
+            "cr": 3,
+            "classGraftId": "graft.class.fighter",
+            "options": [
+                {"optionId": "option.blind-fight", "parameters": {}},
+                {"optionId": "option.accuracy", "parameters": {}},
+                {"optionId": "option.power-attack", "parameters": {"attackType": "bite"}},
+            ],
+        })
+        response = self.engine.execute(request("fighter", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertEqual(response["result"]["evaluation"]["status"], "valid")
+        self.assertEqual(len(canonical["options"]), 3)
+        self.assertEqual(canonical["classGraftId"], "graft.class.fighter")
+        self.assertIn("Fighter", {ability["name"] for ability in canonical["graftAbilities"]})
+
+    def test_cleric_requires_source_defined_spontaneous_casting_choice(self):
+        draft = copy.deepcopy(GOBLIN_DRUID_DRAFT)
+        draft["concept"]["name"] = "Goblin Cleric"
+        draft["selections"]["classGraftId"] = "graft.class.cleric"
+        draft["selections"]["skills"]["master"] = ["survival"]
+        draft["selections"].pop("spellListId")
+        response = self.engine.execute(request("cleric-choice", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "incomplete")
+        self.assertIn("class-graft.choice-required", {issue["code"] for issue in response["result"]["evaluation"]["issues"]})
+
+        draft["selections"]["classGraftChoices"] = {"spontaneousCasting": "inflict"}
+        draft["selections"]["graftOptionChoices"] = {"graft.class.cleric": {
+            "option.channel-energy": {"energy": "negative", "targets": "living"},
+        }}
+        response = Engine().execute(request("cleric-choice-set", "draft.create", {"draft": draft}))
+        spontaneous = next(
+            option for option in response["result"]["evaluation"]["canonical"]["options"]
+            if option["optionId"] == "option.spontaneous-casting"
+        )
+        self.assertEqual(spontaneous["parameters"], {"spellType": "inflict"})
+
+    def test_oracle_lame_curse_applies_cumulative_cr_effects(self):
+        draft = copy.deepcopy(GOBLIN_DRUID_DRAFT)
+        draft["concept"]["name"] = "Lame Oracle"
+        draft["selections"].update({
+            "classGraftId": "graft.class.oracle",
+            "classGraftChoices": {"curse": "lame", "mystery": "battle"},
+            "options": [
+                {"optionId": "option.improved-initiative", "parameters": {}},
+                {"optionId": "option.combat-casting", "parameters": {}},
+            ],
+            "skills": {"master": ["knowledge-arcana", "perception"], "good": ["acrobatics"]},
+        })
+        draft["selections"].pop("spellListId")
+        response = self.engine.execute(request("oracle-lame", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertEqual(canonical["speed"]["land"], 10)
+        self.assertIn("fatigued", canonical["immunities"])
+        self.assertNotIn("exhausted", canonical["immunities"])
+        self.assertIn({"ability": "mystery", "value": "battle", "sourceText": self.engine.catalog.data["grafts"]["classGrafts"]["graft.class.oracle"]["ruleText"]}, canonical["classAbilities"])
+
+    def test_summoner_requires_and_describes_its_eidolon(self):
+        draft = copy.deepcopy(GOBLIN_DRUID_DRAFT)
+        draft["concept"]["name"] = "Goblin Summoner"
+        draft["selections"].update({
+            "classGraftId": "graft.class.summoner",
+            "options": [
+                {"optionId": "option.improved-initiative", "parameters": {}},
+                {"optionId": "option.combat-casting", "parameters": {}},
+            ],
+            "skills": {"master": ["knowledge-arcana"], "good": ["acrobatics"]},
+        })
+        draft["selections"].pop("spellListId")
+        response = self.engine.execute(request("summoner-no-eidolon", "draft.create", {"draft": draft}))
+        self.assertIn("class-graft.choice-required", {issue["code"] for issue in response["result"]["evaluation"]["issues"]})
+
+        draft["selections"]["classGraftChoices"] = {"eidolonName": "Ash"}
+        response = Engine().execute(request("summoner-eidolon", "draft.create", {"draft": draft}))
+        companion = response["result"]["evaluation"]["canonical"]["companion"]
+        self.assertEqual(companion, {
+            "name": "Ash", "cr": 4, "arrayId": "array.combatant",
+            "creatureTypeGraftId": "graft.creature-type.outsider",
+            "combinedEncounterCR": 6, "awardsIndependentXP": True,
+        })
+
+    def test_class_save_choice_is_incomplete_until_selected(self):
+        draft = copy.deepcopy(GOBLIN_DRUID_DRAFT)
+        draft["concept"] = {"name": "Sorcerer", "targetCR": 4}
+        draft["selections"].update({
+            "creatureTypeGraftId": "graft.creature-type.humanoid",
+            "classGraftId": "graft.class.sorcerer",
+            "subtypeGraftIds": [],
+            "sizeId": "graft.size.medium",
+            "options": [
+                {"optionId": "option.at-will-magic", "parameters": {"spellId": "spell.core.detect-magic"}},
+                {"optionId": "option.blind-fight", "parameters": {}},
+            ],
+            "skills": {"master": ["perception"], "good": ["acrobatics"]},
+            "spellListId": None,
+            "spells": [],
+        })
+        response = self.engine.execute(request("sorcerer-choice", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "incomplete")
+        draft["selections"]["classGraftChoices"] = {"save": "reflex"}
+        response = Engine().execute(request("sorcerer-choice-set", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "valid")
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertEqual(canonical["defenses"]["reflex"], 4)
+        self.assertEqual([(spell["name"], spell["frequency"]) for spell in canonical["spells"]], [("Detect Magic", "at will")])
+
+    def test_ranger_additional_skill_and_secondary_magic_use_source_cr(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["concept"] = {"name": "Ranger", "targetCR": 7}
+        draft["selections"].update({
+            "cr": 7,
+            "classGraftId": "graft.class.ranger",
+            "classGraftChoices": {"favoredEnemyTargets": ["graft.creature-type.undead", "humanoid:orc"]},
+            "options": [
+                {"optionId": "option.blind-fight", "parameters": {}},
+                {"optionId": "option.accuracy", "parameters": {}},
+            ],
+            "skills": {"master": ["stealth"], "good": ["survival", "climb"]},
+            "spellListId": "spell-list.water",
+            "spells": [],
+        })
+        response = self.engine.execute(request("ranger", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertEqual(response["result"]["evaluation"]["status"], "valid")
+        self.assertEqual({spell["sourceBand"] for spell in canonical["spells"]}, {"0–3"})
+        self.assertTrue(all(spell["secondaryMagic"] for spell in canonical["spells"]))
+        self.assertEqual(canonical["skills"]["stealth"], 15)
+        favored_enemy = next(option for option in canonical["options"] if option["optionId"] == "option.favored-enemy")
+        self.assertEqual(favored_enemy["parameters"]["targets"], ["graft.creature-type.undead", "humanoid:orc"])
+
+    def test_elf_subtype_requires_and_applies_its_master_skill_choice(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["selections"]["subtypeGraftIds"] = ["graft.subtype.elf"]
+        response = self.engine.execute(request("elf-choice", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "incomplete")
+        draft["selections"]["subtypeGraftChoices"] = {
+            "graft.subtype.elf": {"masterSkill": "skill.spellcraft"},
+        }
+        response = Engine().execute(request("elf-choice-set", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "valid")
+        self.assertEqual(response["result"]["evaluation"]["canonical"]["skills"]["spellcraft"], 10)
+
+    def test_gnome_subtype_requires_a_cr_appropriate_illusion_spell(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["selections"].update({
+            "creatureTypeGraftId": "graft.creature-type.humanoid",
+            "subtypeGraftIds": ["graft.subtype.gnome"],
+            "sizeId": "graft.size.small",
+        })
+        response = self.engine.execute(request("gnome-no-spell", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "incomplete")
+        draft["selections"]["subtypeGraftChoices"] = {
+            "graft.subtype.gnome": {"spellId": "spell.core.color-spray"},
+        }
+        response = Engine().execute(request("gnome-spell", "draft.create", {"draft": draft}))
+        spell = next(spell for spell in response["result"]["evaluation"]["canonical"]["spells"] if spell["spellId"] == "spell.core.color-spray")
+        self.assertEqual((spell["frequency"], spell["role"], spell["sourceBand"]), ("1/day", "subtype-graft", "0–3"))
+
+    def test_inevitable_uses_source_fixed_regeneration_bypass(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["selections"]["subtypeGraftIds"] = ["graft.subtype.inevitable"]
+        response = self.engine.execute(request("inevitable", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        self.assertEqual(response["result"]["evaluation"]["status"], "valid")
+        self.assertEqual(response["result"]["evaluation"]["canonical"]["regeneration"], [{
+            "value": 2, "bypass": ["chaotic"], "suppression": "1 round",
+        }])
+
+    def test_orc_subtype_exposes_darkvision_and_light_sensitivity(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["selections"]["creatureTypeGraftId"] = "graft.creature-type.humanoid"
+        draft["selections"]["subtypeGraftIds"] = ["graft.subtype.orc"]
+        response = self.engine.execute(request("orc", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertIn("darkvision 60 ft.", canonical["senses"])
+        self.assertIn("light sensitivity", canonical["graftTraits"])
+
+    def test_dwarf_subtype_exposes_sense_and_conditional_save_bonus(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["selections"]["creatureTypeGraftId"] = "graft.creature-type.humanoid"
+        draft["selections"]["subtypeGraftIds"] = ["graft.subtype.dwarf"]
+        response = self.engine.execute(request("dwarf", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertIn("darkvision 60 ft.", canonical["senses"])
+        self.assertEqual(canonical["conditionalSaveBonuses"], [{
+            "bonus": 2,
+            "against": ["poison", "spells", "spell-like abilities"],
+        }])
+
+    def test_clockwork_subtype_applies_free_numeric_and_option_grants(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["selections"]["subtypeGraftIds"] = ["graft.subtype.clockwork"]
+        response = self.engine.execute(request("clockwork", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertEqual(response["result"]["evaluation"]["status"], "valid")
+        self.assertEqual(canonical["defenses"], {
+            "ac": 18, "touchAC": 14, "flatFootedAC": 12,
+            "fortitude": 5, "reflex": 7, "will": 1, "cmd": 16, "hp": 22,
+        })
+        self.assertEqual(canonical["initiative"], 6)
+        self.assertIn("option.improved-initiative", {option["optionId"] for option in canonical["options"]})
+        self.assertIn("Clockwork", {ability["name"] for ability in canonical["graftAbilities"]})
+
+    def test_ghost_at_will_choice_grants_source_mandated_telekinesis(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["concept"] = {"name": "Ghost", "targetCR": 6}
+        draft["selections"].update({
+            "cr": 6,
+            "creatureTypeGraftId": "graft.creature-type.undead",
+            "subtypeGraftIds": ["graft.subtype.incorporeal"],
+            "templateGraftId": "graft.template.ghost",
+            "templateGraftChoices": {"optionIds": ["option.at-will-magic"]},
+            "options": [],
+            "skills": {"master": [], "good": ["survival", "climb"]},
+        })
+        response = self.engine.execute(request("ghost", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertEqual(canonical["movementManeuverability"], {"fly": "perfect"})
+        at_will = next(option for option in canonical["options"] if option["optionId"] == "option.at-will-magic")
+        self.assertEqual(at_will["parameters"], {
+            "spellId": "spell.core.telekinesis", "maxSpellLevel": 5,
+        })
+        telekinesis = next(spell for spell in canonical["spells"] if spell["spellId"] == "spell.core.telekinesis")
+        self.assertEqual(telekinesis["frequency"], "at will")
+        self.assertEqual(telekinesis["role"], "option")
+
+        draft["selections"]["graftOptionChoices"] = {"graft.template.ghost": {
+            "option.at-will-magic": {"maxSpellLevel": 5},
+        }}
+        response = Engine().execute(request("ghost-internal", "draft.create", {"draft": draft}))
+        self.assertIn("graft-option.choice-invalid", {issue["code"] for issue in response["result"]["evaluation"]["issues"]})
+
+    def test_zombie_template_applies_staggered_and_fixed_damage_reduction(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["selections"].update({
+            "creatureTypeGraftId": "graft.creature-type.undead",
+            "templateGraftId": "graft.template.zombie",
+            "options": [],
+            "skills": {"master": [], "good": []},
+        })
+        response = self.engine.execute(request("zombie", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertIn("staggered", canonical["conditions"])
+        self.assertIn("can perform only a single move action or standard action each round", canonical["graftTraits"])
+        damage_reduction = next(option for option in canonical["options"] if option["optionId"] == "option.damage-reduction")
+        self.assertEqual(damage_reduction["parameters"], {"bypass": ["slashing"]})
+        self.assertEqual(damage_reduction["value"], 5)
+
+    def test_graveknight_locks_cone_and_links_energy_options(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["concept"] = {"name": "Graveknight", "targetCR": 5}
+        draft["selections"].update({
+            "cr": 5,
+            "creatureTypeGraftId": "graft.creature-type.undead",
+            "templateGraftId": "graft.template.graveknight",
+            "templateGraftChoices": {"energyType": "acid"},
+            "options": [{"optionId": "option.blind-fight", "parameters": {}}],
+            "skills": {"master": [], "good": ["stealth", "survival"]},
+        })
+        response = self.engine.execute(request("graveknight", "draft.create", {"draft": draft}))
+        canonical = response["result"]["evaluation"]["canonical"]
+        breath = next(option for option in canonical["options"] if option["optionId"] == "option.breath-weapon")
+        channel = next(option for option in canonical["options"] if option["optionId"] == "option.channel-destruction")
+        self.assertEqual(breath["parameters"], {"shape": "cone", "damageType": "acid"})
+        self.assertEqual(channel["parameters"], {"energyType": "acid"})
+
+        draft["selections"]["graftOptionChoices"] = {"graft.template.graveknight": {
+            "option.breath-weapon": {"shape": "line", "damageType": "force"},
+        }}
+        response = Engine().execute(request("graveknight-invalid", "draft.create", {"draft": draft}))
+        self.assertIn("graft-option.choice-invalid", {issue["code"] for issue in response["result"]["evaluation"]["issues"]})
+
+    def test_vampire_exposes_constant_spider_climb_and_weaknesses(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["concept"] = {"name": "Vampire", "targetCR": 5}
+        draft["selections"].update({
+            "cr": 5,
+            "creatureTypeGraftId": "graft.creature-type.undead",
+            "templateGraftId": "graft.template.vampire",
+            "options": [],
+            "skills": {"master": [], "good": ["stealth", "survival"]},
+            "graftOptionChoices": {"graft.template.vampire": {
+                "option.energy-drain": {"attackType": "bite"},
+            }},
+        })
+        response = self.engine.execute(request("vampire", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "valid")
+        self.assertEqual(response["result"]["evaluation"]["canonical"]["graftTraits"], [
+            "spider climb (constant)", "vampire weaknesses",
+        ])
+
+    def test_half_celestial_applies_scaled_damage_reduction(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["selections"].update({
+            "creatureTypeGraftId": "graft.creature-type.outsider",
+            "templateGraftId": "graft.template.half-celestial",
+            "options": [],
+            "skills": {"master": ["perception", "intimidate"], "good": ["stealth", "survival"]},
+            "spellListId": "spell-list.good",
+        })
+        response = self.engine.execute(request("half-celestial", "draft.create", {"draft": draft}))
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertEqual(canonical["damageReduction"], [{"value": 5, "bypass": ["magic"]}])
+        self.assertEqual(canonical["movementManeuverability"], {"fly": "good"})
+
+    def test_half_dragon_links_breath_and_immunity_energy_choices(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["concept"] = {"name": "Half-Dragon", "targetCR": 3}
+        draft["selections"].update({
+            "cr": 3,
+            "creatureTypeGraftId": "graft.creature-type.dragon",
+            "templateGraftId": "graft.template.half-dragon",
+            "options": [],
+            "skills": {"master": ["perception", "intimidate"], "good": ["stealth", "survival"]},
+        })
+        response = self.engine.execute(request("half-dragon-no-choice", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "incomplete")
+        draft["selections"]["templateGraftChoices"] = {"energyType": "fire", "breathShape": "cone"}
+        response = Engine().execute(request("half-dragon-choice", "draft.create", {"draft": draft}))
+        canonical = response["result"]["evaluation"]["canonical"]
+        breath = next(option for option in canonical["options"] if option["optionId"] == "option.breath-weapon")
+        immunity = next(option for option in canonical["options"] if option["optionId"] == "option.immunity")
+        self.assertEqual(breath["parameters"], {"shape": "cone", "damageType": "fire"})
+        self.assertEqual(breath["frequency"], "1/day")
+        self.assertEqual(immunity["parameters"], {"immunities": ["sleep", "paralysis", "fire"]})
+
+    def test_paladin_automatic_option_choices_are_required_and_applied(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["concept"] = {"name": "Paladin", "targetCR": 7}
+        draft["selections"].update({
+            "cr": 7,
+            "classGraftId": "graft.class.paladin",
+            "spellListId": "spell-list.good",
+        })
+        response = self.engine.execute(request("paladin-no-choices", "draft.create", {"draft": draft}))
+        self.assertIn("graft-option.choice-required", {issue["code"] for issue in response["result"]["evaluation"]["issues"]})
+        draft["selections"]["graftOptionChoices"] = {"graft.class.paladin": {
+            "option.channel-energy": {"energy": "positive", "targets": "undead"},
+            "option.save-boost": {"save": "all"},
+        }}
+        response = Engine().execute(request("paladin-choices", "draft.create", {"draft": draft}))
+        canonical = response["result"]["evaluation"]["canonical"]
+        main = self.engine.catalog.data["arrays"]["combatant"]["mainStatistics"]["7"]
+        self.assertEqual(canonical["defenses"]["fortitude"], main["fortitude"] + 3)
+        self.assertEqual(canonical["defenses"]["reflex"], main["reflex"] + 1)
+        self.assertEqual(canonical["defenses"]["will"], main["will"] + 4)
+
+        draft["selections"]["graftOptionChoices"]["graft.class.paladin"].update({
+            "option.smite": {"alignment": "good"},
+            "option.alertness": {},
+        })
+        response = Engine().execute(request("paladin-locked-choice", "draft.create", {"draft": draft}))
+        invalid_paths = {issue["path"] for issue in response["result"]["evaluation"]["issues"] if issue["code"] == "graft-option.choice-invalid"}
+        self.assertIn("/selections/graftOptionChoices/graft.class.paladin/option.smite/alignment", invalid_paths)
+        self.assertIn("/selections/graftOptionChoices/graft.class.paladin/option.alertness", invalid_paths)
+
+    def test_skeleton_template_applies_all_automatic_traits_even_over_budget(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["concept"] = {"name": "Skeleton", "targetCR": 2}
+        draft["selections"].update({
+            "creatureTypeGraftId": "graft.creature-type.undead",
+            "templateGraftId": "graft.template.skeleton",
+            "options": [],
+        })
+        response = self.engine.execute(request("skeleton", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertEqual(response["result"]["evaluation"]["status"], "valid")
+        self.assertIsNone(canonical["abilityModifiers"]["intelligence"])
+        self.assertEqual(canonical["initiative"], 6)
+        self.assertEqual({option["optionId"] for option in canonical["options"]}, {
+            "option.damage-reduction", "option.immunity", "option.improved-initiative",
+        })
+        self.assertIn("cold", canonical["immunities"])
+        self.assertIn({"value": 5, "bypass": ["bludgeoning"]}, canonical["damageReduction"])
+        self.assertIn("DR 5/bludgeoning", canonical["damageRules"])
+        self.assertIn("Skeleton", {ability["name"] for ability in canonical["graftAbilities"]})
+
+    def test_option_prerequisites_are_enforced(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["selections"]["options"] = [{"optionId": "option.snatch", "parameters": {}}]
+        response = self.engine.execute(request("snatch-without-grab", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "invalid")
+        self.assertIn("option.prerequisite-missing", {
+            issue["code"] for issue in response["result"]["evaluation"]["issues"]
+        })
+
+    def test_direct_numeric_option_effects_share_the_catalog_effect_path(self):
+        cases = {
+            "option.accuracy": ("attacks", [8]),
+            "option.dodge-expert": ("defenses", {"ac": 18, "touchAC": 16, "flatFootedAC": 6}),
+            "option.spell-resistance": ("spellResistance", 13),
+        }
+        for option_id, (field, expected) in cases.items():
+            with self.subTest(option_id=option_id):
+                draft = copy.deepcopy(WORG_DRAFT)
+                draft["selections"]["options"] = [{"optionId": option_id, "parameters": {}}]
+                response = Engine().execute(request(option_id, "draft.create", {"draft": draft}))
+                self.assertEqual(response["result"]["evaluation"]["status"], "valid")
+                canonical = response["result"]["evaluation"]["canonical"]
+                if field == "attacks":
+                    self.assertEqual(canonical["attacks"][0]["attackBonus"], expected)
+                    self.assertEqual(canonical["cmb"], 6)
+                elif field == "defenses":
+                    self.assertEqual({key: canonical["defenses"][key] for key in expected}, expected)
+                else:
+                    self.assertEqual(canonical[field], expected)
+
+    def test_tough_options_apply_source_cr_formulas(self):
+        cases = [
+            ("option.damage-reduction", {"bypass": ["magic"]}, "damageReduction", [{"value": 5, "bypass": ["magic"]}]),
+            ("option.energy-resistance", {"energyTypes": ["acid", "cold"], "resistanceValue": 10}, "resistances", {"acid": 10, "cold": 10}),
+            ("option.fast-healing", {}, "fastHealing", 2),
+        ]
+        for option_id, parameters, field, expected in cases:
+            with self.subTest(option_id=option_id):
+                draft = copy.deepcopy(WORG_DRAFT)
+                draft["selections"]["options"] = [{"optionId": option_id, "parameters": parameters}]
+                response = Engine().execute(request(option_id, "draft.create", {"draft": draft}))
+                self.assertEqual(response["result"]["evaluation"]["canonical"][field], expected)
+
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["selections"]["options"] = [{"optionId": "option.extra-hit-points", "parameters": {}}]
+        response = Engine().execute(request("extra-hp", "draft.create", {"draft": draft}))
+        base_hp = self.engine.catalog.data["arrays"]["combatant"]["mainStatistics"]["2"]["hp"]
+        self.assertEqual(response["result"]["evaluation"]["canonical"]["defenses"]["hp"], base_hp + int(base_hp * 0.2))
+
+    def test_catalogued_source_rule_option_is_exposed_without_hidden_derivation(self):
+        draft = copy.deepcopy(WORG_DRAFT)
+        draft["selections"]["options"] = [{"optionId": "option.blind-fight", "parameters": {}}]
+        response = self.engine.execute(request("blind-fight", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        option = response["result"]["evaluation"]["canonical"]["options"][0]
+        self.assertEqual(option["effect"]["type"], "source-rule")
+        self.assertIn("concealment", option["effect"]["text"])
 
     def test_evaluation_is_deterministic_and_does_not_mutate_draft(self):
         created = self.create_worg()
@@ -462,6 +992,9 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         response = self.engine.execute(request("universal-slot", "draft.create", {"draft": draft}))
         self.assertTrue(response["ok"], response)
         self.assertEqual(response["result"]["evaluation"]["status"], "valid")
+        spells = response["result"]["evaluation"]["canonical"]["spells"]
+        self.assertEqual(len(spells), 2)
+        self.assertTrue(all(spell["frequency"] == "1/day" and spell["secondaryMagic"] for spell in spells))
 
     def test_step6_spell_list_resolves_cr_bands_frequencies_and_benefit(self):
         spellcaster = copy.deepcopy(WORG_DRAFT)
@@ -470,7 +1003,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             "cr": 9,
             "arrayId": "array.spellcaster",
             "options": [
-                {"optionId": "option.at-will-magic", "parameters": {}},
+                {"optionId": "option.combat-casting", "parameters": {}},
                 {"optionId": "option.secondary-magic", "parameters": {"spellListId": "spell-list.aberrant"}},
             ],
             "skills": {"master": ["perception", "stealth"], "good": ["survival"]},
@@ -515,7 +1048,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
                 draft = copy.deepcopy(WORG_DRAFT)
                 draft["concept"]["targetCR"] = cr
                 magic_slots = 2 if cr < 12 else 3
-                options = [{"optionId": "option.at-will-magic", "parameters": {}} for _ in range(magic_slots - 1)]
+                options = [{"optionId": "option.combat-casting", "parameters": {}} for _ in range(magic_slots - 1)]
                 options.append({"optionId": "option.secondary-magic", "parameters": {"spellListId": "spell-list.aberrant"}})
                 draft["selections"].update({
                     "cr": cr,
@@ -539,7 +1072,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
                 draft["selections"].update({
                     "cr": cr,
                     "arrayId": "array.spellcaster",
-                    "options": [{"optionId": "option.at-will-magic", "parameters": {}}] * option_count,
+                    "options": [{"optionId": "option.combat-casting", "parameters": {}}] * option_count,
                     "skills": {"master": ["perception", "stealth"], "good": ["survival"]},
                     "spellListId": "spell-list.abjuration",
                     "spellListBenefitChoices": {"energyType": "cold"},
@@ -560,7 +1093,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         draft = copy.deepcopy(WORG_DRAFT)
         draft["selections"].update({
             "arrayId": "array.spellcaster",
-            "options": [{"optionId": "option.at-will-magic", "parameters": {}}],
+            "options": [{"optionId": "option.combat-casting", "parameters": {}}],
             "skills": {"master": ["perception", "stealth"], "good": ["survival"]},
             "spellListId": "spell-list.abjuration",
             "spells": [],
@@ -578,7 +1111,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         selections = spellcaster["selections"]
         selections.update({
             "arrayId": "array.spellcaster",
-            "options": [{"optionId": "option.at-will-magic", "parameters": {}}],
+            "options": [{"optionId": "option.combat-casting", "parameters": {}}],
             "skills": {"master": ["perception", "stealth"], "good": ["survival"]},
             "spells": [{"spellId": "spell.um.serenity", "metamagic": ["empower"]}],
             "spellLevelSource": "cleric",

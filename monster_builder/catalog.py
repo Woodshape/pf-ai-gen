@@ -192,6 +192,8 @@ class Catalog:
 
     @staticmethod
     def _validate_graft_grants(graft_id, graft, options, skill_ids):
+        if any(option_id not in options for option_id in graft.get("optionChoiceGrant", {}).get("optionIds", [])):
+            raise CatalogError(f"graft choice references unknown option: {graft_id}")
         for grant in graft.get("optionGrants", []):
             option = options.get(grant.get("optionId"))
             if option is None:
@@ -201,17 +203,30 @@ class Catalog:
             if set(parameters) - set(definitions):
                 raise CatalogError(f"graft has unknown option parameter: {graft_id}")
             for name, definition in definitions.items():
-                if name not in parameters and not definition.get("optional"):
+                if name not in parameters and not definition.get("optional") and not grant.get("sourceText"):
                     raise CatalogError(f"graft is missing option parameter: {graft_id}.{name}")
                 if name not in parameters:
                     continue
                 value = parameters[name]
                 parameter_type = definition["type"]
-                if parameter_type in {"string", "enum"} and not isinstance(value, str):
+                if parameter_type in {"string", "enum", "selected-attack"} and not isinstance(value, str):
+                    raise CatalogError(f"graft option parameter has wrong type: {graft_id}.{name}")
+                if parameter_type == "integer" and (not isinstance(value, int) or isinstance(value, bool)):
                     raise CatalogError(f"graft option parameter has wrong type: {graft_id}.{name}")
                 if parameter_type in {"string-array", "enum-array"} and (not isinstance(value, list) or any(not isinstance(item, str) for item in value)):
                     raise CatalogError(f"graft option parameter has wrong type: {graft_id}.{name}")
                 if parameter_type == "enum" and value not in definition["values"]:
+                    raise CatalogError(f"graft option parameter is not allowed: {graft_id}.{name}")
+                if parameter_type == "enum-array" and (
+                    any(item not in definition["values"] for item in value)
+                    or definition.get("count") is not None and len(value) != definition["count"]
+                    or len(value) < definition.get("minCount", 0)
+                ):
+                    raise CatalogError(f"graft option parameter is not allowed: {graft_id}.{name}")
+                if parameter_type == "string-array" and (
+                    definition.get("count") is not None and len(value) != definition["count"]
+                    or len(value) < definition.get("minCount", 0)
+                ):
                     raise CatalogError(f"graft option parameter is not allowed: {graft_id}.{name}")
         for grant in graft.get("skillGrants", []):
             if grant.get("skillId") not in skill_ids:

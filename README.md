@@ -12,14 +12,18 @@ printf '%s\n' '{"protocolVersion":"1","requestId":"r1","operation":"draft.create
 
 JSONL is only CLI framing; the operation contract is the same in-process.
 The current slice covers the versioned catalog, Worg CR 2, Griffon CR 4,
-the strict pre-Reality-Check Medusa CR 7 path, and the Goblin Druid CR 4
-class/subtype path. Druid required-array/stat/skill/highest-CR-entry rules,
-Goblinoid and Shapechanger free grants, and Lycanthrope template prerequisites
-and slot replacement run through the same public interface and provenance trace.
-It also covers typed draft changes and all 60 Step-6 spell lists with CR-band
-frequencies, spell DCs, metamagic, and source-backed benefits. All 51 numeric or
-choice-based list benefits have typed effects; unsupported natural-attack dice
-remain explicit source gaps rather than guesses.
+the strict pre-Reality-Check Medusa CR 7 path, and catalogs all source-listed
+class, subtype, and template grafts. Required arrays, highest-only class CR entries,
+replacement/additional option and skill budgets, prerequisites, save choices,
+as-if-CR spellcasting, movement, numeric graft adjustments, and provenance
+traces run through the public interface. All 159 Step-7 table options plus the
+three required unmodified-rule options are catalogued with source text; direct
+numeric effects and hard prerequisites use typed evaluation, while complex
+encounter actions remain explicit source-rule abilities rather than guessed
+simulations. The engine also covers all 60 Step-6 spell lists and 51 typed
+numeric or choice-based list benefits. The Witch graft is deliberately rejected
+because its source omits the rank of Knowledge (arcana); unsupported natural-attack
+dice remain explicit source gaps rather than guesses.
 
 Runtime is Python/stdlib only. Regenerating the checked-in catalog additionally
 requires the `pdftotext` executable for source table coordinates.

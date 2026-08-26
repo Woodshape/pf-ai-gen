@@ -68,11 +68,11 @@
       "type": "object",
       "required": ["creatureTypes", "classGrafts", "subtypes", "templates", "sizes"],
       "properties": {
-        "creatureTypes": {"type": "object"},
-        "classGrafts": {"type": "object"},
-        "subtypes": {"type": "object"},
-        "templates": {"type": "object"},
-        "sizes": {"type": "object"}
+        "creatureTypes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/catalogEntry"}},
+        "classGrafts": {"type": "object", "additionalProperties": {"$ref": "#/$defs/catalogEntry"}},
+        "subtypes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/catalogEntry"}},
+        "templates": {"type": "object", "additionalProperties": {"$ref": "#/$defs/catalogEntry"}},
+        "sizes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/catalogEntry"}}
       }
     },
     "spellBandRange": {
