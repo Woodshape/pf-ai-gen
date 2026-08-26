@@ -50,6 +50,8 @@ class Engine:
         self._drafts: dict[str, dict[str, Any]] = {}
         self._histories: dict[str, list[dict[str, Any]]] = {}
         self._previous_status: dict[str, str] = {}
+        self._monsters: dict[str, dict[str, Any]] = {}
+        self._monster_status: dict[str, str] = {}
         self._idempotency: dict[str, tuple[str, dict[str, Any]]] = {}
 
     @classmethod
@@ -93,6 +95,18 @@ class Engine:
                 result = self._archive(payload)
             elif operation == "draft.restore":
                 result = self._restore(payload)
+            elif operation == "monster.finalize":
+                result = self._finalize_monster(payload)
+            elif operation == "monster.get":
+                result = self._get_monster(payload)
+            elif operation == "monster.duplicate":
+                result = self._duplicate_monster(payload)
+            elif operation == "monster.archive":
+                result = self._archive_monster(payload)
+            elif operation == "monster.restore":
+                result = self._restore_monster(payload)
+            elif operation == "monster.export":
+                result = self._export_monster(payload)
             else:
                 raise BoundaryError(
                     "operation.unsupported",
@@ -100,20 +114,25 @@ class Engine:
                     "/operation",
                 )
             response = {"ok": True, "requestId": request_id, "result": result}
-            if operation in {"draft.create", "draft.applyChanges", "draft.restoreRevision", "draft.duplicate", "draft.archive", "draft.restore"}:
+            if operation in {
+                "draft.create", "draft.applyChanges", "draft.restoreRevision", "draft.duplicate", "draft.archive", "draft.restore",
+                "monster.finalize", "monster.duplicate", "monster.archive", "monster.restore",
+            }:
                 self._idempotency[request_id] = (request_fingerprint, copy.deepcopy(response))
             return response
         except BoundaryError as exc:
             return self._error(request_id, exc)
         except PersistenceError as exc:
+            operation_name = str(request.get("operation", "")) if isinstance(request, dict) else ""
+            entity = "monster" if operation_name.startswith("monster.") and operation_name != "monster.finalize" else "draft"
             code, kind = {
-                "persistence.not-found": ("draft.not-found", "boundary"),
-                "persistence.invalid-id": ("draft.not-found", "boundary"),
-                "persistence.corrupt": ("draft.file-corrupt", "persistence"),
-                "persistence.schema-unsupported": ("draft.file-schema-unsupported", "persistence"),
-                "persistence.conflict": ("draft.revision-conflict", "conflict"),
-            }.get(exc.code, ("draft.write-failed", "persistence"))
-            return self._error(request_id, BoundaryError(code, str(exc), "/payload/draftId", kind=kind))
+                "persistence.not-found": (f"{entity}.not-found", "boundary"),
+                "persistence.invalid-id": (f"{entity}.not-found", "boundary"),
+                "persistence.corrupt": (f"{entity}.file-corrupt", "persistence"),
+                "persistence.schema-unsupported": (f"{entity}.file-schema-unsupported", "persistence"),
+                "persistence.conflict": (f"{entity}.revision-conflict", "conflict"),
+            }.get(exc.code, (f"{entity}.write-failed", "persistence"))
+            return self._error(request_id, BoundaryError(code, str(exc), f"/payload/{entity}Id", kind=kind))
         except CatalogError as exc:
             return self._error(
                 request_id,
@@ -243,6 +262,214 @@ class Engine:
         self._store_new(duplicate)
         return {"draft": copy.deepcopy(duplicate), "evaluation": evaluation}
 
+    def _finalize_monster(self, payload: dict[str, Any]) -> dict[str, Any]:
+        draft_id = payload.get("draftId")
+        if self.workspace and isinstance(draft_id, str) and draft_id:
+            with self.workspace.lock(draft_id):
+                return self._finalize_monster_locked(payload)
+        return self._finalize_monster_locked(payload)
+
+    def _finalize_monster_locked(self, payload: dict[str, Any]) -> dict[str, Any]:
+        draft = self._stored_draft(payload)
+        self._require_base_guard(payload, draft)
+        if draft.get("status") == "archived":
+            raise BoundaryError("draft.not-active", "archived drafts cannot be finalized", "/payload/draftId", kind="conflict")
+        evaluation = self._evaluate(draft)
+        if evaluation["status"] != "valid":
+            raise BoundaryError(
+                "monster.finalization-blocked",
+                "only a complete valid strict draft can be finalized",
+                "/payload/draftId",
+                kind="product-constraint",
+                details={"evaluation": evaluation},
+            )
+        found = self._find_finished(draft)
+        if found:
+            monster, monster_status = found
+            self._validate_finished(monster)
+        else:
+            monster = self._build_finished(draft, evaluation)
+            monster_status = "active"
+            self._store_finished(monster)
+        if draft.get("status") != "finalized" or draft.get("monsterId") != monster["monsterId"]:
+            try:
+                finalized = self._set_status(draft, "finalized", None, monster["monsterId"])["draft"]
+            except PersistenceError:
+                current = self._stored_draft({"draftId": draft["draftId"]})
+                if current.get("status") != "finalized" or current.get("monsterId") != monster["monsterId"]:
+                    raise
+                finalized = copy.deepcopy(current)
+        else:
+            finalized = copy.deepcopy(draft)
+        return {"monster": self._finished_view(monster, monster_status), "draft": finalized}
+
+    def _get_monster(self, payload: dict[str, Any]) -> dict[str, Any]:
+        monster, status = self._stored_monster(payload)
+        return {"monster": self._finished_view(monster, status)}
+
+    def _duplicate_monster(self, payload: dict[str, Any]) -> dict[str, Any]:
+        monster, _ = self._stored_monster(payload)
+        duplicate = self._new_draft({"concept": monster["concept"], "selections": monster["selections"]})
+        duplicate["revision"] = 1
+        duplicate["derivedFrom"] = {"type": "monster", "monsterId": monster["monsterId"]}
+        duplicate["fingerprint"] = _draft_fingerprint(duplicate)
+        evaluation = self._evaluate(duplicate)
+        self._store_new(duplicate)
+        return {"draft": copy.deepcopy(duplicate), "evaluation": evaluation}
+
+    def _archive_monster(self, payload: dict[str, Any]) -> dict[str, Any]:
+        monster, status = self._stored_monster(payload)
+        if status == "archived":
+            raise BoundaryError("monster.already-archived", "monster is already archived", "/payload/monsterId", kind="conflict")
+        self._set_finished_status(monster["monsterId"], status, "archived")
+        return {"monster": self._finished_view(monster, "archived")}
+
+    def _restore_monster(self, payload: dict[str, Any]) -> dict[str, Any]:
+        monster, status = self._stored_monster(payload)
+        if status != "archived":
+            raise BoundaryError("monster.not-archived", "only archived monsters can be restored", "/payload/monsterId", kind="conflict")
+        self._set_finished_status(monster["monsterId"], status, "active")
+        return {"monster": self._finished_view(monster, "active")}
+
+    def _export_monster(self, payload: dict[str, Any]) -> dict[str, Any]:
+        monster, _ = self._stored_monster(payload)
+        format_name = payload.get("format", "json")
+        profile = payload.get("profile", "sheet")
+        if format_name not in {"json", "markdown", "html"}:
+            raise BoundaryError("export.format-invalid", "format must be json, markdown, or html", "/payload/format")
+        if profile not in {"sheet", "audit"}:
+            raise BoundaryError("export.profile-invalid", "profile must be sheet or audit", "/payload/profile")
+        if format_name == "json":
+            content = copy.deepcopy(monster)
+        else:
+            from .exports import render_html, render_markdown
+            content = render_html(monster, profile) if format_name == "html" else render_markdown(monster, profile)
+        return {"monsterId": monster["monsterId"], "format": format_name, "profile": profile, "content": content}
+
+    def _build_finished(self, draft: dict[str, Any], evaluation: dict[str, Any]) -> dict[str, Any]:
+        source = {"draftId": draft["draftId"], "revision": draft["revision"], "fingerprint": draft["fingerprint"]}
+        monster_id = f"monster-{uuid.uuid5(uuid.NAMESPACE_URL, _canonical_json(source)).hex}"
+        trace = copy.deepcopy(evaluation["derivationTrace"])
+        monster = {
+            "schemaVersion": "1",
+            "kind": "FinishedMonster",
+            "monsterId": monster_id,
+            "sourceDraft": source,
+            "catalogVersion": draft["catalogVersion"],
+            "mode": "strict",
+            "concept": copy.deepcopy(draft.get("concept", {})),
+            "selections": copy.deepcopy(draft["selections"]),
+            "result": copy.deepcopy(evaluation["effective"]),
+            "fieldAnnotations": {},
+            "derivationTrace": trace,
+            "audit": {
+                "acceptedAIRationale": [],
+                "creationDecisions": self._creation_decisions(draft["selections"], trace),
+                "validationFindings": copy.deepcopy(evaluation["issues"]),
+                "sources": _trace_sources(trace),
+            },
+        }
+        monster["fingerprint"] = _finished_fingerprint(monster)
+        return monster
+
+    @staticmethod
+    def _creation_decisions(selections: dict[str, Any], trace: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        fields = (
+            (1, ("cr", "arrayId", "saveSwap", "abilityModifiers")),
+            (2, ("creatureTypeGraftId", "classGraftId", "classGraftChoices")),
+            (3, ("subtypeGraftIds", "subtypeGraftChoices")),
+            (4, ("templateGraftId", "templateGraftChoices")),
+            (5, ("sizeId", "speed")),
+            (6, ("spellListId", "spellListBenefitChoices", "spells")),
+            (7, ("options", "graftOptionChoices")),
+            (8, ("skills",)),
+            (9, ("attacks",)),
+        )
+        decisions = []
+        for step, names in fields:
+            source_refs = []
+            seen = set()
+            for entry in trace:
+                for source in entry.get("sourceRefs", []):
+                    if str(source.get("section", "")).startswith(f"Step {step}"):
+                        key = _canonical_json(source)
+                        if key not in seen:
+                            seen.add(key)
+                            source_refs.append(copy.deepcopy(source))
+            decisions.append({
+                "step": step,
+                "selections": {field: copy.deepcopy(selections[field]) for field in names if field in selections},
+                "sourceRefs": source_refs,
+            })
+        return decisions
+
+    def _find_finished(self, draft: dict[str, Any]) -> tuple[dict[str, Any], str] | None:
+        if self.workspace:
+            return self.workspace.find_monster(draft["draftId"], draft["revision"], draft["fingerprint"])
+        source = {"draftId": draft["draftId"], "revision": draft["revision"], "fingerprint": draft["fingerprint"]}
+        for monster_id, monster in self._monsters.items():
+            if monster.get("sourceDraft") == source:
+                return copy.deepcopy(monster), self._monster_status[monster_id]
+        return None
+
+    def _store_finished(self, monster: dict[str, Any]) -> None:
+        if self.workspace:
+            self.workspace.create_monster(monster)
+        else:
+            existing = self._monsters.get(monster["monsterId"])
+            if existing is not None and existing != monster:
+                raise BoundaryError("monster.id-conflict", "monsterId already exists", "/monsterId", kind="conflict")
+            self._monsters[monster["monsterId"]] = copy.deepcopy(monster)
+            self._monster_status.setdefault(monster["monsterId"], "active")
+
+    def _stored_monster(self, payload: dict[str, Any]) -> tuple[dict[str, Any], str]:
+        monster_id = payload.get("monsterId")
+        if not isinstance(monster_id, str) or not monster_id:
+            raise BoundaryError("monster.id-required", "monsterId is required", "/payload/monsterId")
+        if self.workspace:
+            monster, status = self.workspace.load_monster(monster_id)
+        else:
+            try:
+                monster, status = copy.deepcopy(self._monsters[monster_id]), self._monster_status[monster_id]
+            except KeyError as exc:
+                raise BoundaryError("monster.not-found", f"unknown monster: {monster_id}", "/payload/monsterId") from exc
+        self._validate_finished(monster)
+        return monster, status
+
+    @staticmethod
+    def _validate_finished(monster: dict[str, Any]) -> None:
+        required = {
+            "schemaVersion", "kind", "monsterId", "sourceDraft", "catalogVersion", "mode", "concept", "selections",
+            "result", "fieldAnnotations", "derivationTrace", "audit", "fingerprint",
+        }
+        if not isinstance(monster, dict) or not required <= set(monster):
+            raise BoundaryError("monster.file-corrupt", "finished monster is missing required fields", "", kind="persistence")
+        if monster.get("schemaVersion") != "1" or monster.get("kind") != "FinishedMonster" or monster.get("mode") != "strict":
+            raise BoundaryError("monster.file-schema-unsupported", "unsupported FinishedMonster snapshot", "/schemaVersion", kind="persistence")
+        object_fields = ("sourceDraft", "concept", "selections", "result", "fieldAnnotations", "audit")
+        if (
+            not isinstance(monster.get("monsterId"), str)
+            or any(not isinstance(monster.get(field), dict) for field in object_fields)
+            or not isinstance(monster.get("derivationTrace"), list)
+        ):
+            raise BoundaryError("monster.file-corrupt", "finished monster content is invalid", "", kind="persistence")
+        if monster.get("fingerprint") != _finished_fingerprint(monster):
+            raise BoundaryError("monster.fingerprint-invalid", "finished monster fingerprint does not match its contents", "/fingerprint", kind="persistence")
+
+    @staticmethod
+    def _finished_view(monster: dict[str, Any], status: str) -> dict[str, Any]:
+        value = copy.deepcopy(monster)
+        value["status"] = status
+        return value
+
+    def _set_finished_status(self, monster_id: str, base_status: str, status: str) -> None:
+        if self.workspace:
+            self.workspace.set_monster_status(monster_id, base_status, status)
+        else:
+            if self._monster_status.get(monster_id) != base_status:
+                raise BoundaryError("monster.status-conflict", "monster status changed", "/payload/monsterId", kind="conflict")
+            self._monster_status[monster_id] = status
+
     def _archive(self, payload: dict[str, Any]) -> dict[str, Any]:
         draft = self._stored_draft(payload)
         self._require_base_guard(payload, draft)
@@ -261,10 +488,10 @@ class Engine:
             raise BoundaryError("draft.restore-state-invalid", "draft has no restorable status", "/payload/draftId", kind="persistence")
         return self._set_status(draft, previous, None)
 
-    def _set_status(self, draft: dict[str, Any], status: str, previous_status: str | None) -> dict[str, Any]:
+    def _set_status(self, draft: dict[str, Any], status: str, previous_status: str | None, monster_id: str | None = None) -> dict[str, Any]:
         if self.workspace:
             self.workspace.set_status(
-                draft["draftId"], draft["revision"], draft["fingerprint"], draft.get("status", "active"), status, previous_status,
+                draft["draftId"], draft["revision"], draft["fingerprint"], draft.get("status", "active"), status, previous_status, monster_id,
             )
         else:
             if previous_status is None:
@@ -272,8 +499,12 @@ class Engine:
             else:
                 self._previous_status[draft["draftId"]] = previous_status
             self._drafts[draft["draftId"]]["status"] = status
+            if monster_id is not None:
+                self._drafts[draft["draftId"]]["monsterId"] = monster_id
         candidate = copy.deepcopy(draft)
         candidate["status"] = status
+        if monster_id is not None:
+            candidate["monsterId"] = monster_id
         return {"draft": candidate, "evaluation": self._evaluate(candidate)}
 
     def _require_base_guard(self, payload: dict[str, Any], draft: dict[str, Any]) -> None:
@@ -1769,6 +2000,25 @@ def _canonical_json(value: Any) -> str:
 
 def _fingerprint(value: Any) -> str:
     return hashlib.sha256(_canonical_json(value).encode("utf-8")).hexdigest()
+
+
+def _finished_fingerprint(monster: dict[str, Any]) -> str:
+    value = copy.deepcopy(monster)
+    value.pop("fingerprint", None)
+    value.pop("status", None)
+    return _fingerprint(value)
+
+
+def _trace_sources(trace: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    sources = []
+    seen = set()
+    for entry in trace:
+        for source in entry.get("sourceRefs", []):
+            key = _canonical_json(source)
+            if key not in seen:
+                seen.add(key)
+                sources.append(copy.deepcopy(source))
+    return sources
 
 
 def _draft_fingerprint(draft: dict[str, Any]) -> str:

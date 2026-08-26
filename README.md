@@ -15,7 +15,10 @@ JSONL is only CLI framing; the operation contract is the same in-process.
 Pass `workspace=...` to `Engine`, or set `MONSTER_BUILDER_WORKSPACE` for the
 CLI, to persist atomic JSON Draft snapshots. Persistent operations include
 history/restore, duplication, and archive/restore; at most 20 older revisions
-are retained. With no workspace configured, `Engine` remains process-local.
+are retained. Valid Strict Drafts can be finalized as immutable FinishedMonster
+snapshots, then fetched, duplicated, archived/restored, or exported through
+`monster.export` as JSON, Markdown, or standalone HTML/print with `sheet` and
+`audit` profiles. With no workspace configured, `Engine` remains process-local.
 The current slice covers the versioned catalog, Worg CR 2, Griffon CR 4,
 the strict pre-Reality-Check Medusa CR 7 path, and catalogs all source-listed
 class, subtype, and template grafts. Required arrays, highest-only class CR entries,

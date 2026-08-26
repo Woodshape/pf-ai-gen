@@ -29,6 +29,7 @@ class JSONWorkspace:
     def __init__(self, root: str | Path):
         self.root = Path(root).expanduser().resolve()
         self.drafts = self.root / "drafts"
+        self.monsters = self.root / "monsters"
 
     @contextmanager
     def lock(self, draft_id: str) -> Iterator[None]:
@@ -49,6 +50,7 @@ class JSONWorkspace:
                 "schemaVersion": self.SCHEMA_VERSION,
                 "status": draft.get("status", "active"),
                 "previousStatus": None,
+                "monsterId": None,
                 "current": self._snapshot(draft),
                 "history": [],
             })
@@ -57,6 +59,8 @@ class JSONWorkspace:
         document = self._read(draft_id)
         draft = copy.deepcopy(document["current"]["draft"])
         draft["status"] = document["status"]
+        if document.get("monsterId"):
+            draft["monsterId"] = document["monsterId"]
         return draft
 
     def history(self, draft_id: str) -> list[dict[str, Any]]:
@@ -75,7 +79,7 @@ class JSONWorkspace:
             document["current"] = self._snapshot(draft)
             self._write(self._path(draft["draftId"]), document)
 
-    def set_status(self, draft_id: str, base_revision: int, base_fingerprint: str, base_status: str, status: str, previous_status: str | None) -> None:
+    def set_status(self, draft_id: str, base_revision: int, base_fingerprint: str, base_status: str, status: str, previous_status: str | None, monster_id: str | None = None) -> None:
         with self.lock(draft_id):
             document = self._read(draft_id)
             current = document["current"]
@@ -83,17 +87,61 @@ class JSONWorkspace:
                 raise PersistenceError("persistence.conflict", "stored draft changed during mutation")
             document["status"] = status
             document["previousStatus"] = previous_status
+            if monster_id is not None:
+                document["monsterId"] = monster_id
             self._write(self._path(draft_id), document)
+
+    def create_monster(self, monster: dict[str, Any]) -> None:
+        with self.lock(monster["monsterId"]):
+            path = self._monster_path(monster["monsterId"])
+            if path.exists():
+                existing = self._read_monster(monster["monsterId"])["monster"]
+                if existing == monster:
+                    return
+                raise PersistenceError("persistence.already-exists", f"monster already exists: {monster['monsterId']}")
+            self._write(path, {"schemaVersion": self.SCHEMA_VERSION, "status": "active", "monster": copy.deepcopy(monster)})
+
+    def load_monster(self, monster_id: str) -> tuple[dict[str, Any], str]:
+        document = self._read_monster(monster_id)
+        return copy.deepcopy(document["monster"]), document["status"]
+
+    def find_monster(self, draft_id: str, revision: int, fingerprint: str) -> tuple[dict[str, Any], str] | None:
+        if not self.monsters.exists():
+            return None
+        # ponytail: linear scan; replace with index.json when library search lands.
+        for path in self.monsters.glob("monster-*.json"):
+            monster_id = path.stem
+            monster, status = self.load_monster(monster_id)
+            source = monster.get("sourceDraft", {})
+            if not isinstance(source, dict):
+                raise PersistenceError("persistence.corrupt", f"invalid monster document: {self._monster_path(monster_id)}")
+            if source == {"draftId": draft_id, "revision": revision, "fingerprint": fingerprint}:
+                return monster, status
+        return None
+
+    def set_monster_status(self, monster_id: str, base_status: str, status: str) -> None:
+        with self.lock(monster_id):
+            document = self._read_monster(monster_id)
+            if document["status"] != base_status:
+                raise PersistenceError("persistence.conflict", "stored monster changed during mutation")
+            document["status"] = status
+            self._write(self._monster_path(monster_id), document)
 
     @staticmethod
     def _snapshot(draft: dict[str, Any]) -> dict[str, Any]:
         stored = copy.deepcopy(draft)
         stored.pop("status", None)
+        stored.pop("monsterId", None)
         return {
             "revision": draft["revision"],
             "fingerprint": draft["fingerprint"],
             "draft": stored,
         }
+
+    def _monster_path(self, monster_id: str) -> Path:
+        if not isinstance(monster_id, str) or not monster_id or Path(monster_id).name != monster_id:
+            raise PersistenceError("persistence.invalid-id", "invalid monsterId")
+        return self.monsters / f"{monster_id}.json"
 
     def _path(self, draft_id: str) -> Path:
         if not isinstance(draft_id, str) or not draft_id or Path(draft_id).name != draft_id:
@@ -122,6 +170,21 @@ class JSONWorkspace:
             draft = snapshot["draft"]
             if draft.get("draftId") != draft_id or draft.get("revision") != snapshot["revision"] or draft.get("fingerprint") != snapshot["fingerprint"]:
                 raise PersistenceError("persistence.corrupt", f"inconsistent snapshot: {path}")
+        return document
+
+    def _read_monster(self, monster_id: str) -> dict[str, Any]:
+        path = self._monster_path(monster_id)
+        try:
+            document = json.loads(path.read_text(encoding="utf-8"))
+        except FileNotFoundError as exc:
+            raise PersistenceError("persistence.not-found", f"unknown monster: {monster_id}") from exc
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise PersistenceError("persistence.corrupt", f"cannot load {path}: {exc}") from exc
+        if not isinstance(document, dict) or document.get("schemaVersion") != self.SCHEMA_VERSION:
+            raise PersistenceError("persistence.schema-unsupported", f"unsupported workspace document: {path}")
+        monster = document.get("monster")
+        if document.get("status") not in {"active", "archived"} or not isinstance(monster, dict) or monster.get("monsterId") != monster_id:
+            raise PersistenceError("persistence.corrupt", f"invalid monster document: {path}")
         return document
 
     @staticmethod

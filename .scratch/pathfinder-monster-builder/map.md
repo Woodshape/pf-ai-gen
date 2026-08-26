@@ -18,16 +18,16 @@ A local-first browser tool that guides a user through *Pathfinder Unchained* Sim
 - AI produces a short rationale and a proposal; the user can inspect and edit the same draft through the frontend or a future machine interface.
 - Use one primary class graft. Normal Pathfinder multiclass simulation and house-rule multiclassing are not part of the strict mode.
 - Strict engine mode has no user-defined Reality Check adjustment layer; it accepts source-defined selections only and recalculates derived values.
-- The MVP persistence contract uses versioned JSON files with authoritative writes through the shared tool interface. Draft persistence is implemented with a configurable workspace, atomic writes, current-plus-20-history snapshots, duplication, revision restore, and archive/restore; omitting a workspace retains process-local behavior. Proposal and immutable FinishedMonster persistence still follow their later implementation milestones. Free Mode, Free Overrides, and the Reality-Check workflow remain backlog work.
+- The MVP persistence contract uses versioned JSON files with authoritative writes through the shared tool interface. Draft and immutable FinishedMonster persistence are implemented with a configurable workspace, atomic writes, Draft history/restore, duplication, and archive/restore; omitting a workspace retains process-local behavior. Proposal persistence follows the later AI milestone. Free Mode, Free Overrides, and the Reality-Check workflow remain backlog work.
 
 ## Current implementation state
 
 The repository has moved from planning into a dependency-free Python vertical slice:
 
 - `catalog/catalog.json` and `catalog/catalog.schema.json` load and validate against local source hashes. The catalog uses a content-derived version fingerprint rather than maintained compatibility branches. It contains the three CR arrays, all 19 class grafts, 41 source-listed subtype grafts, all 10 templates, nine size grafts, all 159 Step-7 table options plus three required unmodified-rule options, skills, attacks, damage, all 60 structured Step-6 spell lists, and 659 spell records. All 39 APG/UM/UC spells, five ACG spells, and Core metamagic rules are now locally hash-anchored with official-source URLs.
-- `monster_builder.Engine.execute` supports `draft.create`, `draft.get`, `draft.applyChanges`, `draft.evaluate`, `draft.history.get`, `draft.restoreRevision`, `draft.duplicate`, `draft.archive`, and `draft.restore` with typed selection validation, revision/fingerprint guards, idempotency, incomplete/invalid separation, and derivation traces.
-- Worg CR 2, Griffon CR 4, pre-Reality-Check Medusa CR 7, Goblin Druid, Fighter, Sorcerer save-choice, Clockwork, Skeleton, and Lycanthrope paths are covered through the public interface. The engine applies required arrays, highest-only class CR entries, option/skill replacement and additional budgets, template prerequisites, as-if-CR spellcasting, and stable source traces. Twenty-eight options have typed effects; complex encounter actions remain explicit source-rule effects rather than guessed simulations. Public `execute` regressions now cover all 93 Step-1 rows, every weapon/natural attack profile, all 231 cells of Table 5-9, every one of the 162 options on a valid path, hard prerequisites, typed scaling thresholds, all size limits, and both sides of every spell band. The matrix exposed and fixed negative damage modifiers and now rejects invalid array ability-modifier totals while retaining the source’s Griffon redistribution. The Witch graft’s source-omitted skill rank and unsupported fixed or sub-d4 natural-attack dice remain explicit source gaps. The offline test suite has 81 passing tests.
-- The Draft JSON persistence slice is complete; this is not yet a full Steps 1–9 application because FinishedMonster finalization/persistence, exports, UI, Proposal persistence, and AI are still outstanding.
+- `monster_builder.Engine.execute` supports the Draft lifecycle plus `monster.finalize`, `monster.get`, `monster.duplicate`, `monster.archive`, `monster.restore`, and `monster.export` with typed validation, guards, idempotency, incomplete/invalid separation, and derivation traces.
+- Worg CR 2, Griffon CR 4, pre-Reality-Check Medusa CR 7, Goblin Druid, Fighter, Sorcerer save-choice, Clockwork, Skeleton, and Lycanthrope paths are covered through the public interface. The engine applies required arrays, highest-only class CR entries, option/skill replacement and additional budgets, template prerequisites, as-if-CR spellcasting, and stable source traces. Twenty-eight options have typed effects; complex encounter actions remain explicit source-rule effects rather than guessed simulations. Public `execute` regressions now cover all 93 Step-1 rows, every weapon/natural attack profile, all 231 cells of Table 5-9, every one of the 162 options on a valid path, hard prerequisites, typed scaling thresholds, all size limits, and both sides of every spell band. The matrix exposed and fixed negative damage modifiers and now rejects invalid array ability-modifier totals while retaining the source’s Griffon redistribution. The Witch graft’s source-omitted skill rank and unsupported fixed or sub-d4 natural-attack dice remain explicit source gaps. The offline test suite has 95 passing tests.
+- Valid Strict Drafts now finalize to immutable, fingerprinted FinishedMonster snapshots and export deterministically as self-contained JSON, Markdown, and standalone HTML/print with sheet/audit profiles. The Guided-Rail UI, Proposal persistence, and AI are still outstanding.
 
 ## Decisions so far
 
@@ -46,8 +46,8 @@ The repository has moved from planning into a dependency-free Python vertical sl
 
 ## Next implementation milestone
 
-- **Implement FinishedMonster finalization and exports:** persist immutable valid snapshots, then project the shared structured Monster Sheet to JSON, Markdown, and HTML/print.
-- Then follow Issue 10's delivery order for the Guided-Rail UI and the optional Pi adapter.
+- **Implement the Guided-Rail UI:** build the local browser workspace with visible Steps 1–9, editable earlier decisions, live validation, finalization, and export actions through `execute`.
+- Then follow Issue 10's delivery order for the optional Pi adapter.
 
 ## Out of scope
 
