@@ -37,7 +37,7 @@ Die Issues 01–09 beschreiben die fachlichen Verträge. Dieses Issue übersetzt
 
 **Ergebnis:** Der Strict-Modus ist gegen die dokumentierten Quellen reproduzierbar abgesichert.
 
-### 4. Lokale Draft-/Snapshot-Persistenz
+### 4. Lokale Draft-/Snapshot-Persistenz — Draft-Slice umgesetzt
 
 - JSON-Workspace, atomare Writes und maximal 20 ältere Draft-Snapshots aus Issue 05 implementieren.
 - `active`, `finalized`, `archived`, Duplizieren und immutable FinishedMonster abbilden.
@@ -62,7 +62,7 @@ Die Issues 01–09 beschreiben die fachlichen Verträge. Dieses Issue übersetzt
 
 ## Konkreter nächster Schritt
 
-Die JSON-Persistenz aus Issue 05 über die gemeinsame `execute`-Schnittstelle umsetzen: konfigurierbarer Workspace, atomare Writes, Current-plus-20-History und Draft-Lifecycle. Komplexe Encounter-Aktionen bleiben explizite Source-Rule-Fähigkeiten.
+`monster.finalize` und immutable FinishedMonster-Snapshots aus Issues 05 und 06 über die gemeinsame `execute`-Schnittstelle umsetzen; danach folgen die deterministischen Exporte. Komplexe Encounter-Aktionen bleiben explizite Source-Rule-Fähigkeiten.
 
 ## Umsetzungsstand
 
@@ -77,7 +77,7 @@ Der erste vertikale Slice ist begonnen und lokal ausführbar:
 - Fixed-1- und nicht von Table 5-9 abgedeckte kleine Natural-Damage-Dice werden als explizite `catalog-data`-Source-Gaps gemeldet, nicht geraten.
 - `README.md` und `pyproject.toml` dokumentieren den dependency-freien lokalen Start; nur die Katalog-Regeneration benötigt zusätzlich `pdftotext`.
 
-Noch nicht umgesetzt sind Persistenz, Finalisierung/Exporte, UI und KI. Komplexe Encounter-Aktionen bleiben bewusst als Source-Regeln im kanonischen Ergebnis, solange sie keine deterministische Monster-Sheet-Statistik verändern.
+Die Draft-Persistenz ist mit konfigurierbarem JSON-Workspace, atomaren Writes, Current-plus-20-History, Revision-Restore, Duplizieren und Archive/Restore umgesetzt. Noch nicht umgesetzt sind FinishedMonster-/Proposal-Persistenz, Finalisierung/Exporte, UI und KI. Komplexe Encounter-Aktionen bleiben bewusst als Source-Regeln im kanonischen Ergebnis, solange sie keine deterministische Monster-Sheet-Statistik verändern.
 
 ## Fertig-Kriterium für diesen Plan
 

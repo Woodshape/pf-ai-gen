@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from .catalog import Catalog, CatalogError
+from .persistence import JSONWorkspace, PersistenceError
 
 
 class BoundaryError(ValueError):
@@ -23,7 +24,7 @@ class BoundaryError(ValueError):
 
 
 class Engine:
-    """Owns the in-memory draft workspace for the MVP vertical slice."""
+    """Owns the draft workspace for the MVP vertical slice."""
 
     PROTOCOL_VERSION = "1"
     DRAFT_SCHEMA_VERSION = "1"
@@ -43,14 +44,17 @@ class Engine:
     _ATTACK_PROFILES = {"weapon.high", "weapon.low", "natural.two", "natural.three"}
     _DAMAGE_DICE = {"d4", "d6", "d8", "d10", "d12", "2d6", "2d8", "3d6"}
 
-    def __init__(self, catalog: Catalog | None = None):
+    def __init__(self, catalog: Catalog | None = None, workspace: str | Path | None = None):
         self.catalog = catalog or Catalog.load()
+        self.workspace = JSONWorkspace(workspace) if workspace is not None else None
         self._drafts: dict[str, dict[str, Any]] = {}
+        self._histories: dict[str, list[dict[str, Any]]] = {}
+        self._previous_status: dict[str, str] = {}
         self._idempotency: dict[str, tuple[str, dict[str, Any]]] = {}
 
     @classmethod
-    def from_catalog(cls, path: str | Path) -> "Engine":
-        return cls(Catalog.load(path))
+    def from_catalog(cls, path: str | Path, *, workspace: str | Path | None = None) -> "Engine":
+        return cls(Catalog.load(path), workspace)
 
     def execute(self, request: dict[str, Any]) -> dict[str, Any]:
         request_id = request.get("requestId") if isinstance(request, dict) else None
@@ -79,6 +83,16 @@ class Engine:
                 result = self._apply_changes(payload)
             elif operation == "draft.evaluate":
                 result = self._evaluate_request(payload)
+            elif operation == "draft.history.get":
+                result = self._history_get(payload)
+            elif operation == "draft.restoreRevision":
+                result = self._restore_revision(payload)
+            elif operation == "draft.duplicate":
+                result = self._duplicate(payload)
+            elif operation == "draft.archive":
+                result = self._archive(payload)
+            elif operation == "draft.restore":
+                result = self._restore(payload)
             else:
                 raise BoundaryError(
                     "operation.unsupported",
@@ -86,11 +100,20 @@ class Engine:
                     "/operation",
                 )
             response = {"ok": True, "requestId": request_id, "result": result}
-            if operation in {"draft.create", "draft.applyChanges"}:
+            if operation in {"draft.create", "draft.applyChanges", "draft.restoreRevision", "draft.duplicate", "draft.archive", "draft.restore"}:
                 self._idempotency[request_id] = (request_fingerprint, copy.deepcopy(response))
             return response
         except BoundaryError as exc:
             return self._error(request_id, exc)
+        except PersistenceError as exc:
+            code, kind = {
+                "persistence.not-found": ("draft.not-found", "boundary"),
+                "persistence.invalid-id": ("draft.not-found", "boundary"),
+                "persistence.corrupt": ("draft.file-corrupt", "persistence"),
+                "persistence.schema-unsupported": ("draft.file-schema-unsupported", "persistence"),
+                "persistence.conflict": ("draft.revision-conflict", "conflict"),
+            }.get(exc.code, ("draft.write-failed", "persistence"))
+            return self._error(request_id, BoundaryError(code, str(exc), "/payload/draftId", kind=kind))
         except CatalogError as exc:
             return self._error(
                 request_id,
@@ -113,11 +136,22 @@ class Engine:
         raw = payload.get("draft", payload)
         draft = self._new_draft(raw)
         evaluation = self._evaluate(draft)
-        self._drafts[draft["draftId"]] = draft
+        self._store_new(draft)
         return {"draft": copy.deepcopy(draft), "evaluation": evaluation}
 
     def _get(self, payload: dict[str, Any]) -> dict[str, Any]:
-        draft = self._stored_draft(payload)
+        draft = self._stored_draft(payload, allow_unsupported_catalog=True)
+        if draft.get("catalogVersion") != self.catalog.version:
+            return {
+                "draft": copy.deepcopy(draft),
+                "evaluation": None,
+                "evaluationError": {
+                    "code": "catalog.version-unsupported",
+                    "kind": "catalog-data",
+                    "message": "draft uses an unsupported catalog version",
+                    "path": "/catalogVersion",
+                },
+            }
         return {"draft": copy.deepcopy(draft), "evaluation": self._evaluate(draft)}
 
     def _evaluate_request(self, payload: dict[str, Any]) -> dict[str, Any]:
@@ -131,21 +165,9 @@ class Engine:
 
     def _apply_changes(self, payload: dict[str, Any]) -> dict[str, Any]:
         draft = self._stored_draft(payload)
-        if "baseRevision" not in payload or "baseFingerprint" not in payload:
-            raise BoundaryError(
-                "draft.base-guard-required",
-                "mutations require baseRevision and baseFingerprint",
-                "/payload",
-            )
-        if payload["baseRevision"] != draft["revision"] or payload["baseFingerprint"] != draft["fingerprint"]:
-            current_evaluation = self._evaluate(draft)
-            raise BoundaryError(
-                "draft.revision-conflict",
-                "draft revision or fingerprint is stale",
-                "/payload/baseRevision",
-                kind="conflict",
-                details={"currentDraft": copy.deepcopy(draft), "currentEvaluation": current_evaluation},
-            )
+        self._require_base_guard(payload, draft)
+        if draft.get("status", "active") != "active":
+            raise BoundaryError("draft.not-active", "only active drafts can be edited", "/payload/draftId", kind="conflict")
         changes = payload.get("changes")
         if not isinstance(changes, list) or not changes:
             raise BoundaryError("changes.required", "changes must be a non-empty array", "/payload/changes")
@@ -164,12 +186,123 @@ class Engine:
         # selections are intentionally stored and reported by evaluation.
         self._validate_draft_input(candidate, include_system=True)
         evaluation = self._evaluate(candidate)
-        self._drafts[candidate["draftId"]] = candidate
+        self._replace_draft(draft, candidate)
         return {
             "draft": copy.deepcopy(candidate),
             "evaluation": evaluation,
             "appliedChanges": copy.deepcopy(changes),
         }
+
+    def _history_get(self, payload: dict[str, Any]) -> dict[str, Any]:
+        draft = self._stored_draft(payload, allow_unsupported_catalog=True)
+        history = self.workspace.history(draft["draftId"]) if self.workspace else copy.deepcopy(self._histories.get(draft["draftId"], []))
+        allow_unsupported = draft.get("catalogVersion") != self.catalog.version
+        for snapshot in history:
+            self._validate_persisted_draft(snapshot["draft"], allow_unsupported_catalog=allow_unsupported)
+        return {"draftId": draft["draftId"], "currentRevision": draft["revision"], "history": history}
+
+    def _restore_revision(self, payload: dict[str, Any]) -> dict[str, Any]:
+        draft = self._stored_draft(payload)
+        self._require_base_guard(payload, draft)
+        if draft.get("status", "active") != "active":
+            raise BoundaryError("draft.not-active", "only active drafts can restore a revision", "/payload/draftId", kind="conflict")
+        revision = payload.get("revision")
+        if not isinstance(revision, int) or isinstance(revision, bool):
+            raise BoundaryError("draft.revision-required", "revision must be an integer", "/payload/revision")
+        history = self.workspace.history(draft["draftId"]) if self.workspace else self._histories.get(draft["draftId"], [])
+        snapshot = next((item for item in history if item["revision"] == revision), None)
+        if snapshot is None:
+            raise BoundaryError("draft.revision-not-found", f"unknown retained revision: {revision}", "/payload/revision")
+        self._validate_persisted_draft(snapshot["draft"])
+        candidate = copy.deepcopy(draft)
+        candidate["concept"] = copy.deepcopy(snapshot["draft"].get("concept", {}))
+        candidate["selections"] = copy.deepcopy(snapshot["draft"].get("selections", {}))
+        candidate["revision"] += 1
+        candidate["fingerprint"] = _draft_fingerprint(candidate)
+        self._validate_draft_input(candidate, include_system=True)
+        evaluation = self._evaluate(candidate)
+        self._replace_draft(draft, candidate)
+        return {"draft": copy.deepcopy(candidate), "evaluation": evaluation, "restoredRevision": revision}
+
+    def _duplicate(self, payload: dict[str, Any]) -> dict[str, Any]:
+        source = self._stored_draft(payload)
+        self._require_base_guard(payload, source)
+        duplicate = self._new_draft({
+            "concept": source.get("concept", {}),
+            "selections": source.get("selections", {}),
+        })
+        duplicate["revision"] = 1
+        duplicate["derivedFrom"] = {
+            "type": "draft",
+            "draftId": source["draftId"],
+            "revision": source["revision"],
+            "fingerprint": source["fingerprint"],
+        }
+        duplicate["fingerprint"] = _draft_fingerprint(duplicate)
+        evaluation = self._evaluate(duplicate)
+        self._store_new(duplicate)
+        return {"draft": copy.deepcopy(duplicate), "evaluation": evaluation}
+
+    def _archive(self, payload: dict[str, Any]) -> dict[str, Any]:
+        draft = self._stored_draft(payload)
+        self._require_base_guard(payload, draft)
+        status = draft.get("status", "active")
+        if status == "archived":
+            raise BoundaryError("draft.already-archived", "draft is already archived", "/payload/draftId", kind="conflict")
+        return self._set_status(draft, "archived", status)
+
+    def _restore(self, payload: dict[str, Any]) -> dict[str, Any]:
+        draft = self._stored_draft(payload)
+        self._require_base_guard(payload, draft)
+        if draft.get("status") != "archived":
+            raise BoundaryError("draft.not-archived", "only archived drafts can be restored", "/payload/draftId", kind="conflict")
+        previous = self.workspace.previous_status(draft["draftId"]) if self.workspace else self._previous_status.get(draft["draftId"])
+        if previous not in {"active", "finalized"}:
+            raise BoundaryError("draft.restore-state-invalid", "draft has no restorable status", "/payload/draftId", kind="persistence")
+        return self._set_status(draft, previous, None)
+
+    def _set_status(self, draft: dict[str, Any], status: str, previous_status: str | None) -> dict[str, Any]:
+        if self.workspace:
+            self.workspace.set_status(
+                draft["draftId"], draft["revision"], draft["fingerprint"], draft.get("status", "active"), status, previous_status,
+            )
+        else:
+            if previous_status is None:
+                self._previous_status.pop(draft["draftId"], None)
+            else:
+                self._previous_status[draft["draftId"]] = previous_status
+            self._drafts[draft["draftId"]]["status"] = status
+        candidate = copy.deepcopy(draft)
+        candidate["status"] = status
+        return {"draft": candidate, "evaluation": self._evaluate(candidate)}
+
+    def _require_base_guard(self, payload: dict[str, Any], draft: dict[str, Any]) -> None:
+        if "baseRevision" not in payload or "baseFingerprint" not in payload:
+            raise BoundaryError("draft.base-guard-required", "mutations require baseRevision and baseFingerprint", "/payload")
+        if payload["baseRevision"] != draft["revision"] or payload["baseFingerprint"] != draft["fingerprint"]:
+            raise BoundaryError(
+                "draft.revision-conflict", "draft revision or fingerprint is stale", "/payload/baseRevision", kind="conflict",
+                details={"currentDraft": copy.deepcopy(draft), "currentEvaluation": self._evaluate(draft)},
+            )
+
+    def _store_new(self, draft: dict[str, Any]) -> None:
+        if self.workspace:
+            self.workspace.create(draft)
+        else:
+            self._drafts[draft["draftId"]] = copy.deepcopy(draft)
+            self._histories[draft["draftId"]] = []
+
+    def _replace_draft(self, previous: dict[str, Any], candidate: dict[str, Any]) -> None:
+        if self.workspace:
+            self.workspace.replace(candidate, previous["revision"], previous["fingerprint"], previous.get("status", "active"))
+        else:
+            snapshot = {
+                "revision": previous["revision"],
+                "fingerprint": previous["fingerprint"],
+                "draft": copy.deepcopy(previous),
+            }
+            self._histories[candidate["draftId"]] = [snapshot, *self._histories.get(candidate["draftId"], [])][:20]
+            self._drafts[candidate["draftId"]] = copy.deepcopy(candidate)
 
     def _apply_change(self, draft: dict[str, Any], change: Any, index: int) -> None:
         path = f"/payload/changes/{index}"
@@ -209,6 +342,7 @@ class Engine:
             "draftId": f"draft-{uuid.uuid4().hex}",
             "catalogVersion": self.catalog.version,
             "revision": 0,
+            "status": "active",
             "concept": copy.deepcopy(concept),
             "selections": copy.deepcopy(selections),
         }
@@ -225,14 +359,37 @@ class Engine:
             raise BoundaryError("draft.fingerprint-invalid", "draft fingerprint does not match its contents", "/fingerprint")
         return draft
 
-    def _stored_draft(self, payload: dict[str, Any]) -> dict[str, Any]:
+    def _stored_draft(self, payload: dict[str, Any], *, allow_unsupported_catalog: bool = False) -> dict[str, Any]:
         draft_id = payload.get("draftId")
         if not isinstance(draft_id, str) or not draft_id:
             raise BoundaryError("draft.id-required", "draftId is required", "/payload/draftId")
+        if self.workspace:
+            draft = self._validate_persisted_draft(
+                self.workspace.load(draft_id),
+                allow_unsupported_catalog=allow_unsupported_catalog,
+            )
+            allow_history_catalog = allow_unsupported_catalog and draft.get("catalogVersion") != self.catalog.version
+            for snapshot in self.workspace.history(draft_id):
+                self._validate_persisted_draft(snapshot["draft"], allow_unsupported_catalog=allow_history_catalog)
+            return draft
         try:
             return self._drafts[draft_id]
         except KeyError as exc:
             raise BoundaryError("draft.not-found", f"unknown draft: {draft_id}", "/payload/draftId") from exc
+
+    def _validate_persisted_draft(self, draft: dict[str, Any], *, allow_unsupported_catalog: bool = False) -> dict[str, Any]:
+        if draft.get("schemaVersion") != self.DRAFT_SCHEMA_VERSION:
+            raise BoundaryError("draft.schema-unsupported", "unsupported draft schemaVersion", "/schemaVersion")
+        if not isinstance(draft.get("concept"), dict) or not isinstance(draft.get("selections"), dict):
+            raise BoundaryError("draft.file-corrupt", "persisted draft content is invalid", "", kind="persistence")
+        if draft.get("fingerprint") != _draft_fingerprint(draft):
+            raise BoundaryError("draft.fingerprint-invalid", "draft fingerprint does not match its contents", "/fingerprint", kind="persistence")
+        if draft.get("catalogVersion") != self.catalog.version:
+            if allow_unsupported_catalog:
+                return draft
+            raise BoundaryError("catalog.version-unsupported", "draft uses an unsupported catalog version", "/catalogVersion", kind="catalog-data")
+        self._validate_draft_input(draft, include_system=True)
+        return draft
 
     def _validate_draft_input(self, draft: dict[str, Any], *, include_system: bool = False) -> None:
         selections = draft.get("selections")

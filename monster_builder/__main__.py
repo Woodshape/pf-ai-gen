@@ -30,7 +30,7 @@ def main() -> int:
         print(json.dumps(response, ensure_ascii=False, separators=(",", ":")), flush=True)
         if not response.get("ok"):
             exit_code = max(exit_code, 3 if response.get("error", {}).get("code") == "draft.revision-conflict" else 4)
-        elif response.get("result", {}).get("evaluation", {}).get("status") in {"incomplete", "invalid"}:
+        elif (response.get("result", {}).get("evaluation") or {}).get("status") in {"incomplete", "invalid"}:
             exit_code = max(exit_code, 2)
     return exit_code
 
