@@ -21,6 +21,57 @@ def request(request_id, operation, payload):
     }
 
 
+def boundary_draft(cr, array="combatant"):
+    """A complete public-interface draft using source-literal slot counts."""
+    ability_values = {
+        0.5: [3, 2, 1], 1: [3, 2, 1], 2: [3, 2, 1], 3: [4, 2, 1],
+        4: [4, 3, 1], 5: [5, 3, 2], 6: [5, 4, 2], 7: [6, 4, 2],
+        8: [6, 4, 2], 10: [7, 5, 3], 11: [7, 5, 4], 12: [8, 5, 4],
+        15: [10, 7, 5], 16: [11, 7, 5], 20: [13, 9, 6], 21: [14, 10, 7],
+        27: [17, 13, 9], 30: [18, 15, 10],
+    }[cr]
+    option_count = 1 if cr < 3 else 2 if cr < 12 else 3 if cr < 20 else 4
+    if array == "combatant":
+        options = [{"optionId": "option.blind-fight", "parameters": {}}] * option_count
+        skills = {"master": ["perception"], "good": ["survival", "climb"]}
+    elif array == "expert":
+        options = [{"optionId": "option.alertness", "parameters": {}}] + [
+            {"optionId": "option.blind-fight", "parameters": {}}
+        ] * (option_count - 1)
+        skills = {
+            "master": ["perception", "stealth", "survival"],
+            "good": ["climb", "swim"],
+        }
+    else:
+        options = [{"optionId": "option.combat-casting", "parameters": {}}] * (
+            option_count if cr < 3 else option_count - 1
+        )
+        if cr >= 3:
+            options.append({"optionId": "option.blind-fight", "parameters": {}})
+        skills = {"master": ["perception", "stealth"], "good": ["survival"]}
+    attack = {"name": "weapon", "attackProfile": "weapon.high", "damageDie": "d6"}
+    if cr == 30:
+        attack.update({"attackProfile": "natural.three", "profileEntry": 1})
+    return {
+        "concept": {"name": "Boundary", "targetCR": cr},
+        "selections": {
+            "cr": cr,
+            "arrayId": f"array.{array}",
+            "creatureTypeGraftId": "graft.creature-type.humanoid",
+            "classGraftId": None,
+            "subtypeGraftIds": [],
+            "templateGraftId": None,
+            "sizeId": "graft.size.medium",
+            "abilityModifiers": dict(zip(("strength", "dexterity", "constitution"), ability_values)),
+            "options": options,
+            "skills": skills,
+            "attacks": [attack],
+            "speed": {"land": 30},
+            "spells": [],
+        },
+    }
+
+
 class ExecuteVerticalSliceTests(unittest.TestCase):
     def setUp(self):
         self.engine = Engine()
@@ -808,6 +859,135 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             issue["code"] for issue in response["result"]["evaluation"]["issues"]
         })
 
+    def test_array_rows_hold_at_source_cr_boundaries(self):
+        # ac, Fort, Will, hp, ability DC, spell DC, selected average damage;
+        # literals transcribed from Tables 5-1 through 5-6.
+        expected = {
+            "combatant": {
+                0.5: (13, 1, 0, 11, 9, 9, 5), 1: (14, 2, 1, 16, 10, 10, 8),
+                3: (17, 4, 2, 33, 12, 11, 14),
+                4: (19, 5, 3, 44, 13, 12, 17), 7: (22, 8, 6, 93, 15, 12, 22),
+                8: (23, 9, 7, 110, 16, 13, 26), 11: (27, 12, 10, 159, 18, 13, 32),
+                12: (29, 13, 11, 176, 19, 14, 35), 15: (32, 16, 13, 242, 21, 14, 41),
+                16: (33, 17, 14, 264, 22, 15, 47), 20: (38, 20, 17, 407, 25, 17, 70),
+                21: (39, 21, 18, 440, 25, 17, 76), 30: (50, 29, 26, 836, 33, 25, 94),
+            },
+            "expert": {
+                0.5: (11, 0, 3, 10, 11, 11, 4), 1: (12, 1, 4, 15, 12, 12, 7),
+                3: (15, 2, 6, 30, 14, 13, 13),
+                4: (17, 3, 7, 40, 15, 14, 16), 7: (20, 6, 10, 85, 17, 14, 20),
+                8: (21, 7, 11, 100, 18, 15, 23), 11: (25, 10, 14, 145, 20, 15, 33),
+                12: (27, 11, 15, 160, 21, 16, 36), 15: (30, 13, 18, 220, 23, 16, 40),
+                16: (31, 14, 19, 240, 24, 17, 46), 20: (36, 17, 22, 370, 27, 19, 68),
+                21: (37, 18, 23, 400, 27, 19, 69), 30: (48, 26, 31, 760, 35, 27, 85),
+            },
+            "spellcaster": {
+                0.5: (9, 0, 3, 9, 11, 13, 4), 1: (10, 1, 4, 13, 12, 14, 6),
+                3: (13, 2, 6, 27, 14, 15, 12),
+                4: (15, 3, 7, 36, 15, 16, 14), 7: (18, 6, 10, 76, 17, 16, 18),
+                8: (19, 7, 11, 90, 18, 17, 21), 11: (23, 10, 14, 130, 20, 17, 30),
+                12: (25, 11, 15, 144, 21, 18, 33), 15: (28, 13, 18, 198, 23, 18, 36),
+                16: (29, 14, 19, 216, 24, 19, 41), 20: (34, 17, 22, 333, 27, 21, 61),
+                21: (35, 18, 23, 360, 27, 21, 63), 30: (46, 26, 31, 684, 35, 29, 77),
+            },
+        }
+        for array, rows in expected.items():
+            for cr, values in rows.items():
+                with self.subTest(array=array, cr=cr):
+                    response = self.engine.execute(request(f"array-{array}-{cr}", "draft.create", {"draft": boundary_draft(cr, array)}))
+                    self.assertTrue(response["ok"], response)
+                    evaluation = response["result"]["evaluation"]
+                    self.assertEqual(evaluation["status"], "valid", evaluation["issues"])
+                    canonical = evaluation["canonical"]
+                    defenses = canonical["defenses"]
+                    actual = (
+                        defenses["ac"], defenses["fortitude"], defenses["will"], defenses["hp"],
+                        canonical["abilityDC"], canonical["spellDC"], canonical["attacks"][0]["averageDamage"],
+                    )
+                    self.assertEqual(actual, values)
+
+    def test_damage_table_lower_and_upper_boundaries_use_source_literals(self):
+        expected = {
+            0.5: {
+                "profile": "weapon.high",
+                "array": "expert",
+                "expressions": {
+                    "d4": "1d4+2", "d6": "1d6+1", "d8": "1d8+0", "d10": "1d10",
+                    "d12": "1d12", "2d6": "2d6", "3d6": "3d6",
+                },
+            },
+            27: {
+                "profile": "weapon.high",
+                "array": "spellcaster",
+                "expressions": {
+                    "d4": "1d4+98", "d6": "1d6+97", "d8": "1d8+96", "d10": "1d10+95",
+                    "d12": "1d12+94", "2d6": "2d6+93", "3d6": "3d6+91",
+                },
+            },
+        }
+        for cr, case in expected.items():
+            for die, expression in case["expressions"].items():
+                with self.subTest(cr=cr, die=die):
+                    draft = boundary_draft(cr, case["array"])
+                    draft["selections"]["attacks"] = [{
+                        "name": "weapon", "attackProfile": case["profile"], "damageDie": die,
+                    }]
+                    response = self.engine.execute(request(f"damage-{cr}-{die}", "draft.create", {"draft": draft}))
+                    self.assertEqual(response["result"]["evaluation"]["canonical"]["attacks"][0]["damageExpression"], expression)
+
+        above_table = boundary_draft(30)
+        above_table["selections"]["attacks"] = [{
+            "name": "weapon", "attackProfile": "weapon.high", "damageDie": "d6",
+        }]
+        evaluation = self.engine.execute(request("damage-above-table", "draft.create", {"draft": above_table}))["result"]["evaluation"]
+        issue = next(issue for issue in evaluation["issues"] if issue["code"] == "damage.unresolved")
+        self.assertTrue(issue["sourceRefs"])
+
+    def test_cr_outside_the_published_array_is_a_catalog_boundary_error(self):
+        for cr in (0, 31):
+            with self.subTest(cr=cr):
+                draft = copy.deepcopy(WORG_DRAFT)
+                draft["concept"]["targetCR"] = cr
+                draft["selections"]["cr"] = cr
+                response = self.engine.execute(request(f"unsupported-cr-{cr}", "draft.create", {"draft": draft}))
+                self.assertFalse(response["ok"])
+                self.assertEqual(response["error"]["code"], "catalog.cr-unsupported")
+
+    def test_size_graft_cr_boundaries_are_inclusive(self):
+        cases = [
+            ("fine", 2, 3, "size.cr-too-high"),
+            ("diminutive", 4, 5, "size.cr-too-high"),
+            ("tiny", 6, 7, "size.cr-too-high"),
+            ("large", 2, 1, "size.cr-too-low"),
+            ("huge", 4, 3, "size.cr-too-low"),
+            ("gargantuan", 6, 5, "size.cr-too-low"),
+            ("colossal", 8, 7, "size.cr-too-low"),
+        ]
+        for size, allowed_cr, rejected_cr, code in cases:
+            with self.subTest(size=size):
+                allowed = boundary_draft(allowed_cr)
+                allowed["selections"]["sizeId"] = f"graft.size.{size}"
+                response = self.engine.execute(request(f"size-{size}-allowed", "draft.create", {"draft": allowed}))
+                self.assertNotIn(code, {issue["code"] for issue in response["result"]["evaluation"]["issues"]})
+
+                rejected = boundary_draft(rejected_cr)
+                rejected["selections"]["sizeId"] = f"graft.size.{size}"
+                response = self.engine.execute(request(f"size-{size}-rejected", "draft.create", {"draft": rejected}))
+                self.assertIn(code, {issue["code"] for issue in response["result"]["evaluation"]["issues"]})
+
+        for cr in (0.5, 30):
+            small = boundary_draft(cr)
+            small["selections"]["sizeId"] = "graft.size.small"
+            response = self.engine.execute(request(f"size-small-{cr}", "draft.create", {"draft": small}))
+            self.assertFalse({"size.cr-too-low", "size.cr-too-high"} & {
+                issue["code"] for issue in response["result"]["evaluation"]["issues"]
+            })
+
+        fine = boundary_draft(2)
+        fine["selections"]["sizeId"] = "graft.size.fine"
+        canonical = self.engine.execute(request("size-fine-cap", "draft.create", {"draft": fine}))["result"]["evaluation"]["canonical"]
+        self.assertEqual(canonical["defenses"]["touchAC"], canonical["defenses"]["ac"])
+
     def test_direct_numeric_option_effects_share_the_catalog_effect_path(self):
         cases = {
             "option.accuracy": ("attacks", [8]),
@@ -828,6 +1008,29 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
                     self.assertEqual({key: canonical["defenses"][key] for key in expected}, expected)
                 else:
                     self.assertEqual(canonical[field], expected)
+
+    def test_sheet_changing_options_are_typed_and_scaled_at_boundaries(self):
+        for cr, expected in ((3, 2), (4, 5), (10, 5), (11, 10), (15, 10), (16, 15), (20, 15), (21, 20)):
+            with self.subTest(option="fast-healing", cr=cr):
+                draft = boundary_draft(cr)
+                draft["selections"]["options"][0] = {"optionId": "option.fast-healing", "parameters": {}}
+                response = self.engine.execute(request(f"fast-healing-{cr}", "draft.create", {"draft": draft}))
+                self.assertEqual(response["result"]["evaluation"]["canonical"]["fastHealing"], expected)
+
+        draft = boundary_draft(2)
+        draft["selections"]["options"][0] = {"optionId": "option.flying-acumen", "parameters": {}}
+        response = self.engine.execute(request("flying-acumen", "draft.create", {"draft": draft}))
+        canonical = response["result"]["evaluation"]["canonical"]
+        self.assertEqual(canonical["skills"]["fly"], 10)
+        option = next(option for option in canonical["options"] if option["optionId"] == "option.flying-acumen")
+        self.assertEqual(option["effect"], {"type": "additionalMasterSkills", "skillIds": ["skill.fly"]})
+
+        draft = boundary_draft(11, "spellcaster")
+        draft["selections"]["options"][0] = {"optionId": "option.spell-penetration", "parameters": {}}
+        response = self.engine.execute(request("spell-penetration-11", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["canonical"]["casterLevelCheckBonuses"], [
+            {"value": 4, "against": "spell resistance"},
+        ])
 
     def test_tough_options_apply_source_cr_formulas(self):
         cases = [
@@ -1039,8 +1242,11 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         expected = {
             3: {"1/day": 2},
             4: {"1/day": 2, "3/day": 4},
+            7: {"1/day": 2, "3/day": 4},
             8: {"1/day": 2, "3/day": 4, "at will": 2},
+            11: {"1/day": 2, "3/day": 4, "at will": 2},
             12: {"1/day": 2, "3/day": 4, "at will": 2},
+            15: {"1/day": 2, "3/day": 4, "at will": 2},
             16: {"1/day": 2, "3/day": 4, "at will": 2},
         }
         for cr, frequencies in expected.items():

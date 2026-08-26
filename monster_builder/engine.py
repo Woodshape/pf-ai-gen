@@ -1029,6 +1029,7 @@ class Engine:
             "damageReduction": [],
             "fastHealing": None,
             "regeneration": [],
+            "casterLevelCheckBonuses": [],
             "conditions": [
                 *(class_choice_effect or {}).get("conditions", []),
                 *(condition for graft in active_grafts for condition in graft.get("conditions", [])),
@@ -1106,6 +1107,14 @@ class Engine:
                         canonical["defenses"][field] += 1
                 else:
                     canonical["defenses"][save] += 3
+            elif effect_type == "additionalMasterSkills":
+                for skill_id in effect["skillIds"]:
+                    canonical["skills"][skill_id.removeprefix("skill.")] = main["masterBonus"]
+            elif effect_type == "casterLevelCheckBonus":
+                value = effect["values"][max(
+                    (threshold for threshold in effect["values"] if cr >= int(threshold)), key=int,
+                )]
+                canonical["casterLevelCheckBonuses"].append({"value": value, "against": effect["against"]})
             if selected_option["optionId"] == "option.extra-hit-points":
                 increase = int(canonical["defenses"]["hp"] * 0.2)
                 canonical["defenses"]["hp"] += increase
@@ -1142,8 +1151,10 @@ class Engine:
                 regeneration = {"value": value, "bypass": copy.deepcopy(selected_option["parameters"]["bypass"]), "suppression": "1 round"}
                 canonical["regeneration"].append(regeneration)
                 selected_option["effect"] = {"type": "regeneration", **copy.deepcopy(regeneration)}
-            if effect_type in {"attackBonus", "defenseBonuses", "concentrationBonus", "spellResistance", "saveChoice"}:
+            if effect_type in {"attackBonus", "defenseBonuses", "concentrationBonus", "spellResistance", "saveChoice", "additionalMasterSkills"}:
                 selected_option["effect"] = copy.deepcopy(effect)
+            elif effect_type == "casterLevelCheckBonus":
+                selected_option["effect"] = {"type": effect_type, "value": value, "against": effect["against"]}
 
         errors = [issue for issue in issues if issue["severity"] == "error"]
         if errors:
@@ -1461,6 +1472,11 @@ class Engine:
             self._resolve("subtype", subtype_id, "/selections/subtypeGraftIds")[1]["sourceRef"]
             for subtype_id in canonical.get("subtypeGraftIds", [])
         )
+        for option in canonical.get("options", []):
+            definition = self.catalog.data["options"][option["optionId"]]
+            if definition.get("effects", {}).get("type") == "additionalMasterSkills":
+                refs = definition["sourceRef"]
+                skill_refs.extend(refs if isinstance(refs, list) else [refs])
         if size.get("additionalMasterSkills") or size.get("additionalGoodSkills"):
             skill_refs.append(size["sourceRef"])
         add("/canonical/skills", "array.skillBonuses + graft grants + skill selections", canonical["skills"], skill_refs)
@@ -1523,6 +1539,13 @@ class Engine:
         add("/canonical/cmb", "otherCalculations.cmb", canonical["cmb"], [main_ref])
         if canonical.get("maneuverBonuses"):
             add("/canonical/maneuverBonuses", "option.improvedCombatManeuver", canonical["maneuverBonuses"], [self.catalog.data["options"]["option.improved-combat-maneuver"]["sourceRef"]])
+        if canonical.get("casterLevelCheckBonuses"):
+            refs = [
+                self.catalog.data["options"][option["optionId"]]["sourceRef"]
+                for option in canonical["options"]
+                if self.catalog.data["options"][option["optionId"]].get("effects", {}).get("type") == "casterLevelCheckBonus"
+            ]
+            add("/canonical/casterLevelCheckBonuses", "option.casterLevelCheckBonus", canonical["casterLevelCheckBonuses"], refs)
         return trace
 
     def _evaluation(self, status, issues):

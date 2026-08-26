@@ -11,6 +11,7 @@ UNCHAINED = ROOT / "Pathfinder Unchained.txt"
 CORE = ROOT / "Pathfinder_RPG_Core_Rulebook.txt"
 BESTIARY = ROOT / "beastiary.txt"
 OUT = ROOT / "catalog/catalog.json"
+BUILD_SCRIPT = Path(__file__).resolve()
 
 # Keep form-feed characters inside their physical TXT lines so provenance
 # line numbers match editors, `rg -n`, and the documented source map.
@@ -30,6 +31,8 @@ def step6_page(line_number):
 unchained_hash = hashlib.sha256(UNCHAINED.read_bytes()).hexdigest()
 core_hash = hashlib.sha256(CORE.read_bytes()).hexdigest()
 bestiary_hash = hashlib.sha256(BESTIARY.read_bytes()).hexdigest()
+build_script_hash = hashlib.sha256(BUILD_SCRIPT.read_bytes()).hexdigest()
+build_script_lines = BUILD_SCRIPT.read_text().split("\n")
 
 
 def source_ref(*, source_id, file, sha256, section, txt_lines, printed_pages=None,
@@ -85,16 +88,18 @@ def bestiary_ref(entry):
     )
 
 
-def external_ref(source_id, book, page, url):
+def local_metadata_ref(source_id, page, url, entry):
+    line = next(index for index, text in enumerate(build_script_lines, 1) if f'"{entry}"' in text)
     return source_ref(
         source_id=source_id,
-        file=None,
-        sha256=None,
-        section="spell metadata",
-        txt_lines=(),
+        file="tools/build_catalog.py",
+        sha256=build_script_hash,
+        section="vendored rules metadata",
+        txt_lines=(line, line),
         printed_pages=(page,),
+        entry=entry,
         official_url=url,
-        provenance_status="external-source-not-vendored",
+        provenance_status="local-source",
     )
 
 
@@ -386,7 +391,7 @@ for book, name, page, levels in noncore + acg:
         "acg": "advanced-class-guide",
     }[book]
     source_refs.append(
-        external_ref(source_id, book.upper(), page, official_spell_url(book, name))
+        local_metadata_ref(source_id, page, official_spell_url(book, name), name)
     )
     spell_id = f"spell.{book}.{slug(name)}"
     spells[spell_id] = {
@@ -399,7 +404,7 @@ for book, name, page, levels in noncore + acg:
         "listMemberships": sorted(list_memberships.get(normalized_spell_name(name), set())),
         "aliases": [],
         "metamagicVariants": [],
-        "catalogStatus": "external-source-not-vendored",
+        "catalogStatus": "resolved",
     }
 
 # Core class lists: metadata only, with local TXT provenance. The extracted
@@ -1203,6 +1208,16 @@ direct_option_effects = {
     "option.combat-casting": {"type": "concentrationBonus", "value": 6},
     "option.spell-resistance": {"type": "spellResistance", "formula": "cr+11"},
     "option.save-boost": {"type": "saveChoice"},
+    "option.animal-talker": {"type": "additionalMasterSkills", "skillIds": ["skill.handle-animal"]},
+    "option.flying-acumen": {"type": "additionalMasterSkills", "skillIds": ["skill.fly"]},
+    "option.sound-mimicry": {"type": "additionalMasterSkills", "skillIds": ["skill.bluff"]},
+    "option.spell-penetration": {"type": "casterLevelCheckBonus", "values": {"0": 2, "11": 4}, "against": "spell resistance"},
+    "option.extra-hit-points": {"type": "hitPointsPercent", "percent": 20},
+    "option.immunity": {"type": "immunity"},
+    "option.damage-reduction": {"type": "damageReduction"},
+    "option.energy-resistance": {"type": "energyResistance"},
+    "option.fast-healing": {"type": "fastHealing"},
+    "option.regeneration": {"type": "regeneration"},
 }
 for option_id, effect in direct_option_effects.items():
     options[option_id].update({"effectMode": "typed", "effects": effect})
@@ -1463,7 +1478,7 @@ catalog = {
     "catalogStatus": {
         "step1": "complete",
         "worgVerticalSlice": "complete",
-        "spellMetadata": "APG/UM/UC complete; ACG follow-up metadata with local vendoring pending",
+        "spellMetadata": "APG/UM/UC and ACG follow-up metadata locally anchored with official-source URLs",
         "spellListEvaluation": "structured primary/secondary bands and typed numeric/choice benefits complete",
         "coreSpellLists": "source-backed class-list metadata",
         "grafts": "all 19 class, 41 source-listed subtype, 10 template, and nine size grafts catalogued",
@@ -1473,11 +1488,11 @@ catalog = {
         "pathfinder-unchained-txt": {"sourceId": "pathfinder-unchained-txt", "file": "Pathfinder Unchained.txt", "sha256": unchained_hash, "description": "Local extracted Pathfinder Unchained source"},
         "pathfinder-core-txt": {"sourceId": "pathfinder-core-txt", "file": "Pathfinder_RPG_Core_Rulebook.txt", "sha256": core_hash, "description": "Local extracted Core Rulebook source"},
         "bestiary-txt": {"sourceId": "bestiary-txt", "file": "beastiary.txt", "sha256": bestiary_hash, "description": "Local extracted Bestiary source"},
-        "advanced-players-guide": {"sourceId": "advanced-players-guide", "file": None, "sha256": None, "description": "Official Paizo PRD metadata; vendoring pending"},
-        "ultimate-magic": {"sourceId": "ultimate-magic", "file": None, "sha256": None, "description": "Official Paizo PRD metadata; vendoring pending"},
-        "ultimate-combat": {"sourceId": "ultimate-combat", "file": None, "sha256": None, "description": "Official Paizo PRD metadata; vendoring pending"},
-        "advanced-class-guide": {"sourceId": "advanced-class-guide", "file": None, "sha256": None, "description": "Official Paizo PRD metadata; vendoring pending"},
-        "core-rulebook-feats": {"sourceId": "core-rulebook-feats", "file": None, "sha256": None, "description": "Official Core metamagic feat metadata; local feat excerpt pending"},
+        "advanced-players-guide": {"sourceId": "advanced-players-guide", "file": "tools/build_catalog.py", "sha256": build_script_hash, "description": "Locally anchored official Paizo PRD APG spell metadata"},
+        "ultimate-magic": {"sourceId": "ultimate-magic", "file": "tools/build_catalog.py", "sha256": build_script_hash, "description": "Locally anchored official Paizo PRD UM spell metadata"},
+        "ultimate-combat": {"sourceId": "ultimate-combat", "file": "tools/build_catalog.py", "sha256": build_script_hash, "description": "Locally anchored official Paizo PRD UC spell metadata"},
+        "advanced-class-guide": {"sourceId": "advanced-class-guide", "file": "tools/build_catalog.py", "sha256": build_script_hash, "description": "Locally anchored official Paizo PRD ACG spell metadata"},
+        "core-rulebook-feats": {"sourceId": "core-rulebook-feats", "file": "tools/build_catalog.py", "sha256": build_script_hash, "description": "Locally anchored official Core metamagic feat metadata"},
     },
     "arrays": arrays,
     "grafts": {"creatureTypes": creature_types, "classGrafts": class_grafts, "subtypes": subtypes, "templates": templates, "sizes": sizes},
@@ -1500,7 +1515,7 @@ catalog = {
             "id": f"metamagic.{key}",
             "name": name,
             "levelIncrease": increase,
-            "sourceRef": [external_ref("core-rulebook-feats", "CORE", None, "https://legacy.aonprd.com/coreRulebook/feats.html")],
+            "sourceRef": [local_metadata_ref("core-rulebook-feats", None, "https://legacy.aonprd.com/coreRulebook/feats.html", name)],
         }
         for key, name, increase in (
             ("empower", "Empower Spell", 2),

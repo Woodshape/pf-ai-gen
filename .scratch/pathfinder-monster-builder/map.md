@@ -24,10 +24,10 @@ A local-first browser tool that guides a user through *Pathfinder Unchained* Sim
 
 The repository has moved from planning into a dependency-free Python vertical slice:
 
-- `catalog/catalog.json` and `catalog/catalog.schema.json` load and validate against local source hashes. The catalog uses a content-derived version fingerprint rather than maintained compatibility branches. It contains the three CR arrays, all 19 class grafts, 41 source-listed subtype grafts, all 10 templates, nine size grafts, all 159 Step-7 table options plus three required unmodified-rule options, skills, attacks, damage, all 60 structured Step-6 spell lists, and 659 spell records. Non-Core spell sources are still marked external/not vendored.
+- `catalog/catalog.json` and `catalog/catalog.schema.json` load and validate against local source hashes. The catalog uses a content-derived version fingerprint rather than maintained compatibility branches. It contains the three CR arrays, all 19 class grafts, 41 source-listed subtype grafts, all 10 templates, nine size grafts, all 159 Step-7 table options plus three required unmodified-rule options, skills, attacks, damage, all 60 structured Step-6 spell lists, and 659 spell records. All 39 APG/UM/UC spells, five ACG spells, and Core metamagic rules are now locally hash-anchored with official-source URLs.
 - `monster_builder.Engine.execute` supports `draft.create`, `draft.get`, `draft.applyChanges`, and `draft.evaluate` with typed selection validation, revision/fingerprint guards, idempotency, incomplete/invalid separation, and derivation traces.
-- Worg CR 2, Griffon CR 4, pre-Reality-Check Medusa CR 7, Goblin Druid, Fighter, Sorcerer save-choice, Clockwork, Skeleton, and Lycanthrope paths are covered through the public interface. The engine applies required arrays, highest-only class CR entries, option/skill replacement and additional budgets, template prerequisites, as-if-CR spellcasting, direct numeric graft/option effects, and stable source traces. Complex encounter actions are retained verbatim as explicit source-rule effects rather than guessed simulations. The Witch graft’s source-omitted skill rank and unsupported fixed or sub-d4 natural-attack dice remain explicit source gaps. The offline test suite currently has 57 passing tests.
-- This is not yet a full Steps 1–9 application: more direct typed calculations for complex source-rule options, complete table-boundary regressions, persistence, finalization, exports, UI, and AI are still outstanding.
+- Worg CR 2, Griffon CR 4, pre-Reality-Check Medusa CR 7, Goblin Druid, Fighter, Sorcerer save-choice, Clockwork, Skeleton, and Lycanthrope paths are covered through the public interface. The engine applies required arrays, highest-only class CR entries, option/skill replacement and additional budgets, template prerequisites, as-if-CR spellcasting, and stable source traces. Twenty-eight options now have typed effects, including direct numeric defenses, healing, resistances, additional master skills, and scaled caster-level checks; complex encounter actions remain explicit source-rule effects rather than guessed simulations. Array transition CRs, all size-graft limits, both sides of every spell band, damage-table endpoints, and unsupported CR/damage limits are public-interface regressions. The Witch graft’s source-omitted skill rank and unsupported fixed or sub-d4 natural-attack dice remain explicit source gaps. The offline test suite currently has 62 passing tests.
+- This is not yet a full Steps 1–9 application: exhaustive every-row/every-option fidelity coverage, persistence, finalization, exports, UI, and AI are still outstanding.
 
 ## Decisions so far
 
@@ -46,9 +46,8 @@ The repository has moved from planning into a dependency-free Python vertical sl
 
 ## Next implementation milestone
 
-- **Deepen typed option effects:** replace source-rule records with direct calculations where a complex option changes canonical statistics; retain source text for encounter-time actions that do not alter the sheet.
-- **Prove the public interface:** add independent full-table and CR-boundary regressions beyond the current golden, graft-family, spell-band, prerequisite, poison-budget, and natural-damage cases.
-- **Close provenance:** vendor or otherwise locally anchor the remaining external APG/UM/UC/ACG spell metadata before claiming fully local non-Core coverage.
+- **Finish the fidelity matrix:** extend the new boundary suite to every published CR row, damage interval, and remaining option prerequisite/scaling threshold through `execute`.
+- **Preserve the strict seam:** keep encounter-time actions as source-rule abilities unless they deterministically change the Monster Sheet; add typed effects only for direct canonical fields.
 - Then follow Issue 10's delivery order for JSON persistence, finalization/exports, the Guided-Rail UI, and the optional Pi adapter.
 
 ## Out of scope

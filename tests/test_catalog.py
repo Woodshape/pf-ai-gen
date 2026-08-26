@@ -77,7 +77,17 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(sum(spell["sourceBook"] == "ACG" for spell in spells), 5)
         self.assertIn("spell.apg.lead-blades", catalog.data["spells"])
         self.assertIn("spell.acg.heart-of-the-metal", catalog.data["spells"])
-        self.assertEqual(catalog.data["spells"]["spell.apg.lead-blades"]["catalogStatus"], "external-source-not-vendored")
+        non_core = [spell for spell in catalog.data["spells"].values() if spell["sourceBook"] != "CORE"]
+        self.assertTrue(all(spell["catalogStatus"] == "resolved" for spell in non_core))
+        for spell in non_core:
+            local_ref = next(ref for ref in spell["sourceRef"] if ref["sourceId"] != "pathfinder-unchained-txt")
+            self.assertEqual(local_ref["provenanceStatus"], "local-source")
+            self.assertTrue(local_ref["file"] and local_ref["sha256"])
+            self.assertTrue((Path(__file__).parents[1] / local_ref["file"]).is_file())
+        self.assertTrue(all(
+            rule["sourceRef"][0]["provenanceStatus"] == "local-source"
+            for rule in catalog.data["metamagicRules"].values()
+        ))
         natural = catalog.data["arrays"]["combatant"]["attackStatistics"]["2"]["natural"]
         self.assertEqual(natural["two"]["entries"], [{"count": 2, "attackBonuses": [2], "averageDamage": 6}])
         self.assertEqual(natural["three"]["entries"], [

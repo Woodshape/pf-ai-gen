@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1",
-  "catalogVersion": "sha256:9b8b21c92b6ea350ce5821c466d61fec33c37e91f6307211c23c0e8bea00b406",
+  "catalogVersion": "sha256:248f42916006dfcb1239b35e8c27a3060096d1ae9c5ff21ebc752bf5935072e3",
   "catalogStatus": {
     "step1": "complete",
     "worgVerticalSlice": "complete",
-    "spellMetadata": "APG/UM/UC complete; ACG follow-up metadata with local vendoring pending",
+    "spellMetadata": "APG/UM/UC and ACG follow-up metadata locally anchored with official-source URLs",
     "spellListEvaluation": "structured primary/secondary bands and typed numeric/choice benefits complete",
     "coreSpellLists": "source-backed class-list metadata",
     "grafts": "all 19 class, 41 source-listed subtype, 10 template, and nine size grafts catalogued",
@@ -31,33 +31,33 @@
     },
     "advanced-players-guide": {
       "sourceId": "advanced-players-guide",
-      "file": null,
-      "sha256": null,
-      "description": "Official Paizo PRD metadata; vendoring pending"
+      "file": "tools/build_catalog.py",
+      "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+      "description": "Locally anchored official Paizo PRD APG spell metadata"
     },
     "ultimate-magic": {
       "sourceId": "ultimate-magic",
-      "file": null,
-      "sha256": null,
-      "description": "Official Paizo PRD metadata; vendoring pending"
+      "file": "tools/build_catalog.py",
+      "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+      "description": "Locally anchored official Paizo PRD UM spell metadata"
     },
     "ultimate-combat": {
       "sourceId": "ultimate-combat",
-      "file": null,
-      "sha256": null,
-      "description": "Official Paizo PRD metadata; vendoring pending"
+      "file": "tools/build_catalog.py",
+      "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+      "description": "Locally anchored official Paizo PRD UC spell metadata"
     },
     "advanced-class-guide": {
       "sourceId": "advanced-class-guide",
-      "file": null,
-      "sha256": null,
-      "description": "Official Paizo PRD metadata; vendoring pending"
+      "file": "tools/build_catalog.py",
+      "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+      "description": "Locally anchored official Paizo PRD ACG spell metadata"
     },
     "core-rulebook-feats": {
       "sourceId": "core-rulebook-feats",
-      "file": null,
-      "sha256": null,
-      "description": "Official Core metamagic feat metadata; local feat excerpt pending"
+      "file": "tools/build_catalog.py",
+      "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+      "description": "Locally anchored official Core metamagic feat metadata"
     }
   },
   "arrays": {
@@ -23730,9 +23730,12 @@
       "category": "social",
       "parameters": {},
       "effects": {
-        "ability": "animal-talker"
+        "type": "additionalMasterSkills",
+        "skillIds": [
+          "skill.handle-animal"
+        ]
       },
-      "effectMode": "source-rule",
+      "effectMode": "typed",
       "ruleText": "Animal Talker: The monster can speak with animals, and gains Handle Animal as an additional master skill.",
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -24863,9 +24866,9 @@
         }
       },
       "effects": {
-        "ability": "damage-reduction"
+        "type": "damageReduction"
       },
-      "effectMode": "source-rule",
+      "effectMode": "typed",
       "ruleText": "Damage Reduction: The monster gains damage reduction. Cross-reference the monster’s CR band and the type of damage that bypasses the reduction to find the value of the monster’s DR on the table below. For DR that requires more than one damage type to bypass, the DR equals the lower value – 5. (If this reduces it to 0, this type of DR is probably too strong.) CR Type* Material Magic Alignment None 0–5 5 5 5 5 1 6–10 10 10 10 5 3 11–15 15 15 10 10 5 16–20 20 20 20 15 10 21+ 30 30 30 20 15 *A bludgeoning, piercing, or slashing weapon.",
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -25374,9 +25377,9 @@
         }
       },
       "effects": {
-        "ability": "energy-resistance"
+        "type": "energyResistance"
       },
-      "effectMode": "source-rule",
+      "effectMode": "typed",
       "ruleText": "Energy Resistance: The monster gains resistance 10 against two energy types. For every 5 CR the monster has, increase the amount of energy resistance by 5, or increase the number of resistances by one. For example, a CR 17 monster might have three resistances at 10 or two resistances at 15.",
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -25588,9 +25591,10 @@
       "category": "combat",
       "parameters": {},
       "effects": {
-        "ability": "extra-hit-points"
+        "type": "hitPointsPercent",
+        "percent": 20
       },
-      "effectMode": "source-rule",
+      "effectMode": "typed",
       "ruleText": "Extra Hit Points: Increase the monster’s hit point total by 20%.",
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -25700,9 +25704,9 @@
       "category": "combat",
       "parameters": {},
       "effects": {
-        "ability": "fast-healing"
+        "type": "fastHealing"
       },
-      "effectMode": "source-rule",
+      "effectMode": "typed",
       "ruleText": "Fast Healing: This monster regains 2 hit points per round. This healing increases to 5 hit points per round at CR 4, 10 at CR 11, 15 at CR 16, and 20 at CR 21.",
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -25962,9 +25966,12 @@
       "category": "universal",
       "parameters": {},
       "effects": {
-        "ability": "flying-acumen"
+        "type": "additionalMasterSkills",
+        "skillIds": [
+          "skill.fly"
+        ]
       },
-      "effectMode": "source-rule",
+      "effectMode": "typed",
       "ruleText": "Flying Acumen: This monster gains hover (as the monster feat on page 315 of the Bestiary) and gains Fly as an additional master skill.",
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -26135,9 +26142,9 @@
         }
       },
       "effects": {
-        "ability": "immunity"
+        "type": "immunity"
       },
-      "effectMode": "source-rule",
+      "effectMode": "typed",
       "ruleText": "Immunity: The monster gains immunity from one energy type, affliction, condition, or spell of your choice, plus one additional immunity for every 5 CR it has.",
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -27516,9 +27523,9 @@
         }
       },
       "effects": {
-        "ability": "regeneration"
+        "type": "regeneration"
       },
-      "effectMode": "source-rule",
+      "effectMode": "typed",
       "ruleText": "Regeneration: This functions as the fast healing option (see page 232), but the monster can’t die while its regeneration still functions. Choose two or more damage types (typically acid and fire damage); these types suppress the regeneration for 1 round.",
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -28012,9 +28019,12 @@
       "category": "social",
       "parameters": {},
       "effects": {
-        "ability": "sound-mimicry"
+        "type": "additionalMasterSkills",
+        "skillIds": [
+          "skill.bluff"
+        ]
       },
-      "effectMode": "source-rule",
+      "effectMode": "typed",
       "ruleText": "Sound Mimicry: The monster can perfectly mimic sounds, and possibly voices. It gains Bluff as an additional master skill, and can attempt a Bluff check opposed by its targets’ Sense Motive checks to mimic a sound convincingly. The target takes a –8 penalty if it’s unfamiliar with the type of sound or creature being imitated.",
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -28068,9 +28078,14 @@
       "category": "magic",
       "parameters": {},
       "effects": {
-        "ability": "spell-penetration"
+        "type": "casterLevelCheckBonus",
+        "values": {
+          "0": 2,
+          "11": 4
+        },
+        "against": "spell resistance"
       },
-      "effectMode": "source-rule",
+      "effectMode": "typed",
       "ruleText": "Spell Penetration: The monster gains a +2 bonus on caster level checks to overcome a creature’s spell resistance. At CR 11, the bonus increases to +4.",
       "sourceRef": {
         "sourceId": "pathfinder-unchained-txt",
@@ -49004,15 +49019,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            276,
+            276
+          ],
           "printedPages": [
             256
           ],
+          "entry": "Winds of Vengeance",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49027,7 +49046,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.ant-haul": {
       "id": "spell.apg.ant-haul",
@@ -49054,15 +49073,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            277,
+            277
+          ],
           "printedPages": [
             201
           ],
+          "entry": "Ant Haul",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49080,7 +49103,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.vomit-swarm": {
       "id": "spell.apg.vomit-swarm",
@@ -49089,15 +49112,19 @@
       "sourceRef": [
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            278,
+            278
+          ],
           "printedPages": [
             254
           ],
+          "entry": "Vomit Swarm",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49110,7 +49137,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.dragon-s-breath": {
       "id": "spell.apg.dragon-s-breath",
@@ -49137,15 +49164,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            279,
+            279
+          ],
           "printedPages": [
             217
           ],
+          "entry": "Dragon’s Breath",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49161,7 +49192,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.twin-form": {
       "id": "spell.apg.twin-form",
@@ -49188,15 +49219,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            280,
+            280
+          ],
           "printedPages": [
             252
           ],
+          "entry": "Twin Form",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49208,7 +49243,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.fiery-body": {
       "id": "spell.apg.fiery-body",
@@ -49235,15 +49270,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            281,
+            281
+          ],
           "printedPages": [
             221
           ],
+          "entry": "Fiery Body",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49256,7 +49295,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.blessing-of-fervor": {
       "id": "spell.apg.blessing-of-fervor",
@@ -49283,15 +49322,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            282,
+            282
+          ],
           "printedPages": [
             205
           ],
+          "entry": "Blessing of Fervor",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49305,7 +49348,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.draconic-reservoir": {
       "id": "spell.apg.draconic-reservoir",
@@ -49332,15 +49375,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            283,
+            283
+          ],
           "printedPages": [
             217
           ],
+          "entry": "Draconic Reservoir",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49354,7 +49401,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.expeditious-excavation": {
       "id": "spell.apg.expeditious-excavation",
@@ -49381,15 +49428,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            284,
+            284
+          ],
           "printedPages": [
             220
           ],
+          "entry": "Expeditious Excavation",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49403,7 +49454,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.elemental-touch": {
       "id": "spell.apg.elemental-touch",
@@ -49430,15 +49481,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            285,
+            285
+          ],
           "printedPages": [
             218
           ],
+          "entry": "Elemental Touch",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49452,7 +49507,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.elemental-aura": {
       "id": "spell.apg.elemental-aura",
@@ -49479,15 +49534,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            286,
+            286
+          ],
           "printedPages": [
             218
           ],
+          "entry": "Elemental Aura",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49501,7 +49560,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.ball-lightning": {
       "id": "spell.apg.ball-lightning",
@@ -49528,15 +49587,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            287,
+            287
+          ],
           "printedPages": [
             204
           ],
+          "entry": "Ball Lightning",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49551,7 +49614,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.wall-of-suppression": {
       "id": "spell.apg.wall-of-suppression",
@@ -49560,15 +49623,19 @@
       "sourceRef": [
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            288,
+            288
+          ],
           "printedPages": [
             255
           ],
+          "entry": "Wall of Suppression",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49581,7 +49648,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.weapon-of-awe": {
       "id": "spell.apg.weapon-of-awe",
@@ -49590,15 +49657,19 @@
       "sourceRef": [
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            289,
+            289
+          ],
           "printedPages": [
             256
           ],
+          "entry": "Weapon of Awe",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49612,7 +49683,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.grace": {
       "id": "spell.apg.grace",
@@ -49639,15 +49710,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            290,
+            290
+          ],
           "printedPages": [
             226
           ],
+          "entry": "Grace",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49660,7 +49735,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.spiritual-ally": {
       "id": "spell.apg.spiritual-ally",
@@ -49687,15 +49762,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            291,
+            291
+          ],
           "printedPages": [
             246
           ],
+          "entry": "Spiritual Ally",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49707,7 +49786,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.hydraulic-push": {
       "id": "spell.apg.hydraulic-push",
@@ -49734,15 +49813,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            292,
+            292
+          ],
           "printedPages": [
             228
           ],
+          "entry": "Hydraulic Push",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49756,7 +49839,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.touch-of-the-sea": {
       "id": "spell.apg.touch-of-the-sea",
@@ -49765,15 +49848,19 @@
       "sourceRef": [
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            293,
+            293
+          ],
           "printedPages": [
             250
           ],
+          "entry": "Touch of the Sea",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49788,7 +49875,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.fluid-form": {
       "id": "spell.apg.fluid-form",
@@ -49815,15 +49902,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            294,
+            294
+          ],
           "printedPages": [
             223
           ],
+          "entry": "Fluid Form",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49837,7 +49928,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.apg.lead-blades": {
       "id": "spell.apg.lead-blades",
@@ -49864,15 +49955,19 @@
         },
         {
           "sourceId": "advanced-players-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            295,
+            295
+          ],
           "printedPages": [
             230
           ],
+          "entry": "Lead Blades",
           "officialUrl": "https://legacy.aonprd.com/advancedPlayersGuide/advancedSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49884,7 +49979,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.corrosive-touch": {
       "id": "spell.um.corrosive-touch",
@@ -49911,15 +50006,19 @@
         },
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            296,
+            296
+          ],
           "printedPages": [
             213
           ],
+          "entry": "Corrosive Touch",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49934,7 +50033,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.acidic-spray": {
       "id": "spell.um.acidic-spray",
@@ -49961,15 +50060,19 @@
         },
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            297,
+            297
+          ],
           "printedPages": [
             204
           ],
+          "entry": "Acidic Spray",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -49983,7 +50086,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.corrosive-consumption": {
       "id": "spell.um.corrosive-consumption",
@@ -49992,15 +50095,19 @@
       "sourceRef": [
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            298,
+            298
+          ],
           "printedPages": [
             212
           ],
+          "entry": "Corrosive Consumption",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50014,7 +50121,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.caustic-eruption": {
       "id": "spell.um.caustic-eruption",
@@ -50041,15 +50148,19 @@
         },
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            299,
+            299
+          ],
           "printedPages": [
             210
           ],
+          "entry": "Caustic Eruption",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50062,7 +50173,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.frostbite": {
       "id": "spell.um.frostbite",
@@ -50089,15 +50200,19 @@
         },
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            300,
+            300
+          ],
           "printedPages": [
             221
           ],
+          "entry": "Frostbite",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50111,7 +50226,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.anticipate-peril": {
       "id": "spell.um.anticipate-peril",
@@ -50138,15 +50253,19 @@
         },
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            301,
+            301
+          ],
           "printedPages": [
             206
           ],
+          "entry": "Anticipate Peril",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50163,7 +50282,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.unprepared-combatant": {
       "id": "spell.um.unprepared-combatant",
@@ -50190,15 +50309,19 @@
         },
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            302,
+            302
+          ],
           "printedPages": [
             246
           ],
+          "entry": "Unprepared Combatant",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50213,7 +50336,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.prediction-of-failure": {
       "id": "spell.um.prediction-of-failure",
@@ -50222,15 +50345,19 @@
       "sourceRef": [
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            303,
+            303
+          ],
           "printedPages": [
             232
           ],
+          "entry": "Prediction of Failure",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50245,7 +50372,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.overwhelming-presence": {
       "id": "spell.um.overwhelming-presence",
@@ -50272,15 +50399,19 @@
         },
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            304,
+            304
+          ],
           "printedPages": [
             230
           ],
+          "entry": "Overwhelming Presence",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50297,7 +50428,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.serenity": {
       "id": "spell.um.serenity",
@@ -50324,15 +50455,19 @@
         },
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            305,
+            305
+          ],
           "printedPages": [
             236
           ],
+          "entry": "Serenity",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50347,7 +50482,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.symbol-of-mirroring": {
       "id": "spell.um.symbol-of-mirroring",
@@ -50356,15 +50491,19 @@
       "sourceRef": [
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            306,
+            306
+          ],
           "printedPages": [
             241
           ],
+          "entry": "Symbol of Mirroring",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50378,7 +50517,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.symbol-of-slowing": {
       "id": "spell.um.symbol-of-slowing",
@@ -50405,15 +50544,19 @@
         },
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            307,
+            307
+          ],
           "printedPages": [
             242
           ],
+          "entry": "Symbol of Slowing",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50426,7 +50569,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.symbol-of-strife": {
       "id": "spell.um.symbol-of-strife",
@@ -50453,15 +50596,19 @@
         },
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            308,
+            308
+          ],
           "printedPages": [
             242
           ],
+          "entry": "Symbol of Strife",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50474,7 +50621,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.symbol-of-vulnerability": {
       "id": "spell.um.symbol-of-vulnerability",
@@ -50483,15 +50630,19 @@
       "sourceRef": [
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            309,
+            309
+          ],
           "printedPages": [
             243
           ],
+          "entry": "Symbol of Vulnerability",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50504,7 +50655,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.um.ear-piercing-scream": {
       "id": "spell.um.ear-piercing-scream",
@@ -50513,15 +50664,19 @@
       "sourceRef": [
         {
           "sourceId": "ultimate-magic",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            310,
+            310
+          ],
           "printedPages": [
             218
           ],
+          "entry": "Ear-Piercing Scream",
           "officialUrl": "https://legacy.aonprd.com/ultimateMagic/ultimateMagicSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50537,7 +50692,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.uc.debilitating-portent": {
       "id": "spell.uc.debilitating-portent",
@@ -50564,15 +50719,19 @@
         },
         {
           "sourceId": "ultimate-combat",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            311,
+            311
+          ],
           "printedPages": [
             227
           ],
+          "entry": "Debilitating Portent",
           "officialUrl": "https://legacy.aonprd.com/ultimateCombat/ultimateCombatSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50585,7 +50744,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.uc.jolting-portent": {
       "id": "spell.uc.jolting-portent",
@@ -50612,15 +50771,19 @@
         },
         {
           "sourceId": "ultimate-combat",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            312,
+            312
+          ],
           "printedPages": [
             232
           ],
+          "entry": "Jolting Portent",
           "officialUrl": "https://legacy.aonprd.com/ultimateCombat/ultimateCombatSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50632,7 +50795,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.uc.pellet-blast": {
       "id": "spell.uc.pellet-blast",
@@ -50641,15 +50804,19 @@
       "sourceRef": [
         {
           "sourceId": "ultimate-combat",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            313,
+            313
+          ],
           "printedPages": [
             238
           ],
+          "entry": "Pellet Blast",
           "officialUrl": "https://legacy.aonprd.com/ultimateCombat/ultimateCombatSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50664,7 +50831,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.uc.wreath-of-blades": {
       "id": "spell.uc.wreath-of-blades",
@@ -50691,15 +50858,19 @@
         },
         {
           "sourceId": "ultimate-combat",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            314,
+            314
+          ],
           "printedPages": [
             249
           ],
+          "entry": "Wreath of Blades",
           "officialUrl": "https://legacy.aonprd.com/ultimateCombat/ultimateCombatSpellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50715,7 +50886,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.acg.long-arm": {
       "id": "spell.acg.long-arm",
@@ -50742,12 +50913,16 @@
         },
         {
           "sourceId": "advanced-class-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            317,
+            317
+          ],
+          "entry": "Long Arm",
           "officialUrl": "https://legacy.aonprd.com/advancedclassguide/spells/spellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50765,7 +50940,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.acg.stricken-heart": {
       "id": "spell.acg.stricken-heart",
@@ -50792,12 +50967,16 @@
         },
         {
           "sourceId": "advanced-class-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            318,
+            318
+          ],
+          "entry": "Stricken Heart",
           "officialUrl": "https://legacy.aonprd.com/advancedclassguide/spells/spellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50813,7 +50992,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.acg.disguise-weapon": {
       "id": "spell.acg.disguise-weapon",
@@ -50840,12 +51019,16 @@
         },
         {
           "sourceId": "advanced-class-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            319,
+            319
+          ],
+          "entry": "Disguise Weapon",
           "officialUrl": "https://legacy.aonprd.com/advancedclassguide/spells/spellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50861,7 +51044,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.acg.molten-orb": {
       "id": "spell.acg.molten-orb",
@@ -50888,12 +51071,16 @@
         },
         {
           "sourceId": "advanced-class-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            320,
+            320
+          ],
+          "entry": "Molten Orb",
           "officialUrl": "https://legacy.aonprd.com/advancedclassguide/spells/spellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50909,7 +51096,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.acg.heart-of-the-metal": {
       "id": "spell.acg.heart-of-the-metal",
@@ -50936,12 +51123,16 @@
         },
         {
           "sourceId": "advanced-class-guide",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            321,
+            321
+          ],
+          "entry": "Heart of the Metal",
           "officialUrl": "https://legacy.aonprd.com/advancedclassguide/spells/spellLists.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ],
       "levelsByClass": {
@@ -50956,7 +51147,7 @@
       ],
       "aliases": [],
       "metamagicVariants": [],
-      "catalogStatus": "external-source-not-vendored"
+      "catalogStatus": "resolved"
     },
     "spell.core.dancing-lights": {
       "id": "spell.core.dancing-lights",
@@ -81277,12 +81468,16 @@
       "sourceRef": [
         {
           "sourceId": "core-rulebook-feats",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            1521,
+            1521
+          ],
+          "entry": "Empower Spell",
           "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ]
     },
@@ -81293,12 +81488,16 @@
       "sourceRef": [
         {
           "sourceId": "core-rulebook-feats",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            1522,
+            1522
+          ],
+          "entry": "Enlarge Spell",
           "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ]
     },
@@ -81309,12 +81508,16 @@
       "sourceRef": [
         {
           "sourceId": "core-rulebook-feats",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            1523,
+            1523
+          ],
+          "entry": "Extend Spell",
           "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ]
     },
@@ -81325,12 +81528,16 @@
       "sourceRef": [
         {
           "sourceId": "core-rulebook-feats",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            1524,
+            1524
+          ],
+          "entry": "Maximize Spell",
           "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ]
     },
@@ -81341,12 +81548,16 @@
       "sourceRef": [
         {
           "sourceId": "core-rulebook-feats",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            1525,
+            1525
+          ],
+          "entry": "Quicken Spell",
           "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ]
     },
@@ -81357,12 +81568,16 @@
       "sourceRef": [
         {
           "sourceId": "core-rulebook-feats",
-          "file": null,
-          "sha256": null,
-          "section": "spell metadata",
-          "txtLines": [],
+          "file": "tools/build_catalog.py",
+          "sha256": "fcf40fdc7e9ea3349d3e71ea523cdf1f31cf1fd19334760af6e3cbd00c67a3bb",
+          "section": "vendored rules metadata",
+          "txtLines": [
+            1526,
+            1526
+          ],
+          "entry": "Widen Spell",
           "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
-          "provenanceStatus": "external-source-not-vendored"
+          "provenanceStatus": "local-source"
         }
       ]
     }
