@@ -44,6 +44,11 @@ class Engine:
     _ABILITY_NAMES = {"strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"}
     _ATTACK_PROFILES = {"weapon.high", "weapon.low", "natural.two", "natural.three"}
     _DAMAGE_DICE = {"d4", "d6", "d8", "d10", "d12", "2d6", "2d8", "3d6"}
+    _HUMANOID_SUBTYPE_IDS = {
+        "graft.subtype.dwarf", "graft.subtype.elf", "graft.subtype.giant", "graft.subtype.gnome",
+        "graft.subtype.goblinoid", "graft.subtype.half-elf", "graft.subtype.half-orc",
+        "graft.subtype.halfling", "graft.subtype.human", "graft.subtype.orc",
+    }
 
     def __init__(self, catalog: Catalog | None = None, workspace: str | Path | None = None):
         self.catalog = catalog or Catalog.load()
@@ -883,6 +888,12 @@ class Engine:
         subtype_ids = [entry_id for entry_id, _ in subtype_grafts]
         if len(subtype_ids) != len(set(subtype_ids)):
             issues.append(self._issue("subtype.duplicate", "/selections/subtypeGraftIds", "a subtype graft can be selected only once", "product-constraint", "error"))
+        if type_id == "graft.creature-type.humanoid" and not self._HUMANOID_SUBTYPE_IDS.intersection(subtype_ids):
+            issues.append(self._issue(
+                "humanoid.subtype-required", "/selections/subtypeGraftIds",
+                "choose a racial humanoid subtype such as Human, Goblinoid, Elf, or Orc",
+                "source-rule", "error", creature_type.get("sourceRef"),
+            ))
         subtype_choice_skill_grants = []
         subtype_choice_spell_grants = []
         for subtype_id, subtype in subtype_grafts:
@@ -1243,8 +1254,8 @@ class Engine:
             issues.append(self._issue("option-budget.mismatch", "/selections/options", f"active array and grafts leave {selected_slot_budget} selectable option slot(s), received {len(options)}", "source-rule", "error", refs))
 
         skills_selection = selections["skills"]
-        master = list(skills_selection.get("master", []))
-        good = list(skills_selection.get("good", []))
+        master = [skill.removeprefix("skill.") for skill in skills_selection.get("master", [])]
+        good = [skill.removeprefix("skill.") for skill in skills_selection.get("good", [])]
         skill_grants = copy.deepcopy(class_graft.get("skillGrants", [])) if class_graft else []
         for graft in active_grafts:
             skill_grants.extend(copy.deepcopy(graft.get("skillGrants", [])))
@@ -1335,12 +1346,28 @@ class Engine:
             unarmed_attack = next((attack for attack in attack_selections if attack["name"].lower().replace("-", " ") == "unarmed strike"), None)
             if unarmed_attack is not None:
                 unarmed_attack["damageDie"] = class_attack_damage
-        attacks = self._evaluate_attacks(attack_selections, attack_table, size_id, attack_adjustment, issues)
+        sneak_attack_dice = 1 + int(cr / 2) if any(option["optionId"] == "option.sneak-attack" for option in selected_options) else 0
+        attacks = self._evaluate_attacks(
+            attack_selections, attack_table, size_id, attack_adjustment, issues,
+            base_damage_reduction=2 * sneak_attack_dice,
+        )
         spell_level_source = (
             None if class_graft and class_graft.get("spellcastingMode") == "supernatural-extracts"
             else class_graft.get("spellcastingClassId") if class_graft else None
         )
         spellcasting_cr = cr if array_id == "array.spellcaster" else cr_entry.get("spellcastingAsCR") if cr_entry else None
+        if spellcasting_cr is not None and not selections.get("spellListId") and not selections.get("spells"):
+            issues.append(self._issue(
+                "spells.selection-required", "/selections/spellListId",
+                "choose a spell list or provide the spellcaster's complete encounter spell selection",
+                "source-rule", "error", main.get("sourceRef"),
+            ))
+        elif spellcasting_cr is not None and selections.get("spells") and not selections.get("spellListId"):
+            issues.append(self._issue(
+                "spells.benefit-required", "/selections/spellListId",
+                "choose a thematic spell list to supply the custom loadout's required spell-list benefit",
+                "source-rule", "error", main.get("sourceRef"),
+            ))
         spells, spell_list_benefit = self._evaluate_spells(selections, array_id, spellcasting_cr, main, issues, spell_level_source)
         secondary_lists = []
         for option in selected_options:
@@ -1460,6 +1487,7 @@ class Engine:
             "cmb": cmb,
             "maneuverBonuses": maneuver_bonuses,
             "attacks": attacks,
+            "sneakAttackDice": f"{sneak_attack_dice}d6" if sneak_attack_dice else None,
             "options": selected_options,
             "senses": list(dict.fromkeys([
                 *creature_type.get("automaticTraits", []),
@@ -1593,6 +1621,13 @@ class Engine:
                 regeneration = {"value": value, "bypass": copy.deepcopy(selected_option["parameters"]["bypass"]), "suppression": "1 round"}
                 canonical["regeneration"].append(regeneration)
                 selected_option["effect"] = {"type": "regeneration", **copy.deepcopy(regeneration)}
+            elif selected_option["optionId"] == "option.sneak-attack":
+                selected_option["effect"] = {
+                    "type": "sneak-attack",
+                    "condition": "flanking or attacking a foe denied its Dexterity bonus to AC",
+                    "dice": canonical["sneakAttackDice"],
+                    "baseDamagePenalty": 2 * sneak_attack_dice,
+                }
             if effect_type in {"attackBonus", "defenseBonuses", "concentrationBonus", "spellResistance", "saveChoice", "additionalMasterSkills"}:
                 selected_option["effect"] = copy.deepcopy(effect)
             elif effect_type == "casterLevelCheckBonus":
@@ -1600,7 +1635,11 @@ class Engine:
 
         errors = [issue for issue in issues if issue["severity"] == "error"]
         if errors:
-            incomplete_codes = {"spell-list-benefit.choice-required", "class-graft.choice-required", "class-graft.spell-list-required", "graft-option.choice-required", "subtype-graft.choice-required", "template-graft.choice-required"}
+            incomplete_codes = {
+                "spell-list-benefit.choice-required", "class-graft.choice-required", "class-graft.spell-list-required",
+                "graft-option.choice-required", "humanoid.subtype-required", "spells.benefit-required", "spells.selection-required",
+                "subtype-graft.choice-required", "template-graft.choice-required",
+            }
             status = "incomplete" if all(issue["code"] in incomplete_codes for issue in errors) else "invalid"
             return self._evaluation(status, issues)
 
@@ -1614,7 +1653,7 @@ class Engine:
             "derivationTrace": trace,
         }
 
-    def _evaluate_attacks(self, selections, attack_table, size_id, attack_adjustment, issues):
+    def _evaluate_attacks(self, selections, attack_table, size_id, attack_adjustment, issues, *, base_damage_reduction=0):
         attacks = []
         size_name = size_id.rsplit(".", 1)[-1]
         for index, selected in enumerate(selections):
@@ -1633,8 +1672,14 @@ class Engine:
                 _, natural = self._resolve("naturalAttack", selected["naturalAttackId"], f"/selections/attacks/{index}/naturalAttackId")
             die = selected.get("damageDie")
             natural_die = natural["bySize"].get(size_name) if natural else None
+            if die is None and natural is None:
+                issues.append(self._issue(
+                    "damage.weapon-die-required", f"/selections/attacks/{index}/damageDie",
+                    "choose the manufactured weapon's damage die",
+                    "source-rule", "error", attack_table.get("sourceRef"),
+                ))
             if die is None:
-                die = natural_die or "d6"
+                die = natural_die
             if natural and selected.get("damageDie") is None and natural_die in {"1", "—"}:
                 code = "damage.fixed-natural-unsupported" if natural_die == "1" else "damage.natural-attack-unavailable"
                 message = (
@@ -1643,10 +1688,10 @@ class Engine:
                     "source natural-attack profile has no damage die at this size"
                 )
                 issues.append(self._issue(code, f"/selections/attacks/{index}", message, "catalog-data", "error", natural.get("sourceRef")))
-            die = _damage_die_name(die)
-            average_damage = profile_entry["averageDamage"]
-            expression = self._damage_expression(average_damage, die)
-            if expression is None and not (natural and selected.get("damageDie") is None and natural_die in {"1", "—"}):
+            die = _damage_die_name(die) if die is not None else None
+            average_damage = profile_entry["averageDamage"] - base_damage_reduction
+            expression = self._damage_expression(average_damage, die) if die is not None else None
+            if die is not None and expression is None and not (natural and selected.get("damageDie") is None and natural_die in {"1", "—"}):
                 source_refs = []
                 if natural and natural.get("sourceRef"):
                     source_refs.append(natural["sourceRef"])
@@ -1690,10 +1735,19 @@ class Engine:
     def _evaluate_spells(self, selections, array_id, cr, main, issues, default_level_source=None):
         if cr is None:
             return [], None
+        bands = self.catalog.data["spellBands"]
+        band_index = next(index for index, band in enumerate(bands) if band["minCR"] <= cr and (band["maxCR"] is None or cr <= band["maxCR"]))
+        spell_list_benefit = None
+        spell_list = None
         if selections.get("spellListId"):
             spell_list_id, spell_list = self._resolve("spellList", selections["spellListId"], "/selections/spellListId")
-            bands = self.catalog.data["spellBands"]
-            band_index = next(index for index, band in enumerate(bands) if band["minCR"] <= cr and (band["maxCR"] is None or cr <= band["maxCR"]))
+            spell_list_benefit = {
+                "spellListId": spell_list_id,
+                "name": spell_list["name"],
+                "text": spell_list["benefit"]["text"],
+                "definition": spell_list["benefit"],
+            }
+        if spell_list and not selections.get("spells"):
             sets = [(band_index, "primary", "1/day")]
             if band_index >= 1:
                 sets.extend(((band_index - 1, "primary", "3/day"), (band_index - 1, "secondary", "3/day")))
@@ -1712,24 +1766,38 @@ class Engine:
                             "sourceText": entry["sourceText"],
                         })
                         output.append(result)
-            return output, {
-                "spellListId": spell_list_id,
-                "name": spell_list["name"],
-                "text": spell_list["benefit"]["text"],
-                "definition": spell_list["benefit"],
-            }
+            return output, spell_list_benefit
         if not selections.get("spells"):
             return [], None
         output = []
         for index, selected in enumerate(selections["spells"]):
+            explicit_level_source = selected.get("spellLevelSource")
+            preferred_level_source = explicit_level_source or selections.get("spellLevelSource") or default_level_source
+            if isinstance(preferred_level_source, str):
+                preferred_level_source = preferred_level_source.strip().lower()
             result = self._spell_result(
                 selected["spellId"], selected.get("metamagic", []),
-                selected.get("spellLevelSource") or selections.get("spellLevelSource") or default_level_source,
+                preferred_level_source,
                 main, issues, f"/selections/spells/{index}",
+                explicit_level_source=explicit_level_source is not None,
             )
             if result:
+                spell_band_index = result["effectiveLevel"] // 2
+                distance = band_index - spell_band_index
+                if spell_band_index >= len(bands) or distance < 0 or distance > 2:
+                    issues.append(self._issue(
+                        "spell.cr-band-invalid", f"/selections/spells/{index}",
+                        "choose a spell from the monster's CR band or one of the two lower bands",
+                        "source-rule", "error", self.catalog.data["spells"][result["spellId"]].get("sourceRef"),
+                    ))
+                    continue
+                result.update({
+                    "frequency": ("1/day", "3/day", "at will")[distance],
+                    "sourceBand": bands[spell_band_index]["id"],
+                    "role": "custom",
+                })
                 output.append(result)
-        return output, None
+        return output, spell_list_benefit
 
     def _evaluate_secondary_magic(self, selected_list_id, cr, main, issues, default_level_source=None):
         spell_list_id, spell_list = self._resolve("spellList", selected_list_id, "/selections/options")
@@ -1842,15 +1910,15 @@ class Engine:
             benefit["effects"] = applied
         return benefit
 
-    def _spell_result(self, selected_spell_id, metamagic, level_source, main, issues, path):
+    def _spell_result(self, selected_spell_id, metamagic, level_source, main, issues, path, *, explicit_level_source=False):
         spell_id, spell = self._resolve("spell", selected_spell_id, f"{path}/spellId")
-        if level_source is None:
+        if level_source not in spell["levelsByClass"]:
+            if explicit_level_source:
+                issues.append(self._issue("spell.level-source-invalid", path, "requested spell level source is not present", "source-rule", "error", spell.get("sourceRef")))
+                return None
             level_source = next((source for source in ("cleric", "sorcerer", "wizard") if source in spell["levelsByClass"]), None)
             if level_source is None:
                 level_source = max(spell["levelsByClass"], key=spell["levelsByClass"].get)
-        if level_source not in spell["levelsByClass"]:
-            issues.append(self._issue("spell.level-source-invalid", path, "requested spell level source is not present", "source-rule", "error", spell.get("sourceRef")))
-            return None
         base_level = spell["levelsByClass"][level_source]
         effective_level = base_level + sum(self.catalog.data["metamagic"][value] for value in metamagic)
         return {
@@ -1883,7 +1951,11 @@ class Engine:
                 ref = row.get("expressionSourceRefs", {}).get(attack["damageDie"], row["sourceRef"])
                 if ref not in attack_refs:
                     attack_refs.append(ref)
-        add("/canonical/attacks", "array.attackStatistics + graft adjustments + damage table", canonical["attacks"], attack_refs)
+        attack_rule = "array.attackStatistics + graft adjustments + damage table"
+        if canonical.get("sneakAttackDice"):
+            attack_refs.append(self.catalog.data["options"]["option.sneak-attack"]["sourceRef"])
+            attack_rule += " + option.sneakAttack"
+        add("/canonical/attacks", attack_rule, canonical["attacks"], attack_refs)
         add("/canonical/senses", "creatureTypeGraft.automaticTraits", canonical["senses"], [creature_type["sourceRef"]])
         if canonical.get("classGraftId"):
             _, class_graft = self._resolve("classGraft", canonical["classGraftId"], "/selections/classGraftId")

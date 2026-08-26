@@ -20,7 +20,7 @@ _DEFENSE_EFFECTS = {
     "saveBonus", "saveChoice", "spellResistance",
 }
 _ATTACK_EFFECTS = {"attackBonus"}
-_SPECIAL_EFFECTS = {"disease", "gaze", "poison", "source-rule"}
+_SPECIAL_EFFECTS = {"disease", "gaze", "poison", "sneak-attack", "source-rule"}
 
 
 def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dict[str, Any]:

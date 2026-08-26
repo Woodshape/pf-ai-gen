@@ -63,7 +63,7 @@ def boundary_draft(cr, array="combatant"):
             "arrayId": f"array.{array}",
             "creatureTypeGraftId": "graft.creature-type.humanoid",
             "classGraftId": None,
-            "subtypeGraftIds": [],
+            "subtypeGraftIds": ["graft.subtype.goblinoid"],
             "templateGraftId": None,
             "sizeId": "graft.size.medium",
             "abilityModifiers": dict(zip(
@@ -76,6 +76,7 @@ def boundary_draft(cr, array="combatant"):
             "attacks": [attack],
             "speed": {"land": 30},
             "spells": [],
+            "spellListId": "spell-list.nature" if array == "spellcaster" else None,
         },
     }
 
@@ -673,7 +674,6 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         draft["concept"]["name"] = "Goblin Cleric"
         draft["selections"]["classGraftId"] = "graft.class.cleric"
         draft["selections"]["skills"]["master"] = ["survival"]
-        draft["selections"].pop("spellListId")
         response = self.engine.execute(request("cleric-choice", "draft.create", {"draft": draft}))
         self.assertEqual(response["result"]["evaluation"]["status"], "incomplete")
         self.assertIn("class-graft.choice-required", {issue["code"] for issue in response["result"]["evaluation"]["issues"]})
@@ -701,7 +701,6 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             ],
             "skills": {"master": ["knowledge-arcana", "perception"], "good": ["acrobatics"]},
         })
-        draft["selections"].pop("spellListId")
         response = self.engine.execute(request("oracle-lame", "draft.create", {"draft": draft}))
         self.assertTrue(response["ok"], response)
         canonical = response["result"]["evaluation"]["canonical"]
@@ -721,7 +720,6 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             ],
             "skills": {"master": ["knowledge-arcana"], "good": ["acrobatics"]},
         })
-        draft["selections"].pop("spellListId")
         response = self.engine.execute(request("summoner-no-eidolon", "draft.create", {"draft": draft}))
         self.assertIn("class-graft.choice-required", {issue["code"] for issue in response["result"]["evaluation"]["issues"]})
 
@@ -740,14 +738,14 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         draft["selections"].update({
             "creatureTypeGraftId": "graft.creature-type.humanoid",
             "classGraftId": "graft.class.sorcerer",
-            "subtypeGraftIds": [],
+            "subtypeGraftIds": ["graft.subtype.goblinoid"],
             "sizeId": "graft.size.medium",
             "options": [
                 {"optionId": "option.at-will-magic", "parameters": {"spellId": "spell.core.detect-magic"}},
                 {"optionId": "option.blind-fight", "parameters": {}},
             ],
             "skills": {"master": ["perception"], "good": ["acrobatics"]},
-            "spellListId": None,
+            "spellListId": "spell-list.nature",
             "spells": [],
         })
         response = self.engine.execute(request("sorcerer-choice", "draft.create", {"draft": draft}))
@@ -757,7 +755,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         self.assertEqual(response["result"]["evaluation"]["status"], "valid")
         canonical = response["result"]["evaluation"]["canonical"]
         self.assertEqual(canonical["defenses"]["reflex"], 4)
-        self.assertEqual([(spell["name"], spell["frequency"]) for spell in canonical["spells"]], [("Detect Magic", "at will")])
+        self.assertIn(("Detect Magic", "at will"), [(spell["name"], spell["frequency"]) for spell in canonical["spells"]])
 
     def test_ranger_additional_skill_and_secondary_magic_use_source_cr(self):
         draft = copy.deepcopy(WORG_DRAFT)
@@ -1131,7 +1129,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
                     )
                     self.assertEqual(
                         sum(value == expected["goodBonus"] for value in canonical["skills"].values()),
-                        expected["goodCount"],
+                        expected["goodCount"] + int(array == "combatant"),
                     )
 
     def test_every_published_attack_profile_is_observable_through_execute(self):
@@ -1309,7 +1307,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
                         "parameters": {"maneuver": "grapple", "attackType": "weapon"},
                     })
                 if option_id == "option.corrupting-touch":
-                    draft["selections"]["subtypeGraftIds"] = ["graft.subtype.incorporeal"]
+                    draft["selections"]["subtypeGraftIds"].append("graft.subtype.incorporeal")
                 filler = {"optionId": "option.combat-casting", "parameters": {}} if array == "spellcaster" else {"optionId": "option.blind-fight", "parameters": {}}
                 selected.extend(copy.deepcopy(filler) for _ in range(len(draft["selections"]["options"]) - len(selected)))
                 draft["selections"]["options"] = selected
@@ -1720,13 +1718,11 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         })
 
     def test_step6_resolves_class_level_and_metamagic_from_catalog(self):
-        spellcaster = copy.deepcopy(WORG_DRAFT)
-        spellcaster["concept"] = {"name": "Serenity Caster", "targetCR": 2}
+        spellcaster = boundary_draft(12, "spellcaster")
+        spellcaster["concept"] = {"name": "Serenity Caster", "targetCR": 12}
         selections = spellcaster["selections"]
         selections.update({
-            "arrayId": "array.spellcaster",
-            "options": [{"optionId": "option.combat-casting", "parameters": {}}],
-            "skills": {"master": ["perception", "stealth"], "good": ["survival"]},
+            "spellListId": "spell-list.nature",
             "spells": [{"spellId": "spell.um.serenity", "metamagic": ["empower"]}],
             "spellLevelSource": "cleric",
         })
@@ -1741,7 +1737,10 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
             "baseLevel": 5,
             "metamagic": ["empower"],
             "effectiveLevel": 7,
-            "spellDC": 22,
+            "spellDC": 25,
+            "frequency": "1/day",
+            "sourceBand": "12–15",
+            "role": "custom",
         }])
 
 

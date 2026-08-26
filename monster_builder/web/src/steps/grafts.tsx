@@ -1,6 +1,6 @@
 import { useState } from "preact/hooks";
 import { CatalogSelect, DefinitionPreview, Field, JsonField, MultiCatalogSelect, Select, Source, StepFrame } from "../components";
-import type { JsonObject } from "../types";
+import type { CatalogEntry, Dict, JsonObject } from "../types";
 import type { EditorProps } from "./basic";
 
 export function PrimaryGraftStep({ draft, catalog, onSave, onBack }: EditorProps) {
@@ -54,20 +54,46 @@ export function SizeStep({ draft, catalog, onSave, onBack }: EditorProps) {
   </StepFrame>;
 }
 
-export function SpellStep({ draft, catalog, onSave, onBack }: EditorProps) {
+interface SelectedSpell { spellId: string; spellLevelSource?: string; metamagic?: string[] }
+
+export function SpellStep({ draft, catalog, evaluation, onSave, onBack }: EditorProps) {
   const selections = draft.selections;
   const [listId, setListId] = useState(String(selections.spellListId || ""));
   const [ability, setAbility] = useState(String(selections.spellcastingAbility || ""));
-  const [levelSource, setLevelSource] = useState(String(selections.spellLevelSource || ""));
+  const [levelSource, setLevelSource] = useState(String(selections.spellLevelSource || "").toLowerCase());
   const [benefit, setBenefit] = useState((selections.spellListBenefitChoices as JsonObject | undefined) || {});
-  const [spells, setSpells] = useState((selections.spells as unknown[] | undefined) || []);
+  const [spells, setSpells] = useState<SelectedSpell[]>((selections.spells as SelectedSpell[] | undefined) || []);
   const entry = Object.values(catalog.spellLists).find((item) => item.id === listId);
+  const levelSources = [...new Set(Object.values(catalog.spells).flatMap((spell) => Object.keys((spell.levelsByClass as JsonObject | undefined) || {})))].sort();
+  const benefitParameters = ((entry?.benefit as JsonObject | undefined)?.parameters as JsonObject | undefined) || {};
+  const savedSpells = (selections.spells as SelectedSpell[] | undefined) || [];
+  const appliedConfiguration = listId === selections.spellListId && JSON.stringify(spells) === JSON.stringify(savedSpells);
+  const resolved = appliedConfiguration ? ((((evaluation.effective as JsonObject | null | undefined)?.spells as JsonObject[] | undefined) || [])) : [];
+  const resolvedSelections = resolved.map((spell) => ({ spellId: String(spell.spellId) }));
+  const customize = (removeIndex?: number) => setSpells(resolvedSelections.filter((_, index) => index !== removeIndex));
+  const addSpell = (spellId: string) => setSpells([...(spells.length ? spells : resolvedSelections), { spellId }]);
   return <StepFrame step={6} onBack={onBack} onApply={(next) => onSave({ spellListId: listId || undefined, spellcastingAbility: ability || undefined, spellLevelSource: levelSource || undefined, spellListBenefitChoices: benefit, spells }, {}, next)}>
-    <div class="grid"><CatalogSelect label="Structured spell list" records={catalog.spellLists} value={listId} onChange={setListId} blank="None" />
+    <div class="grid"><CatalogSelect label="Structured spell list" records={catalog.spellLists} value={listId} onChange={setListId} blank="None — select spells individually" />
       <Select label="Spellcasting ability" value={ability} onChange={setAbility}><option value="">Default</option>{["intelligence", "wisdom", "charisma"].map((item) => <option value={item}>{item}</option>)}</Select>
-      <Field label="Spell-level source / class" value={levelSource} onInput={setLevelSource} />
-      <JsonField label="Spell-list benefit choices" value={benefit} onChange={(value) => setBenefit(value as JsonObject)} />
-      <JsonField label="Explicit spell selections" value={spells} onChange={(value) => setSpells(value as unknown[])} hint="Usually empty when a structured list supplies spells." />
+      <Select label="Preferred spell-level source" value={levelSource} onChange={setLevelSource}><option value="">Automatic per spell</option>{levelSources.map((source) => <option value={source}>{source}</option>)}</Select>
+      {Object.keys(benefitParameters).length > 0 && <JsonField label="Spell-list benefit choices" value={benefit} onChange={(value) => setBenefit(value as JsonObject)} />}
+      <div class="field full"><SpellPicker records={catalog.spells} values={spells} baseValues={listId && !spells.length ? resolvedSelections : []} showValues={!resolved.length} onAdd={addSpell} onChange={setSpells} /></div>
+      <section class="field full"><div class="builder-head"><div><span class="label">Resolved spell loadout</span><small>{resolved.length} {spells.length ? "custom" : "generated"} spell entries using the {entry?.name || "structured"} list at CR {String(selections.cr ?? "—")}</small></div>{resolved.length > 0 && !spells.length && <button type="button" class="btn" onClick={() => customize()}>Customize loadout</button>}</div>
+        {resolved.length ? <div class="builder-list spell-loadout">{resolved.map((spell, index) => <article class="builder-card" key={`${String(spell.spellId)}-${index}`}><div class="builder-head"><div><strong>{String(spell.name || spell.spellId)}</strong><small>{String(spell.frequency || "frequency not specified")} · DC {String(spell.spellDC ?? "—")}</small></div><div class="builder-actions"><span class="pill">{String(spell.role || "spell")}</span><button type="button" class="btn small" onClick={() => customize(index)}>Remove</button></div></div></article>)}</div> : <div class="empty">{listId === selections.spellListId ? "Apply a valid spell selection to see the engine-resolved loadout." : "Apply this spell-list change to preview its loadout."}</div>}
+      </section>
     </div><DefinitionPreview entry={entry} /><Source entry={entry} />
   </StepFrame>;
+}
+
+function SpellPicker(props: { records: Dict<CatalogEntry>; values: SelectedSpell[]; baseValues: SelectedSpell[]; showValues: boolean; onAdd: (spellId: string) => void; onChange: (values: SelectedSpell[]) => void }) {
+  const [addId, setAddId] = useState("");
+  const records = Object.values(props.records).sort((a, b) => (a.name || a.id).localeCompare(b.name || b.id));
+  const selectedIds = [...props.baseValues, ...props.values].map((spell) => spell.spellId);
+  const available = records.filter((spell) => !selectedIds.includes(spell.id));
+  return <section class="skill-picker"><div class="builder-head"><div><span class="label">Explicit spell selections</span><small>{props.values.length} selected</small></div></div>
+    <div class="add-row"><div class="field"><label>Add spell</label><select value={addId} onChange={(event) => setAddId(event.currentTarget.value)}><option value="">Choose a spell…</option>{available.map((spell) => <option value={spell.id}>{spell.name || spell.id}</option>)}</select></div><button type="button" class="btn primary" disabled={!addId} onClick={() => { if (!addId) return; props.onAdd(addId); setAddId(""); }}>Add</button></div>
+    {props.baseValues.length > 0 && <p class="hint">Adding a spell converts the structured loadout to a custom one and keeps its generated spells.</p>}
+    {props.showValues && <div class="builder-list">{props.values.map((selection) => { const spell = records.find((entry) => entry.id === selection.spellId); return <article class="builder-card" key={selection.spellId}><div class="builder-head"><div><strong>{spell?.name || selection.spellId}</strong><small>{selection.spellId}</small></div><button type="button" class="btn small" onClick={() => props.onChange(props.values.filter((item) => item.spellId !== selection.spellId))}>Remove</button></div></article>; })}</div>}
+    {props.showValues && !props.values.length && <div class="empty">No explicit spells selected.</div>}
+  </section>;
 }

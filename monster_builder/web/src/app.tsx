@@ -44,7 +44,7 @@ export function App() {
   }
   if (!catalog || !draft || !evaluation) return <main class="app"><div class="panel step-form"><h1>Loading Guided Rail…</h1>{message && <p>{message.text}</p>}</div></main>;
 
-  const guard = () => ({ draftId: draft.draftId, baseRevision: draft.revision, baseFingerprint: draft.fingerprint });
+  const guard = (target: Draft = draft) => ({ draftId: target.draftId, baseRevision: target.revision, baseFingerprint: target.fingerprint });
   async function save(selections: JsonObject, concept: JsonObject, andContinue: boolean) {
     if (busy || !draft || !evaluation) return;
     const changes: Change[] = [];
@@ -53,11 +53,22 @@ export function App() {
     let nextEvaluation = evaluation;
     try {
       setBusy(true);
+      let targetDraft = draft;
+      let copied = false;
+      if (changes.length && targetDraft.status !== "active") {
+        const duplicate = await execute("draft.duplicate", guard(targetDraft));
+        if (!duplicate.draft) throw new Error("The editable draft copy was not returned.");
+        targetDraft = duplicate.draft;
+        nextEvaluation = duplicate.evaluation || evaluation;
+        accept(duplicate);
+        setMonster(undefined);
+        copied = true;
+      }
       if (changes.length) {
-        const result = await execute("draft.applyChanges", { ...guard(), changes });
+        const result = await execute("draft.applyChanges", { ...guard(targetDraft), changes });
         accept(result);
-        nextEvaluation = result.evaluation || evaluation;
-        show(`Revision ${result.draft?.revision} saved and evaluated.`, true);
+        nextEvaluation = result.evaluation || nextEvaluation;
+        show(`${copied ? "Editable copy created. " : ""}Revision ${result.draft?.revision} saved and evaluated.`, true);
       } else show("No changes to apply.", true);
       if (andContinue) {
         const mergedConcept = { ...draft.concept, ...concept };
@@ -91,7 +102,7 @@ export function App() {
     const anchor = document.createElement("a"); anchor.href = url; anchor.download = `${String(draft!.concept.name || "monster").replace(/[^a-z0-9]+/gi, "-").toLowerCase()}.${format === "markdown" ? "md" : format}`; anchor.click(); URL.revokeObjectURL(url);
   }
 
-  const editorProps: EditorProps = { draft, catalog, onSave: save, onBack: () => setStep((current) => Math.max(0, current - 1)) };
+  const editorProps: EditorProps = { draft, catalog, evaluation, onSave: save, onBack: () => setStep((current) => Math.max(0, current - 1)) };
   const editors = [<ConceptStep {...editorProps} />, <ArrayStep {...editorProps} />, <PrimaryGraftStep {...editorProps} />, <SubtypeStep {...editorProps} />, <TemplateStep {...editorProps} />, <SizeStep {...editorProps} />, <SpellStep {...editorProps} />, <OptionsStep {...editorProps} />, <SkillsStep {...editorProps} />, <DamageStep {...editorProps} />];
   return <><Header draft={draft} monster={monster} busy={busy} onNew={createDraft} onResume={resume} onFinalize={finalize} onExport={exportMonster} />
     <main class="app"><div class="summary"><span class={`pill ${evaluation.status}`}>Strict: {evaluation.status}</span><span class="pill">Revision {draft.revision}</span><span class="pill">{draft.status}</span><span class="pill mono">{draft.draftId}</span>{busy && <span class="pill incomplete">Saving…</span>}</div>

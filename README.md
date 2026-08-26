@@ -10,7 +10,10 @@ python3 -m unittest discover -s tests -v
 python3 -m monster_builder.web --workspace .monster-builder
 printf '%s\n' '{"protocolVersion":"1","requestId":"r1","operation":"draft.create","payload":{"draft":{}}}' | python3 -m monster_builder
 MONSTER_BUILDER_WORKSPACE=.monster-builder python3 -m monster_builder
+python3 -m monster_builder validate monster.json
 ```
+
+`validate` accepts a JSON Draft, persisted draft file, or FinishedMonster JSON export. It prints the current deterministic evaluation and exits `0` for valid, `2` for incomplete/invalid, or `4` for unreadable/unsupported input. Rendered Markdown/HTML sheets are intentionally rejected because they omit authoritative selection IDs; export JSON for repeatable human/agent validation.
 
 Open `http://127.0.0.1:8000/` for the browser workspace. It keeps Before You Begin and Steps 1–9 visible, applies revision-guarded edits, shows live engine findings/provenance, finalizes valid Strict drafts, and downloads JSON, Markdown, or HTML exports. Use `--host` and `--port` to change the local bind address.
 

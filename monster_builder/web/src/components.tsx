@@ -1,4 +1,5 @@
 import type { ComponentChildren } from "preact";
+import { useState } from "preact/hooks";
 import type { CatalogEntry, Dict, SourceRef } from "./types";
 
 export function Field(props: { label: string; value: string | number; type?: string; onInput: (value: string) => void; full?: boolean }) {
@@ -22,14 +23,17 @@ export function CatalogSelect(props: { label: string; records: Dict<CatalogEntry
   </Select>;
 }
 
-export function MultiCatalogSelect(props: { label: string; records: Dict<CatalogEntry>; values: string[]; onChange: (values: string[]) => void; size?: number }) {
-  return <div class="field">
-    <label>{props.label}</label>
-    <select multiple size={props.size || 12} onChange={(event) => props.onChange([...event.currentTarget.selectedOptions].map((option) => option.value))}>
-      {Object.values(props.records).map((entry) => <option value={entry.id} selected={props.values.includes(entry.id)} key={entry.id}>{entry.name || entry.id}</option>)}
-    </select>
-    <p class="hint">Use Ctrl/Cmd-click for multiple choices.</p>
-  </div>;
+export function MultiCatalogSelect(props: { label: string; records: Dict<CatalogEntry>; values: string[]; onChange: (values: string[]) => void }) {
+  const [addId, setAddId] = useState("");
+  const records = Object.values(props.records).sort((a, b) => (a.name || a.id).localeCompare(b.name || b.id));
+  const available = records.filter((entry) => !props.values.includes(entry.id));
+  const selected = props.values.map((id) => records.find((entry) => entry.id === id)).filter((entry): entry is CatalogEntry => Boolean(entry));
+  return <section class="skill-picker">
+    <div class="builder-head"><div><span class="label">{props.label}</span><small>{props.values.length} selected</small></div></div>
+    <div class="add-row"><div class="field"><label>Add subtype graft</label><select value={addId} onChange={(event) => setAddId(event.currentTarget.value)}><option value="">Choose…</option>{available.map((entry) => <option value={entry.id}>{entry.name || entry.id}</option>)}</select></div><button type="button" class="btn primary" disabled={!addId} onClick={() => { if (!addId) return; props.onChange([...props.values, addId]); setAddId(""); }}>Add</button></div>
+    <div class="builder-list">{selected.map((entry) => <article class="builder-card" key={entry.id}><div class="builder-head"><div><strong>{entry.name || entry.id}</strong><small>{entry.id}</small></div><button type="button" class="btn small" onClick={() => props.onChange(props.values.filter((id) => id !== entry.id))}>Remove</button></div></article>)}</div>
+    {!selected.length && <div class="empty">No selections yet.</div>}
+  </section>;
 }
 
 export function JsonField(props: { label: string; value: unknown; onChange: (value: unknown) => void; hint?: string }) {

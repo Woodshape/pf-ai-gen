@@ -1,10 +1,11 @@
 import { useState } from "preact/hooks";
 import { CatalogSelect, Field, Select, StepFrame } from "../components";
-import type { Catalog, Draft, JsonObject } from "../types";
+import type { Catalog, Draft, Evaluation, JsonObject } from "../types";
 
 export interface EditorProps {
   draft: Draft;
   catalog: Catalog;
+  evaluation: Evaluation;
   onSave: (selections: JsonObject, concept: JsonObject, andContinue: boolean) => void;
   onBack: () => void;
 }
