@@ -7,6 +7,7 @@ import json
 import os
 import tempfile
 import threading
+from datetime import datetime, timezone
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Iterator
@@ -20,6 +21,17 @@ class PersistenceError(ValueError):
 
 _LOCKS: dict[tuple[str, str], threading.RLock] = {}
 _LOCKS_GUARD = threading.Lock()
+
+
+def _now() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+
+
+def _mtime(path: Path) -> str | None:
+    try:
+        return datetime.fromtimestamp(path.stat().st_mtime, timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+    except (OSError, OverflowError, ValueError):
+        return None
 
 
 class JSONWorkspace:
@@ -51,20 +63,30 @@ class JSONWorkspace:
                 "status": draft.get("status", "active"),
                 "previousStatus": None,
                 "monsterId": None,
+                "savedAt": _now(),
                 "current": self._snapshot(draft),
                 "history": [],
             })
 
     def load(self, draft_id: str) -> dict[str, Any]:
-        document = self._read(draft_id)
-        draft = copy.deepcopy(document["current"]["draft"])
-        draft["status"] = document["status"]
-        if document.get("monsterId"):
-            draft["monsterId"] = document["monsterId"]
-        return draft
+        return self._draft_from_document(self._read(draft_id))
 
     def history(self, draft_id: str) -> list[dict[str, Any]]:
         return copy.deepcopy(self._read(draft_id)["history"])
+
+    def list_drafts(self) -> list[tuple[dict[str, Any], str | None]]:
+        entries = []
+        for path in sorted(self.drafts.glob("draft-*.json")):
+            document = self._read(path.stem)
+            entries.append((self._draft_from_document(document), self._saved_at(document, path)))
+        return entries
+
+    def list_monsters(self) -> list[tuple[dict[str, Any], str, str | None]]:
+        entries = []
+        for path in sorted(self.monsters.glob("monster-*.json")):
+            document = self._read_monster(path.stem)
+            entries.append((copy.deepcopy(document["monster"]), document["status"], self._saved_at(document, path)))
+        return entries
 
     def previous_status(self, draft_id: str) -> str | None:
         return self._read(draft_id).get("previousStatus")
@@ -77,6 +99,7 @@ class JSONWorkspace:
                 raise PersistenceError("persistence.conflict", "stored draft changed during mutation")
             document["history"] = [current, *document["history"]][:self.HISTORY_LIMIT]
             document["current"] = self._snapshot(draft)
+            document["savedAt"] = _now()
             self._write(self._path(draft["draftId"]), document)
 
     def set_status(self, draft_id: str, base_revision: int, base_fingerprint: str, base_status: str, status: str, previous_status: str | None, monster_id: str | None = None) -> None:
@@ -89,6 +112,7 @@ class JSONWorkspace:
             document["previousStatus"] = previous_status
             if monster_id is not None:
                 document["monsterId"] = monster_id
+            document["savedAt"] = _now()
             self._write(self._path(draft_id), document)
 
     def create_monster(self, monster: dict[str, Any]) -> None:
@@ -99,7 +123,7 @@ class JSONWorkspace:
                 if existing == monster:
                     return
                 raise PersistenceError("persistence.already-exists", f"monster already exists: {monster['monsterId']}")
-            self._write(path, {"schemaVersion": self.SCHEMA_VERSION, "status": "active", "monster": copy.deepcopy(monster)})
+            self._write(path, {"schemaVersion": self.SCHEMA_VERSION, "status": "active", "savedAt": _now(), "monster": copy.deepcopy(monster)})
 
     def load_monster(self, monster_id: str) -> tuple[dict[str, Any], str]:
         document = self._read_monster(monster_id)
@@ -126,6 +150,19 @@ class JSONWorkspace:
                 raise PersistenceError("persistence.conflict", "stored monster changed during mutation")
             document["status"] = status
             self._write(self._monster_path(monster_id), document)
+
+    @staticmethod
+    def _draft_from_document(document: dict[str, Any]) -> dict[str, Any]:
+        draft = copy.deepcopy(document["current"]["draft"])
+        draft["status"] = document["status"]
+        if document.get("monsterId"):
+            draft["monsterId"] = document["monsterId"]
+        return draft
+
+    @staticmethod
+    def _saved_at(document: dict[str, Any], path: Path) -> str | None:
+        value = document.get("savedAt")
+        return value if isinstance(value, str) and value else _mtime(path)
 
     @staticmethod
     def _snapshot(draft: dict[str, Any]) -> dict[str, Any]:

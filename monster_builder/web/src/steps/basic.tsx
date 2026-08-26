@@ -1,11 +1,15 @@
 import { useState } from "preact/hooks";
 import { CatalogSelect, Field, Select, StepFrame } from "../components";
-import type { Catalog, Draft, Evaluation, JsonObject } from "../types";
+import type { AutomaticSelections, Catalog, ChoiceRequirement, Draft, Evaluation, JsonObject, SelectionBudgets } from "../types";
 
 export interface EditorProps {
   draft: Draft;
   catalog: Catalog;
   evaluation: Evaluation;
+  choiceRequirements: ChoiceRequirement[];
+  automaticSelections: AutomaticSelections;
+  selectionBudgets: SelectionBudgets;
+  onPreview: (selections: JsonObject) => void;
   onSave: (selections: JsonObject, concept: JsonObject, andContinue: boolean) => void;
   onBack: () => void;
 }
@@ -36,6 +40,9 @@ export function ArrayStep({ draft, catalog, onSave, onBack }: EditorProps) {
   const saves = ["fortitude", "reflex", "will"];
   const array = Object.values(catalog.arrays).find((entry) => entry.id === arrayId);
   const row = array && (array.mainStatistics as Record<string, unknown> | undefined)?.[cr];
+  const expectedModifiers = row && typeof row === "object" && Array.isArray((row as { abilityModifiers?: unknown }).abilityModifiers)
+    ? (row as { abilityModifiers: unknown[] }).abilityModifiers.filter((value): value is number => typeof value === "number")
+    : [];
   const submit = (next: boolean) => onSave({
     cr: cr === "" ? undefined : Number(cr),
     arrayId: arrayId || undefined,
@@ -48,7 +55,7 @@ export function ArrayStep({ draft, catalog, onSave, onBack }: EditorProps) {
       <CatalogSelect label="Array" records={catalog.arrays} value={arrayId} onChange={setArrayId} />
       <div class="field full"><span class="label">Ability modifiers</span><div class="grid three">
         {["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"].map((ability) => <Field key={ability} label={ability[0].toUpperCase() + ability.slice(1)} type="number" value={String(abilities[ability] ?? "")} onInput={(value) => setAbilities((current) => { const next = { ...current }; if (value === "") delete next[ability]; else next[ability] = Number(value); return next; })} />)}
-      </div><p class="hint">Assign exactly three positive values from the selected CR row; unlisted abilities default to +0.</p></div>
+      </div><p class="hint">Assign exactly three positive values from the selected CR row{expectedModifiers.length ? ` (expected: ${expectedModifiers.map((value) => value > 0 ? `+${value}` : value).join(", ")})` : ""}; unlisted abilities default to +0.</p></div>
       <Select label="Swap save from" value={saveFrom} onChange={setSaveFrom}><option value="" />{saves.map((save) => <option value={save}>{save}</option>)}</Select>
       <Select label="Swap save to" value={saveTo} onChange={setSaveTo}><option value="" />{saves.map((save) => <option value={save}>{save}</option>)}</Select>
     </div>

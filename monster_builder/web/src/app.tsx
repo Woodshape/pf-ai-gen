@@ -1,4 +1,4 @@
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import { execute, loadCatalog, newChangeId } from "./api";
 import { sourceText } from "./components";
 import { STEPS, issuesForStep, stepForPath, stepStatus } from "./steps";
@@ -6,7 +6,7 @@ import { ArrayStep, ConceptStep, type EditorProps } from "./steps/basic";
 import { PrimaryGraftStep, SizeStep, SpellStep, SubtypeStep, TemplateStep } from "./steps/grafts";
 import { OptionsStep } from "./steps/options";
 import { DamageStep, SkillsStep } from "./steps/finish";
-import type { Catalog, Change, Draft, EngineResult, Evaluation, FinishedMonster, JsonObject } from "./types";
+import type { AutomaticSelections, Catalog, Change, ChoiceRequirement, Draft, EngineResult, Evaluation, FinishedMonster, JsonObject, LibraryEntry, SelectionBudgets } from "./types";
 
 export function App() {
   const [catalog, setCatalog] = useState<Catalog>();
@@ -15,6 +15,11 @@ export function App() {
   const [monster, setMonster] = useState<FinishedMonster>();
   const [step, setStep] = useState(0);
   const [busy, setBusy] = useState(false);
+  const [library, setLibrary] = useState<{ drafts: LibraryEntry[]; monsters: LibraryEntry[] }>();
+  const [choiceRequirements, setChoiceRequirements] = useState<ChoiceRequirement[]>([]);
+  const [automaticSelections, setAutomaticSelections] = useState<AutomaticSelections>({ skills: { master: [], good: [] } });
+  const [selectionBudgets, setSelectionBudgets] = useState<SelectionBudgets>({ skills: { master: null, good: null } });
+  const choiceRequest = useRef(0);
   const [message, setMessage] = useState<{ text: string; good?: boolean }>();
 
   useEffect(() => { void boot(); }, []);
@@ -29,12 +34,38 @@ export function App() {
     } catch (error) { show(error instanceof Error ? error.message : String(error)); }
   }
   function accept(result: EngineResult) {
-    if (result.draft) { setDraft(result.draft); localStorage.setItem("monster-builder.draftId", result.draft.draftId); }
+    if (result.draft) {
+      setDraft(result.draft);
+      localStorage.setItem("monster-builder.draftId", result.draft.draftId);
+      void refreshChoiceRequirements({ draftId: result.draft.draftId });
+    }
     if (result.evaluation) setEvaluation(result.evaluation);
     if (result.monster) setMonster(result.monster);
   }
+  async function refreshChoiceRequirements(payload: JsonObject) {
+    const request = ++choiceRequest.current;
+    try {
+      const result = await execute("draft.choiceRequirements", payload);
+      if (request === choiceRequest.current) {
+        setChoiceRequirements(result.requirements || []);
+        setAutomaticSelections(result.automaticSelections || { skills: { master: [], good: [] } });
+        setSelectionBudgets(result.selectionBudgets || { skills: { master: null, good: null } });
+      }
+    } catch (error) {
+      if (request === choiceRequest.current) {
+        setChoiceRequirements([]);
+        setAutomaticSelections({ skills: { master: [], good: [] } });
+        setSelectionBudgets({ skills: { master: null, good: null } });
+        show(`Choice requirements unavailable: ${error instanceof Error ? error.message : String(error)}`);
+      }
+    }
+  }
+  function previewChoiceRequirements(selections: JsonObject) {
+    if (draft) void refreshChoiceRequirements({ draftId: draft.draftId, selectionOverrides: selections });
+  }
   async function getDraft(id: string) {
     const result = await execute("draft.get", { draftId: id });
+    setMonster(undefined);
     accept(result);
     if (result.draft?.monsterId) accept(await execute("monster.get", { monsterId: result.draft.monsterId }));
   }
@@ -89,7 +120,22 @@ export function App() {
     if (!window.confirm("Create a new draft? The current draft remains persisted by its ID.")) return;
     accept(await execute("draft.create", { draft: {} })); setMonster(undefined); setStep(0);
   }
-  async function resume() { const id = window.prompt("Draft ID", draft!.draftId); if (id) try { await getDraft(id); show("Draft loaded.", true); } catch (error) { show(error instanceof Error ? error.message : String(error)); } }
+  async function resume() {
+    try {
+      const result = await execute("library.search", {});
+      setLibrary({ drafts: result.drafts || [], monsters: result.monsters || [] });
+    } catch (error) { show(error instanceof Error ? error.message : String(error)); }
+  }
+  async function openSaved(entry: LibraryEntry) {
+    try {
+      setBusy(true);
+      const draftId = entry.kind === "draft" ? entry.id : entry.sourceDraftId;
+      if (!draftId) throw new Error("Finished monster has no source draft.");
+      await getDraft(draftId);
+      setLibrary(undefined); setStep(0); show(`${entry.name || "Saved monster"} loaded.`, true);
+    } catch (error) { show(error instanceof Error ? error.message : String(error)); }
+    finally { setBusy(false); }
+  }
   async function finalize() {
     if (evaluation!.status !== "valid") { show("Finalization requires a complete valid Strict evaluation."); return; }
     try { accept(await execute("monster.finalize", guard())); show("Immutable FinishedMonster created.", true); } catch (error) { show(error instanceof Error ? error.message : String(error)); }
@@ -102,17 +148,49 @@ export function App() {
     const anchor = document.createElement("a"); anchor.href = url; anchor.download = `${String(draft!.concept.name || "monster").replace(/[^a-z0-9]+/gi, "-").toLowerCase()}.${format === "markdown" ? "md" : format}`; anchor.click(); URL.revokeObjectURL(url);
   }
 
-  const editorProps: EditorProps = { draft, catalog, evaluation, onSave: save, onBack: () => setStep((current) => Math.max(0, current - 1)) };
+  const editorProps: EditorProps = { draft, catalog, evaluation, choiceRequirements, automaticSelections, selectionBudgets, onPreview: previewChoiceRequirements, onSave: save, onBack: () => setStep((current) => Math.max(0, current - 1)) };
   const editors = [<ConceptStep {...editorProps} />, <ArrayStep {...editorProps} />, <PrimaryGraftStep {...editorProps} />, <SubtypeStep {...editorProps} />, <TemplateStep {...editorProps} />, <SizeStep {...editorProps} />, <SpellStep {...editorProps} />, <OptionsStep {...editorProps} />, <SkillsStep {...editorProps} />, <DamageStep {...editorProps} />];
   return <><Header draft={draft} monster={monster} busy={busy} onNew={createDraft} onResume={resume} onFinalize={finalize} onExport={exportMonster} />
-    <main class="app"><div class="summary"><span class={`pill ${evaluation.status}`}>Strict: {evaluation.status}</span><span class="pill">Revision {draft.revision}</span><span class="pill">{draft.status}</span><span class="pill mono">{draft.draftId}</span>{busy && <span class="pill incomplete">Saving…</span>}</div>
+    <main class="app"><div class="summary"><span class={`pill ${evaluation.status}`}>Strict: {evaluation.status}</span><span class="pill">Revision {draft.revision}</span><span class="pill">{draft.status}</span><span class="pill mono">{draft.draftId}</span>{busy && <span class="pill incomplete">Working…</span>}</div>
       <div class="layout"><Rail draft={draft} evaluation={evaluation} step={step} setStep={setStep} /><section class="panel workspace"><div class="step-head"><div class="kicker">{step === 0 ? "Before you begin" : `Step ${step}`}</div><h2>{STEPS[step].label}</h2><p>{STEPS[step].desc}</p></div><div key={`${draft.draftId}-${step}-${draft.revision}`}>{editors[step]}</div></section><Side draft={draft} evaluation={evaluation} monster={monster} setStep={setStep} /></div>
-    </main>{message && <div class={`toast ${message.good ? "good" : ""}`}>{message.text}</div>}</>;
+    </main>{library && <LibraryModal library={library} currentDraftId={draft.draftId} onClose={() => setLibrary(undefined)} onSelect={openSaved} />}{message && <div class={`toast ${message.good ? "good" : ""}`}>{message.text}</div>}</>;
+}
+
+const savedAtFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: "medium", timeStyle: "short" });
+
+function savedLabel(value: string | null | undefined) {
+  if (!value) return "Saved time unavailable";
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? "Saved time unavailable" : `Saved ${savedAtFormatter.format(date)}`;
+}
+
+function LibraryModal(props: { library: { drafts: LibraryEntry[]; monsters: LibraryEntry[] }; currentDraftId: string; onClose: () => void; onSelect: (entry: LibraryEntry) => void }) {
+  const [query, setQuery] = useState("");
+  useEffect(() => {
+    const close = (event: KeyboardEvent) => { if (event.key === "Escape") props.onClose(); };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, []);
+  const matches = (entry: LibraryEntry) => !query || `${entry.name} ${entry.role} ${entry.id}`.toLowerCase().includes(query.toLowerCase());
+  const groups: Array<[string, LibraryEntry[]]> = [["Drafts", props.library.drafts.filter(matches)], ["Finished monsters", props.library.monsters.filter(matches)]];
+  return <div class="modal-backdrop" role="presentation" onClick={(event) => { if (event.target === event.currentTarget) props.onClose(); }}>
+    <section class="library-modal panel" role="dialog" aria-modal="true" aria-labelledby="library-title">
+      <div class="modal-head"><div><div class="kicker">Local workspace</div><h2 id="library-title">Open saved monster</h2></div><button type="button" class="btn" onClick={props.onClose}>Close</button></div>
+      <div class="field"><label>Search</label><input autofocus value={query} placeholder="Name, role, or ID" onInput={(event) => setQuery(event.currentTarget.value)} /></div>
+      <div class="library-groups">{groups.map(([label, entries]) => <section><h3>{label} <span>{entries.length}</span></h3><div class="library-list">{entries.map((entry) => {
+        const current = entry.kind === "draft" ? entry.id === props.currentDraftId : entry.sourceDraftId === props.currentDraftId;
+        return <button type="button" class={`library-row ${current ? "current" : ""}`} onClick={() => props.onSelect(entry)}>
+          <span><strong>{entry.name || "Untitled monster"}</strong><small>CR {String(entry.cr ?? "—")}{entry.role ? ` · ${entry.role}` : ""}</small><small>{savedLabel(entry.savedAt)}</small><code>{entry.id}</code></span>
+          <span class="library-meta"><span class="pill">Revision {entry.revision ?? "—"}</span>{entry.kind === "monster" && <span class="pill">Finished</span>}{current && <span class="pill valid">Current</span>}</span>
+        </button>;
+      })}{!entries.length && <div class="empty">No matching {label.toLowerCase()}.</div>}</div></section>)}</div>
+    </section>
+  </div>;
 }
 
 function Header(props: { draft: Draft; monster?: FinishedMonster; busy: boolean; onNew: () => void; onResume: () => void; onFinalize: () => void; onExport: (format: string, profile: string) => void }) {
   const [format, setFormat] = useState("markdown"); const [profile, setProfile] = useState("sheet");
-  return <header class="top"><div class="top-inner"><div class="brand"><small>Pathfinder Unchained · Simple Monster Creation</small><h1>{String(props.draft.concept.name || "Guided-Rail Monster Builder")}</h1></div><div class="actions"><button class="btn dark" onClick={props.onNew}>New draft</button><button class="btn dark" onClick={props.onResume}>Resume by ID</button><select class="btn" value={format} onChange={(event) => setFormat(event.currentTarget.value)}><option value="markdown">Markdown</option><option value="html">HTML / Print</option><option value="json">JSON</option></select><select class="btn" value={profile} onChange={(event) => setProfile(event.currentTarget.value)}><option value="sheet">Sheet</option><option value="audit">Sheet + audit</option></select><button class="btn" disabled={!props.monster} onClick={() => props.onExport(format, profile)}>Export</button><button class="btn primary" disabled={props.busy || props.draft.status !== "active"} onClick={props.onFinalize}>Finalize</button></div></div></header>;
+  return <header class="top"><div class="top-inner"><div class="brand"><small>Pathfinder Unchained · Simple Monster Creation</small><h1>{String(props.draft.concept.name || "Guided-Rail Monster Builder")}</h1></div><div class="actions"><button class="btn dark" onClick={props.onNew}>New draft</button><button class="btn dark" onClick={props.onResume}>Open saved</button><select class="btn" value={format} onChange={(event) => setFormat(event.currentTarget.value)}><option value="markdown">Markdown</option><option value="html">HTML / Print</option><option value="json">JSON</option></select><select class="btn" value={profile} onChange={(event) => setProfile(event.currentTarget.value)}><option value="sheet">Sheet</option><option value="audit">Sheet + audit</option></select><button class="btn" disabled={!props.monster} onClick={() => props.onExport(format, profile)}>Export</button><button class="btn primary" disabled={props.busy || props.draft.status !== "active"} onClick={props.onFinalize}>Finalize</button></div></div></header>;
 }
 
 function Rail(props: { draft: Draft; evaluation: Evaluation; step: number; setStep: (step: number) => void }) {

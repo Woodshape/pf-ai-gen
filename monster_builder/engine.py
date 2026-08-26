@@ -6,11 +6,17 @@ import copy
 import hashlib
 import json
 import uuid
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 from .catalog import Catalog, CatalogError
+from .choices import ChoiceRequirements, active_class_cr_entry, active_graft_option_grants, skill_selection_basis
 from .persistence import JSONWorkspace, PersistenceError
+
+
+def _now() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
 
 
 class BoundaryError(ValueError):
@@ -56,8 +62,10 @@ class Engine:
         self._drafts: dict[str, dict[str, Any]] = {}
         self._histories: dict[str, list[dict[str, Any]]] = {}
         self._previous_status: dict[str, str] = {}
+        self._draft_saved_at: dict[str, str] = {}
         self._monsters: dict[str, dict[str, Any]] = {}
         self._monster_status: dict[str, str] = {}
+        self._monster_saved_at: dict[str, str] = {}
         self._idempotency: dict[str, tuple[str, dict[str, Any]]] = {}
 
     @classmethod
@@ -91,6 +99,8 @@ class Engine:
                 result = self._apply_changes(payload)
             elif operation == "draft.evaluate":
                 result = self._evaluate_request(payload)
+            elif operation == "draft.choiceRequirements":
+                result = self._choice_requirements(payload)
             elif operation == "draft.history.get":
                 result = self._history_get(payload)
             elif operation == "draft.restoreRevision":
@@ -113,6 +123,8 @@ class Engine:
                 result = self._restore_monster(payload)
             elif operation == "monster.export":
                 result = self._export_monster(payload)
+            elif operation == "library.search":
+                result = self._search_library(payload)
             else:
                 raise BoundaryError(
                     "operation.unsupported",
@@ -178,6 +190,76 @@ class Engine:
                 },
             }
         return {"draft": copy.deepcopy(draft), "evaluation": self._evaluate(draft)}
+
+    def _search_library(self, payload: dict[str, Any]) -> dict[str, Any]:
+        query = payload.get("query", "")
+        include_archived = payload.get("includeArchived", False)
+        if not isinstance(query, str):
+            raise BoundaryError("library.query-invalid", "query must be a string", "/payload/query")
+        if not isinstance(include_archived, bool):
+            raise BoundaryError("library.include-archived-invalid", "includeArchived must be a boolean", "/payload/includeArchived")
+        drafts = self.workspace.list_drafts() if self.workspace else [
+            (copy.deepcopy(draft), self._draft_saved_at.get(draft["draftId"]))
+            for draft in self._drafts.values()
+        ]
+        monsters = self.workspace.list_monsters() if self.workspace else [
+            (copy.deepcopy(monster), self._monster_status.get(monster_id, "active"), self._monster_saved_at.get(monster_id))
+            for monster_id, monster in self._monsters.items()
+        ]
+        draft_entries = [{
+            "kind": "draft",
+            "id": draft["draftId"],
+            "name": str(draft.get("concept", {}).get("name", "")),
+            "cr": draft.get("selections", {}).get("cr", draft.get("concept", {}).get("targetCR")),
+            "role": str(draft.get("concept", {}).get("role", "")),
+            "status": draft.get("status", "active"),
+            "revision": draft["revision"],
+            "savedAt": saved_at,
+        } for draft, saved_at in drafts if include_archived or draft.get("status", "active") == "active"]
+        monster_entries = [{
+            "kind": "monster",
+            "id": monster["monsterId"],
+            "name": str(monster.get("concept", {}).get("name", "")),
+            "cr": monster.get("result", {}).get("cr", monster.get("concept", {}).get("targetCR")),
+            "role": str(monster.get("concept", {}).get("role", "")),
+            "status": status,
+            "revision": monster.get("sourceDraft", {}).get("revision"),
+            "savedAt": saved_at,
+            "sourceDraftId": monster.get("sourceDraft", {}).get("draftId"),
+        } for monster, status, saved_at in monsters if include_archived or status == "active"]
+        if query:
+            needle = query.casefold()
+            draft_entries = [entry for entry in draft_entries if needle in " ".join(map(str, entry.values())).casefold()]
+            monster_entries = [entry for entry in monster_entries if needle in " ".join(map(str, entry.values())).casefold()]
+        key = lambda entry: (entry["name"].casefold(), entry["id"])
+        return {"drafts": sorted(draft_entries, key=key), "monsters": sorted(monster_entries, key=key)}
+
+    def _choice_requirements(self, payload: dict[str, Any]) -> dict[str, Any]:
+        if "draftId" in payload and "draft" in payload:
+            raise BoundaryError("draft.ambiguous", "provide draftId or draft, not both", "/payload")
+        if "draftId" in payload:
+            stored = self._stored_draft(payload)
+            overrides = payload.get("selectionOverrides", {})
+            if not isinstance(overrides, dict):
+                raise BoundaryError("selection-overrides.invalid", "selectionOverrides must be an object", "/payload/selectionOverrides")
+            draft = stored if not overrides else self._new_draft({
+                "concept": stored["concept"], "selections": {**stored["selections"], **overrides},
+            })
+            basis = {
+                "draftId": stored["draftId"], "revision": stored["revision"],
+                "fingerprint": stored["fingerprint"], "catalogVersion": stored["catalogVersion"],
+                "candidateFingerprint": draft["fingerprint"],
+            }
+        elif "draft" in payload:
+            if "selectionOverrides" in payload:
+                raise BoundaryError("draft.ambiguous", "selectionOverrides can be used only with draftId", "/payload/selectionOverrides")
+            draft = self._new_draft(payload["draft"])
+            basis = {"catalogVersion": draft["catalogVersion"], "candidateFingerprint": draft["fingerprint"]}
+        else:
+            raise BoundaryError("draft.required", "draft or draftId is required", "/payload")
+        choices = ChoiceRequirements(self.catalog.data)
+        selection_basis = choices.selection_basis(draft)
+        return {"basis": basis, "requirements": choices.for_draft(draft), "automaticSelections": selection_basis["automaticSelections"], "selectionBudgets": {"skills": selection_basis["budgets"]}}
 
     def _evaluate_request(self, payload: dict[str, Any]) -> dict[str, Any]:
         if "draftId" in payload:
@@ -427,6 +509,7 @@ class Engine:
                 raise BoundaryError("monster.id-conflict", "monsterId already exists", "/monsterId", kind="conflict")
             self._monsters[monster["monsterId"]] = copy.deepcopy(monster)
             self._monster_status.setdefault(monster["monsterId"], "active")
+            self._monster_saved_at[monster["monsterId"]] = _now()
 
     def _stored_monster(self, payload: dict[str, Any]) -> tuple[dict[str, Any], str]:
         monster_id = payload.get("monsterId")
@@ -507,6 +590,7 @@ class Engine:
             self._drafts[draft["draftId"]]["status"] = status
             if monster_id is not None:
                 self._drafts[draft["draftId"]]["monsterId"] = monster_id
+            self._draft_saved_at[draft["draftId"]] = _now()
         candidate = copy.deepcopy(draft)
         candidate["status"] = status
         if monster_id is not None:
@@ -528,6 +612,7 @@ class Engine:
         else:
             self._drafts[draft["draftId"]] = copy.deepcopy(draft)
             self._histories[draft["draftId"]] = []
+            self._draft_saved_at[draft["draftId"]] = _now()
 
     def _replace_draft(self, previous: dict[str, Any], candidate: dict[str, Any]) -> None:
         if self.workspace:
@@ -540,6 +625,7 @@ class Engine:
             }
             self._histories[candidate["draftId"]] = [snapshot, *self._histories.get(candidate["draftId"], [])][:20]
             self._drafts[candidate["draftId"]] = copy.deepcopy(candidate)
+            self._draft_saved_at[candidate["draftId"]] = _now()
 
     def _apply_change(self, draft: dict[str, Any], change: Any, index: int) -> None:
         path = f"/payload/changes/{index}"
@@ -829,10 +915,7 @@ class Engine:
         class_choice_effect = None
         if selections.get("classGraftId") is not None:
             class_id, class_graft = self._resolve("classGraft", selections["classGraftId"], "/selections/classGraftId")
-            cr_entry = max(
-                (entry for entry in class_graft.get("crEntries", []) if cr >= entry["minCR"]),
-                key=lambda entry: entry["minCR"], default=None,
-            )
+            cr_entry = active_class_cr_entry(class_graft, cr)
             if array_id != class_graft["requiredArrayId"]:
                 issues.append(self._issue("class-graft.required-array", "/selections/arrayId", f"class graft requires {class_graft['requiredArrayId']}", "source-rule", "error", class_graft.get("sourceRef")))
             if class_graft.get("maxImplementedCR") is not None and cr > class_graft["maxImplementedCR"]:
@@ -894,7 +977,6 @@ class Engine:
                 "choose a racial humanoid subtype such as Human, Goblinoid, Elf, or Orc",
                 "source-rule", "error", creature_type.get("sourceRef"),
             ))
-        subtype_choice_skill_grants = []
         subtype_choice_spell_grants = []
         for subtype_id, subtype in subtype_grafts:
             if subtype.get("requiredSizeId") not in {None, size_id}:
@@ -904,8 +986,6 @@ class Engine:
                 value = selections.get("subtypeGraftChoices", {}).get(subtype_id, {}).get(choice["name"])
                 if value not in choice["skillIds"]:
                     issues.append(self._issue("subtype-graft.choice-required", f"/selections/subtypeGraftChoices/{subtype_id}/{choice['name']}", "subtype graft requires a source-defined skill choice", "source-rule", "error", subtype.get("sourceRef")))
-                else:
-                    subtype_choice_skill_grants.append({"skillId": value, "rank": choice["rank"], "additional": True})
             spell_choice = subtype.get("spellChoiceGrant")
             if spell_choice:
                 spell_id = selections.get("subtypeGraftChoices", {}).get(subtype_id, {}).get(spell_choice["name"])
@@ -918,7 +998,6 @@ class Engine:
                     subtype_choice_spell_grants.append({"spellId": spell_id, "frequency": spell_choice["frequency"], "sourceBand": band, "role": "subtype-graft", "sourceText": subtype["ruleText"]})
         template_id = None
         template = None
-        template_choice_grants = []
         template_linked_option_parameters = {}
         if selections.get("templateGraftId") is not None:
             template_id, template = self._resolve("template", selections["templateGraftId"], "/selections/templateGraftId")
@@ -936,8 +1015,10 @@ class Engine:
                 choice_values = selections.get("templateGraftChoices", {})
                 energy = choice_values.get(linked_choice["energyName"])
                 shape = linked_choice.get("fixedShape") or choice_values.get(linked_choice.get("shapeName"))
-                if energy not in linked_choice["energyValues"] or shape not in linked_choice.get("shapeValues", [shape]):
-                    issues.append(self._issue("template-graft.choice-required", "/selections/templateGraftChoices", "template graft requires source-defined breath shape and energy choices", "source-rule", "error", template.get("sourceRef")))
+                if energy not in linked_choice["energyValues"]:
+                    issues.append(self._issue("template-graft.choice-required", f"/selections/templateGraftChoices/{linked_choice['energyName']}", "template graft requires a source-defined energy choice", "source-rule", "error", template.get("sourceRef")))
+                elif shape not in linked_choice.get("shapeValues", [shape]):
+                    issues.append(self._issue("template-graft.choice-required", f"/selections/templateGraftChoices/{linked_choice['shapeName']}", "template graft requires a source-defined breath shape choice", "source-rule", "error", template.get("sourceRef")))
                 else:
                     template_linked_option_parameters = {
                         "option.breath-weapon": {"shape": shape, "damageType": energy},
@@ -954,12 +1035,6 @@ class Engine:
                     issues.append(self._issue("template-graft.choice-required", "/selections/templateGraftChoices/optionIds", f"template graft requires {expected_count} option choice(s)", "source-rule", "error", template.get("sourceRef")))
                 elif len(set(values)) != len(values) or any(value not in choice_grant["optionIds"] for value in values):
                     issues.append(self._issue("template-graft.choice-invalid", "/selections/templateGraftChoices/optionIds", "template option choice is not allowed", "source-rule", "error", template.get("sourceRef")))
-                else:
-                    parameters_by_option = choice_grant.get("parametersByOption", {})
-                    template_choice_grants = [
-                        {"optionId": value, "parameters": copy.deepcopy(parameters_by_option.get(value, {})), "sourceText": template["ruleText"]}
-                        for value in values
-                    ]
         if size.get("minCR") is not None and cr < size["minCR"]:
             issues.append(self._issue("size.cr-too-low", "/selections/sizeId", "size graft is below its minimum CR", "source-rule", "error", size.get("sourceRef")))
         if size.get("maxCR") is not None and cr > size["maxCR"]:
@@ -1049,24 +1124,21 @@ class Engine:
         for slot in option_slots:
             slot_counts[slot["category"]] = slot_counts.get(slot["category"], 0) + slot["count"]
         remaining_slots = dict(slot_counts)
+        source_grants = active_graft_option_grants(class_id, class_graft, subtype_grafts, template_id, template, cr, selections)
         granted_options = []
         if class_graft:
-            class_options = copy.deepcopy(class_graft.get("optionGrants", []))
-            if cr_entry:
-                removed = set(cr_entry.get("removeOptionGrantIds", []))
-                class_options = [grant for grant in class_options if grant["optionId"] not in removed]
-                class_options.extend(copy.deepcopy(cr_entry.get("optionGrants", [])))
+            class_options = [copy.deepcopy(grant) for graft_id, grant in source_grants if graft_id == class_id]
             for grant in class_options:
                 grant["parameters"].update(copy.deepcopy(class_option_choice_values.get(grant["optionId"], {})))
                 grant["graftId"] = class_id
             granted_options.extend(class_options)
-        for subtype_id, subtype in subtype_grafts:
-            subtype_options = copy.deepcopy(subtype.get("optionGrants", []))
+        for subtype_id, _ in subtype_grafts:
+            subtype_options = [copy.deepcopy(grant) for graft_id, grant in source_grants if graft_id == subtype_id]
             for grant in subtype_options:
                 grant["graftId"] = subtype_id
             granted_options.extend(subtype_options)
         if template:
-            template_options = copy.deepcopy(template.get("optionGrants", [])) + copy.deepcopy(template_choice_grants)
+            template_options = [copy.deepcopy(grant) for graft_id, grant in source_grants if graft_id == template_id]
             for grant in template_options:
                 grant["parameters"].update(copy.deepcopy(template_linked_option_parameters.get(grant["optionId"], {})))
                 grant["graftId"] = template_id
@@ -1084,6 +1156,15 @@ class Engine:
                 remaining_slots[slot["category"]] = remaining_slots.get(slot["category"], 0) + slot["count"]
 
         graft_option_choices = selections.get("graftOptionChoices", {})
+        controlled_grant_parameters = {
+            (spec["optionId"], spec["parameter"])
+            for spec in (class_graft or {}).get("optionChoiceSpecs", [])
+        }
+        if (template or {}).get("linkedOptionChoiceSpec"):
+            controlled_grant_parameters.update({
+                ("option.breath-weapon", "damageType"), ("option.breath-weapon", "shape"),
+                ("option.channel-destruction", "energyType"), ("option.immunity", "immunities"),
+            })
         active_graft_ids = {value for value in (class_id, template_id, *subtype_ids) if value}
         granted_option_keys = {(grant["graftId"], grant["optionId"]) for grant in granted_options}
         for graft_id, option_choices in graft_option_choices.items():
@@ -1115,7 +1196,7 @@ class Engine:
             if option_id == "option.secondary-magic" and "spellListId" not in grant["parameters"] and selections.get("spellListId"):
                 grant["parameters"]["spellListId"] = self._resolve("spellList", selections["spellListId"], "/selections/spellListId")[0]
             for name, definition in definitions.items():
-                if definition.get("internal"):
+                if definition.get("internal") or (option_id, name) in controlled_grant_parameters:
                     continue
                 path = f"/selections/graftOptionChoices/{graft_id}/{option_id}/{name}"
                 if name not in grant["parameters"] and not definition.get("optional"):
@@ -1256,10 +1337,12 @@ class Engine:
         skills_selection = selections["skills"]
         master = [skill.removeprefix("skill.") for skill in skills_selection.get("master", [])]
         good = [skill.removeprefix("skill.") for skill in skills_selection.get("good", [])]
-        skill_grants = copy.deepcopy(class_graft.get("skillGrants", [])) if class_graft else []
-        for graft in active_grafts:
-            skill_grants.extend(copy.deepcopy(graft.get("skillGrants", [])))
-        skill_grants.extend(subtype_choice_skill_grants)
+        skill_basis = skill_selection_basis(
+            self.catalog.data, draft, main=main, class_graft=class_graft,
+            active_grafts=active_grafts, subtype_grafts=subtype_grafts,
+            size=size, template=template,
+        )
+        skill_grants = copy.deepcopy(skill_basis["grants"])
         if len(set(master)) != len(master) or len(set(good)) != len(good) or set(master) & set(good):
             issues.append(self._issue("skills.duplicate", "/selections/skills", "a skill cannot occupy more than one slot", "source-rule", "error", main.get("sourceRef")))
         extra_master = size.get("additionalMasterSkills", [])
@@ -1280,29 +1363,8 @@ class Engine:
         for skill in extra_good:
             if skill not in effective_master and skill not in effective_good:
                 effective_good.append(skill)
-        expected_master = main["masterCount"]
-        expected_good = main["goodCount"]
-        if class_graft:
-            for slot in class_graft.get("skillSlots", []):
-                if slot["rank"] == "master":
-                    expected_master += slot["count"]
-                else:
-                    expected_good += slot["count"]
-        for graft in active_grafts:
-            for slot in graft.get("skillSlots", []):
-                if slot["rank"] == "master":
-                    expected_master += slot["count"]
-                else:
-                    expected_good += slot["count"]
-        for grant in skill_grants:
-            if not grant.get("additional"):
-                if grant["rank"] == "master":
-                    expected_master = max(0, expected_master - 1)
-                else:
-                    expected_good = max(0, expected_good - 1)
-        if template and template.get("skillBudgetOverride"):
-            expected_master = template["skillBudgetOverride"]["master"]
-            expected_good = template["skillBudgetOverride"]["good"]
+        expected_master = skill_basis["budgets"]["master"]
+        expected_good = skill_basis["budgets"]["good"]
         skill_budget_ref = class_graft.get("sourceRef") if class_graft else main.get("sourceRef")
         automatic_skills = {
             rank: [

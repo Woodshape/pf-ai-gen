@@ -1,25 +1,27 @@
 import { useState } from "preact/hooks";
 import { StepFrame } from "../components";
-import type { CatalogEntry, Dict, SelectedAttack } from "../types";
+import type { CatalogEntry, ChoiceValue, Dict, SelectedAttack } from "../types";
 import type { EditorProps } from "./basic";
 
-export function SkillsStep({ draft, catalog, onSave, onBack }: EditorProps) {
+export function SkillsStep({ draft, catalog, automaticSelections, selectionBudgets, onSave, onBack }: EditorProps) {
   const existing = (draft.selections.skills as { master?: string[]; good?: string[] } | undefined) || {};
   const [master, setMaster] = useState(existing.master || []);
   const [good, setGood] = useState(existing.good || []);
+  const automatic = automaticSelections.skills;
+  const automaticIds = [...automatic.master, ...automatic.good].map((skill) => skill.value);
   return <StepFrame step={8} onBack={onBack} onApply={(next) => onSave({ skills: { master, good } }, {}, next)}>
-    <div class="grid"><SkillPicker label="Master skills" records={catalog.skills} values={master} unavailable={good} onChange={setMaster} /><SkillPicker label="Good skills" records={catalog.skills} values={good} unavailable={master} onChange={setGood} /></div>
+    <div class="grid"><SkillPicker label="Master skills" records={catalog.skills} values={master} required={selectionBudgets.skills.master} automatic={automatic.master} unavailable={[...good, ...automaticIds]} onChange={setMaster} /><SkillPicker label="Good skills" records={catalog.skills} values={good} required={selectionBudgets.skills.good} automatic={automatic.good} unavailable={[...master, ...automaticIds]} onChange={setGood} /></div>
   </StepFrame>;
 }
 
-function SkillPicker(props: { label: string; records: Dict<CatalogEntry>; values: string[]; unavailable: string[]; onChange: (values: string[]) => void }) {
+function SkillPicker(props: { label: string; records: Dict<CatalogEntry>; values: string[]; required: number | null; automatic: ChoiceValue[]; unavailable: string[]; onChange: (values: string[]) => void }) {
   const [addId, setAddId] = useState("");
   const available = Object.values(props.records).filter((skill) => !props.values.includes(skill.id) && !props.unavailable.includes(skill.id));
   const selected = props.values.map((id) => props.records[id]).filter(Boolean);
-  return <section class="skill-picker"><div class="builder-head"><div><span class="label">{props.label}</span><small>{props.values.length} selected</small></div></div>
+  return <section class="skill-picker"><div class="builder-head"><div><span class="label">{props.label}</span><small>{props.required === null ? `${props.values.length} chosen` : `${props.values.length} of ${props.required} required`} · {props.automatic.length} automatic</small></div></div>
     <div class="add-row"><div class="field"><label>Add skill</label><select value={addId} onChange={(event) => setAddId(event.currentTarget.value)}><option value="">Choose a skill…</option>{available.map((skill) => <option value={skill.id}>{skill.name}</option>)}</select></div><button type="button" class="btn primary" disabled={!addId} onClick={() => { if (!addId) return; props.onChange([...props.values, addId]); setAddId(""); }}>Add</button></div>
-    <div class="builder-list">{selected.map((skill) => <article class="builder-card" key={skill.id}><div class="builder-head"><div><strong>{skill.name}</strong><small>{skill.id}</small></div><button type="button" class="btn small" onClick={() => props.onChange(props.values.filter((id) => id !== skill.id))}>Remove</button></div></article>)}</div>
-    {!selected.length && <div class="empty">No {props.label.toLowerCase()} selected.</div>}
+    <div class="builder-list">{props.automatic.map((skill) => <article class="builder-card" key={`automatic-${skill.value}`}><div class="builder-head"><div><strong>{skill.label}</strong><small>{skill.value}</small></div><span class="pill valid">Automatic</span></div></article>)}{selected.map((skill) => <article class="builder-card" key={skill.id}><div class="builder-head"><div><strong>{skill.name}</strong><small>{skill.id}</small></div><button type="button" class="btn small" onClick={() => props.onChange(props.values.filter((id) => id !== skill.id))}>Remove</button></div></article>)}</div>
+    {!selected.length && !props.automatic.length && <div class="empty">No {props.label.toLowerCase()} selected.</div>}
   </section>;
 }
 

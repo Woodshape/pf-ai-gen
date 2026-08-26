@@ -19,11 +19,40 @@ export interface CatalogEntry {
 }
 
 export interface ParameterSpec {
-  type: "enum" | "enum-array" | "string" | "string-array" | "integer" | "selected-attack" | "selected-attacks";
+  type: "enum" | "enum-array" | "string" | "string-array" | "integer" | "selected-attack" | "selected-attacks" | "selected-speed";
   values?: string[];
-  catalogKind?: "spell" | "skill" | "spellList";
+  catalogKind?: string;
   optional?: boolean;
   internal?: boolean;
+  minCount?: number;
+  maxCount?: number;
+  count?: number;
+  sourceDefaultCount?: number;
+}
+
+export interface ChoiceValue {
+  value: string;
+  label: string;
+  sourceRefs?: SourceRef[];
+}
+
+export interface AutomaticSelections {
+  skills: { master: ChoiceValue[]; good: ChoiceValue[] };
+}
+
+export interface SelectionBudgets {
+  skills: { master: number | null; good: number | null };
+}
+
+export interface ChoiceRequirement {
+  path: string;
+  label: string;
+  type: "enum" | "enum-array" | "string" | "string-array" | "integer";
+  required: boolean;
+  values?: ChoiceValue[];
+  minCount?: number;
+  maxCount?: number;
+  sourceRefs?: SourceRef[];
 }
 
 export interface OptionDefinition extends CatalogEntry {
@@ -96,10 +125,27 @@ export interface FinishedMonster {
   monsterId: string;
 }
 
+export interface LibraryEntry {
+  kind: "draft" | "monster";
+  id: string;
+  name: string;
+  cr?: number;
+  role: string;
+  status: string;
+  revision?: number;
+  savedAt?: string | null;
+  sourceDraftId?: string;
+}
+
 export interface EngineResult {
   draft?: Draft;
   evaluation?: Evaluation;
   monster?: FinishedMonster;
+  requirements?: ChoiceRequirement[];
+  automaticSelections?: AutomaticSelections;
+  selectionBudgets?: SelectionBudgets;
+  drafts?: LibraryEntry[];
+  monsters?: LibraryEntry[];
   content?: unknown;
 }
 

@@ -3,6 +3,7 @@ import hashlib
 import json
 import tempfile
 import unittest
+from datetime import datetime
 from pathlib import Path
 
 from monster_builder import Engine
@@ -49,6 +50,37 @@ class JsonPersistenceTests(unittest.TestCase):
             "baseRevision": draft["revision"],
             "baseFingerprint": draft["fingerprint"],
         }
+
+    def test_library_search_lists_active_drafts_and_finished_monsters(self):
+        with tempfile.TemporaryDirectory() as directory:
+            engine = Engine(workspace=directory)
+            finished_draft = self.create(engine, "finished-draft")
+            finalized = engine.execute(request("finalize", "monster.finalize", self.guard(finished_draft)))
+            self.assertTrue(finalized["ok"], finalized)
+            monster = finalized["result"]["monster"]
+            active = engine.execute(request("active-draft", "draft.create", {"draft": {
+                "concept": {"name": "Work in progress", "targetCR": 2},
+            }}))["result"]["draft"]
+
+            response = engine.execute(request("library", "library.search", {}))
+
+            self.assertTrue(response["ok"], response)
+            draft_entry = response["result"]["drafts"][0]
+            self.assertEqual({key: draft_entry[key] for key in ("kind", "id", "name", "cr", "role", "status", "revision")}, {
+                "kind": "draft", "id": active["draftId"], "name": "Work in progress",
+                "cr": 2, "role": "", "status": "active", "revision": 0,
+            })
+            self.assertIsInstance(draft_entry["savedAt"], str)
+            datetime.fromisoformat(draft_entry["savedAt"].replace("Z", "+00:00"))
+
+            monster_entry = response["result"]["monsters"][0]
+            self.assertEqual({key: monster_entry[key] for key in ("kind", "id", "name", "cr", "role", "status", "revision", "sourceDraftId")}, {
+                "kind": "monster", "id": monster["monsterId"], "name": "Worg",
+                "cr": 2, "role": "feral hunter", "status": "active", "revision": finished_draft["revision"],
+                "sourceDraftId": finished_draft["draftId"],
+            })
+            self.assertIsInstance(monster_entry["savedAt"], str)
+            datetime.fromisoformat(monster_entry["savedAt"].replace("Z", "+00:00"))
 
     def test_create_apply_and_get_reload_across_engine_instances(self):
         with tempfile.TemporaryDirectory() as directory:

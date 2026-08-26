@@ -36,15 +36,6 @@ export function MultiCatalogSelect(props: { label: string; records: Dict<Catalog
   </section>;
 }
 
-export function JsonField(props: { label: string; value: unknown; onChange: (value: unknown) => void; hint?: string }) {
-  const text = JSON.stringify(props.value ?? {}, null, 2);
-  return <div class="field full">
-    <label>{props.label}</label>
-    <textarea spellcheck={false} defaultValue={text} onInput={(event) => { try { props.onChange(JSON.parse(event.currentTarget.value || "{}")); } catch { /* keep the last valid value until the JSON is complete */ } }} />
-    {props.hint && <p class="hint">{props.hint}</p>}
-  </div>;
-}
-
 export function sourceText(ref?: SourceRef) {
   if (!ref) return "";
   return `${ref.file || ref.sourceId}, printed p. ${ref.printedPages?.join("–") || "?"}; lines ${ref.txtLines?.join("–") || "?"}${ref.entry ? `; ${ref.entry}` : ""}`;

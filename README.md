@@ -27,7 +27,7 @@ npm run build
 
 TypeScript source lives in `monster_builder/web/src`; the small shell is `monster_builder/web/index.html`, and Vite writes deployable assets to `monster_builder/web/dist`.
 
-JSONL is only CLI framing; the operation contract is the same in-process and over the local browser transport.
+JSONL is only CLI framing; the operation contract is the same in-process and over the local browser transport. `draft.choiceRequirements` accepts either `{"draftId":"...","selectionOverrides":{}}` for a non-persisting preview or an external `{"draft":{"concept":{},"selections":{}}}` and returns basis metadata plus the system-owned input paths, control types, allowed values, exact cardinalities, restrictions, labels, and source references. Agents and the browser use this operation rather than independently interpreting graft rules.
 Pass `workspace=...` to `Engine`, or set `MONSTER_BUILDER_WORKSPACE` for the
 CLI, to persist atomic JSON Draft snapshots. Persistent operations include
 history/restore, duplication, and archive/restore; at most 20 older revisions
