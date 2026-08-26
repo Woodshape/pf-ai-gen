@@ -9,7 +9,7 @@ from monster_builder.web import CATALOG_PATH, INDEX_PATH, make_server
 
 
 class WebTransportTests(unittest.TestCase):
-    def start_server(self, root: str, *, body_limit: int = 1 << 20):
+    def start_server(self, root: str, *, body_limit: int = 1 << 20, proposal_adapter=None):
         index = Path(root) / "index.html"
         index.write_text("<h1>Guided Rail</h1>", encoding="utf-8")
         assets = Path(root) / "assets"
@@ -22,6 +22,7 @@ class WebTransportTests(unittest.TestCase):
             index_path=index,
             asset_path=assets,
             max_body_bytes=body_limit,
+            proposal_adapter=proposal_adapter,
         )
         thread = threading.Thread(target=server.serve_forever, daemon=True)
         thread.start()
@@ -69,6 +70,7 @@ class WebTransportTests(unittest.TestCase):
         grafts = (source_root / "src" / "steps" / "grafts.tsx").read_text(encoding="utf-8")
         choices = (source_root / "src" / "choice-fields.tsx").read_text(encoding="utf-8")
         components = (source_root / "src" / "components.tsx").read_text(encoding="utf-8")
+        proposal_panel = (source_root / "src" / "proposal-panel.tsx").read_text(encoding="utf-8")
         app = (source_root / "src" / "app.tsx").read_text(encoding="utf-8")
         built = INDEX_PATH.read_text(encoding="utf-8")
         self.assertLess(len(html), 1000)
@@ -120,6 +122,14 @@ class WebTransportTests(unittest.TestCase):
         self.assertIn('execute("draft.duplicate"', app)
         self.assertIn("Editable copy created", app)
         self.assertIn('execute("library.search"', app)
+        self.assertIn('execute("proposal.generate"', app)
+        self.assertIn('execute("proposal.accept"', app)
+        self.assertIn("confirmation: { actor: \"user\", confirmed: true }", app)
+        self.assertIn("Generate proposal", proposal_panel)
+        self.assertIn("Generating with Pi", proposal_panel)
+        self.assertIn("AI request failed", proposal_panel)
+        self.assertIn("nonCanonicalSuggestions", proposal_panel)
+        self.assertIn('type="checkbox"', proposal_panel)
         self.assertIn('role="dialog"', app)
         self.assertNotIn("window.prompt", app)
         self.assertIn('/assets/', built)
@@ -155,6 +165,24 @@ class WebTransportTests(unittest.TestCase):
             self.assertEqual(status, 200)
             self.assertEqual(json.loads(body)["result"]["draft"]["draftId"], draft_id)
 
+    def test_proposal_generate_uses_the_optional_pi_adapter(self):
+        class FakeAdapter:
+            def __init__(self):
+                self.requests = []
+
+            def execute(self, request):
+                self.requests.append(request)
+                return {"ok": True, "requestId": request["requestId"], "result": {"proposal": {"proposalId": "proposal-test"}}}
+
+        with tempfile.TemporaryDirectory() as root:
+            adapter = FakeAdapter()
+            server = self.start_server(root, proposal_adapter=adapter)
+            request = {"protocolVersion": "1", "requestId": "ai-1", "operation": "proposal.generate", "payload": {"draftId": "draft-test", "concept": "Goblin"}}
+            status, _, body = self.request(server, "POST", "/api/execute", json.dumps(request).encode("utf-8"))
+            self.assertEqual(status, 200)
+            self.assertEqual(json.loads(body)["result"]["proposal"]["proposalId"], "proposal-test")
+            self.assertEqual(adapter.requests, [request])
+
     def test_bad_json_oversized_body_and_traversal_are_boundary_errors(self):
         with tempfile.TemporaryDirectory() as root:
             server = self.start_server(root, body_limit=16)
@@ -166,6 +194,10 @@ class WebTransportTests(unittest.TestCase):
             status, _, body = self.request(server, "POST", "/api/execute", b"{")
             self.assertEqual(status, 400)
             self.assertEqual(json.loads(body)["error"]["code"], "protocol.invalid-json")
+
+            status, _, body = self.request(server, "POST", "/api/execute", b"[]")
+            self.assertEqual(status, 200)
+            self.assertEqual(json.loads(body)["error"]["code"], "request.invalid")
 
             status, _, body = self.request(server, "POST", "/api/execute", b"x" * 17)
             self.assertEqual(status, 413)

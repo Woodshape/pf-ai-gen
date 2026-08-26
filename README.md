@@ -15,19 +15,22 @@ python3 -m monster_builder validate monster.json
 
 `validate` accepts a JSON Draft, persisted draft file, or FinishedMonster JSON export. It prints the current deterministic evaluation and exits `0` for valid, `2` for incomplete/invalid, or `4` for unreadable/unsupported input. Rendered Markdown/HTML sheets are intentionally rejected because they omit authoritative selection IDs; export JSON for repeatable human/agent validation.
 
-Open `http://127.0.0.1:8000/` for the browser workspace. It keeps Before You Begin and Steps 1–9 visible, applies revision-guarded edits, shows live engine findings/provenance, finalizes valid Strict drafts, and downloads JSON, Markdown, or HTML exports. Use `--host` and `--port` to change the local bind address.
+Open `http://127.0.0.1:8000/` for the browser workspace. It keeps Before You Begin and Steps 1–9 visible, applies revision-guarded edits, shows live engine findings/provenance, finalizes valid Strict drafts, and downloads JSON, Markdown, or HTML exports. Its optional AI panel creates immutable proposals for explicit, selective user acceptance; manual creation remains fully usable without AI. Use `--host` and `--port` to change the local bind address.
 
 The checked-in production assets run without Node. To change the frontend:
 
 ```bash
 npm ci
 npm run typecheck
+npm run test:ai
 npm run build
 ```
 
 TypeScript source lives in `monster_builder/web/src`; the small shell is `monster_builder/web/index.html`, and Vite writes deployable assets to `monster_builder/web/dist`.
 
-JSONL is only CLI framing; the operation contract is the same in-process and over the local browser transport. `draft.choiceRequirements` accepts either `{"draftId":"...","selectionOverrides":{}}` for a non-persisting preview or an external `{"draft":{"concept":{},"selections":{}}}` and returns basis metadata plus the system-owned input paths, control types, allowed values, exact cardinalities, restrictions, labels, and source references. Agents and the browser use this operation rather than independently interpreting graft rules.
+JSONL is only CLI framing; the operation contract is the same in-process and over the local browser transport. `proposal.validate`, `proposal.create`, `proposal.get`, and explicitly confirmed `proposal.accept` use the same deterministic Engine seam. The browser-only `proposal.generate` application operation allows up to three short-lived Pi SDK attempts; each receives the current Draft plus all prior Engine evaluation findings and can use only `catalog_list`, `catalog_search`, `catalog_get`, and terminating `emit_proposal`. `catalog_list` is a hard gate, and only a candidate that evaluates as valid is persisted as the AI Proposal. It uses Pi's configured default/available model, then the documented `openai-codex/gpt-5.6-luna` fallback when no default resolves. Missing credentials, model, Node, or optional SDK packages produce visible AI errors without changing the Draft.
+
+`draft.choiceRequirements` accepts either `{"draftId":"...","selectionOverrides":{}}` for a non-persisting preview or an external `{"draft":{"concept":{},"selections":{}}}` and returns basis metadata plus the system-owned input paths, control types, allowed values, exact cardinalities, restrictions, labels, and source references. Agents and the browser use this operation rather than independently interpreting graft rules.
 Pass `workspace=...` to `Engine`, or set `MONSTER_BUILDER_WORKSPACE` for the
 CLI, to persist atomic JSON Draft snapshots. Persistent operations include
 history/restore, duplication, and archive/restore; at most 20 older revisions
@@ -55,5 +58,5 @@ The Witch graft is deliberately rejected
 because its source omits the rank of Knowledge (arcana); unsupported natural-attack
 dice remain explicit source gaps rather than guesses.
 
-Runtime is Python/stdlib plus the checked-in bundled browser assets. Frontend builds use Preact, TypeScript, and Vite. Regenerating the checked-in catalog additionally
+Core runtime is Python/stdlib plus the checked-in bundled browser assets. The optional Pi adapter requires Node.js 22.19+ and the optional npm packages installed by `npm ci`; frontend builds use Preact, TypeScript, and Vite. Regenerating the checked-in catalog additionally
 requires the `pdftotext` executable for source table coordinates.

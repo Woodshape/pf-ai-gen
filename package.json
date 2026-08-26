@@ -4,10 +4,15 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:ai": "node --test tests/test_ai_tools.mjs tests/test_pi_schema.mjs"
   },
   "dependencies": {
     "preact": "^10.27.2"
+  },
+  "optionalDependencies": {
+    "@earendil-works/pi-coding-agent": "^0.84.3",
+    "typebox": "^1.3.7"
   },
   "devDependencies": {
     "typescript": "^5.9.3",

@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit
 
+from .ai import PiProposalAdapter
 from .engine import Engine
 
 
@@ -66,8 +67,8 @@ class GuidedRailHandler(BaseHTTPRequestHandler):
         request = self._read_request()
         if request is None:
             return
-        response = self._server_engine().execute(request)
-        self._send_json(response)
+        target = self.server.proposal_adapter if isinstance(request, dict) and request.get("operation") == "proposal.generate" else self._server_engine()
+        self._send_json(target.execute(request))
 
     def _request_path(self) -> str | None:
         try:
@@ -183,6 +184,7 @@ class GuidedRailServer(ThreadingHTTPServer):
         catalog_path: str | Path = CATALOG_PATH,
         asset_path: str | Path = ASSET_PATH,
         max_body_bytes: int = MAX_BODY_BYTES,
+        proposal_adapter: PiProposalAdapter | None = None,
     ) -> None:
         if isinstance(max_body_bytes, bool) or not isinstance(max_body_bytes, int) or max_body_bytes <= 0:
             raise ValueError("max_body_bytes must be a positive integer")
@@ -191,6 +193,7 @@ class GuidedRailServer(ThreadingHTTPServer):
         self.catalog_path = Path(catalog_path)
         self.asset_path = Path(asset_path)
         self.max_body_bytes = max_body_bytes
+        self.proposal_adapter = proposal_adapter or PiProposalAdapter(engine)
         super().__init__(server_address, GuidedRailHandler)
 
 
@@ -204,6 +207,7 @@ def make_server(
     catalog_path: str | Path = CATALOG_PATH,
     asset_path: str | Path = ASSET_PATH,
     max_body_bytes: int = MAX_BODY_BYTES,
+    proposal_adapter: PiProposalAdapter | None = None,
 ) -> GuidedRailServer:
     """Build a server whose handlers all use one Engine instance."""
 
@@ -216,6 +220,7 @@ def make_server(
         catalog_path=catalog_path,
         asset_path=asset_path,
         max_body_bytes=max_body_bytes,
+        proposal_adapter=proposal_adapter,
     )
 
 

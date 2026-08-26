@@ -125,6 +125,24 @@ export interface FinishedMonster {
   monsterId: string;
 }
 
+export interface ProposalChange extends Change {
+  rationale?: string;
+  sourceRefs?: SourceRef[];
+}
+
+export interface Proposal {
+  proposalId: string;
+  draftId: string;
+  baseRevision: number;
+  baseFingerprint: string;
+  catalogVersion: string;
+  changes: ProposalChange[];
+  rationale: string;
+  assumptions: string[];
+  nonCanonicalSuggestions: string[];
+  model?: string;
+}
+
 export interface LibraryEntry {
   kind: "draft" | "monster";
   id: string;
@@ -141,6 +159,7 @@ export interface EngineResult {
   draft?: Draft;
   evaluation?: Evaluation;
   monster?: FinishedMonster;
+  proposal?: Proposal;
   requirements?: ChoiceRequirement[];
   automaticSelections?: AutomaticSelections;
   selectionBudgets?: SelectionBudgets;

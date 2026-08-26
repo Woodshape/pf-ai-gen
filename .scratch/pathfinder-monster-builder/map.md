@@ -2,7 +2,7 @@
 
 Type: map
 Label: wayfinder:map
-Status: open
+Status: resolved
 
 ## Destination
 
@@ -18,16 +18,16 @@ A local-first browser tool that guides a user through *Pathfinder Unchained* Sim
 - AI produces a short rationale and a proposal; the user can inspect and edit the same draft through the frontend or a future machine interface.
 - Use one primary class graft. Normal Pathfinder multiclass simulation and house-rule multiclassing are not part of the strict mode.
 - Strict engine mode has no user-defined Reality Check adjustment layer; it accepts source-defined selections only and recalculates derived values.
-- The MVP persistence contract uses versioned JSON files with authoritative writes through the shared tool interface. Draft and immutable FinishedMonster persistence are implemented with a configurable workspace, atomic writes, Draft history/restore, duplication, and archive/restore; omitting a workspace retains process-local behavior. Proposal persistence follows the later AI milestone. Free Mode, Free Overrides, and the Reality-Check workflow remain backlog work.
+- The MVP persistence contract uses versioned JSON files with authoritative writes through the shared tool interface. Draft, immutable Proposal, and immutable FinishedMonster persistence are implemented with a configurable workspace, atomic writes, Draft history/restore, duplication, and archive/restore; omitting a workspace retains process-local behavior. Free Mode, Free Overrides, and the Reality-Check workflow remain backlog work.
 
 ## Current implementation state
 
-The repository has moved from planning into a dependency-free Python vertical slice:
+The repository has delivered the local MVP as a dependency-free Python core with an optional Node/Pi adapter:
 
 - `catalog/catalog.json` and `catalog/catalog.schema.json` load and validate against local source hashes. The catalog uses a content-derived version fingerprint rather than maintained compatibility branches. It contains the three CR arrays, all 19 class grafts, 41 source-listed subtype grafts, all 10 templates, nine size grafts, all 159 Step-7 table options plus three required unmodified-rule options, skills, attacks, damage, all 60 structured Step-6 spell lists, and 659 spell records. All 39 APG/UM/UC spells, five ACG spells, and Core metamagic rules are now locally hash-anchored with official-source URLs.
 - `monster_builder.Engine.execute` supports the Draft lifecycle plus `monster.finalize`, `monster.get`, `monster.duplicate`, `monster.archive`, `monster.restore`, and `monster.export` with typed validation, guards, idempotency, incomplete/invalid separation, and derivation traces.
-- Worg CR 2, Griffon CR 4, pre-Reality-Check Medusa CR 7, Goblin Druid, Fighter, Sorcerer save-choice, Clockwork, Skeleton, and Lycanthrope paths are covered through the public interface. The engine applies required arrays, highest-only class CR entries, option/skill replacement and additional budgets, template prerequisites, as-if-CR spellcasting, and stable source traces. Twenty-eight options have typed effects; complex encounter actions remain explicit source-rule effects rather than guessed simulations. Public `execute` regressions now cover all 93 Step-1 rows, every weapon/natural attack profile, all 231 cells of Table 5-9, every one of the 162 options on a valid path, hard prerequisites, typed scaling thresholds, all size limits, and both sides of every spell band. The matrix exposed and fixed negative damage modifiers and now rejects invalid array ability-modifier totals while retaining the source’s Griffon redistribution. The Witch graft’s source-omitted skill rank and unsupported fixed or sub-d4 natural-attack dice remain explicit source gaps. The offline test suite has 102 passing tests, including partial-draft dependency validation, explicit skill-budget diagnostics, and the selectable browser editors/local HTTP transport.
-- Valid Strict Drafts now finalize to immutable, fingerprinted FinishedMonster snapshots and export deterministically as self-contained JSON, Markdown, and standalone HTML/print with sheet/audit profiles. A Preact/TypeScript Guided-Rail browser UI exposes Before You Begin and Steps 1–9, revision-guarded edits, live validation/provenance, finalization, and downloads through the same `execute` engine; Vite emits checked-in offline runtime assets. Proposal persistence and AI are still outstanding.
+- Worg CR 2, Griffon CR 4, pre-Reality-Check Medusa CR 7, Goblin Druid, Fighter, Sorcerer save-choice, Clockwork, Skeleton, and Lycanthrope paths are covered through the public interface. The engine applies required arrays, highest-only class CR entries, option/skill replacement and additional budgets, template prerequisites, as-if-CR spellcasting, and stable source traces. Twenty-eight options have typed effects; complex encounter actions remain explicit source-rule effects rather than guessed simulations. Public `execute` regressions now cover all 93 Step-1 rows, every weapon/natural attack profile, all 231 cells of Table 5-9, every one of the 162 options on a valid path, hard prerequisites, typed scaling thresholds, all size limits, and both sides of every spell band. The matrix exposed and fixed negative damage modifiers and now rejects invalid array ability-modifier totals while retaining the source’s Griffon redistribution. The Witch graft’s source-omitted skill rank and unsupported fixed or sub-d4 natural-attack dice remain explicit source gaps. The offline suite has 131 passing Python tests plus three Node adapter checks, including partial-draft dependency validation, explicit skill-budget diagnostics, Proposal guards/persistence/acceptance, the Pi catalog gate, and the selectable browser editors/local HTTP transport.
+- Valid Strict Drafts now finalize to immutable, fingerprinted FinishedMonster snapshots and export deterministically as self-contained JSON, Markdown, and standalone HTML/print with sheet/audit profiles. A Preact/TypeScript Guided-Rail browser UI exposes Before You Begin and Steps 1–9, revision-guarded edits, live validation/provenance, finalization, and downloads through the same `execute` engine; Vite emits checked-in offline runtime assets. Immutable Proposal persistence, selective user-confirmed acceptance, the optional Pi SDK concept adapter, its hard `catalog_list` gate, up to three Engine-feedback validation attempts, and the browser Proposal review panel are implemented. Manual creation remains available without AI.
 
 ## Decisions so far
 
@@ -46,7 +46,7 @@ The repository has moved from planning into a dependency-free Python vertical sl
 
 ## Next implementation milestone
 
-- **Implement the optional Pi adapter:** add immutable Proposal persistence and the Issue 07 adapter/acceptance boundary on top of the completed catalog, engine, persistence, exports, and Guided-Rail UI.
+- **Roadmap complete.** Choose a new backlog milestone before adding Free Mode/Overrides or the Reality-Check workflow; neither is part of the delivered Strict MVP.
 
 ## Out of scope
 

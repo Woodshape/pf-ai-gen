@@ -64,6 +64,7 @@ class Engine:
         self._previous_status: dict[str, str] = {}
         self._draft_saved_at: dict[str, str] = {}
         self._monsters: dict[str, dict[str, Any]] = {}
+        self._proposals: dict[str, dict[str, Any]] = {}
         self._monster_status: dict[str, str] = {}
         self._monster_saved_at: dict[str, str] = {}
         self._idempotency: dict[str, tuple[str, dict[str, Any]]] = {}
@@ -99,6 +100,14 @@ class Engine:
                 result = self._apply_changes(payload)
             elif operation == "draft.evaluate":
                 result = self._evaluate_request(payload)
+            elif operation == "proposal.validate":
+                result = self._proposal_validate(payload)
+            elif operation == "proposal.create":
+                result = self._proposal_create(payload)
+            elif operation == "proposal.get":
+                result = self._proposal_get(payload)
+            elif operation == "proposal.accept":
+                result = self._proposal_accept(payload)
             elif operation == "draft.choiceRequirements":
                 result = self._choice_requirements(payload)
             elif operation == "draft.history.get":
@@ -134,6 +143,7 @@ class Engine:
             response = {"ok": True, "requestId": request_id, "result": result}
             if operation in {
                 "draft.create", "draft.applyChanges", "draft.restoreRevision", "draft.duplicate", "draft.archive", "draft.restore",
+                "proposal.create", "proposal.accept",
                 "monster.finalize", "monster.duplicate", "monster.archive", "monster.restore",
             }:
                 self._idempotency[request_id] = (request_fingerprint, copy.deepcopy(response))
@@ -142,7 +152,12 @@ class Engine:
             return self._error(request_id, exc)
         except PersistenceError as exc:
             operation_name = str(request.get("operation", "")) if isinstance(request, dict) else ""
-            entity = "monster" if operation_name.startswith("monster.") and operation_name != "monster.finalize" else "draft"
+            if operation_name.startswith("monster.") and operation_name != "monster.finalize":
+                entity = "monster"
+            elif operation_name.startswith("proposal."):
+                entity = "proposal"
+            else:
+                entity = "draft"
             code, kind = {
                 "persistence.not-found": (f"{entity}.not-found", "boundary"),
                 "persistence.invalid-id": (f"{entity}.not-found", "boundary"),
@@ -269,6 +284,272 @@ class Engine:
         else:
             raise BoundaryError("draft.required", "draft or draftId is required", "/payload")
         return {"evaluation": self._evaluate(draft)}
+
+    def _proposal_validate(self, payload: dict[str, Any]) -> dict[str, Any]:
+        if not isinstance(payload, dict):
+            raise BoundaryError("proposal.invalid", "proposal payload must be an object", "/payload")
+        raw = payload.get("proposal", payload)
+        if not isinstance(raw, dict):
+            raise BoundaryError("proposal.invalid", "proposal must be an object", "/payload/proposal")
+        draft_id = raw.get("draftId", payload.get("draftId"))
+        if not isinstance(draft_id, str) or not draft_id:
+            raise BoundaryError("proposal.draft-id-required", "draftId is required", "/payload/draftId")
+        draft = copy.deepcopy(self._stored_draft({"draftId": draft_id}))
+        if draft.get("status", "active") != "active":
+            raise BoundaryError("draft.not-active", "proposals can only be validated for active drafts", "/payload/draftId", kind="conflict")
+        merged = {**payload, **raw}
+        base_revision, base_fingerprint, _ = self._proposal_base(merged, draft)
+        base_draft = self._draft_at_base(draft, base_revision, base_fingerprint)
+        changes = self._proposal_changes(raw)
+        candidate = self._validate_proposal_changes(base_draft, changes)
+        candidate["revision"] = base_revision + 1
+        candidate["fingerprint"] = _draft_fingerprint(candidate)
+        return {"candidateDraft": candidate, "evaluation": self._evaluate(candidate)}
+
+    def _proposal_create(self, payload: dict[str, Any]) -> dict[str, Any]:
+        if not isinstance(payload, dict):
+            raise BoundaryError("proposal.invalid", "proposal payload must be an object", "/payload")
+        raw = payload.get("proposal", payload)
+        if not isinstance(raw, dict):
+            raise BoundaryError("proposal.invalid", "proposal must be an object", "/payload/proposal")
+        if raw is not payload:
+            raw = copy.deepcopy(raw)
+            for field in (
+                "draftId", "baseRevision", "baseFingerprint", "catalogVersion", "model",
+                "rationale", "assumptions", "nonCanonicalSuggestions",
+            ):
+                if field not in raw and field in payload:
+                    raw[field] = copy.deepcopy(payload[field])
+        draft_id = raw.get("draftId")
+        if not isinstance(draft_id, str) or not draft_id:
+            raise BoundaryError("proposal.draft-id-required", "draftId is required", "/payload/draftId")
+        draft = copy.deepcopy(self._stored_draft({"draftId": draft_id}))
+        if draft.get("status", "active") != "active":
+            raise BoundaryError("draft.not-active", "proposals can only be created for active drafts", "/payload/draftId", kind="conflict")
+        base_revision, base_fingerprint, catalog_version = self._proposal_base(raw, draft)
+        base_draft = self._draft_at_base(draft, base_revision, base_fingerprint)
+        changes = self._proposal_changes(raw)
+        self._validate_proposal_changes(base_draft, changes)
+        proposal = {
+            "schemaVersion": self.DRAFT_SCHEMA_VERSION,
+            "kind": "Proposal",
+            "proposalId": f"proposal-{uuid.uuid4().hex}",
+            "draftId": draft_id,
+            "baseRevision": base_revision,
+            "baseFingerprint": base_fingerprint,
+            "catalogVersion": catalog_version,
+            "changes": copy.deepcopy(changes),
+            "rationale": self._proposal_text(raw, "rationale", ""),
+            "assumptions": self._proposal_strings(raw, "assumptions"),
+            "nonCanonicalSuggestions": self._proposal_strings(raw, "nonCanonicalSuggestions"),
+        }
+        if isinstance(raw.get("model"), str):
+            proposal["model"] = raw["model"]
+        elif raw.get("model") is not None:
+            raise BoundaryError("proposal.metadata-invalid", "model must be a string", "/payload/model")
+        self._store_proposal(proposal)
+        return {"proposal": copy.deepcopy(proposal)}
+
+    def _proposal_get(self, payload: dict[str, Any]) -> dict[str, Any]:
+        proposal = self._stored_proposal(payload)
+        return {"proposal": copy.deepcopy(proposal)}
+
+    def _proposal_accept(self, payload: dict[str, Any]) -> dict[str, Any]:
+        proposal = self._stored_proposal(payload)
+        self._validate_proposal_confirmation(payload)
+        selected_ids = self._proposal_change_ids(payload)
+        changes_by_id = {change["changeId"]: change for change in proposal["changes"]}
+        unknown = [change_id for change_id in selected_ids if change_id not in changes_by_id]
+        if unknown:
+            raise BoundaryError(
+                "proposal.change-id-unknown",
+                f"unknown proposal changeId: {unknown[0]}",
+                f"/payload/changeIds/{selected_ids.index(unknown[0])}",
+            )
+        if payload.get("draftId") is not None and payload["draftId"] != proposal["draftId"]:
+            raise BoundaryError("proposal.draft-mismatch", "proposal is bound to a different draft", "/payload/draftId", kind="conflict")
+        for field in ("baseRevision", "baseFingerprint"):
+            if field in payload and payload[field] != proposal[field]:
+                raise BoundaryError("proposal.base-mismatch", "acceptance base does not match the proposal base", f"/payload/{field}", kind="conflict")
+        if "catalogVersion" in payload and payload["catalogVersion"] != proposal["catalogVersion"]:
+            raise BoundaryError("proposal.catalog-mismatch", "acceptance catalogVersion does not match the proposal", "/payload/catalogVersion", kind="catalog-data")
+        draft = copy.deepcopy(self._stored_draft({"draftId": proposal["draftId"]}))
+        if draft.get("catalogVersion") != proposal["catalogVersion"] or proposal["catalogVersion"] != self.catalog.version:
+            raise BoundaryError("catalog.version-unsupported", "proposal uses an unsupported catalog version", "/payload/catalogVersion", kind="catalog-data")
+        self._require_base_guard({
+            "baseRevision": proposal["baseRevision"],
+            "baseFingerprint": proposal["baseFingerprint"],
+        }, draft)
+        selected_changes = [copy.deepcopy(changes_by_id[change_id]) for change_id in selected_ids]
+        self._validate_proposal_changes(draft, selected_changes)
+        applied = self._apply_changes({
+            "draftId": proposal["draftId"],
+            "baseRevision": proposal["baseRevision"],
+            "baseFingerprint": proposal["baseFingerprint"],
+            "changes": selected_changes,
+        })
+        return {
+            "proposal": copy.deepcopy(proposal),
+            "draft": applied["draft"],
+            "evaluation": applied["evaluation"],
+            "appliedChanges": applied["appliedChanges"],
+            "acceptedChangeIds": list(selected_ids),
+        }
+
+    def _proposal_base(self, raw: dict[str, Any], draft: dict[str, Any]) -> tuple[int, str, str]:
+        for field in ("baseRevision", "baseFingerprint", "catalogVersion"):
+            if field not in raw:
+                raise BoundaryError("proposal.base-guard-required", "proposal requires baseRevision, baseFingerprint, and catalogVersion", f"/payload/{field}")
+        base_revision = raw["baseRevision"]
+        if not isinstance(base_revision, int) or isinstance(base_revision, bool) or base_revision < 0:
+            raise BoundaryError("proposal.base-revision-invalid", "baseRevision must be a non-negative integer", "/payload/baseRevision")
+        base_fingerprint = raw["baseFingerprint"]
+        if not isinstance(base_fingerprint, str) or not base_fingerprint:
+            raise BoundaryError("proposal.base-fingerprint-invalid", "baseFingerprint must be a non-empty string", "/payload/baseFingerprint")
+        catalog_version = raw["catalogVersion"]
+        if not isinstance(catalog_version, str) or not catalog_version:
+            raise BoundaryError("proposal.catalog-version-invalid", "catalogVersion must be a non-empty string", "/payload/catalogVersion")
+        if catalog_version != self.catalog.version:
+            raise BoundaryError("catalog.version-unsupported", "proposal uses an unsupported catalog version", "/payload/catalogVersion", kind="catalog-data")
+        if catalog_version != draft.get("catalogVersion"):
+            raise BoundaryError("proposal.catalog-mismatch", "proposal catalogVersion does not match the draft", "/payload/catalogVersion", kind="catalog-data")
+        return base_revision, base_fingerprint, catalog_version
+
+    def _draft_at_base(self, current: dict[str, Any], revision: int, fingerprint: str) -> dict[str, Any]:
+        if current.get("revision") == revision and current.get("fingerprint") == fingerprint:
+            return copy.deepcopy(current)
+        history = self.workspace.history(current["draftId"]) if self.workspace else self._histories.get(current["draftId"], [])
+        for snapshot in history:
+            if snapshot.get("revision") == revision and snapshot.get("fingerprint") == fingerprint:
+                candidate = copy.deepcopy(snapshot["draft"])
+                candidate.setdefault("status", current.get("status", "active"))
+                return candidate
+        raise BoundaryError(
+            "draft.revision-conflict",
+            "draft revision or fingerprint is stale or unknown",
+            "/payload/baseRevision",
+            kind="conflict",
+            details={"currentDraft": copy.deepcopy(current), "currentEvaluation": self._evaluate(current)},
+        )
+
+    def _proposal_changes(self, raw: dict[str, Any]) -> list[dict[str, Any]]:
+        if "changes" in raw and "typedChanges" in raw:
+            raise BoundaryError("proposal.changes-ambiguous", "provide changes or typedChanges, not both", "/payload")
+        changes = raw.get("changes", raw.get("typedChanges", []))
+        if not isinstance(changes, list):
+            raise BoundaryError("proposal.changes-invalid", "changes must be an array", "/payload/changes")
+        return copy.deepcopy(changes)
+
+    @staticmethod
+    def _proposal_text(raw: dict[str, Any], field: str, default: str) -> str:
+        value = raw.get(field, default)
+        if not isinstance(value, str):
+            raise BoundaryError("proposal.metadata-invalid", f"{field} must be a string", f"/payload/{field}")
+        return value
+
+    @staticmethod
+    def _proposal_strings(raw: dict[str, Any], field: str) -> list[str]:
+        value = raw.get(field, [])
+        if not isinstance(value, list) or any(not isinstance(item, str) for item in value):
+            raise BoundaryError("proposal.metadata-invalid", f"{field} must be an array of strings", f"/payload/{field}")
+        return copy.deepcopy(value)
+
+    def _validate_proposal_confirmation(self, payload: dict[str, Any]) -> None:
+        confirmation = payload.get("confirmation")
+        if not isinstance(confirmation, dict) or confirmation.get("actor") != "user" or confirmation.get("confirmed") is not True:
+            raise BoundaryError(
+                "proposal.confirmation-required",
+                "proposal acceptance requires confirmation.actor='user' and confirmed=true",
+                "/payload/confirmation",
+            )
+
+    def _proposal_change_ids(self, payload: dict[str, Any]) -> list[str]:
+        if "changeIds" in payload and "selectedChangeIds" in payload:
+            raise BoundaryError("proposal.change-ids-ambiguous", "provide changeIds or selectedChangeIds, not both", "/payload")
+        values = payload.get("changeIds", payload.get("selectedChangeIds"))
+        if not isinstance(values, list) or not values:
+            raise BoundaryError("proposal.change-ids-required", "acceptance requires one or more explicit change IDs", "/payload/changeIds")
+        if any(not isinstance(value, str) or not value for value in values):
+            raise BoundaryError("proposal.change-id-invalid", "change IDs must be non-empty strings", "/payload/changeIds")
+        if len(values) != len(set(values)):
+            raise BoundaryError("proposal.change-id-duplicate", "change IDs must be unique", "/payload/changeIds")
+        return list(values)
+
+    def _validate_proposal_changes(self, draft: dict[str, Any], changes: list[dict[str, Any]]) -> dict[str, Any]:
+        candidate = copy.deepcopy(draft)
+        seen: set[str] = set()
+        for index, change in enumerate(changes):
+            path = f"/payload/changes/{index}"
+            if not isinstance(change, dict):
+                raise BoundaryError("change.invalid", "change must be an object", path)
+            change_id = change.get("changeId")
+            if not isinstance(change_id, str) or not change_id:
+                raise BoundaryError("change.id-required", "each change requires a non-empty changeId", f"{path}/changeId")
+            if change_id in seen:
+                raise BoundaryError("change.id-duplicate", "changeId values must be unique within a proposal", f"{path}/changeId")
+            seen.add(change_id)
+            if "rationale" in change and not isinstance(change["rationale"], str):
+                raise BoundaryError("change.rationale-invalid", "change rationale must be a string", f"{path}/rationale")
+            if "sourceRefs" in change and not isinstance(change["sourceRefs"], (dict, list)):
+                raise BoundaryError("change.source-refs-invalid", "change sourceRefs must be an object or array", f"{path}/sourceRefs")
+            self._apply_change(candidate, change, index)
+        self._validate_draft_input(candidate)
+        return candidate
+
+    def _store_proposal(self, proposal: dict[str, Any]) -> None:
+        if self.workspace:
+            self.workspace.create_proposal(proposal)
+            return
+        proposal_id = proposal["proposalId"]
+        existing = self._proposals.get(proposal_id)
+        if existing is not None and existing != proposal:
+            raise BoundaryError("proposal.id-conflict", "proposalId already exists", "/proposalId", kind="conflict")
+        self._proposals[proposal_id] = copy.deepcopy(proposal)
+
+    def _stored_proposal(self, payload: dict[str, Any]) -> dict[str, Any]:
+        if not isinstance(payload, dict):
+            raise BoundaryError("proposal.invalid", "proposal payload must be an object", "/payload")
+        proposal_id = payload.get("proposalId")
+        if not isinstance(proposal_id, str) or not proposal_id:
+            raise BoundaryError("proposal.id-required", "proposalId is required", "/payload/proposalId")
+        if self.workspace:
+            proposal = self.workspace.load_proposal(proposal_id)
+        else:
+            try:
+                proposal = copy.deepcopy(self._proposals[proposal_id])
+            except KeyError as exc:
+                raise BoundaryError("proposal.not-found", f"unknown proposal: {proposal_id}", "/payload/proposalId") from exc
+        self._validate_stored_proposal(proposal)
+        return proposal
+
+    def _validate_stored_proposal(self, proposal: dict[str, Any]) -> None:
+        required = {
+            "schemaVersion", "kind", "proposalId", "draftId", "baseRevision", "baseFingerprint",
+            "catalogVersion", "changes", "rationale", "assumptions", "nonCanonicalSuggestions",
+        }
+        if not isinstance(proposal, dict) or not required <= set(proposal):
+            raise BoundaryError("proposal.file-corrupt", "proposal is missing required fields", "", kind="persistence")
+        if proposal.get("schemaVersion") != self.DRAFT_SCHEMA_VERSION or proposal.get("kind") != "Proposal":
+            raise BoundaryError("proposal.file-schema-unsupported", "unsupported proposal snapshot", "/schemaVersion", kind="persistence")
+        if not isinstance(proposal.get("proposalId"), str) or not isinstance(proposal.get("draftId"), str):
+            raise BoundaryError("proposal.file-corrupt", "proposal identifiers are invalid", "", kind="persistence")
+        if not isinstance(proposal.get("baseRevision"), int) or isinstance(proposal.get("baseRevision"), bool) or proposal["baseRevision"] < 0:
+            raise BoundaryError("proposal.file-corrupt", "proposal baseRevision is invalid", "/baseRevision", kind="persistence")
+        if not isinstance(proposal.get("baseFingerprint"), str) or not isinstance(proposal.get("catalogVersion"), str):
+            raise BoundaryError("proposal.file-corrupt", "proposal base metadata is invalid", "", kind="persistence")
+        if not isinstance(proposal.get("changes"), list) or not isinstance(proposal.get("rationale"), str):
+            raise BoundaryError("proposal.file-corrupt", "proposal content is invalid", "", kind="persistence")
+        if "model" in proposal and not isinstance(proposal["model"], str):
+            raise BoundaryError("proposal.file-corrupt", "proposal model metadata is invalid", "/model", kind="persistence")
+        if not isinstance(proposal.get("assumptions"), list) or any(not isinstance(item, str) for item in proposal["assumptions"]):
+            raise BoundaryError("proposal.file-corrupt", "proposal assumptions are invalid", "/assumptions", kind="persistence")
+        if not isinstance(proposal.get("nonCanonicalSuggestions"), list) or any(not isinstance(item, str) for item in proposal["nonCanonicalSuggestions"]):
+            raise BoundaryError("proposal.file-corrupt", "proposal suggestions are invalid", "/nonCanonicalSuggestions", kind="persistence")
+        seen: set[str] = set()
+        for change in proposal["changes"]:
+            if not isinstance(change, dict) or not isinstance(change.get("changeId"), str) or not change["changeId"] or change["changeId"] in seen:
+                raise BoundaryError("proposal.file-corrupt", "proposal changes are invalid", "/changes", kind="persistence")
+            seen.add(change["changeId"])
 
     def _apply_changes(self, payload: dict[str, Any]) -> dict[str, Any]:
         draft = self._stored_draft(payload)
@@ -637,8 +918,19 @@ class Engine:
             "set-concept", "set_concept", "unset-concept", "unset_concept",
         }:
             raise BoundaryError("change.type-invalid", "only typed selection or concept changes are supported", f"{path}/type")
+        if "field" in change and "path" in change:
+            raise BoundaryError("change.path-ambiguous", "change may provide field or path, not both", f"{path}/path")
         field = change.get("field", change.get("key"))
         concept_change = change_type in {"set-concept", "set_concept", "unset-concept", "unset_concept"}
+        if "path" in change:
+            raw_path = change["path"]
+            if not isinstance(raw_path, str):
+                raise BoundaryError("change.path-invalid", "change path must be a string", f"{path}/path")
+            segments = raw_path.split("/")
+            expected_root = "concept" if concept_change else "selections"
+            if len(segments) != 3 or segments[0] != "" or segments[1] != expected_root or not segments[2]:
+                raise BoundaryError("change.path-invalid", "change path must identify one concept or selection field", f"{path}/path")
+            field = segments[2]
         prefixes = ("concept.",) if concept_change else ("selections.", "selection.")
         for prefix in prefixes:
             if isinstance(field, str) and field.startswith(prefix):

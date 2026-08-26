@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import os
 import tempfile
@@ -41,6 +42,7 @@ class JSONWorkspace:
     def __init__(self, root: str | Path):
         self.root = Path(root).expanduser().resolve()
         self.drafts = self.root / "drafts"
+        self.proposals = self.root / "proposals"
         self.monsters = self.root / "monsters"
 
     @contextmanager
@@ -80,6 +82,25 @@ class JSONWorkspace:
             document = self._read(path.stem)
             entries.append((self._draft_from_document(document), self._saved_at(document, path)))
         return entries
+
+    def create_proposal(self, proposal: dict[str, Any]) -> None:
+        proposal_id = proposal["proposalId"]
+        with self.lock(proposal_id):
+            path = self._proposal_path(proposal_id)
+            if path.exists():
+                existing = self._read_proposal(proposal_id)["proposal"]
+                if existing == proposal:
+                    return
+                raise PersistenceError("persistence.already-exists", f"proposal already exists: {proposal_id}")
+            self._write(path, {
+                "schemaVersion": self.SCHEMA_VERSION,
+                "savedAt": _now(),
+                "fingerprint": self._proposal_fingerprint(proposal),
+                "proposal": copy.deepcopy(proposal),
+            })
+
+    def load_proposal(self, proposal_id: str) -> dict[str, Any]:
+        return copy.deepcopy(self._read_proposal(proposal_id)["proposal"])
 
     def list_monsters(self) -> list[tuple[dict[str, Any], str, str | None]]:
         entries = []
@@ -175,6 +196,11 @@ class JSONWorkspace:
             "draft": stored,
         }
 
+    def _proposal_path(self, proposal_id: str) -> Path:
+        if not isinstance(proposal_id, str) or not proposal_id or Path(proposal_id).name != proposal_id:
+            raise PersistenceError("persistence.invalid-id", "invalid proposalId")
+        return self.proposals / f"{proposal_id}.json"
+
     def _monster_path(self, monster_id: str) -> Path:
         if not isinstance(monster_id, str) or not monster_id or Path(monster_id).name != monster_id:
             raise PersistenceError("persistence.invalid-id", "invalid monsterId")
@@ -208,6 +234,30 @@ class JSONWorkspace:
             if draft.get("draftId") != draft_id or draft.get("revision") != snapshot["revision"] or draft.get("fingerprint") != snapshot["fingerprint"]:
                 raise PersistenceError("persistence.corrupt", f"inconsistent snapshot: {path}")
         return document
+
+    def _read_proposal(self, proposal_id: str) -> dict[str, Any]:
+        path = self._proposal_path(proposal_id)
+        try:
+            document = json.loads(path.read_text(encoding="utf-8"))
+        except FileNotFoundError as exc:
+            raise PersistenceError("persistence.not-found", f"unknown proposal: {proposal_id}") from exc
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise PersistenceError("persistence.corrupt", f"cannot load {path}: {exc}") from exc
+        proposal = document.get("proposal") if isinstance(document, dict) else None
+        if (
+            not isinstance(document, dict)
+            or document.get("schemaVersion") != self.SCHEMA_VERSION
+            or not isinstance(proposal, dict)
+            or proposal.get("proposalId") != proposal_id
+            or document.get("fingerprint") != self._proposal_fingerprint(proposal)
+        ):
+            raise PersistenceError("persistence.corrupt", f"invalid proposal document: {path}")
+        return document
+
+    @staticmethod
+    def _proposal_fingerprint(proposal: dict[str, Any]) -> str:
+        encoded = json.dumps(proposal, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        return hashlib.sha256(encoded).hexdigest()
 
     def _read_monster(self, monster_id: str) -> dict[str, Any]:
         path = self._monster_path(monster_id)
