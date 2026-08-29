@@ -34,8 +34,13 @@ class ChoiceRequirementTests(unittest.TestCase):
 
         self.assertTrue(response["ok"], response)
         requirements = {item["path"]: item for item in response["result"]["requirements"]}
-        automatic_skills = response["result"]["automaticSelections"]["skills"]
+        automatic_selections = response["result"]["automaticSelections"]
+        automatic_skills = automatic_selections["skills"]
+        automatic_options = automatic_selections["options"]
         self.assertEqual(response["result"]["selectionBudgets"]["skills"], {"master": 0, "good": 2})
+        automatic_option_ids = {(item["optionId"], item["graftId"]) for item in automatic_options}
+        self.assertIn(("option.favored-enemy", "graft.class.ranger"), automatic_option_ids)
+        self.assertIn(("option.secondary-magic", "graft.class.ranger"), automatic_option_ids)
         self.assertEqual(
             [(item["value"], item["label"]) for item in automatic_skills["master"]],
             [("skill.intimidate", "Intimidate"), ("skill.perception", "Perception"), ("skill.ride", "Ride")],
@@ -61,6 +66,47 @@ class ChoiceRequirementTests(unittest.TestCase):
         self.assertIn("/selections/templateGraftChoices/energyType", issue_paths)
         self.assertNotIn("/selections/graftOptionChoices/graft.template.graveknight/option.breath-weapon/shape", issue_paths)
         self.assertNotIn("/selections/graftOptionChoices/graft.class.ranger/option.favored-enemy/targets", issue_paths)
+
+    def test_choice_budgets_normalize_ids_accepted_by_the_engine(self):
+        draft = copy.deepcopy(WORG)
+        draft["selections"].update({
+            "arrayId": "combatant",
+            "creatureTypeGraftId": "magical-beast",
+            "sizeId": "medium",
+        })
+
+        result = Engine().execute(request("alias-requirements", {"draft": draft}))["result"]
+
+        self.assertEqual(result["selectionBudgets"]["skills"], {"master": 1, "good": 2})
+        self.assertEqual(result["selectionBudgets"]["options"], {"categories": {"combat": 1}, "total": 1})
+
+    def test_secondary_class_options_use_the_secondary_level(self):
+        draft = copy.deepcopy(WORG)
+        draft["selections"].update({
+            "cr": 9,
+            "classGraftId": "graft.class.druid",
+            "primaryClassLevel": 7,
+            "secondaryClassGrafts": [{"classGraftId": "graft.class.bard", "levels": 3}],
+        })
+
+        result = Engine().execute(request("multiclass-requirements", {"draft": draft}))["result"]
+        automatic = [item for item in result["automaticSelections"]["options"] if item["graftId"] == "graft.class.bard"]
+
+        self.assertEqual(result["selectionBudgets"]["options"], {"categories": {"magic": 1, "social": 1}, "total": 2})
+        self.assertEqual([item["optionId"] for item in automatic], [
+            "option.inspire-courage", "option.knowledgeable", "option.secondary-magic",
+        ])
+        self.assertTrue(all((item["classLevel"], item["effectiveCR"]) == (3, 2) for item in automatic))
+        self.assertTrue(all(any(ref.get("entry") == "Bard" for ref in item["sourceRefs"]) for item in automatic))
+
+        draft["selections"]["secondaryClassGrafts"] = [{"classGraftId": "graft.class.ranger", "levels": 3}]
+        ranger = Engine().execute(request("secondary-ranger-requirements", {"draft": draft}))["result"]
+        favored = next(item for item in ranger["requirements"] if item["path"].endswith("option.favored-enemy/targets"))
+        self.assertEqual((favored["minCount"], favored["maxCount"]), (3, 3))  # Favored Enemy scales by monster CR 9.
+
+        draft["selections"]["secondaryClassGrafts"] = [{"classGraftId": "graft.class.rogue", "levels": 4}]
+        rogue = Engine().execute(request("secondary-rogue-budget", {"draft": draft}))["result"]
+        self.assertEqual(rogue["selectionBudgets"]["options"], {"categories": {"combat": 1, "social": 1}, "total": 2})
 
     def test_every_catalogued_dynamic_schema_normalizes_to_supported_types(self):
         engine = Engine()

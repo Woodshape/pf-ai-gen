@@ -3,7 +3,7 @@ import type { Draft, Evaluation } from "./types";
 export const STEPS = [
   { n: "B", label: "Before You Begin", short: "Concept", desc: "Record the monster’s concept, target CR, and encounter role. These notes guide choices but never alter statistics." },
   { n: "1", label: "Array", short: "Baseline", desc: "Choose the CR-based array and assign its three positive ability modifiers. Array values are already totals." },
-  { n: "2", label: "Creature / Class Graft", short: "Primary identity", desc: "Choose a creature type and optionally one primary class graft. Class grafts can require a particular array." },
+  { n: "2", label: "Creature / Class Graft", short: "Class progression", desc: "Choose a creature type, one primary class graft, and any level-tagged secondary classes. Only the primary controls foundational calculations." },
   { n: "3", label: "Subtype Graft", short: "Optional", desc: "Select every relevant subtype. Subtype grants are additional and do not consume normal slots." },
   { n: "4", label: "Template Graft", short: "Optional", desc: "Apply an optional template and its source-defined choices. Automatic template traits consume normal budgets." },
   { n: "5", label: "Size Graft", short: "Size & movement", desc: "Choose size and movement. Only the listed size-graft adjustments are applied." },
@@ -16,7 +16,7 @@ export const STEPS = [
 const fields = [
   [],
   ["cr", "arrayId", "abilityModifiers", "saveSwap"],
-  ["creatureTypeGraftId", "classGraftId", "classGraftChoices", "graftOptionChoices"],
+  ["creatureTypeGraftId", "classGraftId", "primaryClassLevel", "secondaryClassGrafts", "classGraftChoices", "graftOptionChoices"],
   ["subtypeGraftIds", "subtypeGraftChoices"],
   ["templateGraftId", "templateGraftChoices"],
   ["sizeId", "speed"],

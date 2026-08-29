@@ -36,12 +36,29 @@ export interface ChoiceValue {
   sourceRefs?: SourceRef[];
 }
 
+export interface SecondaryClassGraft {
+  classGraftId: string;
+  levels: number;
+}
+
+export interface AutomaticOption {
+  optionId: string;
+  label: string;
+  graftId: string;
+  classLevel?: number;
+  effectiveCR?: number;
+  parameters?: JsonObject;
+  sourceRefs?: SourceRef[];
+}
+
 export interface AutomaticSelections {
   skills: { master: ChoiceValue[]; good: ChoiceValue[] };
+  options?: AutomaticOption[];
 }
 
 export interface SelectionBudgets {
   skills: { master: number | null; good: number | null };
+  options?: { categories: Dict<number>; total: number };
 }
 
 export interface ChoiceRequirement {

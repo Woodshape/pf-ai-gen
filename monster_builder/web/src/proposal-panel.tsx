@@ -24,7 +24,7 @@ export function ProposalPanel(props: {
   return <section class="panel proposal-panel"><h3>AI proposal <span class="pill">Optional</span></h3>
     {!proposal ? <><p class="hint">Pi can suggest source-valid changes. It cannot edit the Draft until you confirm them.</p>
       <div class="field"><label for="proposal-concept">Monster concept</label><textarea id="proposal-concept" value={concept} onInput={(event) => setConcept(event.currentTarget.value)} placeholder="Goblin level 4 druid, level 1 rogue…" /></div>
-      {props.running && <div class="proposal-notes" role="status">Generating with Pi… Each of up to three validation attempts can take about a minute.</div>}
+      {props.running && <div class="proposal-notes" role="status">Generating with one Pi session… The agent can validate and repair up to three candidates.</div>}
       {props.error && <div class="proposal-notes warning" role="alert"><strong>AI request failed:</strong> {props.error}</div>}
       <button type="button" class="btn primary" disabled={props.busy || props.draft.status !== "active" || !concept.trim()} onClick={() => props.onGenerate(concept)}>{props.running ? "Generating…" : "Generate proposal"}</button>
     </> : <><p>{proposal.rationale}</p><p class="hint mono">Base revision {proposal.baseRevision} · {proposal.baseFingerprint.slice(0, 12)}…{proposal.model ? ` · ${proposal.model}` : ""}</p>

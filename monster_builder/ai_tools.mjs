@@ -14,17 +14,28 @@ const COLLECTIONS = {
 };
 
 const clone = (value) => structuredClone(value);
+const canonical = (value) => JSON.stringify(value, (_key, item) => item && typeof item === "object" && !Array.isArray(item)
+  ? Object.fromEntries(Object.entries(item).sort(([left], [right]) => left.localeCompare(right)))
+  : item);
 
 export class CatalogToolState {
   #catalog;
   #listed = false;
   #proposal;
+  #choiceRequirements;
+  #validateProposal;
+  #validationCount = 0;
+  #lastValidation;
+  #lastValidProposal;
 
-  constructor(catalog) {
+  constructor(catalog, { choiceRequirements, validateProposal } = {}) {
     this.#catalog = catalog;
+    this.#choiceRequirements = choiceRequirements;
+    this.#validateProposal = validateProposal;
   }
 
   get proposal() { return this.#proposal && clone(this.#proposal); }
+  get lastValidation() { return this.#lastValidation && clone(this.#lastValidation); }
 
   list() {
     if (this.#proposal) throw new Error("PROPOSAL_ALREADY_EMITTED");
@@ -58,9 +69,27 @@ export class CatalogToolState {
     return clone({ kind, key: found.key, ...found.value });
   }
 
+  choiceRequirements() {
+    this.#requireList();
+    return clone(this.#choiceRequirements || {});
+  }
+
+  async validate(proposal) {
+    this.#requireList();
+    if (!this.#validateProposal) throw new Error("PROPOSAL_VALIDATION_UNAVAILABLE");
+    if (this.#validationCount >= 3) throw new Error("PROPOSAL_VALIDATION_LIMIT");
+    this.#validationCount += 1;
+    const result = await this.#validateProposal(clone(proposal), this.#validationCount);
+    this.#lastValidation = clone(result);
+    const evaluation = result?.result?.evaluation;
+    this.#lastValidProposal = result?.ok && evaluation?.status === "valid" && evaluation.issues?.length === 0 ? canonical(proposal) : undefined;
+    return clone(result);
+  }
+
   emit(proposal) {
     this.#requireList();
     if (this.#proposal) throw new Error("PROPOSAL_ALREADY_EMITTED");
+    if (this.#validateProposal && this.#lastValidProposal !== canonical(proposal)) throw new Error("PROPOSAL_VALIDATION_REQUIRED");
     this.#proposal = clone(proposal);
     return { accepted: true, terminating: true };
   }

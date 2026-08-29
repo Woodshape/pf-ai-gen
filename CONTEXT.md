@@ -15,8 +15,15 @@ The CR-based Combatant, Expert, or Spellcaster baseline that supplies a monster'
 A source-defined set of adjustments applied for a creature type, class, subtype, template, or size.
 
 **Primary Class Graft**:
-The single class graft that defines a class-led monster in Strict Mode. Secondary class identities are concept guidance and can only be represented through separately catalogued skills or monster options.
-_Avoid_: Multiclass simulation, stacked class grafts
+The class graft that defines a class-led monster’s array, foundational statistic adjustments, skills, class choices, and primary spellcasting. Its class level determines which level-dependent graft features are active.
+_Avoid_: Applying every class graft as primary
+
+**Secondary Class Graft**:
+A product extension, informed by Pathfinder Unchained’s secondary-graft option-replacement precedent, for an additional class identity with an explicit positive class level evaluated at effective CR equal to level minus one. It contributes only its fixed and active CR-entry monster options; its selectable option categories replace primary categories without increasing the selectable slot count. It does not contribute an array, foundational statistics, skills, class choices, or primary spellcasting. Secondary grafts are ordered, may include any number of distinct classes, and cannot repeat the primary graft.
+_Avoid_: Secondary class concept guidance, stacked foundational adjustments
+
+**Class Progression**:
+One Primary Class Graft and zero or more ordered Secondary Class Grafts, each with an explicit positive class level. The combined levels provide a source-guided CR recommendation without overriding the selected encounter CR; a disagreement remains visible as a warning.
 
 **Monster Option**:
 A source-defined combat, magic, social, or universal ability used to specialize a monster beyond its array and grafts.
@@ -32,7 +39,7 @@ An optional boundary that translates a natural-language Monster Concept into an 
 _Avoid_: AI Draft mutation, automatic proposal application
 
 **Inferred CR**:
-A visible product assumption for a missing target CR, calculated in the MVP as the sum of stated class levels minus one. It is not a source-derived Pathfinder value and remains editable until the user confirms a valid Draft selection.
+A visible recommendation for a missing target CR, calculated as the sum of stated class levels minus one. Pathfinder Unchained describes class level minus one as typical rather than mandatory, so the value remains editable.
 
 **Evaluation**:
 The deterministic result calculated from the current Monster Draft. It exposes the canonical Strict result and, when applicable, the effective Free result.

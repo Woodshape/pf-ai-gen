@@ -1,39 +1,66 @@
 import { useEffect, useState } from "preact/hooks";
 import { ChoiceGroups, ChoiceSection, setChoiceValue, setNestedChoiceValue } from "../choice-fields";
 import { CatalogSelect, DefinitionPreview, Field, MultiCatalogSelect, Select, Source, StepFrame } from "../components";
-import type { CatalogEntry, ChoiceRequirement, Dict, JsonObject } from "../types";
+import type { CatalogEntry, ChoiceRequirement, Dict, JsonObject, SecondaryClassGraft } from "../types";
 import type { EditorProps } from "./basic";
 
 function objectValue(value: unknown): JsonObject {
   return value && typeof value === "object" && !Array.isArray(value) ? value as JsonObject : {};
 }
 
-export function PrimaryGraftStep({ draft, catalog, choiceRequirements, onPreview, onSave, onBack }: EditorProps) {
+export function PrimaryGraftStep({ draft, catalog, choiceRequirements, automaticSelections, onPreview, onSave, onBack }: EditorProps) {
   const selections = draft.selections;
   const [typeId, setTypeId] = useState(String(selections.creatureTypeGraftId || ""));
   const [classId, setClassId] = useState(String(selections.classGraftId || ""));
+  const [primaryLevel, setPrimaryLevel] = useState(String(selections.primaryClassLevel || ""));
+  const [secondary, setSecondary] = useState<SecondaryClassGraft[]>((selections.secondaryClassGrafts as SecondaryClassGraft[] | undefined) || []);
   const [classChoices, setClassChoices] = useState((selections.classGraftChoices as JsonObject | undefined) || {});
   const [optionChoices, setOptionChoices] = useState((selections.graftOptionChoices as JsonObject | undefined) || {});
-  const selectedClass = Object.values(catalog.grafts.classGrafts).find((entry) => entry.id === classId);
+  const classes = Object.values(catalog.grafts.classGrafts);
+  const selectedClass = classes.find((entry) => entry.id === classId);
   const classPrefix = "/selections/classGraftChoices";
   const optionPrefix = classId ? `/selections/graftOptionChoices/${classId}` : "/selections/graftOptionChoices/__none__";
   const classOptionValues = objectValue(optionChoices[classId]);
-  useEffect(() => onPreview({ creatureTypeGraftId: typeId || undefined, classGraftId: classId || undefined, classGraftChoices: classChoices, graftOptionChoices: optionChoices }), [typeId, classId, classChoices, optionChoices]);
+  const preview = { creatureTypeGraftId: typeId || undefined, classGraftId: classId || undefined, primaryClassLevel: primaryLevel ? Number(primaryLevel) : undefined, secondaryClassGrafts: secondary, classGraftChoices: classChoices, graftOptionChoices: optionChoices };
+  useEffect(() => onPreview(preview), [typeId, classId, primaryLevel, secondary, classChoices, optionChoices]);
   const chooseClass = (id: string) => {
     setClassId(id);
     setClassChoices({});
+    if (!id) setPrimaryLevel("");
+    setSecondary((current) => id ? current.filter((item) => item.classGraftId !== id) : []);
     setOptionChoices((current) => {
       const next = { ...current };
-      if (classId) delete next[classId];
+      const active = new Set(id ? [id, ...secondary.filter((item) => item.classGraftId !== id).map((item) => item.classGraftId)] : []);
+      for (const key of Object.keys(next)) if (key.startsWith("graft.class.") && !active.has(key)) delete next[key];
       return next;
     });
   };
-  return <StepFrame step={2} onBack={onBack} onApply={(next) => onSave({ creatureTypeGraftId: typeId || undefined, classGraftId: classId || undefined, classGraftChoices: classChoices, graftOptionChoices: optionChoices }, {}, next)}>
+  const removeSecondary = (index: number) => {
+    const removed = secondary[index];
+    setSecondary((current) => current.filter((_, itemIndex) => itemIndex !== index));
+    setOptionChoices((current) => { const next = { ...current }; delete next[removed.classGraftId]; return next; });
+  };
+  const available = classes.filter((entry) => entry.id !== classId && !secondary.some((item) => item.classGraftId === entry.id));
+  return <StepFrame step={2} onBack={onBack} onApply={(next) => onSave(preview, {}, next)}>
     <div class="grid">
       <CatalogSelect label="Creature type graft" records={catalog.grafts.creatureTypes} value={typeId} onChange={setTypeId} />
       <CatalogSelect label="Primary class graft" records={catalog.grafts.classGrafts} value={classId} onChange={chooseClass} blank="None" />
+      {classId && <Field label="Primary class level (positive integer)" type="number" value={primaryLevel} onInput={(value) => setPrimaryLevel(value === "" ? "" : String(Math.max(1, Number(value) || 1)))} />}
       <ChoiceSection title="Class graft choices" description={selectedClass ? `Catalog-defined choices for ${selectedClass.name}.` : undefined} requirements={choiceRequirements} pathPrefix={classPrefix} values={classChoices} onChange={(name, value) => setClassChoices((current) => setChoiceValue(current, name, value))} />
       <ChoiceGroups title="Automatic class option" description="Catalog-defined parameters for each granted option." requirements={choiceRequirements} pathPrefix={optionPrefix} values={classOptionValues} onChange={(optionId, name, value) => setOptionChoices((current) => setNestedChoiceValue(current, classId, optionId, name, value))} />
+      {classId && <section class="field full"><div class="builder-head"><div><span class="label">Secondary / tertiary class grafts</span><small>Each uses its own class level (effective CR = level − 1) for automatic options. The primary alone controls array, statistics, and skills.</small></div><button type="button" class="btn" disabled={!available.length} onClick={() => setSecondary((current) => [...current, { classGraftId: available[0].id, levels: 1 }])}>Add class</button></div>
+        <div class="builder-list">{secondary.map((item, index) => {
+          const entry = classes.find((candidate) => candidate.id === item.classGraftId);
+          const choices = objectValue(optionChoices[item.classGraftId]);
+          const automatic = (automaticSelections.options || []).filter((option) => option.graftId === item.classGraftId);
+          return <article class="builder-card" key={item.classGraftId}><div class="builder-head"><strong>{entry?.name || item.classGraftId}</strong><button type="button" class="btn small" onClick={() => removeSecondary(index)}>Remove</button></div><div class="builder-fields">
+            <Select label="Class graft" value={item.classGraftId} onChange={(id) => { setSecondary((current) => current.map((value, itemIndex) => itemIndex === index ? { ...value, classGraftId: id } : value)); setOptionChoices((current) => { const next = { ...current }; delete next[item.classGraftId]; return next; }); }}>{classes.filter((candidate) => candidate.id === item.classGraftId || candidate.id !== classId && !secondary.some((value, itemIndex) => itemIndex !== index && value.classGraftId === candidate.id)).map((candidate) => <option value={candidate.id}>{candidate.name}</option>)}</Select>
+            <Field label="Class levels (positive integer)" type="number" value={String(item.levels)} onInput={(value) => setSecondary((current) => current.map((entry, itemIndex) => itemIndex === index ? { ...entry, levels: Math.max(1, Number(value) || 1) } : entry))} /><small class="hint">Effective class CR: {item.levels - 1}</small>
+            <ChoiceGroups title={`${entry?.name || "Secondary class"} automatic option`} description="Parameters required by this class graft." requirements={choiceRequirements} pathPrefix={`/selections/graftOptionChoices/${item.classGraftId}`} values={choices} onChange={(optionId, name, value) => setOptionChoices((current) => setNestedChoiceValue(current, item.classGraftId, optionId, name, value))} />
+            <div class="field full"><span class="label">Active automatic grants</span><p class="hint">{automatic.length ? automatic.map((option) => `${option.label} (${option.optionId}, CR ${option.effectiveCR})`).join(" · ") : "None at this class level."}</p></div>
+          </div></article>;
+        })}{!secondary.length && <div class="empty">No secondary class grafts.</div>}</div>
+      </section>}
     </div>
     <DefinitionPreview entry={selectedClass} /><Source entry={selectedClass} />
   </StepFrame>;

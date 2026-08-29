@@ -21,6 +21,9 @@ _DEFENSE_EFFECTS = {
 }
 _ATTACK_EFFECTS = {"attackBonus"}
 _SPECIAL_EFFECTS = {"disease", "gaze", "poison", "sneak-attack", "source-rule"}
+# Same-parameter copies of these options are redundant, regardless of graft.
+# Other options, notably Extra Attack, may legitimately repeat.
+_REDUNDANT_AUTO_OPTION_IDS = {"option.secondary-magic", "option.terrain-stride"}
 
 
 def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dict[str, Any]:
@@ -61,7 +64,18 @@ def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dic
     defenses.update(aggregate_defenses)
     defenses["fields"] = defense_fields
     attacks = [_attack(value, index, annotations) for index, value in enumerate(result.get("attacks", [])) if isinstance(value, Mapping)]
-    options = [_option(value) for value in result.get("options", []) if isinstance(value, Mapping)]
+    raw_options = [value for value in result.get("options", []) if isinstance(value, Mapping)]
+    # Older snapshots may contain an explicit copy of an automatic grant. Keep
+    # distinct grants and repeated explicit options, but hide only that redundant copy.
+    automatic_option_signatures = {
+        _option_signature(value)
+        for value in raw_options
+        if value.get("graftId") and value.get("optionId") in _REDUNDANT_AUTO_OPTION_IDS
+    }
+    options = [
+        _option(value) for value in raw_options
+        if value.get("graftId") or _option_signature(value) not in automatic_option_signatures
+    ]
     defenses["options"] = [value for value in options if value["section"] == "defenses"]
     attack_options = [value for value in options if value["section"] == "attacks"]
     utility_options = [value for value in options if value["section"] == "statistics"]
@@ -223,6 +237,13 @@ def _attack(value: Mapping[str, Any], index: int, annotations: Mapping[str, Any]
     annotation = annotations.get(f"attacks.{index}", annotations.get("attacks"))
     result["text"] = text + (f" ({annotation})" if annotation else "")
     return result
+
+
+def _option_signature(value: Mapping[str, Any]) -> tuple[Any, str]:
+    return (
+        value.get("optionId"),
+        json.dumps(value.get("parameters", {}), ensure_ascii=False, sort_keys=True, separators=(",", ":")),
+    )
 
 
 def _option(value: Mapping[str, Any]) -> dict[str, Any]:

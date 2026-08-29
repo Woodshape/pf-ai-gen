@@ -31,17 +31,19 @@ Der Agent erhält keine Shell-, Datei- oder allgemeinen Schreibwerkzeuge. Er erh
 - `catalog_list`
 - `catalog_search`
 - `catalog_get`
+- `draft_choice_requirements`
+- `proposal_validate`
 - `emit_proposal`
 
-`catalog_list` ist ein **hartes Gate** und muss der erste erfolgreiche Werkzeugaufruf sein. Der Adapter verfolgt diesen Zustand. `emit_proposal` wird technisch mit `CATALOG_REQUIRED` abgelehnt, solange `catalog_list` nicht erfolgreich abgeschlossen wurde. Dadurch hängt die Sicherheit nicht nur von einer Prompt-Anweisung ab.
+`catalog_list` ist ein **hartes Gate** und muss der erste erfolgreiche Werkzeugaufruf sein. Der Adapter verfolgt diesen Zustand. Alle anderen Tools werden technisch mit `CATALOG_REQUIRED` abgelehnt, solange `catalog_list` nicht erfolgreich abgeschlossen wurde. `draft_choice_requirements` liefert die Engine-eigenen Controls und Budgets. `proposal_validate` prüft höchstens drei Kandidaten ohne Persistenz oder Draft-Mutation und liefert Candidate Draft, alle Evaluation Findings sowie kandidatenabhängige Choice Requirements. Dadurch hängt die Sicherheit nicht nur von einer Prompt-Anweisung ab.
 
 `catalog_list` liefert den vollständigen maschinenlesbaren Katalog für den Entwurf: Arrays, Creature-/Class-/Subtype-/Template-/Size-Grafts, alle Monster Options, Spell-Lists und Spell-IDs sowie Skills, Attack-Profiles und Damage-Profiles. Jede Auswahl enthält IDs, Parameter, Voraussetzungen, Effekte, CR-Skalierung und SourceRefs. `catalog_search` und `catalog_get` dienen danach nur noch der gezielten Vertiefung.
 
 Der fachliche Inhalt bleibt versioniertes JSON. JSONL ist – entsprechend dem gemeinsamen Interface-Vertrag – nur Transport-/Framingformat; falls ein großer Katalog gestreamt wird, werden JSONL-Zeilen als Transport verwendet, nicht als eigenes Domainformat.
 
-Die Ausgabe erfolgt über ein typisiertes, terminierendes `emit_proposal`-Tool. Dessen Ergebnis wird vom Adapter als untrusted Ergebnis an `proposal.create` übergeben. `proposal.create` validiert erneut alle IDs, Parameter, Base-Revision und Katalogversion. Ein Proposal darf unvollständig sein, darf aber keine unbekannten IDs oder berechneten Zahlen als Selections einschleusen.
+Die Ausgabe erfolgt über ein typisiertes, terminierendes `emit_proposal`-Tool. Es akzeptiert nur exakt den zuletzt durch `proposal_validate` als `valid` bewerteten Kandidaten. Derselbe kurzlebige `AgentSession`-Lauf kann Findings lesen, Katalogdaten nachschlagen und bis zu drei Kandidaten verbessern; Pi-Sessions werden weiterhin nicht persistiert. Das Ergebnis wird vom Adapter als untrusted Ergebnis erneut an `proposal.validate` und danach an `proposal.create` übergeben. `proposal.create` validiert nochmals alle IDs, Parameter, Base-Revision und Katalogversion. Allgemeine Proposals dürfen unvollständig sein; der AI-Adapter persistiert jedoch nur einen vollständigen validen Kandidaten.
 
-Die KI erhält keine Rückfragen-Schleife mit dem Benutzer. Sie macht in einem Lauf den bestmöglichen katalogisierten Vorschlag, dokumentiert `rationale`, `assumptions` und `nonCanonicalSuggestions` und lässt nicht ableitbare Felder leer. Bei einem Schema- oder Engine-Fehler ist höchstens ein begrenzter Reparaturversuch erlaubt; danach bleibt der Draft unverändert und der Adapter liefert einen technischen Fehler.
+Die KI erhält keine Rückfragen-Schleife mit dem Benutzer. Sie macht in einem Lauf den bestmöglichen katalogisierten Vorschlag, dokumentiert `rationale`, `assumptions` und `nonCanonicalSuggestions` und lässt nicht ableitbare Felder leer. Bei Schema- oder Engine-Findings sind höchstens drei Candidate-Validierungen innerhalb derselben AgentSession erlaubt; danach bleibt der Draft unverändert und der Adapter liefert einen technischen Fehler.
 
 ## Concept-Mapping und CR-Heuristik
 
@@ -50,9 +52,9 @@ Für „Goblin Level 4 Druid, Level 1 Rogue“ gilt folgende Interpretation:
 ```text
 creatureTypeGraft: humanoid
 subtype: goblinoid, sofern im Katalog vorhanden
-classGraft: druid
+classGraft: druid, primaryClassLevel: 4
 array: spellcaster
-rogue: katalogisierte Skills und Monster Options, kein zweites Class-Graft
+secondaryClassGrafts: [{ classGraftId: rogue, levels: 1 }]
 ```
 
 `Humanoid` ist dabei ein Creature-Type-Graft, kein Template; `Druid` ist ein Class-Graft, kein Array. Bei einem Class-Graft bleiben die automatischen Traits des Creature-Type-Grafts erhalten, während dessen Statistik-Adjustments nicht zusätzlich angewendet werden.
@@ -65,9 +67,9 @@ inferredCR = Summe aller angegebenen Klassenlevel - 1
 
 Druid 4 / Rogue 1 ergibt daher zunächst `inferredCR: 4`. Ein expliziter `targetCR` des Benutzers hat Vorrang. Fehlt `targetCR`, aber sind Klassenlevel vorhanden, wird die Heuristik als sichtbare `assumption` vorgeschlagen. Fehlen beide, bleibt CR leer und der Draft `incomplete`.
 
-Diese Heuristik erzeugt keine normale Pathfinder-Multiclass-Simulation und keine separaten zusätzlichen Hit Dice: Die Simple-Monster-Creation-Engine verwendet weiterhin CR als HD für ihre Berechnungen (`Pathfinder Unchained.txt`, Zeilen 168–178). Die Rogue-Anteile werden nur über tatsächlich katalogisierte Skills und Options angenähert. Die Quelle beschreibt genau dieses Muster für Kreaturen mit wenigen Klassenleveln und nennt Sneak Attack als Option (`Pathfinder Unchained.txt`, Zeilen 64–77, 227–246). Nicht katalogisierbare Rogue-Wünsche bleiben Plain-Text-Vorschläge.
+Diese Heuristik erzeugt keine vollständige Pathfinder-Charakterberechnung und keine separaten zusätzlichen Hit Dice: Die Simple-Monster-Creation-Engine verwendet weiterhin CR als HD (`Pathfinder Unchained.txt`, Zeilen 168–178). Das primäre Druid-Graft wird am effektiven CR 3, das sekundäre Rogue-Graft am effektiven CR 0 ausgewertet. Nur Druid bestimmt Array, foundational Statistics/Skills, Class-Choices und primäres Spellcasting. Rogue liefert seine katalogisierten Automatic Options; seine selectable Kategorien ersetzen primäre Kategorien ohne zusätzliche Slots. Nicht katalogisierbare Wünsche bleiben Plain-Text-Vorschläge.
 
-Der Druid-Class-Graft erzwingt das Spellcaster-Array und bringt seine eigenen Skills und Options mit (`Pathfinder Unchained.txt`, Zeilen 1184–1208). Der Agent wählt daraus und aus dem vollständigen Katalog eine passende, budgetierte Kombination; er erfindet kein Rogue- oder Multiclass-Paket.
+Der Druid-Class-Graft erzwingt das Spellcaster-Array (`Pathfinder Unchained.txt`, Zeilen 1184–1208). Der Agent setzt Class Progression und erforderliche Graft-Option-Parameter explizit; Automatic Grants werden nicht als manuelle Options dupliziert.
 
 ## Offline-Verhalten und Fehler
 
@@ -79,7 +81,7 @@ Die KI ist optional. Der Adapter mutiert bei keinem Fehler den Draft. Mindestens
 - `CATALOG_UNAVAILABLE`: `catalog_list` konnte nicht geladen werden
 - `CATALOG_REQUIRED`: Proposal wurde vor dem Katalog-Gate ausgegeben
 - `AI_OUTPUT_INVALID`: kein gültiger typisierter Tool-Output
-- `PROPOSAL_INVALID`: `proposal.create` lehnt Changes oder Parameter ab
+- `PROPOSAL_INVALID`: nach drei In-Session-Validierungen liegt kein vollständiger valider Kandidat vor
 - `DRAFT_CONFLICT`: der Base-Draft ist nicht mehr anwendbar
 
 Ein Proposal bleibt an `baseRevision` und `baseFingerprint` gebunden. Ändert sich der Draft während der Generierung, wird das Proposal höchstens als stale gespeichert; es wird weder rebased noch automatisch angewendet.
@@ -94,6 +96,6 @@ CLI- oder JSON-Clients müssen dieselbe explizite Confirmation mitsenden. Der Pi
 
 - direkte Ollama-/lokale-Modellintegration
 - automatische Modellinstallation oder Serververwaltung
-- normale Pathfinder-Multiclass-Simulation
+- vollständige Pathfinder-Charakterberechnung außerhalb der levelbezogenen Class-Graft-Progression
 - automatische Übernahme von KI-Vorschlägen
 - freie oder nicht katalogisierte Regelwerte

@@ -32,6 +32,7 @@ Die Schnittstelle wird als `execute(request) -> response` modelliert. Die Browse
 - `draft.applyChanges`
 - `draft.evaluate`
 - `draft.import`
+- `proposal.validate`
 - `proposal.create`
 - `proposal.get`
 - `proposal.accept`

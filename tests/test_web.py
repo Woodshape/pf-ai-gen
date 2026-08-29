@@ -126,7 +126,7 @@ class WebTransportTests(unittest.TestCase):
         self.assertIn('execute("proposal.accept"', app)
         self.assertIn("confirmation: { actor: \"user\", confirmed: true }", app)
         self.assertIn("Generate proposal", proposal_panel)
-        self.assertIn("Generating with Pi", proposal_panel)
+        self.assertIn("Generating with one Pi session", proposal_panel)
         self.assertIn("AI request failed", proposal_panel)
         self.assertIn("nonCanonicalSuggestions", proposal_panel)
         self.assertIn('type="checkbox"', proposal_panel)

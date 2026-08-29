@@ -137,6 +137,54 @@ class ExportTests(unittest.TestCase):
         self.assertNotIn("<script>", output)
         self.assertNotIn(unsafe, output)
 
+    def test_redundant_explicit_graft_options_are_rendered_once(self):
+        snapshot = _snapshot("worg-cr2.json", "monster-ranger-duplicate-options")
+        snapshot["result"]["options"] = [
+            {
+                "optionId": "option.secondary-magic",
+                "parameters": {"spellListId": "spell-list.nature"},
+                "graftId": "graft.class.ranger",
+            },
+            {
+                "optionId": "option.terrain-stride",
+                "parameters": {"terrain": "undergrowth"},
+                "graftId": "graft.class.ranger",
+            },
+            {
+                "optionId": "option.secondary-magic",
+                "parameters": {"spellListId": "spell-list.nature"},
+            },
+            {
+                "optionId": "option.terrain-stride",
+                "parameters": {"terrain": "undergrowth"},
+            },
+            {"optionId": "option.extra-attack", "parameters": {"attackMode": "melee"}},
+        ]
+
+        model = structured_sheet(snapshot)
+        utility = model["statistics"]["options"]
+        self.assertEqual([option["optionId"] for option in utility], [
+            "option.secondary-magic", "option.terrain-stride",
+        ])
+        self.assertEqual([option["optionId"] for option in model["attackOptions"]], ["option.extra-attack"])
+        markdown = render_markdown(snapshot)
+        utility_line = next(line for line in markdown.splitlines() if line.startswith("Utility Options:"))
+        self.assertEqual(utility_line.count("Secondary Magic"), 1)
+        self.assertEqual(utility_line.count("Terrain Stride"), 1)
+
+        # Extra Attack is explicitly repeatable, even when one copy is grafted.
+        snapshot["result"]["options"] = [
+            {"optionId": "option.extra-attack", "parameters": {"attackMode": "melee"}, "graftId": "graft.class.monk"},
+            {"optionId": "option.extra-attack", "parameters": {"attackMode": "melee"}},
+            {"optionId": "option.extra-attack", "parameters": {"attackMode": "melee"}},
+        ]
+        model = structured_sheet(snapshot)
+        rendered_options = [
+            *model["defenses"]["options"], *model["attackOptions"], *model["statistics"]["options"],
+            *(option for option in model["specialAbilities"] if option.get("optionId")),
+        ]
+        self.assertEqual(sum(option["optionId"] == "option.extra-attack" for option in rendered_options), 3)
+
     def test_modeled_defenses_counts_and_mapping_order_are_preserved(self):
         snapshot = _snapshot("worg-cr2.json", "monster-defense-details")
         snapshot["result"].update({

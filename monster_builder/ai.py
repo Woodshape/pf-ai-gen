@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import json
+import select
 import subprocess
+import time
 from pathlib import Path
 from typing import Any, Callable
 
@@ -23,10 +25,12 @@ class PiProposalAdapter:
         engine: Engine,
         *,
         runner: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
-        timeout: float = 120,
+        timeout: float = 360,
+        script: str | Path = SCRIPT,
     ) -> None:
         self.engine = engine
         self.timeout = timeout
+        self.script = Path(script)
         self.runner = runner or self._run_pi
 
     def execute(self, request: dict[str, Any]) -> dict[str, Any]:
@@ -52,48 +56,44 @@ class PiProposalAdapter:
         if not isinstance(draft, dict):
             return self._error(request_id, "DRAFT_CONFLICT", "Draft could not be loaded for proposal generation.", "/payload/draftId", kind="conflict")
 
-        adapter_input = {"draft": draft, "concept": concept.strip(), "catalogPath": str(CATALOG), "cwd": str(ROOT)}
+        choices = self.engine.execute({
+            "protocolVersion": "1", "requestId": f"{request_id}:choice-requirements",
+            "operation": "draft.choiceRequirements", "payload": {"draftId": draft_id},
+        })
+        if not choices.get("ok"):
+            return {**choices, "requestId": request_id}
+        adapter_input = {
+            "draft": draft, "concept": concept.strip(), "choiceRequirements": choices.get("result", {}),
+            "catalogPath": str(CATALOG), "cwd": str(ROOT), "requestId": request_id,
+        }
         generated, error_response = self._invoke(adapter_input, request_id)
         if error_response:
             return error_response
-        for attempt in range(3):
-            proposal = generated["proposal"]
-            proposal_payload = {
-                "draftId": draft["draftId"], "baseRevision": draft["revision"],
-                "baseFingerprint": draft["fingerprint"], "catalogVersion": draft["catalogVersion"],
-                "changes": proposal.get("changes"), "rationale": proposal.get("rationale"),
-                "assumptions": proposal.get("assumptions", []),
-                "nonCanonicalSuggestions": proposal.get("nonCanonicalSuggestions", []),
-                "model": generated.get("model"),
-            }
-            validated = self.engine.execute({
-                "protocolVersion": "1", "requestId": f"{request_id}:validate:{attempt + 1}",
-                "operation": "proposal.validate", "payload": proposal_payload,
-            })
-            evaluation = validated.get("result", {}).get("evaluation") if validated.get("ok") else None
-            if validated.get("ok") and isinstance(evaluation, dict) and evaluation.get("status") == "valid":
-                return self.engine.execute({
-                    "protocolVersion": "1", "requestId": request_id,
-                    "operation": "proposal.create", "payload": proposal_payload,
-                })
-            if attempt == 2:
-                if not validated.get("ok"):
-                    return validated
-                return self._error(
-                    request_id, "PROPOSAL_INVALID", "Pi could not produce a complete valid Proposal after three attempts.",
-                    details={"evaluation": evaluation},
-                )
-            if not validated.get("ok") and not self._repairable(validated):
-                return validated
-            feedback = {"proposal": proposal}
-            if validated.get("ok"):
-                feedback["evaluation"] = evaluation
-            else:
-                feedback["error"] = validated.get("error", {})
-            generated, error_response = self._invoke({**adapter_input, "repair": feedback}, request_id)
-            if error_response:
-                return error_response
-        raise AssertionError("bounded proposal validation loop did not return")
+        proposal = generated["proposal"]
+        proposal_payload = {
+            "draftId": draft["draftId"], "baseRevision": draft["revision"],
+            "baseFingerprint": draft["fingerprint"], "catalogVersion": draft["catalogVersion"],
+            "changes": proposal.get("changes"), "rationale": proposal.get("rationale"),
+            "assumptions": proposal.get("assumptions", []),
+            "nonCanonicalSuggestions": proposal.get("nonCanonicalSuggestions", []),
+            "model": generated.get("model"),
+        }
+        validated = self.engine.execute({
+            "protocolVersion": "1", "requestId": f"{request_id}:final-validation",
+            "operation": "proposal.validate", "payload": proposal_payload,
+        })
+        if not validated.get("ok"):
+            return validated
+        evaluation = validated.get("result", {}).get("evaluation")
+        if not isinstance(evaluation, dict) or evaluation.get("status") != "valid" or evaluation.get("issues"):
+            return self._error(
+                request_id, "PROPOSAL_INVALID", "Pi emitted a Proposal that did not pass final authoritative validation without findings.",
+                details={"evaluation": evaluation},
+            )
+        return self.engine.execute({
+            "protocolVersion": "1", "requestId": request_id,
+            "operation": "proposal.create", "payload": proposal_payload,
+        })
 
     def _invoke(self, value: dict[str, Any], request_id: Any) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
         try:
@@ -113,26 +113,75 @@ class PiProposalAdapter:
             return None, self._error(request_id, "AI_OUTPUT_INVALID", "Pi adapter did not emit a Proposal.")
         return generated, None
 
-    @staticmethod
-    def _repairable(response: dict[str, Any]) -> bool:
-        code = str(response.get("error", {}).get("code", ""))
-        return code.startswith(("selection.", "change.")) or code == "catalog.unknown-id"
-
     def _run_pi(self, value: dict[str, Any]) -> dict[str, Any]:
-        completed = subprocess.run(
-            ["node", str(SCRIPT)], input=json.dumps(value), text=True,
-            capture_output=True, cwd=ROOT, timeout=self.timeout, check=False,
+        process = subprocess.Popen(
+            ["node", str(self.script)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            text=True, bufsize=1, cwd=ROOT,
         )
+        assert process.stdin and process.stdout and process.stderr
+        process.stdin.write(json.dumps({"type": "start", "input": value}) + "\n")
+        process.stdin.flush()
+        deadline = time.monotonic() + self.timeout
         try:
-            output = json.loads(completed.stdout)
-        except json.JSONDecodeError as exc:
-            message = completed.stderr.strip() or completed.stdout.strip() or "Pi adapter returned invalid JSON."
-            if "ERR_MODULE_NOT_FOUND" in message or "Cannot find package" in message:
-                raise FileNotFoundError(message) from exc
-            raise ValueError(message) from exc
-        if not isinstance(output, dict):
-            raise ValueError("Pi adapter returned invalid JSON.")
-        return output
+            while True:
+                remaining = deadline - time.monotonic()
+                if remaining <= 0 or not select.select([process.stdout], [], [], max(0, remaining))[0]:
+                    raise subprocess.TimeoutExpired(["node", str(self.script)], self.timeout)
+                line = process.stdout.readline()
+                if not line:
+                    message = process.stderr.read().strip() or "Pi adapter ended without a result."
+                    if "ERR_MODULE_NOT_FOUND" in message or "Cannot find package" in message:
+                        raise FileNotFoundError(message)
+                    raise ValueError(message)
+                try:
+                    event = json.loads(line)
+                except json.JSONDecodeError as exc:
+                    raise ValueError(f"Pi adapter returned invalid protocol output: {line.strip()}") from exc
+                if event.get("type") == "request" and event.get("method") == "proposal_validate":
+                    result = self._validate_for_agent(value, event.get("payload", {}), event.get("id"))
+                    process.stdin.write(json.dumps({"type": "response", "id": event.get("id"), "value": result}) + "\n")
+                    process.stdin.flush()
+                elif event.get("type") == "result":
+                    process.stdin.close()
+                    process.wait(timeout=5)
+                    output = event.get("value")
+                    if not isinstance(output, dict):
+                        raise ValueError("Pi adapter returned invalid result.")
+                    return output
+        finally:
+            if process.poll() is None:
+                process.kill()
+                process.wait()
+            for stream in (process.stdin, process.stdout, process.stderr):
+                if stream and not stream.closed:
+                    stream.close()
+
+    def _validate_for_agent(self, adapter_input: dict[str, Any], payload: dict[str, Any], bridge_id: Any) -> dict[str, Any]:
+        draft = adapter_input["draft"]
+        proposal = payload.get("proposal") if isinstance(payload, dict) else None
+        if not isinstance(proposal, dict):
+            return self._error(bridge_id, "AI_OUTPUT_INVALID", "proposal_validate requires a Proposal object.")
+        validated = self.engine.execute({
+            "protocolVersion": "1", "requestId": f"{adapter_input.get('requestId')}:agent-validation:{bridge_id}",
+            "operation": "proposal.validate", "payload": {
+                "draftId": draft["draftId"], "baseRevision": draft["revision"],
+                "baseFingerprint": draft["fingerprint"], "catalogVersion": draft["catalogVersion"],
+                "changes": proposal.get("changes"), "rationale": proposal.get("rationale"),
+                "assumptions": proposal.get("assumptions", []),
+                "nonCanonicalSuggestions": proposal.get("nonCanonicalSuggestions", []),
+            },
+        })
+        candidate = validated.get("result", {}).get("candidateDraft") if validated.get("ok") else None
+        if isinstance(candidate, dict):
+            requirements = self.engine.execute({
+                "protocolVersion": "1", "requestId": f"{adapter_input.get('requestId')}:candidate-choices:{bridge_id}",
+                "operation": "draft.choiceRequirements", "payload": {
+                    "draft": {"concept": candidate.get("concept", {}), "selections": candidate.get("selections", {})},
+                },
+            })
+            if requirements.get("ok"):
+                validated["result"]["choiceRequirements"] = requirements.get("result", {})
+        return validated
 
     @staticmethod
     def _error(request_id: Any, code: str, message: str, path: str = "", *, kind: str = "ai", retryable: bool = False, details: Any = None) -> dict[str, Any]:

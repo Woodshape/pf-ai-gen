@@ -65,7 +65,7 @@ Concept-Daten beschreiben die Absicht, nicht die Regelberechnung:
 Selections sind Benutzer- oder AI-Entscheidungen. Sie enthalten IDs aus der versionierten Regelbasis und typisierte Parameter, niemals kopierte Regelzahlen:
 
 - CR und genau ein Array.
-- Creature-Type-Graft und höchstens ein primäres Class-Graft.
+- Creature-Type-Graft, höchstens ein primäres Class-Graft mit optionalem Level und eine geordnete Liste eindeutiger sekundärer Class-Grafts mit jeweils eigenem Level.
 - Unterstützte Subtype-Grafts, höchstens ein Template-Graft und die Size-Auswahl.
 - Save-Swap, Ability-Modifier-Zuordnung und optionale bzw. elective Graft-Entscheidungen.
 - Spell-List bzw. einzelne katalogisierte Spells und zulässige Spell-Parameter.
@@ -98,7 +98,7 @@ Diese Regeln folgen dem Simple-Monster-Creation-Kapitel:
 
 1. Ein Draft hat genau ein CR-basiertes Array. Die Arraywerte sind bereits Gesamtwerte.
 2. Ein Creature-Type-Graft wird immer gewählt. Bei einem Class-Graft bleiben die automatischen Type-Traits erhalten, aber die Statistik-Adjustments des Type-Grafts werden nicht angewendet.
-3. Ein Class-Graft hat ein Required Array; es wird nur der höchste für das CR passende CR-Eintrag angewendet.
+3. Ein Class-Graft hat ein Required Array; im singulären Quellenverfahren wird sein höchster zum Monster-CR passender Eintrag angewendet. Die levelbezogene Class Progression ist die unten dokumentierte Produkterweiterung.
 4. Subtype-Fähigkeiten sind automatisch. Durch Subtypes gewährte Optionen und Skills sind zusätzlich und verbrauchen kein normales Budget.
 5. Template-Prerequisites, CR-Grenzen sowie erforderliche Types/Subtypes müssen erfüllt sein. Template-Automatic-Traits zählen dagegen gegen normale Optionen und Skills bzw. ersetzen diese; sie dürfen das normale Maximum überschreiten.
 6. Ein Size-Graft darf nur innerhalb seiner CR-Grenzen gewählt werden. Es verändert nur die im Graft genannten Werte; Touch AC bleibt höchstens AC und Flat-Footed AC mindestens 1.
@@ -112,7 +112,7 @@ Diese Regeln folgen dem Simple-Monster-Creation-Kapitel:
 
 Nicht jede dieser Grenzen ist eine wörtliche Verbotsregel der Quelle; sie macht die Software deterministisch und nachvollziehbar:
 
-- Genau ein primäres Class-Graft; normale Multiclass-Simulation ist nicht Teil des Strict-Modus.
+- Als bewusste, vom ACG-Secondary-Graft-Replacement inspirierte Produkterweiterung bestimmt höchstens ein primäres Class-Graft Array, foundational Statistic-/Skill-Adjustments, Class-Choices und primäres Spellcasting. Beliebig viele eindeutige sekundäre Class-Grafts liefern ihre levelgerechten Automatic Options; ihre selectable Kategorien ersetzen primäre Kategorien ohne das Slot-Budget zu erhöhen. Sekundäre Statistik-/Skill-Adjustments werden nicht gestapelt.
 - Höchstens ein Template-Graft; Template-Stacking wird in Version 1 nicht unterstützt.
 - Komplexe oder nicht katalogisierte Subtypes werden als unsupported abgelehnt, nicht durch erfundene Grafts ergänzt.
 - Golden-Rule-Anpassungen, freie zusätzliche Optionen und nicht modellierte zusätzliche Angriffe sind keine Strict-Selections. Sie benötigen entweder einen katalogisierten Effekt oder den `free`-Modus.

@@ -50,12 +50,13 @@ Die erwarteten Werte und Entscheidungen stammen aus `Pathfinder Unchained.txt`, 
 Der Standardfall **Goblin Level 4 Druid, Level 1 Rogue** muss als Concept und Proposal abbildbar sein:
 
 - Die Klassenstufen ergeben im MVP die sichtbare CR-Annahme `4 + 1 - 1 = 4`.
-- Der Draft verwendet genau einen primären Class-Graft, hier Druid, und dessen Required Array.
-- Der Rogue-Anteil bleibt als Concept-/Assumption-Information sichtbar und darf nur durch separat katalogisierte Skills oder Monster Options ausgedrückt werden.
-- Es gibt keinen zweiten Rogue-Class-Graft, keine gestapelten Class-Graft-Statistik-Adjustments und keine simulierten Rogue-Level-Fähigkeiten.
-- Eine Proposal-Übernahme darf nur tatsächlich katalogisierte Rogue-nahe Skills/Options anwenden; nicht katalogisierte Multiclass-Behauptungen bleiben Text bzw. erzeugen einen sichtbaren Strict-Befund.
+- Der Draft verwendet Druid Level 4 als primäres Class-Graft und dessen Required Array.
+- Rogue Level 1 wird als explizites sekundäres Class-Graft gespeichert und am effektiven CR 0 ausgewertet.
+- Nur Druid bestimmt foundational Statistic-/Skill-Adjustments, Class-Choices und primäres Spellcasting; Rogue-Adjustments werden nicht gestapelt.
+- Rogue-Automatic-Options werden katalogisiert angewendet. Seine selectable Kategorien ersetzen primäre Kategorien, ohne die Anzahl auswählbarer Slots zu erhöhen.
+- Proposal- und Choice-Requirement-Tests zeigen Class-Level, effective CR, automatische Grants und die erforderlichen Parameter sichtbar an.
 
-Damit ist der Homebrew-Fall repräsentierbar, ohne die beschlossene Strict-Grenze gegen Multiclass-Simulation zu brechen.
+Damit bleibt der Homebrew-Fall deterministisch und levelbezogen, ohne vollständige Pathfinder-Charakterberechnung einzuführen.
 
 #### Kompatibilitäts- und Negativ-Fixtures
 

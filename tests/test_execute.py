@@ -465,6 +465,52 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         initiative_trace = next(entry for entry in evaluation["derivationTrace"] if entry["path"] == "/canonical/initiative")
         self.assertIn("Improved Initiative", {ref.get("entry") for ref in initiative_trace["sourceRefs"]})
 
+    def test_multiclass_uses_each_class_level_for_options_but_only_primary_adjustments(self):
+        draft = boundary_draft(9, "spellcaster")
+        draft["selections"].update({
+            "classGraftId": "graft.class.druid",
+            "primaryClassLevel": 7,
+            "secondaryClassGrafts": [{"classGraftId": "graft.class.bard", "levels": 3}],
+            "classGraftChoices": {},
+            "graftOptionChoices": {
+                "graft.class.bard": {"option.secondary-magic": {"spellListId": "spell-list.charm"}},
+            },
+            "options": [
+                {"optionId": "option.magic-attack", "parameters": {"damageType": "bludgeoning"}},
+                {"optionId": "option.fascinate", "parameters": {}},
+            ],
+            "skills": {"master": [], "good": ["skill.acrobatics"]},
+        })
+
+        evaluation = Engine().execute(request("druid-7-bard-3", "draft.create", {"draft": draft}))["result"]["evaluation"]
+        canonical = evaluation["canonical"]
+
+        self.assertEqual(evaluation["status"], "valid")
+        self.assertEqual(len(draft["selections"]["options"]), 2)  # Secondary slots replace; they do not increase the primary count.
+        self.assertEqual(canonical["secondaryClassGrafts"], [{"classGraftId": "graft.class.bard", "levels": 3}])
+        self.assertEqual(canonical["defenses"]["reflex"], 8)  # Bard's statistic adjustment does not stack.
+        self.assertEqual(canonical["concentration"], 16)  # Other Calculations uses monster CR 9, not Druid effective CR 6.
+        self.assertEqual(next(option for option in canonical["options"] if option["optionId"] == "option.change-shape")["effectiveCR"], 6)
+        self.assertEqual(
+            [option["optionId"] for option in canonical["options"] if option.get("graftId") == "graft.class.bard"],
+            ["option.inspire-courage", "option.knowledgeable", "option.secondary-magic"],
+        )
+        self.assertNotIn("graft.class.bard", {ability["graftId"] for ability in canonical["graftAbilities"]})
+        self.assertEqual(next(spell for spell in canonical["spells"] if spell["name"] == "Call Lightning")["sourceBand"], "4–7")
+        charm_person = next(spell for spell in canonical["spells"] if spell["name"] == "Charm Person")
+        self.assertEqual(charm_person["spellLevelSource"], "bard")
+        self.assertIn("/canonical/secondaryClassGrafts", {entry["path"] for entry in evaluation["derivationTrace"]})
+
+        rogue = copy.deepcopy(draft)
+        rogue["selections"]["secondaryClassGrafts"] = [{"classGraftId": "graft.class.rogue", "levels": 3}]
+        rogue["selections"]["graftOptionChoices"] = {}
+        rogue_evaluation = Engine().execute(request("druid-7-rogue-3", "draft.create", {"draft": rogue}))["result"]["evaluation"]
+        self.assertEqual(rogue_evaluation["canonical"]["sneakAttackDice"], "5d6")  # Sneak Attack scales by monster CR.
+
+        draft["selections"]["options"][1] = {"optionId": "option.combat-casting", "parameters": {}}
+        replacement = Engine().execute(request("multiclass-replacement-slot", "draft.create", {"draft": draft}))["result"]["evaluation"]
+        self.assertIn("option-slot.invalid", {issue["code"] for issue in replacement["issues"]})
+
     def test_incomplete_draft_still_reports_a_class_required_array_mismatch(self):
         response = self.engine.execute(request("partial-bad-druid-array", "draft.create", {"draft": {
             "concept": {"name": "Gobak", "targetCR": 4, "role": "caster"},
@@ -648,6 +694,17 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         self.assertEqual(canonical["classAttackDamage"], "1d10")
         self.assertEqual(canonical["attacks"][0]["damageDie"], "d6")
 
+        draft["selections"]["options"] = [
+            {"optionId": "option.extra-attack", "parameters": {"attackMode": "melee"}},
+            {"optionId": "option.extra-attack", "parameters": {"attackMode": "melee"}},
+        ]
+        response = Engine().execute(request("monk-repeated-extra-attack", "draft.create", {"draft": draft}))
+        self.assertEqual(response["result"]["evaluation"]["status"], "valid")
+        self.assertEqual(
+            sum(option["optionId"] == "option.extra-attack" for option in response["result"]["evaluation"]["canonical"]["options"]),
+            3,
+        )
+
     def test_fighter_uses_base_plus_highest_cr_option_slots(self):
         draft = copy.deepcopy(WORG_DRAFT)
         draft["concept"] = {"name": "Fighter", "targetCR": 3}
@@ -763,6 +820,7 @@ class ExecuteVerticalSliceTests(unittest.TestCase):
         draft["selections"].update({
             "cr": 7,
             "classGraftId": "graft.class.ranger",
+            "primaryClassLevel": 8,
             "classGraftChoices": {"favoredEnemyTargets": ["graft.creature-type.undead", "humanoid:orc"]},
             "options": [
                 {"optionId": "option.blind-fight", "parameters": {}},

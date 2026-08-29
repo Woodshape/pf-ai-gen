@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 from typing import Any
 
 
@@ -9,16 +10,22 @@ def active_class_cr_entry(graft: dict[str, Any] | None, cr: int | float) -> dict
     return max((entry for entry in (graft or {}).get("crEntries", []) if cr >= entry["minCR"]), key=lambda entry: entry["minCR"], default=None)
 
 
-def active_graft_option_grants(class_id, class_graft, subtype_grafts, template_id, template, cr, selections):
+def active_graft_option_grants(class_id, class_graft, subtype_grafts, template_id, template, cr, selections, *, class_cr=None, secondary_classes=()):
     """Return the source grants used by both validation and input requirements."""
     grants = []
-    if class_graft:
-        class_grants = list(class_graft.get("optionGrants", []))
-        entry = active_class_cr_entry(class_graft, cr)
+
+    def add_class(graft_id, graft, effective_cr):
+        class_grants = list(graft.get("optionGrants", []))
+        entry = active_class_cr_entry(graft, effective_cr)
         if entry:
             removed = set(entry.get("removeOptionGrantIds", []))
             class_grants = [grant for grant in class_grants if grant["optionId"] not in removed] + list(entry.get("optionGrants", []))
-        grants.extend((class_id, grant) for grant in class_grants)
+        grants.extend((graft_id, grant) for grant in class_grants)
+
+    if class_graft:
+        add_class(class_id, class_graft, cr if class_cr is None else class_cr)
+    for secondary_id, secondary, effective_cr in secondary_classes:
+        add_class(secondary_id, secondary, effective_cr)
     for subtype_id, subtype in subtype_grafts:
         if subtype:
             grants.extend((subtype_id, grant) for grant in subtype.get("optionGrants", []))
@@ -31,6 +38,68 @@ def active_graft_option_grants(class_id, class_graft, subtype_grafts, template_i
             parameters = choice.get("parametersByOption", {})
             grants.extend((template_id, {"optionId": option_id, "parameters": parameters.get(option_id, {}), "sourceText": template.get("ruleText", "")}) for option_id in values)
     return grants
+
+
+def option_selection_budget(catalog, draft, *, main=None, class_graft=None, class_cr=None, secondary_classes=None, subtype_grafts=None, template=None):
+    """Return the selectable option slots after secondary replacements and template consumption."""
+    selections = draft.get("selections", {})
+    cr = selections.get("cr", 0)
+
+    def by_id(records, value):
+        return next((entry for entry in records.values() if entry.get("id") == value), None)
+
+    class_graft = class_graft if class_graft is not None else by_id(catalog["grafts"]["classGrafts"], selections.get("classGraftId"))
+    class_cr = selections.get("primaryClassLevel", cr + 1) - 1 if class_cr is None else class_cr
+    secondary_classes = secondary_classes if secondary_classes is not None else [
+        (item["classGraftId"], by_id(catalog["grafts"]["classGrafts"], item["classGraftId"]), item["levels"] - 1)
+        for item in selections.get("secondaryClassGrafts", [])
+        if isinstance(item, dict) and isinstance(item.get("classGraftId"), str)
+        and isinstance(item.get("levels"), int) and not isinstance(item.get("levels"), bool)
+        and by_id(catalog["grafts"]["classGrafts"], item["classGraftId"])
+    ]
+    subtype_grafts = subtype_grafts if subtype_grafts is not None else [(value, by_id(catalog["grafts"]["subtypes"], value)) for value in selections.get("subtypeGraftIds", [])]
+    template = template if template is not None else by_id(catalog["grafts"]["templates"], selections.get("templateGraftId"))
+    if main is None:
+        array = by_id(catalog["arrays"], selections.get("arrayId"))
+        main = (array or {}).get("mainStatistics", {}).get("1/2" if cr == 0.5 else str(cr))
+    slots = list((class_graft or {}).get("optionSlots", []) if class_graft else (main or {}).get("options", []))
+    primary_entry = active_class_cr_entry(class_graft, class_cr)
+    if primary_entry:
+        slots.extend(primary_entry.get("optionSlots", []))
+    counts = {}
+    for slot in slots:
+        counts[slot["category"]] = counts.get(slot["category"], 0) + slot["count"]
+    secondary_slots = []
+    for _, secondary, effective_cr in secondary_classes:
+        secondary_slots.extend(secondary.get("optionSlots", []))
+        entry = active_class_cr_entry(secondary, effective_cr)
+        if entry:
+            secondary_slots.extend(entry.get("optionSlots", []))
+    replaceable = dict(counts)
+    for slot in secondary_slots:
+        for _ in range(slot["count"]):
+            replaced = next((category for category in ("any", "combat/social", "universal", "combat", "magic", "social") if replaceable.get(category, 0)), None)
+            if replaced is None:
+                break
+            replaceable[replaced] -= 1
+            counts[replaced] -= 1
+            counts[slot["category"]] = counts.get(slot["category"], 0) + 1
+    for _, subtype in subtype_grafts:
+        for slot in (subtype or {}).get("optionSlots", []):
+            counts[slot["category"]] = counts.get(slot["category"], 0) + slot["count"]
+    if template:
+        template_id = template["id"]
+        grants = active_graft_option_grants(None, None, [], template_id, template, cr, selections)
+        for _, grant in grants:
+            category = catalog["options"][grant["optionId"]]["category"]
+            choices = ("universal", "combat", "magic", "social", "any") if category == "universal" else (category, "combat/social", "any") if category in {"combat", "social"} else (category, "any")
+            assigned = next((slot for slot in choices if counts.get(slot, 0)), None)
+            if assigned:
+                counts[assigned] -= 1
+        for slot in template.get("optionSlots", []):
+            counts[slot["category"]] = counts.get(slot["category"], 0) + slot["count"]
+    categories = {category: count for category, count in counts.items() if count > 0}
+    return {"categories": categories, "total": sum(categories.values())}
 
 
 def skill_selection_basis(catalog, draft, *, main=None, class_graft=None, active_grafts=None, subtype_grafts=None, size=None, template=None):
@@ -104,6 +173,60 @@ class ChoiceRequirements:
     def selection_basis(self, draft: dict[str, Any]) -> dict[str, Any]:
         return skill_selection_basis(self.catalog, draft)
 
+    def automatic_options(self, draft: dict[str, Any]) -> list[dict[str, Any]]:
+        selections = draft.get("selections", {})
+        cr = selections.get("cr", draft.get("concept", {}).get("targetCR", 0))
+        cr = cr if isinstance(cr, (int, float)) and not isinstance(cr, bool) else 0
+        class_id = selections.get("classGraftId")
+        class_graft = self.catalog["grafts"]["classGrafts"].get(class_id) if class_id else None
+        class_cr = selections.get("primaryClassLevel", cr + 1) - 1
+        secondary_classes = [
+            (item["classGraftId"], self.catalog["grafts"]["classGrafts"].get(item["classGraftId"]), item["levels"] - 1)
+            for item in selections.get("secondaryClassGrafts", [])
+            if isinstance(item, dict) and isinstance(item.get("classGraftId"), str)
+            and isinstance(item.get("levels"), int) and not isinstance(item.get("levels"), bool)
+            and self.catalog["grafts"]["classGrafts"].get(item["classGraftId"])
+        ]
+        subtype_grafts = [
+            (subtype_id, self.catalog["grafts"]["subtypes"].get(subtype_id))
+            for subtype_id in selections.get("subtypeGraftIds", [])
+        ]
+        template_id = selections.get("templateGraftId")
+        template = self.catalog["grafts"]["templates"].get(template_id) if template_id else None
+        grants = active_graft_option_grants(
+            class_id, class_graft, subtype_grafts, template_id, template, cr, selections,
+            class_cr=class_cr, secondary_classes=secondary_classes,
+        )
+        class_progression = {class_id: (selections.get("primaryClassLevel"), class_cr)} if class_id else {}
+        class_progression.update({graft_id: (effective_cr + 1, effective_cr) for graft_id, _, effective_cr in secondary_classes})
+        options = []
+        for graft_id, grant in grants:
+            option_id = grant.get("optionId")
+            option = self.catalog["options"].get(option_id)
+            if not option:
+                continue
+            item = {
+                "optionId": option_id,
+                "label": option.get("name", option_id),
+                "graftId": graft_id,
+                "parameters": copy.deepcopy(grant.get("parameters", {})),
+            }
+            refs = copy.deepcopy(option.get("sourceRef", []))
+            refs = refs if isinstance(refs, list) else [refs]
+            if graft_id in class_progression:
+                class_level, effective_cr = class_progression[graft_id]
+                item["effectiveCR"] = effective_cr
+                if class_level is not None:
+                    item["classLevel"] = class_level
+                graft = self.catalog["grafts"]["classGrafts"][graft_id]
+                for ref in (graft.get("sourceRef"), (active_class_cr_entry(graft, effective_cr) or {}).get("sourceRef")):
+                    if ref and ref not in refs:
+                        refs.append(copy.deepcopy(ref))
+            if refs:
+                item["sourceRefs"] = refs
+            options.append(item)
+        return options
+
     def for_draft(self, draft: dict[str, Any]) -> list[dict[str, Any]]:
         selections = draft.get("selections", {})
         cr = selections.get("cr", draft.get("concept", {}).get("targetCR", 0))
@@ -111,8 +234,16 @@ class ChoiceRequirements:
         requirements: list[dict[str, Any]] = []
         class_id = selections.get("classGraftId")
         class_graft = self.catalog["grafts"]["classGrafts"].get(class_id) if class_id else None
+        class_cr = selections.get("primaryClassLevel", cr + 1) - 1
+        secondary_classes = [
+            (item["classGraftId"], self.catalog["grafts"]["classGrafts"].get(item["classGraftId"]), item["levels"] - 1)
+            for item in selections.get("secondaryClassGrafts", [])
+            if isinstance(item, dict) and isinstance(item.get("classGraftId"), str)
+            and isinstance(item.get("levels"), int) and not isinstance(item.get("levels"), bool)
+            and self.catalog["grafts"]["classGrafts"].get(item["classGraftId"])
+        ]
         if class_graft:
-            self._class_choices(requirements, class_id, class_graft, cr, selections)
+            self._class_choices(requirements, class_id, class_graft, class_cr, selections, monster_cr=cr)
         subtype_grafts = [
             (subtype_id, self.catalog["grafts"]["subtypes"].get(subtype_id))
             for subtype_id in selections.get("subtypeGraftIds", [])
@@ -125,7 +256,10 @@ class ChoiceRequirements:
         if template:
             self._template_choices(requirements, template_id, template, cr)
         controlled = self._controlled_option_parameters(class_graft, template)
-        grants = active_graft_option_grants(class_id, class_graft, subtype_grafts, template_id, template, cr, selections)
+        grants = active_graft_option_grants(
+            class_id, class_graft, subtype_grafts, template_id, template, cr, selections,
+            class_cr=class_cr, secondary_classes=secondary_classes,
+        )
         for graft_id, grant in grants:
             self._option_parameters(
                 requirements,
@@ -134,6 +268,7 @@ class ChoiceRequirements:
                 f"/selections/graftOptionChoices/{graft_id}/{grant['optionId']}",
                 selections,
                 controlled,
+                monster_cr=cr,
             )
         for index, selected in enumerate(selections.get("options", [])):
             if isinstance(selected, dict) and selected.get("optionId") in self.catalog["options"]:
@@ -144,6 +279,7 @@ class ChoiceRequirements:
                     f"/selections/options/{index}/parameters",
                     selections,
                     set(),
+                    monster_cr=cr,
                 )
         spell_list_id = selections.get("spellListId")
         spell_list = self._catalog_records("spellList").get(spell_list_id) if spell_list_id else None
@@ -156,7 +292,7 @@ class ChoiceRequirements:
         unique = {requirement["path"]: requirement for requirement in requirements}
         return [unique[path] for path in sorted(unique)]
 
-    def _class_choices(self, output, class_id, graft, cr, selections):
+    def _class_choices(self, output, class_id, graft, cr, selections, *, monster_cr):
         base = f"/selections/classGraftChoices"
         if graft.get("choiceSpec"):
             spec = graft["choiceSpec"]
@@ -164,7 +300,7 @@ class ChoiceRequirements:
         for spec in graft.get("abilityChoiceSpecs", []):
             output.append(self._enum(f"{base}/{spec['name']}", spec["name"], spec["values"], graft))
         for spec in graft.get("optionChoiceSpecs", []):
-            count = 1 + sum(cr >= threshold for threshold in spec.get("countThresholds", [])) if spec.get("type") == "enum-array" else None
+            count = 1 + sum(monster_cr >= threshold for threshold in spec.get("countThresholds", [])) if spec.get("type") == "enum-array" else None
             output.append(self._enum(f"{base}/{spec['name']}", spec["name"], spec["values"], graft, array=count is not None, count=count))
         companion = graft.get("companionSpec")
         if companion:
@@ -219,11 +355,15 @@ class ChoiceRequirements:
             })
         return controlled
 
-    def _option_parameters(self, output, option_id, fixed, base, selections, controlled):
+    def _option_parameters(self, output, option_id, fixed, base, selections, controlled, *, monster_cr):
         option = self.catalog["options"][option_id]
-        for name, spec in option.get("parameters", {}).items():
-            if spec.get("internal") or name in fixed or (option_id, name) in controlled:
+        for name, raw_spec in option.get("parameters", {}).items():
+            if raw_spec.get("internal") or name in fixed or (option_id, name) in controlled:
                 continue
+            spec = copy.deepcopy(raw_spec)
+            if option_id == "option.favored-enemy" and name == "targets":
+                count = 1 + sum(monster_cr >= threshold for threshold in (4, 9, 14, 19))
+                spec.update({"minCount": count, "maxCount": count})
             output.append(self._requirement(f"{base}/{name}", name, spec, selections, option.get("sourceRef")))
 
     def _enum(self, path, name, values, source, *, array=False, count=None):

@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
 import process from "node:process";
+import { createInterface } from "node:readline";
 import { Type } from "typebox";
 import {
   createAgentSession,
@@ -15,7 +16,7 @@ import { CatalogToolState } from "./ai_tools.mjs";
 const FALLBACK = ["openai-codex", "gpt-5.6-luna"];
 const CONCEPT_FIELDS = ["name", "targetCR", "role", "creatureType", "description"];
 const SELECTION_FIELDS = [
-  "cr", "arrayId", "creatureTypeGraftId", "classGraftId", "classGraftChoices", "graftOptionChoices",
+  "cr", "arrayId", "creatureTypeGraftId", "classGraftId", "primaryClassLevel", "secondaryClassGrafts", "classGraftChoices", "graftOptionChoices",
   "subtypeGraftIds", "subtypeGraftChoices", "templateGraftId", "templateGraftChoices", "sizeId", "saveSwap",
   "abilityModifiers", "options", "skills", "attacks", "speed", "spells", "spellListId", "spellListBenefitChoices",
   "spellLevelSource", "spellcastingAbility",
@@ -33,6 +34,9 @@ const ABILITY_MODIFIERS = Type.Object(Object.fromEntries(
   ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"].map((name) => [name, Type.Optional(Type.Integer())]),
 ), { additionalProperties: false });
 const OPTIONS = Type.Array(Type.Object({ optionId: Type.String(), parameters: Type.Optional(FREE_OBJECT) }, { additionalProperties: false }));
+const SECONDARY_CLASS_GRAFTS = Type.Array(Type.Object({
+  classGraftId: Type.String(), levels: Type.Integer({ minimum: 1 }),
+}, { additionalProperties: false }));
 const ATTACKS = Type.Array(Type.Object({
   name: Type.String(), kind: Type.Optional(Type.String()),
   attackProfile: field(["weapon.high", "weapon.low", "natural.two", "natural.three"]),
@@ -45,6 +49,8 @@ const SPELLS = Type.Array(Type.Object({
 export const proposalParameters = Type.Object({
   changes: Type.Array(Type.Union([
     change("set-selection", ["cr"], Type.Number()),
+    change("set-selection", ["primaryClassLevel"], Type.Integer({ minimum: 1 })),
+    change("set-selection", ["secondaryClassGrafts"], SECONDARY_CLASS_GRAFTS),
     change("set-selection", ["arrayId", "creatureTypeGraftId", "classGraftId", "templateGraftId", "sizeId", "spellListId", "spellLevelSource", "spellcastingAbility"], Type.Union([Type.String(), Type.Null()])),
     change("set-selection", ["subtypeGraftIds"], STRINGS),
     change("set-selection", ["abilityModifiers"], ABILITY_MODIFIERS),
@@ -99,7 +105,16 @@ function toolsFor(state) {
       execute: async (_id, args) => textResult(state.get(args.kind, args.id)),
     }),
     defineTool({
-      name: "emit_proposal", label: "Emit proposal", description: "Emit the one immutable proposal and terminate.",
+      name: "draft_choice_requirements", label: "Get Draft choice requirements", description: "Read the Engine-owned required controls, budgets, and source-backed allowed values after catalog_list.",
+      parameters: Type.Object({}), execute: async () => textResult(state.choiceRequirements()),
+    }),
+    defineTool({
+      name: "proposal_validate", label: "Validate candidate Proposal", description: "Evaluate a candidate without persistence or Draft mutation. Returns every evaluation finding and candidate choice requirement. Maximum three calls.",
+      parameters: proposalParameters,
+      execute: async (_id, args) => textResult(await state.validate({ ...args, nonCanonicalSuggestions: args.nonCanonicalSuggestions || [] })),
+    }),
+    defineTool({
+      name: "emit_proposal", label: "Emit proposal", description: "Emit and terminate only with the exact candidate most recently validated as valid.",
       parameters: proposalParameters,
       execute: async (_id, args) => textResult(state.emit({ ...args, nonCanonicalSuggestions: args.nonCanonicalSuggestions || [] })),
     }),
@@ -123,30 +138,33 @@ async function resolveModel(runtime, settings) {
   throw new AdapterError("AI_NOT_CONFIGURED", `No authenticated Pi model is available (fallback ${FALLBACK.join("/")}).`);
 }
 
-export async function generateProposal(input) {
+export async function generateProposal(input, bridge) {
   if (!input || typeof input !== "object" || !input.draft || typeof input.concept !== "string" || !input.concept.trim()) {
     throw new AdapterError("AI_OUTPUT_INVALID", "draft and a non-empty concept are required");
   }
   let catalog;
   try { catalog = JSON.parse(await readFile(input.catalogPath, "utf8")); }
   catch (error) { throw new AdapterError("CATALOG_UNAVAILABLE", error instanceof Error ? error.message : String(error)); }
-  const state = new CatalogToolState(catalog);
+  if (!bridge) throw new AdapterError("AI_UNAVAILABLE", "proposal validation bridge is unavailable");
+  const state = new CatalogToolState(catalog, {
+    choiceRequirements: input.choiceRequirements,
+    validateProposal: (proposal, attempt) => bridge.request("proposal_validate", { proposal, attempt }),
+  });
   const cwd = input.cwd || process.cwd();
   const agentDir = getAgentDir();
   const fileSettings = SettingsManager.create(cwd, agentDir);
   const modelRuntime = await ModelRuntime.create();
   const model = await resolveModel(modelRuntime, fileSettings);
-  const systemPrompt = `You translate a Pathfinder Unchained Simple Monster Creation concept into one typed Proposal.\n\nSecurity and rules:\n- Your first successful tool call MUST be catalog_list.\n- Use only IDs and parameters returned by the catalog tools. Never invent calculated statistics.\n- One primary class graft only. Represent secondary classes with catalogued options/skills.\n- If target CR is omitted but class levels are stated, propose CR = sum(levels) - 1 and record that product heuristic as an assumption.\n- When CR is known, propose both concept.targetCR and selections.cr and fill every required Strict selection through Steps 1–9, including abilityModifiers, attacks, sizeId, speed, and exact skill budgets. Use catalog tools to resolve uncertain values instead of omitting required fields.\n- The candidate Draft must evaluate as valid; fix every evaluation issue supplied during a repair attempt.\n- Non-canonical ideas belong only in nonCanonicalSuggestions.\n- Changes set or unset whole top-level concept/selection fields.\n- Finish with exactly one emit_proposal call, then do nothing else.`;
+  const systemPrompt = `You translate a Pathfinder Unchained Simple Monster Creation concept into one typed Proposal.\n\nSecurity and rules:\n- Your first successful tool call MUST be catalog_list.\n- Use only IDs and parameters returned by the catalog tools. Never invent calculated statistics.\n- Use one primary class graft with primaryClassLevel. It alone controls the required array, statistic adjustments, skills, class choices, and primary spellcasting.\n- Put additional classes in an ordered secondaryClassGrafts array with their exact positive levels. Each secondary is evaluated at effective CR = levels - 1 and contributes only its fixed and active CR-entry option grants plus replacement option categories; do not apply secondary arrays, statistics, skills, class choices, or primary spellcasting. Do not repeat a class graft, and do not repeat the primary class.\n- The selected CR remains the encounter CR. If target CR is omitted but class levels are stated, propose CR = sum(levels) - 1 and record that source-guided heuristic as an assumption. If target CR and secondary levels are explicit but the primary level is omitted, infer primaryClassLevel = target CR + 1 - sum(secondary levels); never preserve a multiclass.cr-mismatch finding.\n- Secondary entries that replace Secondary Magic with true spellcasting are not implemented; preserve the Engine finding instead of inventing spells.\n- When CR is known, propose both concept.targetCR and selections.cr and fill every required Strict selection through Steps 1–9, including abilityModifiers, attacks, sizeId, speed, and exact skill budgets. Use catalog tools to resolve uncertain values instead of omitting required fields.\n- Call draft_choice_requirements after catalog_list, then use its Engine-owned controls and budgets. Its automaticSelections.options list shows grants already included by the Engine; do not copy an automatic grant merely to fill slots. Choose other options unless a repeated option is intentional and useful under Duplicate Options (for example, Extra Attack twice). Put only explicit choices that consume the remaining option slots in selections.options.\n- Call proposal_validate for each candidate. It returns all evaluation findings and candidate-specific choice requirements without mutating the Draft. Fix every finding, including warnings; emit_proposal accepts only a warning-free valid evaluation. You have at most three validation calls.\n- Non-canonical ideas belong only in nonCanonicalSuggestions.\n- Changes set or unset whole top-level concept/selection fields.\n- emit_proposal accepts only the exact last candidate validated as valid. Finish with exactly one successful emit_proposal call, then do nothing else.`;
   const settings = SettingsManager.inMemory({ compaction: { enabled: false }, retry: { enabled: true, maxRetries: 1 } });
   const { session } = await createAgentSession({
     cwd, agentDir, model, modelRuntime, thinkingLevel: "medium",
-    tools: ["catalog_list", "catalog_search", "catalog_get", "emit_proposal"],
+    tools: ["catalog_list", "catalog_search", "catalog_get", "draft_choice_requirements", "proposal_validate", "emit_proposal"],
     customTools: toolsFor(state), resourceLoader: resourceLoader(systemPrompt),
     sessionManager: SessionManager.inMemory(cwd), settingsManager: settings,
   });
   try {
-    const repair = input.repair ? `\n\nRepair attempt: the Engine rejected or found the previous candidate incomplete. Correct every supplied error/finding and emit a complete replacement Proposal. Re-query catalog records as needed.\nEngine feedback: ${JSON.stringify(input.repair.error || input.repair.evaluation)}\nRejected Proposal: ${JSON.stringify(input.repair.proposal)}` : "";
-    await session.prompt(`Monster Concept:\n${input.concept}\n\nCurrent authoritative Draft (suggest changes only; do not mutate it):\n${JSON.stringify(input.draft)}${repair}`);
+    await session.prompt(`Monster Concept:\n${input.concept}\n\nCurrent authoritative Draft (suggest changes only; do not mutate it):\n${JSON.stringify(input.draft)}`);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     if (/abort/i.test(message)) throw new AdapterError("AI_ABORTED", message);
@@ -154,19 +172,54 @@ export async function generateProposal(input) {
   } finally {
     session.dispose();
   }
-  if (!state.proposal) throw new AdapterError("AI_OUTPUT_INVALID", "Pi completed without emit_proposal");
+  if (!state.proposal) {
+    const feedback = state.lastValidation ? ` Last validation: ${JSON.stringify(state.lastValidation)}` : "";
+    throw new AdapterError("PROPOSAL_INVALID", `Pi completed without emitting a validated Proposal.${feedback}`);
+  }
   return { proposal: state.proposal, model: `${model.provider}/${model.id}` };
 }
 
+class StdioBridge {
+  #nextId = 0;
+  #pending = new Map();
+  #start;
+  #resolveStart;
+
+  constructor() {
+    this.#start = new Promise((resolve) => { this.#resolveStart = resolve; });
+    const lines = createInterface({ input: process.stdin });
+    lines.on("line", (line) => {
+      let message;
+      try { message = JSON.parse(line); } catch { return; }
+      if (message.type === "start") this.#resolveStart(message.input);
+      if (message.type === "response" && this.#pending.has(message.id)) {
+        this.#pending.get(message.id)(message.value);
+        this.#pending.delete(message.id);
+      }
+    });
+  }
+
+  start() { return this.#start; }
+
+  request(method, payload) {
+    const id = ++this.#nextId;
+    return new Promise((resolve) => {
+      this.#pending.set(id, resolve);
+      process.stdout.write(`${JSON.stringify({ type: "request", id, method, payload })}\n`);
+    });
+  }
+
+  result(value) { process.stdout.write(`${JSON.stringify({ type: "result", value })}\n`); }
+}
+
 async function main() {
+  const bridge = new StdioBridge();
   try {
-    const chunks = [];
-    for await (const chunk of process.stdin) chunks.push(chunk);
-    const input = JSON.parse(Buffer.concat(chunks).toString("utf8"));
-    process.stdout.write(JSON.stringify({ ok: true, ...(await generateProposal(input)) }));
+    const input = await bridge.start();
+    bridge.result({ ok: true, ...(await generateProposal(input, bridge)) });
   } catch (error) {
     const code = error instanceof AdapterError ? error.code : "AI_UNAVAILABLE";
-    process.stdout.write(JSON.stringify({ ok: false, error: { code, message: error instanceof Error ? error.message : String(error) } }));
+    bridge.result({ ok: false, error: { code, message: error instanceof Error ? error.message : String(error) } });
     process.exitCode = 1;
   }
 }
