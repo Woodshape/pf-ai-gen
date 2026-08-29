@@ -1,6 +1,6 @@
 ---
 name: pathfinder-simple-monster-creation
-description: Create, convert, or audit Pathfinder RPG monsters by following Pathfinder Unchained's Simple Monster Creation Steps 1–9 exactly, using the local Pathfinder Unchained, Bestiary, and Core Rulebook PDFs plus their extracted TXT files for rule validation, spell levels, and damage references.
+description: Create, convert, or audit Pathfinder RPG monsters by following Pathfinder Unchained's Simple Monster Creation Steps 1–9 exactly, using the local Pathfinder Unchained, Bestiary, and Core Rulebook PDFs plus their extracted TXT files for rule validation, spell levels, and damage references, and using the local monster_builder engine for deterministic offline Draft creation, evaluation, and validation.
 ---
 
 # Pathfinder Unchained: Simple Monster Creation
@@ -14,6 +14,67 @@ Use this skill to build Pathfinder RPG monsters with the **Simple Monster Creati
 - When a source rule is needed, read the relevant extracted `.txt` file; use the corresponding PDF only to resolve tables, layout, or ambiguous extraction.
 - If a referenced spell or Bestiary rule has no local source entry, report the unresolved source gap instead of inferring its value.
 - If the user asks for an exact procedure or exact rule, quote or closely transcribe the source instead of paraphrasing it.
+
+## Local monster_builder engine
+
+Use the local engine when you need deterministic offline Draft creation, evaluation, or validation instead of recalculating statistics by hand. The same rules engine powers the browser UI; the JSONL CLI is the agent-facing surface.
+
+### JSONL CLI
+
+Start it with:
+
+```bash
+MONSTER_BUILDER_WORKSPACE=.monster-builder python3 -m monster_builder
+```
+
+Without `MONSTER_BUILDER_WORKSPACE`, state is process-local and does not persist between runs.
+
+Send one JSON request per line. The envelope is:
+
+```json
+{"protocolVersion":"1","requestId":"r1","operation":"draft.get","payload":{"draftId":"draft-..."}}
+```
+
+`payload` may be omitted; it defaults to `{}`.
+
+Common operations for offline monster creation:
+
+- `draft.create` — create a new Draft. Payload: `{"draft":{"concept":{...},"selections":{...}}}`.
+- `draft.get` — load a Draft by `draftId`.
+- `draft.evaluate` — evaluate a Draft by `draftId` or an inline `draft` object.
+- `draft.choiceRequirements` — return the exact Engine-owned controls, allowed values, budgets, and source references for a Draft or candidate. With `draftId`, pass `selectionOverrides` to preview a candidate without persisting it. Prefer this over interpreting graft rules manually.
+- `draft.applyChanges` — apply typed changes to an existing Draft. Requires `draftId`, `baseRevision`, `baseFingerprint`, and `changes`.
+- `monster.finalize` — turn a complete valid Strict Draft into an immutable FinishedMonster. Requires `draftId`, `baseRevision`, and `baseFingerprint`.
+- `monster.export` — export a FinishedMonster as JSON, Markdown, or HTML. Requires `monsterId`; optional `format` (`json`, `markdown`, `html`) and `profile` (`sheet`, `audit`).
+- `library.search` — list stored Drafts and monsters. Optional `query` and `includeArchived`.
+
+Keep `requestId` unique for mutating operations; the engine caches them for idempotency.
+
+The optional Pi `proposal.generate` workflow is browser-only and is not required for offline creation.
+
+The same operations are available in-process:
+
+```python
+from monster_builder import Engine
+
+Engine(workspace=".monster-builder").execute(request)
+```
+
+### validate helper
+
+For a one-shot check, run:
+
+```bash
+python3 -m monster_builder validate monster.json
+```
+
+It accepts a raw Draft, a persisted Draft wrapper, or a FinishedMonster JSON export. It prints the current deterministic evaluation and exits:
+
+- `0` valid
+- `2` incomplete or invalid
+- `4` unreadable or unsupported input
+
+Rendered Markdown and HTML sheets are rejected because they are lossy.
 
 ## Local source files and page map
 
