@@ -53,6 +53,9 @@ export interface AutomaticOption {
 
 export interface AutomaticSelections {
   skills: { master: ChoiceValue[]; good: ChoiceValue[] };
+  racialTraits?: ChoiceValue[];
+  classFeatures?: ChoiceValue[];
+  featGrants?: ChoiceValue[];
   options?: AutomaticOption[];
 }
 
@@ -70,6 +73,8 @@ export interface ChoiceRequirement {
   minCount?: number;
   maxCount?: number;
   sourceRefs?: SourceRef[];
+  minValue?: number;
+  maxValue?: number;
 }
 
 export interface OptionDefinition extends CatalogEntry {
@@ -112,7 +117,24 @@ export interface SelectedAttack {
   damageDie?: string;
 }
 
+export interface NpcCatalog {
+  version?: string;
+  catalogVersion?: string;
+  races: Dict<CatalogEntry>;
+  classes: Dict<CatalogEntry>;
+  skills: Dict<CatalogEntry>;
+  feats: Dict<CatalogEntry>;
+  items: Dict<CatalogEntry>;
+  spells: Dict<CatalogEntry>;
+  gearBudgets: Dict<CatalogEntry>;
+  abilityArrays: Dict<CatalogEntry>;
+  derivedRules?: Dict<CatalogEntry>;
+  classFeatures?: Dict<CatalogEntry>;
+  [key: string]: unknown;
+}
+
 export interface Draft {
+  creationSystem?: "simple-monster" | "npc" | string;
   draftId: string;
   revision: number;
   fingerprint: string;
@@ -134,6 +156,7 @@ export interface Issue {
 export interface Evaluation {
   status: "incomplete" | "invalid" | "valid";
   issues: Issue[];
+  canonical?: JsonObject | null;
   effective?: JsonObject | null;
   derivationTrace: Array<{ path: string; rule: string; value: unknown; sourceRefs?: SourceRef[] }>;
 }
@@ -163,6 +186,8 @@ export interface Proposal {
 export interface LibraryEntry {
   kind: "draft" | "monster";
   id: string;
+  creationSystem?: string;
+  level?: number | null;
   name: string;
   cr?: number;
   role: string;

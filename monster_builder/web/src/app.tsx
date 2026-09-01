@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "preact/hooks";
-import { execute, loadCatalog, newChangeId } from "./api";
+import { execute, loadCatalog, loadNpcCatalog, newChangeId } from "./api";
 import { sourceText } from "./components";
 import { ProposalPanel } from "./proposal-panel";
 import { STEPS, issuesForStep, stepForPath, stepStatus } from "./steps";
@@ -7,10 +7,12 @@ import { ArrayStep, ConceptStep, type EditorProps } from "./steps/basic";
 import { PrimaryGraftStep, SizeStep, SpellStep, SubtypeStep, TemplateStep } from "./steps/grafts";
 import { OptionsStep } from "./steps/options";
 import { DamageStep, SkillsStep } from "./steps/finish";
-import type { AutomaticSelections, Catalog, Change, ChoiceRequirement, Draft, EngineResult, Evaluation, FinishedMonster, JsonObject, LibraryEntry, Proposal, SelectionBudgets } from "./types";
+import { NpcWorkflow } from "./steps/npc";
+import type { AutomaticSelections, Catalog, Change, ChoiceRequirement, Draft, EngineResult, Evaluation, FinishedMonster, JsonObject, LibraryEntry, NpcCatalog, Proposal, SelectionBudgets } from "./types";
 
 export function App() {
   const [catalog, setCatalog] = useState<Catalog>();
+  const [npcCatalog, setNpcCatalog] = useState<NpcCatalog>();
   const [draft, setDraft] = useState<Draft>();
   const [evaluation, setEvaluation] = useState<Evaluation>();
   const [monster, setMonster] = useState<FinishedMonster>();
@@ -29,7 +31,9 @@ export function App() {
   useEffect(() => { void boot(); }, []);
   async function boot() {
     try {
-      setCatalog(await loadCatalog());
+      const [simpleCatalog, npcCatalogValue] = await Promise.all([loadCatalog(), loadNpcCatalog()]);
+      setCatalog(simpleCatalog);
+      setNpcCatalog(npcCatalogValue);
       const saved = localStorage.getItem("monster-builder.draftId");
       if (saved) {
         try { await getDraft(saved); return; } catch { localStorage.removeItem("monster-builder.draftId"); }
@@ -78,7 +82,7 @@ export function App() {
     setMessage({ text, good });
     window.setTimeout(() => setMessage(undefined), 4500);
   }
-  if (!catalog || !draft || !evaluation) return <main class="app"><div class="panel step-form"><h1>Loading Guided Rail…</h1>{message && <p>{message.text}</p>}</div></main>;
+  if (!catalog || !npcCatalog || !draft || !evaluation) return <main class="app"><div class="panel step-form"><h1>Loading Guided Rail…</h1>{message && <p>{message.text}</p>}</div></main>;
 
   const guard = (target: Draft = draft) => ({ draftId: target.draftId, baseRevision: target.revision, baseFingerprint: target.fingerprint });
   async function save(selections: JsonObject, concept: JsonObject, andContinue: boolean) {
@@ -108,10 +112,10 @@ export function App() {
       } else show("No changes to apply.", true);
       if (andContinue) {
         const mergedConcept = { ...draft.concept, ...concept };
-        const conceptReady = Boolean(mergedConcept.name && mergedConcept.role && mergedConcept.targetCR !== undefined);
-        const blocking = issuesForStep(nextEvaluation, step).some((issue) => issue.severity !== "warning");
+        const conceptReady = Boolean(mergedConcept.name && mergedConcept.role && (targetDraft.creationSystem === "npc" || mergedConcept.targetCR !== undefined));
+        const blocking = nextEvaluation.issues.some((issue) => (draft.creationSystem === "npc" ? npcStepForPath(issue.path) : stepForPath(issue.path)) === step && issue.severity !== "warning");
         if ((step === 0 && !conceptReady) || blocking) show("Resolve this step before continuing. You can still inspect another step from the rail.");
-        else setStep((current) => Math.min(9, current + 1));
+        else setStep((current) => Math.min(targetDraft.creationSystem === "npc" ? 6 : 9, current + 1));
       }
     } catch (error) { show(error instanceof Error ? error.message : String(error)); }
     finally { setBusy(false); }
@@ -122,8 +126,12 @@ export function App() {
     changes.push({ changeId: newChangeId(field), type: unset ? (isConcept ? "unset-concept" : "unset-selection") : (isConcept ? "set-concept" : "set-selection"), field, ...(unset ? {} : { value }) });
   }
   async function createDraft() {
-    if (!window.confirm("Create a new draft? The current draft remains persisted by its ID.")) return;
+    if (!window.confirm("Create a new Simple Monster draft? The current draft remains persisted by its ID.")) return;
     accept(await execute("draft.create", { draft: {} })); setMonster(undefined); setProposal(undefined); setAiError(undefined); setStep(0);
+  }
+  async function createNpcDraft() {
+    if (!window.confirm("Create a new class-based NPC draft? The current draft remains persisted by its ID.")) return;
+    accept(await execute("draft.create", { draft: { creationSystem: "npc" } })); setMonster(undefined); setProposal(undefined); setAiError(undefined); setStep(0);
   }
   async function resume() {
     try {
@@ -163,7 +171,7 @@ export function App() {
     finally { setBusy(false); }
   }
   async function finalize() {
-    if (evaluation!.status !== "valid") { show("Finalization requires a complete valid Strict evaluation."); return; }
+    if (evaluation!.status !== "valid") { show("Finalization requires a complete valid evaluation."); return; }
     try { accept(await execute("monster.finalize", guard())); show("Immutable FinishedMonster created.", true); } catch (error) { show(error instanceof Error ? error.message : String(error)); }
   }
   async function exportMonster(format: string, profile: string) {
@@ -175,10 +183,17 @@ export function App() {
   }
 
   const editorProps: EditorProps = { draft, catalog, evaluation, choiceRequirements, automaticSelections, selectionBudgets, onPreview: previewChoiceRequirements, onSave: save, onBack: () => setStep((current) => Math.max(0, current - 1)) };
+  const side = <Side draft={draft} evaluation={evaluation} monster={monster} proposal={proposal} busy={busy} aiRunning={aiRunning} aiError={aiError} setStep={setStep} issueStep={draft.creationSystem === "npc" ? npcStepForPath : undefined} onGenerate={generateProposal} onAccept={acceptProposal} onClearProposal={() => setProposal(undefined)} />;
+  if (draft.creationSystem === "npc") {
+    return <><Header draft={draft} monster={monster} busy={busy} creationSystem="npc" onNew={createDraft} onNewNpc={createNpcDraft} onResume={resume} onFinalize={finalize} onExport={exportMonster} />
+      <main class="app"><div class="summary"><span class={`pill ${evaluation.status}`}>NPC: {evaluation.status}</span><span class="pill">Revision {draft.revision}</span><span class="pill">{draft.status}</span><span class="pill mono">{draft.draftId}</span>{busy && <span class="pill incomplete">Working…</span>}</div>
+        <div class="layout npc-layout"><NpcWorkflow draft={draft} catalog={npcCatalog} evaluation={evaluation} step={step} setStep={setStep} choiceRequirements={choiceRequirements} automaticSelections={automaticSelections} selectionBudgets={selectionBudgets} onPreview={previewChoiceRequirements} onSave={save} onBack={() => setStep((current) => Math.max(0, current - 1))} />{side}</div>
+      </main>{library && <LibraryModal library={library} currentDraftId={draft.draftId} onClose={() => setLibrary(undefined)} onSelect={openSaved} />}{message && <div class={`toast ${message.good ? "good" : ""}`}>{message.text}</div>}</>;
+  }
   const editors = [<ConceptStep {...editorProps} />, <ArrayStep {...editorProps} />, <PrimaryGraftStep {...editorProps} />, <SubtypeStep {...editorProps} />, <TemplateStep {...editorProps} />, <SizeStep {...editorProps} />, <SpellStep {...editorProps} />, <OptionsStep {...editorProps} />, <SkillsStep {...editorProps} />, <DamageStep {...editorProps} />];
-  return <><Header draft={draft} monster={monster} busy={busy} onNew={createDraft} onResume={resume} onFinalize={finalize} onExport={exportMonster} />
+  return <><Header draft={draft} monster={monster} busy={busy} creationSystem="simple-monster" onNew={createDraft} onNewNpc={createNpcDraft} onResume={resume} onFinalize={finalize} onExport={exportMonster} />
     <main class="app"><div class="summary"><span class={`pill ${evaluation.status}`}>Strict: {evaluation.status}</span><span class="pill">Revision {draft.revision}</span><span class="pill">{draft.status}</span><span class="pill mono">{draft.draftId}</span>{busy && <span class="pill incomplete">Working…</span>}</div>
-      <div class="layout"><Rail draft={draft} evaluation={evaluation} step={step} setStep={setStep} /><section class="panel workspace"><div class="step-head"><div class="kicker">{step === 0 ? "Before you begin" : `Step ${step}`}</div><h2>{STEPS[step].label}</h2><p>{STEPS[step].desc}</p></div><div key={`${draft.draftId}-${step}-${draft.revision}`}>{editors[step]}</div></section><Side draft={draft} evaluation={evaluation} monster={monster} proposal={proposal} busy={busy} aiRunning={aiRunning} aiError={aiError} setStep={setStep} onGenerate={generateProposal} onAccept={acceptProposal} onClearProposal={() => setProposal(undefined)} /></div>
+      <div class="layout"><Rail draft={draft} evaluation={evaluation} step={step} setStep={setStep} /><section class="panel workspace"><div class="step-head"><div class="kicker">{step === 0 ? "Before you begin" : `Step ${step}`}</div><h2>{STEPS[step].label}</h2><p>{STEPS[step].desc}</p></div><div key={`${draft.draftId}-${step}-${draft.revision}`}>{editors[step]}</div></section>{side}</div>
     </main>{library && <LibraryModal library={library} currentDraftId={draft.draftId} onClose={() => setLibrary(undefined)} onSelect={openSaved} />}{message && <div class={`toast ${message.good ? "good" : ""}`}>{message.text}</div>}</>;
 }
 
@@ -206,7 +221,7 @@ function LibraryModal(props: { library: { drafts: LibraryEntry[]; monsters: Libr
       <div class="library-groups">{groups.map(([label, entries]) => <section><h3>{label} <span>{entries.length}</span></h3><div class="library-list">{entries.map((entry) => {
         const current = entry.kind === "draft" ? entry.id === props.currentDraftId : entry.sourceDraftId === props.currentDraftId;
         return <button type="button" class={`library-row ${current ? "current" : ""}`} onClick={() => props.onSelect(entry)}>
-          <span><strong>{entry.name || "Untitled monster"}</strong><small>CR {String(entry.cr ?? "—")}{entry.role ? ` · ${entry.role}` : ""}</small><small>{savedLabel(entry.savedAt)}</small><code>{entry.id}</code></span>
+          <span><strong>{entry.name || "Untitled monster"}</strong><small>{entry.creationSystem === "npc" ? `NPC level ${String(entry.level ?? "—")}` : "Simple Monster"} · CR {String(entry.cr ?? "—")}{entry.role ? ` · ${entry.role}` : ""}</small><small>{savedLabel(entry.savedAt)}</small><code>{entry.id}</code></span>
           <span class="library-meta"><span class="pill">Revision {entry.revision ?? "—"}</span>{entry.kind === "monster" && <span class="pill">Finished</span>}{current && <span class="pill valid">Current</span>}</span>
         </button>;
       })}{!entries.length && <div class="empty">No matching {label.toLowerCase()}.</div>}</div></section>)}</div>
@@ -214,20 +229,33 @@ function LibraryModal(props: { library: { drafts: LibraryEntry[]; monsters: Libr
   </div>;
 }
 
-function Header(props: { draft: Draft; monster?: FinishedMonster; busy: boolean; onNew: () => void; onResume: () => void; onFinalize: () => void; onExport: (format: string, profile: string) => void }) {
+function Header(props: { draft: Draft; monster?: FinishedMonster; busy: boolean; creationSystem: "simple-monster" | "npc"; onNew: () => void; onNewNpc: () => void; onResume: () => void; onFinalize: () => void; onExport: (format: string, profile: string) => void }) {
   const [format, setFormat] = useState("markdown"); const [profile, setProfile] = useState("sheet");
-  return <header class="top"><div class="top-inner"><div class="brand"><small>Pathfinder Unchained · Simple Monster Creation</small><h1>{String(props.draft.concept.name || "Guided-Rail Monster Builder")}</h1></div><div class="actions"><button class="btn dark" onClick={props.onNew}>New draft</button><button class="btn dark" onClick={props.onResume}>Open saved</button><select class="btn" value={format} onChange={(event) => setFormat(event.currentTarget.value)}><option value="markdown">Markdown</option><option value="html">HTML / Print</option><option value="json">JSON</option></select><select class="btn" value={profile} onChange={(event) => setProfile(event.currentTarget.value)}><option value="sheet">Sheet</option><option value="audit">Sheet + audit</option></select><button class="btn" disabled={!props.monster} onClick={() => props.onExport(format, profile)}>Export</button><button class="btn primary" disabled={props.busy || props.draft.status !== "active"} onClick={props.onFinalize}>Finalize</button></div></div></header>;
+  const npc = props.creationSystem === "npc";
+  return <header class="top"><div class="top-inner"><div class="brand"><small>Pathfinder Unchained · {npc ? "Class-based NPC Creation" : "Simple Monster Creation"}</small><h1>{String(props.draft.concept.name || (npc ? "Guided-Rail NPC Builder" : "Guided-Rail Monster Builder"))}</h1></div><div class="actions"><button class="btn dark" onClick={props.onNew}>New Simple Monster</button><button class="btn dark" onClick={props.onNewNpc}>New NPC</button><button class="btn dark" onClick={props.onResume}>Open saved</button><select class="btn" value={format} onChange={(event) => setFormat(event.currentTarget.value)}><option value="markdown">Markdown</option><option value="html">HTML / Print</option><option value="json">JSON</option></select><select class="btn" value={profile} onChange={(event) => setProfile(event.currentTarget.value)}><option value="sheet">Sheet</option><option value="audit">Sheet + audit</option></select><button class="btn" disabled={!props.monster} onClick={() => props.onExport(format, profile)}>Export</button><button class="btn primary" disabled={props.busy || props.draft.status !== "active"} onClick={props.onFinalize}>Finalize</button></div></div></header>;
 }
 
 function Rail(props: { draft: Draft; evaluation: Evaluation; step: number; setStep: (step: number) => void }) {
   return <aside class="panel rail"><h2>Creation path</h2><nav aria-label="Creation steps">{STEPS.map((item, index) => { const status = stepStatus(props.draft, props.evaluation, index), count = issuesForStep(props.evaluation, index).length; return <button class={`${status} ${index === props.step ? "current" : ""}`} onClick={() => props.setStep(index)}><span class="n">{item.n}</span><span><strong>{item.label}</strong><small>{count ? `${count} issue(s)` : item.short}</small></span><span class="dot" /></button>; })}</nav><p class="rail-note">Every applied change creates a revision and is immediately evaluated by the deterministic engine. You may inspect any step at any time.</p></aside>;
 }
 
-function Side(props: { draft: Draft; evaluation: Evaluation; monster?: FinishedMonster; proposal?: Proposal; busy: boolean; aiRunning: boolean; aiError?: string; setStep: (step: number) => void; onGenerate: (concept: string) => void; onAccept: (changeIds: string[]) => void; onClearProposal: () => void }) {
-  const result = props.evaluation.effective as { defenses?: Record<string, unknown>; abilityDC?: unknown; spellDC?: unknown; cmb?: unknown } | null | undefined;
+function npcStepForPath(path: string): number {
+  if (path.startsWith("/concept") || path.startsWith("/selections/statblockUse")) return 0;
+  if (path.startsWith("/selections/raceId") || path.startsWith("/selections/racialChoices")) return 1;
+  if (path.startsWith("/selections/classProgression") || path.startsWith("/selections/classFeatureChoices")) return 2;
+  if (path.startsWith("/selections/abilityGeneration") || path.startsWith("/selections/levelIncreases")) return 3;
+  if (path.startsWith("/selections/skillGeneration") || path.startsWith("/selections/feats")) return 4;
+  if (path.startsWith("/selections/spellLoadout") || path.startsWith("/selections/gear" ) || path.startsWith("/selections/gearProfile")) return 5;
+  return 6;
+}
+
+function Side(props: { draft: Draft; evaluation: Evaluation; monster?: FinishedMonster; proposal?: Proposal; busy: boolean; aiRunning: boolean; aiError?: string; setStep: (step: number) => void; issueStep?: (path: string) => number; onGenerate: (concept: string) => void; onAccept: (changeIds: string[]) => void; onClearProposal: () => void }) {
+  const result = props.evaluation.effective as { level?: unknown; bab?: unknown; defenses?: Record<string, unknown>; abilityScores?: unknown; feats?: unknown; gear?: unknown; abilityDC?: unknown; spellDC?: unknown; spells?: Array<Record<string, unknown>>; cmb?: unknown } | null | undefined;
   const defenses = result?.defenses || {};
-  const stats: Array<[string, unknown]> = [["AC", defenses.ac], ["HP", defenses.hp], ["CMD", defenses.cmd], ["Fort", defenses.fortitude], ["Ref", defenses.reflex], ["Will", defenses.will], ["Ability DC", result?.abilityDC], ["Spell DC", result?.spellDC], ["CMB", result?.cmb]];
-  return <aside class="side"><ProposalPanel draft={props.draft} proposal={props.proposal} busy={props.busy} running={props.aiRunning} error={props.aiError} onGenerate={props.onGenerate} onAccept={props.onAccept} onClear={props.onClearProposal} /><section class="panel"><h3>Live validation</h3><div class="validation-summary">Engine status: <strong>{props.evaluation.status}</strong>. {props.evaluation.issues.length ? `${props.evaluation.issues.length} finding(s) remain.` : "No validation findings."}</div><div class="issues">{props.evaluation.issues.map((issue) => <article class={`issue ${issue.kind === "catalog-data" ? "invalid" : ""}`}><button onClick={() => props.setStep(stepForPath(issue.path))}>{issue.code} · {issue.path}</button><p>{issue.message}</p><small>{sourceText(issue.sourceRefs?.[0])}</small></article>)}</div></section>
-    <section class="panel"><h3>Monster preview</h3>{result ? <><div class="stats">{stats.map(([label, value]) => <div class="stat"><span>{label}</span><b>{String(value ?? "—")}</b></div>)}</div><div class="trace"><h3>Derivation trace</h3>{props.evaluation.derivationTrace.map((item) => <details><summary>{item.rule} · {item.path}</summary><pre>{JSON.stringify(item.value, null, 2)}</pre><small>{sourceText(item.sourceRefs?.[0])}</small></details>)}</div></> : <div class="empty">Canonical and effective results appear only after a complete valid Strict evaluation.</div>}</section>
+  const npcStats: Array<[string, unknown]> = [["Level", result?.level], ["BAB", result?.bab], ["AC", defenses.ac], ["HP", defenses.hp], ["CMD", defenses.cmd], ["Fort", defenses.fortitude], ["Ref", defenses.reflex], ["Will", defenses.will], ["CMB", result?.cmb]];
+  const simpleStats: Array<[string, unknown]> = [["AC", defenses.ac], ["HP", defenses.hp], ["CMD", defenses.cmd], ["Fort", defenses.fortitude], ["Ref", defenses.reflex], ["Will", defenses.will], ["Ability DC", result?.abilityDC], ["Spell DC", result?.spellDC], ["CMB", result?.cmb]];
+  const stats = props.draft.creationSystem === "npc" ? npcStats : simpleStats;
+  return <aside class="side"><ProposalPanel draft={props.draft} proposal={props.proposal} busy={props.busy} running={props.aiRunning} error={props.aiError} onGenerate={props.onGenerate} onAccept={props.onAccept} onClear={props.onClearProposal} /><section class="panel"><h3>Live validation</h3><div class="validation-summary">Engine status: <strong>{props.evaluation.status}</strong>. {props.evaluation.issues.length ? `${props.evaluation.issues.length} finding(s) remain.` : "No validation findings."}</div><div class="issues">{props.evaluation.issues.map((issue) => <article class={`issue ${issue.kind === "catalog-data" ? "invalid" : ""}`}><button onClick={() => props.setStep((props.issueStep || stepForPath)(issue.path))}>{issue.code} · {issue.path}</button><p>{issue.message}</p><small>{sourceText(issue.sourceRefs?.[0])}</small></article>)}</div></section>
+    <section class="panel"><h3>Monster preview</h3>{result ? <><div class="stats">{stats.map(([label, value]) => <div class="stat"><span>{label}</span><b>{String(value ?? "—")}</b></div>)}</div><div class="trace"><h3>Derivation trace</h3>{props.evaluation.derivationTrace.map((item) => <details><summary>{item.rule} · {item.path}</summary><pre>{JSON.stringify(item.value, null, 2)}</pre><small>{sourceText(item.sourceRefs?.[0])}</small></details>)}</div></> : <div class="empty">Canonical and effective results appear only after a complete valid evaluation.</div>}</section>
     <section class="panel"><h3>Draft state</h3><p class="hint">Authoritative writes use <code>execute</code>. The JSON below is inspectable only.</p><details><summary class="mono">Revision {props.draft.revision} · {props.draft.fingerprint.slice(0, 12)}…</summary><pre class="draft-json">{JSON.stringify(props.draft, null, 2)}</pre></details>{props.monster && <p class="hint"><strong>Finished:</strong> <code>{props.monster.monsterId}</code></p>}</section></aside>;
 }

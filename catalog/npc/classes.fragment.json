@@ -1,0 +1,6389 @@
+{
+  "section": "classes",
+  "records": [
+    {
+      "id": "npc-class.adept",
+      "name": "Adept",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "npc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Adept level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [18, 18],
+        "entry": "Five NPC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.aristocrat",
+      "name": "Aristocrat",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "npc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Aristocrat level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [18, 18],
+        "entry": "Five NPC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.barbarian",
+      "name": "Barbarian",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "pc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Barbarian level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [19, 19],
+        "entry": "Eleven Core PC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.bard",
+      "name": "Bard",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "pc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Bard level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [19, 19],
+        "entry": "Eleven Core PC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.cleric",
+      "name": "Cleric",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "pc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Cleric level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [19, 19],
+        "entry": "Eleven Core PC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.commoner",
+      "name": "Commoner",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "npc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Commoner level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [18, 18],
+        "entry": "Five NPC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.druid",
+      "name": "Druid",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "pc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Druid level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [19, 19],
+        "entry": "Eleven Core PC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.expert",
+      "name": "Expert",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "npc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Expert level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [18, 18],
+        "entry": "Five NPC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.fighter",
+      "name": "Fighter",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "pc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Fighter level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [19, 19],
+        "entry": "Eleven Core PC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.monk",
+      "name": "Monk",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "pc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Monk level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [19, 19],
+        "entry": "Eleven Core PC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.paladin",
+      "name": "Paladin",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "pc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Paladin level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [19, 19],
+        "entry": "Eleven Core PC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.ranger",
+      "name": "Ranger",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "pc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Ranger level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [19, 19],
+        "entry": "Eleven Core PC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.rogue",
+      "name": "Rogue",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "pc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Rogue level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [19, 19],
+        "entry": "Eleven Core PC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.sorcerer",
+      "name": "Sorcerer",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "pc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Sorcerer level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [19, 19],
+        "entry": "Eleven Core PC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.warrior",
+      "name": "Warrior",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "npc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [18, 18],
+            "entry": "Warrior level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [18, 18],
+        "entry": "Five NPC classes",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-class.wizard",
+      "name": "Wizard",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "category": "pc",
+      "hitDie": null,
+      "classSkills": null,
+      "skillSelections": null,
+      "levels": {
+        "1": {
+          "level": 1,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 1",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "2": {
+          "level": 2,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 2",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "3": {
+          "level": 3,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 3",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "4": {
+          "level": 4,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 4",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "5": {
+          "level": 5,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 5",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "6": {
+          "level": 6,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 6",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "7": {
+          "level": 7,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 7",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "8": {
+          "level": 8,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 8",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "9": {
+          "level": 9,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 9",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "10": {
+          "level": 10,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 10",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "11": {
+          "level": 11,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 11",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "12": {
+          "level": 12,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 12",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "13": {
+          "level": 13,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 13",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "14": {
+          "level": 14,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 14",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "15": {
+          "level": 15,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 15",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "16": {
+          "level": 16,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 16",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "17": {
+          "level": 17,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 17",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "18": {
+          "level": 18,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 18",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "19": {
+          "level": 19,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 19",
+            "provenanceStatus": "catalog-gap"
+          }
+        },
+        "20": {
+          "level": 20,
+          "bab": null,
+          "fortitude": null,
+          "reflex": null,
+          "will": null,
+          "hitDie": null,
+          "skillSelections": null,
+          "featureGrants": null,
+          "choiceSlots": null,
+          "catalogStatus": "gap",
+          "sourceRef": {
+            "sourceId": "source.npc-gap-matrix",
+            "section": "NPC Source-Gap Matrix",
+            "txtLines": [19, 19],
+            "entry": "Wizard level 20",
+            "provenanceStatus": "catalog-gap"
+          }
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [19, 19],
+        "entry": "Eleven Core PC class tables through level 20",
+        "provenanceStatus": "catalog-gap"
+      }
+    }
+  ]
+}

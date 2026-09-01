@@ -1,0 +1,60 @@
+{
+  "catalogVersion": "sha256:ac565b6fdec0a0b35549acc840332c69760ec022f42835b47526002664b77688",
+  "concept": {
+    "creatureType": "magical beast",
+    "description": "A vicious wolf-like magical beast.",
+    "name": "Worg",
+    "role": "feral hunter",
+    "targetCR": 2
+  },
+  "draftId": "draft-legacy-simple-monster-worg",
+  "fingerprint": "509ee3dbcf287d0177639792e5d5e7abadf85ac82604da10095bdb6457855d0f",
+  "revision": 0,
+  "schemaVersion": "1",
+  "selections": {
+    "abilityModifiers": {
+      "constitution": 1,
+      "dexterity": 2,
+      "intelligence": -2,
+      "strength": 3
+    },
+    "arrayId": "array.combatant",
+    "attacks": [
+      {
+        "attackProfile": "weapon.high",
+        "kind": "natural",
+        "name": "bite",
+        "naturalAttackId": "natural-attack.bite"
+      }
+    ],
+    "classGraftId": null,
+    "cr": 2,
+    "creatureTypeGraftId": "graft.creature-type.magical-beast",
+    "options": [
+      {
+        "optionId": "option.improved-combat-maneuver",
+        "parameters": {
+          "attackType": "bite",
+          "maneuver": "trip"
+        }
+      }
+    ],
+    "sizeId": "graft.size.medium",
+    "skills": {
+      "good": [
+        "stealth",
+        "survival"
+      ],
+      "master": [
+        "perception"
+      ]
+    },
+    "speed": {
+      "land": 50
+    },
+    "spells": [],
+    "subtypeGraftIds": [],
+    "templateGraftId": null
+  },
+  "status": "active"
+}

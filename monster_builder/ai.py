@@ -55,6 +55,13 @@ class PiProposalAdapter:
         draft = loaded.get("result", {}).get("draft")
         if not isinstance(draft, dict):
             return self._error(request_id, "DRAFT_CONFLICT", "Draft could not be loaded for proposal generation.", "/payload/draftId", kind="conflict")
+        if draft.get("creationSystem", "simple-monster") != "simple-monster":
+            return self._error(
+                request_id,
+                "AI_CREATION_SYSTEM_UNSUPPORTED",
+                "AI proposal generation is not available for NPC drafts until manual NPC creation is stable.",
+                "/payload/draftId",
+            )
 
         choices = self.engine.execute({
             "protocolVersion": "1", "requestId": f"{request_id}:choice-requirements",

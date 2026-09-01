@@ -1,0 +1,37 @@
+{
+  "section": "abilityArrays",
+  "records": [
+    {
+      "id": "npc-ability-array.basic",
+      "name": "Basic NPC ability array",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-ability-arrays",
+      "method": "assigned-array",
+      "scores": null,
+      "abilityOrder": ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"],
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [16, 16],
+        "entry": "Basic and heroic ability arrays",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-ability-array.heroic",
+      "name": "Heroic NPC ability array",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-ability-arrays",
+      "method": "assigned-array",
+      "scores": null,
+      "abilityOrder": ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"],
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [16, 16],
+        "entry": "Basic and heroic ability arrays",
+        "provenanceStatus": "catalog-gap"
+      }
+    }
+  ]
+}

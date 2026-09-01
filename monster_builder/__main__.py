@@ -24,11 +24,16 @@ def validate_file(file_name: str) -> int:
             value = value["draft"]
         if not isinstance(value, dict) or not isinstance(value.get("concept"), dict) or not isinstance(value.get("selections"), dict):
             raise ValueError("JSON must contain concept and selections")
+        draft = {"concept": value["concept"], "selections": value["selections"]}
+        # Validate under the snapshot's rules system. Legacy JSON without this
+        # field keeps the Simple Monster default.
+        if "creationSystem" in value:
+            draft["creationSystem"] = value["creationSystem"]
         response = Engine().execute({
             "protocolVersion": "1",
             "requestId": "validate-file",
             "operation": "draft.create",
-            "payload": {"draft": {"concept": value["concept"], "selections": value["selections"]}},
+            "payload": {"draft": draft},
         })
         if not response.get("ok"):
             print(json.dumps(response["error"], ensure_ascii=False, indent=2))

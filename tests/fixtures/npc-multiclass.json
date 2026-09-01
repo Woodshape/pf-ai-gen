@@ -1,0 +1,50 @@
+{
+  "creationSystem": "npc",
+  "concept": {
+    "name": "Human Commoner 2 Expert 3",
+    "role": "experienced village leader",
+    "description": "A two-class NPC progression used to exercise multiclass aggregation."
+  },
+  "selections": {
+    "statblockUse": "full",
+    "raceId": "npc-race.human",
+    "racialChoices": {},
+    "classProgression": [
+      {
+        "classId": "npc-class.commoner",
+        "levels": 2
+      },
+      {
+        "classId": "npc-class.expert",
+        "levels": 3
+      }
+    ],
+    "abilityGeneration": {
+      "method": "custom",
+      "scores": {
+        "strength": 10,
+        "dexterity": 12,
+        "constitution": 12,
+        "intelligence": 13,
+        "wisdom": 10,
+        "charisma": 11
+      },
+      "rationale": "The multiclass example intentionally uses a source-authorized custom array."
+    },
+    "skillGeneration": {
+      "method": "precise",
+      "ranks": {}
+    },
+    "feats": [],
+    "classFeatureChoices": {},
+    "spellLoadout": {},
+    "gearProfile": {
+      "experienceProgression": "slow",
+      "fantasyLevel": "low"
+    },
+    "gear": [],
+    "details": {
+      "alignment": "N"
+    }
+  }
+}

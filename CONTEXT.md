@@ -58,3 +58,27 @@ A non-canonical mode that starts from a valid Strict Evaluation and applies expl
 
 **Monster Sheet**:
 The finished Pathfinder-style presentation of the selected final result. A Strict sheet uses the canonical result; a Free sheet uses only the final effective result, not both alternatives.
+
+**Creation System**:
+The independent axis selecting which source-defined construction rules evaluate a draft: `simple-monster` (Pathfinder Unchained Simple Monster Creation) or `npc` (Core Rulebook class-based NPC creation). It is immutable for the life of a draft and written on every new draft and FinishedMonster snapshot; legacy documents without the field resolve to `simple-monster` without mutation.
+_Avoid_: mode (reserved for Strict/Free Mode), engine.
+
+**Simple Monster Creation**:
+The existing Pathfinder Unchained array/graft system: CR-based arrays, creature/class/subtype/template grafts, and monster options. The default creation system and the compatibility anchor for all persisted drafts.
+
+**Class-Based NPC Creation**:
+Core Rulebook class-based NPC construction using races, ordered class progression, feats, skills, spells, and NPC gear budgets to produce mechanically normal statblocks. It reuses NPC-source policies (basic/heroic arrays, average HP, gear budgets) and is not a PC character builder.
+
+**Basic NPC / Heroic NPC**:
+The derived classification of a class-based NPC: any PC class level makes it heroic; only NPC class levels make it basic. Always calculated from the class progression, never selected.
+
+**Creation-System Adapter**:
+The internal seam between the shared engine and one creation system. It owns that system's selection fields and validation, choice requirements, rules evaluation, canonical result, derivation trace, and step-to-audit mapping. The shared engine owns lifecycle, persistence, proposals, finalization, exports, and adapter selection.
+_Avoid_: spreading creationSystem conditionals outside the adapter.
+
+**Catalog Registry**:
+The mapping from creation system to its independently versioned catalog. Each draft's `catalogVersion` refers to its own creation system's catalog; the Simple Monster catalog is frozen and never gains NPC data.
+
+**Creation-System Comparison**:
+A read-only benchmark comparison between an evaluation of one creation system and reference rows of another (Simple Monster arrays, Bestiary Table 1-1). Comparisons never mutate the draft or apply foreign arithmetic; class-derived bonuses and array totals must never coexist in one evaluation.
+_Avoid_: conversion inside an evaluation, mixed arithmetic.

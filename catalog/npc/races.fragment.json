@@ -1,0 +1,138 @@
+{
+  "section": "races",
+  "records": [
+    {
+      "id": "npc-race.human",
+      "name": "Human",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-races",
+      "abilityAdjustments": null,
+      "sizeId": null,
+      "speed": null,
+      "senses": null,
+      "traits": null,
+      "languages": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [17, 17],
+        "entry": "Seven Core races",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-race.dwarf",
+      "name": "Dwarf",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-races",
+      "abilityAdjustments": null,
+      "sizeId": null,
+      "speed": null,
+      "senses": null,
+      "traits": null,
+      "languages": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [17, 17],
+        "entry": "Seven Core races",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-race.elf",
+      "name": "Elf",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-races",
+      "abilityAdjustments": null,
+      "sizeId": null,
+      "speed": null,
+      "senses": null,
+      "traits": null,
+      "languages": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [17, 17],
+        "entry": "Seven Core races",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-race.gnome",
+      "name": "Gnome",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-races",
+      "abilityAdjustments": null,
+      "sizeId": null,
+      "speed": null,
+      "senses": null,
+      "traits": null,
+      "languages": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [17, 17],
+        "entry": "Seven Core races",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-race.half-elf",
+      "name": "Half-Elf",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-races",
+      "abilityAdjustments": null,
+      "sizeId": null,
+      "speed": null,
+      "senses": null,
+      "traits": null,
+      "languages": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [17, 17],
+        "entry": "Seven Core races",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-race.half-orc",
+      "name": "Half-Orc",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-races",
+      "abilityAdjustments": null,
+      "sizeId": null,
+      "speed": null,
+      "senses": null,
+      "traits": null,
+      "languages": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [17, 17],
+        "entry": "Seven Core races",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-race.halfling",
+      "name": "Halfling",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-races",
+      "abilityAdjustments": null,
+      "sizeId": null,
+      "speed": null,
+      "senses": null,
+      "traits": null,
+      "languages": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [17, 17],
+        "entry": "Seven Core races",
+        "provenanceStatus": "catalog-gap"
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "section": "derivedRules",
+  "records": [
+    {
+      "id": "npc-rule.money-copper",
+      "name": "Money representation",
+      "kind": "money",
+      "unit": "cp",
+      "integerOnly": true,
+      "catalogStatus": "policy",
+      "sourceRef": {
+        "sourceId": "source.npc-adr",
+        "section": "D7 Evaluation determinism",
+        "txtLines": [],
+        "entry": "Money is represented as integer copper pieces",
+        "provenanceStatus": "product-policy"
+      }
+    },
+    {
+      "id": "npc-rule.typed-prerequisites",
+      "name": "Typed prerequisite expressions",
+      "kind": "prerequisite-expression",
+      "catalogStatus": "policy",
+      "supportedOperands": [
+        "all",
+        "any",
+        "not",
+        "abilityAtLeast",
+        "babAtLeast",
+        "characterLevelAtLeast",
+        "classLevelAtLeast",
+        "skillRanksAtLeast",
+        "race",
+        "alignment",
+        "hasFeat",
+        "hasClassFeature",
+        "casterLevelAtLeast"
+      ],
+      "examples": [
+        {
+          "all": [
+            {"abilityAtLeast": {"strength": 13}},
+            {"babAtLeast": 1}
+          ]
+        },
+        {"hasFeat": "feat.point-blank-shot"}
+      ],
+      "sourceRef": {
+        "sourceId": "source.npc-adr",
+        "section": "D7 Evaluation determinism",
+        "txtLines": [],
+        "entry": "Typed prerequisite expressions are required",
+        "provenanceStatus": "product-policy"
+      }
+    }
+  ]
+}

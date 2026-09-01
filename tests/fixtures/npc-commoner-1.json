@@ -1,0 +1,37 @@
+{
+  "creationSystem": "npc",
+  "concept": {
+    "name": "Human Commoner 1",
+    "role": "village laborer",
+    "description": "A level 1 human commoner built through the class-based NPC workflow."
+  },
+  "selections": {
+    "statblockUse": "full",
+    "raceId": "npc-race.human",
+    "racialChoices": {},
+    "classProgression": [
+      {
+        "classId": "npc-class.commoner",
+        "levels": 1
+      }
+    ],
+    "abilityGeneration": {
+      "method": "melee-preset"
+    },
+    "skillGeneration": {
+      "method": "simplified",
+      "skills": []
+    },
+    "feats": [],
+    "classFeatureChoices": {},
+    "spellLoadout": {},
+    "gearProfile": {
+      "experienceProgression": "medium",
+      "fantasyLevel": "normal"
+    },
+    "gear": [],
+    "details": {
+      "alignment": "N"
+    }
+  }
+}

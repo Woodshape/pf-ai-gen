@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "1",
+  "description": "Hash-anchored source extracts for class-based NPC creation (NPC_MODE_PLAN.md Phase 0). Anchors the locally available Core Rulebook content, curates fragments consumed by the NPC catalog builders, and records exactly which source domains are missing locally.",
+  "extraction": {
+    "tool": "pdftotext",
+    "toolVersion": "24.02.0 (poppler)",
+    "note": "Fragment line ranges are stable because the parent .txt files are immutable. core-rulebook-extract.txt line numbers depend on this exact pdftotext version; the extract itself is hash-anchored so downstream code never re-runs extraction."
+  },
+  "parentSources": {
+    "core-rulebook-pdf": {
+      "file": "Pathfinder_RPG_Core_Rulebook.pdf",
+      "sha256": "e1b520f1d8f1983741b56181d3d823d520c88eb9b888b342b90896dec9a5ccef",
+      "description": "16-page Core Rulebook PDF excerpt: complete class spell lists (Bard 0-6, Cleric 0-9, Druid 0-9, Paladin 1-4, Ranger 1-4, Sorcerer/Wizard 0-9) plus the first alphabetical spell descriptions. This is the ONLY local Core Rulebook content; NPC creation pages 448-454, races, class tables, skills, feats, equipment, and Appendix gear tables are not present."
+    },
+    "core-rulebook-txt-legacy": {
+      "file": "Pathfinder_RPG_Core_Rulebook.txt",
+      "sha256": "b7756690294e9322d7ba6cf3dc56ae92237175214b85a2fc80125dad7f75351b",
+      "description": "Existing 1749-line extraction of the 16-page spell excerpt; anchored by catalog/catalog.json as pathfinder-core-txt. Must not be modified."
+    },
+    "pathfinder-unchained-txt": {
+      "file": "Pathfinder Unchained.txt",
+      "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+      "description": "Existing full Simple Monster Creation chapter (5566 lines); anchored by catalog/catalog.json as pathfinder-unchained-txt. Must not be modified."
+    },
+    "bestiary-txt": {
+      "file": "beastiary.txt",
+      "sha256": "ece9130992edbfba27d6151e6a8a254a20fb1fd15375a0f56c94f81186b1b4ff",
+      "description": "Existing 2-page Bestiary appendix: Table 1-1 (Monster Statistics by CR) and Table 1-2 (Creature Hit Dice by CR); anchored by catalog/catalog.json as bestiary-txt."
+    },
+    "pathfinder-unchained-pdf": {
+      "file": "Pathfinder Unchained.pdf",
+      "sha256": "8c244211a77e71fba994a1e236a8154a213fa871c222b1852993c19b2ed7cb69",
+      "description": "60-page Simple Monster Creation chapter PDF."
+    },
+    "beastiary-pdf": {
+      "file": "beastiary.pdf",
+      "sha256": "c79cd92d0e1af0e961db87b233341c944bbe217187aa85612a8f5f44c1db6880",
+      "description": "2-page Bestiary appendix PDF."
+    },
+    "npc-mode-plan": {
+      "file": "NPC_MODE_PLAN.md",
+      "sha256": "934c509d33764d284d124597af2efd82c7d4a18b92605e47d13d56e424afe3b5",
+      "description": "Local implementation plan; the only local carrier of the printed Kiramor statblock values."
+    }
+  },
+  "extracts": {
+    "core-rulebook-extract": {
+      "file": "sources/npc/core-rulebook-extract.txt",
+      "sha256": "0871da03406f898a23be03dd0732392104a58d5978dd281270ffc729300b68e9",
+      "derivedFrom": "core-rulebook-pdf",
+      "command": "pdftotext Pathfinder_RPG_Core_Rulebook.pdf sources/npc/core-rulebook-extract.txt",
+      "pdfPages": "1-16 of 16",
+      "lines": [1, 1770],
+      "contents": "Complete spell-list chapter for Bard (0-6), Cleric (0-9), Druid (0-9), Paladin (1-4), Ranger (1-4), Sorcerer/Wizard (0-9), followed by the opening of the alphabetical spell descriptions (roughly the letter A: Acid Fog, Acid Splash, Air Walker, Astral Projection, Energy Drain, Etherealness, Shapechange, Soul Bind, Time Stop, Wail of the Banshee, Wish). Two-column PDF; reading order is reliable in the list section, partially scrambled in the description section.",
+      "catalogUse": "NPC spell lists (adept = cleric/druid lists; PC casters) for tasks 3.b and 5.a."
+    },
+    "core-rulebook-extract-spell-lists": {
+      "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
+      "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
+      "derivedFrom": "core-rulebook-extract",
+      "command": "sed -n '1,1691p' sources/npc/core-rulebook-extract.txt > sources/npc/core-rulebook-extract.spell-lists.txt",
+      "lines": [1, 1691],
+      "contents": "Spell-list portion only: complete class lists for Bard (0-6), Cleric (0-9), Druid (0-9), Paladin (1-4), Ranger (1-4), and Sorcerer/Wizard (0-9), ending immediately before the alphabetical spell-description section. Two-column extraction losses: the cleric 7th-level and druid 3rd-level lists are empty in the excerpt at page boundaries; the parser records them as emptySections.",
+      "catalogUse": "Stable parse target for spell list membership in the NPC catalog (tools/parse_npc_sources.py)."
+    }
+  },
+  "fragments": {
+    "pathfinder-unchained-npc-likeness": {
+      "file": "sources/npc/pathfinder-unchained.npc-likeness.txt",
+      "sha256": "3d7700919b14054dc9283c4e37a3c147251655634be413eac19579281a605ae3",
+      "derivedFrom": "pathfinder-unchained-txt",
+      "command": "sed -n '3555,3559p' 'Pathfinder Unchained.txt' > sources/npc/pathfinder-unchained.npc-likeness.txt",
+      "parentLines": [3555, 3559],
+      "contents": "Simple Monster Creation guidance that a monster meant to be more like an NPC, especially one using a PC race, should avoid monstrous combat options.",
+      "catalogUse": "Policy grounding: NPC-likeness expectations and the future Simple Monster comparison benchmark (plan section 13)."
+    },
+    "bestiary-table-1-1": {
+      "file": "sources/npc/bestiary.table-1-1.txt",
+      "sha256": "3e808a21ffa19a9b44f76b4c5f91b9263e9b113a1381e194fd077eddba19a822",
+      "derivedFrom": "bestiary-txt",
+      "command": "sed -n '5,27p' beastiary.txt > sources/npc/bestiary.table-1-1.txt",
+      "parentLines": [5, 27],
+      "contents": "Bestiary Table 1-1: Monster Statistics by CR (CR 1/2 through 20 rows).",
+      "catalogUse": "Future draft.compareBenchmarks comparisons (plan section 13); never used to compute NPC statistics."
+    }
+  },
+  "missing": {
+    "core-rulebook-npc-creation-pages": {
+      "printPages": "448-454",
+      "needed": "Before You Begin, Steps 1-7 workflow, basic/heroic arrays, statblockUse rules",
+      "reason": "Local Core Rulebook PDF is a 16-page spell excerpt only.",
+      "consequence": "Workflow text and any numeric rule printed on these pages is an explicit catalog gap until a hash-anchored copy is added."
+    },
+    "core-rulebook-races": {
+      "needed": "Seven Core races with ability adjustments, sizes, speeds, senses, traits, languages",
+      "consequence": "Racial data is a catalog gap; the engine must reject races it cannot anchor."
+    },
+    "core-rulebook-class-tables": {
+      "needed": "Five NPC classes (adept, aristocrat, commoner, expert, warrior) and eleven PC classes through level 20: BAB, saves, HD, skill points, feature grants, choice slots, spells per day",
+      "consequence": "Class level rows are a catalog gap; no class table row may be built from memory."
+    },
+    "core-rulebook-advancement": {
+      "needed": "Character advancement, Table 3-2 experience, +1 ability increase every four levels, multiclass rules",
+      "consequence": "The level-4/8/12/16/20 ability-increase rule is a catalog gap pending an anchored extract."
+    },
+    "core-rulebook-skills": {
+      "needed": "Skill list, class skills, Armor Check Penalty, rank limits",
+      "consequence": "Skill catalog rows are a catalog gap."
+    },
+    "core-rulebook-feats": {
+      "needed": "Core feat list, prerequisite prose, general feat progression (1, 3, 5, 7, 9...), class bonus feats",
+      "consequence": "Feat catalog rows and typed prerequisites are a catalog gap."
+    },
+    "core-rulebook-equipment": {
+      "needed": "Weapons, armor, goods, magic item prices (integer copper), Table 14-9 NPC gear budgets, gear profiles (slow/medium/fast, low/normal/high fantasy)",
+      "consequence": "Gear budgets and item prices are catalog gaps; nothing may be priced from memory."
+    },
+    "core-rulebook-spell-descriptions": {
+      "needed": "Full spell descriptions for levels/DCs/components beyond the letter-A fragment",
+      "consequence": "Spell list membership is locally anchored; per-spell rules beyond the fragment remain a catalog gap."
+    },
+    "kiramor-statblock": {
+      "needed": "The printed 'Kiramor, the Forest Shadow' example statblock",
+      "consequence": "Printed Kiramor values exist only in NPC_MODE_PLAN.md section 12; treated as unanchored until a hash-anchored source is added. See docs/kiramor-worksheet.md."
+    }
+  }
+}

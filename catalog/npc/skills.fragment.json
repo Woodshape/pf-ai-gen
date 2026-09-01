@@ -1,0 +1,565 @@
+{
+  "section": "skills",
+  "records": [
+    {
+      "id": "skill.perception",
+      "name": "Perception",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.climb",
+      "name": "Climb",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.handle-animal",
+      "name": "Handle Animal",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.intimidate",
+      "name": "Intimidate",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.ride",
+      "name": "Ride",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.swim",
+      "name": "Swim",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.acrobatics",
+      "name": "Acrobatics",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.appraise",
+      "name": "Appraise",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.bluff",
+      "name": "Bluff",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.craft",
+      "name": "Craft",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.diplomacy",
+      "name": "Diplomacy",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.disable-device",
+      "name": "Disable Device",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.disguise",
+      "name": "Disguise",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.escape-artist",
+      "name": "Escape Artist",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.fly",
+      "name": "Fly",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.heal",
+      "name": "Heal",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.knowledge-arcana",
+      "name": "Knowledge (Arcana)",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.knowledge-dungeoneering",
+      "name": "Knowledge (Dungeoneering)",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.knowledge-engineering",
+      "name": "Knowledge (Engineering)",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.knowledge-geography",
+      "name": "Knowledge (Geography)",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.knowledge-history",
+      "name": "Knowledge (History)",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.knowledge-local",
+      "name": "Knowledge (Local)",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.knowledge-nature",
+      "name": "Knowledge (Nature)",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.knowledge-nobility",
+      "name": "Knowledge (Nobility)",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.knowledge-planes",
+      "name": "Knowledge (Planes)",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.knowledge-religion",
+      "name": "Knowledge (Religion)",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.linguistics",
+      "name": "Linguistics",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.perform",
+      "name": "Perform",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.profession",
+      "name": "Profession",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.sense-motive",
+      "name": "Sense Motive",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.sleight-of-hand",
+      "name": "Sleight of Hand",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.spellcraft",
+      "name": "Spellcraft",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.stealth",
+      "name": "Stealth",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.survival",
+      "name": "Survival",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "skill.use-magic-device",
+      "name": "Use Magic Device",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [21, 21],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
+      }
+    }
+  ]
+}

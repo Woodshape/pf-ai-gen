@@ -1,0 +1,221 @@
+{
+  "section": "gearBudgets",
+  "records": [
+    {
+      "id": "npc-gear.fast.high",
+      "name": "Fast progression, high fantasy",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-gear-budgets",
+      "progression": "fast",
+      "fantasyLevel": "high",
+      "effectiveLevel": null,
+      "budgetCp": null,
+      "categories": {
+        "weapons": null,
+        "protection": null,
+        "magic": null,
+        "limitedUse": null,
+        "gear": null
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [24, 24],
+        "entry": "Table 14-9 NPC gear budgets",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-gear.fast.low",
+      "name": "Fast progression, low fantasy",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-gear-budgets",
+      "progression": "fast",
+      "fantasyLevel": "low",
+      "effectiveLevel": null,
+      "budgetCp": null,
+      "categories": {
+        "weapons": null,
+        "protection": null,
+        "magic": null,
+        "limitedUse": null,
+        "gear": null
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [24, 24],
+        "entry": "Table 14-9 NPC gear budgets",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-gear.fast.normal",
+      "name": "Fast progression, normal fantasy",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-gear-budgets",
+      "progression": "fast",
+      "fantasyLevel": "normal",
+      "effectiveLevel": null,
+      "budgetCp": null,
+      "categories": {
+        "weapons": null,
+        "protection": null,
+        "magic": null,
+        "limitedUse": null,
+        "gear": null
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [24, 24],
+        "entry": "Table 14-9 NPC gear budgets",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-gear.medium.high",
+      "name": "Medium progression, high fantasy",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-gear-budgets",
+      "progression": "medium",
+      "fantasyLevel": "high",
+      "effectiveLevel": null,
+      "budgetCp": null,
+      "categories": {
+        "weapons": null,
+        "protection": null,
+        "magic": null,
+        "limitedUse": null,
+        "gear": null
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [24, 24],
+        "entry": "Table 14-9 NPC gear budgets",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-gear.medium.low",
+      "name": "Medium progression, low fantasy",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-gear-budgets",
+      "progression": "medium",
+      "fantasyLevel": "low",
+      "effectiveLevel": null,
+      "budgetCp": null,
+      "categories": {
+        "weapons": null,
+        "protection": null,
+        "magic": null,
+        "limitedUse": null,
+        "gear": null
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [24, 24],
+        "entry": "Table 14-9 NPC gear budgets",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-gear.medium.normal",
+      "name": "Medium progression, normal fantasy",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-gear-budgets",
+      "progression": "medium",
+      "fantasyLevel": "normal",
+      "effectiveLevel": null,
+      "budgetCp": null,
+      "categories": {
+        "weapons": null,
+        "protection": null,
+        "magic": null,
+        "limitedUse": null,
+        "gear": null
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [24, 24],
+        "entry": "Table 14-9 NPC gear budgets",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-gear.slow.high",
+      "name": "Slow progression, high fantasy",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-gear-budgets",
+      "progression": "slow",
+      "fantasyLevel": "high",
+      "effectiveLevel": null,
+      "budgetCp": null,
+      "categories": {
+        "weapons": null,
+        "protection": null,
+        "magic": null,
+        "limitedUse": null,
+        "gear": null
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [24, 24],
+        "entry": "Table 14-9 NPC gear budgets",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-gear.slow.low",
+      "name": "Slow progression, low fantasy",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-gear-budgets",
+      "progression": "slow",
+      "fantasyLevel": "low",
+      "effectiveLevel": null,
+      "budgetCp": null,
+      "categories": {
+        "weapons": null,
+        "protection": null,
+        "magic": null,
+        "limitedUse": null,
+        "gear": null
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [24, 24],
+        "entry": "Table 14-9 NPC gear budgets",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "npc-gear.slow.normal",
+      "name": "Slow progression, normal fantasy",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-gear-budgets",
+      "progression": "slow",
+      "fantasyLevel": "normal",
+      "effectiveLevel": null,
+      "budgetCp": null,
+      "categories": {
+        "weapons": null,
+        "protection": null,
+        "magic": null,
+        "limitedUse": null,
+        "gear": null
+      },
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [24, 24],
+        "entry": "Table 14-9 NPC gear budgets",
+        "provenanceStatus": "catalog-gap"
+      }
+    }
+  ]
+}

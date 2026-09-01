@@ -33,6 +33,8 @@ def draft_fingerprint(draft):
         "concept": draft["concept"],
         "selections": selections,
     }
+    if "creationSystem" in draft:
+        value["creationSystem"] = draft["creationSystem"]
     encoded = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
     return hashlib.sha256(encoded).hexdigest()
 

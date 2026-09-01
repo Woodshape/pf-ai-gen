@@ -1,0 +1,863 @@
+{
+  "audit": {
+    "acceptedAIRationale": [],
+    "creationDecisions": [
+      {
+        "selections": {
+          "abilityModifiers": {
+            "constitution": 1,
+            "dexterity": 2,
+            "intelligence": -2,
+            "strength": 3
+          },
+          "arrayId": "array.combatant",
+          "cr": 2
+        },
+        "sourceRefs": [
+          {
+            "entry": "CR 2",
+            "file": "Pathfinder Unchained.txt",
+            "printedPages": [
+              198
+            ],
+            "section": "Step 1: Array",
+            "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+            "sourceId": "pathfinder-unchained-txt",
+            "table": "Table 5-1: Combatant Main Statistics",
+            "txtLines": [
+              374,
+              374
+            ],
+            "viewerPages": [
+              5
+            ]
+          },
+          {
+            "entry": "CR 2",
+            "file": "Pathfinder Unchained.txt",
+            "printedPages": [
+              199
+            ],
+            "section": "Step 1: Array",
+            "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+            "sourceId": "pathfinder-unchained-txt",
+            "table": "Table 5-2: Combatant Attack Statistics",
+            "txtLines": [
+              447,
+              447
+            ],
+            "viewerPages": [
+              6
+            ]
+          }
+        ],
+        "step": 1
+      },
+      {
+        "selections": {
+          "classGraftId": null,
+          "creatureTypeGraftId": "graft.creature-type.magical-beast"
+        },
+        "sourceRefs": [
+          {
+            "entry": "Magical-Beast",
+            "file": "Pathfinder Unchained.txt",
+            "printedPages": [
+              204
+            ],
+            "section": "Step 2: Creature Type Graft",
+            "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+            "sourceId": "pathfinder-unchained-txt",
+            "txtLines": [
+              914,
+              914
+            ],
+            "viewerPages": [
+              11
+            ]
+          }
+        ],
+        "step": 2
+      },
+      {
+        "selections": {
+          "subtypeGraftIds": []
+        },
+        "sourceRefs": [],
+        "step": 3
+      },
+      {
+        "selections": {
+          "templateGraftId": null
+        },
+        "sourceRefs": [],
+        "step": 4
+      },
+      {
+        "selections": {
+          "sizeId": "graft.size.medium",
+          "speed": {
+            "land": 50
+          }
+        },
+        "sourceRefs": [],
+        "step": 5
+      },
+      {
+        "selections": {
+          "spells": []
+        },
+        "sourceRefs": [],
+        "step": 6
+      },
+      {
+        "selections": {
+          "options": [
+            {
+              "optionId": "option.improved-combat-maneuver",
+              "parameters": {
+                "attackType": "bite",
+                "maneuver": "trip"
+              }
+            }
+          ]
+        },
+        "sourceRefs": [
+          {
+            "entry": "Improved Combat Maneuver",
+            "file": "Pathfinder Unchained.txt",
+            "printedPages": [
+              229
+            ],
+            "section": "Step 7: Monster Options",
+            "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+            "sourceId": "pathfinder-unchained-txt",
+            "txtLines": [
+              3325,
+              3325
+            ],
+            "viewerPages": [
+              36
+            ]
+          }
+        ],
+        "step": 7
+      },
+      {
+        "selections": {
+          "skills": {
+            "good": [
+              "stealth",
+              "survival"
+            ],
+            "master": [
+              "perception"
+            ]
+          }
+        },
+        "sourceRefs": [],
+        "step": 8
+      },
+      {
+        "selections": {
+          "attacks": [
+            {
+              "attackProfile": "weapon.high",
+              "kind": "natural",
+              "name": "bite",
+              "naturalAttackId": "natural-attack.bite"
+            }
+          ]
+        },
+        "sourceRefs": [
+          {
+            "entry": "9–11",
+            "file": "Pathfinder Unchained.txt",
+            "printedPages": [
+              241
+            ],
+            "section": "Step 9: Damage",
+            "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+            "sourceId": "pathfinder-unchained-txt",
+            "table": "Table 5-9: Damage Dice Values",
+            "txtLines": [
+              4444,
+              4444
+            ],
+            "viewerPages": [
+              48
+            ]
+          }
+        ],
+        "step": 9
+      }
+    ],
+    "sources": [
+      {
+        "entry": "CR 2",
+        "file": "Pathfinder Unchained.txt",
+        "printedPages": [
+          198
+        ],
+        "section": "Step 1: Array",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "sourceId": "pathfinder-unchained-txt",
+        "table": "Table 5-1: Combatant Main Statistics",
+        "txtLines": [
+          374,
+          374
+        ],
+        "viewerPages": [
+          5
+        ]
+      },
+      {
+        "entry": "CR 2",
+        "file": "Pathfinder Unchained.txt",
+        "printedPages": [
+          199
+        ],
+        "section": "Step 1: Array",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "sourceId": "pathfinder-unchained-txt",
+        "table": "Table 5-2: Combatant Attack Statistics",
+        "txtLines": [
+          447,
+          447
+        ],
+        "viewerPages": [
+          6
+        ]
+      },
+      {
+        "entry": "bite",
+        "file": "beastiary.txt",
+        "printedPages": [
+          302
+        ],
+        "section": "Bestiary Table 3-1",
+        "sha256": "ece9130992edbfba27d6151e6a8a254a20fb1fd15375a0f56c94f81186b1b4ff",
+        "sourceId": "bestiary-txt",
+        "table": "Table 3-1: Natural Attacks by Size",
+        "txtLines": [
+          149,
+          159
+        ],
+        "viewerPages": [
+          2
+        ]
+      },
+      {
+        "entry": "9–11",
+        "file": "Pathfinder Unchained.txt",
+        "printedPages": [
+          241
+        ],
+        "section": "Step 9: Damage",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "sourceId": "pathfinder-unchained-txt",
+        "table": "Table 5-9: Damage Dice Values",
+        "txtLines": [
+          4444,
+          4444
+        ],
+        "viewerPages": [
+          48
+        ]
+      },
+      {
+        "entry": "Magical-Beast",
+        "file": "Pathfinder Unchained.txt",
+        "printedPages": [
+          204
+        ],
+        "section": "Step 2: Creature Type Graft",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "sourceId": "pathfinder-unchained-txt",
+        "txtLines": [
+          914,
+          914
+        ],
+        "viewerPages": [
+          11
+        ]
+      },
+      {
+        "entry": "Improved Combat Maneuver",
+        "file": "Pathfinder Unchained.txt",
+        "printedPages": [
+          229
+        ],
+        "section": "Step 7: Monster Options",
+        "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+        "sourceId": "pathfinder-unchained-txt",
+        "txtLines": [
+          3325,
+          3325
+        ],
+        "viewerPages": [
+          36
+        ]
+      }
+    ],
+    "validationFindings": []
+  },
+  "catalogVersion": "sha256:ac565b6fdec0a0b35549acc840332c69760ec022f42835b47526002664b77688",
+  "concept": {
+    "creatureType": "magical beast",
+    "description": "A vicious wolf-like magical beast.",
+    "name": "Worg",
+    "role": "feral hunter",
+    "targetCR": 2
+  },
+  "derivationTrace": [
+    {
+      "path": "/canonical/defenses",
+      "rule": "array.mainStatistics",
+      "sourceRefs": [
+        {
+          "entry": "CR 2",
+          "file": "Pathfinder Unchained.txt",
+          "printedPages": [
+            198
+          ],
+          "section": "Step 1: Array",
+          "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+          "sourceId": "pathfinder-unchained-txt",
+          "table": "Table 5-1: Combatant Main Statistics",
+          "txtLines": [
+            374,
+            374
+          ],
+          "viewerPages": [
+            5
+          ]
+        }
+      ],
+      "value": {
+        "ac": 16,
+        "cmd": 16,
+        "flatFootedAC": 12,
+        "fortitude": 5,
+        "hp": 22,
+        "reflex": 5,
+        "touchAC": 12,
+        "will": 1
+      }
+    },
+    {
+      "path": "/canonical/abilityDC",
+      "rule": "array.abilityDC",
+      "sourceRefs": [
+        {
+          "entry": "CR 2",
+          "file": "Pathfinder Unchained.txt",
+          "printedPages": [
+            198
+          ],
+          "section": "Step 1: Array",
+          "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+          "sourceId": "pathfinder-unchained-txt",
+          "table": "Table 5-1: Combatant Main Statistics",
+          "txtLines": [
+            374,
+            374
+          ],
+          "viewerPages": [
+            5
+          ]
+        }
+      ],
+      "value": 11
+    },
+    {
+      "path": "/canonical/spellDC",
+      "rule": "array.spellDC",
+      "sourceRefs": [
+        {
+          "entry": "CR 2",
+          "file": "Pathfinder Unchained.txt",
+          "printedPages": [
+            198
+          ],
+          "section": "Step 1: Array",
+          "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+          "sourceId": "pathfinder-unchained-txt",
+          "table": "Table 5-1: Combatant Main Statistics",
+          "txtLines": [
+            374,
+            374
+          ],
+          "viewerPages": [
+            5
+          ]
+        }
+      ],
+      "value": 11
+    },
+    {
+      "path": "/canonical/abilityModifiers",
+      "rule": "draft.abilityModifierAssignments",
+      "sourceRefs": [
+        {
+          "entry": "CR 2",
+          "file": "Pathfinder Unchained.txt",
+          "printedPages": [
+            198
+          ],
+          "section": "Step 1: Array",
+          "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+          "sourceId": "pathfinder-unchained-txt",
+          "table": "Table 5-1: Combatant Main Statistics",
+          "txtLines": [
+            374,
+            374
+          ],
+          "viewerPages": [
+            5
+          ]
+        }
+      ],
+      "value": {
+        "constitution": 1,
+        "dexterity": 2,
+        "intelligence": -2,
+        "strength": 3
+      }
+    },
+    {
+      "path": "/canonical/attacks",
+      "rule": "array.attackStatistics + graft adjustments + damage table",
+      "sourceRefs": [
+        {
+          "entry": "CR 2",
+          "file": "Pathfinder Unchained.txt",
+          "printedPages": [
+            199
+          ],
+          "section": "Step 1: Array",
+          "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+          "sourceId": "pathfinder-unchained-txt",
+          "table": "Table 5-2: Combatant Attack Statistics",
+          "txtLines": [
+            447,
+            447
+          ],
+          "viewerPages": [
+            6
+          ]
+        },
+        {
+          "entry": "bite",
+          "file": "beastiary.txt",
+          "printedPages": [
+            302
+          ],
+          "section": "Bestiary Table 3-1",
+          "sha256": "ece9130992edbfba27d6151e6a8a254a20fb1fd15375a0f56c94f81186b1b4ff",
+          "sourceId": "bestiary-txt",
+          "table": "Table 3-1: Natural Attacks by Size",
+          "txtLines": [
+            149,
+            159
+          ],
+          "viewerPages": [
+            2
+          ]
+        },
+        {
+          "entry": "9–11",
+          "file": "Pathfinder Unchained.txt",
+          "printedPages": [
+            241
+          ],
+          "section": "Step 9: Damage",
+          "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+          "sourceId": "pathfinder-unchained-txt",
+          "table": "Table 5-9: Damage Dice Values",
+          "txtLines": [
+            4444,
+            4444
+          ],
+          "viewerPages": [
+            48
+          ]
+        }
+      ],
+      "value": [
+        {
+          "attackBonus": [
+            6
+          ],
+          "attackBonusText": "+6",
+          "averageDamage": 11,
+          "classification": "primary",
+          "count": 1,
+          "damageDie": "d6",
+          "damageExpression": "1d6+7",
+          "damageType": "B/S/P",
+          "name": "bite",
+          "naturalAttackId": "natural-attack.bite"
+        }
+      ]
+    },
+    {
+      "path": "/canonical/senses",
+      "rule": "creatureTypeGraft.automaticTraits",
+      "sourceRefs": [
+        {
+          "entry": "Magical-Beast",
+          "file": "Pathfinder Unchained.txt",
+          "printedPages": [
+            204
+          ],
+          "section": "Step 2: Creature Type Graft",
+          "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+          "sourceId": "pathfinder-unchained-txt",
+          "txtLines": [
+            914,
+            914
+          ],
+          "viewerPages": [
+            11
+          ]
+        }
+      ],
+      "value": [
+        "darkvision 60 ft.",
+        "low-light vision"
+      ]
+    },
+    {
+      "path": "/canonical/skills",
+      "rule": "array.skillBonuses + graft grants + skill selections",
+      "sourceRefs": [
+        {
+          "entry": "CR 2",
+          "file": "Pathfinder Unchained.txt",
+          "printedPages": [
+            198
+          ],
+          "section": "Step 1: Array",
+          "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+          "sourceId": "pathfinder-unchained-txt",
+          "table": "Table 5-1: Combatant Main Statistics",
+          "txtLines": [
+            374,
+            374
+          ],
+          "viewerPages": [
+            5
+          ]
+        }
+      ],
+      "value": {
+        "perception": 10,
+        "stealth": 7,
+        "survival": 7
+      }
+    },
+    {
+      "path": "/canonical/initiative",
+      "rule": "otherCalculations.initiative + option adjustments",
+      "sourceRefs": [
+        {
+          "entry": "CR 2",
+          "file": "Pathfinder Unchained.txt",
+          "printedPages": [
+            198
+          ],
+          "section": "Step 1: Array",
+          "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+          "sourceId": "pathfinder-unchained-txt",
+          "table": "Table 5-1: Combatant Main Statistics",
+          "txtLines": [
+            374,
+            374
+          ],
+          "viewerPages": [
+            5
+          ]
+        }
+      ],
+      "value": 2
+    },
+    {
+      "path": "/canonical/hitDice",
+      "rule": "otherCalculations.hitDice",
+      "sourceRefs": [
+        {
+          "entry": "CR 2",
+          "file": "Pathfinder Unchained.txt",
+          "printedPages": [
+            198
+          ],
+          "section": "Step 1: Array",
+          "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+          "sourceId": "pathfinder-unchained-txt",
+          "table": "Table 5-1: Combatant Main Statistics",
+          "txtLines": [
+            374,
+            374
+          ],
+          "viewerPages": [
+            5
+          ]
+        }
+      ],
+      "value": 2
+    },
+    {
+      "path": "/canonical/speed",
+      "rule": "draft.speed",
+      "sourceRefs": [],
+      "value": {
+        "land": 50
+      }
+    },
+    {
+      "path": "/canonical/options",
+      "rule": "array/graft option slots + automatic grants + option selections",
+      "sourceRefs": [
+        {
+          "entry": "Improved Combat Maneuver",
+          "file": "Pathfinder Unchained.txt",
+          "printedPages": [
+            229
+          ],
+          "section": "Step 7: Monster Options",
+          "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+          "sourceId": "pathfinder-unchained-txt",
+          "txtLines": [
+            3325,
+            3325
+          ],
+          "viewerPages": [
+            36
+          ]
+        }
+      ],
+      "value": [
+        {
+          "optionId": "option.improved-combat-maneuver",
+          "parameters": {
+            "attackType": "bite",
+            "maneuver": "trip"
+          }
+        }
+      ]
+    },
+    {
+      "path": "/canonical/cmb",
+      "rule": "otherCalculations.cmb",
+      "sourceRefs": [
+        {
+          "entry": "CR 2",
+          "file": "Pathfinder Unchained.txt",
+          "printedPages": [
+            198
+          ],
+          "section": "Step 1: Array",
+          "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+          "sourceId": "pathfinder-unchained-txt",
+          "table": "Table 5-1: Combatant Main Statistics",
+          "txtLines": [
+            374,
+            374
+          ],
+          "viewerPages": [
+            5
+          ]
+        }
+      ],
+      "value": 4
+    },
+    {
+      "path": "/canonical/maneuverBonuses",
+      "rule": "option.improvedCombatManeuver",
+      "sourceRefs": [
+        {
+          "entry": "Improved Combat Maneuver",
+          "file": "Pathfinder Unchained.txt",
+          "printedPages": [
+            229
+          ],
+          "section": "Step 7: Monster Options",
+          "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+          "sourceId": "pathfinder-unchained-txt",
+          "txtLines": [
+            3325,
+            3325
+          ],
+          "viewerPages": [
+            36
+          ]
+        }
+      ],
+      "value": {
+        "trip": {
+          "cmb": 8,
+          "cmd": 20
+        }
+      }
+    }
+  ],
+  "fieldAnnotations": {},
+  "fingerprint": "0af0bd20d2cfafd319c7de0154fb874feceef1ea96a16106e6535e590b485f91",
+  "kind": "FinishedMonster",
+  "mode": "strict",
+  "monsterId": "monster-f6238fe296d358758ced30b67dd0fbe7",
+  "result": {
+    "abilityDC": 11,
+    "abilityModifiers": {
+      "constitution": 1,
+      "dexterity": 2,
+      "intelligence": -2,
+      "strength": 3
+    },
+    "arrayId": "array.combatant",
+    "attacks": [
+      {
+        "attackBonus": [
+          6
+        ],
+        "attackBonusText": "+6",
+        "averageDamage": 11,
+        "classification": "primary",
+        "count": 1,
+        "damageDie": "d6",
+        "damageExpression": "1d6+7",
+        "damageType": "B/S/P",
+        "name": "bite",
+        "naturalAttackId": "natural-attack.bite"
+      }
+    ],
+    "casterLevelCheckBonuses": [],
+    "classAbilities": [],
+    "classAttackDamage": null,
+    "classGraftChoiceEffect": null,
+    "classGraftChoices": {},
+    "classGraftId": null,
+    "cmb": 4,
+    "companion": null,
+    "concentration": null,
+    "conditionalSaveBonuses": [],
+    "conditions": [],
+    "cr": 2,
+    "creatureTypeGraftId": "graft.creature-type.magical-beast",
+    "damageReduction": [],
+    "damageRules": [],
+    "defenses": {
+      "ac": 16,
+      "cmd": 16,
+      "flatFootedAC": 12,
+      "fortitude": 5,
+      "hp": 22,
+      "reflex": 5,
+      "touchAC": 12,
+      "will": 1
+    },
+    "fastHealing": null,
+    "graftAbilities": [],
+    "graftOptionChoices": {},
+    "graftTraits": [],
+    "hitDice": 2,
+    "immunities": [],
+    "initiative": 2,
+    "maneuverBonuses": {
+      "trip": {
+        "cmb": 8,
+        "cmd": 20
+      }
+    },
+    "movementManeuverability": {},
+    "options": [
+      {
+        "optionId": "option.improved-combat-maneuver",
+        "parameters": {
+          "attackType": "bite",
+          "maneuver": "trip"
+        }
+      }
+    ],
+    "primaryClassLevel": null,
+    "regeneration": [],
+    "resistances": {},
+    "secondaryClassGrafts": [],
+    "senses": [
+      "darkvision 60 ft.",
+      "low-light vision"
+    ],
+    "sizeId": "graft.size.medium",
+    "skills": {
+      "perception": 10,
+      "stealth": 7,
+      "survival": 7
+    },
+    "sneakAttackDice": null,
+    "speed": {
+      "land": 50
+    },
+    "spellDC": 11,
+    "spellListBenefit": null,
+    "spellcastingClassId": null,
+    "spellcastingMode": null,
+    "spells": [],
+    "subtypeGraftChoices": {},
+    "subtypeGraftIds": [],
+    "templateGraftChoices": {},
+    "templateGraftId": null,
+    "vulnerabilities": []
+  },
+  "schemaVersion": "1",
+  "selections": {
+    "abilityModifiers": {
+      "constitution": 1,
+      "dexterity": 2,
+      "intelligence": -2,
+      "strength": 3
+    },
+    "arrayId": "array.combatant",
+    "attacks": [
+      {
+        "attackProfile": "weapon.high",
+        "kind": "natural",
+        "name": "bite",
+        "naturalAttackId": "natural-attack.bite"
+      }
+    ],
+    "classGraftId": null,
+    "cr": 2,
+    "creatureTypeGraftId": "graft.creature-type.magical-beast",
+    "options": [
+      {
+        "optionId": "option.improved-combat-maneuver",
+        "parameters": {
+          "attackType": "bite",
+          "maneuver": "trip"
+        }
+      }
+    ],
+    "sizeId": "graft.size.medium",
+    "skills": {
+      "good": [
+        "stealth",
+        "survival"
+      ],
+      "master": [
+        "perception"
+      ]
+    },
+    "speed": {
+      "land": 50
+    },
+    "spells": [],
+    "subtypeGraftIds": [],
+    "templateGraftId": null
+  },
+  "sourceDraft": {
+    "draftId": "draft-legacy-simple-monster-worg",
+    "fingerprint": "509ee3dbcf287d0177639792e5d5e7abadf85ac82604da10095bdb6457855d0f",
+    "revision": 0
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "creationSystem": "npc",
+  "concept": {
+    "name": "Human Expert 5",
+    "role": "skilled artisan",
+    "description": "A level 5 human expert built through the class-based NPC workflow."
+  },
+  "selections": {
+    "statblockUse": "full",
+    "raceId": "npc-race.human",
+    "racialChoices": {},
+    "classProgression": [
+      {
+        "classId": "npc-class.expert",
+        "levels": 5
+      }
+    ],
+    "abilityGeneration": {
+      "method": "skill-preset"
+    },
+    "skillGeneration": {
+      "method": "simplified",
+      "skills": []
+    },
+    "feats": [],
+    "classFeatureChoices": {},
+    "spellLoadout": {},
+    "gearProfile": {
+      "experienceProgression": "medium",
+      "fantasyLevel": "normal"
+    },
+    "gear": [],
+    "details": {
+      "alignment": "N"
+    }
+  }
+}

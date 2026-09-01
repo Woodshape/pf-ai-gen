@@ -1,0 +1,1059 @@
+{
+  "section": "items",
+  "records": [
+    {
+      "id": "item.club",
+      "name": "Club",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Mundane weapons",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.dagger",
+      "name": "Dagger",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Mundane weapons",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.longsword",
+      "name": "Longsword",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Mundane weapons",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.battleaxe",
+      "name": "Battleaxe",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Mundane weapons",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.spear",
+      "name": "Spear",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Mundane weapons",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.shortbow",
+      "name": "Shortbow",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Mundane weapons",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.leather-armor",
+      "name": "Leather Armor",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "armor",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Mundane armor",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.chain-shirt",
+      "name": "Chain Shirt",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "armor",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Mundane armor",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.breastplate",
+      "name": "Breastplate",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "armor",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Mundane armor",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.light-steel-shield",
+      "name": "Light Steel Shield",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "shield",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Mundane shields",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.heavy-steel-shield",
+      "name": "Heavy Steel Shield",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "shield",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Mundane shields",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.greatsword",
+      "name": "Greatsword",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.greataxe",
+      "name": "Greataxe",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.warhammer",
+      "name": "Warhammer",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.light-crossbow",
+      "name": "Light Crossbow",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.heavy-crossbow",
+      "name": "Heavy Crossbow",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.longbow",
+      "name": "Longbow",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.sling",
+      "name": "Sling",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.javelin",
+      "name": "Javelin",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.morningstar",
+      "name": "Morningstar",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.rapier",
+      "name": "Rapier",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.sap",
+      "name": "Sap",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.scythe",
+      "name": "Scythe",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.falchion",
+      "name": "Falchion",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.halberd",
+      "name": "Halberd",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.lance",
+      "name": "Lance",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.handaxe",
+      "name": "Handaxe",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.light-hammer",
+      "name": "Light Hammer",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.heavy-flail",
+      "name": "Heavy Flail",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.light-flail",
+      "name": "Light Flail",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.trident",
+      "name": "Trident",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.whip",
+      "name": "Whip",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.gauntlet",
+      "name": "Gauntlet",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "weapon",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.padded-armor",
+      "name": "Padded Armor",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "armor",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.studded-leather",
+      "name": "Studded Leather",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "armor",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.hide-armor",
+      "name": "Hide Armor",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "armor",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.scale-mail",
+      "name": "Scale Mail",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "armor",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.chainmail",
+      "name": "Chainmail",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "armor",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.splint-mail",
+      "name": "Splint Mail",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "armor",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.banded-mail",
+      "name": "Banded Mail",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "armor",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.half-plate",
+      "name": "Half-Plate",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "armor",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.full-plate",
+      "name": "Full-Plate",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "armor",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.buckler",
+      "name": "Buckler",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "shield",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.heavy-wooden-shield",
+      "name": "Heavy Wooden Shield",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "shield",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.tower-shield",
+      "name": "Tower Shield",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "shield",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.backpack",
+      "name": "Backpack",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "goods",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.bedroll",
+      "name": "Bedroll",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "goods",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.hempen-rope",
+      "name": "Hempen Rope (50 ft.)",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "goods",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.trail-rations",
+      "name": "Trail Rations",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "goods",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.torch",
+      "name": "Torch",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "goods",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.waterskin",
+      "name": "Waterskin",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "goods",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.flint-and-steel",
+      "name": "Flint and Steel",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "goods",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.wooden-holy-symbol",
+      "name": "Wooden Holy Symbol",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "goods",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.spellbook",
+      "name": "Spellbook",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "goods",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.explorers-outfit",
+      "name": "Explorer's Outfit",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "goods",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.cloak-of-resistance",
+      "name": "Cloak of Resistance",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "magic",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.belt-of-giant-strength",
+      "name": "Belt of Giant Strength",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "magic",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.headband-of-vast-intelligence",
+      "name": "Headband of Vast Intelligence",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "magic",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.amulet-of-natural-armor",
+      "name": "Amulet of Natural Armor",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "magic",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.ring-of-protection",
+      "name": "Ring of Protection",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "magic",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.potion-of-cure-light-wounds",
+      "name": "Potion of Cure Light Wounds",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "magic",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    },
+    {
+      "id": "item.wand-of-cure-light-wounds",
+      "name": "Wand of Cure Light Wounds",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-equipment",
+      "category": "magic",
+      "priceCp": null,
+      "weightLb": null,
+      "effects": null,
+      "sourceRef": {
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [23, 23],
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap"
+      }
+    }
+  ]
+}

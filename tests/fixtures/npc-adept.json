@@ -1,0 +1,55 @@
+{
+  "creationSystem": "npc",
+  "concept": {
+    "name": "Human Adept 3",
+    "role": "village healer",
+    "description": "A prepared Adept spellcaster built through the class-based NPC workflow."
+  },
+  "selections": {
+    "statblockUse": "full",
+    "raceId": "npc-race.human",
+    "racialChoices": {},
+    "classProgression": [
+      {
+        "classId": "npc-class.adept",
+        "levels": 3
+      }
+    ],
+    "abilityGeneration": {
+      "method": "custom",
+      "scores": {
+        "strength": 8,
+        "dexterity": 10,
+        "constitution": 12,
+        "intelligence": 10,
+        "wisdom": 14,
+        "charisma": 13
+      },
+      "rationale": "Wisdom is selected for the prepared Adept spellcasting concept."
+    },
+    "skillGeneration": {
+      "method": "precise",
+      "ranks": {}
+    },
+    "feats": [],
+    "classFeatureChoices": {},
+    "spellLoadout": {
+      "mode": "prepared",
+      "spells": [
+        {
+          "spellId": "spell.cure-light-wounds",
+          "level": 1
+        }
+      ]
+    },
+    "gearProfile": {
+      "experienceProgression": "medium",
+      "fantasyLevel": "normal"
+    },
+    "gear": [],
+    "details": {
+      "alignment": "N",
+      "languages": ["Common"]
+    }
+  }
+}

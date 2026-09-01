@@ -5,7 +5,7 @@ import threading
 import unittest
 from pathlib import Path
 
-from monster_builder.web import CATALOG_PATH, INDEX_PATH, make_server
+from monster_builder.web import CATALOG_PATH, INDEX_PATH, NPC_CATALOG_PATH, make_server
 
 
 class WebTransportTests(unittest.TestCase):
@@ -62,12 +62,18 @@ class WebTransportTests(unittest.TestCase):
             self.assertTrue(content_type.startswith("application/json"))
             self.assertEqual(json.loads(body), json.loads(CATALOG_PATH.read_text(encoding="utf-8")))
 
+            status, content_type, body = self.request(server, "GET", "/npc.json")
+            self.assertEqual(status, 200)
+            self.assertTrue(content_type.startswith("application/json"))
+            self.assertEqual(json.loads(body), json.loads(NPC_CATALOG_PATH.read_text(encoding="utf-8")))
+
     def test_checked_in_ui_is_a_built_typescript_app_with_structured_editors(self):
         source_root = Path(__file__).parents[1] / "monster_builder" / "web"
         html = (source_root / "index.html").read_text(encoding="utf-8")
         options = (source_root / "src" / "steps" / "options.tsx").read_text(encoding="utf-8")
         damage = (source_root / "src" / "steps" / "finish.tsx").read_text(encoding="utf-8")
         grafts = (source_root / "src" / "steps" / "grafts.tsx").read_text(encoding="utf-8")
+        npc_steps = (source_root / "src" / "steps" / "npc.tsx").read_text(encoding="utf-8")
         choices = (source_root / "src" / "choice-fields.tsx").read_text(encoding="utf-8")
         components = (source_root / "src" / "components.tsx").read_text(encoding="utf-8")
         proposal_panel = (source_root / "src" / "proposal-panel.tsx").read_text(encoding="utf-8")
@@ -109,6 +115,11 @@ class WebTransportTests(unittest.TestCase):
         self.assertIn("Customize loadout", grafts)
         self.assertIn("using the", grafts)
         self.assertIn("keeps its generated spells", grafts)
+        self.assertIn("NpcWorkflow", npc_steps)
+        self.assertIn("classProgression", npc_steps)
+        self.assertIn("Canonical NPC preview", npc_steps)
+        self.assertIn("loadNpcCatalog", app)
+        self.assertIn('creationSystem: "npc"', app)
         self.assertNotIn('<JsonField label="Explicit spell selections"', grafts)
         self.assertNotIn('type="checkbox"', components)
         self.assertNotIn("function JsonField", components)

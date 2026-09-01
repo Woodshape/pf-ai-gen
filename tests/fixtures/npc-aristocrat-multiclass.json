@@ -1,0 +1,50 @@
+{
+  "creationSystem": "npc",
+  "concept": {
+    "name": "Human Aristocrat 2 Commoner 1",
+    "role": "minor provincial noble",
+    "description": "An ordered multiclass NPC progression for the aristocrat class."
+  },
+  "selections": {
+    "statblockUse": "full",
+    "raceId": "npc-race.human",
+    "racialChoices": {},
+    "classProgression": [
+      {
+        "classId": "npc-class.aristocrat",
+        "levels": 2
+      },
+      {
+        "classId": "npc-class.commoner",
+        "levels": 1
+      }
+    ],
+    "abilityGeneration": {
+      "method": "custom",
+      "scores": {
+        "strength": 10,
+        "dexterity": 10,
+        "constitution": 10,
+        "intelligence": 12,
+        "wisdom": 11,
+        "charisma": 14
+      },
+      "rationale": "Custom scores are recorded for this source-gap fixture without deriving any statistics from concept text."
+    },
+    "skillGeneration": {
+      "method": "precise",
+      "ranks": {}
+    },
+    "feats": [],
+    "classFeatureChoices": {},
+    "spellLoadout": {},
+    "gearProfile": {
+      "experienceProgression": "medium",
+      "fantasyLevel": "normal"
+    },
+    "gear": [],
+    "details": {
+      "alignment": "N"
+    }
+  }
+}

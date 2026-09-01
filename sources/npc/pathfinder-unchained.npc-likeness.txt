@@ -1,0 +1,5 @@
+Unflankable: The monster can’t be flanked.
+Monstrous
+Theseabilitiesaretypicallysupernaturalorinhumaninnature.
+If a monster is meant to be more like an NPC—and especially
+ifitusesaPCrace—avoidchoosingmonstrouscombatoptions.

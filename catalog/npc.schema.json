@@ -1,0 +1,274 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pf-ai-gen.local/npc.schema.json",
+  "title": "Pathfinder class-based NPC catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "catalogVersion",
+    "catalogStatus",
+    "sources",
+    "abilityArrays",
+    "gearBudgets",
+    "races",
+    "classes",
+    "classFeatures",
+    "skills",
+    "feats",
+    "items",
+    "spells",
+    "derivedRules"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "1"},
+    "catalogVersion": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "catalogStatus": {"type": "object", "additionalProperties": {"type": "string"}},
+    "sources": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/source"}
+    },
+    "abilityArrays": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/abilityArray"}
+    },
+    "gearBudgets": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/gearBudget"}
+    },
+    "races": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/race"}
+    },
+    "classes": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/class"}
+    },
+    "classFeatures": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/classFeature"}
+    },
+    "skills": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/skill"}
+    },
+    "feats": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/feat"}
+    },
+    "items": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/item"}
+    },
+    "spells": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/spell"}
+    },
+    "derivedRules": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/catalogRecord"}
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceId", "file", "sha256", "description"],
+      "properties": {
+        "sourceId": {"type": "string", "minLength": 1},
+        "file": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "description": {"type": "string", "minLength": 1}
+      }
+    },
+    "sourceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceId", "section", "txtLines"],
+      "properties": {
+        "sourceId": {"type": "string", "minLength": 1},
+        "file": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "section": {"type": "string", "minLength": 1},
+        "txtLines": {"type": "array", "minItems": 0, "maxItems": 2, "items": {"type": "integer", "minimum": 1}},
+        "printedPages": {"type": "array", "minItems": 1, "items": {"type": "integer", "minimum": 1}},
+        "viewerPages": {"type": "array", "minItems": 1, "items": {"type": "integer", "minimum": 1}},
+        "officialUrl": {"type": "string", "format": "uri"},
+        "entry": {"type": "string"},
+        "table": {"type": "string"},
+        "provenanceStatus": {"type": "string"}
+      }
+    },
+    "sourceRefs": {
+      "oneOf": [
+        {"$ref": "#/$defs/sourceRef"},
+        {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/sourceRef"}}
+      ]
+    },
+    "catalogStatus": {"enum": ["resolved", "gap", "policy", "partial"]},
+    "catalogRecord": {
+      "type": "object",
+      "required": ["id", "name", "catalogStatus", "sourceRef"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "catalogStatus": {"$ref": "#/$defs/catalogStatus"},
+        "gapCode": {"type": "string", "minLength": 1},
+        "ruleText": {"type": "string"},
+        "sourceRef": {"$ref": "#/$defs/sourceRefs"},
+        "aliases": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      },
+      "additionalProperties": true
+    },
+    "abilityArray": {
+      "allOf": [
+        {"$ref": "#/$defs/catalogRecord"},
+        {
+          "type": "object",
+          "required": ["method", "scores"],
+          "properties": {
+            "method": {"type": "string", "minLength": 1},
+            "scores": {
+              "oneOf": [
+                {"type": "null"},
+                {"type": "array", "minItems": 6, "maxItems": 6, "items": {"type": "integer"}}
+              ]
+            },
+            "abilityOrder": {"type": "array", "items": {"type": "string"}}
+          }
+        }
+      ]
+    },
+    "gearBudget": {
+      "allOf": [
+        {"$ref": "#/$defs/catalogRecord"},
+        {
+          "type": "object",
+          "required": ["progression", "fantasyLevel", "budgetCp", "categories"],
+          "properties": {
+            "progression": {"enum": ["slow", "medium", "fast"]},
+            "fantasyLevel": {"enum": ["low", "normal", "high"]},
+            "effectiveLevel": {"type": ["integer", "null"]},
+            "budgetCp": {"type": ["integer", "null"], "minimum": 0},
+            "categories": {"type": ["object", "null"], "additionalProperties": {"type": ["integer", "null"], "minimum": 0}}
+          }
+        }
+      ]
+    },
+    "race": {
+      "allOf": [
+        {"$ref": "#/$defs/catalogRecord"},
+        {
+          "type": "object",
+          "properties": {
+            "abilityAdjustments": {"type": ["object", "null"], "additionalProperties": {"type": "integer"}},
+            "sizeId": {"type": ["string", "null"]},
+            "speed": {"type": ["object", "null"], "additionalProperties": {"type": "integer"}},
+            "senses": {"type": ["array", "null"], "items": {"type": "string"}},
+            "traits": {"type": ["array", "null"], "items": {"type": "string"}},
+            "languages": {"type": ["array", "null"], "items": {"type": "string"}}
+          }
+        }
+      ]
+    },
+    "class": {
+      "allOf": [
+        {"$ref": "#/$defs/catalogRecord"},
+        {
+          "type": "object",
+          "required": ["category", "hitDie", "classSkills", "skillSelections", "levels"],
+          "properties": {
+            "category": {"enum": ["npc", "pc"]},
+            "hitDie": {"type": ["string", "null"]},
+            "classSkills": {"type": ["array", "null"], "items": {"type": "string"}},
+            "skillSelections": {"type": ["integer", "null"]},
+            "levels": {"type": "object", "additionalProperties": {"$ref": "#/$defs/classLevel"}}
+          }
+        }
+      ]
+    },
+    "classLevel": {
+      "type": "object",
+      "required": ["level", "catalogStatus", "sourceRef"],
+      "properties": {
+        "level": {"type": "integer", "minimum": 1},
+        "bab": {"type": ["integer", "null"]},
+        "fortitude": {"type": ["integer", "null"]},
+        "reflex": {"type": ["integer", "null"]},
+        "will": {"type": ["integer", "null"]},
+        "hitDie": {"type": ["string", "null"]},
+        "skillSelections": {"type": ["integer", "null"]},
+        "featureGrants": {"type": ["array", "null"], "items": {"type": "string"}},
+        "choiceSlots": {"type": ["array", "null"], "items": {"type": "object"}},
+        "catalogStatus": {"$ref": "#/$defs/catalogStatus"},
+        "sourceRef": {"$ref": "#/$defs/sourceRefs"}
+      },
+      "additionalProperties": true
+    },
+    "classFeature": {
+      "$ref": "#/$defs/catalogRecord"
+    },
+    "skill": {
+      "allOf": [
+        {"$ref": "#/$defs/catalogRecord"},
+        {
+          "type": "object",
+          "properties": {
+            "keyAbility": {"type": ["string", "null"]},
+            "trainedOnly": {"type": ["boolean", "null"]},
+            "armorCheckPenalty": {"type": ["boolean", "null"]}
+          }
+        }
+      ]
+    },
+    "feat": {
+      "allOf": [
+        {"$ref": "#/$defs/catalogRecord"},
+        {
+          "type": "object",
+          "required": ["category", "prerequisites"],
+          "properties": {
+            "category": {"type": "string", "minLength": 1},
+            "prerequisites": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/prerequisiteExpression"}]},
+            "effects": {"type": ["object", "null"]}
+          }
+        }
+      ]
+    },
+    "item": {
+      "allOf": [
+        {"$ref": "#/$defs/catalogRecord"},
+        {
+          "type": "object",
+          "required": ["category", "priceCp", "effects"],
+          "properties": {
+            "category": {"enum": ["weapon", "armor", "shield", "gear", "goods", "magic"]},
+            "priceCp": {"type": ["integer", "null"], "minimum": 0},
+            "weightLb": {"type": ["integer", "null"]},
+            "effects": {"type": ["object", "null"]}
+          }
+        }
+      ]
+    },
+    "spell": {
+      "$ref": "#/$defs/catalogRecord"
+    },
+    "prerequisiteExpression": {
+      "oneOf": [
+        {"type": "object", "required": ["all"], "additionalProperties": false, "properties": {"all": {"type": "array", "items": {"$ref": "#/$defs/prerequisiteExpression"}}}},
+        {"type": "object", "required": ["any"], "additionalProperties": false, "properties": {"any": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/prerequisiteExpression"}}}},
+        {"type": "object", "required": ["not"], "additionalProperties": false, "properties": {"not": {"$ref": "#/$defs/prerequisiteExpression"}}},
+        {"type": "object", "required": ["abilityAtLeast"], "additionalProperties": false, "properties": {"abilityAtLeast": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "integer"}}}},
+        {"type": "object", "required": ["babAtLeast"], "additionalProperties": false, "properties": {"babAtLeast": {"type": "integer", "minimum": 0}}},
+        {"type": "object", "required": ["characterLevelAtLeast"], "additionalProperties": false, "properties": {"characterLevelAtLeast": {"type": "integer", "minimum": 1}}},
+        {"type": "object", "required": ["classLevelAtLeast"], "additionalProperties": false, "properties": {"classLevelAtLeast": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "integer", "minimum": 1}}}},
+        {"type": "object", "required": ["skillRanksAtLeast"], "additionalProperties": false, "properties": {"skillRanksAtLeast": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "integer", "minimum": 0}}}},
+        {"type": "object", "required": ["race"], "additionalProperties": false, "properties": {"race": {"type": "string", "minLength": 1}}},
+        {"type": "object", "required": ["alignment"], "additionalProperties": false, "properties": {"alignment": {"type": "string", "minLength": 1}}},
+        {"type": "object", "required": ["hasFeat"], "additionalProperties": false, "properties": {"hasFeat": {"type": "string", "minLength": 1}}},
+        {"type": "object", "required": ["hasClassFeature"], "additionalProperties": false, "properties": {"hasClassFeature": {"type": "string", "minLength": 1}}},
+        {"type": "object", "required": ["casterLevelAtLeast"], "additionalProperties": false, "properties": {"casterLevelAtLeast": {"type": "integer", "minimum": 1}}}
+      ]
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "creationSystem": "npc",
+  "concept": {
+    "name": "Human Warrior 3",
+    "role": "melee guardian",
+    "description": "A level 3 human warrior built from the class-based NPC workflow."
+  },
+  "selections": {
+    "statblockUse": "full",
+    "raceId": "npc-race.human",
+    "racialChoices": {},
+    "classProgression": [
+      {
+        "classId": "npc-class.warrior",
+        "levels": 3
+      }
+    ],
+    "abilityGeneration": {
+      "method": "melee-preset"
+    },
+    "skillGeneration": {
+      "method": "simplified",
+      "skills": []
+    },
+    "feats": [],
+    "classFeatureChoices": {},
+    "spellLoadout": {},
+    "gearProfile": {
+      "experienceProgression": "medium",
+      "fantasyLevel": "normal"
+    },
+    "gear": [],
+    "details": {
+      "alignment": "N"
+    }
+  }
+}

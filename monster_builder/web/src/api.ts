@@ -23,4 +23,10 @@ export async function loadCatalog() {
   return response.json();
 }
 
+export async function loadNpcCatalog() {
+  const response = await fetch("/npc.json");
+  if (!response.ok) throw new Error("NPC catalog failed to load");
+  return response.json();
+}
+
 export const newChangeId = (field: string) => `${field}-${requestId()}`;

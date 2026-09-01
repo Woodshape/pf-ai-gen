@@ -24,6 +24,7 @@ WEB_DIST_PATH = Path(__file__).resolve().parent / "web" / "dist"
 INDEX_PATH = WEB_DIST_PATH / "index.html"
 ASSET_PATH = WEB_DIST_PATH / "assets"
 CATALOG_PATH = Path(__file__).resolve().parents[1] / "catalog" / "catalog.json"
+NPC_CATALOG_PATH = Path(__file__).resolve().parents[1] / "catalog" / "npc.json"
 JSON_CONTENT_TYPE = "application/json; charset=utf-8"
 HTML_CONTENT_TYPE = "text/html; charset=utf-8"
 
@@ -88,6 +89,9 @@ class GuidedRailHandler(BaseHTTPRequestHandler):
             content_type = HTML_CONTENT_TYPE
         elif path == "/catalog.json":
             asset = Path(getattr(server, "catalog_path", CATALOG_PATH))
+            content_type = JSON_CONTENT_TYPE
+        elif path == "/npc.json":
+            asset = Path(getattr(server, "npc_catalog_path", NPC_CATALOG_PATH))
             content_type = JSON_CONTENT_TYPE
         elif path and path.startswith("/assets/") and Path(path.removeprefix("/assets/")).name == path.removeprefix("/assets/"):
             asset = Path(getattr(server, "asset_path", ASSET_PATH)) / path.removeprefix("/assets/")
@@ -182,6 +186,7 @@ class GuidedRailServer(ThreadingHTTPServer):
         *,
         index_path: str | Path = INDEX_PATH,
         catalog_path: str | Path = CATALOG_PATH,
+        npc_catalog_path: str | Path = NPC_CATALOG_PATH,
         asset_path: str | Path = ASSET_PATH,
         max_body_bytes: int = MAX_BODY_BYTES,
         proposal_adapter: PiProposalAdapter | None = None,
@@ -191,6 +196,7 @@ class GuidedRailServer(ThreadingHTTPServer):
         self.engine = engine
         self.index_path = Path(index_path)
         self.catalog_path = Path(catalog_path)
+        self.npc_catalog_path = Path(npc_catalog_path)
         self.asset_path = Path(asset_path)
         self.max_body_bytes = max_body_bytes
         self.proposal_adapter = proposal_adapter or PiProposalAdapter(engine)
@@ -205,6 +211,7 @@ def make_server(
     engine: Engine | None = None,
     index_path: str | Path = INDEX_PATH,
     catalog_path: str | Path = CATALOG_PATH,
+    npc_catalog_path: str | Path = NPC_CATALOG_PATH,
     asset_path: str | Path = ASSET_PATH,
     max_body_bytes: int = MAX_BODY_BYTES,
     proposal_adapter: PiProposalAdapter | None = None,
@@ -218,6 +225,7 @@ def make_server(
         engine,
         index_path=index_path,
         catalog_path=catalog_path,
+        npc_catalog_path=npc_catalog_path,
         asset_path=asset_path,
         max_body_bytes=max_body_bytes,
         proposal_adapter=proposal_adapter,

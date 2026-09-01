@@ -1,0 +1,373 @@
+{
+  "section": "classFeatures",
+  "records": [
+    {
+      "id": "npc-class-feature.general-feats",
+      "name": "General feat slots",
+      "kind": "feat-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [476, 482],
+          "entry": "Step 4: Feats - slot kinds",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.fighter-bonus-feats",
+      "name": "Fighter bonus feat slots",
+      "kind": "feat-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [476, 482],
+          "entry": "Step 4: Feats - slot kinds",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.ranger-combat-style-feats",
+      "name": "Ranger combat style feat slots",
+      "kind": "feat-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [476, 482],
+          "entry": "Step 4: Feats - slot kinds",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.monk-bonus-feats",
+      "name": "Monk bonus feat slots",
+      "kind": "feat-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [476, 482],
+          "entry": "Step 4: Feats - slot kinds",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.wizard-bonus-feats",
+      "name": "Wizard bonus feat slots",
+      "kind": "feat-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [476, 482],
+          "entry": "Step 4: Feats - slot kinds",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.class-specific-feats",
+      "name": "Other class-specific feat slots",
+      "kind": "feat-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [476, 482],
+          "entry": "Step 4: Feats - slot kinds",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.rage-powers",
+      "name": "Rage powers",
+      "kind": "choice-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [501, 513],
+          "entry": "Step 5: Class Features - choice slots",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.rogue-talents",
+      "name": "Rogue talents",
+      "kind": "choice-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [501, 513],
+          "entry": "Step 5: Class Features - choice slots",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.favored-enemies",
+      "name": "Favored enemies",
+      "kind": "choice-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [501, 513],
+          "entry": "Step 5: Class Features - choice slots",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.favored-terrains",
+      "name": "Favored terrains",
+      "kind": "choice-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [501, 513],
+          "entry": "Step 5: Class Features - choice slots",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.ranger-combat-styles",
+      "name": "Ranger combat styles",
+      "kind": "choice-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [501, 513],
+          "entry": "Step 5: Class Features - choice slots",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.hunters-bond",
+      "name": "Hunter's bond",
+      "kind": "choice-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [501, 513],
+          "entry": "Step 5: Class Features - choice slots",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.cleric-domains",
+      "name": "Cleric domains",
+      "kind": "choice-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [501, 513],
+          "entry": "Step 5: Class Features - choice slots",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.sorcerer-bloodlines",
+      "name": "Sorcerer bloodlines",
+      "kind": "choice-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [501, 513],
+          "entry": "Step 5: Class Features - choice slots",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.wizard-schools",
+      "name": "Wizard schools",
+      "kind": "choice-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [501, 513],
+          "entry": "Step 5: Class Features - choice slots",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.familiar-bond",
+      "name": "Familiar/bond choices",
+      "kind": "choice-slot",
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-class-tables",
+      "sourceRef": [
+        {
+          "sourceId": "source.npc-gap-matrix",
+          "section": "NPC Source-Gap Matrix",
+          "txtLines": [18, 18],
+          "entry": "Five NPC class tables through level 20",
+          "provenanceStatus": "catalog-gap"
+        },
+        {
+          "sourceId": "source.npc-mode-plan",
+          "section": "NPC_MODE_PLAN.md",
+          "txtLines": [501, 513],
+          "entry": "Step 5: Class Features - choice slots",
+          "provenanceStatus": "structural-reference"
+        }
+      ]
+    }
+  ]
+}

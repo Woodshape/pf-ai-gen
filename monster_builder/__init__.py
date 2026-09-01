@@ -2,12 +2,14 @@
 
 import os
 
-from .catalog import Catalog, CatalogError
-from .engine import BoundaryError, Engine
+from .catalog import Catalog, CatalogError, CatalogRegistry
+from .engine import Engine
+from .npc_catalog import NpcCatalog
+from .errors import BoundaryError
 
 Application = Engine
 
-__all__ = ["Application", "BoundaryError", "Catalog", "CatalogError", "Engine", "execute"]
+__all__ = ["Application", "BoundaryError", "Catalog", "CatalogError", "CatalogRegistry", "Engine", "NpcCatalog", "execute"]
 
 _default_engine: Engine | None = None
 

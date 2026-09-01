@@ -36,7 +36,17 @@ def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dic
     concept = snapshot.get("concept") if isinstance(snapshot.get("concept"), Mapping) else {}
     selections = snapshot.get("selections") if isinstance(snapshot.get("selections"), Mapping) else {}
     annotations = snapshot.get("fieldAnnotations") if isinstance(snapshot.get("fieldAnnotations"), Mapping) else {}
+    creation_system = str(snapshot.get("creationSystem", "simple-monster"))
     name, cr, hit_dice = str(concept.get("name", "")), result.get("cr", selections.get("cr")), result.get("hitDice")
+    level = result.get("level", result.get("totalLevel"))
+    recommended_cr = result.get("recommendedCR")
+    if creation_system == "npc":
+        if recommended_cr is not None:
+            header_label = f"{name} CR {recommended_cr}/Level {level}" if level is not None else f"{name} CR {recommended_cr}"
+        else:
+            header_label = f"{name} Level {level}" if level is not None else name
+    else:
+        header_label = f"{name} CR/HD {cr}" if cr == hit_dice else f"{name} CR {cr}/HD {hit_dice}"
     skills = result.get("skills") if isinstance(result.get("skills"), Mapping) else {}
     basics = {
         "initiative": result.get("initiative"),
@@ -44,6 +54,8 @@ def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dic
         "senses": copy.deepcopy(result.get("senses", [])),
         "size": _human(result.get("sizeId", selections.get("sizeId", ""))),
         "speed": copy.deepcopy(result.get("speed", selections.get("speed", {}))),
+        "alignment": result.get("alignment"),
+        "religion": result.get("religion"),
     }
     raw_defenses = result.get("defenses") if isinstance(result.get("defenses"), Mapping) else {}
     defense_fields = [
@@ -85,14 +97,35 @@ def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dic
             specials.append({"name": str(value.get("name", value.get("graftId", "Ability"))), "text": str(value.get("text", value.get("ruleText", "")))})
 
     statistic_fields = []
+    if creation_system == "npc" and isinstance(result.get("abilityScores"), Mapping) and result["abilityScores"]:
+        statistic_fields.append(_field("abilityScores", "Ability Scores", result["abilityScores"], annotations, _scores(result["abilityScores"])))
     abilities = result.get("abilityModifiers") if isinstance(result.get("abilityModifiers"), Mapping) else {}
     if abilities:
         statistic_fields.append(_field("abilityModifiers", "Ability Modifiers", abilities, annotations, _abilities(abilities)))
+    if creation_system == "npc":
+        for key, label, text in (
+            ("npcCategory", "NPC Category", _human(result.get("npcCategory", ""))),
+            ("hitDiceExpression", "Hit Dice", str(result.get("hitDiceExpression", ""))),
+            ("bab", "BAB", _signed(result.get("bab"))),
+            ("classProgression", "Class Progression", _class_progression(result.get("classProgression"))),
+        ):
+            if result.get(key) not in (None, [], {}, ""):
+                statistic_fields.append(_field(key, label, result[key], annotations, text))
     if skills:
         statistic_fields.append(_field("skills", "Skills", skills, annotations, ", ".join(f"{_human(key)} {_signed(value)}" for key, value in sorted(skills.items()))))
     for key, label in (("cmb", "CMB"), ("abilityDC", "Ability DC"), ("spellDC", "Spell DC"), ("concentration", "Concentration")):
         if result.get(key) is not None:
             statistic_fields.append(_field(key, label, result[key], annotations, _signed(result[key]) if key in {"cmb", "concentration"} else str(result[key])))
+    if creation_system == "npc":
+        for key, label, text in (
+            ("feats", "Feats", _named_entries(result.get("feats"), "featId")),
+            ("classFeatures", "Class Features", _named_entries(result.get("classFeatures"), "featureId")),
+            ("gear", "Gear", _gear_entries(result.get("gear"))),
+            ("gearBudget", "Gear Budget", _gear_budget(result.get("gearBudget"))),
+            ("languages", "Languages", _value_text(result.get("languages", []))),
+        ):
+            if result.get(key) not in (None, [], {}, ""):
+                statistic_fields.append(_field(key, label, result[key], annotations, text))
     spells = copy.deepcopy(result.get("spells", [])) if isinstance(result.get("spells"), list) else []
     spellcasting = {
         key: copy.deepcopy(result[key])
@@ -115,12 +148,15 @@ def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dic
         "monsterId": copy.deepcopy(snapshot.get("monsterId")),
         "sourceDraft": copy.deepcopy(snapshot.get("sourceDraft")),
         "catalogVersion": copy.deepcopy(snapshot.get("catalogVersion")),
+        "creationSystem": creation_system,
         "mode": copy.deepcopy(snapshot.get("mode")),
         "header": {
             "name": name,
             "cr": cr,
+            "recommendedCR": recommended_cr,
+            "level": level,
             "hitDice": hit_dice,
-            "label": (f"{name} CR/HD {cr}" if cr == hit_dice else f"{name} CR {cr}/HD {hit_dice}").strip(),
+            "label": header_label.strip(),
         },
         "basics": basics,
         "defenses": defenses,
@@ -169,7 +205,7 @@ def render_markdown(snapshot: Mapping[str, Any], profile: str = "sheet") -> str:
     if model.get("catalogVersion"):
         lines.extend(["", f"_Generated from catalog {model['catalogVersion']}._"])
     if profile == "audit":
-        for key, title in _AUDIT_HEADINGS:
+        for key, title in _audit_headings(model["creationSystem"]):
             value = model["audit"][key]
             if value not in (None, {}, [], ""):
                 lines.extend(["", f"## {title}", "```json", json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True), "```"])
@@ -192,7 +228,7 @@ def render_html(snapshot: Mapping[str, Any], profile: str = "sheet") -> str:
     if model.get("catalogVersion"):
         parts.append(f'<footer>Generated from catalog {_esc(model["catalogVersion"])}</footer>')
     if profile == "audit":
-        for key, title in _AUDIT_HEADINGS:
+        for key, title in _audit_headings(model["creationSystem"]):
             value = model["audit"][key]
             if value not in (None, {}, [], ""):
                 parts.append(f'<section class="audit"><h2>{_esc(title)}</h2><pre>{_esc(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True))}</pre></section>')
@@ -207,6 +243,15 @@ _AUDIT_HEADINGS = (
     ("creationDecisions", "CREATION DECISIONS: STEPS 1–9"), ("validationFindings", "VALIDATION FINDINGS"),
     ("sources", "SOURCES"), ("derivationTrace", "DERIVATION TRACE"),
 )
+
+
+def _audit_headings(creation_system: str) -> tuple[tuple[str, str], ...]:
+    if creation_system != "npc":
+        return _AUDIT_HEADINGS
+    return tuple(
+        (key, "CREATION DECISIONS: STEPS 1–8" if key == "creationDecisions" else title)
+        for key, title in _AUDIT_HEADINGS
+    )
 
 
 def _field(key: str, label: str, value: Any, annotations: Mapping[str, Any], text: str | None = None) -> dict[str, Any]:
@@ -314,7 +359,8 @@ def _spell_lines(statistics: Mapping[str, Any]) -> list[str]:
             name = str(spell.get("name", _human(spell.get("spellId", "Spell"))))
             details = []
             for key, label in (
-                ("spellDC", "DC"), ("baseLevel", "base level"), ("effectiveLevel", "effective level"),
+                ("spellDC", "DC"), ("spellLevel", "level"), ("baseLevel", "base level"),
+                ("effectiveLevel", "effective level"), ("usesPerDay", "uses/day"),
                 ("spellLevelSource", "source"), ("metamagic", "metamagic"), ("role", "role"), ("sourceBand", "band"),
             ):
                 if spell.get(key) is not None:
@@ -325,11 +371,70 @@ def _spell_lines(statistics: Mapping[str, Any]) -> list[str]:
     return lines
 
 
-def _abilities(values: Mapping[str, Any]) -> str:
+def _ability_values(values: Mapping[str, Any], *, signed: bool) -> str:
     labels = {"strength": "Str", "dexterity": "Dex", "constitution": "Con", "intelligence": "Int", "wisdom": "Wis", "charisma": "Cha"}
     order = tuple(labels)
     keys = [key for key in order if key in values] + sorted(key for key in values if key not in order)
-    return ", ".join(f"{labels.get(key, _human(key))} {_signed(values[key])}" for key in keys)
+    render = _signed if signed else str
+    return ", ".join(f"{labels.get(key, _human(key))} {render(values[key])}" for key in keys)
+
+
+def _abilities(values: Mapping[str, Any]) -> str:
+    return _ability_values(values, signed=True)
+
+
+def _scores(values: Mapping[str, Any]) -> str:
+    return _ability_values(values, signed=False)
+
+
+def _class_progression(value: Any) -> str:
+    if not isinstance(value, list):
+        return _value_text(value)
+    entries = []
+    for item in value:
+        if isinstance(item, Mapping):
+            name = item.get("name", _human(item.get("classId", "Class")))
+            levels = item.get("levels", item.get("level"))
+            entries.append(f"{name} {levels}" if levels is not None else str(name))
+        else:
+            entries.append(str(item))
+    return ", ".join(entries)
+
+
+def _named_entries(value: Any, id_key: str) -> str:
+    if not isinstance(value, list):
+        return _value_text(value)
+    entries = []
+    for item in value:
+        if isinstance(item, Mapping):
+            entries.append(str(item.get("name", _human(item.get(id_key, "")))))
+        else:
+            entries.append(str(item))
+    return ", ".join(entry for entry in entries if entry)
+
+
+def _gear_entries(value: Any) -> str:
+    if not isinstance(value, list):
+        return _value_text(value)
+    entries = []
+    for item in value:
+        if isinstance(item, Mapping):
+            name = str(item.get("name", _human(item.get("itemId", "Item"))))
+            quantity = item.get("quantity")
+            entries.append(f"{name} ×{quantity}" if quantity not in (None, 1) else name)
+        else:
+            entries.append(str(item))
+    return ", ".join(entries)
+
+
+def _gear_budget(value: Any) -> str:
+    if not isinstance(value, Mapping):
+        return _value_text(value)
+    fields = []
+    for key, label in (("budgetCp", "budget"), ("spentCp", "spent"), ("deltaCp", "delta")):
+        if value.get(key) is not None:
+            fields.append(f"{value[key]} cp {label}")
+    return ", ".join(fields) if fields else _value_text(value)
 
 
 def _signed(value: Any) -> str:

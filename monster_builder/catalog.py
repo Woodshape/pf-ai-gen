@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+from collections.abc import Callable
 from typing import Any
 
 
@@ -295,3 +296,48 @@ class Catalog:
         if alias in entries:
             return entries[alias].get("id", alias), entries[alias]
         raise CatalogError(f"unknown {kind} id: {value}")
+
+
+class CatalogRegistry:
+    """Lazily load the independently versioned catalog for a creation system."""
+
+    SIMPLE_MONSTER = "simple-monster"
+    NPC = "npc"
+
+    def __init__(
+        self,
+        simple_monster: Catalog | None = None,
+        *,
+        loaders: dict[str, Callable[[], Any]] | None = None,
+    ):
+        self._catalogs: dict[str, Any] = {}
+        if simple_monster is not None:
+            self._catalogs[self.SIMPLE_MONSTER] = simple_monster
+        self._loaders: dict[str, Callable[[], Any]] = {
+            self.SIMPLE_MONSTER: Catalog.load,
+            self.NPC: self._load_npc,
+        }
+        if loaders:
+            self._loaders.update(loaders)
+
+    @staticmethod
+    def _load_npc() -> Any:
+        try:
+            from .npc_catalog import NpcCatalog
+        except ModuleNotFoundError as exc:
+            if exc.name != "monster_builder.npc_catalog":
+                raise
+            raise CatalogError("NPC catalog loader is not installed") from exc
+        return NpcCatalog.load()
+
+    def register(self, system: str, catalog: Any) -> None:
+        if system not in self._loaders:
+            raise CatalogError(f"unknown creation system: {system}")
+        self._catalogs[system] = catalog
+
+    def for_system(self, system: str) -> Any:
+        if system not in self._loaders:
+            raise CatalogError(f"unknown creation system: {system}")
+        if system not in self._catalogs:
+            self._catalogs[system] = self._loaders[system]()
+        return self._catalogs[system]
