@@ -1064,6 +1064,70 @@
         "entry": "Core weapons, armor, goods, and required magic items",
         "provenanceStatus": "catalog-gap"
       }
+    },
+    {
+      "id": "item.wand-of-burning-hands",
+      "name": "Wand of Burning Hands",
+      "catalogStatus": "resolved",
+      "category": "magic",
+      "priceCp": 75000,
+      "weightLb": 0,
+      "effects": {
+        "spellId": "spell.burning-hands",
+        "spellLevel": 1,
+        "casterLevel": 1,
+        "charges": 50,
+        "activation": "spell-trigger"
+      },
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-wands",
+          "section": "Wands; Table 15-17",
+          "txtLines": [3, 21],
+          "entry": "1st-level wand formula and price",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Wands&Category=Magic%20Items"
+        },
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Step 6: Gear categories",
+          "txtLines": [77, 77],
+          "entry": "Harmful spellcaster wands count as weapons",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+          "provenanceStatus": "resolved"
+        }
+      ],
+      "npcGearCategory": "weapons"
+    },
+    {
+      "id": "item.cloak-of-resistance-1",
+      "name": "Cloak of Resistance +1",
+      "catalogStatus": "resolved",
+      "category": "magic",
+      "priceCp": 100000,
+      "weightLb": 1,
+      "effects": {
+        "resistanceBonus": 1
+      },
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-cloak-of-resistance",
+          "section": "Cloak of Resistance",
+          "txtLines": [1, 11],
+          "entry": "Cloak of Resistance +1",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=Cloak%20of%20Resistance1"
+        },
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Step 6: Gear categories",
+          "txtLines": [78, 78],
+          "entry": "Save-augmenting magic items count as protection",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+          "provenanceStatus": "resolved"
+        }
+      ],
+      "npcGearCategory": "protection"
     }
   ]
 }

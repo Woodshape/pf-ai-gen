@@ -237,6 +237,34 @@
       "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Scorching%20Ray",
       "retrievedAt": "2026-09-02T10:55:56Z",
       "description": "Official current Archives of Nethys Scorching Ray spell page."
+    },
+    "aon-cloak-of-resistance-html": {
+      "file": "sources/reference/aonprd/cloak-of-resistance.html",
+      "sha256": "2ce06482d0fe2ba47aac1a05d527832d4820e3d7cefff2942b6c581e880921bb",
+      "officialUrl": "https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=Cloak%20of%20Resistance1",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Cloak of Resistance page."
+    },
+    "aon-skill-bluff-html": {
+      "file": "sources/reference/aonprd/skill-bluff.html",
+      "sha256": "d853041c76e048a3965bf21627c6e9632de4d98035766ee8b6a12d1a619c4199",
+      "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Bluff",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Bluff skill page."
+    },
+    "aon-skill-spellcraft-html": {
+      "file": "sources/reference/aonprd/skill-spellcraft.html",
+      "sha256": "451d15f593dcfd9d14d923ae99d1653e6a4d6b7ea4e976edb39cfe89c3128c2f",
+      "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Spellcraft",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Spellcraft skill page."
+    },
+    "aon-spell-grease-html": {
+      "file": "sources/reference/aonprd/spell-grease.html",
+      "sha256": "1143bd067b9199a4a7b22701f29b0081e3f3ee94685eb6b9c6ac0d80c3820870",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Grease",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Grease spell page."
     }
   },
   "extracts": {
@@ -600,6 +628,54 @@
       ],
       "contents": "Official current Archives of Nethys Scorching Ray spell page",
       "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-cloak-of-resistance": {
+      "file": "sources/npc/aonprd/cloak-of-resistance.txt",
+      "sha256": "49a91f48c74be1ec7f01ed11f3d4c80c14133b60f5cc1c23250434297b8d7176",
+      "derivedFrom": "aon-cloak-of-resistance-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        11
+      ],
+      "contents": "Cloak of Resistance prices and saving-throw effects",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-skill-bluff": {
+      "file": "sources/npc/aonprd/skill-bluff.txt",
+      "sha256": "f79d3c05889b0e2b54f3c48d1fd9c64a09ba705bf4f89a07dc095ecc155ef73d",
+      "derivedFrom": "aon-skill-bluff-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        33
+      ],
+      "contents": "Bluff skill rules",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-skill-spellcraft": {
+      "file": "sources/npc/aonprd/skill-spellcraft.txt",
+      "sha256": "31d7d09a88421c45a45cf4d5a2452e1d6de4a75ac027d7f271b9ae0be223e7c7",
+      "derivedFrom": "aon-skill-spellcraft-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        31
+      ],
+      "contents": "Spellcraft skill rules",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-spell-grease": {
+      "file": "sources/npc/aonprd/spell-grease.txt",
+      "sha256": "f5955826cec6d9c6be4ae6028266fab81797e90536d8d739b1172b1ffd8f899d",
+      "derivedFrom": "aon-spell-grease-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        30
+      ],
+      "contents": "Grease spell rules",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
     }
   },
   "fragments": {
@@ -632,17 +708,17 @@
     "core-rulebook-pc-class-pages": {
       "needed": "PC classes other than the source-gated Sorcerer levels 1–5 slice",
       "availability": "Available as official Archives of Nethys class pages but not yet archived locally.",
-      "consequence": "Sorcerer levels 1–5 can be hydrated; other heroic PC-class rows remain source gaps."
+      "consequence": "Sorcerer levels 1–5 are hydrated; other heroic PC-class rows remain source gaps."
     },
     "core-rulebook-magic-items": {
       "needed": "Magic items other than the source-gated wand rules and selected wand records",
       "availability": "Available in the official Archives of Nethys Core rules but not yet archived locally.",
-      "consequence": "Selected wand records can be hydrated; other heroic magic-item records remain source gaps."
+      "consequence": "The bounded wand and cloak records are hydrated; other heroic magic-item records remain source gaps."
     },
     "core-rulebook-spell-descriptions": {
       "needed": "Spell descriptions other than the source-gated Goblin Sorcerer loadout",
       "availability": "Available as official Archives of Nethys spell pages but not yet archived locally.",
-      "consequence": "Selected Sorcerer spells can be hydrated; all other spell rules remain gaps."
+      "consequence": "The selected Sorcerer spells are hydrated; all other spell rules remain gaps."
     },
     "core-rulebook-conditions": {
       "needed": "Condition definitions used by class features, feats, equipment, and spells",

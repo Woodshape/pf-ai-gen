@@ -132,17 +132,17 @@
     {
       "id": "skill.bluff",
       "name": "Bluff",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
+      "catalogStatus": "resolved",
+      "keyAbility": "charisma",
+      "trainedOnly": false,
+      "armorCheckPenalty": false,
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-skill-bluff",
+        "section": "Bluff",
+        "txtLines": [1, 33],
+        "entry": "Bluff",
+        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Bluff",
+        "provenanceStatus": "resolved"
       }
     },
     {
@@ -500,17 +500,17 @@
     {
       "id": "skill.spellcraft",
       "name": "Spellcraft",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
+      "catalogStatus": "resolved",
+      "keyAbility": "intelligence",
+      "trainedOnly": true,
+      "armorCheckPenalty": false,
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-skill-spellcraft",
+        "section": "Spellcraft",
+        "txtLines": [1, 31],
+        "entry": "Spellcraft",
+        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Spellcraft",
+        "provenanceStatus": "resolved"
       }
     },
     {
@@ -548,17 +548,17 @@
     {
       "id": "skill.use-magic-device",
       "name": "Use Magic Device",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
+      "catalogStatus": "resolved",
+      "keyAbility": "charisma",
+      "trainedOnly": true,
+      "armorCheckPenalty": false,
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-use-magic-device",
+        "section": "Use Magic Device",
+        "txtLines": [1, 40],
+        "entry": "Use Magic Device",
+        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Use%20Magic%20Device",
+        "provenanceStatus": "resolved"
       }
     }
   ]

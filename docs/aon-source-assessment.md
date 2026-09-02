@@ -3,9 +3,9 @@
 ## Conclusion
 
 Archives of Nethys is sufficient for the planned Core-only class-based NPC
-system. A full Core Rulebook PDF is not currently needed. The Phase 2 human
-warrior levels 1–5 slice is now fully source-unblocked by local, hash-anchored
-AoN snapshots.
+system. A full Core Rulebook PDF is not currently needed. The human warrior
+levels 1–5 and level-5 elemental-fire goblin Sorcerer slices are fully
+source-backed by local, hash-anchored AoN snapshots.
 
 Builds must consume the local snapshots, not live HTTP responses. Raw pages and
 their SHA-256 hashes are recorded in `sources/npc/MANIFEST.json`; normalized
@@ -36,9 +36,11 @@ slice: basic ability arrays, human racial traits, warrior HD/BAB/saves/skills,
 level advancement, skill totals, general feats, mundane weapons and armor, NPC
 gear budgets, and combat statistics.
 
-Later phases should archive AoN's individual PC-class pages, magic-item rules,
-spell pages, and condition definitions immediately before those domains are
-implemented. These are acquisition tasks, not reasons to request the full PDF.
+The goblin Sorcerer phase additionally archives current-site pages for Goblin,
+Sorcerer, the Elemental bloodline, fourteen selected spells, three selected
+skills, wands, and a cloak of resistance +1. Later phases should continue to
+archive only the individual class, item, spell, and condition pages they need.
+These are acquisition tasks, not reasons to request the full PDF.
 Official errata is still required only if a printed-example discrepancy such as
 Kiramor's values must be adjudicated.
 

@@ -31,17 +31,27 @@
     {
       "id": "npc-ability-array.heroic",
       "name": "Heroic NPC ability array",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-ability-arrays",
+      "catalogStatus": "resolved",
       "method": "assigned-array",
-      "scores": null,
+      "scores": [15, 14, 13, 12, 10, 8],
       "abilityOrder": ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"],
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [19, 19],
-        "entry": "Basic and heroic ability arrays",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-creating-npcs",
+        "section": "Step 2: Determine Ability Scores; Table 14-6",
+        "txtLines": [12, 32],
+        "entry": "Heroic NPC array and Charisma-based arcane preset",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+      },
+      "presets": {
+        "arcane": {
+          "strength": 8,
+          "dexterity": 14,
+          "constitution": 12,
+          "intelligence": 13,
+          "wisdom": 10,
+          "charisma": 15
+        }
       }
     }
   ]

@@ -1,8 +1,4 @@
-"""Source-backed class-based NPC creation.
-
-The production slice intentionally supports only Core human warriors, levels 1–5.
-Everything else remains represented by explicit catalog gaps instead of guessed rules.
-"""
+"""Source-backed class-based NPC creation for bounded production slices."""
 
 from __future__ import annotations
 
@@ -100,6 +96,7 @@ class NpcCreation(CreationSystem):
         class_record = self._optional("class", progression[0].get("classId")) if progression and isinstance(progression[0], dict) else None
         feat_slots = self._feat_slots(level, race)
         gear_budget = self._gear_budget(selections, level)
+        spell_counts = copy.deepcopy((class_record or {}).get("levels", {}).get(str(level), {}).get("spellsKnown", {}))
         skill_count = None
         if class_record and class_record.get("catalogStatus") == "resolved":
             intelligence = self._preview_intelligence(selections, race)
@@ -111,7 +108,7 @@ class NpcCreation(CreationSystem):
             self._requirement("/selections/raceId", "Race", "catalog-id", self._catalog_values("race")),
             self._requirement("/selections/classProgression/0/classId", "Class", "catalog-id", self._catalog_values("class")),
             self._requirement("/selections/classProgression/0/levels", "Class levels", "integer"),
-            self._requirement("/selections/abilityGeneration/method", "Ability method", "enum", ["melee-preset", "assigned-array"]),
+            self._requirement("/selections/abilityGeneration/method", "Ability method", "enum", ["melee-preset", "arcane-preset", "assigned-array"]),
             self._requirement("/selections/skillGeneration/method", "Skill method", "enum", ["simplified"]),
             self._requirement("/selections/skillGeneration/skills", "Skills", "catalog-id-array", self._catalog_values("skill")),
             self._requirement("/selections/gearProfile/experienceProgression", "Experience progression", "enum", ["medium"]),
@@ -123,6 +120,13 @@ class NpcCreation(CreationSystem):
                 requirements.append(self._requirement(
                     f"/selections/racialChoices/{slot['choiceId']}", slot.get("name", slot["choiceId"]), "enum", slot.get("allowedValues", [])
                 ))
+        if class_record and class_record["id"] == "npc-class.sorcerer":
+            requirements.append(self._requirement(
+                "/selections/classFeatureChoices/bloodline", "Bloodline", "enum", ["elemental-fire"]
+            ))
+            requirements.append(self._requirement(
+                "/selections/spellLoadout/known", "Spells known", "spell-loadout"
+            ))
 
         selected_skills = selections.get("skillGeneration", {}).get("skills", []) if isinstance(selections.get("skillGeneration"), dict) else []
         selected_feats = selections.get("feats", []) if isinstance(selections.get("feats"), list) else []
@@ -138,7 +142,7 @@ class NpcCreation(CreationSystem):
             "selectionBudgets": {
                 "skills": {"method": "simplified", "count": skill_count, "selected": len(selected_skills)},
                 "feats": {"slots": feat_slots, "selected": len(selected_feats)},
-                "spells": {"required": False, "levels": {}},
+                "spells": {"required": bool(spell_counts), "levels": spell_counts},
                 "gear": {
                     **(gear_budget or {"budgetCp": None, "categories": None}),
                     "spentCp": self._preview_gear_cost(gear),
@@ -216,15 +220,14 @@ class NpcCreation(CreationSystem):
 
         if race.get("catalogStatus") != "resolved":
             issues.append(self._gap(race, "/selections/raceId"))
-        if progression[0]["classId"] != "npc-class.warrior" or not 1 <= total_level <= 5:
+        slice_id = (selections["raceId"], progression[0]["classId"], total_level)
+        supported = (
+            slice_id[0] == "npc-race.human" and slice_id[1] == "npc-class.warrior" and 1 <= total_level <= 5
+        ) or slice_id == ("npc-race.goblin", "npc-class.sorcerer", 5)
+        if not supported:
             issues.append(self._issue(
-                "npc.slice-unsupported", "production evaluation currently supports human warriors of levels 1–5",
+                "npc.slice-unsupported", "production evaluation supports human warriors 1–5 and goblin sorcerers at level 5",
                 path="/selections/classProgression", source_refs=_refs(class_records[0]) if class_records else [],
-            ))
-        if selections["raceId"] != "npc-race.human":
-            issues.append(self._issue(
-                "npc.slice-unsupported", "production evaluation currently supports the human race",
-                path="/selections/raceId", source_refs=_refs(race),
             ))
         if issues:
             return self._evaluation("invalid", mode, issues)
@@ -232,6 +235,8 @@ class NpcCreation(CreationSystem):
         class_record, row = class_records[0], rows[0]
         scores, ability_refs, ability_issues = self._abilities(selections, race, total_level)
         issues.extend(ability_issues)
+        if not scores:
+            return self._evaluation("invalid", mode, issues)
         gear_result, gear_refs, gear_issues, gear_warnings = self._gear(selections, total_level)
         issues.extend(gear_issues)
         warnings.extend(gear_warnings)
@@ -239,19 +244,20 @@ class NpcCreation(CreationSystem):
         issues.extend(feat_issues)
         skills, skill_refs, skill_issues = self._skills(selections, race, class_record, total_level, scores, gear_result)
         issues.extend(skill_issues)
-        if selections.get("classFeatureChoices"):
-            issues.append(self._issue("npc.slice-unsupported", "class feature choices are not part of the production slice", path="/selections/classFeatureChoices"))
-        if selections.get("spellLoadout"):
-            issues.append(self._issue("npc.slice-unsupported", "spells are not part of the production slice", path="/selections/spellLoadout"))
+        modifiers = {ability: _ability_modifier(score) for ability, score in scores.items()}
+        class_features, feature_refs, feature_issues = self._selected_class_features(selections, race, class_record, total_level, modifiers)
+        issues.extend(feature_issues)
+        spells, spell_refs, spell_issues = self._spells(selections, class_record, row, total_level, modifiers)
+        issues.extend(spell_issues)
         if issues:
             return self._evaluation("invalid", mode, issues, warnings)
 
-        modifiers = {ability: _ability_modifier(score) for ability, score in scores.items()}
         class_refs = _dedupe_refs(_refs(class_record), _refs(row))
         combat_ref = self._source_ref("source.aon-combat", "Combat Statistics", [24, 58])
         maneuver_ref = self._source_ref("source.aon-combat", "Combat Maneuvers", [536, 544])
         hp_rule = self._record("derivedRule", "npc-rule.average-hp")
-        hp = math.floor(total_level * ((10 + 1) / 2 + modifiers["constitution"]))
+        die_size = int(class_record["hitDie"].removeprefix("d"))
+        hp = math.floor(total_level * ((die_size + 1) / 2 + modifiers["constitution"]))
         bab = row["bab"]
         size_modifiers = race.get("sizeModifiers", {})
         equipped = [entry for entry in gear_result["items"] if entry["equipped"]]
@@ -260,18 +266,18 @@ class NpcCreation(CreationSystem):
         max_dex_values = [entry["effects"]["maxDex"] for entry in equipped if "maxDex" in entry["effects"]]
         dex_to_ac = min([modifiers["dexterity"], *max_dex_values]) if max_dex_values else modifiers["dexterity"]
         feat_saves = feat_effects.get("saves", {})
+        resistance_bonus = max((entry["effects"].get("resistanceBonus", 0) for entry in equipped), default=0)
         defenses = {
             "ac": 10 + armor_bonus + shield_bonus + dex_to_ac + size_modifiers.get("ac", 0),
             "touch": 10 + modifiers["dexterity"] + size_modifiers.get("ac", 0),
             "flatFooted": 10 + armor_bonus + shield_bonus + size_modifiers.get("ac", 0),
-            "fortitude": row["fortitude"] + modifiers["constitution"] + feat_saves.get("fortitude", 0),
-            "reflex": row["reflex"] + modifiers["dexterity"] + feat_saves.get("reflex", 0),
-            "will": row["will"] + modifiers["wisdom"] + feat_saves.get("will", 0),
+            "fortitude": row["fortitude"] + modifiers["constitution"] + feat_saves.get("fortitude", 0) + resistance_bonus,
+            "reflex": row["reflex"] + modifiers["dexterity"] + feat_saves.get("reflex", 0) + resistance_bonus,
+            "will": row["will"] + modifiers["wisdom"] + feat_saves.get("will", 0) + resistance_bonus,
         }
         attacks = self._attacks(equipped, bab, modifiers, size_modifiers)
         cmb = bab + modifiers["strength"] + size_modifiers.get("cmb", 0)
         cmd = 10 + bab + modifiers["strength"] + modifiers["dexterity"] + size_modifiers.get("cmd", 0)
-        class_features = self._class_features(class_record, total_level)
         source_groups = {
             "abilities": ability_refs,
             "class": class_refs,
@@ -281,6 +287,8 @@ class NpcCreation(CreationSystem):
             "skills": skill_refs,
             "combat": _dedupe_refs(class_refs, ability_refs, gear_refs, [combat_ref]),
             "maneuvers": _dedupe_refs(class_refs, ability_refs, [maneuver_ref]),
+            "features": _dedupe_refs(feature_refs, ability_refs, class_refs, [combat_ref]),
+            "spells": _dedupe_refs(spell_refs, ability_refs, class_refs),
         }
         canonical = {
             "name": draft.get("concept", {}).get("name", "Unnamed NPC"),
@@ -288,7 +296,7 @@ class NpcCreation(CreationSystem):
             "statblockUse": selections["statblockUse"],
             "level": total_level,
             "totalLevel": total_level,
-            "npcCategory": "basic",
+            "npcCategory": "heroic" if class_record["category"] == "pc" else "basic",
             "raceId": race["id"],
             "raceName": race["name"],
             "classProgression": [{"classId": class_record["id"], "className": class_record["name"], "levels": total_level}],
@@ -304,7 +312,7 @@ class NpcCreation(CreationSystem):
             "skills": skills,
             "feats": feats,
             "classFeatures": class_features,
-            "spells": [],
+            "spells": spells,
             "gearBudget": gear_result["budget"],
             "gear": gear_result["items"],
             "speed": copy.deepcopy(race.get("speed", {"land": 30})),
@@ -315,17 +323,19 @@ class NpcCreation(CreationSystem):
         }
         trace = [
             self._trace("/canonical/level", total_level, "sum selected class levels", class_refs),
-            self._trace("/canonical/abilityScores", scores, "apply the basic array, racial choice, and level increases", ability_refs),
-            self._trace("/canonical/hp", hp, "floor(level × (average d10 + Constitution modifier))", source_groups["hp"]),
-            self._trace("/canonical/bab", bab, "read the warrior level row", class_refs),
+            self._trace("/canonical/abilityScores", scores, "apply the NPC array, racial adjustments, and level increases", ability_refs),
+            self._trace("/canonical/hp", hp, f"floor(level × (average d{die_size} + Constitution modifier))", source_groups["hp"]),
+            self._trace("/canonical/bab", bab, "read the selected class level row", class_refs),
             self._trace("/canonical/defenses", defenses, "combine class saves, abilities, armor, shield, and feat bonuses", source_groups["combat"]),
             self._trace("/canonical/initiative", canonical["initiative"], "Dexterity modifier plus feat bonuses", _dedupe_refs(ability_refs, feat_refs, [combat_ref])),
             self._trace("/canonical/attacks", attacks, "BAB plus ability and size modifiers; weapon die plus Strength", source_groups["combat"]),
             self._trace("/canonical/cmb", cmb, "BAB + Strength modifier + size modifier", source_groups["maneuvers"]),
             self._trace("/canonical/cmd", cmd, "10 + BAB + Strength modifier + Dexterity modifier + size modifier", source_groups["maneuvers"]),
             self._trace("/canonical/skills", skills, "level ranks plus class-skill bonus, ability modifier, and armor check penalty", skill_refs),
-            self._trace("/canonical/feats", feats, "fill general and human bonus feat slots", feat_refs),
-            self._trace("/canonical/gearBudget", gear_result["budget"], "read the basic NPC level row from Table 14-9", gear_refs),
+            self._trace("/canonical/feats", feats, "fill granted feat slots", feat_refs),
+            self._trace("/canonical/classFeatures", class_features, "apply automatic features and selected class-feature options", source_groups["features"]),
+            self._trace("/canonical/spells", spells, "validate spells known, add bloodline spells, and apply Charisma bonus spells", source_groups["spells"]),
+            self._trace("/canonical/gearBudget", gear_result["budget"], "read the NPC category and level row from Table 14-9", gear_refs),
         ]
         return self._evaluation("valid", mode, [], warnings, canonical, trace)
 
@@ -362,7 +372,7 @@ class NpcCreation(CreationSystem):
             if not isinstance(ability, dict):
                 raise BoundaryError("selection.type-invalid", "abilityGeneration must be an object", "/selections/abilityGeneration")
             self._reject_unknown(ability, {"method", "arrayId", "scores", "assignments", "levelIncreases", "preset", "role", "rationale"}, "/selections/abilityGeneration")
-            if "method" in ability and ability["method"] not in {"melee-preset", "skill-preset", "assigned-array", "custom", "rolled", "purchase"}:
+            if "method" in ability and ability["method"] not in {"melee-preset", "arcane-preset", "skill-preset", "assigned-array", "custom", "rolled", "purchase"}:
                 raise BoundaryError("selection.value-invalid", "abilityGeneration.method is not supported", "/selections/abilityGeneration/method")
             if "arrayId" in ability and not isinstance(ability["arrayId"], str):
                 raise BoundaryError("selection.type-invalid", "abilityGeneration.arrayId must be a string", "/selections/abilityGeneration/arrayId")
@@ -391,6 +401,15 @@ class NpcCreation(CreationSystem):
                 raise BoundaryError("selection.type-invalid", "skills must be an array of IDs", "/selections/skillGeneration/skills")
             if "ranks" in skills and (not isinstance(skills["ranks"], dict) or any(not isinstance(key, str) or not _is_int(value) or value < 0 for key, value in skills["ranks"].items())):
                 raise BoundaryError("selection.type-invalid", "precise ranks must map skill IDs to non-negative integers", "/selections/skillGeneration/ranks")
+
+        spell_loadout = selections.get("spellLoadout")
+        if isinstance(spell_loadout, dict) and "known" in spell_loadout:
+            known = spell_loadout["known"]
+            if not isinstance(known, dict) or any(
+                not str(level).isdigit() or not isinstance(spells, list) or any(not isinstance(spell, str) for spell in spells)
+                for level, spells in known.items()
+            ):
+                raise BoundaryError("selection.type-invalid", "spellLoadout.known must map spell levels to arrays of IDs", "/selections/spellLoadout/known")
 
         feats = selections.get("feats")
         if feats is not None:
@@ -449,6 +468,11 @@ class NpcCreation(CreationSystem):
                 lookups.append(("skill", skill_id, f"/selections/skillGeneration/ranks/{skill_id}"))
         for index, item in enumerate(selections.get("feats", [])):
             lookups.append(("feat", item["featId"], f"/selections/feats/{index}/featId"))
+        spell_loadout = selections.get("spellLoadout", {})
+        if isinstance(spell_loadout, dict):
+            for level, spells in spell_loadout.get("known", {}).items():
+                for index, spell_id in enumerate(spells):
+                    lookups.append(("spell", spell_id, f"/selections/spellLoadout/known/{level}/{index}"))
         for index, item in enumerate(selections.get("gear", [])):
             lookups.append(("item", item["itemId"], f"/selections/gear/{index}/itemId"))
         profile = selections.get("gearProfile", {})
@@ -489,16 +513,18 @@ class NpcCreation(CreationSystem):
         if array.get("catalogStatus") != "resolved":
             return {}, _refs(array), [self._gap(array, "/selections/abilityGeneration/arrayId")]
         method = generation.get("method")
-        if method == "melee-preset":
-            scores = copy.deepcopy(array["presets"]["melee"])
+        if method in {"melee-preset", "arcane-preset"}:
+            scores = copy.deepcopy(array["presets"][method.removesuffix("-preset")])
         elif method == "assigned-array":
             scores = copy.deepcopy(generation.get("assignments", generation.get("scores", {})))
             if sorted(scores.values()) != sorted(array["scores"]):
-                issues.append(self._issue("npc.ability-array-invalid", "assigned scores must use the basic NPC array exactly", path="/selections/abilityGeneration/assignments", source_refs=_refs(array)))
+                issues.append(self._issue("npc.ability-array-invalid", "assigned scores must use the selected NPC array exactly", path="/selections/abilityGeneration/assignments", source_refs=_refs(array)))
         else:
-            return {}, _refs(array), [self._issue("npc.slice-unsupported", "the production slice supports melee-preset or assigned-array abilities", path="/selections/abilityGeneration/method", source_refs=_refs(array))]
+            return {}, _refs(array), [self._issue("npc.slice-unsupported", "the production slice supports its catalog presets or assigned-array abilities", path="/selections/abilityGeneration/method", source_refs=_refs(array))]
 
-        refs = _refs(array)
+        refs = _dedupe_refs(_refs(array), _refs(race))
+        for ability, adjustment in race.get("abilityAdjustments", {}).items():
+            scores[ability] += adjustment
         for slot in race.get("choiceSlots", []):
             choice = selections.get("racialChoices", {}).get(slot["choiceId"])
             if choice is None:
@@ -547,6 +573,107 @@ class NpcCreation(CreationSystem):
             total = level + (3 if class_skill else 0) + _ability_modifier(scores[ability]) + acp
             results.append({"skillId": skill_id, "name": record["name"], "ability": ability, "ranks": level, "classSkill": class_skill, "armorCheckPenalty": acp, "total": total, "sourceRefs": _refs(record)})
         return results, refs, issues
+
+    def _selected_class_features(
+        self, selections: dict[str, Any], race: dict[str, Any], class_record: dict[str, Any], level: int, modifiers: dict[str, int]
+    ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+        features = self._class_features(class_record, level)
+        refs = _dedupe_refs(_refs(class_record), *[feature.get("sourceRefs", []) for feature in features])
+        choices = selections.get("classFeatureChoices", {})
+        if class_record["id"] != "npc-class.sorcerer":
+            issues = [self._issue("npc.slice-unsupported", "class feature choices are not part of this production slice", path="/selections/classFeatureChoices")] if choices else []
+            return features, refs, issues
+
+        bloodline = self._record("classFeature", "npc-class-feature.sorcerer-bloodlines")
+        choice = choices.get("bloodline")
+        if choice != "elemental-fire":
+            return features, _dedupe_refs(refs, _refs(bloodline)), [self._issue(
+                "npc.choice-invalid", "the source-gated Sorcerer slice requires the elemental fire bloodline",
+                path="/selections/classFeatureChoices/bloodline", source_refs=_refs(bloodline),
+            )]
+        option = bloodline["options"][choice]
+        powers = []
+        for power in option["powers"]:
+            if power["level"] > level:
+                continue
+            selected = copy.deepcopy(power)
+            if selected["name"] == "Elemental Ray":
+                selected["usesPerDay"] = 3 + modifiers["charisma"]
+                selected["attackBonus"] = class_record["levels"][str(level)]["bab"] + modifiers["dexterity"] + race.get("sizeModifiers", {}).get("attack", 0)
+            powers.append(selected)
+        for feature in features:
+            if feature["featureId"] == bloodline["id"]:
+                feature.update(choice=choice, name=option["name"], energyType=option["energyType"], powers=powers)
+        return features, _dedupe_refs(refs, _refs(bloodline)), []
+
+    def _spells(
+        self, selections: dict[str, Any], class_record: dict[str, Any], row: dict[str, Any], level: int,
+        modifiers: dict[str, int],
+    ) -> tuple[Any, list[dict[str, Any]], list[dict[str, Any]]]:
+        loadout = selections.get("spellLoadout", {})
+        if class_record["id"] != "npc-class.sorcerer":
+            issues = [self._issue("npc.slice-unsupported", "spells are not part of this production slice", path="/selections/spellLoadout")] if loadout else []
+            return [], _refs(class_record), issues
+
+        known = loadout.get("known", {}) if isinstance(loadout, dict) else {}
+        expected = row["spellsKnown"]
+        issues: list[dict[str, Any]] = []
+        refs = _refs(class_record)
+        if set(known) != set(expected):
+            issues.append(self._issue(
+                "npc.spell-levels-invalid", "spell loadout must include exactly the available spell levels",
+                path="/selections/spellLoadout/known", details={"expectedLevels": sorted(expected)}, source_refs=_refs(row),
+            ))
+        selected_ids: set[str] = set()
+        resolved: dict[str, list[str]] = {}
+        for spell_level, expected_count in expected.items():
+            selected = known.get(spell_level, [])
+            if len(selected) != expected_count or len(set(selected)) != len(selected):
+                issues.append(self._issue(
+                    "npc.spell-count-invalid", "spells known must fill each level exactly without duplicates",
+                    path=f"/selections/spellLoadout/known/{spell_level}",
+                    details={"expected": expected_count, "selected": len(selected)}, source_refs=_refs(row),
+                ))
+            resolved[spell_level] = []
+            for index, spell_id in enumerate(selected):
+                record = self._record("spell", spell_id)
+                refs = _dedupe_refs(refs, _refs(record))
+                if record.get("catalogStatus") != "resolved":
+                    issues.append(self._gap(record, f"/selections/spellLoadout/known/{spell_level}/{index}"))
+                elif record.get("levelsByClass", {}).get("sorcerer") != int(spell_level):
+                    issues.append(self._issue(
+                        "npc.spell-level-invalid", "spell is not a Sorcerer spell of the selected level",
+                        path=f"/selections/spellLoadout/known/{spell_level}/{index}", source_refs=_refs(record),
+                    ))
+                if spell_id in selected_ids:
+                    issues.append(self._issue("npc.spell-duplicate", "the same spell cannot fill multiple known slots", path=f"/selections/spellLoadout/known/{spell_level}/{index}"))
+                selected_ids.add(spell_id)
+                resolved[spell_level].append(record["id"])
+
+        bloodline = self._record("classFeature", "npc-class-feature.sorcerer-bloodlines")
+        option = bloodline["options"]["elemental-fire"]
+        refs = _dedupe_refs(refs, _refs(bloodline))
+        for granted_level, spell_id in option["bonusSpells"].items():
+            if int(granted_level) <= level:
+                spell = self._record("spell", spell_id)
+                spell_level = str(spell["levelsByClass"]["sorcerer"])
+                resolved.setdefault(spell_level, []).append(spell["id"])
+                refs = _dedupe_refs(refs, _refs(spell))
+
+        charisma = modifiers["charisma"]
+        per_day: dict[str, Any] = {"0": "at-will"}
+        for spell_level, base in row["spellsPerDay"].items():
+            numeric_level = int(spell_level)
+            bonus_spells = 1 + (charisma - numeric_level) // 4 if charisma >= numeric_level else 0
+            per_day[spell_level] = base + bonus_spells
+        bonus_ref = self._source_ref("source.aon-getting-started", "Table: Ability Modifiers and Bonus Spells", [89, 101])
+        refs = _dedupe_refs(refs, [bonus_ref])
+        result = {
+            "casterLevel": level, "castingAbility": "charisma", "castingAbilityModifier": charisma,
+            "perDay": per_day, "saveDcByLevel": {spell_level: 10 + int(spell_level) + charisma for spell_level in expected},
+            "known": resolved,
+        }
+        return result, refs, issues
 
     def _feats(self, selections: dict[str, Any], race: dict[str, Any], level: int, scores: dict[str, int]) -> tuple[list[dict[str, Any]], dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]:
         slots = self._feat_slots(level, race)
@@ -605,6 +732,7 @@ class NpcCreation(CreationSystem):
             spent += cost
             items.append({
                 "itemId": record["id"], "name": record["name"], "category": record["category"],
+                "npcGearCategory": record.get("npcGearCategory"),
                 "quantity": quantity, "equipped": selected.get("equipped", True), "priceCp": cost,
                 "weightLb": record.get("weightLb", 0) * quantity, "effects": copy.deepcopy(record.get("effects", {})),
                 "sourceRefs": _refs(record),
@@ -702,8 +830,11 @@ class NpcCreation(CreationSystem):
         record = self._gear_profile_record(selections)
         if not record:
             return None
+        progression = selections.get("classProgression", [])
+        class_record = self._optional("class", progression[0].get("classId")) if progression and isinstance(progression[0], dict) else None
+        npc_category = "heroic" if class_record and class_record.get("category") == "pc" else "basic"
         for row in record.get("rows", []):
-            if row.get("level") == level and row.get("npcCategory") == "basic":
+            if row.get("level") == level and row.get("npcCategory") == npc_category:
                 return {"gearBudgetId": record["id"], **copy.deepcopy(row)}
         return record
 
@@ -714,12 +845,14 @@ class NpcCreation(CreationSystem):
         array = self._optional("abilityArray", generation.get("arrayId", "npc-ability-array.basic"))
         if not array or array.get("catalogStatus") != "resolved":
             return None
-        if generation.get("method") == "melee-preset":
-            score = array.get("presets", {}).get("melee", {}).get("intelligence")
+        method = generation.get("method")
+        if method in {"melee-preset", "arcane-preset"}:
+            score = array.get("presets", {}).get(method.removesuffix("-preset"), {}).get("intelligence")
         else:
             score = generation.get("assignments", generation.get("scores", {})).get("intelligence")
         if not _is_int(score):
             return None
+        score += (race or {}).get("abilityAdjustments", {}).get("intelligence", 0)
         if selections.get("racialChoices", {}).get("ability-bonus") == "intelligence":
             score += 2
         return score

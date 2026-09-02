@@ -142,45 +142,127 @@
           "level": 1,
           "effectiveLevel": 1,
           "budgetCp": 26000,
-          "categories": {"weapons": 5000, "protection": 13000, "magic": 0, "limitedUse": 4000, "gear": 4000},
+          "categories": {
+            "weapons": 5000,
+            "protection": 13000,
+            "magic": 0,
+            "limitedUse": 4000,
+            "gear": 4000
+          },
           "catalogStatus": "resolved",
-          "sourceRef": {"sourceId": "source.aon-creating-npcs", "section": "Table 14-9: NPC Gear", "txtLines": [82, 82], "entry": "Basic level 1", "provenanceStatus": "resolved"}
+          "sourceRef": {
+            "sourceId": "source.aon-creating-npcs",
+            "section": "Table 14-9: NPC Gear",
+            "txtLines": [82, 82],
+            "entry": "Basic level 1",
+            "provenanceStatus": "resolved"
+          }
         },
         {
           "npcCategory": "basic",
           "level": 2,
           "effectiveLevel": 2,
           "budgetCp": 39000,
-          "categories": {"weapons": 10000, "protection": 15000, "magic": 0, "limitedUse": 4000, "gear": 10000},
+          "categories": {
+            "weapons": 10000,
+            "protection": 15000,
+            "magic": 0,
+            "limitedUse": 4000,
+            "gear": 10000
+          },
           "catalogStatus": "resolved",
-          "sourceRef": {"sourceId": "source.aon-creating-npcs", "section": "Table 14-9: NPC Gear", "txtLines": [83, 83], "entry": "Basic level 2", "provenanceStatus": "resolved"}
+          "sourceRef": {
+            "sourceId": "source.aon-creating-npcs",
+            "section": "Table 14-9: NPC Gear",
+            "txtLines": [83, 83],
+            "entry": "Basic level 2",
+            "provenanceStatus": "resolved"
+          }
         },
         {
           "npcCategory": "basic",
           "level": 3,
           "effectiveLevel": 3,
           "budgetCp": 78000,
-          "categories": {"weapons": 35000, "protection": 20000, "magic": 0, "limitedUse": 8000, "gear": 15000},
+          "categories": {
+            "weapons": 35000,
+            "protection": 20000,
+            "magic": 0,
+            "limitedUse": 8000,
+            "gear": 15000
+          },
           "catalogStatus": "resolved",
-          "sourceRef": {"sourceId": "source.aon-creating-npcs", "section": "Table 14-9: NPC Gear", "txtLines": [84, 84], "entry": "Basic level 3", "provenanceStatus": "resolved"}
+          "sourceRef": {
+            "sourceId": "source.aon-creating-npcs",
+            "section": "Table 14-9: NPC Gear",
+            "txtLines": [84, 84],
+            "entry": "Basic level 3",
+            "provenanceStatus": "resolved"
+          }
         },
         {
           "npcCategory": "basic",
           "level": 4,
           "effectiveLevel": 4,
           "budgetCp": 165000,
-          "categories": {"weapons": 65000, "protection": 80000, "magic": 0, "limitedUse": 10000, "gear": 20000},
+          "categories": {
+            "weapons": 65000,
+            "protection": 80000,
+            "magic": 0,
+            "limitedUse": 10000,
+            "gear": 20000
+          },
           "catalogStatus": "resolved",
-          "sourceRef": {"sourceId": "source.aon-creating-npcs", "section": "Table 14-9: NPC Gear", "txtLines": [85, 85], "entry": "Basic level 4", "provenanceStatus": "resolved"}
+          "sourceRef": {
+            "sourceId": "source.aon-creating-npcs",
+            "section": "Table 14-9: NPC Gear",
+            "txtLines": [85, 85],
+            "entry": "Basic level 4",
+            "provenanceStatus": "resolved"
+          }
         },
         {
           "npcCategory": "basic",
           "level": 5,
           "effectiveLevel": 5,
           "budgetCp": 240000,
-          "categories": {"weapons": 90000, "protection": 100000, "magic": 0, "limitedUse": 30000, "gear": 20000},
+          "categories": {
+            "weapons": 90000,
+            "protection": 100000,
+            "magic": 0,
+            "limitedUse": 30000,
+            "gear": 20000
+          },
           "catalogStatus": "resolved",
-          "sourceRef": {"sourceId": "source.aon-creating-npcs", "section": "Table 14-9: NPC Gear", "txtLines": [86, 86], "entry": "Basic level 5", "provenanceStatus": "resolved"}
+          "sourceRef": {
+            "sourceId": "source.aon-creating-npcs",
+            "section": "Table 14-9: NPC Gear",
+            "txtLines": [86, 86],
+            "entry": "Basic level 5",
+            "provenanceStatus": "resolved"
+          }
+        },
+        {
+          "npcCategory": "heroic",
+          "level": 5,
+          "effectiveLevel": 5,
+          "budgetCp": 345000,
+          "categories": {
+            "weapons": 140000,
+            "protection": 140000,
+            "magic": 0,
+            "limitedUse": 45000,
+            "gear": 20000
+          },
+          "catalogStatus": "resolved",
+          "sourceRef": {
+            "sourceId": "source.aon-creating-npcs",
+            "section": "Table 14-9: NPC Gear",
+            "txtLines": [87, 87],
+            "entry": "Heroic level 5",
+            "provenanceStatus": "resolved",
+            "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+          }
         }
       ],
       "sourceRef": {

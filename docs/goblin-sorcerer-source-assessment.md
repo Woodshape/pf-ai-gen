@@ -1,7 +1,7 @@
 # Goblin Sorcerer (Level 5, fire theme, wand) — Source Assessment
 
-> Research-only note. Every claim below was taken from official Archives of Nethys primary pages. **All URLs are current-site (`aonprd.com` / `www.aonprd.com`), live-fetched on 2026-09-02; no `legacy.aonprd.com` URL is used anywhere in this document.** The only local file cited is `sources/reference/aonprd/creating-npcs.html`, an archived capture of the current site (it links `https://www.aonprd.com` and contains no legacy references); its live current URL was re-verified on 2026-09-02 (see §6). No secondary sources; values not verifiable on the current site in this pass are explicitly flagged as gaps.
-> Date: 2026-09-02 (rev. 2: current-site-only citation pass)
+> Every implemented claim below is backed by a current-site `aonprd.com` snapshot archived under `sources/reference/aonprd/`, normalized under `sources/npc/aonprd/`, and hash-anchored in `sources/npc/MANIFEST.json`. No newly acquired legacy-site page is used.
+> Date: 2026-09-02 (rev. 3: implementation source gate)
 
 ## 1. Goblin racial statistics
 
@@ -67,9 +67,7 @@ Bloodline bonus spells (fixed, verified via the bloodline page): **burning hands
 - Scorching Ray — https://aonprd.com/SpellDisplay.aspx?ItemName=Scorching%20Ray — "evocation [fire]; Level ... sorcerer 2, wizard 2"; "4d6 points of fire damage" per ray, ranged touch, extra ray every 4 levels beyond 3rd (one ray at CL 5).
 - Flaming Sphere — https://aonprd.com/SpellDisplay.aspx?ItemName=Flaming%20Sphere — "evocation [fire]; Level ... sorcerer 2, wizard 2"; "3d6 points of fire damage", "moves 30 feet per round", Reflex negates, 1 round/level. Sorcerer list membership verified.
 
-Spells-known budget at 5th: 6 cantrips + 4 first-level + 2 second-level known (plus the 2 bloodline spells on top).
-Verified fire picks to fill those slots: 1st = burning hands (also bloodline), 2nd = scorching ray (bloodline) and/or flaming sphere.
-**Not verified in this pass (flagged, do not hard-code without checking AoN):** specific cantrip picks (e.g. detect magic / flare / mage hand) and non-fire utility picks (mage armor, shield) — their sorcerer/wizard list membership was not fetched. No fire-descriptor cantrip was verified on the sorcerer list in this pass; assume none until checked.
+Spells-known budget at 5th: 6 cantrips + 4 first-level + 2 second-level known, plus the 2 bloodline spells. The implemented loadout uses current-site snapshots for acid splash, detect magic, light, mage hand, prestidigitation, and read magic; grease, mage armor, magic missile, and shield; and flaming sphere and mirror image. Burning hands and scorching ray are added separately by the bloodline. No broader spell catalog is claimed resolved.
 
 ## 5. Wand: creation, pricing, use rules
 
@@ -88,7 +86,7 @@ Verified fire picks to fill those slots: 1st = burning hands (also bloodline), 2
 
 **One fitting wand:** **Wand of burning hands** (CL 1, 750 gp, 50 charges = 15 gp/charge — the 15 gp/charge minimum is stated on https://aonprd.com/Rules.aspx?ID=1430). A wand of scorching ray (2nd-level spell) prices at 6,000 gp (sorcerer column) — above the level-5 heroic NPC gear budget (see §6).
 
-**Staff note (level-appropriateness):** No Core staff pricing was verified on AoN in this pass, so no staff value is asserted here. What is verified: the heroic level-5 gear budget (§6) fits a 750 gp wand, and 2nd-level spell wands (CL 3) are already legal at level 5 per Table 15–17. A staff claim should only be added after verifying its price on AoN.
+**Other magic gear:** A current-site [Cloak of Resistance](https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=Cloak%20of%20Resistance1) snapshot verifies the +1 cloak at 1,000 gp and its +1 resistance bonus on all saves. It fits the 1,400 gp Protection allocation. No staff pricing was verified, so no staff is asserted.
 
 ## 6. NPC heroic ability/gear rows (archived Creating NPCs page)
 
@@ -103,7 +101,7 @@ Source: current-site AoN page https://aonprd.com/Rules.aspx?Name=Creating%20NPCs
 
 ## 7. Suggested level-5 stat block skeleton (all values sourced above)
 
-Goblin sorcerer 5 — derived ability scores Str 6, Dex 18, Con 12, Int 13, Wis 10, Cha 14 after the level-4 increase; hp 22 from five average d6 Hit Dice plus Constitution; BAB +2; total saves Fort +2, Ref +5, Will +4 after ability modifiers; fire resistance 10. Base spells/day are 1st ×6 and 2nd ×4, increased to 7 and 5 by Charisma 14; spells known are 6/4/2 plus burning hands and scorching ray from the bloodline. Elemental ray is 1d6+2 fire, 5/day. Gear budget is 3,450 gp and includes a 750 gp wand of burning hands. No CR is asserted because this source gate does not include the classed-NPC CR rule.
+Goblin sorcerer 5 — derived ability scores Str 6, Dex 18, Con 12, Int 13, Wis 10, Cha 14 after the level-4 increase; hp 22 from five average d6 Hit Dice plus Constitution; BAB +2; base saves Fort +2, Ref +5, Will +4 before feats and gear; fire resistance 10. Base spells/day are 1st ×6 and 2nd ×4, increased to 7 and 5 by Charisma 14; spells known are 6/4/2 plus burning hands and scorching ray from the bloodline. Elemental ray is 1d6+2 fire, 5/day. The 3,450 gp gear budget includes a 750 gp wand of burning hands and a 1,000 gp cloak of resistance +1. The implemented fixture's Iron Will, Lightning Reflexes, and cloak produce final saves +3/+8/+7. No CR is asserted because this source gate does not include the classed-NPC CR rule.
 
 ## Sources index
 
@@ -116,8 +114,10 @@ Goblin sorcerer 5 — derived ability scores Str 6, Dex 18, Con 12, Int 13, Wis 
 | Burning Hands | https://aonprd.com/SpellDisplay.aspx?ItemName=Burning%20Hands |
 | Scorching Ray | https://aonprd.com/SpellDisplay.aspx?ItemName=Scorching%20Ray |
 | Flaming Sphere | https://aonprd.com/SpellDisplay.aspx?ItemName=Flaming%20Sphere |
+| Other selected spells | Current `SpellDisplay.aspx` pages listed and hashed individually in `sources/npc/MANIFEST.json` |
 | Wand rules + Table 15–17 | https://aonprd.com/Rules.aspx?Name=Wands&Category=Magic%20Items |
 | Wand of burning hands = 750 gp (example) | https://aonprd.com/Rules.aspx?ID=1436 |
 | Wand recharge/15 gp-charge context | https://aonprd.com/Rules.aspx?ID=1430 |
-| Use Magic Device DCs | https://aonprd.com/Skills.aspx?ItemName=Use%20Magic%20Device |
+| Bluff, Spellcraft, and Use Magic Device | Current `Skills.aspx` pages listed and hashed individually in `sources/npc/MANIFEST.json` |
+| Cloak of Resistance +1 | https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=Cloak%20of%20Resistance1 |
 | Heroic NPC abilities + Table 14–9 gear (current site, live) | https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=- |

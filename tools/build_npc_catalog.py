@@ -61,6 +61,9 @@ SOURCE_FILES = (
     ("source.aon-elemental-bloodline", "sources/npc/aonprd/elemental-bloodline.txt", "Official current AoN Elemental bloodline rules"),
     ("source.aon-wands", "sources/npc/aonprd/wands.txt", "Official current AoN Core wand rules"),
     ("source.aon-use-magic-device", "sources/npc/aonprd/use-magic-device.txt", "Official current AoN Use Magic Device rules"),
+    ("source.aon-skill-bluff", "sources/npc/aonprd/skill-bluff.txt", "Official current AoN Bluff skill rules"),
+    ("source.aon-skill-spellcraft", "sources/npc/aonprd/skill-spellcraft.txt", "Official current AoN Spellcraft skill rules"),
+    ("source.aon-cloak-of-resistance", "sources/npc/aonprd/cloak-of-resistance.txt", "Official current AoN Cloak of Resistance rules"),
     *((
         f"source.aon-spell-{name}",
         f"sources/npc/aonprd/spell-{name}.txt",
@@ -68,7 +71,7 @@ SOURCE_FILES = (
     ) for name in (
         "acid-splash", "detect-magic", "light", "mage-hand", "prestidigitation", "read-magic",
         "burning-hands", "mage-armor", "magic-missile", "shield", "flaming-sphere", "mirror-image",
-        "scorching-ray",
+        "scorching-ray", "grease",
     )),
 )
 

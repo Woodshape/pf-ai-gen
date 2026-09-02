@@ -1,0 +1,88 @@
+{
+  "creationSystem": "npc",
+  "concept": {
+    "name": "Cinder",
+    "role": "fire-themed arcane striker",
+    "description": "A level 5 goblin sorcerer with the elemental fire bloodline."
+  },
+  "selections": {
+    "statblockUse": "full",
+    "raceId": "npc-race.goblin",
+    "racialChoices": {},
+    "classProgression": [
+      {
+        "classId": "npc-class.sorcerer",
+        "levels": 5
+      }
+    ],
+    "abilityGeneration": {
+      "method": "arcane-preset",
+      "arrayId": "npc-ability-array.heroic",
+      "levelIncreases": {
+        "4": "charisma"
+      }
+    },
+    "skillGeneration": {
+      "method": "simplified",
+      "skills": [
+        "skill.bluff",
+        "skill.spellcraft",
+        "skill.use-magic-device"
+      ]
+    },
+    "feats": [
+      {
+        "slotId": "general-1",
+        "featId": "feat.improved-initiative"
+      },
+      {
+        "slotId": "general-3",
+        "featId": "feat.iron-will"
+      },
+      {
+        "slotId": "general-5",
+        "featId": "feat.lightning-reflexes"
+      }
+    ],
+    "classFeatureChoices": {
+      "bloodline": "elemental-fire"
+    },
+    "spellLoadout": {
+      "known": {
+        "0": [
+          "spell.acid-splash",
+          "spell.detect-magic",
+          "spell.light",
+          "spell.mage-hand",
+          "spell.prestidigitation",
+          "spell.read-magic"
+        ],
+        "1": [
+          "spell.grease",
+          "spell.mage-armor",
+          "spell.magic-missile",
+          "spell.shield"
+        ],
+        "2": [
+          "spell.flaming-sphere",
+          "spell.mirror-image"
+        ]
+      }
+    },
+    "gearProfile": {
+      "experienceProgression": "medium",
+      "fantasyLevel": "normal"
+    },
+    "gear": [
+      {
+        "itemId": "item.wand-of-burning-hands"
+      },
+      {
+        "itemId": "item.cloak-of-resistance-1"
+      }
+    ],
+    "details": {
+      "alignment": "CE"
+    }
+  }
+}

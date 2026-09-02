@@ -29,12 +29,15 @@ SOURCES = {
     "elemental-bloodline": ("id", "MainContent_DataListTypes_LabelName_0"),
     "wands": ("id", "MainContent_DetailedOutput"),
     "use-magic-device": ("id", "MainContent_DataListTalentsAll_LabelName_0"),
+    "skill-bluff": ("id", "MainContent_DataListTalentsAll_LabelName_0"),
+    "skill-spellcraft": ("id", "MainContent_DataListTalentsAll_LabelName_0"),
+    "cloak-of-resistance": ("id", "MainContent_DataListTypes_LabelName_0"),
     **{
         f"spell-{name}": ("id", "MainContent_DataListTypes_LabelName_0")
         for name in (
             "acid-splash", "detect-magic", "light", "mage-hand", "prestidigitation", "read-magic",
             "burning-hands", "mage-armor", "magic-missile", "shield", "flaming-sphere", "mirror-image",
-            "scorching-ray",
+            "scorching-ray", "grease",
         )
     },
 }

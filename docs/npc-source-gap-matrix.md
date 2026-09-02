@@ -6,8 +6,8 @@ Status legend:
 - **partial** — some required rules are anchored; the listed remainder stays unavailable locally.
 - **GAP** — not present in a local source and must not be implemented from memory.
 
-The official Archives of Nethys pages were snapshotted on 2026-09-02. Raw HTML
-lives under `sources/reference/aonprd/`; deterministic, line-citable text lives
+The Archives of Nethys pages were snapshotted on 2026-09-02. New goblin, Sorcerer,
+spell, skill, wand, and cloak sources use current `aonprd.com` pages. Raw HTML lives under `sources/reference/aonprd/`; deterministic, line-citable text lives
 under `sources/npc/aonprd/`. Every file and upstream URL is recorded in
 `sources/npc/MANIFEST.json`. Source availability does **not** make the current
 catalog records resolved: a row remains `catalogStatus: "gap"` until a parser or
@@ -19,13 +19,13 @@ curated fragment gives it an anchored `sourceRef`.
 | 2 | Basic and heroic arrays; preset arrays; racial adjustment table | Phase 2 | `aonprd/creating-npcs.txt` lines 9–33 | **anchored** | Arrays and Table 14-6/14-7 values may now replace their catalog gaps. |
 | 3 | Seven Core races: adjustments, size, speed, senses, traits, languages | Phase 2+ | `aonprd/core-races.txt` lines 1–128 | **anchored** | Core race records may now be curated. |
 | 4 | Five NPC classes through level 20 | Phase 2+ | `aonprd/npc-classes.txt` lines 1–172 | **anchored** | Adept, aristocrat, commoner, expert, and warrior HD, skills, BAB, saves, features, and spell rows may now be curated. |
-| 5 | Eleven Core PC classes through level 20 | Heroic phase | Class overview only in `aonprd/character-classes.txt`; individual class pages are not archived | **GAP** | AoN has official pages for each class, so a full PDF is not required; snapshot those pages before hydrating heroic class rows. |
+| 5 | Eleven Core PC classes through level 20 | Heroic phase | Current `aonprd/sorcerer.txt` covers Sorcerer; other individual class pages are not archived | **partial** | Sorcerer levels 1–5 are hydrated for the bounded goblin slice. Other PC classes and Sorcerer levels 6–20 remain gaps. |
 | 6 | Character advancement, feat/ability progression, multiclassing, favored class | Phase 2+ | `aonprd/character-classes.txt` lines 13–47 | **anchored** | Total-level advancement and multiclass arithmetic may now be implemented. |
 | 7 | Skill ranks, class-skill bonus, rank cap, key ability, trained-only, ACP | Phase 2+ | `aonprd/skills.txt` lines 1–38; `aonprd/skill-descriptions.txt` lines 1–53; NPC class skills in `aonprd/npc-classes.txt` | **anchored** | Core skill records and skill-total calculation may now be curated. Individual skill-use/DC pages are outside the NPC statistic slice. |
 | 8 | Core feats and prerequisites | Phase 2+ | `aonprd/feats.txt` lines 1–1062 | **partial** | General feat rules, table, and descriptions are anchored. PC-class bonus-feat schedules still depend on the unarchived individual class pages. |
-| 9 | Weapons, armor, goods, services, and magic items | Phase 2+ | `aonprd/equipment.txt` lines 1–774 | **partial** | Mundane prices and statistics are anchored. Magic-item chapters and enhancement pricing remain GAP until separately snapshotted from AoN. |
+| 9 | Weapons, armor, goods, services, and magic items | Phase 2+ | Mundane equipment plus current `aonprd/wands.txt` and `aonprd/cloak-of-resistance.txt` | **partial** | The CL 1 wand of burning hands and cloak of resistance +1 are hydrated. Other magic items remain gaps. |
 | 10 | Table 14-9 NPC gear budgets, allocation categories, progression adjustments, and fantasy multipliers | Phase 2+ | `aonprd/creating-npcs.txt` lines 71–102 | **anchored** | Table 14-9 supplies basic/heroic level rows; the preceding prose explicitly defines slow/medium/fast level adjustment and low/normal/high fantasy scaling. The existing nine profile combinations are source-supported. |
-| 11 | Spell descriptions (levels, components, schools, DC inputs, effects) | Heroic phase | Local CRB excerpt contains only an opening alphabetical fragment | **partial** | Spell-list membership is safe; full per-spell rules remain GAP until official AoN spell pages are snapshotted. |
+| 11 | Spell descriptions (levels, components, schools, DC inputs, effects) | Heroic phase | Current individual AoN pages for the bounded goblin Sorcerer loadout | **partial** | Fourteen selected spells are hydrated; all other spell descriptions remain gaps. |
 | 12 | Class spell lists for NPC/PC casters | Basic/heroic phases | `sources/npc/core-rulebook-extract.spell-lists.txt` | **anchored** | Bard, cleric, druid, paladin, ranger, and sorcerer/wizard lists are locally anchored; the adept class page supplies its list relationship. |
 | 13 | Core combat calculations | Phase 2+ | `aonprd/combat.txt` lines 1–617 | **anchored** | Attacks, AC, saves, initiative, CMB/CMD, and iterative attacks may now be implemented. |
 | 14 | Simple Monster Creation and NPC-likeness guidance | Comparison only | `sources/npc/pathfinder-unchained.npc-likeness.txt` | **anchored** | Comparison-only; never mix Simple Monster arithmetic into NPC calculation. |
@@ -44,6 +44,6 @@ curated fragment gives it an anchored `sourceRef`.
 4. **AoN is sufficient for the planned Core-only v1.** Remaining domains are
    available from official AoN pages and can be archived phase-by-phase; no full
    Core Rulebook PDF is currently required.
-5. **Phase 2 is source-unblocked, not implementation-complete.** The next bounded
-   task is the human warrior levels 1–5 catalog slice and one production-catalog
-   lifecycle fixture.
+5. **Production remains deliberately bounded.** The source-resolved slices are
+   human warrior levels 1–5 and the level-5 elemental-fire goblin Sorcerer;
+   broader races, classes, spells, and magic items remain explicit gaps.

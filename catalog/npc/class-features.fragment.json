@@ -304,24 +304,55 @@
       "id": "npc-class-feature.sorcerer-bloodlines",
       "name": "Sorcerer bloodlines",
       "kind": "choice-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
+      "catalogStatus": "resolved",
       "sourceRef": [
         {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
+          "sourceId": "source.aon-sorcerer",
+          "section": "Bloodline",
+          "txtLines": [62, 64],
+          "entry": "Sorcerer bloodline choice and bonus spells",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer"
         },
         {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [501, 513],
-          "entry": "Step 5: Class Features - choice slots",
-          "provenanceStatus": "structural-reference"
+          "sourceId": "source.aon-elemental-bloodline",
+          "section": "Elemental Bloodline",
+          "txtLines": [1, 16],
+          "entry": "Elemental fire bloodline through level 5",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/BloodlineDisplay.aspx?ItemName=Elemental"
         }
-      ]
+      ],
+      "choiceId": "bloodline",
+      "allowedValues": ["elemental-fire"],
+      "options": {
+        "elemental-fire": {
+          "name": "Elemental (fire)",
+          "energyType": "fire",
+          "classSkill": "skill.knowledge-planes",
+          "bonusSpells": {
+            "3": "spell.burning-hands",
+            "5": "spell.scorching-ray"
+          },
+          "powers": [
+            {
+              "level": 1,
+              "name": "Elemental Ray",
+              "damageExpression": "1d6+2",
+              "damageType": "fire",
+              "range": "30 ft.",
+              "usesFormula": "3 + Charisma modifier"
+            },
+            {
+              "level": 3,
+              "name": "Elemental Resistance",
+              "resistance": {
+                "fire": 10
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "id": "npc-class-feature.wizard-schools",
@@ -382,6 +413,39 @@
         "officialUrl": "https://legacy.aonprd.com/coreRulebook/NPCClasses.html#warrior",
         "entry": "Weapon and Armor Proficiency",
         "provenanceStatus": "resolved"
+      }
+    },
+    {
+      "id": "npc-class-feature.sorcerer-eschew-materials",
+      "name": "Eschew Materials",
+      "catalogStatus": "resolved",
+      "kind": "automatic",
+      "effects": {},
+      "sourceRef": {
+        "sourceId": "source.aon-sorcerer",
+        "section": "Eschew Materials",
+        "txtLines": [66, 66],
+        "entry": "Sorcerer bonus feat",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer"
+      }
+    },
+    {
+      "id": "npc-class-feature.sorcerer-spellcasting",
+      "name": "Sorcerer spellcasting",
+      "catalogStatus": "resolved",
+      "kind": "automatic",
+      "effects": {
+        "castingAbility": "charisma",
+        "castingMode": "spontaneous"
+      },
+      "sourceRef": {
+        "sourceId": "source.aon-sorcerer",
+        "section": "Spells; Cantrips",
+        "txtLines": [57, 65],
+        "entry": "Sorcerer spontaneous spellcasting",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer"
       }
     }
   ]

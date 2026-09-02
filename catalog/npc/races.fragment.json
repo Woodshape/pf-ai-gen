@@ -183,6 +183,46 @@
         "entry": "Seven Core races",
         "provenanceStatus": "catalog-gap"
       }
+    },
+    {
+      "id": "npc-race.goblin",
+      "name": "Goblin",
+      "catalogStatus": "resolved",
+      "subtype": "goblinoid",
+      "abilityAdjustments": {
+        "strength": -2,
+        "dexterity": 4,
+        "charisma": -2
+      },
+      "sizeId": "size.small",
+      "sizeModifiers": {
+        "ac": 1,
+        "attack": 1,
+        "cmb": -1,
+        "cmd": -1
+      },
+      "speed": {
+        "land": 30
+      },
+      "senses": ["darkvision 60 ft."],
+      "traits": ["Fast", "Darkvision", "Skilled"],
+      "skillBonuses": {
+        "skill.ride": 4,
+        "skill.stealth": 4
+      },
+      "languages": ["Goblin"],
+      "bonusLanguages": ["Common", "Draconic", "Dwarven", "Gnoll", "Gnome", "Halfling", "Orc"],
+      "choiceSlots": [],
+      "featSlots": [],
+      "skillSelectionsBonus": 0,
+      "sourceRef": {
+        "sourceId": "source.aon-goblin-race",
+        "section": "Goblin Racial Traits",
+        "txtLines": [15, 22],
+        "entry": "Standard Goblin racial traits",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin"
+      }
     }
   ]
 }

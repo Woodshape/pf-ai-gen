@@ -84,8 +84,7 @@
     {
       "id": "spell.acid-splash",
       "name": "Acid Splash",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -111,14 +110,15 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-acid-splash",
+        "section": "Spell description",
         "txtLines": [
-          970,
-          970
+          1,
+          13
         ],
         "entry": "Acid Splash",
-        "provenanceStatus": "list-membership-resolved"
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Acid%20Splash"
       }
     },
     {
@@ -2482,8 +2482,7 @@
     {
       "id": "spell.burning-hands",
       "name": "Burning Hands",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -2509,14 +2508,20 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-burning-hands",
+        "section": "Spell description",
         "txtLines": [
-          1054,
-          1054
+          1,
+          16
         ],
         "entry": "Burning Hands",
-        "provenanceStatus": "list-membership-resolved"
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Burning%20Hands"
+      },
+      "effects": {
+        "damage": "1d4 fire/caster level (maximum 5d4)",
+        "area": "15-ft. cone",
+        "save": "Reflex half"
       }
     },
     {
@@ -5872,8 +5877,7 @@
     {
       "id": "spell.detect-magic",
       "name": "Detect Magic",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -5926,14 +5930,15 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-detect-magic",
+        "section": "Spell description",
         "txtLines": [
-          34,
-          34
+          1,
+          58
         ],
         "entry": "Detect Magic",
-        "provenanceStatus": "list-membership-resolved"
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Detect%20Magic"
       }
     },
     {
@@ -9098,8 +9103,7 @@
     {
       "id": "spell.flaming-sphere",
       "name": "Flaming Sphere",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -9134,14 +9138,20 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-flaming-sphere",
+        "section": "Spell description",
         "txtLines": [
-          647,
-          647
+          1,
+          27
         ],
         "entry": "Flaming Sphere",
-        "provenanceStatus": "list-membership-resolved"
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Flaming%20Sphere"
+      },
+      "effects": {
+        "damage": "3d6 fire",
+        "duration": "1 round/level",
+        "save": "Reflex negates"
       }
     },
     {
@@ -10677,8 +10687,7 @@
     {
       "id": "spell.grease",
       "name": "Grease",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -10713,14 +10722,15 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-grease",
+        "section": "Spell description",
         "txtLines": [
-          66,
-          66
+          1,
+          18
         ],
         "entry": "Grease",
-        "provenanceStatus": "list-membership-resolved"
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Grease",
+        "provenanceStatus": "resolved"
       }
     },
     {
@@ -13379,8 +13389,7 @@
     {
       "id": "spell.light",
       "name": "Light",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -13433,14 +13442,15 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-light",
+        "section": "Spell description",
         "txtLines": [
-          38,
-          38
+          1,
+          14
         ],
         "entry": "Light",
-        "provenanceStatus": "list-membership-resolved"
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Light"
       }
     },
     {
@@ -13735,8 +13745,7 @@
     {
       "id": "spell.mage-armor",
       "name": "Mage Armor",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -13762,21 +13771,21 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-mage-armor",
+        "section": "Spell description",
         "txtLines": [
-          1033,
-          1033
+          1,
+          17
         ],
         "entry": "Mage Armor",
-        "provenanceStatus": "list-membership-resolved"
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Armor"
       }
     },
     {
       "id": "spell.mage-hand",
       "name": "Mage Hand",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -13811,14 +13820,15 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-mage-hand",
+        "section": "Spell description",
         "txtLines": [
-          41,
-          41
+          1,
+          13
         ],
         "entry": "Mage Hand",
-        "provenanceStatus": "list-membership-resolved"
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Hand"
       }
     },
     {
@@ -14313,8 +14323,7 @@
     {
       "id": "spell.magic-missile",
       "name": "Magic Missile",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -14340,14 +14349,15 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-magic-missile",
+        "section": "Spell description",
         "txtLines": [
-          1057,
-          1057
+          1,
+          19
         ],
         "entry": "Magic Missile",
-        "provenanceStatus": "list-membership-resolved"
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Magic%20Missile"
       }
     },
     {
@@ -15261,8 +15271,7 @@
     {
       "id": "spell.mirror-image",
       "name": "Mirror Image",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -15297,14 +15306,15 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-mirror-image",
+        "section": "Spell description",
         "txtLines": [
-          106,
-          106
+          1,
+          17
         ],
         "entry": "Mirror Image",
-        "provenanceStatus": "list-membership-resolved"
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mirror%20Image"
       }
     },
     {
@@ -17312,8 +17322,7 @@
     {
       "id": "spell.prestidigitation",
       "name": "Prestidigitation",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -17348,14 +17357,15 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-prestidigitation",
+        "section": "Spell description",
         "txtLines": [
-          45,
-          45
+          1,
+          13
         ],
         "entry": "Prestidigitation",
-        "provenanceStatus": "list-membership-resolved"
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Prestidigitation"
       }
     },
     {
@@ -18286,8 +18296,7 @@
     {
       "id": "spell.read-magic",
       "name": "Read Magic",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -18358,14 +18367,15 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-read-magic",
+        "section": "Spell description",
         "txtLines": [
-          46,
-          46
+          1,
+          13
         ],
         "entry": "Read Magic",
-        "provenanceStatus": "list-membership-resolved"
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Read%20Magic"
       }
     },
     {
@@ -19630,8 +19640,7 @@
     {
       "id": "spell.scorching-ray",
       "name": "Scorching Ray",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -19657,14 +19666,20 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-scorching-ray",
+        "section": "Spell description",
         "txtLines": [
-          1116,
-          1116
+          1,
+          16
         ],
         "entry": "Scorching Ray",
-        "provenanceStatus": "list-membership-resolved"
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Scorching%20Ray"
+      },
+      "effects": {
+        "damage": "4d6 fire/ray",
+        "attack": "ranged touch",
+        "raysAtCasterLevel5": 1
       }
     },
     {
@@ -20685,8 +20700,7 @@
     {
       "id": "spell.shield",
       "name": "Shield",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -20712,14 +20726,15 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-shield",
+        "section": "Spell description",
         "txtLines": [
-          1029,
-          1029
+          1,
+          12
         ],
         "entry": "Shield",
-        "provenanceStatus": "list-membership-resolved"
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Shield"
       }
     },
     {

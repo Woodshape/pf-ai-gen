@@ -38,17 +38,17 @@ class NpcCatalogTests(unittest.TestCase):
             },
         )
 
-    def test_production_catalog_resolves_only_the_human_warrior_slice(self):
+    def test_production_catalog_keeps_the_human_warrior_slice_resolved(self):
         catalog = NpcCatalog.load().data
         basic = catalog["abilityArrays"]["npc-ability-array.basic"]
         self.assertEqual(basic["scores"], [13, 12, 11, 10, 9, 8])
         self.assertEqual(basic["presets"]["melee"]["strength"], 13)
-        self.assertEqual(catalog["abilityArrays"]["npc-ability-array.heroic"]["catalogStatus"], "gap")
+        self.assertEqual(catalog["abilityArrays"]["npc-ability-array.heroic"]["catalogStatus"], "resolved")
 
         human = catalog["races"]["npc-race.human"]
         self.assertEqual(human["catalogStatus"], "resolved")
         self.assertEqual(human["speed"], {"land": 30})
-        self.assertTrue(all(race["catalogStatus"] == "gap" for race_id, race in catalog["races"].items() if race_id != "npc-race.human"))
+        self.assertTrue(all(race["catalogStatus"] == "gap" for race_id, race in catalog["races"].items() if race_id not in {"npc-race.human", "npc-race.goblin"}))
 
         warrior = catalog["classes"]["npc-class.warrior"]
         self.assertEqual(set(warrior["levels"]), {str(level) for level in range(1, 21)})
@@ -62,7 +62,36 @@ class NpcCatalogTests(unittest.TestCase):
         self.assertEqual(catalog["items"]["item.longsword"]["priceCp"], 1500)
         self.assertEqual(catalog["items"]["item.chain-shirt"]["effects"]["armorBonus"], 4)
         budget = catalog["gearBudgets"]["npc-gear.medium.normal"]
-        self.assertEqual([row["budgetCp"] for row in budget["rows"]], [26000, 39000, 78000, 165000, 240000])
+        self.assertEqual([row["budgetCp"] for row in budget["rows"] if row["npcCategory"] == "basic"], [26000, 39000, 78000, 165000, 240000])
+
+    def test_goblin_sorcerer_level_five_catalog_slice_is_resolved(self):
+        catalog = NpcCatalog.load().data
+        heroic = catalog["abilityArrays"]["npc-ability-array.heroic"]
+        self.assertEqual(heroic["scores"], [15, 14, 13, 12, 10, 8])
+        self.assertEqual(heroic["presets"]["arcane"], {
+            "strength": 8, "dexterity": 14, "constitution": 12,
+            "intelligence": 13, "wisdom": 10, "charisma": 15,
+        })
+        goblin = catalog["races"]["npc-race.goblin"]
+        self.assertEqual(goblin["abilityAdjustments"], {"strength": -2, "dexterity": 4, "charisma": -2})
+        self.assertEqual(goblin["sizeId"], "size.small")
+        self.assertEqual(goblin["skillBonuses"], {"skill.ride": 4, "skill.stealth": 4})
+
+        sorcerer = catalog["classes"]["npc-class.sorcerer"]
+        self.assertTrue(all(sorcerer["levels"][str(level)]["catalogStatus"] == "resolved" for level in range(1, 6)))
+        self.assertEqual(sorcerer["levels"]["5"]["bab"], 2)
+        self.assertEqual(sorcerer["levels"]["5"]["spellsPerDay"], {"1": 6, "2": 4})
+        self.assertEqual(sorcerer["levels"]["5"]["spellsKnown"], {"0": 6, "1": 4, "2": 2})
+        self.assertEqual(catalog["classFeatures"]["npc-class-feature.sorcerer-bloodlines"]["catalogStatus"], "resolved")
+
+        for spell_id in ("burning-hands", "flaming-sphere", "scorching-ray"):
+            self.assertEqual(catalog["spells"][f"spell.{spell_id}"]["catalogStatus"], "resolved")
+        self.assertEqual(catalog["items"]["item.wand-of-burning-hands"]["priceCp"], 75000)
+        self.assertEqual(catalog["items"]["item.wand-of-burning-hands"]["npcGearCategory"], "weapons")
+        self.assertEqual(catalog["items"]["item.cloak-of-resistance-1"]["priceCp"], 100000)
+        self.assertEqual(catalog["items"]["item.cloak-of-resistance-1"]["npcGearCategory"], "protection")
+        heroic_five = next(row for row in catalog["gearBudgets"]["npc-gear.medium.normal"]["rows"] if row["npcCategory"] == "heroic" and row["level"] == 5)
+        self.assertEqual(heroic_five["budgetCp"], 345000)
 
     def test_money_is_integer_copper_and_prerequisite_examples_are_typed(self):
         catalog = NpcCatalog.load().data
@@ -134,6 +163,8 @@ class NpcCatalogTests(unittest.TestCase):
             "wands": "level of the spell × the creator's caster level × 750 gp",
             "spell-burning-hands": "1d4 points of fire damage per caster level",
             "spell-scorching-ray": "4d6 points of fire damage",
+            "spell-grease": "10-ft. square",
+            "cloak-of-resistance": "+1 to +5 resistance bonus on all saving throws",
         }
         for name, text in expected.items():
             self.assertIn(text, (AON_OUTPUT / f"{name}.txt").read_text(encoding="utf-8"))
