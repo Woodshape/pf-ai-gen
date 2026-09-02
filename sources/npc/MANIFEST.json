@@ -49,6 +49,13 @@
       "retrievedAt": "2026-09-02T08:18:33Z",
       "description": "Official Archives of Nethys Creating NPCs page: Core Rulebook pages 448-454, including Steps 1-7, Tables 14-6 through 14-9, and Kiramor."
     },
+    "aon-getting-started-html": {
+      "file": "sources/reference/aonprd/getting-started.html",
+      "sha256": "0fcfce8f6057b5ff2fcc02927dcac65ce5e97ca6472769e971207b0ebe1bd452",
+      "officialUrl": "https://legacy.aonprd.com/coreRulebook/gettingStarted.html",
+      "retrievedAt": "2026-09-02T08:46:57Z",
+      "description": "Official Archives of Nethys legacy Core Rulebook general rules, including rounding and ability modifiers."
+    },
     "aon-core-races-html": {
       "file": "sources/reference/aonprd/core-races.html",
       "sha256": "beb28dcb3f0a1d404ae850ca5c7e29117aa6dbc32cba106b9c733dca5f53f222",
@@ -134,6 +141,15 @@
       "lines": [1, 133],
       "contents": "Creating NPCs Steps 1-7, ability arrays and presets, racial adjustments, simplified skill ranks, feat recommendations, NPC gear budgets and allocations, and the Kiramor worked example.",
       "catalogUse": "Authoritative workflow and numeric tables for class-based NPC creation."
+    },
+    "aon-getting-started": {
+      "file": "sources/npc/aonprd/getting-started.txt",
+      "sha256": "2a59a8c5aaf2c1bc734c1ed47efaccecc037e3c703fe26f09e1b29c57535d78d",
+      "derivedFrom": "aon-getting-started-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [1, 159],
+      "contents": "Core general rules, including round-down policy, ability modifiers, and ability applications.",
+      "catalogUse": "Average-HP rounding and ability modifier calculations."
     },
     "aon-core-races": {
       "file": "sources/npc/aonprd/core-races.txt",

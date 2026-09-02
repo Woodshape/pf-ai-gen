@@ -4,20 +4,70 @@
     {
       "id": "npc-race.human",
       "name": "Human",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-races",
-      "abilityAdjustments": null,
-      "sizeId": null,
-      "speed": null,
-      "senses": null,
-      "traits": null,
-      "languages": null,
+      "catalogStatus": "resolved",
+      "abilityAdjustments": {
+        "strength": 0,
+        "dexterity": 0,
+        "constitution": 0,
+        "intelligence": 0,
+        "wisdom": 0,
+        "charisma": 0
+      },
+      "sizeId": "size.medium",
+      "speed": {"land": 30},
+      "senses": [],
+      "traits": ["Bonus Feat", "Skilled"],
+      "languages": ["Common"],
+      "skillSelectionsBonus": 1,
+      "sizeModifiers": {"ac": 0, "attack": 0, "cmb": 0, "cmd": 0},
+      "choiceSlots": [
+        {
+          "choiceId": "ability-bonus",
+          "name": "+2 ability score",
+          "kind": "ability",
+          "required": true,
+          "catalogStatus": "resolved",
+          "allowedValues": ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"],
+          "options": {
+            "strength": {"effects": {"abilityAdjustments": {"strength": 2}}},
+            "dexterity": {"effects": {"abilityAdjustments": {"dexterity": 2}}},
+            "constitution": {"effects": {"abilityAdjustments": {"constitution": 2}}},
+            "intelligence": {"effects": {"abilityAdjustments": {"intelligence": 2}}},
+            "wisdom": {"effects": {"abilityAdjustments": {"wisdom": 2}}},
+            "charisma": {"effects": {"abilityAdjustments": {"charisma": 2}}}
+          },
+          "sourceRef": {
+            "sourceId": "source.aon-core-races",
+            "section": "Human Racial Traits",
+            "txtLines": [121, 122],
+            "entry": "+2 to One Ability Score",
+            "provenanceStatus": "resolved"
+          }
+        }
+      ],
+      "featSlots": [
+        {
+          "slotId": "human-bonus-feat",
+          "kind": "general",
+          "grantedAtLevel": 1,
+          "required": true,
+          "allowedCategories": ["general"],
+          "sourceRef": {
+            "sourceId": "source.aon-core-races",
+            "section": "Human Racial Traits",
+            "txtLines": [125, 125],
+            "entry": "Bonus Feat",
+            "provenanceStatus": "resolved"
+          }
+        }
+      ],
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [20, 20],
-        "entry": "Seven Core races",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-core-races",
+        "section": "Human Racial Traits",
+        "txtLines": [121, 127],
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/races.html#humans",
+        "entry": "Human",
+        "provenanceStatus": "resolved"
       }
     },
     {

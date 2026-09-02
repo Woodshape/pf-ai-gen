@@ -24,7 +24,6 @@ class NpcBasicClassTests(unittest.TestCase):
     def test_public_basic_fixtures_use_engine_and_preserve_catalog_gaps(self):
         for index, name in enumerate((
             "npc-commoner-1.json",
-            "human-warrior-3.json",
             "npc-expert-5.json",
             "npc-multiclass.json",
             "npc-aristocrat-multiclass.json",

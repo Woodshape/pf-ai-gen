@@ -38,18 +38,21 @@
     {
       "id": "item.longsword",
       "name": "Longsword",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-equipment",
+      "catalogStatus": "resolved",
       "category": "weapon",
-      "priceCp": null,
-      "weightLb": null,
-      "effects": null,
+      "priceCp": 1500,
+      "weightLb": 4,
+      "effects": {
+        "damageDie": "1d8",
+        "damageType": "S"
+      },
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [26, 26],
-        "entry": "Mundane weapons",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-equipment",
+        "section": "Table: Weapons",
+        "txtLines": [155, 155],
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+        "entry": "Longsword",
+        "provenanceStatus": "resolved"
       }
     },
     {
@@ -123,18 +126,22 @@
     {
       "id": "item.chain-shirt",
       "name": "Chain Shirt",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-equipment",
+      "catalogStatus": "resolved",
       "category": "armor",
-      "priceCp": null,
-      "weightLb": null,
-      "effects": null,
+      "priceCp": 10000,
+      "weightLb": 25,
+      "effects": {
+        "armorBonus": 4,
+        "maxDex": 4,
+        "armorCheckPenalty": -2
+      },
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [26, 26],
-        "entry": "Mundane armor",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-equipment",
+        "section": "Table: Armor and Shields",
+        "txtLines": [326, 326],
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+        "entry": "Chain shirt",
+        "provenanceStatus": "resolved"
       }
     },
     {
@@ -157,18 +164,21 @@
     {
       "id": "item.light-steel-shield",
       "name": "Light Steel Shield",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-equipment",
+      "catalogStatus": "resolved",
       "category": "shield",
-      "priceCp": null,
-      "weightLb": null,
-      "effects": null,
+      "priceCp": 900,
+      "weightLb": 6,
+      "effects": {
+        "shieldBonus": 1,
+        "armorCheckPenalty": -1
+      },
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [26, 26],
-        "entry": "Mundane shields",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-equipment",
+        "section": "Table: Armor and Shields",
+        "txtLines": [340, 340],
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+        "entry": "Shield, light steel",
+        "provenanceStatus": "resolved"
       }
     },
     {

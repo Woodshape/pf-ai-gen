@@ -368,6 +368,21 @@
           "provenanceStatus": "structural-reference"
         }
       ]
+    },
+    {
+      "id": "npc-class-feature.warrior-proficiencies",
+      "name": "Warrior weapon and armor proficiencies",
+      "kind": "automatic",
+      "catalogStatus": "resolved",
+      "effects": {},
+      "sourceRef": {
+        "sourceId": "source.aon-npc-classes",
+        "section": "Warrior Class Features",
+        "txtLines": [169, 172],
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/NPCClasses.html#warrior",
+        "entry": "Weapon and Armor Proficiency",
+        "provenanceStatus": "resolved"
+      }
     }
   ]
 }

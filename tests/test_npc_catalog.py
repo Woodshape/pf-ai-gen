@@ -38,31 +38,31 @@ class NpcCatalogTests(unittest.TestCase):
             },
         )
 
-    def test_phase_one_inventory_is_bounded_by_declared_source_gaps(self):
+    def test_production_catalog_resolves_only_the_human_warrior_slice(self):
         catalog = NpcCatalog.load().data
-        self.assertEqual(set(catalog["abilityArrays"]), {"npc-ability-array.basic", "npc-ability-array.heroic"})
-        self.assertIsNone(catalog["abilityArrays"]["npc-ability-array.basic"]["scores"])
-        self.assertEqual(catalog["abilityArrays"]["npc-ability-array.basic"]["gapCode"], "core-rulebook-ability-arrays")
+        basic = catalog["abilityArrays"]["npc-ability-array.basic"]
+        self.assertEqual(basic["scores"], [13, 12, 11, 10, 9, 8])
+        self.assertEqual(basic["presets"]["melee"]["strength"], 13)
+        self.assertEqual(catalog["abilityArrays"]["npc-ability-array.heroic"]["catalogStatus"], "gap")
 
         human = catalog["races"]["npc-race.human"]
-        self.assertEqual(human["catalogStatus"], "gap")
-        self.assertIsNone(human["abilityAdjustments"])
+        self.assertEqual(human["catalogStatus"], "resolved")
+        self.assertEqual(human["speed"], {"land": 30})
+        self.assertTrue(all(race["catalogStatus"] == "gap" for race_id, race in catalog["races"].items() if race_id != "npc-race.human"))
 
         warrior = catalog["classes"]["npc-class.warrior"]
         self.assertEqual(set(warrior["levels"]), {str(level) for level in range(1, 21)})
-        self.assertTrue(all(row["catalogStatus"] == "gap" for row in warrior["levels"].values()))
-        self.assertTrue(all(row["sourceRef"]["sourceId"] == "source.npc-gap-matrix" for row in warrior["levels"].values()))
+        self.assertTrue(all(warrior["levels"][str(level)]["catalogStatus"] == "resolved" for level in range(1, 6)))
+        self.assertTrue(all(warrior["levels"][str(level)]["catalogStatus"] == "gap" for level in range(6, 21)))
+        self.assertEqual(warrior["levels"]["5"]["bab"], 5)
 
-        self.assertIn("skill.perception", catalog["skills"])
-        self.assertIn("skill.handle-animal", catalog["skills"])
-        self.assertTrue(all(item["catalogStatus"] == "gap" for item in catalog["skills"].values()))
-        self.assertIn("feat.toughness", catalog["feats"])
-        self.assertTrue(all(item["category"] == "general" for item in catalog["feats"].values()))
-        self.assertIn("item.longsword", catalog["items"])
-        self.assertIn("item.chain-shirt", catalog["items"])
-        self.assertIsNone(catalog["items"]["item.longsword"]["priceCp"])
-        self.assertEqual(catalog["gearBudgets"]["npc-gear.medium.normal"]["progression"], "medium")
-        self.assertEqual(catalog["gearBudgets"]["npc-gear.medium.normal"]["fantasyLevel"], "normal")
+        self.assertEqual(catalog["skills"]["skill.climb"]["keyAbility"], "strength")
+        self.assertEqual(catalog["skills"]["skill.intimidate"]["keyAbility"], "charisma")
+        self.assertEqual(catalog["feats"]["feat.improved-initiative"]["effects"], {"initiative": 4})
+        self.assertEqual(catalog["items"]["item.longsword"]["priceCp"], 1500)
+        self.assertEqual(catalog["items"]["item.chain-shirt"]["effects"]["armorBonus"], 4)
+        budget = catalog["gearBudgets"]["npc-gear.medium.normal"]
+        self.assertEqual([row["budgetCp"] for row in budget["rows"]], [26000, 39000, 78000, 165000, 240000])
 
     def test_money_is_integer_copper_and_prerequisite_examples_are_typed(self):
         catalog = NpcCatalog.load().data

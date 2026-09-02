@@ -20,17 +20,17 @@
     {
       "id": "skill.climb",
       "name": "Climb",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
+      "catalogStatus": "resolved",
+      "keyAbility": "strength",
+      "trainedOnly": false,
+      "armorCheckPenalty": true,
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-skill-descriptions",
+        "section": "Table: Skill Summary",
+        "txtLines": [8, 8],
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#climb",
+        "entry": "Climb",
+        "provenanceStatus": "resolved"
       }
     },
     {
@@ -52,17 +52,17 @@
     {
       "id": "skill.intimidate",
       "name": "Intimidate",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
+      "catalogStatus": "resolved",
+      "keyAbility": "charisma",
+      "trainedOnly": false,
+      "armorCheckPenalty": false,
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-skill-descriptions",
+        "section": "Table: Skill Summary",
+        "txtLines": [17, 17],
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#intimidate",
+        "entry": "Intimidate",
+        "provenanceStatus": "resolved"
       }
     },
     {

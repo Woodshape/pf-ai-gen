@@ -8,7 +8,9 @@
   "selections": {
     "statblockUse": "full",
     "raceId": "npc-race.human",
-    "racialChoices": {},
+    "racialChoices": {
+      "ability-bonus": "strength"
+    },
     "classProgression": [
       {
         "classId": "npc-class.warrior",
@@ -20,16 +22,42 @@
     },
     "skillGeneration": {
       "method": "simplified",
-      "skills": []
+      "skills": [
+        "skill.climb",
+        "skill.intimidate"
+      ]
     },
-    "feats": [],
+    "feats": [
+      {
+        "slotId": "general-1",
+        "featId": "feat.improved-initiative"
+      },
+      {
+        "slotId": "human-bonus-feat",
+        "featId": "feat.iron-will"
+      },
+      {
+        "slotId": "general-3",
+        "featId": "feat.endurance"
+      }
+    ],
     "classFeatureChoices": {},
     "spellLoadout": {},
     "gearProfile": {
       "experienceProgression": "medium",
       "fantasyLevel": "normal"
     },
-    "gear": [],
+    "gear": [
+      {
+        "itemId": "item.longsword"
+      },
+      {
+        "itemId": "item.chain-shirt"
+      },
+      {
+        "itemId": "item.light-steel-shield"
+      }
+    ],
     "details": {
       "alignment": "N"
     }

@@ -52,6 +52,88 @@
         "entry": "Typed prerequisite expressions are required",
         "provenanceStatus": "product-policy"
       }
+    },
+    {
+      "id": "npc-rule.ability-increase",
+      "name": "Ability score increases",
+      "kind": "ability-increase",
+      "levels": [4, 8, 12, 16, 20],
+      "amount": 1,
+      "catalogStatus": "resolved",
+      "sourceRef": {
+        "sourceId": "source.aon-character-classes",
+        "section": "Table: Character Advancement and Level-Dependent Bonuses",
+        "txtLines": [19, 40],
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+        "entry": "Ability Score",
+        "provenanceStatus": "resolved"
+      }
+    },
+    {
+      "id": "npc-rule.average-hp",
+      "name": "Average NPC hit points",
+      "kind": "average-hp",
+      "firstLevelMax": false,
+      "rounding": "floor",
+      "constitutionPerLevel": true,
+      "catalogStatus": "resolved",
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Step 7: Details",
+          "txtLines": [103, 106],
+          "printedPages": [454],
+          "entry": "Determine total hit points by assuming the average result",
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-getting-started",
+          "section": "Rounding; Constitution",
+          "txtLines": [39, 39],
+          "entry": "Always round down",
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-getting-started",
+          "section": "Constitution",
+          "txtLines": [133, 138],
+          "entry": "Constitution modifier applies to each Hit Die",
+          "provenanceStatus": "resolved"
+        }
+      ]
+    },
+    {
+      "id": "npc-rule.general-feat-slots",
+      "name": "General feat slots",
+      "kind": "general-feat-slots",
+      "levels": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
+      "allowedFeatIds": ["feat.endurance", "feat.improved-initiative", "feat.iron-will", "feat.lightning-reflexes"],
+      "allowedCategories": ["general"],
+      "required": true,
+      "catalogStatus": "resolved",
+      "sourceRef": {
+        "sourceId": "source.aon-character-classes",
+        "section": "Table: Character Advancement and Level-Dependent Bonuses",
+        "txtLines": [19, 40],
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+        "entry": "Feats",
+        "provenanceStatus": "resolved"
+      }
+    },
+    {
+      "id": "npc-rule.class-skill-bonus",
+      "name": "Class skill bonus",
+      "kind": "class-skill-bonus",
+      "value": 3,
+      "catalogStatus": "resolved",
+      "sourceRef": {
+        "sourceId": "source.aon-skills",
+        "section": "Acquiring Skills",
+        "txtLines": [3, 4],
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/usingSkills.html#acquiring-skills",
+        "entry": "Class skill bonus",
+        "provenanceStatus": "resolved"
+      }
     }
   ]
 }

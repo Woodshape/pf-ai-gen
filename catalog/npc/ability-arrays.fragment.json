@@ -4,17 +4,28 @@
     {
       "id": "npc-ability-array.basic",
       "name": "Basic NPC ability array",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-ability-arrays",
+      "catalogStatus": "resolved",
       "method": "assigned-array",
-      "scores": null,
+      "scores": [13, 12, 11, 10, 9, 8],
       "abilityOrder": ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"],
+      "presets": {
+        "melee": {
+          "strength": 13,
+          "dexterity": 11,
+          "constitution": 12,
+          "intelligence": 9,
+          "wisdom": 10,
+          "charisma": 8
+        }
+      },
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [19, 19],
-        "entry": "Basic and heroic ability arrays",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-creating-npcs",
+        "section": "Step 2: Determine Ability Scores; Table 14-6",
+        "txtLines": [12, 23],
+        "printedPages": [450],
+        "officialUrl": "https://aonprd.com/Rules.aspx?ID=355",
+        "entry": "Basic NPC array and melee preset",
+        "provenanceStatus": "resolved"
       }
     },
     {

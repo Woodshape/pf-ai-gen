@@ -15,6 +15,7 @@ RAW = ROOT / "sources" / "reference" / "aonprd"
 OUTPUT = ROOT / "sources" / "npc" / "aonprd"
 SOURCES = {
     "creating-npcs": ("id", "MainContent_DetailedOutput"),
+    "getting-started": ("class", "body"),
     "core-races": ("class", "body"),
     "character-classes": ("class", "body"),
     "npc-classes": ("class", "body"),

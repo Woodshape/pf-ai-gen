@@ -36,33 +36,33 @@
     {
       "id": "feat.endurance",
       "name": "Endurance",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
+      "catalogStatus": "resolved",
       "category": "general",
-      "prerequisites": null,
-      "effects": null,
+      "prerequisites": {"all": []},
+      "effects": {},
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-feats",
+        "section": "Endurance",
+        "txtLines": [425, 429],
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#endurance",
+        "entry": "Endurance",
+        "provenanceStatus": "resolved"
       }
     },
     {
       "id": "feat.improved-initiative",
       "name": "Improved Initiative",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
+      "catalogStatus": "resolved",
       "category": "general",
-      "prerequisites": null,
-      "effects": null,
+      "prerequisites": {"all": []},
+      "effects": {"initiative": 4},
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-feats",
+        "section": "Improved Initiative",
+        "txtLines": [635, 637],
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#improved-initiative",
+        "entry": "Improved Initiative",
+        "provenanceStatus": "resolved"
       }
     },
     {
@@ -1348,17 +1348,17 @@
     {
       "id": "feat.iron-will",
       "name": "Iron Will",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
+      "catalogStatus": "resolved",
       "category": "general",
-      "prerequisites": null,
-      "effects": null,
+      "prerequisites": {"all": []},
+      "effects": {"will": 2},
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-feats",
+        "section": "Iron Will",
+        "txtLines": [691, 693],
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#iron-will",
+        "entry": "Iron Will",
+        "provenanceStatus": "resolved"
       }
     },
     {
@@ -1380,17 +1380,17 @@
     {
       "id": "feat.lightning-reflexes",
       "name": "Lightning Reflexes",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
+      "catalogStatus": "resolved",
       "category": "general",
-      "prerequisites": null,
-      "effects": null,
+      "prerequisites": {"all": []},
+      "effects": {"reflex": 2},
       "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
+        "sourceId": "source.aon-feats",
+        "section": "Lightning Reflexes",
+        "txtLines": [751, 753],
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#lightning-reflexes",
+        "entry": "Lightning Reflexes",
+        "provenanceStatus": "resolved"
       }
     },
     {

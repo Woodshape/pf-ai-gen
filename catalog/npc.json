@@ -9,22 +9,42 @@
         "wisdom",
         "charisma"
       ],
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-ability-arrays",
+      "catalogStatus": "resolved",
       "id": "npc-ability-array.basic",
       "method": "assigned-array",
       "name": "Basic NPC ability array",
-      "scores": null,
+      "presets": {
+        "melee": {
+          "charisma": 8,
+          "constitution": 12,
+          "dexterity": 11,
+          "intelligence": 9,
+          "strength": 13,
+          "wisdom": 10
+        }
+      },
+      "scores": [
+        13,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
       "sourceRef": {
-        "entry": "Basic and heroic ability arrays",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Basic NPC array and melee preset",
+        "file": "sources/npc/aonprd/creating-npcs.txt",
+        "officialUrl": "https://aonprd.com/Rules.aspx?ID=355",
+        "printedPages": [
+          450
+        ],
+        "provenanceStatus": "resolved",
+        "section": "Step 2: Determine Ability Scores; Table 14-6",
+        "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+        "sourceId": "source.aon-creating-npcs",
         "txtLines": [
-          19,
-          19
+          12,
+          23
         ]
       }
     },
@@ -58,22 +78,22 @@
     }
   },
   "catalogStatus": {
-    "abilityArrays": "gap",
-    "classFeatures": "gap",
-    "classes": "gap",
-    "equipment": "gap",
-    "feats": "gap",
-    "gearBudgets": "gap",
+    "abilityArrays": "partial",
+    "classFeatures": "partial",
+    "classes": "partial",
+    "equipment": "partial",
+    "feats": "partial",
+    "gearBudgets": "partial",
     "money": "integer-copper-pieces",
-    "npcWorkflow": "gap",
-    "races": "gap",
-    "skills": "gap",
-    "sourcePolicy": "bounded-by-local-source-gaps",
+    "npcWorkflow": "resolved",
+    "races": "partial",
+    "skills": "partial",
+    "sourcePolicy": "source-backed-slice-with-explicit-gaps",
     "spellListMembership": "resolved",
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:40df0d08d786bb8d534f92038ba630416a4eb4fbd25183e6e5ec15ea910cc4a2",
+  "catalogVersion": "sha256:57e17677906df03c47f9784dcc6b032b4759bda3f6158cd2cd3f5bced27aec23",
   "classFeatures": {
     "npc-class-feature.class-specific-feats": {
       "catalogStatus": "gap",
@@ -536,6 +556,26 @@
           ]
         }
       ]
+    },
+    "npc-class-feature.warrior-proficiencies": {
+      "catalogStatus": "resolved",
+      "effects": {},
+      "id": "npc-class-feature.warrior-proficiencies",
+      "kind": "automatic",
+      "name": "Warrior weapon and armor proficiencies",
+      "sourceRef": {
+        "entry": "Weapon and Armor Proficiency",
+        "file": "sources/npc/aonprd/npc-classes.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/NPCClasses.html#warrior",
+        "provenanceStatus": "resolved",
+        "section": "Warrior Class Features",
+        "sha256": "17c52d1bc3df506a81c3d077fa252350b98301db9479fd282a7e4f1f28af2f3f",
+        "sourceId": "source.aon-npc-classes",
+        "txtLines": [
+          169,
+          172
+        ]
+      }
     },
     "npc-class-feature.wizard-bonus-feats": {
       "catalogStatus": "gap",
@@ -7662,36 +7702,45 @@
       }
     },
     "npc-class.warrior": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "npc",
-      "classSkills": null,
-      "gapCode": "core-rulebook-class-tables",
-      "hitDie": null,
+      "classSkills": [
+        "skill.climb",
+        "skill.craft",
+        "skill.handle-animal",
+        "skill.intimidate",
+        "skill.profession",
+        "skill.ride",
+        "skill.swim"
+      ],
+      "hitDie": "d10",
       "id": "npc-class.warrior",
       "levels": {
         "1": {
-          "bab": null,
-          "catalogStatus": "gap",
-          "choiceSlots": null,
-          "featureGrants": null,
-          "fortitude": null,
-          "hitDie": null,
+          "bab": 1,
+          "catalogStatus": "resolved",
+          "choiceSlots": [],
+          "featureGrants": [
+            "npc-class-feature.warrior-proficiencies"
+          ],
+          "fortitude": 2,
+          "hitDie": "d10",
           "level": 1,
-          "reflex": null,
-          "skillSelections": null,
+          "reflex": 0,
+          "skillSelections": 2,
           "sourceRef": {
             "entry": "Warrior level 1",
-            "file": "docs/npc-source-gap-matrix.md",
-            "provenanceStatus": "catalog-gap",
-            "section": "NPC Source-Gap Matrix",
-            "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-            "sourceId": "source.npc-gap-matrix",
+            "file": "sources/npc/aonprd/npc-classes.txt",
+            "provenanceStatus": "resolved",
+            "section": "Warrior; Table: Warrior",
+            "sha256": "17c52d1bc3df506a81c3d077fa252350b98301db9479fd282a7e4f1f28af2f3f",
+            "sourceId": "source.aon-npc-classes",
             "txtLines": [
-              21,
-              21
+              141,
+              149
             ]
           },
-          "will": null
+          "will": 0
         },
         "10": {
           "bab": null,
@@ -7934,28 +7983,28 @@
           "will": null
         },
         "2": {
-          "bab": null,
-          "catalogStatus": "gap",
-          "choiceSlots": null,
-          "featureGrants": null,
-          "fortitude": null,
-          "hitDie": null,
+          "bab": 2,
+          "catalogStatus": "resolved",
+          "choiceSlots": [],
+          "featureGrants": [],
+          "fortitude": 3,
+          "hitDie": "d10",
           "level": 2,
-          "reflex": null,
-          "skillSelections": null,
+          "reflex": 0,
+          "skillSelections": 2,
           "sourceRef": {
             "entry": "Warrior level 2",
-            "file": "docs/npc-source-gap-matrix.md",
-            "provenanceStatus": "catalog-gap",
-            "section": "NPC Source-Gap Matrix",
-            "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-            "sourceId": "source.npc-gap-matrix",
+            "file": "sources/npc/aonprd/npc-classes.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table: Warrior",
+            "sha256": "17c52d1bc3df506a81c3d077fa252350b98301db9479fd282a7e4f1f28af2f3f",
+            "sourceId": "source.aon-npc-classes",
             "txtLines": [
-              21,
-              21
+              150,
+              150
             ]
           },
-          "will": null
+          "will": 0
         },
         "20": {
           "bab": null,
@@ -7982,76 +8031,76 @@
           "will": null
         },
         "3": {
-          "bab": null,
-          "catalogStatus": "gap",
-          "choiceSlots": null,
-          "featureGrants": null,
-          "fortitude": null,
-          "hitDie": null,
+          "bab": 3,
+          "catalogStatus": "resolved",
+          "choiceSlots": [],
+          "featureGrants": [],
+          "fortitude": 3,
+          "hitDie": "d10",
           "level": 3,
-          "reflex": null,
-          "skillSelections": null,
+          "reflex": 1,
+          "skillSelections": 2,
           "sourceRef": {
             "entry": "Warrior level 3",
-            "file": "docs/npc-source-gap-matrix.md",
-            "provenanceStatus": "catalog-gap",
-            "section": "NPC Source-Gap Matrix",
-            "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-            "sourceId": "source.npc-gap-matrix",
+            "file": "sources/npc/aonprd/npc-classes.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table: Warrior",
+            "sha256": "17c52d1bc3df506a81c3d077fa252350b98301db9479fd282a7e4f1f28af2f3f",
+            "sourceId": "source.aon-npc-classes",
             "txtLines": [
-              21,
-              21
+              151,
+              151
             ]
           },
-          "will": null
+          "will": 1
         },
         "4": {
-          "bab": null,
-          "catalogStatus": "gap",
-          "choiceSlots": null,
-          "featureGrants": null,
-          "fortitude": null,
-          "hitDie": null,
+          "bab": 4,
+          "catalogStatus": "resolved",
+          "choiceSlots": [],
+          "featureGrants": [],
+          "fortitude": 4,
+          "hitDie": "d10",
           "level": 4,
-          "reflex": null,
-          "skillSelections": null,
+          "reflex": 1,
+          "skillSelections": 2,
           "sourceRef": {
             "entry": "Warrior level 4",
-            "file": "docs/npc-source-gap-matrix.md",
-            "provenanceStatus": "catalog-gap",
-            "section": "NPC Source-Gap Matrix",
-            "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-            "sourceId": "source.npc-gap-matrix",
+            "file": "sources/npc/aonprd/npc-classes.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table: Warrior",
+            "sha256": "17c52d1bc3df506a81c3d077fa252350b98301db9479fd282a7e4f1f28af2f3f",
+            "sourceId": "source.aon-npc-classes",
             "txtLines": [
-              21,
-              21
+              152,
+              152
             ]
           },
-          "will": null
+          "will": 1
         },
         "5": {
-          "bab": null,
-          "catalogStatus": "gap",
-          "choiceSlots": null,
-          "featureGrants": null,
-          "fortitude": null,
-          "hitDie": null,
+          "bab": 5,
+          "catalogStatus": "resolved",
+          "choiceSlots": [],
+          "featureGrants": [],
+          "fortitude": 4,
+          "hitDie": "d10",
           "level": 5,
-          "reflex": null,
-          "skillSelections": null,
+          "reflex": 1,
+          "skillSelections": 2,
           "sourceRef": {
             "entry": "Warrior level 5",
-            "file": "docs/npc-source-gap-matrix.md",
-            "provenanceStatus": "catalog-gap",
-            "section": "NPC Source-Gap Matrix",
-            "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-            "sourceId": "source.npc-gap-matrix",
+            "file": "sources/npc/aonprd/npc-classes.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table: Warrior",
+            "sha256": "17c52d1bc3df506a81c3d077fa252350b98301db9479fd282a7e4f1f28af2f3f",
+            "sourceId": "source.aon-npc-classes",
             "txtLines": [
-              21,
-              21
+              153,
+              153
             ]
           },
-          "will": null
+          "will": 1
         },
         "6": {
           "bab": null,
@@ -8151,19 +8200,27 @@
         }
       },
       "name": "Warrior",
-      "skillSelections": null,
+      "skillSelections": 2,
       "sourceRef": {
-        "entry": "Five NPC classes",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Warrior",
+        "file": "sources/npc/aonprd/npc-classes.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/NPCClasses.html#warrior",
+        "provenanceStatus": "resolved",
+        "section": "Warrior",
+        "sha256": "17c52d1bc3df506a81c3d077fa252350b98301db9479fd282a7e4f1f28af2f3f",
+        "sourceId": "source.aon-npc-classes",
         "txtLines": [
-          21,
-          21
+          141,
+          172
         ]
-      }
+      },
+      "supportedLevels": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
     },
     "npc-class.wizard": {
       "catalogStatus": "gap",
@@ -8671,6 +8728,144 @@
     }
   },
   "derivedRules": {
+    "npc-rule.ability-increase": {
+      "amount": 1,
+      "catalogStatus": "resolved",
+      "id": "npc-rule.ability-increase",
+      "kind": "ability-increase",
+      "levels": [
+        4,
+        8,
+        12,
+        16,
+        20
+      ],
+      "name": "Ability score increases",
+      "sourceRef": {
+        "entry": "Ability Score",
+        "file": "sources/npc/aonprd/character-classes.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+        "provenanceStatus": "resolved",
+        "section": "Table: Character Advancement and Level-Dependent Bonuses",
+        "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
+        "sourceId": "source.aon-character-classes",
+        "txtLines": [
+          19,
+          40
+        ]
+      }
+    },
+    "npc-rule.average-hp": {
+      "catalogStatus": "resolved",
+      "constitutionPerLevel": true,
+      "firstLevelMax": false,
+      "id": "npc-rule.average-hp",
+      "kind": "average-hp",
+      "name": "Average NPC hit points",
+      "rounding": "floor",
+      "sourceRef": [
+        {
+          "entry": "Determine total hit points by assuming the average result",
+          "file": "sources/npc/aonprd/creating-npcs.txt",
+          "printedPages": [
+            454
+          ],
+          "provenanceStatus": "resolved",
+          "section": "Step 7: Details",
+          "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+          "sourceId": "source.aon-creating-npcs",
+          "txtLines": [
+            103,
+            106
+          ]
+        },
+        {
+          "entry": "Always round down",
+          "file": "sources/npc/aonprd/getting-started.txt",
+          "provenanceStatus": "resolved",
+          "section": "Rounding; Constitution",
+          "sha256": "2a59a8c5aaf2c1bc734c1ed47efaccecc037e3c703fe26f09e1b29c57535d78d",
+          "sourceId": "source.aon-getting-started",
+          "txtLines": [
+            39,
+            39
+          ]
+        },
+        {
+          "entry": "Constitution modifier applies to each Hit Die",
+          "file": "sources/npc/aonprd/getting-started.txt",
+          "provenanceStatus": "resolved",
+          "section": "Constitution",
+          "sha256": "2a59a8c5aaf2c1bc734c1ed47efaccecc037e3c703fe26f09e1b29c57535d78d",
+          "sourceId": "source.aon-getting-started",
+          "txtLines": [
+            133,
+            138
+          ]
+        }
+      ]
+    },
+    "npc-rule.class-skill-bonus": {
+      "catalogStatus": "resolved",
+      "id": "npc-rule.class-skill-bonus",
+      "kind": "class-skill-bonus",
+      "name": "Class skill bonus",
+      "sourceRef": {
+        "entry": "Class skill bonus",
+        "file": "sources/npc/aonprd/skills.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/usingSkills.html#acquiring-skills",
+        "provenanceStatus": "resolved",
+        "section": "Acquiring Skills",
+        "sha256": "56cdedfa6a3ae326bf8531f45fa9cfc93ecb1aa1a60e767819c7f259cb5ec18a",
+        "sourceId": "source.aon-skills",
+        "txtLines": [
+          3,
+          4
+        ]
+      },
+      "value": 3
+    },
+    "npc-rule.general-feat-slots": {
+      "allowedCategories": [
+        "general"
+      ],
+      "allowedFeatIds": [
+        "feat.endurance",
+        "feat.improved-initiative",
+        "feat.iron-will",
+        "feat.lightning-reflexes"
+      ],
+      "catalogStatus": "resolved",
+      "id": "npc-rule.general-feat-slots",
+      "kind": "general-feat-slots",
+      "levels": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15,
+        17,
+        19
+      ],
+      "name": "General feat slots",
+      "required": true,
+      "sourceRef": {
+        "entry": "Feats",
+        "file": "sources/npc/aonprd/character-classes.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+        "provenanceStatus": "resolved",
+        "section": "Table: Character Advancement and Level-Dependent Bonuses",
+        "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
+        "sourceId": "source.aon-character-classes",
+        "txtLines": [
+          19,
+          40
+        ]
+      }
+    },
     "npc-rule.money-copper": {
       "catalogStatus": "policy",
       "id": "npc-rule.money-copper",
@@ -9452,23 +9647,25 @@
       }
     },
     "feat.endurance": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "general",
-      "effects": null,
-      "gapCode": "core-rulebook-feats",
+      "effects": {},
       "id": "feat.endurance",
       "name": "Endurance",
-      "prerequisites": null,
+      "prerequisites": {
+        "all": []
+      },
       "sourceRef": {
-        "entry": "Core feats",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Endurance",
+        "file": "sources/npc/aonprd/feats.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#endurance",
+        "provenanceStatus": "resolved",
+        "section": "Endurance",
+        "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+        "sourceId": "source.aon-feats",
         "txtLines": [
-          25,
-          25
+          425,
+          429
         ]
       }
     },
@@ -10166,23 +10363,27 @@
       }
     },
     "feat.improved-initiative": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "general",
-      "effects": null,
-      "gapCode": "core-rulebook-feats",
+      "effects": {
+        "initiative": 4
+      },
       "id": "feat.improved-initiative",
       "name": "Improved Initiative",
-      "prerequisites": null,
+      "prerequisites": {
+        "all": []
+      },
       "sourceRef": {
-        "entry": "Core feats",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Improved Initiative",
+        "file": "sources/npc/aonprd/feats.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#improved-initiative",
+        "provenanceStatus": "resolved",
+        "section": "Improved Initiative",
+        "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+        "sourceId": "source.aon-feats",
         "txtLines": [
-          25,
-          25
+          635,
+          637
         ]
       }
     },
@@ -10439,23 +10640,27 @@
       }
     },
     "feat.iron-will": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "general",
-      "effects": null,
-      "gapCode": "core-rulebook-feats",
+      "effects": {
+        "will": 2
+      },
       "id": "feat.iron-will",
       "name": "Iron Will",
-      "prerequisites": null,
+      "prerequisites": {
+        "all": []
+      },
       "sourceRef": {
-        "entry": "Core feats",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Iron Will",
+        "file": "sources/npc/aonprd/feats.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#iron-will",
+        "provenanceStatus": "resolved",
+        "section": "Iron Will",
+        "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+        "sourceId": "source.aon-feats",
         "txtLines": [
-          25,
-          25
+          691,
+          693
         ]
       }
     },
@@ -10481,23 +10686,27 @@
       }
     },
     "feat.lightning-reflexes": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "general",
-      "effects": null,
-      "gapCode": "core-rulebook-feats",
+      "effects": {
+        "reflex": 2
+      },
       "id": "feat.lightning-reflexes",
       "name": "Lightning Reflexes",
-      "prerequisites": null,
+      "prerequisites": {
+        "all": []
+      },
       "sourceRef": {
-        "entry": "Core feats",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Lightning Reflexes",
+        "file": "sources/npc/aonprd/feats.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#lightning-reflexes",
+        "provenanceStatus": "resolved",
+        "section": "Lightning Reflexes",
+        "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+        "sourceId": "source.aon-feats",
         "txtLines": [
-          25,
-          25
+          751,
+          753
         ]
       }
     },
@@ -11868,7 +12077,7 @@
     },
     "npc-gear.medium.normal": {
       "budgetCp": null,
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "categories": {
         "gear": null,
         "limitedUse": null,
@@ -11878,20 +12087,156 @@
       },
       "effectiveLevel": null,
       "fantasyLevel": "normal",
-      "gapCode": "core-rulebook-gear-budgets",
       "id": "npc-gear.medium.normal",
       "name": "Medium progression, normal fantasy",
       "progression": "medium",
+      "rows": [
+        {
+          "budgetCp": 26000,
+          "catalogStatus": "resolved",
+          "categories": {
+            "gear": 4000,
+            "limitedUse": 4000,
+            "magic": 0,
+            "protection": 13000,
+            "weapons": 5000
+          },
+          "effectiveLevel": 1,
+          "level": 1,
+          "npcCategory": "basic",
+          "sourceRef": {
+            "entry": "Basic level 1",
+            "file": "sources/npc/aonprd/creating-npcs.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table 14-9: NPC Gear",
+            "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+            "sourceId": "source.aon-creating-npcs",
+            "txtLines": [
+              82,
+              82
+            ]
+          }
+        },
+        {
+          "budgetCp": 39000,
+          "catalogStatus": "resolved",
+          "categories": {
+            "gear": 10000,
+            "limitedUse": 4000,
+            "magic": 0,
+            "protection": 15000,
+            "weapons": 10000
+          },
+          "effectiveLevel": 2,
+          "level": 2,
+          "npcCategory": "basic",
+          "sourceRef": {
+            "entry": "Basic level 2",
+            "file": "sources/npc/aonprd/creating-npcs.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table 14-9: NPC Gear",
+            "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+            "sourceId": "source.aon-creating-npcs",
+            "txtLines": [
+              83,
+              83
+            ]
+          }
+        },
+        {
+          "budgetCp": 78000,
+          "catalogStatus": "resolved",
+          "categories": {
+            "gear": 15000,
+            "limitedUse": 8000,
+            "magic": 0,
+            "protection": 20000,
+            "weapons": 35000
+          },
+          "effectiveLevel": 3,
+          "level": 3,
+          "npcCategory": "basic",
+          "sourceRef": {
+            "entry": "Basic level 3",
+            "file": "sources/npc/aonprd/creating-npcs.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table 14-9: NPC Gear",
+            "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+            "sourceId": "source.aon-creating-npcs",
+            "txtLines": [
+              84,
+              84
+            ]
+          }
+        },
+        {
+          "budgetCp": 165000,
+          "catalogStatus": "resolved",
+          "categories": {
+            "gear": 20000,
+            "limitedUse": 10000,
+            "magic": 0,
+            "protection": 80000,
+            "weapons": 65000
+          },
+          "effectiveLevel": 4,
+          "level": 4,
+          "npcCategory": "basic",
+          "sourceRef": {
+            "entry": "Basic level 4",
+            "file": "sources/npc/aonprd/creating-npcs.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table 14-9: NPC Gear",
+            "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+            "sourceId": "source.aon-creating-npcs",
+            "txtLines": [
+              85,
+              85
+            ]
+          }
+        },
+        {
+          "budgetCp": 240000,
+          "catalogStatus": "resolved",
+          "categories": {
+            "gear": 20000,
+            "limitedUse": 30000,
+            "magic": 0,
+            "protection": 100000,
+            "weapons": 90000
+          },
+          "effectiveLevel": 5,
+          "level": 5,
+          "npcCategory": "basic",
+          "sourceRef": {
+            "entry": "Basic level 5",
+            "file": "sources/npc/aonprd/creating-npcs.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table 14-9: NPC Gear",
+            "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+            "sourceId": "source.aon-creating-npcs",
+            "txtLines": [
+              86,
+              86
+            ]
+          }
+        }
+      ],
       "sourceRef": {
-        "entry": "Table 14-9 NPC gear budgets",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Medium progression, normal fantasy",
+        "file": "sources/npc/aonprd/creating-npcs.txt",
+        "officialUrl": "https://aonprd.com/Rules.aspx?ID=359",
+        "printedPages": [
+          453,
+          454
+        ],
+        "provenanceStatus": "resolved",
+        "section": "Step 6: Gear; Table 14-9: NPC Gear",
+        "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+        "sourceId": "source.aon-creating-npcs",
         "txtLines": [
-          27,
-          27
+          71,
+          102
         ]
       }
     },
@@ -12161,26 +12506,30 @@
       "weightLb": null
     },
     "item.chain-shirt": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "armor",
-      "effects": null,
-      "gapCode": "core-rulebook-equipment",
+      "effects": {
+        "armorBonus": 4,
+        "armorCheckPenalty": -2,
+        "maxDex": 4
+      },
       "id": "item.chain-shirt",
       "name": "Chain Shirt",
-      "priceCp": null,
+      "priceCp": 10000,
       "sourceRef": {
-        "entry": "Mundane armor",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Chain shirt",
+        "file": "sources/npc/aonprd/equipment.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+        "provenanceStatus": "resolved",
+        "section": "Table: Armor and Shields",
+        "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+        "sourceId": "source.aon-equipment",
         "txtLines": [
-          26,
-          26
+          326,
+          326
         ]
       },
-      "weightLb": null
+      "weightLb": 25
     },
     "item.chainmail": {
       "catalogStatus": "gap",
@@ -12777,26 +13126,29 @@
       "weightLb": null
     },
     "item.light-steel-shield": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "shield",
-      "effects": null,
-      "gapCode": "core-rulebook-equipment",
+      "effects": {
+        "armorCheckPenalty": -1,
+        "shieldBonus": 1
+      },
       "id": "item.light-steel-shield",
       "name": "Light Steel Shield",
-      "priceCp": null,
+      "priceCp": 900,
       "sourceRef": {
-        "entry": "Mundane shields",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Shield, light steel",
+        "file": "sources/npc/aonprd/equipment.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+        "provenanceStatus": "resolved",
+        "section": "Table: Armor and Shields",
+        "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+        "sourceId": "source.aon-equipment",
         "txtLines": [
-          26,
-          26
+          340,
+          340
         ]
       },
-      "weightLb": null
+      "weightLb": 6
     },
     "item.longbow": {
       "catalogStatus": "gap",
@@ -12821,26 +13173,29 @@
       "weightLb": null
     },
     "item.longsword": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "weapon",
-      "effects": null,
-      "gapCode": "core-rulebook-equipment",
+      "effects": {
+        "damageDie": "1d8",
+        "damageType": "S"
+      },
       "id": "item.longsword",
       "name": "Longsword",
-      "priceCp": null,
+      "priceCp": 1500,
       "sourceRef": {
-        "entry": "Mundane weapons",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Longsword",
+        "file": "sources/npc/aonprd/equipment.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+        "provenanceStatus": "resolved",
+        "section": "Table: Weapons",
+        "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+        "sourceId": "source.aon-equipment",
         "txtLines": [
-          26,
-          26
+          155,
+          155
         ]
       },
-      "weightLb": null
+      "weightLb": 4
     },
     "item.morningstar": {
       "catalogStatus": "gap",
@@ -13495,28 +13850,145 @@
       "traits": null
     },
     "npc-race.human": {
-      "abilityAdjustments": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-races",
+      "abilityAdjustments": {
+        "charisma": 0,
+        "constitution": 0,
+        "dexterity": 0,
+        "intelligence": 0,
+        "strength": 0,
+        "wisdom": 0
+      },
+      "catalogStatus": "resolved",
+      "choiceSlots": [
+        {
+          "allowedValues": [
+            "strength",
+            "dexterity",
+            "constitution",
+            "intelligence",
+            "wisdom",
+            "charisma"
+          ],
+          "catalogStatus": "resolved",
+          "choiceId": "ability-bonus",
+          "kind": "ability",
+          "name": "+2 ability score",
+          "options": {
+            "charisma": {
+              "effects": {
+                "abilityAdjustments": {
+                  "charisma": 2
+                }
+              }
+            },
+            "constitution": {
+              "effects": {
+                "abilityAdjustments": {
+                  "constitution": 2
+                }
+              }
+            },
+            "dexterity": {
+              "effects": {
+                "abilityAdjustments": {
+                  "dexterity": 2
+                }
+              }
+            },
+            "intelligence": {
+              "effects": {
+                "abilityAdjustments": {
+                  "intelligence": 2
+                }
+              }
+            },
+            "strength": {
+              "effects": {
+                "abilityAdjustments": {
+                  "strength": 2
+                }
+              }
+            },
+            "wisdom": {
+              "effects": {
+                "abilityAdjustments": {
+                  "wisdom": 2
+                }
+              }
+            }
+          },
+          "required": true,
+          "sourceRef": {
+            "entry": "+2 to One Ability Score",
+            "file": "sources/npc/aonprd/core-races.txt",
+            "provenanceStatus": "resolved",
+            "section": "Human Racial Traits",
+            "sha256": "281a370dc1bff2a537f68449fcf808c2a6d8d8a131012e56522c1c5db60cab90",
+            "sourceId": "source.aon-core-races",
+            "txtLines": [
+              121,
+              122
+            ]
+          }
+        }
+      ],
+      "featSlots": [
+        {
+          "allowedCategories": [
+            "general"
+          ],
+          "grantedAtLevel": 1,
+          "kind": "general",
+          "required": true,
+          "slotId": "human-bonus-feat",
+          "sourceRef": {
+            "entry": "Bonus Feat",
+            "file": "sources/npc/aonprd/core-races.txt",
+            "provenanceStatus": "resolved",
+            "section": "Human Racial Traits",
+            "sha256": "281a370dc1bff2a537f68449fcf808c2a6d8d8a131012e56522c1c5db60cab90",
+            "sourceId": "source.aon-core-races",
+            "txtLines": [
+              125,
+              125
+            ]
+          }
+        }
+      ],
       "id": "npc-race.human",
-      "languages": null,
+      "languages": [
+        "Common"
+      ],
       "name": "Human",
-      "senses": null,
-      "sizeId": null,
+      "senses": [],
+      "sizeId": "size.medium",
+      "sizeModifiers": {
+        "ac": 0,
+        "attack": 0,
+        "cmb": 0,
+        "cmd": 0
+      },
+      "skillSelectionsBonus": 1,
       "sourceRef": {
-        "entry": "Seven Core races",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Human",
+        "file": "sources/npc/aonprd/core-races.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/races.html#humans",
+        "provenanceStatus": "resolved",
+        "section": "Human Racial Traits",
+        "sha256": "281a370dc1bff2a537f68449fcf808c2a6d8d8a131012e56522c1c5db60cab90",
+        "sourceId": "source.aon-core-races",
         "txtLines": [
-          20,
-          20
+          121,
+          127
         ]
       },
-      "speed": null,
-      "traits": null
+      "speed": {
+        "land": 30
+      },
+      "traits": [
+        "Bonus Feat",
+        "Skilled"
+      ]
     }
   },
   "schemaVersion": "1",
@@ -13585,25 +14057,25 @@
       "trainedOnly": null
     },
     "skill.climb": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": true,
+      "catalogStatus": "resolved",
       "id": "skill.climb",
-      "keyAbility": null,
+      "keyAbility": "strength",
       "name": "Climb",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Climb",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#climb",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          8,
+          8
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": false
     },
     "skill.craft": {
       "armorCheckPenalty": null,
@@ -13774,25 +14246,25 @@
       "trainedOnly": null
     },
     "skill.intimidate": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
       "id": "skill.intimidate",
-      "keyAbility": null,
+      "keyAbility": "charisma",
       "name": "Intimidate",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "8cc5b0371fffe02a8a65012d397190522256503afbd28d8038f6efd74560e8f5",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Intimidate",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#intimidate",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          17,
+          17
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": false
     },
     "skill.knowledge-arcana": {
       "armorCheckPenalty": null,
@@ -14294,6 +14766,12 @@
       "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
       "sourceId": "source.aon-feats"
     },
+    "source.aon-getting-started": {
+      "description": "Official AoN rounding and ability rules",
+      "file": "sources/npc/aonprd/getting-started.txt",
+      "sha256": "2a59a8c5aaf2c1bc734c1ed47efaccecc037e3c703fe26f09e1b29c57535d78d",
+      "sourceId": "source.aon-getting-started"
+    },
     "source.aon-npc-classes": {
       "description": "Official AoN NPC class tables and rules",
       "file": "sources/npc/aonprd/npc-classes.txt",
@@ -14339,7 +14817,7 @@
     "source.npc-manifest": {
       "description": "Hash manifest for the local NPC source foundation",
       "file": "sources/npc/MANIFEST.json",
-      "sha256": "7544ff3f25fbb8ad26f9cb1efe8228a81de5c2cf104d4a3d0ec21f5025c13bc7",
+      "sha256": "075c07737a4f928472e995900d9d9a808dbcbae8d5e3d086ec640adc8b1d557e",
       "sourceId": "source.npc-manifest"
     },
     "source.npc-mode-plan": {
