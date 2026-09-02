@@ -32,6 +32,7 @@ class GoblinSorcererTests(unittest.TestCase):
         self.assertEqual(canonical["defenses"], {
             "ac": 15, "touch": 15, "flatFooted": 11,
             "fortitude": 4, "reflex": 9, "will": 8,
+            "acBreakdown": {"dexterity": 4, "size": 1},
         })
         self.assertEqual(canonical["initiative"], 8)
         self.assertEqual(canonical["gearBudget"]["budgetCp"], 465000)
@@ -86,7 +87,10 @@ class GoblinSorcererTests(unittest.TestCase):
                 }))
                 self.assertTrue(exported["ok"], exported)
                 content = exported["result"]["content"]
-                self.assertIn("Cinder", json.dumps(content) if isinstance(content, dict) else content)
+                rendered = json.dumps(content) if isinstance(content, dict) else content
+                self.assertIn("Cinder", rendered)
+                if format_name != "json":
+                    self.assertIn("AC 15 (+4 Dex, +1 size)", rendered)
 
 
 if __name__ == "__main__":

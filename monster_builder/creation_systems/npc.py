@@ -269,6 +269,12 @@ class NpcCreation(CreationSystem):
         dex_to_ac = min([modifiers["dexterity"], *max_dex_values]) if max_dex_values else modifiers["dexterity"]
         feat_saves = feat_effects.get("saves", {})
         resistance_bonus = max((entry["effects"].get("resistanceBonus", 0) for entry in equipped), default=0)
+        ac_breakdown = {
+            key: value for key, value in (
+                ("armor", armor_bonus), ("shield", shield_bonus),
+                ("dexterity", dex_to_ac), ("size", size_modifiers.get("ac", 0)),
+            ) if value
+        }
         defenses = {
             "ac": 10 + armor_bonus + shield_bonus + dex_to_ac + size_modifiers.get("ac", 0),
             "touch": 10 + modifiers["dexterity"] + size_modifiers.get("ac", 0),
@@ -276,6 +282,7 @@ class NpcCreation(CreationSystem):
             "fortitude": row["fortitude"] + modifiers["constitution"] + feat_saves.get("fortitude", 0) + resistance_bonus,
             "reflex": row["reflex"] + modifiers["dexterity"] + feat_saves.get("reflex", 0) + resistance_bonus,
             "will": row["will"] + modifiers["wisdom"] + feat_saves.get("will", 0) + resistance_bonus,
+            "acBreakdown": ac_breakdown,
         }
         attacks = self._attacks(equipped, bab, modifiers, size_modifiers)
         cmb = bab + modifiers["strength"] + size_modifiers.get("cmb", 0)

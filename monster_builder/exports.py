@@ -59,7 +59,7 @@ def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dic
     }
     raw_defenses = result.get("defenses") if isinstance(result.get("defenses"), Mapping) else {}
     defense_fields = [
-        _field(key, label, raw_defenses[key], annotations, _signed(raw_defenses[key]) if key in {"fortitude", "reflex", "will"} else None)
+        _field(key, label, raw_defenses[key], annotations, _defense_text(key, raw_defenses[key], raw_defenses))
         for key, label in _DEFENSES if key in raw_defenses
     ]
     aggregate_defenses = {}
@@ -252,6 +252,16 @@ def _audit_headings(creation_system: str) -> tuple[tuple[str, str], ...]:
         (key, "CREATION DECISIONS: STEPS 1–8" if key == "creationDecisions" else title)
         for key, title in _AUDIT_HEADINGS
     )
+
+
+def _defense_text(key: str, value: Any, defenses: Mapping[str, Any]) -> str | None:
+    if key in {"fortitude", "reflex", "will"}:
+        return _signed(value)
+    if key != "ac" or not isinstance(defenses.get("acBreakdown"), Mapping):
+        return None
+    labels = {"armor": "armor", "shield": "shield", "dexterity": "Dex", "size": "size"}
+    parts = [f"{_signed(bonus)} {labels.get(source, _human(source))}" for source, bonus in defenses["acBreakdown"].items()]
+    return f"{value} ({', '.join(parts)})" if parts else str(value)
 
 
 def _field(key: str, label: str, value: Any, annotations: Mapping[str, Any], text: str | None = None) -> dict[str, Any]:

@@ -249,10 +249,18 @@ function npcStepForPath(path: string): number {
   return 6;
 }
 
+function npcAc(defenses: Record<string, unknown>): unknown {
+  const breakdown = defenses.acBreakdown;
+  if (defenses.ac == null || !breakdown || typeof breakdown !== "object") return defenses.ac;
+  const labels: Record<string, string> = { armor: "armor", shield: "shield", dexterity: "Dex", size: "size" };
+  const parts = Object.entries(breakdown as Record<string, number>).map(([source, bonus]) => `${bonus >= 0 ? "+" : ""}${bonus} ${labels[source] || source}`);
+  return parts.length ? `${defenses.ac} (${parts.join(", ")})` : defenses.ac;
+}
+
 function Side(props: { draft: Draft; evaluation: Evaluation; monster?: FinishedMonster; proposal?: Proposal; busy: boolean; aiRunning: boolean; aiError?: string; setStep: (step: number) => void; issueStep?: (path: string) => number; onGenerate: (concept: string) => void; onAccept: (changeIds: string[]) => void; onClearProposal: () => void }) {
   const result = props.evaluation.effective as { level?: unknown; bab?: unknown; defenses?: Record<string, unknown>; abilityScores?: unknown; feats?: unknown; gear?: unknown; abilityDC?: unknown; spellDC?: unknown; spells?: Array<Record<string, unknown>>; cmb?: unknown } | null | undefined;
   const defenses = result?.defenses || {};
-  const npcStats: Array<[string, unknown]> = [["Level", result?.level], ["BAB", result?.bab], ["AC", defenses.ac], ["HP", defenses.hp], ["CMD", defenses.cmd], ["Fort", defenses.fortitude], ["Ref", defenses.reflex], ["Will", defenses.will], ["CMB", result?.cmb]];
+  const npcStats: Array<[string, unknown]> = [["Level", result?.level], ["BAB", result?.bab], ["AC", npcAc(defenses)], ["HP", defenses.hp], ["CMD", defenses.cmd], ["Fort", defenses.fortitude], ["Ref", defenses.reflex], ["Will", defenses.will], ["CMB", result?.cmb]];
   const simpleStats: Array<[string, unknown]> = [["AC", defenses.ac], ["HP", defenses.hp], ["CMD", defenses.cmd], ["Fort", defenses.fortitude], ["Ref", defenses.reflex], ["Will", defenses.will], ["Ability DC", result?.abilityDC], ["Spell DC", result?.spellDC], ["CMB", result?.cmb]];
   const stats = props.draft.creationSystem === "npc" ? npcStats : simpleStats;
   return <aside class="side"><ProposalPanel draft={props.draft} proposal={props.proposal} busy={props.busy} running={props.aiRunning} error={props.aiError} onGenerate={props.onGenerate} onAccept={props.onAccept} onClear={props.onClearProposal} /><section class="panel"><h3>Live validation</h3><div class="validation-summary">Engine status: <strong>{props.evaluation.status}</strong>. {props.evaluation.issues.length ? `${props.evaluation.issues.length} finding(s) remain.` : "No validation findings."}</div><div class="issues">{props.evaluation.issues.map((issue) => <article class={`issue ${issue.kind === "catalog-data" ? "invalid" : ""}`}><button onClick={() => props.setStep((props.issueStep || stepForPath)(issue.path))}>{issue.code} · {issue.path}</button><p>{issue.message}</p><small>{sourceText(issue.sourceRefs?.[0])}</small></article>)}</div></section>
