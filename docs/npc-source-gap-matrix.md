@@ -3,47 +3,47 @@
 Status legend:
 
 - **anchored** — data is present in a hash-anchored local source; catalog rows may cite it.
-- **extractable** — present in a local parent source and reduced to a hash-anchored fragment in `sources/npc/` (see `MANIFEST.json`).
-- **GAP** — not present in any local source; must be classified as an explicit catalog gap and must not be implemented from memory.
+- **partial** — some required rules are anchored; the listed remainder stays unavailable locally.
+- **GAP** — not present in a local source and must not be implemented from memory.
 
-Anchoring convention: catalog `sourceRef` entries may cite `sources/npc/` extract files
-(by `file` + `sha256`, the mechanism `catalog.py` already validates) or parent `.txt`
-files by `sourceId` + `txtLines`, exactly like the existing catalog. The parent files
-`Pathfinder_RPG_Core_Rulebook.txt`, `Pathfinder Unchained.txt`, and `beastiary.txt` are
-immutable; `catalog/catalog.json` is frozen.
+The official Archives of Nethys pages were snapshotted on 2026-09-02. Raw HTML
+lives under `sources/reference/aonprd/`; deterministic, line-citable text lives
+under `sources/npc/aonprd/`. Every file and upstream URL is recorded in
+`sources/npc/MANIFEST.json`. Source availability does **not** make the current
+catalog records resolved: a row remains `catalogStatus: "gap"` until a parser or
+curated fragment gives it an anchored `sourceRef`.
 
-| # | Source domain | Needed by (phase / task) | Local source | Status | Classification and consequence |
-|---|---------------|--------------------------|--------------|--------|-------------------------------|
-| 1 | NPC creation workflow, Before You Begin + Steps 1–7 (CRB pp. 448–454): basic/heroic ability arrays, `statblockUse` full/encounter, step definitions | Phase 2+ (3.a, 4.a) | None (local CRB PDF = 16-page spell excerpt) | **GAP** | Explicit catalog gap. Workflow field names in the plan remain product decisions; every numeric rule printed on these pages is unimplemented until an anchored extract exists. |
-| 2 | Basic (13/12/11/10/9/8) and heroic (15/14/13/12/10/8) ability arrays | 2.a (3.a) | None | **GAP** | Explicit catalog gap. The vertical slice may only implement arrays once anchored; no memory-sourced rows. |
-| 3 | Seven Core races: ability adjustments, size, speed, senses, traits, languages | 3.b | None | **GAP** | Explicit catalog gap; engine rejects races it cannot anchor. |
-| 4 | Five NPC class tables (adept, aristocrat, commoner, expert, warrior) through level 20: BAB, saves, HD, skill ranks, features, choice slots, spells/day | 3.b, 4.a | None | **GAP** | Explicit catalog gap. Class level rows are table-driven only. |
-| 5 | Eleven Core PC class tables (Table 3-x per class) through level 20 | 5.a | None | **GAP** | Explicit catalog gap. |
-| 6 | Character advancement: +1 ability increase every four total levels, multiclass rules, XP/level relationship | 3.a, 4.a | None | **GAP** | Explicit catalog gap; the every-four-levels increase stays unimplemented until anchored. |
-| 7 | Core skill list, class skills, Armor Check Penalty, max ranks = total HD | 3.a, 3.b | None | **GAP** | Explicit catalog gap. |
-| 8 | Core feats, prerequisite prose, general feat progression, fighter/ranger/monk/wizard bonus feats | 3.b, 5.a | None | **GAP** | Explicit catalog gap. Typed prerequisite expressions may only encode forms after the feat chapter is anchored; unknown forms stay gaps. |
-| 9 | Core weapons, armor, goods; magic item prices; magic weapon/armor instance pricing | 3.b, 5.a | None | **GAP** | Explicit catalog gap; no item price from memory. |
-| 10 | Table 14-9 NPC gear budgets + basic/heroic lines + slow/medium/fast and low/normal/high fantasy profiles | 3.b, 4.a | None | **GAP** | Explicit catalog gap. No extrapolation outside anchored rows (plan: no invented tolerances). |
-| 11 | Spell descriptions (levels, components, schools, DC inputs) | 5.a | CRB spell excerpt: only ~letter-A fragment, two-column reading order partially scrambled | **extractable** (partial) | `sources/npc/core-rulebook-extract.txt` pp. 11–16. Full descriptions remain a GAP; list membership alone is safe. |
-| 12 | Class spell lists for NPC/PC casters (adept = cleric/druid lists) | 4.a, 5.a | CRB spell excerpt, complete class lists | **anchored** | `sources/npc/core-rulebook-extract.spell-lists.txt` (hash in `MANIFEST.json`). Bard 0–6, Cleric 0–9, Druid 0–9, Paladin 1–4, Ranger 1–4, Sorcerer/Wizard 0–9. |
-| 13 | Simple Monster Creation chapter: array/graft semantics, NPC-likeness guidance, class-level−1 CR convention | Phase 1+ comparisons | `Pathfinder Unchained.txt` (full chapter, already anchored) | **anchored** | NPC-likeness guidance curated at `sources/npc/pathfinder-unchained.npc-likeness.txt` (parent lines 3555–3559). |
-| 14 | Bestiary Table 1-1 (Monster Statistics by CR) and Table 1-2 (Hit Dice by CR) | Future `draft.compareBenchmarks` (plan §13) | `beastiary.txt` (already anchored) | **anchored** | Curated at `sources/npc/bestiary.table-1-1.txt` (parent lines 5–27). Comparison-only; never used to compute NPC statistics. |
-| 15 | Printed "Kiramor, the Forest Shadow" example statblock | 6.a acceptance fixture | Only inside `NPC_MODE_PLAN.md` §12 | **GAP** | Treated as unanchored until a hash-anchored copy is added; worksheet records both oracles with provenance (see `docs/kiramor-worksheet.md`). |
-| 16 | Errata status of printed examples (Kiramor saves/HP) | 6.a | None locally; no errata corpus | **GAP** | Cannot distinguish "unlisted resistance bonus" from "example error"; resolved by the dual-oracle Kiramor fixture, never by hidden bonuses. |
+| # | Source domain | Needed by | Local source | Status | Classification and consequence |
+|---|---------------|-----------|--------------|--------|-------------------------------|
+| 1 | NPC creation workflow, Steps 1–7 (CRB pp. 448–454) | Phase 2+ | `aonprd/creating-npcs.txt` lines 1–108 | **anchored** | The workflow, full/encounter statblock guidance, and quick-NPC procedure may now be implemented from this extract. |
+| 2 | Basic and heroic arrays; preset arrays; racial adjustment table | Phase 2 | `aonprd/creating-npcs.txt` lines 9–33 | **anchored** | Arrays and Table 14-6/14-7 values may now replace their catalog gaps. |
+| 3 | Seven Core races: adjustments, size, speed, senses, traits, languages | Phase 2+ | `aonprd/core-races.txt` lines 1–128 | **anchored** | Core race records may now be curated. |
+| 4 | Five NPC classes through level 20 | Phase 2+ | `aonprd/npc-classes.txt` lines 1–172 | **anchored** | Adept, aristocrat, commoner, expert, and warrior HD, skills, BAB, saves, features, and spell rows may now be curated. |
+| 5 | Eleven Core PC classes through level 20 | Heroic phase | Class overview only in `aonprd/character-classes.txt`; individual class pages are not archived | **GAP** | AoN has official pages for each class, so a full PDF is not required; snapshot those pages before hydrating heroic class rows. |
+| 6 | Character advancement, feat/ability progression, multiclassing, favored class | Phase 2+ | `aonprd/character-classes.txt` lines 13–47 | **anchored** | Total-level advancement and multiclass arithmetic may now be implemented. |
+| 7 | Skill ranks, class-skill bonus, rank cap, key ability, trained-only, ACP | Phase 2+ | `aonprd/skills.txt` lines 1–38; `aonprd/skill-descriptions.txt` lines 1–53; NPC class skills in `aonprd/npc-classes.txt` | **anchored** | Core skill records and skill-total calculation may now be curated. Individual skill-use/DC pages are outside the NPC statistic slice. |
+| 8 | Core feats and prerequisites | Phase 2+ | `aonprd/feats.txt` lines 1–1062 | **partial** | General feat rules, table, and descriptions are anchored. PC-class bonus-feat schedules still depend on the unarchived individual class pages. |
+| 9 | Weapons, armor, goods, services, and magic items | Phase 2+ | `aonprd/equipment.txt` lines 1–774 | **partial** | Mundane prices and statistics are anchored. Magic-item chapters and enhancement pricing remain GAP until separately snapshotted from AoN. |
+| 10 | Table 14-9 NPC gear budgets, allocation categories, progression adjustments, and fantasy multipliers | Phase 2+ | `aonprd/creating-npcs.txt` lines 71–102 | **anchored** | Table 14-9 supplies basic/heroic level rows; the preceding prose explicitly defines slow/medium/fast level adjustment and low/normal/high fantasy scaling. The existing nine profile combinations are source-supported. |
+| 11 | Spell descriptions (levels, components, schools, DC inputs, effects) | Heroic phase | Local CRB excerpt contains only an opening alphabetical fragment | **partial** | Spell-list membership is safe; full per-spell rules remain GAP until official AoN spell pages are snapshotted. |
+| 12 | Class spell lists for NPC/PC casters | Basic/heroic phases | `sources/npc/core-rulebook-extract.spell-lists.txt` | **anchored** | Bard, cleric, druid, paladin, ranger, and sorcerer/wizard lists are locally anchored; the adept class page supplies its list relationship. |
+| 13 | Core combat calculations | Phase 2+ | `aonprd/combat.txt` lines 1–617 | **anchored** | Attacks, AC, saves, initiative, CMB/CMD, and iterative attacks may now be implemented. |
+| 14 | Simple Monster Creation and NPC-likeness guidance | Comparison only | `sources/npc/pathfinder-unchained.npc-likeness.txt` | **anchored** | Comparison-only; never mix Simple Monster arithmetic into NPC calculation. |
+| 15 | Bestiary Table 1-1 benchmark | Future comparison | `sources/npc/bestiary.table-1-1.txt` | **anchored** | Comparison-only; never used to compute NPC statistics. |
+| 16 | Kiramor worked example | Acceptance fixture | `aonprd/creating-npcs.txt` lines 109–133 | **anchored** | The printed values now have a primary-source anchor. Keep the computed and printed oracles distinct where they disagree. |
+| 17 | Errata affecting Kiramor or this printing | Kiramor acceptance | No errata snapshot | **GAP** | Do not invent hidden bonuses or silently normalize printed discrepancies. Add matching official errata only if a discrepancy needs adjudication. |
 
 ## Rulings binding downstream tasks
 
-1. **No memory-sourced numbers.** Any catalog row lacking an anchored `sourceRef` is a
-   catalog-gap error, matching how `catalog.py` already rejects entries without
-   provenance.
-2. **Gaps are explicit, not silent.** Where the plan's workflow requires data under GAP
-   status, the adapter emits deterministic `catalog-data` issues naming the gap, as the
-   Simple Monster engine already does (`class-graft.catalog-gap` precedent).
-3. **Fragments are derived, parents are authoritative.** Files under `sources/npc/` are
-   hash-anchored views of immutable parents; if a fragment and its parent ever
-   disagree, the parent hash in `MANIFEST.json` decides.
-4. **Phase 0 exit criterion** (plan §10) cannot be fully met locally: no numeric rule in
-   the first vertical slice may depend solely on memory — therefore the first vertical
-   slice is constrained to data that becomes anchored in tasks 2.b/3.b. Until CRB
-   extracts for domains 1–10 are added to `sources/npc/`, those domains stay declared
-   gaps and the vertical slice's numeric surface stays correspondingly small.
+1. **No memory-sourced numbers.** A catalog row is unresolved until it cites one
+   of the anchored extracts with exact line provenance.
+2. **Gaps are explicit, not silent.** The adapter emits deterministic
+   `catalog-data` issues for unresolved rows.
+3. **Snapshots, not live requests, are build inputs.** Runtime and catalog builds
+   never depend on AoN availability or changing HTML.
+4. **AoN is sufficient for the planned Core-only v1.** Remaining domains are
+   available from official AoN pages and can be archived phase-by-phase; no full
+   Core Rulebook PDF is currently required.
+5. **Phase 2 is source-unblocked, not implementation-complete.** The next bounded
+   task is the human warrior levels 1–5 catalog slice and one production-catalog
+   lifecycle fixture.

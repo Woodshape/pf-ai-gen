@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1",
-  "description": "Hash-anchored source extracts for class-based NPC creation (NPC_MODE_PLAN.md Phase 0). Anchors the locally available Core Rulebook content, curates fragments consumed by the NPC catalog builders, and records exactly which source domains are missing locally.",
+  "description": "Hash-anchored source extracts for class-based NPC creation (NPC_MODE_PLAN.md Phase 0). Anchors the local Core Rulebook excerpt and official Archives of Nethys snapshots, curates fragments consumed by the NPC catalog builders, and records the remaining source gaps.",
   "extraction": {
-    "tool": "pdftotext",
-    "toolVersion": "24.02.0 (poppler)",
-    "note": "Fragment line ranges are stable because the parent .txt files are immutable. core-rulebook-extract.txt line numbers depend on this exact pdftotext version; the extract itself is hash-anchored so downstream code never re-runs extraction."
+    "pdfTool": "pdftotext 24.02.0 (poppler)",
+    "htmlTool": "python3 tools/extract_npc_aon_sources.py",
+    "note": "Extract line ranges are stable because every parent file and derived text file is immutable and hash-anchored. Downstream code does not fetch live web pages or re-run PDF extraction."
   },
   "parentSources": {
     "core-rulebook-pdf": {
@@ -40,7 +40,70 @@
     "npc-mode-plan": {
       "file": "NPC_MODE_PLAN.md",
       "sha256": "934c509d33764d284d124597af2efd82c7d4a18b92605e47d13d56e424afe3b5",
-      "description": "Local implementation plan; the only local carrier of the printed Kiramor statblock values."
+      "description": "Local implementation plan."
+    },
+    "aon-creating-npcs-html": {
+      "file": "sources/reference/aonprd/creating-npcs.html",
+      "sha256": "a1c9f2075311b9330f9a9211badf260973c1cbb16cb219a1c43357099b83c26c",
+      "officialUrl": "https://aonprd.com/Rules.aspx?ID=353",
+      "retrievedAt": "2026-09-02T08:18:33Z",
+      "description": "Official Archives of Nethys Creating NPCs page: Core Rulebook pages 448-454, including Steps 1-7, Tables 14-6 through 14-9, and Kiramor."
+    },
+    "aon-core-races-html": {
+      "file": "sources/reference/aonprd/core-races.html",
+      "sha256": "beb28dcb3f0a1d404ae850ca5c7e29117aa6dbc32cba106b9c733dca5f53f222",
+      "officialUrl": "https://legacy.aonprd.com/coreRulebook/races.html",
+      "retrievedAt": "2026-09-02T08:18:33Z",
+      "description": "Official Archives of Nethys legacy Core Rulebook race chapter."
+    },
+    "aon-character-classes-html": {
+      "file": "sources/reference/aonprd/character-classes.html",
+      "sha256": "7c5b8349f9cb5238a213c354eaced69cef2d5dd843a0bac9332ae7bcbd7463ca",
+      "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html",
+      "retrievedAt": "2026-09-02T08:18:33Z",
+      "description": "Official Archives of Nethys legacy Core Rulebook class and advancement rules."
+    },
+    "aon-npc-classes-html": {
+      "file": "sources/reference/aonprd/npc-classes.html",
+      "sha256": "09fc5c001d42dcdf4c8a49e1680d32554bbac485aa3160cef1de91749a99c770",
+      "officialUrl": "https://legacy.aonprd.com/coreRulebook/NPCClasses.html",
+      "retrievedAt": "2026-09-02T08:18:33Z",
+      "description": "Official Archives of Nethys legacy Core Rulebook tables and rules for the five NPC classes."
+    },
+    "aon-skills-html": {
+      "file": "sources/reference/aonprd/skills.html",
+      "sha256": "26b888c3e3adbd583d722576cfc3ad1b048fc69c2997f2aa063bf85f95ff9ffd",
+      "officialUrl": "https://legacy.aonprd.com/coreRulebook/usingSkills.html",
+      "retrievedAt": "2026-09-02T08:18:33Z",
+      "description": "Official Archives of Nethys legacy Core Rulebook rules for acquiring and using skills."
+    },
+    "aon-skill-descriptions-html": {
+      "file": "sources/reference/aonprd/skill-descriptions.html",
+      "sha256": "f0a474ef5da089308cc2ebb260add613715dd637df875ae0beb0e412bdcf454f",
+      "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html",
+      "retrievedAt": "2026-09-02T08:26:11Z",
+      "description": "Official Archives of Nethys legacy Core Rulebook skill summary table and skill-description conventions."
+    },
+    "aon-feats-html": {
+      "file": "sources/reference/aonprd/feats.html",
+      "sha256": "ac2039ee953b216f55d15bf100963f9cedf2d1da9b72216df925714a3725459e",
+      "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
+      "retrievedAt": "2026-09-02T08:18:33Z",
+      "description": "Official Archives of Nethys legacy Core Rulebook feat rules, table, and descriptions."
+    },
+    "aon-equipment-html": {
+      "file": "sources/reference/aonprd/equipment.html",
+      "sha256": "a6b945662c32f2753e0f974214bd2f23692854b57ecc837e017bf0d235b23d68",
+      "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+      "retrievedAt": "2026-09-02T08:18:33Z",
+      "description": "Official Archives of Nethys legacy Core Rulebook mundane equipment rules and tables."
+    },
+    "aon-combat-html": {
+      "file": "sources/reference/aonprd/combat.html",
+      "sha256": "9f72ecd45a8d4b3ebde5681c88fafe483224ae7ec617e9fb21174ecfcf533e00",
+      "officialUrl": "https://legacy.aonprd.com/coreRulebook/combat.html",
+      "retrievedAt": "2026-09-02T08:18:33Z",
+      "description": "Official Archives of Nethys legacy Core Rulebook combat rules."
     }
   },
   "extracts": {
@@ -60,8 +123,89 @@
       "derivedFrom": "core-rulebook-extract",
       "command": "sed -n '1,1691p' sources/npc/core-rulebook-extract.txt > sources/npc/core-rulebook-extract.spell-lists.txt",
       "lines": [1, 1691],
-      "contents": "Spell-list portion only: complete class lists for Bard (0-6), Cleric (0-9), Druid (0-9), Paladin (1-4), Ranger (1-4), and Sorcerer/Wizard (0-9), ending immediately before the alphabetical spell-description section. Two-column extraction losses: the cleric 7th-level and druid 3rd-level lists are empty in the excerpt at page boundaries; the parser records them as emptySections.",
+      "contents": "Spell-list portion only: complete class lists for Bard (0-6), Cleric (0-9), Druid (0-9), Paladin (1-4), Ranger (1-4), and Sorcerer/Wizard (0-9), ending immediately before the alphabetical spell-description section. Two-column extraction losses: the cleric 7th-level and druid 3rd-level lists are empty in the excerpt at page boundaries; the parser records these as emptySections.",
       "catalogUse": "Stable parse target for spell list membership in the NPC catalog (tools/parse_npc_sources.py)."
+    },
+    "aon-creating-npcs": {
+      "file": "sources/npc/aonprd/creating-npcs.txt",
+      "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+      "derivedFrom": "aon-creating-npcs-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [1, 133],
+      "contents": "Creating NPCs Steps 1-7, ability arrays and presets, racial adjustments, simplified skill ranks, feat recommendations, NPC gear budgets and allocations, and the Kiramor worked example.",
+      "catalogUse": "Authoritative workflow and numeric tables for class-based NPC creation."
+    },
+    "aon-core-races": {
+      "file": "sources/npc/aonprd/core-races.txt",
+      "sha256": "281a370dc1bff2a537f68449fcf808c2a6d8d8a131012e56522c1c5db60cab90",
+      "derivedFrom": "aon-core-races-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [1, 128],
+      "contents": "Core racial traits for dwarf, elf, gnome, half-elf, half-orc, halfling, and human.",
+      "catalogUse": "Race adjustments and traits."
+    },
+    "aon-character-classes": {
+      "file": "sources/npc/aonprd/character-classes.txt",
+      "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
+      "derivedFrom": "aon-character-classes-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [1, 48],
+      "contents": "Class selection, level advancement, favored-class, multiclassing, and general feat and ability-score advancement rules.",
+      "catalogUse": "Shared character advancement rules."
+    },
+    "aon-npc-classes": {
+      "file": "sources/npc/aonprd/npc-classes.txt",
+      "sha256": "17c52d1bc3df506a81c3d077fa252350b98301db9479fd282a7e4f1f28af2f3f",
+      "derivedFrom": "aon-npc-classes-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [1, 172],
+      "contents": "Adept, aristocrat, commoner, expert, and warrior class rules and level tables.",
+      "catalogUse": "Basic NPC class tables and features."
+    },
+    "aon-skills": {
+      "file": "sources/npc/aonprd/skills.txt",
+      "sha256": "56cdedfa6a3ae326bf8531f45fa9cfc93ecb1aa1a60e767819c7f259cb5ec18a",
+      "derivedFrom": "aon-skills-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [1, 38],
+      "contents": "Skill ranks, class-skill bonus, rank cap, checks, and armor check penalty rule.",
+      "catalogUse": "Skill calculation and validation."
+    },
+    "aon-skill-descriptions": {
+      "file": "sources/npc/aonprd/skill-descriptions.txt",
+      "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+      "derivedFrom": "aon-skill-descriptions-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [1, 53],
+      "contents": "Core skill names, PC class-skill assignments, key abilities, trained-only flags, and armor check penalty applicability.",
+      "catalogUse": "Core skill records and PC class-skill mappings."
+    },
+    "aon-feats": {
+      "file": "sources/npc/aonprd/feats.txt",
+      "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+      "derivedFrom": "aon-feats-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [1, 1062],
+      "contents": "Core feat progression, feat table, prerequisites, benefits, and descriptions.",
+      "catalogUse": "Core feat records and typed prerequisites."
+    },
+    "aon-equipment": {
+      "file": "sources/npc/aonprd/equipment.txt",
+      "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+      "derivedFrom": "aon-equipment-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [1, 774],
+      "contents": "Core mundane weapons, armor, goods, services, prices, damage, maximum Dexterity bonuses, and armor check penalties.",
+      "catalogUse": "Mundane item records and equipment-derived statistics."
+    },
+    "aon-combat": {
+      "file": "sources/npc/aonprd/combat.txt",
+      "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+      "derivedFrom": "aon-combat-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [1, 617],
+      "contents": "Core combat calculations and rules for attacks, AC, saves, initiative, CMB, CMD, and iterative attacks.",
+      "catalogUse": "Derived NPC combat statistics."
     }
   },
   "fragments": {
@@ -85,43 +229,25 @@
     }
   },
   "missing": {
-    "core-rulebook-npc-creation-pages": {
-      "printPages": "448-454",
-      "needed": "Before You Begin, Steps 1-7 workflow, basic/heroic arrays, statblockUse rules",
-      "reason": "Local Core Rulebook PDF is a 16-page spell excerpt only.",
-      "consequence": "Workflow text and any numeric rule printed on these pages is an explicit catalog gap until a hash-anchored copy is added."
+    "core-rulebook-pc-class-pages": {
+      "needed": "Eleven PC classes through level 20: BAB, saves, HD, skill points, feature grants, choice slots, and spells per day",
+      "availability": "Available as official Archives of Nethys class pages but not yet archived locally.",
+      "consequence": "Heroic PC-class catalog rows remain source gaps."
     },
-    "core-rulebook-races": {
-      "needed": "Seven Core races with ability adjustments, sizes, speeds, senses, traits, languages",
-      "consequence": "Racial data is a catalog gap; the engine must reject races it cannot anchor."
-    },
-    "core-rulebook-class-tables": {
-      "needed": "Five NPC classes (adept, aristocrat, commoner, expert, warrior) and eleven PC classes through level 20: BAB, saves, HD, skill points, feature grants, choice slots, spells per day",
-      "consequence": "Class level rows are a catalog gap; no class table row may be built from memory."
-    },
-    "core-rulebook-advancement": {
-      "needed": "Character advancement, Table 3-2 experience, +1 ability increase every four levels, multiclass rules",
-      "consequence": "The level-4/8/12/16/20 ability-increase rule is a catalog gap pending an anchored extract."
-    },
-    "core-rulebook-skills": {
-      "needed": "Skill list, class skills, Armor Check Penalty, rank limits",
-      "consequence": "Skill catalog rows are a catalog gap."
-    },
-    "core-rulebook-feats": {
-      "needed": "Core feat list, prerequisite prose, general feat progression (1, 3, 5, 7, 9...), class bonus feats",
-      "consequence": "Feat catalog rows and typed prerequisites are a catalog gap."
-    },
-    "core-rulebook-equipment": {
-      "needed": "Weapons, armor, goods, magic item prices (integer copper), Table 14-9 NPC gear budgets, gear profiles (slow/medium/fast, low/normal/high fantasy)",
-      "consequence": "Gear budgets and item prices are catalog gaps; nothing may be priced from memory."
+    "core-rulebook-magic-items": {
+      "needed": "Magic item descriptions, prices, enhancement pricing, and special abilities",
+      "availability": "Available in the official Archives of Nethys Core rules but not yet archived locally.",
+      "consequence": "Mundane item prices and NPC gear budgets are anchored; heroic magic-item records remain source gaps."
     },
     "core-rulebook-spell-descriptions": {
-      "needed": "Full spell descriptions for levels/DCs/components beyond the letter-A fragment",
-      "consequence": "Spell list membership is locally anchored; per-spell rules beyond the fragment remain a catalog gap."
+      "needed": "Full spell descriptions for levels, DCs, components, and effects beyond the local letter-A fragment",
+      "availability": "Available as official Archives of Nethys spell pages but not yet archived locally.",
+      "consequence": "Spell-list membership is locally anchored; per-spell rules beyond the fragment remain gaps."
     },
-    "kiramor-statblock": {
-      "needed": "The printed 'Kiramor, the Forest Shadow' example statblock",
-      "consequence": "Printed Kiramor values exist only in NPC_MODE_PLAN.md section 12; treated as unanchored until a hash-anchored source is added. See docs/kiramor-worksheet.md."
+    "core-rulebook-conditions": {
+      "needed": "Condition definitions used by class features, feats, equipment, and spells",
+      "availability": "Available in the official Archives of Nethys Core rules but not yet archived locally.",
+      "consequence": "Rules text that depends on unsnapshotted condition definitions remains a source gap."
     }
   }
 }

@@ -12,7 +12,7 @@
       "sourceRef": {
         "sourceId": "source.npc-gap-matrix",
         "section": "NPC Source-Gap Matrix",
-        "txtLines": [16, 16],
+        "txtLines": [19, 19],
         "entry": "Basic and heroic ability arrays",
         "provenanceStatus": "catalog-gap"
       }
@@ -28,7 +28,7 @@
       "sourceRef": {
         "sourceId": "source.npc-gap-matrix",
         "section": "NPC Source-Gap Matrix",
-        "txtLines": [16, 16],
+        "txtLines": [19, 19],
         "entry": "Basic and heroic ability arrays",
         "provenanceStatus": "catalog-gap"
       }

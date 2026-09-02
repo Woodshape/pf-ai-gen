@@ -37,10 +37,8 @@ DEFAULT_OUTPUT = ROOT / "catalog" / "npc.json"
 SOURCE_MANIFEST = ROOT / "sources" / "npc" / "MANIFEST.json"
 
 # Local policy and hash-anchored source files consumed by the NPC catalog.
-# Record fragments cite the gap matrix for unavailable game data, the ADR for
-# product representation decisions, the mode plan for structural references,
-# and the anchored Core Rulebook spell-list extract for resolved spell-list
-# membership (the only locally anchored numeric NPC domain).
+# Runtime and catalog builds use these immutable local extracts, never live
+# Archives of Nethys requests.
 SOURCE_FILES = (
     ("source.npc-manifest", "sources/npc/MANIFEST.json", "Hash manifest for the local NPC source foundation"),
     ("source.npc-gap-matrix", "docs/npc-source-gap-matrix.md", "Explicit source-gap classifications binding NPC catalog data"),
@@ -48,6 +46,15 @@ SOURCE_FILES = (
     ("source.npc-mode-plan", "NPC_MODE_PLAN.md", "NPC creation plan and terminology"),
     ("source.npc-crb-spell-lists", "sources/npc/core-rulebook-extract.spell-lists.txt", "Hash-anchored Core Rulebook class spell lists (16-page local excerpt)"),
     ("source.npc-crb-extract", "sources/npc/core-rulebook-extract.txt", "Full pdftotext extraction of the local 16-page Core Rulebook excerpt"),
+    ("source.aon-creating-npcs", "sources/npc/aonprd/creating-npcs.txt", "Official AoN Creating NPCs rules, tables, and Kiramor example"),
+    ("source.aon-core-races", "sources/npc/aonprd/core-races.txt", "Official AoN Core race rules"),
+    ("source.aon-character-classes", "sources/npc/aonprd/character-classes.txt", "Official AoN advancement and multiclass rules"),
+    ("source.aon-npc-classes", "sources/npc/aonprd/npc-classes.txt", "Official AoN NPC class tables and rules"),
+    ("source.aon-skills", "sources/npc/aonprd/skills.txt", "Official AoN skill calculation rules"),
+    ("source.aon-skill-descriptions", "sources/npc/aonprd/skill-descriptions.txt", "Official AoN Core skill summary"),
+    ("source.aon-feats", "sources/npc/aonprd/feats.txt", "Official AoN Core feat rules and descriptions"),
+    ("source.aon-equipment", "sources/npc/aonprd/equipment.txt", "Official AoN Core mundane equipment rules and tables"),
+    ("source.aon-combat", "sources/npc/aonprd/combat.txt", "Official AoN Core combat rules"),
 )
 
 

@@ -8,6 +8,7 @@ from monster_builder import Catalog
 from monster_builder.catalog import CatalogError, CatalogRegistry
 from monster_builder.npc_catalog import NpcCatalog, catalog_fingerprint, validate_npc_data
 from tools.build_npc_catalog import build_catalog, serialized_catalog, validate_source_manifest
+from tools.extract_npc_aon_sources import OUTPUT as AON_OUTPUT, RAW as AON_RAW, SOURCES as AON_SOURCES, extract as extract_aon
 
 
 ROOT = Path(__file__).parents[1]
@@ -113,6 +114,17 @@ class NpcCatalogTests(unittest.TestCase):
         catalog["sources"][source_id]["sha256"] = "0" * 64
         with self.assertRaises(CatalogError):
             validate_npc_data(catalog, ROOT, check_version=False)
+
+    def test_archived_aon_extracts_are_deterministic_and_keep_rule_tables(self):
+        for name, (attribute, value) in AON_SOURCES.items():
+            self.assertEqual(
+                extract_aon(AON_RAW / f"{name}.html", attribute, value),
+                (AON_OUTPUT / f"{name}.txt").read_text(encoding="utf-8"),
+            )
+        creating_npcs = (AON_OUTPUT / "creating-npcs.txt").read_text(encoding="utf-8")
+        self.assertIn("1\t—\t260 gp\t50 gp\t130 gp\t—\t40 gp\t40 gp", creating_npcs)
+        self.assertIn("Kiramor, The Forest Shadow", creating_npcs)
+        self.assertIn("5th\t+5\t+4\t+1\t+1", (AON_OUTPUT / "npc-classes.txt").read_text(encoding="utf-8"))
 
     def test_catalog_loader_is_lazy_and_registry_does_not_touch_simple_catalog(self):
         calls = []
