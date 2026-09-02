@@ -8952,8 +8952,7 @@
     {
       "id": "spell.fireball",
       "name": "Fireball",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -8979,14 +8978,20 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-fireball",
+        "section": "Spell description",
         "txtLines": [
-          1199,
-          1199
+          1,
+          33
         ],
         "entry": "Fireball",
-        "provenanceStatus": "list-membership-resolved"
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Fireball",
+        "provenanceStatus": "resolved"
+      },
+      "effects": {
+        "damage": "1d6 fire/caster level (maximum 10d6)",
+        "area": "20-ft.-radius spread",
+        "save": "Reflex half"
       }
     },
     {
@@ -9157,8 +9162,7 @@
     {
       "id": "spell.flare",
       "name": "Flare",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -9202,14 +9206,15 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
+        "sourceId": "source.aon-spell-flare",
+        "section": "Spell description",
         "txtLines": [
-          35,
-          35
+          1,
+          26
         ],
         "entry": "Flare",
-        "provenanceStatus": "list-membership-resolved"
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Flare",
+        "provenanceStatus": "resolved"
       }
     },
     {

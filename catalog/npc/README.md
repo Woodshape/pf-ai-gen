@@ -12,7 +12,7 @@ of Nethys pages for the Phase 2 rules are now archived and hash-anchored under
 Source acquisition does not silently resolve the scaffold: records keep
 `catalogStatus: "gap"` until a parser or curated fragment supplies exact values
 and line-level `sourceRef` provenance. The current resolved slices are human
-warrior levels 1–5 and a level-5 elemental-fire goblin Sorcerer. Everything
+warrior levels 1–5 and an elemental-fire goblin Sorcerer at levels 5–6. Everything
 outside those bounded slices remains a gap.
 
 The complete class spell lists in the PDF excerpt remain independently
@@ -20,7 +20,7 @@ anchored. `spells.fragment.json` is **generated** by
 `tools/parse_npc_sources.py` from `sources/npc/core-rulebook-extract.spell-lists.txt`
 (hash in `sources/npc/MANIFEST.json`). Every spell record carries
 `levelsByClass` plus per-row `listMembership` line provenance with
-`catalogStatus: "partial"` — list membership is resolved. Fourteen spells used
+`catalogStatus: "partial"` — list membership is resolved. Sixteen spells used
 by the goblin Sorcerer slice are curated from current AoN pages and resolved;
 other spell rules remain gaps. The excerpt's two-column extraction lost
 the cleric 7th-level and druid 3rd-level lists at page boundaries; the parser
@@ -32,7 +32,7 @@ records these as `emptySections` instead of guessing.
 |----------|---------|--------|
 | `ability-arrays.fragment.json` | 2 (basic, heroic) | resolved |
 | `races.fragment.json` | 8 races | human and goblin resolved |
-| `classes.fragment.json` | 16 classes (5 NPC + 11 PC) × levels 1–20 | warrior and Sorcerer levels 1–5 resolved |
+| `classes.fragment.json` | 16 classes (5 NPC + 11 PC) × levels 1–20 | warrior levels 1–5 and Sorcerer levels 1–6 resolved |
 | `class-features.fragment.json` | 19 feat-slot and choice-slot kinds | bounded warrior/Sorcerer features resolved |
 | `skills.fragment.json` | 35 Core skills | slice selections resolved |
 | `feats.fragment.json` | 142 Core feats | slice selections resolved |

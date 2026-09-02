@@ -64,6 +64,7 @@ SOURCE_FILES = (
     ("source.aon-skill-bluff", "sources/npc/aonprd/skill-bluff.txt", "Official current AoN Bluff skill rules"),
     ("source.aon-skill-spellcraft", "sources/npc/aonprd/skill-spellcraft.txt", "Official current AoN Spellcraft skill rules"),
     ("source.aon-cloak-of-resistance", "sources/npc/aonprd/cloak-of-resistance.txt", "Official current AoN Cloak of Resistance rules"),
+    ("source.aon-designing-encounters", "sources/npc/aonprd/designing-encounters.txt", "Official current AoN classed-NPC CR rules"),
     *((
         f"source.aon-spell-{name}",
         f"sources/npc/aonprd/spell-{name}.txt",
@@ -71,7 +72,7 @@ SOURCE_FILES = (
     ) for name in (
         "acid-splash", "detect-magic", "light", "mage-hand", "prestidigitation", "read-magic",
         "burning-hands", "mage-armor", "magic-missile", "shield", "flaming-sphere", "mirror-image",
-        "scorching-ray", "grease",
+        "scorching-ray", "grease", "fireball", "flare",
     )),
 )
 

@@ -2,8 +2,8 @@
 
 These tests re-parse hash-anchored source extracts with independent literals
 and verify the generated catalog against the planned Core scope. Nothing here
-invents rules: domains outside the human warrior levels 1–5 and level-5
-goblin Sorcerer slices remain explicit catalog gaps.
+invents rules: domains outside the human warrior levels 1–5 and goblin
+Sorcerer levels 5–6 remain explicit catalog gaps.
 """
 
 import json
@@ -90,7 +90,7 @@ RESOLVED_SPELLS = {
     "spell.acid-splash", "spell.detect-magic", "spell.light", "spell.mage-hand",
     "spell.prestidigitation", "spell.read-magic", "spell.burning-hands", "spell.grease",
     "spell.mage-armor", "spell.magic-missile", "spell.shield", "spell.flaming-sphere",
-    "spell.mirror-image", "spell.scorching-ray",
+    "spell.mirror-image", "spell.scorching-ray", "spell.fireball", "spell.flare",
 }
 
 
@@ -184,7 +184,8 @@ class CatalogCompletenessTests(unittest.TestCase):
             if class_id in {"npc-class.warrior", "npc-class.sorcerer"}:
                 self.assertEqual(record["catalogStatus"], "resolved")
                 for level in range(1, 21):
-                    expected = "resolved" if level <= 5 else "gap"
+                    maximum = 6 if class_id == "npc-class.sorcerer" else 5
+                    expected = "resolved" if level <= maximum else "gap"
                     self.assertEqual(record["levels"][str(level)]["catalogStatus"], expected)
             else:
                 self.assertEqual(record["catalogStatus"], "gap")
@@ -232,7 +233,7 @@ class CatalogCompletenessTests(unittest.TestCase):
         resolved = budgets["npc-gear.medium.normal"]
         self.assertEqual(resolved["catalogStatus"], "resolved")
         self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "basic"], [1, 2, 3, 4, 5])
-        self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "heroic"], [5])
+        self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "heroic"], [5, 6])
         self.assertTrue(all(record["catalogStatus"] == "gap" for record_id, record in budgets.items() if record_id != "npc-gear.medium.normal"))
 
     def test_phase_two_values_match_the_archived_aon_rows(self):

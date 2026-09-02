@@ -19,7 +19,7 @@ COMPUTED_FIELDS = {
     "level", "totalLevel", "npcCategory", "abilityScores", "abilityModifiers", "hp", "bab",
     "defenses", "initiative", "attacks", "cmb", "cmd", "skills", "speed", "senses", "languages",
     "size", "classFeatures", "spells", "gearBudget", "canonical", "effective", "derivationTrace",
-    "evaluation", "ac", "fortitude", "reflex", "will",
+    "evaluation", "cr", "ac", "fortitude", "reflex", "will",
 }
 
 
@@ -223,10 +223,10 @@ class NpcCreation(CreationSystem):
         slice_id = (selections["raceId"], progression[0]["classId"], total_level)
         supported = (
             slice_id[0] == "npc-race.human" and slice_id[1] == "npc-class.warrior" and 1 <= total_level <= 5
-        ) or slice_id == ("npc-race.goblin", "npc-class.sorcerer", 5)
+        ) or (slice_id[0] == "npc-race.goblin" and slice_id[1] == "npc-class.sorcerer" and 5 <= total_level <= 6)
         if not supported:
             issues.append(self._issue(
-                "npc.slice-unsupported", "production evaluation supports human warriors 1–5 and goblin sorcerers at level 5",
+                "npc.slice-unsupported", "production evaluation supports human warriors 1–5 and goblin sorcerers at levels 5–6",
                 path="/selections/classProgression", source_refs=_refs(class_records[0]) if class_records else [],
             ))
         if issues:
@@ -256,6 +256,8 @@ class NpcCreation(CreationSystem):
         combat_ref = self._source_ref("source.aon-combat", "Combat Statistics", [24, 58])
         maneuver_ref = self._source_ref("source.aon-combat", "Combat Maneuvers", [536, 544])
         hp_rule = self._record("derivedRule", "npc-rule.average-hp")
+        cr_rule = self._record("derivedRule", "npc-rule.classed-npc-cr")
+        cr = total_level + cr_rule["pcClassAdjustment"] if class_record["category"] == "pc" else None
         die_size = int(class_record["hitDie"].removeprefix("d"))
         hp = math.floor(total_level * ((die_size + 1) / 2 + modifiers["constitution"]))
         bab = row["bab"]
@@ -289,6 +291,7 @@ class NpcCreation(CreationSystem):
             "maneuvers": _dedupe_refs(class_refs, ability_refs, [maneuver_ref]),
             "features": _dedupe_refs(feature_refs, ability_refs, class_refs, [combat_ref]),
             "spells": _dedupe_refs(spell_refs, ability_refs, class_refs),
+            "cr": _refs(cr_rule),
         }
         canonical = {
             "name": draft.get("concept", {}).get("name", "Unnamed NPC"),
@@ -296,6 +299,7 @@ class NpcCreation(CreationSystem):
             "statblockUse": selections["statblockUse"],
             "level": total_level,
             "totalLevel": total_level,
+            **({"cr": cr} if cr is not None else {}),
             "npcCategory": "heroic" if class_record["category"] == "pc" else "basic",
             "raceId": race["id"],
             "raceName": race["name"],
@@ -323,6 +327,7 @@ class NpcCreation(CreationSystem):
         }
         trace = [
             self._trace("/canonical/level", total_level, "sum selected class levels", class_refs),
+            *([self._trace("/canonical/cr", cr, "PC class levels − 1", source_groups["cr"])] if cr is not None else []),
             self._trace("/canonical/abilityScores", scores, "apply the NPC array, racial adjustments, and level increases", ability_refs),
             self._trace("/canonical/hp", hp, f"floor(level × (average d{die_size} + Constitution modifier))", source_groups["hp"]),
             self._trace("/canonical/bab", bab, "read the selected class level row", class_refs),
@@ -598,6 +603,7 @@ class NpcCreation(CreationSystem):
                 continue
             selected = copy.deepcopy(power)
             if selected["name"] == "Elemental Ray":
+                selected["damageExpression"] = f"{selected['damageDie']}+{level // 2}"
                 selected["usesPerDay"] = 3 + modifiers["charisma"]
                 selected["attackBonus"] = class_record["levels"][str(level)]["bab"] + modifiers["dexterity"] + race.get("sizeModifiers", {}).get("attack", 0)
             powers.append(selected)

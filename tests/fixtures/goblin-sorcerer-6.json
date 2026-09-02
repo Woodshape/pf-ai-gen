@@ -3,7 +3,7 @@
   "concept": {
     "name": "Cinder",
     "role": "fire-themed arcane striker",
-    "description": "A level 5 goblin sorcerer with the elemental fire bloodline."
+    "description": "A level 6 goblin sorcerer with the elemental fire bloodline."
   },
   "selections": {
     "statblockUse": "full",
@@ -12,7 +12,7 @@
     "classProgression": [
       {
         "classId": "npc-class.sorcerer",
-        "levels": 5
+        "levels": 6
       }
     ],
     "abilityGeneration": {
@@ -55,7 +55,8 @@
           "spell.light",
           "spell.mage-hand",
           "spell.prestidigitation",
-          "spell.read-magic"
+          "spell.read-magic",
+          "spell.flare"
         ],
         "1": [
           "spell.grease",
@@ -66,6 +67,9 @@
         "2": [
           "spell.flaming-sphere",
           "spell.mirror-image"
+        ],
+        "3": [
+          "spell.fireball"
         ]
       }
     },

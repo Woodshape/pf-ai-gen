@@ -1,4 +1,4 @@
-# Goblin Sorcerer (Level 5, fire theme, wand) — Source Assessment
+# Goblin Sorcerer (Levels 5–6, fire theme, wand) — Source Assessment
 
 > Every implemented claim below is backed by a current-site `aonprd.com` snapshot archived under `sources/reference/aonprd/`, normalized under `sources/npc/aonprd/`, and hash-anchored in `sources/npc/MANIFEST.json`. No newly acquired legacy-site page is used.
 > Date: 2026-09-02 (rev. 3: implementation source gate)
@@ -27,12 +27,12 @@ URL: https://aonprd.com/MonsterDisplay.aspx?ItemName=Goblin
 Exact claims: "Goblin warrior 1 NE Small humanoid (goblinoid)"; "Init +6; Senses darkvision 60 ft.; Perception –1"; "AC 16, touch 13, flat-footed 14 (+2 armor, +2 Dex, +1 shield, +1 size) hp 6 (1d10+1)"; "Str 11, Dex 15, Con 12, Int 10, Wis 9, Cha 6"; "Racial Modifiers +4 Ride, +4 Stealth"; "Languages Goblin"; Treasure: "NPC gear (leather armor, light wooden shield, short sword, short bow with 20 arrows, other treasure)".
 Note: the same category list (verified on that page) contains a **Goblin Firestarter, CR 4** (link: https://aonprd.com/MonsterDisplay.aspx?ItemName=Goblin%20Firestarter) — an official pre-built fire-themed goblin NPC near the target level. Its contents were not fetched in this pass.
 
-## 2. Sorcerer class progression through level 5
+## 2. Sorcerer class progression through level 6
 
 URL: https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer
 Source: PRPG Core Rulebook pg. 70.
 
-Table: Sorcerer (levels 1–5, exact):
+Table: Sorcerer (levels 1–6, exact):
 | Level | BAB | Fort | Ref | Will | Special | 1st | 2nd |
 |---|---|---|---|---|---|---|---|
 | 1st | +0 | +0 | +0 | +2 | Bloodline power, cantrips, eschew materials | 3 | – |
@@ -40,8 +40,9 @@ Table: Sorcerer (levels 1–5, exact):
 | 3rd | +1 | +1 | +1 | +3 | Bloodline power, bloodline spell | 5 | – |
 | 4th | +2 | +1 | +1 | +4 | — | 6 | 3 |
 | 5th | +2 | +1 | +1 | +4 | Bloodline spell | 6 | 4 |
+| 6th | +3 | +2 | +2 | +5 | — | 6 | 5; 3rd: 3 |
 
-Spells Known (Table: Sorcerer Spells Known), level 5 exact: "0: 6 | 1st: 4 | 2nd: 2".
+Spells Known (Table: Sorcerer Spells Known), level 6 exact: "0: 7 | 1st: 4 | 2nd: 2 | 3rd: 1".
 Cantrips: "These spells are cast like any other spell, but they do not consume any slots and may be used again."
 Bloodline: "A sorcerer must pick one bloodline upon taking her first level of sorcerer." / "At 3rd level, and every two levels thereafter, a sorcerer learns an additional spell, derived from her bloodline. These spells are in addition to the number of spells given on Table: Sorcerer Spells Known." Bonus feats only at 7th/13th/19th — no bloodline feat at level 5.
 Other level-1 features (exact): simple-weapon proficiency only, no armor/shield proficiency; Eschew Materials bonus feat at 1st; spellcasting key stat Charisma ("To learn or cast a spell, a sorcerer must have a Charisma score equal to at least 10 + the spell level"; "The Difficulty Class ... is 10 + the spell level + the sorcerer's Charisma modifier").
@@ -50,24 +51,24 @@ Hit Die: d6. Starting Wealth: "2d6 x 10 gp (average 70 gp)."
 ## 3. Core fire bloodline: Elemental (fire)
 
 URL: https://aonprd.com/BloodlineDisplay.aspx?ItemName=Elemental
-Source: PRPG Core Rulebook pg. 75. This is the Core bloodline that covers fire: "At first level, you must select one of the four elements: air, earth, fire, or water." Fire column (exact): energy type **Fire**; Elemental Movement "+30 feet base speed" (granted at 15th, not relevant at 5).
+Source: PRPG Core Rulebook pg. 75. This is the Core bloodline that covers fire: "At first level, you must select one of the four elements: air, earth, fire, or water." Fire column (exact): energy type **Fire**; Elemental Movement "+30 feet base speed" (granted at 15th, not relevant at 6).
 
-Exact claims relevant at level 5:
+Exact claims relevant through level 6:
 - Class Skill: Knowledge (planes).
 - Bonus Spells: "burning hands* (3rd), scorching ray* (5th), protection from energy (7th), elemental body I (9th), ..." with the footnote: "*These spells always deal a type of damage determined by your element. In addition, the subtype of these spells changes to match the energy type of your element."
 - Bloodline Arcana: "Whenever you cast a spell that deals energy damage, you can change the type of damage to match the type of your bloodline."
-- Elemental Ray (Sp), 1st level: "1d6 points of damage of your energy type + 1 for every two sorcerer levels you possess ... a number of times per day equal to 3 + your Charisma modifier." → at 5th: 1d6+2 fire, ranged touch, 30 ft.
+- Elemental Ray (Sp), 1st level: "1d6 points of damage of your energy type + 1 for every two sorcerer levels you possess ... a number of times per day equal to 3 + your Charisma modifier." → at 6th: 1d6+3 fire, ranged touch, 30 ft.
 - Elemental Resistance (Ex), 3rd level: "you gain energy resistance 10 against your energy type" (→ fire resistance 10).
-- Bloodline powers beyond level 5 (9th Elemental Blast, 15th Elemental Movement, 20th Elemental Body) are on the page but out of scope.
+- Bloodline powers beyond level 6 (9th Elemental Blast, 15th Elemental Movement, 20th Elemental Body) are on the page but out of scope.
 
-## 4. Minimal Core spell loadout, levels 0–2 (verified spells only)
+## 4. Minimal Core spell loadout, levels 0–3 (verified spells only)
 
 Bloodline bonus spells (fixed, verified via the bloodline page): **burning hands** (3rd) and **scorching ray** (5th), both always fire for this bloodline.
 - Burning Hands — https://aonprd.com/SpellDisplay.aspx?ItemName=Burning%20Hands — "evocation [fire]; Level ... sorcerer 1, wizard 1"; "1d4 points of fire damage per caster level (maximum 5d4)"; Reflex half; 15-ft. cone.
 - Scorching Ray — https://aonprd.com/SpellDisplay.aspx?ItemName=Scorching%20Ray — "evocation [fire]; Level ... sorcerer 2, wizard 2"; "4d6 points of fire damage" per ray, ranged touch, extra ray every 4 levels beyond 3rd (one ray at CL 5).
 - Flaming Sphere — https://aonprd.com/SpellDisplay.aspx?ItemName=Flaming%20Sphere — "evocation [fire]; Level ... sorcerer 2, wizard 2"; "3d6 points of fire damage", "moves 30 feet per round", Reflex negates, 1 round/level. Sorcerer list membership verified.
 
-Spells-known budget at 5th: 6 cantrips + 4 first-level + 2 second-level known, plus the 2 bloodline spells. The implemented loadout uses current-site snapshots for acid splash, detect magic, light, mage hand, prestidigitation, and read magic; grease, mage armor, magic missile, and shield; and flaming sphere and mirror image. Burning hands and scorching ray are added separately by the bloodline. No broader spell catalog is claimed resolved.
+Spells-known budget at 6th: 7 cantrips + 4 first-level + 2 second-level + 1 third-level known, plus the 2 bloodline spells. The implemented loadout adds flare to the prior cantrips and fireball as the 3rd-level spell. Burning hands and scorching ray are added separately by the bloodline. No broader spell catalog is claimed resolved.
 
 ## 5. Wand: creation, pricing, use rules
 
@@ -84,7 +85,7 @@ Spells-known budget at 5th: 6 cantrips + 4 first-level + 2 second-level known, p
 - "Normally, to use a wand, you must have the wand's spell on your class spell list." → a sorcerer uses a wand of burning hands/scorching ray without any check.
 - UMD table: "Use a wand | 20"; "Failing the roll does not expend a charge."
 
-**One fitting wand:** **Wand of burning hands** (CL 1, 750 gp, 50 charges = 15 gp/charge — the 15 gp/charge minimum is stated on https://aonprd.com/Rules.aspx?ID=1430). A wand of scorching ray (2nd-level spell) prices at 6,000 gp (sorcerer column) — above the level-5 heroic NPC gear budget (see §6).
+**One fitting wand:** **Wand of burning hands** (CL 1, 750 gp, 50 charges = 15 gp/charge — the 15 gp/charge minimum is stated on https://aonprd.com/Rules.aspx?ID=1430). A wand of scorching ray (2nd-level spell) prices at 6,000 gp (sorcerer column) — above the level-6 heroic NPC gear budget (see §6).
 
 **Other magic gear:** A current-site [Cloak of Resistance](https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=Cloak%20of%20Resistance1) snapshot verifies the +1 cloak at 1,000 gp and its +1 resistance bonus on all saves. It fits the 1,400 gp Protection allocation. No staff pricing was verified, so no staff is asserted.
 
@@ -96,12 +97,13 @@ Source: current-site AoN page https://aonprd.com/Rules.aspx?Name=Creating%20NPCs
 - "Apply the NPC's racial modifiers after the scores have been assigned. For every four levels the NPC has attained, increase one of its scores by 1."
 - Table 14–6, Arcane NPC, Heroic column (exact): Str 8, Dex 14, Con 12, Int 15*, Wis 10, Cha 13* — with the footnote: "*If the arcane caster's spellcasting relies on Charisma, exchange these scores with one another." → for a sorcerer: Int 13, Cha 15 before racial modifiers.
 - Combined with goblin racial modifiers (§1: +4 Dex, –2 Str, –2 Cha), the preset becomes Str 6, Dex 18, Con 12, Int 13, Wis 10, Cha 13. The required level-4 ability increase can then raise Charisma to 14.
-- Table 14–9: NPC Gear, row "Basic Level 6 | Heroic Level 5" (exact): Total gp value **3,450 gp**; Weapons 1,400 gp; Protection 1,400 gp; Magic **—**; Limited Use 450 gp; Gear 200 gp. (First nonzero Magic allocation in the table is 500 gp at Basic 8 / Heroic 7.)
-- Wand classification (exact, same page): "Weapons: This includes normal, masterwork, and magic weapons, as well as magic staves and wands used by spellcasters to harm their enemies. For example, a wand of scorching ray would count as a weapon, but a staff of life would count as a piece of magic gear." → A wand of burning hands for this spellcaster NPC counts against the **Weapons** budget (1,400 gp at Heroic 5), not the "—" Magic column: the 750 gp wand fits cleanly. A 6,000 gp wand of scorching ray fits neither the Weapons budget nor the 3,450 gp total.
+- Table 14–9: NPC Gear, row "Basic Level 7 | Heroic Level 6" (exact): Total gp value **4,650 gp**; Weapons 2,350 gp; Protection 1,650 gp; Magic **—**; Limited Use 450 gp; Gear 200 gp.
+- Wand classification places the wand of burning hands in Weapons; the cloak belongs to Protection. Both fit their level-6 allocations.
+- Current AoN [Designing Encounters](https://aonprd.com/Rules.aspx?ID=252) states that a creature with class levels and no racial Hit Dice has CR equal to class levels −1. The Sorcerer 6 is therefore **CR 5**.
 
-## 7. Suggested level-5 stat block skeleton (all values sourced above)
+## 7. Suggested level-6 stat block skeleton (all values sourced above)
 
-Goblin sorcerer 5 — derived ability scores Str 6, Dex 18, Con 12, Int 13, Wis 10, Cha 14 after the level-4 increase; hp 22 from five average d6 Hit Dice plus Constitution; BAB +2; base saves Fort +2, Ref +5, Will +4 before feats and gear; fire resistance 10. Base spells/day are 1st ×6 and 2nd ×4, increased to 7 and 5 by Charisma 14; spells known are 6/4/2 plus burning hands and scorching ray from the bloodline. Elemental ray is 1d6+2 fire, 5/day. The 3,450 gp gear budget includes a 750 gp wand of burning hands and a 1,000 gp cloak of resistance +1. The implemented fixture's Iron Will, Lightning Reflexes, and cloak produce final saves +3/+8/+7. No CR is asserted because this source gate does not include the classed-NPC CR rule.
+Goblin sorcerer 6 (CR 5) — Str 6, Dex 18, Con 12, Int 13, Wis 10, Cha 14; hp 27; BAB +3; AC 15 (10 +4 Dexterity +1 Small size); base saves Fort +3, Ref +6, Will +5 before feats and gear; fire resistance 10. Spells/day are 7/6/3 after Charisma bonus spells; spells known are 7/4/2/1 plus burning hands and scorching ray. Fireball is the 3rd-level selection. Elemental ray is 1d6+3 fire, 5/day. The 4,650 gp gear budget includes the wand and cloak; Iron Will, Lightning Reflexes, and the cloak produce final saves +4/+9/+8.
 
 ## Sources index
 
@@ -114,6 +116,7 @@ Goblin sorcerer 5 — derived ability scores Str 6, Dex 18, Con 12, Int 13, Wis 
 | Burning Hands | https://aonprd.com/SpellDisplay.aspx?ItemName=Burning%20Hands |
 | Scorching Ray | https://aonprd.com/SpellDisplay.aspx?ItemName=Scorching%20Ray |
 | Flaming Sphere | https://aonprd.com/SpellDisplay.aspx?ItemName=Flaming%20Sphere |
+| Fireball and Flare | Current `SpellDisplay.aspx` pages listed and hashed individually in `sources/npc/MANIFEST.json` |
 | Other selected spells | Current `SpellDisplay.aspx` pages listed and hashed individually in `sources/npc/MANIFEST.json` |
 | Wand rules + Table 15–17 | https://aonprd.com/Rules.aspx?Name=Wands&Category=Magic%20Items |
 | Wand of burning hands = 750 gp (example) | https://aonprd.com/Rules.aspx?ID=1436 |
@@ -121,3 +124,4 @@ Goblin sorcerer 5 — derived ability scores Str 6, Dex 18, Con 12, Int 13, Wis 
 | Bluff, Spellcraft, and Use Magic Device | Current `Skills.aspx` pages listed and hashed individually in `sources/npc/MANIFEST.json` |
 | Cloak of Resistance +1 | https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=Cloak%20of%20Resistance1 |
 | Heroic NPC abilities + Table 14–9 gear (current site, live) | https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=- |
+| Classed-NPC CR | https://aonprd.com/Rules.aspx?ID=252 |

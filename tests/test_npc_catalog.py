@@ -64,7 +64,7 @@ class NpcCatalogTests(unittest.TestCase):
         budget = catalog["gearBudgets"]["npc-gear.medium.normal"]
         self.assertEqual([row["budgetCp"] for row in budget["rows"] if row["npcCategory"] == "basic"], [26000, 39000, 78000, 165000, 240000])
 
-    def test_goblin_sorcerer_level_five_catalog_slice_is_resolved(self):
+    def test_goblin_sorcerer_levels_five_and_six_catalog_slice_is_resolved(self):
         catalog = NpcCatalog.load().data
         heroic = catalog["abilityArrays"]["npc-ability-array.heroic"]
         self.assertEqual(heroic["scores"], [15, 14, 13, 12, 10, 8])
@@ -78,13 +78,14 @@ class NpcCatalogTests(unittest.TestCase):
         self.assertEqual(goblin["skillBonuses"], {"skill.ride": 4, "skill.stealth": 4})
 
         sorcerer = catalog["classes"]["npc-class.sorcerer"]
-        self.assertTrue(all(sorcerer["levels"][str(level)]["catalogStatus"] == "resolved" for level in range(1, 6)))
+        self.assertTrue(all(sorcerer["levels"][str(level)]["catalogStatus"] == "resolved" for level in range(1, 7)))
         self.assertEqual(sorcerer["levels"]["5"]["bab"], 2)
         self.assertEqual(sorcerer["levels"]["5"]["spellsPerDay"], {"1": 6, "2": 4})
         self.assertEqual(sorcerer["levels"]["5"]["spellsKnown"], {"0": 6, "1": 4, "2": 2})
+        self.assertEqual(sorcerer["levels"]["6"]["spellsKnown"], {"0": 7, "1": 4, "2": 2, "3": 1})
         self.assertEqual(catalog["classFeatures"]["npc-class-feature.sorcerer-bloodlines"]["catalogStatus"], "resolved")
 
-        for spell_id in ("burning-hands", "flaming-sphere", "scorching-ray"):
+        for spell_id in ("burning-hands", "flaming-sphere", "scorching-ray", "fireball", "flare"):
             self.assertEqual(catalog["spells"][f"spell.{spell_id}"]["catalogStatus"], "resolved")
         self.assertEqual(catalog["items"]["item.wand-of-burning-hands"]["priceCp"], 75000)
         self.assertEqual(catalog["items"]["item.wand-of-burning-hands"]["npcGearCategory"], "weapons")
@@ -92,6 +93,7 @@ class NpcCatalogTests(unittest.TestCase):
         self.assertEqual(catalog["items"]["item.cloak-of-resistance-1"]["npcGearCategory"], "protection")
         heroic_five = next(row for row in catalog["gearBudgets"]["npc-gear.medium.normal"]["rows"] if row["npcCategory"] == "heroic" and row["level"] == 5)
         self.assertEqual(heroic_five["budgetCp"], 345000)
+        self.assertEqual(catalog["derivedRules"]["npc-rule.classed-npc-cr"]["pcClassAdjustment"], -1)
 
     def test_money_is_integer_copper_and_prerequisite_examples_are_typed(self):
         catalog = NpcCatalog.load().data
@@ -163,6 +165,8 @@ class NpcCatalogTests(unittest.TestCase):
             "wands": "level of the spell × the creator's caster level × 750 gp",
             "spell-burning-hands": "1d4 points of fire damage per caster level",
             "spell-scorching-ray": "4d6 points of fire damage",
+            "spell-fireball": "1d6 points of fire damage per caster level",
+            "designing-encounters": "CR equal to its class levels –1",
             "spell-grease": "10-ft. square",
             "cloak-of-resistance": "+1 to +5 resistance bonus on all saving throws",
         }

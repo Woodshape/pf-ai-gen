@@ -134,6 +134,22 @@
         "entry": "Class skill bonus",
         "provenanceStatus": "resolved"
       }
+    },
+    {
+      "id": "npc-rule.classed-npc-cr",
+      "name": "Classed NPC challenge rating",
+      "catalogStatus": "resolved",
+      "kind": "classed-npc-cr",
+      "pcClassAdjustment": -1,
+      "npcClassAdjustment": -2,
+      "sourceRef": {
+        "sourceId": "source.aon-designing-encounters",
+        "section": "Adding NPCs",
+        "txtLines": [1, 1],
+        "entry": "Class levels without racial Hit Dice determine NPC CR",
+        "officialUrl": "https://aonprd.com/Rules.aspx?ID=252",
+        "provenanceStatus": "resolved"
+      }
     }
   ]
 }

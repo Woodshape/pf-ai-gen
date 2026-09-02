@@ -4,7 +4,7 @@
 
 Archives of Nethys is sufficient for the planned Core-only class-based NPC
 system. A full Core Rulebook PDF is not currently needed. The human warrior
-levels 1–5 and level-5 elemental-fire goblin Sorcerer slices are fully
+levels 1–5 and elemental-fire goblin Sorcerer levels 5–6 are fully
 source-backed by local, hash-anchored AoN snapshots.
 
 Builds must consume the local snapshots, not live HTTP responses. Raw pages and
@@ -37,8 +37,8 @@ level advancement, skill totals, general feats, mundane weapons and armor, NPC
 gear budgets, and combat statistics.
 
 The goblin Sorcerer phase additionally archives current-site pages for Goblin,
-Sorcerer, the Elemental bloodline, fourteen selected spells, three selected
-skills, wands, and a cloak of resistance +1. Later phases should continue to
+Sorcerer, the Elemental bloodline, sixteen selected spells, three selected
+skills, wands, a cloak of resistance +1, and the classed-NPC CR rule. Later phases should continue to
 archive only the individual class, item, spell, and condition pages they need.
 These are acquisition tasks, not reasons to request the full PDF.
 Official errata is still required only if a printed-example discrepancy such as

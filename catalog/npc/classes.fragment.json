@@ -5344,21 +5344,33 @@
         },
         "6": {
           "level": 6,
-          "bab": null,
-          "fortitude": null,
-          "reflex": null,
-          "will": null,
-          "hitDie": null,
-          "skillSelections": null,
-          "featureGrants": null,
-          "choiceSlots": null,
-          "catalogStatus": "gap",
+          "bab": 3,
+          "fortitude": 2,
+          "reflex": 2,
+          "will": 5,
+          "hitDie": "d6",
+          "skillSelections": 2,
+          "featureGrants": [],
+          "choiceSlots": [],
+          "catalogStatus": "resolved",
           "sourceRef": {
-            "sourceId": "source.npc-gap-matrix",
-            "section": "NPC Source-Gap Matrix",
-            "txtLines": [22, 22],
+            "sourceId": "source.aon-sorcerer",
+            "section": "Table: Sorcerer; Spells Known",
+            "txtLines": [13, 41],
             "entry": "Sorcerer level 6",
-            "provenanceStatus": "catalog-gap"
+            "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer",
+            "provenanceStatus": "resolved"
+          },
+          "spellsPerDay": {
+            "1": 6,
+            "2": 5,
+            "3": 3
+          },
+          "spellsKnown": {
+            "0": 7,
+            "1": 4,
+            "2": 2,
+            "3": 1
           }
         },
         "7": {
@@ -5632,13 +5644,13 @@
         "sourceId": "source.aon-sorcerer",
         "section": "Sorcerer; Class Skills; Class Features",
         "txtLines": [1, 66],
-        "entry": "Sorcerer class levels 1-5",
+        "entry": "Sorcerer class levels 1-6",
         "provenanceStatus": "resolved",
         "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer"
       },
       "castingAbility": "charisma",
       "castingMode": "spontaneous",
-      "supportedLevels": [1, 2, 3, 4, 5]
+      "supportedLevels": [1, 2, 3, 4, 5, 6]
     },
     {
       "id": "npc-class.warrior",

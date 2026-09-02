@@ -32,14 +32,16 @@ SOURCES = {
     "skill-bluff": ("id", "MainContent_DataListTalentsAll_LabelName_0"),
     "skill-spellcraft": ("id", "MainContent_DataListTalentsAll_LabelName_0"),
     "cloak-of-resistance": ("id", "MainContent_DataListTypes_LabelName_0"),
+    "designing-encounters": ("id", "MainContent_DetailedOutput"),
     **{
         f"spell-{name}": ("id", "MainContent_DataListTypes_LabelName_0")
         for name in (
             "acid-splash", "detect-magic", "light", "mage-hand", "prestidigitation", "read-magic",
             "burning-hands", "mage-armor", "magic-missile", "shield", "flaming-sphere", "mirror-image",
-            "scorching-ray", "grease",
+            "scorching-ray", "grease", "fireball", "flare",
         )
     },
+    "spell-fireball": ("id", "MainContent_DataListTypes_LabelName_1"),
 }
 BLOCK_TAGS = {
     "address", "article", "aside", "blockquote", "dd", "div", "dl", "dt",
@@ -144,10 +146,19 @@ def extract(path: Path, attribute: str, value: str) -> str:
 
 
 def extract_source(name: str, path: Path, attribute: str, value: str) -> str:
+    html = path.read_text(encoding="utf-8")
+    if name == "designing-encounters":
+        start = html.find("<b>Adding NPCs</b>:")
+        end = html.find("<b>High CR Encounters</b>", start)
+        if start < 0 or end < 0:
+            raise ValueError("expected Adding NPCs section")
+        parser = ContentExtractor("id", "adding-npcs")
+        parser.feed(f'<div id="adding-npcs">{html[start:end]}</div>')
+        parser.close()
+        return parser.extracted_text()
     content = extract(path, attribute, value)
     if name != "sorcerer":
         return content
-    html = path.read_text(encoding="utf-8")
     start = html.find("<b>Weapon and Armor Proficiency</b>")
     end = html.find('<h2 class="title">Alternate Capstones</h2>', start)
     if start < 0 or end < 0:

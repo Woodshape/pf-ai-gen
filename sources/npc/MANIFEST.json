@@ -265,6 +265,27 @@
       "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Grease",
       "retrievedAt": "2026-09-02T10:55:56Z",
       "description": "Official current Archives of Nethys Grease spell page."
+    },
+    "aon-designing-encounters-html": {
+      "file": "sources/reference/aonprd/designing-encounters.html",
+      "sha256": "76fba00504c7c4cfa9cdf252d3cc4e2d3f551aafec80704ad0797bf928cfeba7",
+      "officialUrl": "https://aonprd.com/Rules.aspx?ID=252",
+      "retrievedAt": "2026-09-02T11:46:09Z",
+      "description": "Official current Archives of Nethys encounter-design and classed-NPC CR rules."
+    },
+    "aon-spell-fireball-html": {
+      "file": "sources/reference/aonprd/spell-fireball.html",
+      "sha256": "9cc0a87491b10e1a72c3bdfadc2a75b2bcb65d6c94342774422e9bc775e6729a",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Fireball",
+      "retrievedAt": "2026-09-02T11:46:09Z",
+      "description": "Official current Archives of Nethys Fireball spell page."
+    },
+    "aon-spell-flare-html": {
+      "file": "sources/reference/aonprd/spell-flare.html",
+      "sha256": "1cc9242c7137eee33c561ef75ad03d92b44a8e061597b3f589d8a6ca4436a27a",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Flare",
+      "retrievedAt": "2026-09-02T11:46:09Z",
+      "description": "Official current Archives of Nethys Flare spell page."
     }
   },
   "extracts": {
@@ -423,7 +444,7 @@
         69
       ],
       "contents": "Official current Archives of Nethys Goblin race page and standard racial traits",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-sorcerer": {
       "file": "sources/npc/aonprd/sorcerer.txt",
@@ -435,7 +456,7 @@
         66
       ],
       "contents": "Official current Archives of Nethys Sorcerer class page, progression, spellcasting, and class features",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-elemental-bloodline": {
       "file": "sources/npc/aonprd/elemental-bloodline.txt",
@@ -447,7 +468,7 @@
         19
       ],
       "contents": "Official current Archives of Nethys Elemental sorcerer bloodline page",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-wands": {
       "file": "sources/npc/aonprd/wands.txt",
@@ -459,7 +480,7 @@
         21
       ],
       "contents": "Official current Archives of Nethys Core wand rules and price table",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-use-magic-device": {
       "file": "sources/npc/aonprd/use-magic-device.txt",
@@ -471,7 +492,7 @@
         40
       ],
       "contents": "Official current Archives of Nethys Use Magic Device skill rules",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-spell-acid-splash": {
       "file": "sources/npc/aonprd/spell-acid-splash.txt",
@@ -483,7 +504,7 @@
         13
       ],
       "contents": "Official current Archives of Nethys Acid Splash spell page",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-spell-detect-magic": {
       "file": "sources/npc/aonprd/spell-detect-magic.txt",
@@ -495,7 +516,7 @@
         58
       ],
       "contents": "Official current Archives of Nethys Detect Magic spell page",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-spell-light": {
       "file": "sources/npc/aonprd/spell-light.txt",
@@ -507,7 +528,7 @@
         14
       ],
       "contents": "Official current Archives of Nethys Light spell page",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-spell-mage-hand": {
       "file": "sources/npc/aonprd/spell-mage-hand.txt",
@@ -519,7 +540,7 @@
         13
       ],
       "contents": "Official current Archives of Nethys Mage Hand spell page",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-spell-prestidigitation": {
       "file": "sources/npc/aonprd/spell-prestidigitation.txt",
@@ -531,7 +552,7 @@
         13
       ],
       "contents": "Official current Archives of Nethys Prestidigitation spell page",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-spell-read-magic": {
       "file": "sources/npc/aonprd/spell-read-magic.txt",
@@ -543,7 +564,7 @@
         13
       ],
       "contents": "Official current Archives of Nethys Read Magic spell page",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-spell-burning-hands": {
       "file": "sources/npc/aonprd/spell-burning-hands.txt",
@@ -555,7 +576,7 @@
         16
       ],
       "contents": "Official current Archives of Nethys Burning Hands spell page",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-spell-mage-armor": {
       "file": "sources/npc/aonprd/spell-mage-armor.txt",
@@ -567,7 +588,7 @@
         17
       ],
       "contents": "Official current Archives of Nethys Mage Armor spell page",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-spell-magic-missile": {
       "file": "sources/npc/aonprd/spell-magic-missile.txt",
@@ -579,7 +600,7 @@
         19
       ],
       "contents": "Official current Archives of Nethys Magic Missile spell page",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-spell-shield": {
       "file": "sources/npc/aonprd/spell-shield.txt",
@@ -591,7 +612,7 @@
         12
       ],
       "contents": "Official current Archives of Nethys Shield spell page",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-spell-flaming-sphere": {
       "file": "sources/npc/aonprd/spell-flaming-sphere.txt",
@@ -603,7 +624,7 @@
         27
       ],
       "contents": "Official current Archives of Nethys Flaming Sphere spell page",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-spell-mirror-image": {
       "file": "sources/npc/aonprd/spell-mirror-image.txt",
@@ -615,7 +636,7 @@
         17
       ],
       "contents": "Official current Archives of Nethys Mirror Image spell page",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-spell-scorching-ray": {
       "file": "sources/npc/aonprd/spell-scorching-ray.txt",
@@ -627,7 +648,7 @@
         16
       ],
       "contents": "Official current Archives of Nethys Scorching Ray spell page",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-cloak-of-resistance": {
       "file": "sources/npc/aonprd/cloak-of-resistance.txt",
@@ -639,7 +660,7 @@
         11
       ],
       "contents": "Cloak of Resistance prices and saving-throw effects",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-skill-bluff": {
       "file": "sources/npc/aonprd/skill-bluff.txt",
@@ -651,7 +672,7 @@
         33
       ],
       "contents": "Bluff skill rules",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-skill-spellcraft": {
       "file": "sources/npc/aonprd/skill-spellcraft.txt",
@@ -663,7 +684,7 @@
         31
       ],
       "contents": "Spellcraft skill rules",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
     },
     "aon-spell-grease": {
       "file": "sources/npc/aonprd/spell-grease.txt",
@@ -675,7 +696,43 @@
         30
       ],
       "contents": "Grease spell rules",
-      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
+    },
+    "aon-designing-encounters": {
+      "file": "sources/npc/aonprd/designing-encounters.txt",
+      "sha256": "fcfea8b5b372ba39e132818cbe9c1c46e2d556ec3bb6ce73cee6ec2c686d3716",
+      "derivedFrom": "aon-designing-encounters-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        1
+      ],
+      "contents": "Official current Archives of Nethys encounter-design and classed-NPC CR rules",
+      "catalogUse": "Goblin sorcerer level-6 source-gated production slice."
+    },
+    "aon-spell-fireball": {
+      "file": "sources/npc/aonprd/spell-fireball.txt",
+      "sha256": "45c8ba2e29b37f76f97691e27c1e3c500853daf3960d4e88cd93e1c36f85c38a",
+      "derivedFrom": "aon-spell-fireball-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        33
+      ],
+      "contents": "Official current Archives of Nethys Fireball spell page",
+      "catalogUse": "Goblin sorcerer level-6 source-gated production slice."
+    },
+    "aon-spell-flare": {
+      "file": "sources/npc/aonprd/spell-flare.txt",
+      "sha256": "3abf681f9013db7442803defbd14abb4606761273e6e92b35ea24823c164eda4",
+      "derivedFrom": "aon-spell-flare-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        26
+      ],
+      "contents": "Official current Archives of Nethys Flare spell page",
+      "catalogUse": "Goblin sorcerer level-6 source-gated production slice."
     }
   },
   "fragments": {
@@ -706,9 +763,9 @@
   },
   "missing": {
     "core-rulebook-pc-class-pages": {
-      "needed": "PC classes other than the source-gated Sorcerer levels 1–5 slice",
+      "needed": "PC classes other than the source-gated Sorcerer levels 1–6 slice",
       "availability": "Available as official Archives of Nethys class pages but not yet archived locally.",
-      "consequence": "Sorcerer levels 1–5 are hydrated; other heroic PC-class rows remain source gaps."
+      "consequence": "Sorcerer levels 1–6 are hydrated; other heroic PC-class rows remain source gaps."
     },
     "core-rulebook-magic-items": {
       "needed": "Magic items other than the source-gated wand rules and selected wand records",
@@ -718,7 +775,7 @@
     "core-rulebook-spell-descriptions": {
       "needed": "Spell descriptions other than the source-gated Goblin Sorcerer loadout",
       "availability": "Available as official Archives of Nethys spell pages but not yet archived locally.",
-      "consequence": "The selected Sorcerer spells are hydrated; all other spell rules remain gaps."
+      "consequence": "The selected Sorcerer spells through 3rd level are hydrated; all other spell rules remain gaps."
     },
     "core-rulebook-conditions": {
       "needed": "Condition definitions used by class features, feats, equipment, and spells",

@@ -318,7 +318,7 @@
           "sourceId": "source.aon-elemental-bloodline",
           "section": "Elemental Bloodline",
           "txtLines": [1, 16],
-          "entry": "Elemental fire bloodline through level 5",
+          "entry": "Elemental fire bloodline through level 6",
           "provenanceStatus": "resolved",
           "officialUrl": "https://aonprd.com/BloodlineDisplay.aspx?ItemName=Elemental"
         }
@@ -338,10 +338,11 @@
             {
               "level": 1,
               "name": "Elemental Ray",
-              "damageExpression": "1d6+2",
               "damageType": "fire",
               "range": "30 ft.",
-              "usesFormula": "3 + Charisma modifier"
+              "usesFormula": "3 + Charisma modifier",
+              "damageDie": "1d6",
+              "damageBonusFormula": "floor(Sorcerer level / 2)"
             },
             {
               "level": 3,
