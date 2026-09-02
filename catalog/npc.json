@@ -110,7 +110,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:d89e77a6498ac149286bc882f1636eaeb413c9ebd0e62ed6ee24c36bc981aaa0",
+  "catalogVersion": "sha256:7c1bbd22dae5755f5815c2a8c1382ff7f5a176968e4dcdf099080d6abd6e1cdf",
   "classFeatures": {
     "npc-class-feature.class-specific-feats": {
       "catalogStatus": "gap",
@@ -552,6 +552,11 @@
       "name": "Sorcerer bloodlines",
       "options": {
         "elemental-fire": {
+          "arcana": {
+            "effect": "energy-damage spells may change their damage type to fire",
+            "energyType": "fire",
+            "name": "Elemental bloodline arcana"
+          },
           "bonusSpells": {
             "3": "spell.burning-hands",
             "5": "spell.scorching-ray"

@@ -350,7 +350,12 @@
                 "fire": 10
               }
             }
-          ]
+          ],
+          "arcana": {
+            "name": "Elemental bloodline arcana",
+            "energyType": "fire",
+            "effect": "energy-damage spells may change their damage type to fire"
+          }
         }
       }
     },

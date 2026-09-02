@@ -41,6 +41,7 @@ class GoblinSorcererTests(unittest.TestCase):
         self.assertIn("spell.scorching-ray", canonical["spells"]["known"]["2"])
         fire = next(feature for feature in canonical["classFeatures"] if feature["featureId"] == "npc-class-feature.sorcerer-bloodlines")
         self.assertEqual(fire["choice"], "elemental-fire")
+        self.assertEqual(fire["arcana"]["energyType"], "fire")
         self.assertEqual(fire["powers"][0]["usesPerDay"], 5)
         self.assertEqual(fire["powers"][1]["resistance"], {"fire": 10})
         self.assertTrue(all(entry["sourceRefs"] for entry in evaluation["derivationTrace"]))

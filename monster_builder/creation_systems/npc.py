@@ -603,7 +603,7 @@ class NpcCreation(CreationSystem):
             powers.append(selected)
         for feature in features:
             if feature["featureId"] == bloodline["id"]:
-                feature.update(choice=choice, name=option["name"], energyType=option["energyType"], powers=powers)
+                feature.update(choice=choice, name=option["name"], energyType=option["energyType"], arcana=copy.deepcopy(option["arcana"]), powers=powers)
         return features, _dedupe_refs(refs, _refs(bloodline)), []
 
     def _spells(
