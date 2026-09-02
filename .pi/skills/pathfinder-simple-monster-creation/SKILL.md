@@ -50,6 +50,8 @@ Common operations for offline monster creation:
 
 Keep `requestId` unique for mutating operations; the engine caches them for idempotency.
 
+**Export gate:** whenever the agent creates and finalizes a monster or NPC through the engine, call `monster.export` with `format: "markdown"` and `profile: "sheet"`. Inspect the rendered Markdown and verify its identity/CR or level, defenses and hp, attacks, skills, and applicable spells against the canonical result; resolve any omission or mismatch before declaring the creation complete.
+
 The optional Pi `proposal.generate` workflow is browser-only and is not required for offline creation.
 
 The same operations are available in-process:
