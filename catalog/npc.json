@@ -93,7 +93,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:57e17677906df03c47f9784dcc6b032b4759bda3f6158cd2cd3f5bced27aec23",
+  "catalogVersion": "sha256:ad6dba28b5545775f53937e6a92f94ea24497b068442fb0d5430039c7ff79732",
   "classFeatures": {
     "npc-class-feature.class-specific-feats": {
       "catalogStatus": "gap",
@@ -14754,6 +14754,12 @@
       "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
       "sourceId": "source.aon-creating-npcs"
     },
+    "source.aon-elemental-bloodline": {
+      "description": "Official current AoN Elemental bloodline rules",
+      "file": "sources/npc/aonprd/elemental-bloodline.txt",
+      "sha256": "b654638572f9597e498032d5bf439f073e07c3c4062313631beb20b80ae6805f",
+      "sourceId": "source.aon-elemental-bloodline"
+    },
     "source.aon-equipment": {
       "description": "Official AoN Core mundane equipment rules and tables",
       "file": "sources/npc/aonprd/equipment.txt",
@@ -14772,6 +14778,12 @@
       "sha256": "2a59a8c5aaf2c1bc734c1ed47efaccecc037e3c703fe26f09e1b29c57535d78d",
       "sourceId": "source.aon-getting-started"
     },
+    "source.aon-goblin-race": {
+      "description": "Official current AoN Goblin racial rules",
+      "file": "sources/npc/aonprd/goblin-race.txt",
+      "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+      "sourceId": "source.aon-goblin-race"
+    },
     "source.aon-npc-classes": {
       "description": "Official AoN NPC class tables and rules",
       "file": "sources/npc/aonprd/npc-classes.txt",
@@ -14789,6 +14801,102 @@
       "file": "sources/npc/aonprd/skills.txt",
       "sha256": "56cdedfa6a3ae326bf8531f45fa9cfc93ecb1aa1a60e767819c7f259cb5ec18a",
       "sourceId": "source.aon-skills"
+    },
+    "source.aon-sorcerer": {
+      "description": "Official current AoN Sorcerer class rules",
+      "file": "sources/npc/aonprd/sorcerer.txt",
+      "sha256": "ebe8943d2e0582ba82f0a180d35ab9ba56e2e9f2f9fb24a9f29d4b8d58fb80af",
+      "sourceId": "source.aon-sorcerer"
+    },
+    "source.aon-spell-acid-splash": {
+      "description": "Official current AoN Acid Splash spell rules",
+      "file": "sources/npc/aonprd/spell-acid-splash.txt",
+      "sha256": "b4ad758edb41b90ddbc15fe50667ddbd2fb954a6608832b56062def909faaa35",
+      "sourceId": "source.aon-spell-acid-splash"
+    },
+    "source.aon-spell-burning-hands": {
+      "description": "Official current AoN Burning Hands spell rules",
+      "file": "sources/npc/aonprd/spell-burning-hands.txt",
+      "sha256": "45592b0968a019ae0016d7b8190fab3f6d98dd8ca41dd49c8f2b036aba93d727",
+      "sourceId": "source.aon-spell-burning-hands"
+    },
+    "source.aon-spell-detect-magic": {
+      "description": "Official current AoN Detect Magic spell rules",
+      "file": "sources/npc/aonprd/spell-detect-magic.txt",
+      "sha256": "6d75ee9f310bdd3911eab59b8abceffc5f698ba3cef36a4200b1748dfda88ab6",
+      "sourceId": "source.aon-spell-detect-magic"
+    },
+    "source.aon-spell-flaming-sphere": {
+      "description": "Official current AoN Flaming Sphere spell rules",
+      "file": "sources/npc/aonprd/spell-flaming-sphere.txt",
+      "sha256": "3e86b3f2f739e99037cff2e142d6a9d1a19a3d805f6acf6e936211157cdc9e1d",
+      "sourceId": "source.aon-spell-flaming-sphere"
+    },
+    "source.aon-spell-light": {
+      "description": "Official current AoN Light spell rules",
+      "file": "sources/npc/aonprd/spell-light.txt",
+      "sha256": "3722f8addac74a7ba5774fdb273d4cae9542b0b162e55a7aa37be35132fc11e0",
+      "sourceId": "source.aon-spell-light"
+    },
+    "source.aon-spell-mage-armor": {
+      "description": "Official current AoN Mage Armor spell rules",
+      "file": "sources/npc/aonprd/spell-mage-armor.txt",
+      "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+      "sourceId": "source.aon-spell-mage-armor"
+    },
+    "source.aon-spell-mage-hand": {
+      "description": "Official current AoN Mage Hand spell rules",
+      "file": "sources/npc/aonprd/spell-mage-hand.txt",
+      "sha256": "5361d41fdbaf39a6baebcee3e4d26d38cee5f710bb806f36510b8e15c86fa7ff",
+      "sourceId": "source.aon-spell-mage-hand"
+    },
+    "source.aon-spell-magic-missile": {
+      "description": "Official current AoN Magic Missile spell rules",
+      "file": "sources/npc/aonprd/spell-magic-missile.txt",
+      "sha256": "82e54a13f4e8a2e77a642780c0dc2474bb5e49f90f84728204916bfd485f1c35",
+      "sourceId": "source.aon-spell-magic-missile"
+    },
+    "source.aon-spell-mirror-image": {
+      "description": "Official current AoN Mirror Image spell rules",
+      "file": "sources/npc/aonprd/spell-mirror-image.txt",
+      "sha256": "8d4f9a05b6af81b8a434b08a024dd20468f099bb8e84aa916f894323ac9d994e",
+      "sourceId": "source.aon-spell-mirror-image"
+    },
+    "source.aon-spell-prestidigitation": {
+      "description": "Official current AoN Prestidigitation spell rules",
+      "file": "sources/npc/aonprd/spell-prestidigitation.txt",
+      "sha256": "fcc0f9a72a4adae21b38f9a6bde121926e856e6a29af341c57dd1cf468161962",
+      "sourceId": "source.aon-spell-prestidigitation"
+    },
+    "source.aon-spell-read-magic": {
+      "description": "Official current AoN Read Magic spell rules",
+      "file": "sources/npc/aonprd/spell-read-magic.txt",
+      "sha256": "1e1b52a23fdb1453f5d976863127b7621ae5880a8d5a4024b05fad6d942ddf8f",
+      "sourceId": "source.aon-spell-read-magic"
+    },
+    "source.aon-spell-scorching-ray": {
+      "description": "Official current AoN Scorching Ray spell rules",
+      "file": "sources/npc/aonprd/spell-scorching-ray.txt",
+      "sha256": "6cd9453cd80241ed34a8535e926a1863d9b9fe82da1d3bec34c2d286f91aeafd",
+      "sourceId": "source.aon-spell-scorching-ray"
+    },
+    "source.aon-spell-shield": {
+      "description": "Official current AoN Shield spell rules",
+      "file": "sources/npc/aonprd/spell-shield.txt",
+      "sha256": "426fd2722e6ff650ef50163c2be7dd2a9b664d9071ebacef3e72bbd27b3511d0",
+      "sourceId": "source.aon-spell-shield"
+    },
+    "source.aon-use-magic-device": {
+      "description": "Official current AoN Use Magic Device rules",
+      "file": "sources/npc/aonprd/use-magic-device.txt",
+      "sha256": "61c5d6abf9956fd07978213a34375b1255cf8d1b8a26ae350b74242457ea314c",
+      "sourceId": "source.aon-use-magic-device"
+    },
+    "source.aon-wands": {
+      "description": "Official current AoN Core wand rules",
+      "file": "sources/npc/aonprd/wands.txt",
+      "sha256": "70ffb82a3ded2be78064d7cc10bb5d7895ad4f679732a1fb9b06374a69cf7957",
+      "sourceId": "source.aon-wands"
     },
     "source.npc-adr": {
       "description": "Accepted creation-system and NPC catalog decisions",
@@ -14817,7 +14925,7 @@
     "source.npc-manifest": {
       "description": "Hash manifest for the local NPC source foundation",
       "file": "sources/npc/MANIFEST.json",
-      "sha256": "075c07737a4f928472e995900d9d9a808dbcbae8d5e3d086ec640adc8b1d557e",
+      "sha256": "f271fc1328f72c5dc6460a72650bb67dca2b2559f6d62ab72327a1d894f3fc67",
       "sourceId": "source.npc-manifest"
     },
     "source.npc-mode-plan": {

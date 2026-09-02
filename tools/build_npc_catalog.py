@@ -56,6 +56,20 @@ SOURCE_FILES = (
     ("source.aon-feats", "sources/npc/aonprd/feats.txt", "Official AoN Core feat rules and descriptions"),
     ("source.aon-equipment", "sources/npc/aonprd/equipment.txt", "Official AoN Core mundane equipment rules and tables"),
     ("source.aon-combat", "sources/npc/aonprd/combat.txt", "Official AoN Core combat rules"),
+    ("source.aon-goblin-race", "sources/npc/aonprd/goblin-race.txt", "Official current AoN Goblin racial rules"),
+    ("source.aon-sorcerer", "sources/npc/aonprd/sorcerer.txt", "Official current AoN Sorcerer class rules"),
+    ("source.aon-elemental-bloodline", "sources/npc/aonprd/elemental-bloodline.txt", "Official current AoN Elemental bloodline rules"),
+    ("source.aon-wands", "sources/npc/aonprd/wands.txt", "Official current AoN Core wand rules"),
+    ("source.aon-use-magic-device", "sources/npc/aonprd/use-magic-device.txt", "Official current AoN Use Magic Device rules"),
+    *((
+        f"source.aon-spell-{name}",
+        f"sources/npc/aonprd/spell-{name}.txt",
+        f"Official current AoN {name.replace('-', ' ').title()} spell rules",
+    ) for name in (
+        "acid-splash", "detect-magic", "light", "mage-hand", "prestidigitation", "read-magic",
+        "burning-hands", "mage-armor", "magic-missile", "shield", "flaming-sphere", "mirror-image",
+        "scorching-ray",
+    )),
 )
 
 

@@ -111,6 +111,132 @@
       "officialUrl": "https://legacy.aonprd.com/coreRulebook/combat.html",
       "retrievedAt": "2026-09-02T08:18:33Z",
       "description": "Official Archives of Nethys legacy Core Rulebook combat rules."
+    },
+    "aon-goblin-race-html": {
+      "file": "sources/reference/aonprd/goblin-race.html",
+      "sha256": "3ed9274cd131460b29d14b8bd691f46ccc81375e1e7700f2cef87d47dc692017",
+      "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Goblin race page and standard racial traits."
+    },
+    "aon-sorcerer-html": {
+      "file": "sources/reference/aonprd/sorcerer.html",
+      "sha256": "988a272dfd7779734c35b555981d86a8be6dafa38316a806f560a9eea07f8eff",
+      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Sorcerer class page, progression, spellcasting, and class features."
+    },
+    "aon-elemental-bloodline-html": {
+      "file": "sources/reference/aonprd/elemental-bloodline.html",
+      "sha256": "1dbba6022411f137e46498b525fa554299ec1f02ee3e452e4c6e1347f8904efb",
+      "officialUrl": "https://aonprd.com/BloodlineDisplay.aspx?ItemName=Elemental",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Elemental sorcerer bloodline page."
+    },
+    "aon-wands-html": {
+      "file": "sources/reference/aonprd/wands.html",
+      "sha256": "4722c05485a7ff15b0920bbfb997fda0cb515279370d8dce7f908b5e28e38db4",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Wands&Category=Magic%20Items",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Core wand rules and price table."
+    },
+    "aon-use-magic-device-html": {
+      "file": "sources/reference/aonprd/use-magic-device.html",
+      "sha256": "0b020b27087845573b4d46023e003682f76231b4d269e113af4f3a9988d94ebf",
+      "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Use%20Magic%20Device",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Use Magic Device skill rules."
+    },
+    "aon-spell-acid-splash-html": {
+      "file": "sources/reference/aonprd/spell-acid-splash.html",
+      "sha256": "5d2eef0885f723aadfb0bb50f19f806b70fdd6e5d40fbdd642fe64de32a35607",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Acid%20Splash",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Acid Splash spell page."
+    },
+    "aon-spell-detect-magic-html": {
+      "file": "sources/reference/aonprd/spell-detect-magic.html",
+      "sha256": "2c4792fa85995364b025e3aa6e39d9bd90f4ef7dd58ef0ed718f841d113aae49",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Detect%20Magic",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Detect Magic spell page."
+    },
+    "aon-spell-light-html": {
+      "file": "sources/reference/aonprd/spell-light.html",
+      "sha256": "647bc63299845dc245748236eee8dbd360dd3771e1ddec55a98d9cb91495a079",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Light",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Light spell page."
+    },
+    "aon-spell-mage-hand-html": {
+      "file": "sources/reference/aonprd/spell-mage-hand.html",
+      "sha256": "d58bdcde471a6d77c5894b9c65018421a88f9b736e776459984cb3a4f9798b7c",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Hand",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Mage Hand spell page."
+    },
+    "aon-spell-prestidigitation-html": {
+      "file": "sources/reference/aonprd/spell-prestidigitation.html",
+      "sha256": "b577ec1eeb2c9546fa5e1e4287121e7353fdc4347d1e8e075e8aa2060bacf2b4",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Prestidigitation",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Prestidigitation spell page."
+    },
+    "aon-spell-read-magic-html": {
+      "file": "sources/reference/aonprd/spell-read-magic.html",
+      "sha256": "f5c1664b8c7050ad1243488d6f3f4573cb657e6b0884ef395bae3f5cb35464bf",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Read%20Magic",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Read Magic spell page."
+    },
+    "aon-spell-burning-hands-html": {
+      "file": "sources/reference/aonprd/spell-burning-hands.html",
+      "sha256": "9cb0dd8126752a0e9dafd7a183b75cfa21f6a44f29d690bc22e1140994814f39",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Burning%20Hands",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Burning Hands spell page."
+    },
+    "aon-spell-mage-armor-html": {
+      "file": "sources/reference/aonprd/spell-mage-armor.html",
+      "sha256": "d562b7477a5276488db8e76077c4af5d8e00b4d6e1ddbdd887ab087230b99c7d",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Armor",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Mage Armor spell page."
+    },
+    "aon-spell-magic-missile-html": {
+      "file": "sources/reference/aonprd/spell-magic-missile.html",
+      "sha256": "513d779d7a95738068a2651bc3bd8b724b7a322466084e4753cf9bfba440835e",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Magic%20Missile",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Magic Missile spell page."
+    },
+    "aon-spell-shield-html": {
+      "file": "sources/reference/aonprd/spell-shield.html",
+      "sha256": "6d932171206ba0f29fe4c62a38becc378f2525ff2b049a3da879ce46e8c423e2",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Shield",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Shield spell page."
+    },
+    "aon-spell-flaming-sphere-html": {
+      "file": "sources/reference/aonprd/spell-flaming-sphere.html",
+      "sha256": "85582a4a3a81e31728f5e4d3cd774084d731a6ffb982262bd2588188fe5389b7",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Flaming%20Sphere",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Flaming Sphere spell page."
+    },
+    "aon-spell-mirror-image-html": {
+      "file": "sources/reference/aonprd/spell-mirror-image.html",
+      "sha256": "e8a8dd3bd213a1d4e1ec2c13ef57782d090ef684a297a33115b1fff11707320e",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mirror%20Image",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Mirror Image spell page."
+    },
+    "aon-spell-scorching-ray-html": {
+      "file": "sources/reference/aonprd/spell-scorching-ray.html",
+      "sha256": "46ab2c057eecaf0188dad28d43ae0d5cc3fc271a0568c3db93008df1cfe5fd40",
+      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Scorching%20Ray",
+      "retrievedAt": "2026-09-02T10:55:56Z",
+      "description": "Official current Archives of Nethys Scorching Ray spell page."
     }
   },
   "extracts": {
@@ -120,7 +246,10 @@
       "derivedFrom": "core-rulebook-pdf",
       "command": "pdftotext Pathfinder_RPG_Core_Rulebook.pdf sources/npc/core-rulebook-extract.txt",
       "pdfPages": "1-16 of 16",
-      "lines": [1, 1770],
+      "lines": [
+        1,
+        1770
+      ],
       "contents": "Complete spell-list chapter for Bard (0-6), Cleric (0-9), Druid (0-9), Paladin (1-4), Ranger (1-4), Sorcerer/Wizard (0-9), followed by the opening of the alphabetical spell descriptions (roughly the letter A: Acid Fog, Acid Splash, Air Walker, Astral Projection, Energy Drain, Etherealness, Shapechange, Soul Bind, Time Stop, Wail of the Banshee, Wish). Two-column PDF; reading order is reliable in the list section, partially scrambled in the description section.",
       "catalogUse": "NPC spell lists (adept = cleric/druid lists; PC casters) for tasks 3.b and 5.a."
     },
@@ -129,7 +258,10 @@
       "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
       "derivedFrom": "core-rulebook-extract",
       "command": "sed -n '1,1691p' sources/npc/core-rulebook-extract.txt > sources/npc/core-rulebook-extract.spell-lists.txt",
-      "lines": [1, 1691],
+      "lines": [
+        1,
+        1691
+      ],
       "contents": "Spell-list portion only: complete class lists for Bard (0-6), Cleric (0-9), Druid (0-9), Paladin (1-4), Ranger (1-4), and Sorcerer/Wizard (0-9), ending immediately before the alphabetical spell-description section. Two-column extraction losses: the cleric 7th-level and druid 3rd-level lists are empty in the excerpt at page boundaries; the parser records these as emptySections.",
       "catalogUse": "Stable parse target for spell list membership in the NPC catalog (tools/parse_npc_sources.py)."
     },
@@ -138,7 +270,10 @@
       "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
       "derivedFrom": "aon-creating-npcs-html",
       "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [1, 133],
+      "lines": [
+        1,
+        133
+      ],
       "contents": "Creating NPCs Steps 1-7, ability arrays and presets, racial adjustments, simplified skill ranks, feat recommendations, NPC gear budgets and allocations, and the Kiramor worked example.",
       "catalogUse": "Authoritative workflow and numeric tables for class-based NPC creation."
     },
@@ -147,7 +282,10 @@
       "sha256": "2a59a8c5aaf2c1bc734c1ed47efaccecc037e3c703fe26f09e1b29c57535d78d",
       "derivedFrom": "aon-getting-started-html",
       "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [1, 159],
+      "lines": [
+        1,
+        159
+      ],
       "contents": "Core general rules, including round-down policy, ability modifiers, and ability applications.",
       "catalogUse": "Average-HP rounding and ability modifier calculations."
     },
@@ -156,7 +294,10 @@
       "sha256": "281a370dc1bff2a537f68449fcf808c2a6d8d8a131012e56522c1c5db60cab90",
       "derivedFrom": "aon-core-races-html",
       "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [1, 128],
+      "lines": [
+        1,
+        128
+      ],
       "contents": "Core racial traits for dwarf, elf, gnome, half-elf, half-orc, halfling, and human.",
       "catalogUse": "Race adjustments and traits."
     },
@@ -165,7 +306,10 @@
       "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
       "derivedFrom": "aon-character-classes-html",
       "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [1, 48],
+      "lines": [
+        1,
+        48
+      ],
       "contents": "Class selection, level advancement, favored-class, multiclassing, and general feat and ability-score advancement rules.",
       "catalogUse": "Shared character advancement rules."
     },
@@ -174,7 +318,10 @@
       "sha256": "17c52d1bc3df506a81c3d077fa252350b98301db9479fd282a7e4f1f28af2f3f",
       "derivedFrom": "aon-npc-classes-html",
       "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [1, 172],
+      "lines": [
+        1,
+        172
+      ],
       "contents": "Adept, aristocrat, commoner, expert, and warrior class rules and level tables.",
       "catalogUse": "Basic NPC class tables and features."
     },
@@ -183,7 +330,10 @@
       "sha256": "56cdedfa6a3ae326bf8531f45fa9cfc93ecb1aa1a60e767819c7f259cb5ec18a",
       "derivedFrom": "aon-skills-html",
       "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [1, 38],
+      "lines": [
+        1,
+        38
+      ],
       "contents": "Skill ranks, class-skill bonus, rank cap, checks, and armor check penalty rule.",
       "catalogUse": "Skill calculation and validation."
     },
@@ -192,7 +342,10 @@
       "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
       "derivedFrom": "aon-skill-descriptions-html",
       "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [1, 53],
+      "lines": [
+        1,
+        53
+      ],
       "contents": "Core skill names, PC class-skill assignments, key abilities, trained-only flags, and armor check penalty applicability.",
       "catalogUse": "Core skill records and PC class-skill mappings."
     },
@@ -201,7 +354,10 @@
       "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
       "derivedFrom": "aon-feats-html",
       "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [1, 1062],
+      "lines": [
+        1,
+        1062
+      ],
       "contents": "Core feat progression, feat table, prerequisites, benefits, and descriptions.",
       "catalogUse": "Core feat records and typed prerequisites."
     },
@@ -210,7 +366,10 @@
       "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
       "derivedFrom": "aon-equipment-html",
       "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [1, 774],
+      "lines": [
+        1,
+        774
+      ],
       "contents": "Core mundane weapons, armor, goods, services, prices, damage, maximum Dexterity bonuses, and armor check penalties.",
       "catalogUse": "Mundane item records and equipment-derived statistics."
     },
@@ -219,9 +378,228 @@
       "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
       "derivedFrom": "aon-combat-html",
       "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [1, 617],
+      "lines": [
+        1,
+        617
+      ],
       "contents": "Core combat calculations and rules for attacks, AC, saves, initiative, CMB, CMD, and iterative attacks.",
       "catalogUse": "Derived NPC combat statistics."
+    },
+    "aon-goblin-race": {
+      "file": "sources/npc/aonprd/goblin-race.txt",
+      "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+      "derivedFrom": "aon-goblin-race-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        69
+      ],
+      "contents": "Official current Archives of Nethys Goblin race page and standard racial traits",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-sorcerer": {
+      "file": "sources/npc/aonprd/sorcerer.txt",
+      "sha256": "ebe8943d2e0582ba82f0a180d35ab9ba56e2e9f2f9fb24a9f29d4b8d58fb80af",
+      "derivedFrom": "aon-sorcerer-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        66
+      ],
+      "contents": "Official current Archives of Nethys Sorcerer class page, progression, spellcasting, and class features",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-elemental-bloodline": {
+      "file": "sources/npc/aonprd/elemental-bloodline.txt",
+      "sha256": "b654638572f9597e498032d5bf439f073e07c3c4062313631beb20b80ae6805f",
+      "derivedFrom": "aon-elemental-bloodline-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        19
+      ],
+      "contents": "Official current Archives of Nethys Elemental sorcerer bloodline page",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-wands": {
+      "file": "sources/npc/aonprd/wands.txt",
+      "sha256": "70ffb82a3ded2be78064d7cc10bb5d7895ad4f679732a1fb9b06374a69cf7957",
+      "derivedFrom": "aon-wands-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        21
+      ],
+      "contents": "Official current Archives of Nethys Core wand rules and price table",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-use-magic-device": {
+      "file": "sources/npc/aonprd/use-magic-device.txt",
+      "sha256": "61c5d6abf9956fd07978213a34375b1255cf8d1b8a26ae350b74242457ea314c",
+      "derivedFrom": "aon-use-magic-device-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        40
+      ],
+      "contents": "Official current Archives of Nethys Use Magic Device skill rules",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-spell-acid-splash": {
+      "file": "sources/npc/aonprd/spell-acid-splash.txt",
+      "sha256": "b4ad758edb41b90ddbc15fe50667ddbd2fb954a6608832b56062def909faaa35",
+      "derivedFrom": "aon-spell-acid-splash-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        13
+      ],
+      "contents": "Official current Archives of Nethys Acid Splash spell page",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-spell-detect-magic": {
+      "file": "sources/npc/aonprd/spell-detect-magic.txt",
+      "sha256": "6d75ee9f310bdd3911eab59b8abceffc5f698ba3cef36a4200b1748dfda88ab6",
+      "derivedFrom": "aon-spell-detect-magic-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        58
+      ],
+      "contents": "Official current Archives of Nethys Detect Magic spell page",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-spell-light": {
+      "file": "sources/npc/aonprd/spell-light.txt",
+      "sha256": "3722f8addac74a7ba5774fdb273d4cae9542b0b162e55a7aa37be35132fc11e0",
+      "derivedFrom": "aon-spell-light-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        14
+      ],
+      "contents": "Official current Archives of Nethys Light spell page",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-spell-mage-hand": {
+      "file": "sources/npc/aonprd/spell-mage-hand.txt",
+      "sha256": "5361d41fdbaf39a6baebcee3e4d26d38cee5f710bb806f36510b8e15c86fa7ff",
+      "derivedFrom": "aon-spell-mage-hand-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        13
+      ],
+      "contents": "Official current Archives of Nethys Mage Hand spell page",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-spell-prestidigitation": {
+      "file": "sources/npc/aonprd/spell-prestidigitation.txt",
+      "sha256": "fcc0f9a72a4adae21b38f9a6bde121926e856e6a29af341c57dd1cf468161962",
+      "derivedFrom": "aon-spell-prestidigitation-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        13
+      ],
+      "contents": "Official current Archives of Nethys Prestidigitation spell page",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-spell-read-magic": {
+      "file": "sources/npc/aonprd/spell-read-magic.txt",
+      "sha256": "1e1b52a23fdb1453f5d976863127b7621ae5880a8d5a4024b05fad6d942ddf8f",
+      "derivedFrom": "aon-spell-read-magic-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        13
+      ],
+      "contents": "Official current Archives of Nethys Read Magic spell page",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-spell-burning-hands": {
+      "file": "sources/npc/aonprd/spell-burning-hands.txt",
+      "sha256": "45592b0968a019ae0016d7b8190fab3f6d98dd8ca41dd49c8f2b036aba93d727",
+      "derivedFrom": "aon-spell-burning-hands-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        16
+      ],
+      "contents": "Official current Archives of Nethys Burning Hands spell page",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-spell-mage-armor": {
+      "file": "sources/npc/aonprd/spell-mage-armor.txt",
+      "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+      "derivedFrom": "aon-spell-mage-armor-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        17
+      ],
+      "contents": "Official current Archives of Nethys Mage Armor spell page",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-spell-magic-missile": {
+      "file": "sources/npc/aonprd/spell-magic-missile.txt",
+      "sha256": "82e54a13f4e8a2e77a642780c0dc2474bb5e49f90f84728204916bfd485f1c35",
+      "derivedFrom": "aon-spell-magic-missile-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        19
+      ],
+      "contents": "Official current Archives of Nethys Magic Missile spell page",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-spell-shield": {
+      "file": "sources/npc/aonprd/spell-shield.txt",
+      "sha256": "426fd2722e6ff650ef50163c2be7dd2a9b664d9071ebacef3e72bbd27b3511d0",
+      "derivedFrom": "aon-spell-shield-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        12
+      ],
+      "contents": "Official current Archives of Nethys Shield spell page",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-spell-flaming-sphere": {
+      "file": "sources/npc/aonprd/spell-flaming-sphere.txt",
+      "sha256": "3e86b3f2f739e99037cff2e142d6a9d1a19a3d805f6acf6e936211157cdc9e1d",
+      "derivedFrom": "aon-spell-flaming-sphere-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        27
+      ],
+      "contents": "Official current Archives of Nethys Flaming Sphere spell page",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-spell-mirror-image": {
+      "file": "sources/npc/aonprd/spell-mirror-image.txt",
+      "sha256": "8d4f9a05b6af81b8a434b08a024dd20468f099bb8e84aa916f894323ac9d994e",
+      "derivedFrom": "aon-spell-mirror-image-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        17
+      ],
+      "contents": "Official current Archives of Nethys Mirror Image spell page",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
+    },
+    "aon-spell-scorching-ray": {
+      "file": "sources/npc/aonprd/spell-scorching-ray.txt",
+      "sha256": "6cd9453cd80241ed34a8535e926a1863d9b9fe82da1d3bec34c2d286f91aeafd",
+      "derivedFrom": "aon-spell-scorching-ray-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        16
+      ],
+      "contents": "Official current Archives of Nethys Scorching Ray spell page",
+      "catalogUse": "Goblin sorcerer level-5 source-gated production slice."
     }
   },
   "fragments": {
@@ -230,7 +608,10 @@
       "sha256": "3d7700919b14054dc9283c4e37a3c147251655634be413eac19579281a605ae3",
       "derivedFrom": "pathfinder-unchained-txt",
       "command": "sed -n '3555,3559p' 'Pathfinder Unchained.txt' > sources/npc/pathfinder-unchained.npc-likeness.txt",
-      "parentLines": [3555, 3559],
+      "parentLines": [
+        3555,
+        3559
+      ],
       "contents": "Simple Monster Creation guidance that a monster meant to be more like an NPC, especially one using a PC race, should avoid monstrous combat options.",
       "catalogUse": "Policy grounding: NPC-likeness expectations and the future Simple Monster comparison benchmark (plan section 13)."
     },
@@ -239,26 +620,29 @@
       "sha256": "3e808a21ffa19a9b44f76b4c5f91b9263e9b113a1381e194fd077eddba19a822",
       "derivedFrom": "bestiary-txt",
       "command": "sed -n '5,27p' beastiary.txt > sources/npc/bestiary.table-1-1.txt",
-      "parentLines": [5, 27],
+      "parentLines": [
+        5,
+        27
+      ],
       "contents": "Bestiary Table 1-1: Monster Statistics by CR (CR 1/2 through 20 rows).",
       "catalogUse": "Future draft.compareBenchmarks comparisons (plan section 13); never used to compute NPC statistics."
     }
   },
   "missing": {
     "core-rulebook-pc-class-pages": {
-      "needed": "Eleven PC classes through level 20: BAB, saves, HD, skill points, feature grants, choice slots, and spells per day",
+      "needed": "PC classes other than the source-gated Sorcerer levels 1–5 slice",
       "availability": "Available as official Archives of Nethys class pages but not yet archived locally.",
-      "consequence": "Heroic PC-class catalog rows remain source gaps."
+      "consequence": "Sorcerer levels 1–5 can be hydrated; other heroic PC-class rows remain source gaps."
     },
     "core-rulebook-magic-items": {
-      "needed": "Magic item descriptions, prices, enhancement pricing, and special abilities",
+      "needed": "Magic items other than the source-gated wand rules and selected wand records",
       "availability": "Available in the official Archives of Nethys Core rules but not yet archived locally.",
-      "consequence": "Mundane item prices and NPC gear budgets are anchored; heroic magic-item records remain source gaps."
+      "consequence": "Selected wand records can be hydrated; other heroic magic-item records remain source gaps."
     },
     "core-rulebook-spell-descriptions": {
-      "needed": "Full spell descriptions for levels, DCs, components, and effects beyond the local letter-A fragment",
+      "needed": "Spell descriptions other than the source-gated Goblin Sorcerer loadout",
       "availability": "Available as official Archives of Nethys spell pages but not yet archived locally.",
-      "consequence": "Spell-list membership is locally anchored; per-spell rules beyond the fragment remain gaps."
+      "consequence": "Selected Sorcerer spells can be hydrated; all other spell rules remain gaps."
     },
     "core-rulebook-conditions": {
       "needed": "Condition definitions used by class features, feats, equipment, and spells",

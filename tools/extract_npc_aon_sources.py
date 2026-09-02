@@ -24,6 +24,19 @@ SOURCES = {
     "feats": ("class", "body"),
     "equipment": ("class", "body"),
     "combat": ("class", "body"),
+    "goblin-race": ("id", "MainContent_DataListTypes_LabelName_0"),
+    "sorcerer": ("id", "MainContent_DataListTypes_LabelName_0"),
+    "elemental-bloodline": ("id", "MainContent_DataListTypes_LabelName_0"),
+    "wands": ("id", "MainContent_DetailedOutput"),
+    "use-magic-device": ("id", "MainContent_DataListTalentsAll_LabelName_0"),
+    **{
+        f"spell-{name}": ("id", "MainContent_DataListTypes_LabelName_0")
+        for name in (
+            "acid-splash", "detect-magic", "light", "mage-hand", "prestidigitation", "read-magic",
+            "burning-hands", "mage-armor", "magic-missile", "shield", "flaming-sphere", "mirror-image",
+            "scorching-ray",
+        )
+    },
 }
 BLOCK_TAGS = {
     "address", "article", "aside", "blockquote", "dd", "div", "dl", "dt",
@@ -127,6 +140,21 @@ def extract(path: Path, attribute: str, value: str) -> str:
     return parser.extracted_text()
 
 
+def extract_source(name: str, path: Path, attribute: str, value: str) -> str:
+    content = extract(path, attribute, value)
+    if name != "sorcerer":
+        return content
+    html = path.read_text(encoding="utf-8")
+    start = html.find("<b>Weapon and Armor Proficiency</b>")
+    end = html.find('<h2 class="title">Alternate Capstones</h2>', start)
+    if start < 0 or end < 0:
+        raise ValueError("expected Sorcerer class-feature section")
+    parser = ContentExtractor("id", "sorcerer-features")
+    parser.feed(f'<div id="sorcerer-features">{html[start:end]}</div>')
+    parser.close()
+    return content + parser.extracted_text()
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="verify extracts without rewriting them")
@@ -135,7 +163,7 @@ def main(argv: list[str] | None = None) -> int:
         source = RAW / f"{name}.html"
         destination = OUTPUT / f"{name}.txt"
         try:
-            content = extract(source, attribute, value)
+            content = extract_source(name, source, attribute, value)
         except (OSError, UnicodeError, ValueError) as exc:
             print(f"AoN extraction failed for {source}: {exc}", file=sys.stderr)
             return 2
