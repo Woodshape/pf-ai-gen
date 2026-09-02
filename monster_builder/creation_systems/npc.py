@@ -285,6 +285,17 @@ class NpcCreation(CreationSystem):
             "acBreakdown": ac_breakdown,
         }
         attacks = self._attacks(equipped, bab, modifiers, size_modifiers)
+        resistances: dict[str, int] = {}
+        for feature in class_features:
+            for power in feature.get("powers", []):
+                if power.get("damageExpression") and power.get("attackBonus") is not None:
+                    attacks.append({
+                        "name": power["name"], "attackBonuses": [power["attackBonus"]],
+                        "attackBonusExpression": _bonus(power["attackBonus"]), "attackType": "ranged touch",
+                        "damageExpression": power["damageExpression"], "damageType": power.get("damageType"),
+                        "range": power.get("range"), "usesPerDay": power.get("usesPerDay"),
+                    })
+                resistances.update(power.get("resistance", {}))
         cmb = bab + modifiers["strength"] + size_modifiers.get("cmb", 0)
         cmd = 10 + bab + modifiers["strength"] + modifiers["dexterity"] + size_modifiers.get("cmd", 0)
         source_groups = {
@@ -294,7 +305,7 @@ class NpcCreation(CreationSystem):
             "gear": gear_refs,
             "feats": feat_refs,
             "skills": skill_refs,
-            "combat": _dedupe_refs(class_refs, ability_refs, gear_refs, [combat_ref]),
+            "combat": _dedupe_refs(class_refs, ability_refs, gear_refs, feature_refs, [combat_ref]),
             "maneuvers": _dedupe_refs(class_refs, ability_refs, [maneuver_ref]),
             "features": _dedupe_refs(feature_refs, ability_refs, class_refs, [combat_ref]),
             "spells": _dedupe_refs(spell_refs, ability_refs, class_refs),
@@ -313,6 +324,7 @@ class NpcCreation(CreationSystem):
             "classProgression": [{"classId": class_record["id"], "className": class_record["name"], "levels": total_level}],
             "abilityScores": scores,
             "abilityModifiers": modifiers,
+            "hitDiceExpression": f"{total_level}{class_record['hitDie']}{_bonus(total_level * modifiers['constitution']) if modifiers['constitution'] else ''}",
             "hp": hp,
             "bab": bab,
             "defenses": defenses,
@@ -330,6 +342,9 @@ class NpcCreation(CreationSystem):
             "senses": copy.deepcopy(race.get("senses", [])),
             "languages": copy.deepcopy(race.get("languages", [])),
             "size": {"id": race.get("sizeId", "size.medium"), "name": race.get("sizeId", "size.medium").split(".")[-1].title()},
+            "creatureType": f"humanoid ({race['subtype']})" if race.get("subtype") else "humanoid",
+            "alignment": selections.get("details", {}).get("alignment"),
+            "resistances": resistances,
             "details": copy.deepcopy(selections.get("details", {})),
         }
         trace = [
@@ -666,11 +681,13 @@ class NpcCreation(CreationSystem):
         bloodline = self._record("classFeature", "npc-class-feature.sorcerer-bloodlines")
         option = bloodline["options"]["elemental-fire"]
         refs = _dedupe_refs(refs, _refs(bloodline))
+        bloodline_spells: list[str] = []
         for granted_level, spell_id in option["bonusSpells"].items():
             if int(granted_level) <= level:
                 spell = self._record("spell", spell_id)
                 spell_level = str(spell["levelsByClass"]["sorcerer"])
                 resolved.setdefault(spell_level, []).append(spell["id"])
+                bloodline_spells.append(spell["id"])
                 refs = _dedupe_refs(refs, _refs(spell))
 
         charisma = modifiers["charisma"]
@@ -682,9 +699,10 @@ class NpcCreation(CreationSystem):
         bonus_ref = self._source_ref("source.aon-getting-started", "Table: Ability Modifiers and Bonus Spells", [89, 101])
         refs = _dedupe_refs(refs, [bonus_ref])
         result = {
-            "casterLevel": level, "castingAbility": "charisma", "castingAbilityModifier": charisma,
+            "className": class_record["name"], "casterLevel": level,
+            "castingAbility": "charisma", "castingAbilityModifier": charisma,
             "perDay": per_day, "saveDcByLevel": {spell_level: 10 + int(spell_level) + charisma for spell_level in expected},
-            "known": resolved,
+            "known": resolved, "bloodlineSpells": bloodline_spells,
         }
         return result, refs, issues
 
