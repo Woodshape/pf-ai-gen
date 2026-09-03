@@ -12,6 +12,7 @@ resolvable from their line-citable extracts. No remembered values were used.
 | `source.aon-eidolon-unchained` | `sources/npc/aonprd/eidolon-unchained.txt` (46 lines) | `ClassDisplay.aspx?ItemName=Eidolon (Unchained)`, Table 1–6 Eidolon Base Statistics |
 | `source.aon-eidolon-uc-subtypes` | `sources/npc/aonprd/eidolon-uc-subtypes.txt` (12 lines) | `EidolonUCSubtypes.aspx`, "Elemental" subtype, Pathfinder Unchained pg. 33 |
 | `source.aon-eidolon-base-forms` | `sources/npc/aonprd/eidolon-base-forms.txt` (3 lines) | `EidolonBaseForms.aspx`, "Quadruped", Advanced Player's Guide pg. 60 |
+| `source.aon-eidolon-base-forms-biped` | `sources/npc/aonprd/eidolon-base-forms-biped.txt` (3 lines) | `EidolonBaseForms.aspx`, "Biped", Advanced Player's Guide pg. 60 |
 
 Note: the archetype detail URL uses `FixedName=`, not `ItemName=`; `ItemName=Elemental%20Ally`
 returns AoN's "Sequence contains no elements" error page.
@@ -36,16 +37,16 @@ returns AoN's "Sequence contains no elements" error page.
    subtype base evolutions. Table 1–6 row "3rd" (`eidolon-unchained.txt:8`) and the Elemental
    subtype of PFU pg. 33 (`eidolon-uc-subtypes.txt:2`) are exactly the cited rules.
 4. **Level-3 fire row fully resolvable.** The unchained eidolon base statistics row
-   (`eidolon-unchained.txt:8`), the Quadruped base form starting statistics
-   (`eidolon-base-forms.txt:3`), the Elemental subtype evolutions (`eidolon-uc-subtypes.txt:7`),
+   (`eidolon-unchained.txt:8`), the Biped base form starting statistics
+   (`eidolon-base-forms-biped.txt:3`), the Elemental subtype evolutions (`eidolon-uc-subtypes.txt:7`),
    and the archived Core combat rules resolve every required field.
 
-## Curated selection: Quadruped base form
+## Curated selection: Biped base form
 
 The archetype states "Each of the four elementals has its own base form, skills, and feats"
 (`elemental-ally.txt:5`), and the Elemental subtype lists four source-authorized base forms:
 Aberrant, Biped, quadruped, or serpentine (`eidolon-uc-subtypes.txt:5`). The bounded slice
-resolves exactly one row, so the fire eidolon's form is pinned to **Quadruped** as an
+resolves exactly one row, so the fire eidolon's form is pinned to **Biped** as an
 explicit curated selection (not a rule value). The other three forms and unpinned
 skill/feat assignments remain explicit non-resolved choices; only the row values below are
 resolved. Skill ranks (12) and feats (2) stay source-backed budgets without assignments.
@@ -53,31 +54,31 @@ resolved. Skill ranks (12) and feats (2) stay source-backed budgets without assi
 ## Level-3 fire elemental eidolon row (derivation with archived lines)
 
 Inputs: unchained eidolon at class level 3 (`eidolon-unchained.txt:8`, summoner level per
-`:26`), no evolution pool (`elemental-ally.txt:4`), Quadruped base form
-(`eidolon-base-forms.txt:3`), fire elemental subtype base evolutions at 1st level
+`:26`), no evolution pool (`elemental-ally.txt:4`), Biped base form
+(`eidolon-base-forms-biped.txt:3`), fire elemental subtype base evolutions at 1st level
 (`eidolon-uc-subtypes.txt:7`).
 
 | Value | Derivation | Lines |
 |---|---|---|
 | Type outsider | "Eidolons are outsiders" | `eidolon-unchained.txt:3` |
 | Alignment Neutral | subtype alignment | `eidolon-uc-subtypes.txt:4` |
-| Size Medium; speed 40 ft. | Quadruped starting statistics | `eidolon-base-forms.txt:3` |
+| Size Medium; speed 30 ft. | Biped starting statistics | `eidolon-base-forms-biped.txt:3` |
 | HD 3 (d10, +Con each); hp 19 | floor(3 × (5.5 + 1)) = 19.5, round down | `eidolon-unchained.txt:8,27`; `getting-started.txt:39` |
 | BAB +3 | 3rd row; BAB equals HD | `eidolon-unchained.txt:8,28` |
-| Armor total +4 = table +2 + form +2 natural | table armor "modified by the base form" | `eidolon-unchained.txt:8,32`; `eidolon-base-forms.txt:3` |
-| AC 16, touch 12, flat-footed 14 | 10 + 4 + Dex +2; touch drops armor; flat-footed drops Dex | `combat.txt:35,41` |
-| Fort +4, Ref +5, Will +1 | good/good/bad per form; +3 good/+1 bad at 3rd; +Con 1, +Dex 2, +Wis 0 | `eidolon-base-forms.txt:3`; `eidolon-unchained.txt:8,29` |
-| Bite +5 (1d6+3) | full BAB + Str +2; sole natural attack adds 1–1/2 Str bonus (+3) | `eidolon-base-forms.txt:3`; `eidolon-unchained.txt:8,33`; `combat.txt:195` |
-| Str 15, Dex 15, Con 13, Int 7, Wis 10, Cha 11 | form starting scores + Str/Dex bonus +1 | `eidolon-base-forms.txt:3`; `eidolon-unchained.txt:8,33` |
-| Initiative +2 | Dexterity modifier | `combat.txt:13` |
-| CMB +5; CMD 17 | BAB + Str + size 0; 10 + BAB + Str + Dex | `combat.txt:539-544` |
+| Armor total +4 = table +2 + form +2 natural | table armor "modified by the base form" | `eidolon-unchained.txt:8,32`; `eidolon-base-forms-biped.txt:3` |
+| AC 15, touch 11, flat-footed 14 | 10 + 4 + Dex +1; touch drops armor; flat-footed drops Dex | `combat.txt:35,41` |
+| Fort +4, Ref +2, Will +3 | good/bad/good per form; +3 good/+1 bad at 3rd; +Con 1, +Dex 1, +Wis 0 | `eidolon-base-forms-biped.txt:3`; `eidolon-unchained.txt:8,29` |
+| 2 claws +6 (1d4+3) | full BAB + Str +3; two primary attacks each add full Str (no 1–1/2) | `eidolon-base-forms-biped.txt:3`; `eidolon-unchained.txt:8,33`; `combat.txt:195` |
+| Str 17, Dex 13, Con 13, Int 7, Wis 10, Cha 11 | form starting scores + Str/Dex bonus +1 | `eidolon-base-forms-biped.txt:3`; `eidolon-unchained.txt:8,33` |
+| Initiative +1 | Dexterity modifier | `combat.txt:13` |
+| CMB +6; CMD 17 | BAB + Str + size 0; 10 + BAB + Str + Dex | `combat.txt:539-544` |
 | Darkvision 60 ft. | 1st-level special | `eidolon-unchained.txt:37` |
 | Link, share spells, evasion | 1st/2nd-level specials | `eidolon-unchained.txt:38-40` |
 | Immunity to paralysis and sleep; immunity (fire) | 1st-level base evolutions, all elemental / fire | `eidolon-uc-subtypes.txt:7` |
 | Cannot wear armor | Armor Bonus rule | `eidolon-unchained.txt:32` |
 | 12 skill ranks; 2 feats; max 3 attacks | 3rd-row values; assignments unpinned | `eidolon-unchained.txt:8,30,31,35,46` |
 
-Ability modifiers: Str 15 +2, Dex 15 +2, Con 13 +1, Int 7 −2, Wis 10 +0, Cha 11 +0
+Ability modifiers: Str 17 +3, Dex 13 +1, Con 13 +1, Int 7 −2, Wis 10 +0, Cha 11 +0
 (`getting-started.txt` ability-modifier table, already anchored).
 
 ## Elemental Empathy (Druid 3 consequence)

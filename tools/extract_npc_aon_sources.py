@@ -13,6 +13,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "sources" / "reference" / "aonprd"
+# Sections extracted from an already-archived page: extract name -> archived HTML name.
+HTML_SOURCE_ALIASES = {
+    "eidolon-base-forms-biped": "eidolon-base-forms",
+}
+
+
+def html_source_name(name: str) -> str:
+    """Archived HTML page name providing the extract's section."""
+    return HTML_SOURCE_ALIASES.get(name, name)
 OUTPUT = ROOT / "sources" / "npc" / "aonprd"
 SOURCES = {
     "creating-npcs": ("id", "MainContent_DetailedOutput"),
@@ -58,11 +67,13 @@ SOURCES = {
     "eidolon-unchained": ("id", "MainContent_DataListTypes_LabelName_0"),
     "eidolon-uc-subtypes": ("heading", "Elemental"),
     "eidolon-base-forms": ("heading", "Quadruped"),
+    "eidolon-base-forms-biped": ("heading", "Biped"),
 }
 
 # Stop tag for heading-based extractions: the tag of the next titled entry.
 HEADING_STOPS = {
     "fire-domain": "h2", "eidolon-uc-subtypes": "h2", "eidolon-base-forms": "h2",
+    "eidolon-base-forms-biped": "h2",
 }
 BLOCK_TAGS = {
     "address", "article", "aside", "blockquote", "dd", "div", "dl", "dt",
@@ -225,7 +236,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--check", action="store_true", help="verify extracts without rewriting them")
     args = parser.parse_args(argv)
     for name, (attribute, value) in SOURCES.items():
-        source = RAW / f"{name}.html"
+        source = RAW / f"{html_source_name(name)}.html"
         destination = OUTPUT / f"{name}.txt"
         try:
             content = extract_source(name, source, attribute, value)

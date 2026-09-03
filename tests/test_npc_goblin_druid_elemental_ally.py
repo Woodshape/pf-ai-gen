@@ -214,6 +214,25 @@ class ElementalAllyValidEvaluationTests(unittest.TestCase):
         self.assertEqual(block["element"], "fire")
         self.assertEqual(block["level"], 3)
 
+    def test_curated_base_form_is_biped(self):
+        created = Engine().execute(request("ea-biped", "draft.create", archetype_draft_payload()))
+        self.assertTrue(created["ok"], created)
+        block = created["result"]["evaluation"]["canonical"]["linkedCreature"]
+        self.assertEqual(block["attacks"], [{
+            "name": "claws", "attackType": "melee", "attackBonus": "+6",
+            "damage": "1d4+3", "count": 2,
+            "notes": "primary natural attacks each add full Strength bonus",
+        }])
+        self.assertEqual(block["speed"], {"land": 30})
+        self.assertEqual(block["defenses"], {
+            "ac": 15, "touch": 11, "flatFooted": 14,
+            "fortitude": 4, "reflex": 2, "will": 3,
+            "acBreakdown": {"armor": 4, "dexterity": 1},
+        })
+        self.assertEqual((block["initiative"], block["cmb"], block["cmd"]), (1, 6, 17))
+        self.assertEqual(block["abilities"]["strength"], 17)
+        self.assertEqual(block["abilities"]["dexterity"], 13)
+
     def test_trace_projects_the_linked_creature_row(self):
         created = Engine().execute(request("ea-trace", "draft.create", archetype_draft_payload()))
         self.assertTrue(created["ok"], created)

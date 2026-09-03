@@ -118,7 +118,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:daedc73d2e15da5827cfcb2bad41cc23b79fdd4c01f5e42861248f3a2c1a7e39",
+  "catalogVersion": "sha256:1af9311916086719399651b61f4d875186d931a9570ebee0a648fffde7ece00d",
   "classFeatures": {
     "npc-class-feature.class-specific-feats": {
       "catalogStatus": "gap",
@@ -198,13 +198,13 @@
           "abilities": {
             "sourceRef": [
               {
-                "entry": "Quadruped starting ability scores",
-                "file": "sources/npc/aonprd/eidolon-base-forms.txt",
+                "entry": "Biped starting ability scores (Str 16, Dex 12, Con 13, Int 7, Wis 10, Cha 11)",
+                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
                 "provenanceStatus": "resolved",
-                "section": "Quadruped",
-                "sha256": "c9b7213bca3eb59ac0fc7c32155b38d9fd6eacd5f2b82c0d26e9565eaa6b503f",
-                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Biped",
+                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -237,7 +237,7 @@
                 ]
               },
               {
-                "entry": "Ability modifier +2 at score 15",
+                "entry": "Ability modifiers +3 at score 17 and +1 at score 13",
                 "file": "sources/npc/aonprd/getting-started.txt",
                 "provenanceStatus": "resolved",
                 "section": "Rounding; Ability Modifiers",
@@ -252,9 +252,9 @@
             "value": {
               "charisma": 11,
               "constitution": 13,
-              "dexterity": 15,
+              "dexterity": 13,
               "intelligence": 7,
-              "strength": 15,
+              "strength": 17,
               "wisdom": 10
             }
           },
@@ -277,13 +277,13 @@
           "attacks": {
             "sourceRef": [
               {
-                "entry": "Quadruped bite (1d6) and Strength 14",
-                "file": "sources/npc/aonprd/eidolon-base-forms.txt",
+                "entry": "Biped 2 claws (1d4) and Strength 16",
+                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
                 "provenanceStatus": "resolved",
-                "section": "Quadruped",
-                "sha256": "c9b7213bca3eb59ac0fc7c32155b38d9fd6eacd5f2b82c0d26e9565eaa6b503f",
-                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Biped",
+                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -316,7 +316,7 @@
                 ]
               },
               {
-                "entry": "Strength modifier +2 at score 15",
+                "entry": "Strength modifier +3 at score 17",
                 "file": "sources/npc/aonprd/getting-started.txt",
                 "provenanceStatus": "resolved",
                 "section": "Rounding; Ability Modifiers",
@@ -328,7 +328,7 @@
                 ]
               },
               {
-                "entry": "Natural attacks use full attack bonus; one natural attack adds 1-1/2 Strength bonus to damage",
+                "entry": "Natural attacks use full attack bonus; two primary attacks each add full Strength (no 1-1/2)",
                 "file": "sources/npc/aonprd/combat.txt",
                 "provenanceStatus": "resolved",
                 "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
@@ -342,11 +342,12 @@
             ],
             "value": [
               {
-                "attackBonus": "+5",
+                "attackBonus": "+6",
                 "attackType": "melee",
-                "damage": "1d6+3",
-                "name": "bite",
-                "notes": "sole natural attack adds 1-1/2 Strength bonus"
+                "count": 2,
+                "damage": "1d4+3",
+                "name": "claws",
+                "notes": "primary natural attacks each add full Strength bonus"
               }
             ]
           },
@@ -409,13 +410,13 @@
                 ]
               },
               {
-                "entry": "Quadruped Strength",
-                "file": "sources/npc/aonprd/eidolon-base-forms.txt",
+                "entry": "Biped Strength 16",
+                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
                 "provenanceStatus": "resolved",
-                "section": "Quadruped",
-                "sha256": "c9b7213bca3eb59ac0fc7c32155b38d9fd6eacd5f2b82c0d26e9565eaa6b503f",
-                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Biped",
+                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -435,7 +436,7 @@
                 ]
               },
               {
-                "entry": "Strength modifier +2 at score 15",
+                "entry": "Strength modifier +3 at score 17",
                 "file": "sources/npc/aonprd/getting-started.txt",
                 "provenanceStatus": "resolved",
                 "section": "Rounding; Ability Modifiers",
@@ -447,7 +448,7 @@
                 ]
               }
             ],
-            "value": 5
+            "value": 6
           },
           "cmd": {
             "sourceRef": [
@@ -477,13 +478,13 @@
                 ]
               },
               {
-                "entry": "Quadruped Strength and Dexterity",
-                "file": "sources/npc/aonprd/eidolon-base-forms.txt",
+                "entry": "Biped Strength 16 and Dexterity 12",
+                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
                 "provenanceStatus": "resolved",
-                "section": "Quadruped",
-                "sha256": "c9b7213bca3eb59ac0fc7c32155b38d9fd6eacd5f2b82c0d26e9565eaa6b503f",
-                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Biped",
+                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -503,7 +504,7 @@
                 ]
               },
               {
-                "entry": "Modifiers +2 at score 15",
+                "entry": "Modifiers +3 at score 17 and +1 at score 13",
                 "file": "sources/npc/aonprd/getting-started.txt",
                 "provenanceStatus": "resolved",
                 "section": "Rounding; Ability Modifiers",
@@ -572,20 +573,20 @@
                 ]
               },
               {
-                "entry": "Quadruped: +2 natural armor, Fort good, Ref good, Will bad; Con 13, Dex 14, Wis 10",
-                "file": "sources/npc/aonprd/eidolon-base-forms.txt",
+                "entry": "Biped: +2 natural armor, Fort good, Ref bad, Will good; Con 13, Dex 12, Wis 10",
+                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
                 "provenanceStatus": "resolved",
-                "section": "Quadruped",
-                "sha256": "c9b7213bca3eb59ac0fc7c32155b38d9fd6eacd5f2b82c0d26e9565eaa6b503f",
-                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Biped",
+                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
                 "txtLines": [
                   3,
                   3
                 ]
               },
               {
-                "entry": "Modifiers +2 at 15 and +1 at 13",
+                "entry": "Dexterity modifier +1 at score 13",
                 "file": "sources/npc/aonprd/getting-started.txt",
                 "provenanceStatus": "resolved",
                 "section": "Rounding; Ability Modifiers",
@@ -610,16 +611,16 @@
               }
             ],
             "value": {
-              "ac": 16,
+              "ac": 15,
               "acBreakdown": {
                 "armor": 4,
-                "dexterity": 2
+                "dexterity": 1
               },
               "flatFooted": 14,
               "fortitude": 4,
-              "reflex": 5,
-              "touch": 12,
-              "will": 1
+              "reflex": 2,
+              "touch": 11,
+              "will": 3
             }
           },
           "feats": {
@@ -713,13 +714,13 @@
                 ]
               },
               {
-                "entry": "Quadruped Con 13 (+1 modifier)",
-                "file": "sources/npc/aonprd/eidolon-base-forms.txt",
+                "entry": "Biped Con 13 (+1 modifier)",
+                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
                 "provenanceStatus": "resolved",
-                "section": "Quadruped",
-                "sha256": "c9b7213bca3eb59ac0fc7c32155b38d9fd6eacd5f2b82c0d26e9565eaa6b503f",
-                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Biped",
+                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -755,13 +756,13 @@
                 ]
               },
               {
-                "entry": "Quadruped Dex 14",
-                "file": "sources/npc/aonprd/eidolon-base-forms.txt",
+                "entry": "Biped Dexterity 12",
+                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
                 "provenanceStatus": "resolved",
-                "section": "Quadruped",
-                "sha256": "c9b7213bca3eb59ac0fc7c32155b38d9fd6eacd5f2b82c0d26e9565eaa6b503f",
-                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Biped",
+                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -781,7 +782,7 @@
                 ]
               },
               {
-                "entry": "Dexterity modifier +2 at score 15",
+                "entry": "Dexterity modifier +1 at score 13",
                 "file": "sources/npc/aonprd/getting-started.txt",
                 "provenanceStatus": "resolved",
                 "section": "Rounding; Ability Modifiers",
@@ -793,7 +794,7 @@
                 ]
               }
             ],
-            "value": 2
+            "value": 1
           },
           "maxAttacks": {
             "sourceRef": [
@@ -900,13 +901,13 @@
           "size": {
             "sourceRef": [
               {
-                "entry": "Quadruped starting size Medium",
-                "file": "sources/npc/aonprd/eidolon-base-forms.txt",
+                "entry": "Biped starting size Medium",
+                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
                 "provenanceStatus": "resolved",
-                "section": "Quadruped",
-                "sha256": "c9b7213bca3eb59ac0fc7c32155b38d9fd6eacd5f2b82c0d26e9565eaa6b503f",
-                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Biped",
+                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -962,13 +963,13 @@
           "speed": {
             "sourceRef": [
               {
-                "entry": "Quadruped speed 40 ft.",
-                "file": "sources/npc/aonprd/eidolon-base-forms.txt",
+                "entry": "Biped speed 30 ft.",
+                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
                 "provenanceStatus": "resolved",
-                "section": "Quadruped",
-                "sha256": "c9b7213bca3eb59ac0fc7c32155b38d9fd6eacd5f2b82c0d26e9565eaa6b503f",
-                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Biped",
+                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -976,7 +977,7 @@
               }
             ],
             "value": {
-              "land": 40
+              "land": 30
             }
           },
           "type": {
@@ -1028,13 +1029,13 @@
             ]
           },
           {
-            "entry": "Quadruped base form pinned by the curated slice",
-            "file": "sources/npc/aonprd/eidolon-base-forms.txt",
+            "entry": "Biped base form pinned by the curated slice",
+            "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
             "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
             "provenanceStatus": "resolved",
-            "section": "Quadruped",
-            "sha256": "c9b7213bca3eb59ac0fc7c32155b38d9fd6eacd5f2b82c0d26e9565eaa6b503f",
-            "sourceId": "source.aon-eidolon-base-forms",
+            "section": "Biped",
+            "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
+            "sourceId": "source.aon-eidolon-base-forms-biped",
             "txtLines": [
               3,
               3
@@ -16735,6 +16736,12 @@
       "sha256": "c9b7213bca3eb59ac0fc7c32155b38d9fd6eacd5f2b82c0d26e9565eaa6b503f",
       "sourceId": "source.aon-eidolon-base-forms"
     },
+    "source.aon-eidolon-base-forms-biped": {
+      "description": "Official current AoN Biped eidolon base form starting statistics",
+      "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
+      "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
+      "sourceId": "source.aon-eidolon-base-forms-biped"
+    },
     "source.aon-eidolon-uc-subtypes": {
       "description": "Official current AoN unchained eidolon Elemental subtype rules (Pathfinder Unchained pg. 33)",
       "file": "sources/npc/aonprd/eidolon-uc-subtypes.txt",
@@ -16996,7 +17003,7 @@
     "source.npc-manifest": {
       "description": "Hash manifest for the local NPC source foundation",
       "file": "sources/npc/MANIFEST.json",
-      "sha256": "735f025d81769ddd24070be0f54a17c870a656900544c9f7e2c98952b18b580e",
+      "sha256": "b95cf6bbd26664e814880a4a8a1458415c969260135f79e9e498e11fc9c525b6",
       "sourceId": "source.npc-manifest"
     },
     "source.npc-mode-plan": {

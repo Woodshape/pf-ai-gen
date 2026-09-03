@@ -16,7 +16,7 @@ warrior levels 1–5, an elemental-fire goblin Sorcerer at levels 5–6, a
 Fire-domain goblin Druid at level 3 (prepared divine casting), and a
 goblin Druid at level 3 with the Elemental Ally archetype (Monster Summoner's
 Handbook pg. 16) and its linked level-3 fire elemental eidolon row (unchained
-eidolon rules, Elemental subtype, Quadruped base form; see
+eidolon rules, Elemental subtype, Biped base form; see
 `docs/elemental-ally-source-assessment.md`). The fixture's
 four selected Druid skills are resolved; unselected class-skill records such as
 Perception remain gaps even where their source table is already archived.

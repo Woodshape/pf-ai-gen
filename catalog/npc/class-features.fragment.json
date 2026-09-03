@@ -752,8 +752,8 @@
         "fields": {
           "abilities": {
             "value": {
-              "strength": 15,
-              "dexterity": 15,
+              "strength": 17,
+              "dexterity": 13,
               "constitution": 13,
               "intelligence": 7,
               "wisdom": 10,
@@ -761,10 +761,10 @@
             },
             "sourceRef": [
               {
-                "sourceId": "source.aon-eidolon-base-forms",
-                "section": "Quadruped",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "section": "Biped",
                 "txtLines": [3, 3],
-                "entry": "Quadruped starting ability scores",
+                "entry": "Biped starting ability scores (Str 16, Dex 12, Con 13, Int 7, Wis 10, Cha 11)",
                 "provenanceStatus": "resolved",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
               },
@@ -788,7 +788,7 @@
                 "sourceId": "source.aon-getting-started",
                 "section": "Rounding; Ability Modifiers",
                 "txtLines": [89, 101],
-                "entry": "Ability modifier +2 at score 15",
+                "entry": "Ability modifiers +3 at score 17 and +1 at score 13",
                 "provenanceStatus": "resolved"
               }
             ]
@@ -807,19 +807,20 @@
           "attacks": {
             "value": [
               {
-                "name": "bite",
+                "name": "claws",
                 "attackType": "melee",
-                "attackBonus": "+5",
-                "damage": "1d6+3",
-                "notes": "sole natural attack adds 1-1/2 Strength bonus"
+                "attackBonus": "+6",
+                "damage": "1d4+3",
+                "count": 2,
+                "notes": "primary natural attacks each add full Strength bonus"
               }
             ],
             "sourceRef": [
               {
-                "sourceId": "source.aon-eidolon-base-forms",
-                "section": "Quadruped",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "section": "Biped",
                 "txtLines": [3, 3],
-                "entry": "Quadruped bite (1d6) and Strength 14",
+                "entry": "Biped 2 claws (1d4) and Strength 16",
                 "provenanceStatus": "resolved",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
               },
@@ -843,14 +844,14 @@
                 "sourceId": "source.aon-getting-started",
                 "section": "Rounding; Ability Modifiers",
                 "txtLines": [89, 101],
-                "entry": "Strength modifier +2 at score 15",
+                "entry": "Strength modifier +3 at score 17",
                 "provenanceStatus": "resolved"
               },
               {
                 "sourceId": "source.aon-combat",
                 "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
                 "txtLines": [195, 195],
-                "entry": "Natural attacks use full attack bonus; one natural attack adds 1-1/2 Strength bonus to damage",
+                "entry": "Natural attacks use full attack bonus; two primary attacks each add full Strength (no 1-1/2)",
                 "provenanceStatus": "resolved"
               }
             ]
@@ -895,10 +896,10 @@
                 "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
               },
               {
-                "sourceId": "source.aon-eidolon-base-forms",
-                "section": "Quadruped",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "section": "Biped",
                 "txtLines": [3, 3],
-                "entry": "Quadruped Strength and Dexterity",
+                "entry": "Biped Strength 16 and Dexterity 12",
                 "provenanceStatus": "resolved",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
               },
@@ -914,13 +915,13 @@
                 "sourceId": "source.aon-getting-started",
                 "section": "Rounding; Ability Modifiers",
                 "txtLines": [89, 101],
-                "entry": "Modifiers +2 at score 15",
+                "entry": "Modifiers +3 at score 17 and +1 at score 13",
                 "provenanceStatus": "resolved"
               }
             ]
           },
           "cmb": {
-            "value": 5,
+            "value": 6,
             "sourceRef": [
               {
                 "sourceId": "source.aon-combat",
@@ -938,10 +939,10 @@
                 "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
               },
               {
-                "sourceId": "source.aon-eidolon-base-forms",
-                "section": "Quadruped",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "section": "Biped",
                 "txtLines": [3, 3],
-                "entry": "Quadruped Strength",
+                "entry": "Biped Strength 16",
                 "provenanceStatus": "resolved",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
               },
@@ -957,22 +958,22 @@
                 "sourceId": "source.aon-getting-started",
                 "section": "Rounding; Ability Modifiers",
                 "txtLines": [89, 101],
-                "entry": "Strength modifier +2 at score 15",
+                "entry": "Strength modifier +3 at score 17",
                 "provenanceStatus": "resolved"
               }
             ]
           },
           "defenses": {
             "value": {
-              "ac": 16,
-              "touch": 12,
+              "ac": 15,
+              "touch": 11,
               "flatFooted": 14,
               "fortitude": 4,
-              "reflex": 5,
-              "will": 1,
+              "reflex": 2,
+              "will": 3,
               "acBreakdown": {
                 "armor": 4,
-                "dexterity": 2
+                "dexterity": 1
               }
             },
             "sourceRef": [
@@ -1009,10 +1010,10 @@
                 "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
               },
               {
-                "sourceId": "source.aon-eidolon-base-forms",
-                "section": "Quadruped",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "section": "Biped",
                 "txtLines": [3, 3],
-                "entry": "Quadruped: +2 natural armor, Fort good, Ref good, Will bad; Con 13, Dex 14, Wis 10",
+                "entry": "Biped: +2 natural armor, Fort good, Ref bad, Will good; Con 13, Dex 12, Wis 10",
                 "provenanceStatus": "resolved",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
               },
@@ -1020,7 +1021,7 @@
                 "sourceId": "source.aon-getting-started",
                 "section": "Rounding; Ability Modifiers",
                 "txtLines": [89, 101],
-                "entry": "Modifiers +2 at 15 and +1 at 13",
+                "entry": "Dexterity modifier +1 at score 13",
                 "provenanceStatus": "resolved"
               },
               {
@@ -1094,10 +1095,10 @@
                 "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
               },
               {
-                "sourceId": "source.aon-eidolon-base-forms",
-                "section": "Quadruped",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "section": "Biped",
                 "txtLines": [3, 3],
-                "entry": "Quadruped Con 13 (+1 modifier)",
+                "entry": "Biped Con 13 (+1 modifier)",
                 "provenanceStatus": "resolved",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
               },
@@ -1111,7 +1112,7 @@
             ]
           },
           "initiative": {
-            "value": 2,
+            "value": 1,
             "sourceRef": [
               {
                 "sourceId": "source.aon-combat",
@@ -1121,10 +1122,10 @@
                 "provenanceStatus": "resolved"
               },
               {
-                "sourceId": "source.aon-eidolon-base-forms",
-                "section": "Quadruped",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "section": "Biped",
                 "txtLines": [3, 3],
-                "entry": "Quadruped Dex 14",
+                "entry": "Biped Dexterity 12",
                 "provenanceStatus": "resolved",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
               },
@@ -1140,7 +1141,7 @@
                 "sourceId": "source.aon-getting-started",
                 "section": "Rounding; Ability Modifiers",
                 "txtLines": [89, 101],
-                "entry": "Dexterity modifier +2 at score 15",
+                "entry": "Dexterity modifier +1 at score 13",
                 "provenanceStatus": "resolved"
               }
             ]
@@ -1212,10 +1213,10 @@
             "value": "Medium",
             "sourceRef": [
               {
-                "sourceId": "source.aon-eidolon-base-forms",
-                "section": "Quadruped",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "section": "Biped",
                 "txtLines": [3, 3],
-                "entry": "Quadruped starting size Medium",
+                "entry": "Biped starting size Medium",
                 "provenanceStatus": "resolved",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
               }
@@ -1252,14 +1253,14 @@
           },
           "speed": {
             "value": {
-              "land": 40
+              "land": 30
             },
             "sourceRef": [
               {
-                "sourceId": "source.aon-eidolon-base-forms",
-                "section": "Quadruped",
+                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "section": "Biped",
                 "txtLines": [3, 3],
-                "entry": "Quadruped speed 40 ft.",
+                "entry": "Biped speed 30 ft.",
                 "provenanceStatus": "resolved",
                 "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
               }
@@ -1297,10 +1298,10 @@
             "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
           },
           {
-            "sourceId": "source.aon-eidolon-base-forms",
-            "section": "Quadruped",
+            "sourceId": "source.aon-eidolon-base-forms-biped",
+            "section": "Biped",
             "txtLines": [3, 3],
-            "entry": "Quadruped base form pinned by the curated slice",
+            "entry": "Biped base form pinned by the curated slice",
             "provenanceStatus": "resolved",
             "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
           },

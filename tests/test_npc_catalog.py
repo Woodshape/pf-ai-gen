@@ -8,7 +8,7 @@ from monster_builder import Catalog
 from monster_builder.catalog import CatalogError, CatalogRegistry
 from monster_builder.npc_catalog import NpcCatalog, catalog_fingerprint, validate_npc_data
 from tools.build_npc_catalog import build_catalog, serialized_catalog, validate_source_manifest
-from tools.extract_npc_aon_sources import OUTPUT as AON_OUTPUT, RAW as AON_RAW, SOURCES as AON_SOURCES, extract_source as extract_aon
+from tools.extract_npc_aon_sources import OUTPUT as AON_OUTPUT, RAW as AON_RAW, SOURCES as AON_SOURCES, extract_source as extract_aon, html_source_name as aon_html_source
 
 
 ROOT = Path(__file__).parents[1]
@@ -225,7 +225,7 @@ class NpcCatalogTests(unittest.TestCase):
     def test_archived_aon_extracts_are_deterministic_and_keep_rule_tables(self):
         for name, (attribute, value) in AON_SOURCES.items():
             self.assertEqual(
-                extract_aon(name, AON_RAW / f"{name}.html", attribute, value),
+                extract_aon(name, AON_RAW / f"{aon_html_source(name)}.html", attribute, value),
                 (AON_OUTPUT / f"{name}.txt").read_text(encoding="utf-8"),
             )
         creating_npcs = (AON_OUTPUT / "creating-npcs.txt").read_text(encoding="utf-8")
