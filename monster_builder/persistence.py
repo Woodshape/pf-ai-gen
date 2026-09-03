@@ -109,6 +109,18 @@ class JSONWorkspace:
             entries.append((copy.deepcopy(document["monster"]), document["status"], self._saved_at(document, path)))
         return entries
 
+    def delete_draft(self, draft_id: str) -> None:
+        path = self._path(draft_id)
+        if not path.exists():
+            raise PersistenceError("persistence.not-found", f"unknown draft: {draft_id}")
+        path.unlink()
+
+    def delete_monster(self, monster_id: str) -> None:
+        path = self._monster_path(monster_id)
+        if not path.exists():
+            raise PersistenceError("persistence.not-found", f"unknown monster: {monster_id}")
+        path.unlink()
+
     def previous_status(self, draft_id: str) -> str | None:
         return self._read(draft_id).get("previousStatus")
 

@@ -150,6 +150,8 @@ class Engine:
                 result = self._duplicate(payload)
             elif operation == "draft.archive":
                 result = self._archive(payload)
+            elif operation == "draft.delete":
+                result = self._delete_draft(payload)
             elif operation == "draft.restore":
                 result = self._restore(payload)
             elif operation == "monster.finalize":
@@ -160,6 +162,8 @@ class Engine:
                 result = self._duplicate_monster(payload)
             elif operation == "monster.archive":
                 result = self._archive_monster(payload)
+            elif operation == "monster.delete":
+                result = self._delete_monster(payload)
             elif operation == "monster.restore":
                 result = self._restore_monster(payload)
             elif operation == "monster.export":
@@ -758,6 +762,34 @@ class Engine:
             raise BoundaryError("monster.already-archived", "monster is already archived", "/payload/monsterId", kind="conflict")
         self._set_finished_status(monster["monsterId"], status, "archived")
         return {"monster": self._finished_view(monster, "archived")}
+
+    def _delete_draft(self, payload: dict[str, Any]) -> None:
+        draft_id = payload.get("draftId")
+        if not isinstance(draft_id, str) or not draft_id:
+            raise BoundaryError("draft.id-required", "draftId is required", "/payload/draftId")
+        if self.workspace:
+            # ponytail: stale drafts stay deletable because delete never validates the catalog version.
+            self.workspace.delete_draft(draft_id)
+            self._drafts.pop(draft_id, None)
+        else:
+            if draft_id not in self._drafts:
+                raise BoundaryError("draft.not-found", f"unknown draft: {draft_id}", "/payload/draftId")
+            self._drafts.pop(draft_id)
+        return None
+
+    def _delete_monster(self, payload: dict[str, Any]) -> None:
+        monster_id = payload.get("monsterId")
+        if not isinstance(monster_id, str) or not monster_id:
+            raise BoundaryError("monster.id-required", "monsterId is required", "/payload/monsterId")
+        if self.workspace:
+            self.workspace.delete_monster(monster_id)
+            self._monsters.pop(monster_id, None)
+        else:
+            if monster_id not in self._monsters:
+                raise BoundaryError("monster.not-found", f"unknown monster: {monster_id}", "/payload/monsterId")
+            self._monsters.pop(monster_id)
+            self._monster_status.pop(monster_id, None)
+        return None
 
     def _restore_monster(self, payload: dict[str, Any]) -> dict[str, Any]:
         monster, status = self._stored_monster(payload)

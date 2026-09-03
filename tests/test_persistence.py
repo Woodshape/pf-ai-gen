@@ -102,6 +102,39 @@ class JsonPersistenceTests(unittest.TestCase):
             saved = [entry["savedAt"] for entry in response["result"]["drafts"][:3]]
             self.assertEqual(saved, sorted(saved, reverse=True))
 
+    def test_delete_removes_drafts_and_finished_monsters(self):
+        with tempfile.TemporaryDirectory() as directory:
+            engine = Engine(workspace=directory)
+            draft = self.create(engine, "doomed")
+            finalized = engine.execute(request("finalize", "monster.finalize", self.guard(draft)))
+            self.assertTrue(finalized["ok"], finalized)
+            monster_id = finalized["result"]["monster"]["monsterId"]
+            other = self.create(engine, "survivor")
+
+            deleted = engine.execute(request("draft-delete", "draft.delete", {"draftId": draft["draftId"]}))
+            self.assertTrue(deleted["ok"], deleted)
+            self.assertIsNone(deleted["result"])
+            monster_deleted = engine.execute(request("monster-delete", "monster.delete", {"monsterId": monster_id}))
+            self.assertTrue(monster_deleted["ok"], monster_deleted)
+
+            gone = engine.execute(request("get-gone", "draft.get", {"draftId": draft["draftId"]}))
+            self.assertFalse(gone["ok"])
+            self.assertEqual(gone["error"]["code"], "draft.not-found")
+            monster_gone = engine.execute(request("monster-gone", "monster.get", {"monsterId": monster_id}))
+            self.assertFalse(monster_gone["ok"])
+            self.assertEqual(monster_gone["error"]["code"], "monster.not-found")
+
+            library = engine.execute(request("library", "library.search", {}))
+            self.assertEqual([entry["id"] for entry in library["result"]["drafts"]], [other["draftId"]])
+            self.assertEqual(library["result"]["monsters"], [])
+
+            again = engine.execute(request("again", "draft.delete", {"draftId": draft["draftId"]}))
+            self.assertFalse(again["ok"])
+            self.assertEqual(again["error"]["code"], "draft.not-found")
+
+            stale_ok = engine.execute(request("stale", "draft.get", {"draftId": other["draftId"]}))
+            self.assertTrue(stale_ok["ok"], stale_ok)
+
     def test_create_apply_and_get_reload_across_engine_instances(self):
         with tempfile.TemporaryDirectory() as directory:
             first = Engine(workspace=directory)

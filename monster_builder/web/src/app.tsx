@@ -135,6 +135,18 @@ export function App() {
     const unset = value === undefined || value === "";
     changes.push({ changeId: newChangeId(field), type: unset ? (isConcept ? "unset-concept" : "unset-selection") : (isConcept ? "set-concept" : "set-selection"), field, ...(unset ? {} : { value }) });
   }
+  async function deleteEntry(entry: LibraryEntry) {
+    if (entry.kind === "monster" && !window.confirm(`Delete finished monster "${entry.name || "Untitled"}"? This permanently removes the exported statblock and cannot be undone.`)) return;
+    try {
+      setBusy(true);
+      if (entry.kind === "draft") await execute("draft.delete", { draftId: entry.id });
+      else await execute("monster.delete", { monsterId: entry.id });
+      const result = await execute("library.search", {});
+      setLibrary({ drafts: result.drafts || [], monsters: result.monsters || [] });
+      show(`${entry.name || "Entry"} deleted.`, true);
+    } catch (error) { show(error instanceof Error ? error.message : String(error)); }
+    finally { setBusy(false); }
+  }
   async function createDraft() {
     if (!window.confirm("Create a new Simple Monster draft? The current draft remains persisted by its ID.")) return;
     accept(await execute("draft.create", { draft: {} })); setMonster(undefined); setProposal(undefined); setAiError(undefined); setStep(0);
@@ -198,13 +210,13 @@ export function App() {
     return <><Header draft={draft} monster={monster} busy={busy} creationSystem="npc" onNew={createDraft} onNewNpc={createNpcDraft} onResume={resume} onFinalize={finalize} onExport={exportMonster} />
       <main class="app"><div class="summary"><span class={`pill ${evaluation.status}`}>NPC: {evaluation.status}</span><span class="pill">Revision {draft.revision}</span><span class="pill">{draft.status}</span><span class="pill mono">{draft.draftId}</span>{busy && <span class="pill incomplete">Working…</span>}</div>
         <div class="layout npc-layout"><NpcWorkflow draft={draft} catalog={npcCatalog} evaluation={evaluation} step={step} setStep={setStep} choiceRequirements={choiceRequirements} automaticSelections={automaticSelections} selectionBudgets={selectionBudgets} onPreview={previewChoiceRequirements} onSave={save} onBack={() => setStep((current) => Math.max(0, current - 1))} />{side}</div>
-      </main>{library && <LibraryModal library={library} currentDraftId={draft.draftId} onClose={() => setLibrary(undefined)} onSelect={openSaved} />}{message && <div class={`toast ${message.good ? "good" : ""}`}>{message.text}</div>}</>;
+      </main>{library && <LibraryModal library={library} currentDraftId={draft.draftId} onClose={() => setLibrary(undefined)} onSelect={openSaved} onDelete={deleteEntry} />}{message && <div class={`toast ${message.good ? "good" : ""}`}>{message.text}</div>}</>;
   }
   const editors = [<ConceptStep {...editorProps} />, <ArrayStep {...editorProps} />, <PrimaryGraftStep {...editorProps} />, <SubtypeStep {...editorProps} />, <TemplateStep {...editorProps} />, <SizeStep {...editorProps} />, <SpellStep {...editorProps} />, <OptionsStep {...editorProps} />, <SkillsStep {...editorProps} />, <DamageStep {...editorProps} />];
   return <><Header draft={draft} monster={monster} busy={busy} creationSystem="simple-monster" onNew={createDraft} onNewNpc={createNpcDraft} onResume={resume} onFinalize={finalize} onExport={exportMonster} />
     <main class="app"><div class="summary"><span class={`pill ${evaluation.status}`}>Strict: {evaluation.status}</span><span class="pill">Revision {draft.revision}</span><span class="pill">{draft.status}</span><span class="pill mono">{draft.draftId}</span>{busy && <span class="pill incomplete">Working…</span>}</div>
       <div class="layout"><Rail draft={draft} evaluation={evaluation} step={step} setStep={setStep} /><section class="panel workspace"><div class="step-head"><div class="kicker">{step === 0 ? "Before you begin" : `Step ${step}`}</div><h2>{STEPS[step].label}</h2><p>{STEPS[step].desc}</p></div><div key={`${draft.draftId}-${step}-${draft.revision}`}>{editors[step]}</div></section>{side}</div>
-    </main>{library && <LibraryModal library={library} currentDraftId={draft.draftId} onClose={() => setLibrary(undefined)} onSelect={openSaved} />}{message && <div class={`toast ${message.good ? "good" : ""}`}>{message.text}</div>}</>;
+    </main>{library && <LibraryModal library={library} currentDraftId={draft.draftId} onClose={() => setLibrary(undefined)} onSelect={openSaved} onDelete={deleteEntry} />}{message && <div class={`toast ${message.good ? "good" : ""}`}>{message.text}</div>}</>;
 }
 
 const savedAtFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: "medium", timeStyle: "short" });
@@ -215,7 +227,7 @@ function savedLabel(value: string | null | undefined) {
   return Number.isNaN(date.getTime()) ? "Saved time unavailable" : `Saved ${savedAtFormatter.format(date)}`;
 }
 
-function LibraryModal(props: { library: { drafts: LibraryEntry[]; monsters: LibraryEntry[] }; currentDraftId: string; onClose: () => void; onSelect: (entry: LibraryEntry) => void }) {
+function LibraryModal(props: { library: { drafts: LibraryEntry[]; monsters: LibraryEntry[] }; currentDraftId: string; onClose: () => void; onSelect: (entry: LibraryEntry) => void; onDelete: (entry: LibraryEntry) => void }) {
   const [query, setQuery] = useState("");
   useEffect(() => {
     const close = (event: KeyboardEvent) => { if (event.key === "Escape") props.onClose(); };
@@ -230,10 +242,10 @@ function LibraryModal(props: { library: { drafts: LibraryEntry[]; monsters: Libr
       <div class="field"><label>Search</label><input autofocus value={query} placeholder="Name, role, or ID" onInput={(event) => setQuery(event.currentTarget.value)} /></div>
       <div class="library-groups">{groups.map(([label, entries]) => <section><h3>{label} <span>{entries.length}</span></h3><div class="library-list">{entries.map((entry) => {
         const current = entry.kind === "draft" ? entry.id === props.currentDraftId : entry.sourceDraftId === props.currentDraftId;
-        return <button type="button" class={`library-row ${current ? "current" : ""}`} onClick={() => props.onSelect(entry)}>
+        return <div key={entry.id} role="button" tabIndex={0} class={`library-row ${current ? "current" : ""}`} onClick={() => props.onSelect(entry)} onKeyDown={(event) => { if (event.key === "Enter") props.onSelect(entry); }}>
           <span><strong>{entry.name || "Untitled monster"}</strong><small>{entry.creationSystem === "npc" ? `NPC level ${String(entry.level ?? "—")}` : "Simple Monster"} · CR {String(entry.cr ?? "—")}{entry.role ? ` · ${entry.role}` : ""}</small><small>{savedLabel(entry.savedAt)}</small><code>{entry.id}</code></span>
-          <span class="library-meta"><span class="pill">Revision {entry.revision ?? "—"}</span>{entry.kind === "monster" && <span class="pill">Finished</span>}{current && <span class="pill valid">Current</span>}</span>
-        </button>;
+          <span class="library-meta"><span class="pill">Revision {entry.revision ?? "—"}</span>{entry.kind === "monster" && <span class="pill">Finished</span>}{current && <span class="pill valid">Current</span>}<button type="button" class="btn small danger" title={entry.kind === "monster" ? "Delete finished monster (asks for confirmation)" : "Delete draft"} onClick={(event) => { event.stopPropagation(); props.onDelete(entry); }}>Delete</button></span>
+        </div>;
       })}{!entries.length && <div class="empty">No matching {label.toLowerCase()}.</div>}</div></section>)}</div>
     </section>
   </div>;
