@@ -200,6 +200,7 @@ export interface LibraryEntry {
 export interface EngineResult {
   draft?: Draft;
   evaluation?: Evaluation;
+  evaluationError?: { code: string; kind: string; message: string; path: string };
   monster?: FinishedMonster;
   proposal?: Proposal;
   requirements?: ChoiceRequirement[];

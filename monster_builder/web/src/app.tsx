@@ -36,7 +36,7 @@ export function App() {
       setNpcCatalog(npcCatalogValue);
       const saved = localStorage.getItem("monster-builder.draftId");
       if (saved) {
-        try { await getDraft(saved); return; } catch { localStorage.removeItem("monster-builder.draftId"); }
+        try { await getDraft(saved); return; } catch { localStorage.removeItem("monster-builder.draftId"); show("Saved draft uses an older catalog version; started a new draft. Previous items remain in the Library."); }
       }
       accept(await execute("draft.create", { draft: {} }));
     } catch (error) { show(error instanceof Error ? error.message : String(error)); }
@@ -74,6 +74,16 @@ export function App() {
   }
   async function getDraft(id: string) {
     const result = await execute("draft.get", { draftId: id });
+    if (result.evaluationError) {
+      const detail = result.evaluationError;
+      const error = new Error(
+        detail.code === "catalog.version-unsupported"
+          ? "This draft was created with an older catalog version. View its finished monster from the Library, or start a new draft."
+          : detail.message,
+      );
+      (error as Error & { data?: unknown }).data = detail;
+      throw error;
+    }
     setMonster(undefined); setProposal(undefined); setAiError(undefined);
     accept(result);
     if (result.draft?.monsterId) accept(await execute("monster.get", { monsterId: result.draft.monsterId }));
