@@ -137,11 +137,12 @@ export function App() {
   }
   async function deleteEntry(entry: LibraryEntry) {
     if (entry.kind === "monster" && !window.confirm(`Delete finished monster "${entry.name || "Untitled"}"? This permanently removes the exported statblock and cannot be undone.`)) return;
+    if (entry.kind === "draft" && entry.status !== "active" && !window.confirm(`Delete ${entry.status} draft "${entry.name || "Untitled monster"}"? This permanently removes it and cannot be undone.`)) return;
     try {
       setBusy(true);
       if (entry.kind === "draft") await execute("draft.delete", { draftId: entry.id });
       else await execute("monster.delete", { monsterId: entry.id });
-      const result = await execute("library.search", {});
+      const result = await execute("library.search", { includeArchived: true });
       setLibrary({ drafts: result.drafts || [], monsters: result.monsters || [] });
       show(`${entry.name || "Entry"} deleted.`, true);
     } catch (error) { show(error instanceof Error ? error.message : String(error)); }
@@ -157,7 +158,7 @@ export function App() {
   }
   async function resume() {
     try {
-      const result = await execute("library.search", {});
+      const result = await execute("library.search", { includeArchived: true });
       setLibrary({ drafts: result.drafts || [], monsters: result.monsters || [] });
     } catch (error) { show(error instanceof Error ? error.message : String(error)); }
   }
@@ -239,22 +240,25 @@ function savedLabel(value: string | null | undefined) {
 
 function LibraryModal(props: { library: { drafts: LibraryEntry[]; monsters: LibraryEntry[] }; currentDraftId: string; onClose: () => void; onSelect: (entry: LibraryEntry) => void; onDelete: (entry: LibraryEntry) => void }) {
   const [query, setQuery] = useState("");
+  const [showInactive, setShowInactive] = useState(true);
   useEffect(() => {
     const close = (event: KeyboardEvent) => { if (event.key === "Escape") props.onClose(); };
     window.addEventListener("keydown", close);
     return () => window.removeEventListener("keydown", close);
   }, []);
-  const matches = (entry: LibraryEntry) => !query || `${entry.name} ${entry.role} ${entry.id}`.toLowerCase().includes(query.toLowerCase());
+  const matches = (entry: LibraryEntry) => (showInactive || entry.status === "active") && (!query || `${entry.name} ${entry.role} ${entry.id}`.toLowerCase().includes(query.toLowerCase()));
   const groups: Array<[string, LibraryEntry[]]> = [["Drafts", props.library.drafts.filter(matches)], ["Finished monsters", props.library.monsters.filter(matches)]];
   return <div class="modal-backdrop" role="presentation" onClick={(event) => { if (event.target === event.currentTarget) props.onClose(); }}>
     <section class="library-modal panel" role="dialog" aria-modal="true" aria-labelledby="library-title">
       <div class="modal-head"><div><div class="kicker">Local workspace</div><h2 id="library-title">Open saved monster</h2></div><button type="button" class="btn" onClick={props.onClose}>Close</button></div>
       <div class="field"><label>Search</label><input autofocus value={query} placeholder="Name, role, or ID" onInput={(event) => setQuery(event.currentTarget.value)} /></div>
+      <label class="library-toggle"><input type="checkbox" checked={showInactive} onChange={(event) => setShowInactive(event.currentTarget.checked)} /> Show finalized &amp; archived</label>
       <div class="library-groups">{groups.map(([label, entries]) => <section><h3>{label} <span>{entries.length}</span></h3><div class="library-list">{entries.map((entry) => {
         const current = entry.kind === "draft" ? entry.id === props.currentDraftId : entry.sourceDraftId === props.currentDraftId;
-        return <div key={entry.id} role="button" tabIndex={0} class={`library-row ${current ? "current" : ""}`} onClick={() => props.onSelect(entry)} onKeyDown={(event) => { if (event.key === "Enter") props.onSelect(entry); }}>
+        const openable = entry.status === "active";
+        return <div key={entry.id} role={openable ? "button" : undefined} tabIndex={openable ? 0 : undefined} class={`library-row ${current ? "current" : ""} ${entry.status !== "active" ? "inactive" : ""}`} onClick={() => { if (openable) props.onSelect(entry); }} onKeyDown={(event) => { if (openable && event.key === "Enter") props.onSelect(entry); }}>
           <span><strong>{entry.name || "Untitled monster"}</strong><small>{entry.creationSystem === "npc" ? `NPC level ${String(entry.level ?? "—")}` : "Simple Monster"} · CR {String(entry.cr ?? "—")}{entry.role ? ` · ${entry.role}` : ""}</small><small>{savedLabel(entry.savedAt)}</small><code>{entry.id}</code></span>
-          <span class="library-meta"><span class="pill">Revision {entry.revision ?? "—"}</span>{entry.kind === "monster" && <span class="pill">Finished</span>}{current && <span class="pill valid">Current</span>}<button type="button" class="btn small danger" title={entry.kind === "monster" ? "Delete finished monster (asks for confirmation)" : "Delete draft"} onClick={(event) => { event.stopPropagation(); props.onDelete(entry); }}>Delete</button></span>
+          <span class="library-meta"><span class="pill">Revision {entry.revision ?? "—"}</span>{entry.kind === "monster" && <span class="pill">Finished</span>}{entry.status !== "active" && <span class="pill">{entry.status === "finalized" ? "Finalized" : "Archived"}</span>}{current && <span class="pill valid">Current</span>}<button type="button" class="btn small danger" title={entry.kind === "monster" ? "Delete finished monster (asks for confirmation)" : "Delete draft"} onClick={(event) => { event.stopPropagation(); props.onDelete(entry); }}>Delete</button></span>
         </div>;
       })}{!entries.length && <div class="empty">No matching {label.toLowerCase()}.</div>}</div></section>)}</div>
     </section>
