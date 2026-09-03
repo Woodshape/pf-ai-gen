@@ -171,12 +171,20 @@ export function App() {
         await getDraft(draftId);
       } catch (error) {
         const code = (error as Error & { data?: { code?: string } }).data?.code;
-        if (entry.kind !== "monster" || code !== "catalog.version-unsupported") throw error;
-        const duplicate = await execute("monster.duplicate", { monsterId: entry.id });
-        accept(duplicate);
-        if (duplicate.draft) localStorage.setItem("monster-builder.draftId", duplicate.draft.draftId);
-        await accept(await execute("monster.get", { monsterId: entry.id }));
-        show(`"${entry.name || "Finished monster"}" was created with an older catalog; opened a fresh duplicate for editing. The original finished monster stays attached for export.`, true);
+        if (code !== "catalog.version-unsupported") throw error;
+        if (entry.kind === "monster") {
+          const duplicate = await execute("monster.duplicate", { monsterId: entry.id });
+          accept(duplicate);
+          if (duplicate.draft) localStorage.setItem("monster-builder.draftId", duplicate.draft.draftId);
+          await accept(await execute("monster.get", { monsterId: entry.id }));
+        } else {
+          const duplicate = await execute("draft.duplicate", { draftId });
+          accept(duplicate);
+          if (duplicate.draft) localStorage.setItem("monster-builder.draftId", duplicate.draft.draftId);
+        }
+        show(`"${entry.name || "Entry"}" was created with an older catalog; opened a fresh duplicate for editing.${entry.kind === "monster" ? " The original finished monster stays attached for export." : " The original draft stays in the Library."}`, true);
+        setLibrary(undefined); setStep(0);
+        return;
       }
       setLibrary(undefined); setStep(0); show(`${entry.name || "Saved monster"} loaded.`, true);
     } catch (error) { show(error instanceof Error ? error.message : String(error)); }

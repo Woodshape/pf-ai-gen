@@ -677,8 +677,8 @@ class Engine:
         return {"draft": copy.deepcopy(candidate), "evaluation": evaluation, "restoredRevision": revision}
 
     def _duplicate(self, payload: dict[str, Any]) -> dict[str, Any]:
-        source = self._stored_draft(payload)
-        self._require_base_guard(payload, source)
+        # ponytail: duplicates always evaluate under the current catalog so stale drafts stay rehomable.
+        source = self._stored_draft(payload, allow_unsupported_catalog=True)
         duplicate = self._new_draft({
             "creationSystem": self._creation_system_key(source),
             "concept": source.get("concept", {}),

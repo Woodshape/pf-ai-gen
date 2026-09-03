@@ -125,6 +125,28 @@ class JsonPersistenceTests(unittest.TestCase):
             self.assertTrue(original["ok"], original)
             self.assertEqual(original["result"]["monster"]["catalogVersion"], "sha256:older-catalog")
 
+    def test_draft_duplicate_rehomes_a_stale_catalog_draft(self):
+        with tempfile.TemporaryDirectory() as directory:
+            engine = Engine(workspace=directory)
+            draft = self.create(engine, "stale-draft")
+            stale_path = Path(directory) / "drafts" / f"{draft['draftId']}.json"
+            document = json.loads(stale_path.read_text(encoding="utf-8"))
+            stale = document["current"]
+            stale["draft"]["catalogVersion"] = "sha256:older-catalog"
+            stale["draft"]["fingerprint"] = engine._draft_fingerprint(stale["draft"])
+            stale["fingerprint"] = stale["draft"]["fingerprint"]
+            stale_path.write_text(json.dumps(document), encoding="utf-8")
+
+            duplicated = engine.execute(request("duplicate", "draft.duplicate", {"draftId": draft["draftId"]}))
+            self.assertTrue(duplicated["ok"], duplicated)
+            duplicate = duplicated["result"]["draft"]
+            self.assertNotEqual(duplicate["catalogVersion"], "sha256:older-catalog")
+            self.assertEqual(duplicated["result"]["evaluation"]["status"], "valid")
+            self.assertEqual(duplicate["derivedFrom"]["draftId"], draft["draftId"])
+            original = engine.execute(request("original", "draft.get", {"draftId": draft["draftId"]}))
+            self.assertTrue(original["ok"], original)
+            self.assertIsNone(original["result"]["evaluation"])
+
     def test_delete_removes_drafts_and_finished_monsters(self):
         with tempfile.TemporaryDirectory() as directory:
             engine = Engine(workspace=directory)
