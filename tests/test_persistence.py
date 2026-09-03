@@ -8,6 +8,7 @@ from datetime import datetime
 from pathlib import Path
 
 from monster_builder import Engine
+from monster_builder.engine import _finished_fingerprint
 
 
 WORG_DRAFT = json.loads((Path(__file__).parent / "fixtures" / "worg-cr2.json").read_text())
@@ -101,6 +102,28 @@ class JsonPersistenceTests(unittest.TestCase):
             self.assertEqual(draft_ids[:3], [third["draftId"], second["draftId"], first["draftId"]])
             saved = [entry["savedAt"] for entry in response["result"]["drafts"][:3]]
             self.assertEqual(saved, sorted(saved, reverse=True))
+
+    def test_monster_duplicate_rehomes_a_stale_catalog_snapshot(self):
+        with tempfile.TemporaryDirectory() as directory:
+            engine = Engine(workspace=directory)
+            draft = self.create(engine, "stale-monster")
+            finalized = engine.execute(request("finalize", "monster.finalize", self.guard(draft)))
+            self.assertTrue(finalized["ok"], finalized)
+            monster_id = finalized["result"]["monster"]["monsterId"]
+            stale_path = Path(directory) / "monsters" / f"{monster_id}.json"
+            document = json.loads(stale_path.read_text(encoding="utf-8"))
+            document["monster"]["catalogVersion"] = "sha256:older-catalog"
+            document["monster"]["fingerprint"] = _finished_fingerprint(document["monster"])
+            stale_path.write_text(json.dumps(document), encoding="utf-8")
+
+            duplicated = engine.execute(request("duplicate", "monster.duplicate", {"monsterId": monster_id}))
+            self.assertTrue(duplicated["ok"], duplicated)
+            duplicate_draft = duplicated["result"]["draft"]
+            self.assertNotEqual(duplicate_draft["catalogVersion"], "sha256:older-catalog")
+            self.assertEqual(duplicated["result"]["evaluation"]["status"], "valid")
+            original = engine.execute(request("original", "monster.get", {"monsterId": monster_id}))
+            self.assertTrue(original["ok"], original)
+            self.assertEqual(original["result"]["monster"]["catalogVersion"], "sha256:older-catalog")
 
     def test_delete_removes_drafts_and_finished_monsters(self):
         with tempfile.TemporaryDirectory() as directory:

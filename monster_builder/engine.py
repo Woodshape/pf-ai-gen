@@ -743,9 +743,9 @@ class Engine:
 
     def _duplicate_monster(self, payload: dict[str, Any]) -> dict[str, Any]:
         monster, _ = self._stored_monster(payload)
+        # ponytail: duplicates always evaluate under the current catalog so stale snapshots stay rehomable.
         duplicate = self._new_draft({
             "creationSystem": self._creation_system_key(monster),
-            "catalogVersion": monster["catalogVersion"],
             "concept": monster["concept"],
             "selections": monster["selections"],
         })

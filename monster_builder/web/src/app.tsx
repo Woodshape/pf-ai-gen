@@ -166,7 +166,17 @@ export function App() {
       setBusy(true);
       const draftId = entry.kind === "draft" ? entry.id : entry.sourceDraftId;
       if (!draftId) throw new Error("Finished monster has no source draft.");
-      await getDraft(draftId);
+      try {
+        await getDraft(draftId);
+      } catch (error) {
+        const code = (error as Error & { data?: { code?: string } }).data?.code;
+        if (entry.kind !== "monster" || code !== "catalog.version-unsupported") throw error;
+        const duplicate = await execute("monster.duplicate", { monsterId: entry.id });
+        accept(duplicate);
+        if (duplicate.draft) localStorage.setItem("monster-builder.draftId", duplicate.draft.draftId);
+        await accept(await execute("monster.get", { monsterId: entry.id }));
+        show(`"${entry.name || "Finished monster"}" was created with an older catalog; opened a fresh duplicate for editing. The original finished monster stays attached for export.`, true);
+      }
       setLibrary(undefined); setStep(0); show(`${entry.name || "Saved monster"} loaded.`, true);
     } catch (error) { show(error instanceof Error ? error.message : String(error)); }
     finally { setBusy(false); }
