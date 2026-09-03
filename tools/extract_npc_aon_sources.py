@@ -62,6 +62,7 @@ SOURCES = {
             "scorching-ray", "grease", "fireball", "flare", "barkskin", "cure-light-wounds",
             "entangle", "produce-flame", "summon-natures-ally-i", "summon-natures-ally-ii",
             "charm-person", "sleep", "silent-image", "feather-fall",
+            "dancing-lights", "message",
         )
     },
     "spell-fireball": ("id", "MainContent_DataListTypes_LabelName_1"),
@@ -71,6 +72,8 @@ SOURCES = {
     "spell-sleep": ("heading", "Sleep"),
     "spell-silent-image": ("heading", "Silent Image"),
     "spell-feather-fall": ("heading", "Feather Fall"),
+    "spell-dancing-lights": ("heading", "Dancing Lights"),
+    "spell-message": ("heading", "Message"),
     "spell-entangle": ("heading", "Entangle"),
     "spell-produce-flame": ("heading", "Produce Flame"),
     "spell-summon-natures-ally-i": ("heading", "Summon Nature's Ally 1"),

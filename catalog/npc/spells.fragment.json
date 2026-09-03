@@ -5086,8 +5086,7 @@
   {
    "id": "spell.dancing-lights",
    "name": "Dancing Lights",
-   "catalogStatus": "partial",
-   "gapCode": "core-rulebook-spell-descriptions",
+   "catalogStatus": "resolved",
    "school": null,
    "components": null,
    "levelsByClass": {
@@ -5122,14 +5121,15 @@
     }
    ],
    "sourceRef": {
-    "sourceId": "source.npc-crb-spell-lists",
-    "section": "Core Rulebook class spell lists",
+    "sourceId": "source.aon-spell-dancing-lights",
+    "section": "Spell description",
     "txtLines": [
-     32,
-     32
+     1,
+     15
     ],
     "entry": "Dancing Lights",
-    "provenanceStatus": "list-membership-resolved"
+    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Dancing+Lights",
+    "provenanceStatus": "resolved"
    }
   },
   {
@@ -14945,8 +14945,7 @@
   {
    "id": "spell.message",
    "name": "Message",
-   "catalogStatus": "partial",
-   "gapCode": "core-rulebook-spell-descriptions",
+   "catalogStatus": "resolved",
    "school": null,
    "components": null,
    "levelsByClass": {
@@ -14981,14 +14980,15 @@
     }
    ],
    "sourceRef": {
-    "sourceId": "source.npc-crb-spell-lists",
-    "section": "Core Rulebook class spell lists",
+    "sourceId": "source.aon-spell-message",
+    "section": "Spell description",
     "txtLines": [
-     43,
-     43
+     1,
+     13
     ],
     "entry": "Message",
-    "provenanceStatus": "list-membership-resolved"
+    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Message",
+    "provenanceStatus": "resolved"
    }
   },
   {

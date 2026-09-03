@@ -461,6 +461,20 @@
    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Feather+Fall",
    "retrievedAt": "2026-09-03T20:04:37Z",
    "description": "Official current Archives of Nethys Feather Fall spell page."
+  },
+  "aon-spell-dancing-lights-html": {
+   "file": "sources/reference/aonprd/spell-dancing-lights.html",
+   "sha256": "08750ac2f07810cd227c9f9411e4b072af2f7ae0527bfd69dd51fb3c3eaa6376",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Dancing+Lights",
+   "retrievedAt": "2026-09-03T20:21:09Z",
+   "description": "Official current Archives of Nethys Dancing Lights spell page."
+  },
+  "aon-spell-message-html": {
+   "file": "sources/reference/aonprd/spell-message.html",
+   "sha256": "b450474d993d23316b62010386f86ac9aa9d84ea1824f9a4dada242544386577",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Message",
+   "retrievedAt": "2026-09-03T20:21:09Z",
+   "description": "Official current Archives of Nethys Message spell page."
   }
  },
  "extracts": {
@@ -1220,6 +1234,30 @@
    ],
    "contents": "Official current Archives of Nethys Feather Fall spell description (base text; mythic variants below remain uncurated).",
    "catalogUse": "Bard level-1 known-spell option for the halfling bard slice."
+  },
+  "aon-spell-dancing-lights": {
+   "file": "sources/npc/aonprd/spell-dancing-lights.txt",
+   "sha256": "08bd1eabf6f412875d38e50203ceb4eb83fdfec1d4a15a4f84fec70bef1c65fa",
+   "derivedFrom": "aon-spell-dancing-lights-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    15
+   ],
+   "contents": "Official current Archives of Nethys Dancing Lights spell description (base text; variants below remain uncurated).",
+   "catalogUse": "Bard level-0 known-spell option for the halfling bard slice."
+  },
+  "aon-spell-message": {
+   "file": "sources/npc/aonprd/spell-message.txt",
+   "sha256": "cc59bc3b1ec9c159e08642885b237d2e8fd92c8215e9021c2792d0416a6d8a1f",
+   "derivedFrom": "aon-spell-message-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    13
+   ],
+   "contents": "Official current Archives of Nethys Message spell description (base text; variants below remain uncurated).",
+   "catalogUse": "Bard level-0 known-spell option for the halfling bard slice."
   }
  },
  "fragments": {

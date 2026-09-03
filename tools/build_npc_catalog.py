@@ -91,6 +91,7 @@ SOURCE_FILES = (
         "scorching-ray", "grease", "fireball", "flare", "barkskin", "cure-light-wounds",
         "entangle", "produce-flame", "summon-natures-ally-i", "summon-natures-ally-ii",
         "charm-person", "sleep", "silent-image", "feather-fall",
+        "dancing-lights", "message",
     )),
 )
 

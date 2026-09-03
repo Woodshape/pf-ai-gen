@@ -93,7 +93,7 @@ RESOLVED_SPELLS = {
     "spell.mirror-image", "spell.scorching-ray", "spell.fireball", "spell.flare",
     "spell.barkskin", "spell.cure-light-wounds", "spell.entangle", "spell.produce-flame",
     "spell.summon-nature-s-ally-i", "spell.summon-nature-s-ally-ii", "spell.charm-person", "spell.sleep",
-    "spell.silent-image", "spell.feather-fall",
+    "spell.silent-image", "spell.feather-fall", "spell.dancing-lights", "spell.message",
 }
 
 
