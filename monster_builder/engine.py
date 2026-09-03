@@ -285,7 +285,12 @@ class Engine:
             draft_entries = [entry for entry in draft_entries if needle in " ".join(map(str, entry.values())).casefold()]
             monster_entries = [entry for entry in monster_entries if needle in " ".join(map(str, entry.values())).casefold()]
         key = lambda entry: (entry["name"].casefold(), entry["id"])
-        return {"drafts": sorted(draft_entries, key=key), "monsters": sorted(monster_entries, key=key)}
+        draft_entries.sort(key=key)
+        monster_entries.sort(key=key)
+        # Stable secondary sort: newest first, name order within identical timestamps.
+        draft_entries.sort(key=lambda entry: entry["savedAt"] or "", reverse=True)
+        monster_entries.sort(key=lambda entry: entry["savedAt"] or "", reverse=True)
+        return {"drafts": draft_entries, "monsters": monster_entries}
 
     def _library_draft_level(self, draft: dict[str, Any]) -> Any:
         """Project adapter-owned level data without making search catalog-fragile."""

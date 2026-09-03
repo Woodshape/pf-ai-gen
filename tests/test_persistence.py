@@ -2,6 +2,7 @@ import copy
 import hashlib
 import json
 import tempfile
+import time
 import unittest
 from datetime import datetime
 from pathlib import Path
@@ -83,6 +84,23 @@ class JsonPersistenceTests(unittest.TestCase):
             })
             self.assertIsInstance(monster_entry["savedAt"], str)
             datetime.fromisoformat(monster_entry["savedAt"].replace("Z", "+00:00"))
+
+    def test_library_search_orders_entries_newest_first(self):
+        with tempfile.TemporaryDirectory() as directory:
+            engine = Engine(workspace=directory)
+            first = self.create(engine, "first")
+            time.sleep(0.01)
+            second = self.create(engine, "second")
+            time.sleep(0.01)
+            third = self.create(engine, "third")
+
+            response = engine.execute(request("library", "library.search", {}))
+
+            self.assertTrue(response["ok"], response)
+            draft_ids = [entry["id"] for entry in response["result"]["drafts"]]
+            self.assertEqual(draft_ids[:3], [third["draftId"], second["draftId"], first["draftId"]])
+            saved = [entry["savedAt"] for entry in response["result"]["drafts"][:3]]
+            self.assertEqual(saved, sorted(saved, reverse=True))
 
     def test_create_apply_and_get_reload_across_engine_instances(self):
         with tempfile.TemporaryDirectory() as directory:
