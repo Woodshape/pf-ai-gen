@@ -1,0 +1,111 @@
+Rogue
+Source PRPG Core Rulebook pg. 67
+Life is an endless adventure for those who live by their wits. Ever just one step ahead of danger, rogues bank on their cunning, skill, and charm to bend fate to their favor. Never knowing what to expect, they prepare for everything, becoming masters of a wide variety of skills, training themselves to be adept manipulators, agile acrobats, shadowy stalkers, or masters of any of dozens of other professions or talents. Thieves and gamblers, fast talkers and diplomats, bandits and bounty hunters, and explorers and investigators all might be considered rogues, as well as countless other professions that rely upon wits, prowess, or luck. Although many rogues favor cities and the innumerable opportunities of civilization, some embrace lives on the road, journeying far, meeting exotic people, and facing fantastic danger in pursuit of equally fantastic riches. In the end, any who desire to shape their fates and live life on their own terms might come to be called rogues.
+Role: Rogues excel at moving about unseen and catching foes unaware, and tend to avoid head-to-head combat. Their varied skills and abilities allow them to be highly versatile, with great variations in expertise existing between different rogues. Most, however, excel in overcoming hindrances of all types, from unlocking doors and disarming traps to outwitting magical hazards and conning dull-witted opponents.
+Alignment: Any.
+Hit Die: d8.
+Starting Wealth: 4d6 x 10 gp (average 140 gp).
+Class Skills
+The Rogue's class skills are Acrobatics (Dex), Appraise (Int), Bluff (Cha), Climb (Str), Craft (Int), Diplomacy (Cha), Disable Device (Dex), Disguise (Cha), Escape Artist (Dex), Intimidate (Cha), Knowledge (dungeoneering) (Int), Knowledge (local) (Int), Linguistics (Int), Perception (Wis), Perform (Cha), Profession (Wis), Sense Motive (Wis), Sleight of Hand (Dex), Stealth (Dex), Swim (Str), and Use Magic Device (Cha).
+Skill Points at each Level: 8 + Int modifier.
+Class Features
+Level	Base Attack Bonus	Fort Save	Ref Save	Will Save	Special
+1st	+0	+0	+2	+0	Sneak attack +1d6, trapfinding
+2nd	+1	+0	+3	+0	Evasion, rogue talent
+3rd	+2	+1	+3	+1	Sneak attack +2d6, trap sense +1
+4th	+3	+1	+4	+1	Rogue talent, uncanny dodge
+5th	+3	+1	+4	+1	Sneak attack +3d6
+6th	+4	+2	+5	+2	Rogue talent, trap sense +2
+7th	+5	+2	+5	+2	Sneak attack +4d6
+8th	+6/+1	+2	+6	+2	Improved uncanny dodge, rogue talent
+9th	+6/+1	+3	+6	+3	Sneak attack +5d6, trap sense +3
+10th	+7/+2	+3	+7	+3	Advanced talents, rogue talent
+11th	+8/+3	+3	+7	+3	Sneak attack +6d6
+12th	+9/+4	+4	+8	+4	Rogue talent, trap sense +4
+13th	+9/+4	+4	+8	+4	Sneak attack +7d6
+14th	+10/+5	+4	+9	+4	Rogue talent
+15th	+11/+6/+1	+5	+9	+5	Sneak attack +8d6, trap sense +5
+16th	+12/+7/+2	+5	+10	+5	Rogue talent
+17th	+12/+7/+2	+5	+10	+5	Sneak attack +9d6
+18th	+13/+8/+3	+6	+11	+6	Rogue talent, trap sense +6
+19th	+14/+9/+4	+6	+11	+6	Sneak attack +10d6
+20th	+15/+10/+5	+6	+12	+6	Master strike, rogue talent
+Weapon and Armor Proficiency: Rogues are proficient with all simple weapons, plus the hand crossbow, rapier, sap, shortbow, and short sword. They are proficient with light armor, but not with shields.
+Sneak Attack: If a rogue can catch an opponent when he is unable to defend himself effectively from her attack, she can strike a vital spot for extra damage.
+The rogue's attack deals extra damage anytime her target would be denied a Dexterity bonus to AC (whether the target actually has a Dexterity bonus or not), or when the rogue flanks her target. This extra damage is 1d6 at 1st level, and increases by 1d6 every two rogue levels thereafter. Should the rogue score a critical hit with a sneak attack, this extra damage is not multiplied. Ranged attacks can count as sneak attacks only if the target is within 30 feet.
+With a weapon that deals nonlethal damage (like a sap, whip, or an unarmed strike), a rogue can make a sneak attack that deals nonlethal damage instead of lethal damage. She cannot use a weapon that deals lethal damage to deal nonlethal damage in a sneak attack, not even with the usual –4 penalty.
+The rogue must be able to see the target well enough to pick out a vital spot and must be able to reach such a spot. A rogue cannot sneak attack while striking a creature with concealment.
+Trapfinding: A rogue adds 1/2 her level to Perception skill checks made to locate traps and to Disable Device skill checks (minimum +1). A rogue can use Disable Device to disarm magic traps.
+Evasion (Ex): At 2nd level and higher, a rogue can avoid even magical and unusual attacks with great agility. If she makes a successful Reflex saving throw against an attack that normally deals half damage on a successful save, she instead takes no damage. Evasion can be used only if the rogue is wearing light armor or no armor. A helpless rogue does not gain the benefit of evasion.
+Rogue Talents: As a rogue gains experience, she learns a number of talents that aid her and confound her foes. Starting at 2nd level, a rogue gains one rogue talent. She gains an additional rogue talent for every 2 levels of rogue attained after 2nd level. A rogue cannot select an individual talent more than once.
+Note from Nethys: The full list of rogue talents is available here.
+Trap Sense (Ex): At 3rd level, a rogue gains an intuitive sense that alerts her to danger from traps, giving her a +1 bonus on Reflex saves made to avoid traps and a +1 dodge bonus to AC against attacks made by traps. These bonuses rise to +2 when the rogue reaches 6th level, to +3 when she reaches 9th level, to +4 when she reaches 12th level, to +5 at 15th, and to +6 at 18th level.
+Trap sense bonuses gained from multiple classes stack.
+Uncanny Dodge (Ex): Starting at 4th level, a rogue can react to danger before her senses would normally allow her to do so. She cannot be caught flat-footed, nor does she lose her Dex bonus to AC if the attacker is invisible. She still loses her Dexterity bonus to AC if immobilized. A rogue with this ability can still lose her Dexterity bonus to AC if an opponent successfully uses the feint action (see Combat) against her.
+If a rogue already has uncanny dodge from a different class, she automatically gains improved uncanny dodge (see below) instead.
+Improved Uncanny Dodge (Ex): A rogue of 8th level or higher can no longer be flanked.
+This defense denies another rogue the ability to sneak attack the character by flanking her, unless the attacker has at least four more rogue levels than the target does.
+If a character already has uncanny dodge (see above) from another class, the levels from the classes that grant uncanny dodge stack to determine the minimum rogue level required to flank the character.
+Advanced Talents: At 10th level, and every two levels thereafter, a rogue can choose one of the following advanced talents in place of a rogue talent.
+Note from Nethys: The full list of rogue talents is available here.
+Master Strike (Ex): Upon reaching 20th level, a rogue becomes incredibly deadly when dealing sneak attack damage. Each time the rogue deals sneak attack damage, she can choose one of the following three effects: the target can be put to sleep for 1d4 hours, paralyzed for 2d6 rounds, or slain. Regardless of the effect chosen, the target receives a Fortitude save to negate the additional effect. The DC of this save is equal to 10 + 1/2 the rogue's level + the rogue's Intelligence modifier. Once a creature has been the target of a master strike, regardless of whether or not the save is made, that creature is immune to that rogue's master strike for 24 hours. Creatures that are immune to sneak attack damage are also immune to this ability.
+Alternate Capstones
+Source Chronicle of Legends pg. 28
+When a character reaches the 20th level of a class, she gains a powerful class feature or ability, sometimes referred to as a capstone. The following section provides new capstones for characters to select at 20th level. A character can select one of the following capstones in place of the capstone provided by her class. Some capstones are for specific classes, while others are for a range of classes that qualify for them. In some cases, a capstone specifies what ability it replaces. A character can’t select a new capstone if she has previously traded away her class capstone via an archetype. Clerics and wizards can receive a capstone at 20th level, despite not having one to begin with.
+Masterful Talent (Ex)
+Source Chronicle of Legends pg. 29
+At 20th level, the rogue has been a thief, an actor, a merchant, a scout, a confessor, a friend, an assassin, and a dozen more things besides. The rogue gains a +4 bonus on all of her skills.
+Perfect Body, Flawless Mind (Ex)
+Source Chronicle of Legends pg. 31
+At 20th level, the character’s endless training and study has resulted in an unmatched mastery of the self. The character increases her ability scores by a collective total of 8. For example, she can increase one score by 8, or one score by 5 and another by 3, or four scores by 2, and so on. Characters of any class can select this ability.
+The Boss (Ex)
+Source Chronicle of Legends pg. 30
+At 20th level, the character has become more than just a lone hero—she has become one of the senior figures of her field, with powers and responsibilities to match. The character becomes one of the leading figures in some manner of group or organization, as appropriate to the campaign and the setting. A wizard might become the dean of an arcane university or mages’ guild, a fighter could command a mercenary army or a city guard, a cleric might lead a major temple or her own sect, and so forth. The player and the GM should work together to determine the specifics. The character gains the Leadership feat if she does not already have it, and the number of followers that the feat grants is multiplied by 10 (although depending on the campaign and setting, the position may grant other powers as well). If multiple characters in a party select this capstone, the GM may consider pooling them to grant the players a particularly large and powerful organization, such as a small kingdom. Characters of any class can select this ability.
+The Right Spot (Ex)
+Source Chronicle of Legends pg. 31
+At 20th level, the character can hit an opponent’s weak spot effortlessly. Once per round, the character can apply her sneak attack damage to an attack, even if the target is not flanked or denied its Dexterity bonus to AC. This does not allow the character to sneak attack targets that are immune to sneak attacks (such as oozes). This capstone is available for any class with the sneak attack class feature.
+With This Sword (Ex)
+Source Chronicle of Legends pg. 31
+At 20th level, the character’s blade has become as well-known as the character herself. The character selects one item she has—preferably something iconic and significant, such as a weapon or arcane bond. The item becomes a minor artifact and gains 100,000 gp worth of new powers. The player and the GM should work together to select the new powers, with an eye towards making something memorable yet campaign-appropriate. Characters of any class can select this ability.
+Won’t Stay Dead (Ex)
+Source Chronicle of Legends pg. 31
+At 20th level, the character becomes a paragon of resilience. Once per week, if the character is killed, petrified, or otherwise removed from play, the character manages to survive by some dint of skill or luck and returns at the end of the combat or the scene (GM’s discretion). The player and the GM should work together to ensure that the method of the character’s survival is at least vaguely plausible, if unlikely. Characters of any class can select this ability.
+Favored Class Options
+Aphorite (Plane-Hopper's Handbook pg. 15): Add a +1 bonus on Disable Device and Use Magic Device checks related to glyphs, scrolls, symbols, and other magical writings.
+Catfolk (Advanced Race Guide pg. 92): Add a +1/2 bonus on Bluff checks to feint and Sleight of Hands checks to pickpocket.
+Changeling (Advanced Race Guide pg. 184): The rogue gains 1/6 of a new rogue talent.
+Dhampir (Advanced Race Guide pg. 98): Add a +1/2 bonus on Stealth checks and Perception checks made in dim light or darkness.
+Drow (Advanced Race Guide pg. 104): Add a +1/2 bonus on Bluff checks to feint and pass secret messages.
+Duskwalker (Plane-Hopper's Handbook pg. 17): The rogue gains 1/6 of a new rogue talent.
+Dwarf (Advanced Race Guide pg. 13, Advanced Player's Guide pg. 11): Add a +1/2 bonus on Disable Device checks regarding stone traps and a +1/2 bonus to trap sense regarding stone traps.
+Elf (Advanced Race Guide pg. 23): Add +1 to the number of times per day the rogue can cast a cantrip or 1st-level spell gained from the minor magic or major magic talent. The number of times this bonus is selected for the major magic talent cannot exceed the number of times it is selected for the minor magic talent. The rogue must possess the associated rogue talent to select these options.
+Fetchling (Advanced Race Guide pg. 109): Add a +1/2 bonus on Stealth and Sleight of Hand checks made while in dim light or darkness.
+Ganzi (Plane-Hopper's Handbook pg. 19): Add a +1/2 bonus on Stealth checks while on a plane other than the Material Plane.
+Gathlain (Ultimate Wilderness pg. 10, Legacy of the First World pg. 9): Add a +1/2 bonus to Bluff checks to pass secret messages or create a distraction to hide and on Sleight of Hands checks to pickpocket.
+Ghoran (Ultimate Wilderness pg. 17): Choose one type of ranger favored enemy (or one subtype in case of either humanoid or outsider). The rogue adds 1/2 to her sneak attack damage when using sneak attack against creatures of the chosen type (maximum +3).
+Gillman (Advanced Race Guide pg. 188): The rogue gains 1/6 of a new rogue talent.
+Gnome (Advanced Race Guide pg. 33, Advanced Player's Guide pg. 15): The rogue gains a +1/2 bonus on Disable Device and Use Magic Device checks related to glyphs, symbols, scrolls, and other magical writings.
+Gnome (Horror Adventures pg. 39): Add 1/4 to the Perception and Disable Device DCs of traps the rogue creates.
+Goblin (Advanced Race Guide pg. 115, Goblins of Golarion pg. 31): Add a +1 bonus on the rogue’s sneak attack damage rolls during the surprise round or before the target has acted in combat.
+Grippli (Advanced Race Guide pg. 190): Add a +1/2 bonus on Perception checks while in a forest or swamp.
+Half-Elf (Advanced Race Guide pg. 43, Advanced Player's Guide pg. 17): Add a +1/2 bonus on Bluff checks to feint and Diplomacy checks to gather information.
+Halfling (Advanced Race Guide pg. 63, Advanced Player's Guide pg. 21): Choose a weapon from the following list: sling, dagger, or any weapon with "halfling" in its name. Add a +1/2 bonus on critical hit confirmation rolls with that weapon (maximum bonus +4). This bonus does not stack with Critical Focus.
+Half-Orc (Advanced Race Guide pg. 53): Add +1/3 on critical hit confirmation rolls made while using sneak attack (maximum bonus of +5). This bonus does not stack with Critical Focus.
+Hobgoblin (Advanced Race Guide pg. 122): Reduce the penalty for not being proficient with one weapon by 1. When the nonproficiency penalty for a weapon becomes 0 because of this ability, the rogue is treated as having the appropriate Martial or Exotic Weapon Proficiency feat for that weapon.
+Human (Advanced Race Guide pg. 73, Advanced Player's Guide pg. 23): The rogue gains +1/6 of a new rogue talent.
+Ifrit (Advanced Race Guide pg. 127): Add a +1/2 bonus on Acrobatics checks to jump and a +1/2 bonus on Intimidate checks to demoralize enemies.
+Kitsune (Blood of the Beast pg. 12): Gain 1/6 of a new Magical TailARG feat. Any kitsune character can choose this bonus upon gaining a level in her favored class.
+Kitsune (Advanced Race Guide pg. 192): The rogue gains 1/6 of a new rogue talent.
+Kobold (Advanced Race Guide pg. 133): Add +1/2 to the rogue’s trap sense bonus to AC.
+Locathah (Blood of the Sea pg. 11): Choose a piercing melee weapon. Add a +1/2 bonus on critical hit confirmation rolls with that weapon (maximum bonus +4). This bonus does not stack with Critical Focus.
+Ratfolk (Advanced Race Guide pg. 151): Add a +1/2 bonus on Escape Artist checks.
+Samsaran (Advanced Race Guide pg. 198): The rogue gains 1/6 of a new rogue talent.
+Sylph (Advanced Race Guide pg. 157): Add a +1/2 bonus on Acrobatics checks to jump and a +1/2 bonus on Sense Motive checks.
+Tengu (Advanced Race Guide pg. 163): Choose a weapon from those listed under the tengu’s swordtrained ability. Add a +1/2 bonus on critical hit confirmation rolls with that weapon (maximum bonus +4). This bonus does not stack with Critical Focus.
+Tiefling (Advanced Race Guide pg. 170): Add +1/2 to sneak attack damage dealt to creatures with the outsider type.
+Vanara (Advanced Race Guide pg. 206): The rogue gains 1/6 of a new rogue talent.
+Vine Leshy (Ultimate Wilderness pg. 22): Add a +1/2 bonus to Climb checks and on Stealth checks in forests.
+Vishkanya (Advanced Race Guide pg. 208): Add +1 to the rogue’s CMD when resisting a grapple or reposition attempt.
+Wayang (Blood of Shadows pg. 11): The rogue gains 1/6 of a new rogue talent.
+Wyrwood (Heroes of Golarion pg. 6): The rogue gains 1/6 of a rogue talent.
+Wyvaran (Legacy of Dragons pg. 18): Add a +1/2 bonus to Stealth and Sleight of Hand checks to steal or hide objects.
