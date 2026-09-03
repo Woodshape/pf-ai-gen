@@ -13,8 +13,10 @@ Source acquisition does not silently resolve the scaffold: records keep
 `catalogStatus: "gap"` until a parser or curated fragment supplies exact values
 and line-level `sourceRef` provenance. The current resolved slices are human
 warrior levels 1–5, an elemental-fire goblin Sorcerer at levels 5–6, and a
-Fire-domain goblin Druid at level 3 (prepared divine casting). Everything
-outside those bounded slices remains a gap.
+Fire-domain goblin Druid at level 3 (prepared divine casting). The fixture's
+four selected Druid skills are resolved; unselected class-skill records such as
+Perception remain gaps even where their source table is already archived.
+Everything outside those bounded slices remains a gap.
 
 The complete class spell lists in the PDF excerpt remain independently
 anchored. `spells.fragment.json` is **generated** by

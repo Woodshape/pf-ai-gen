@@ -225,11 +225,11 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(self.catalog["skills"]["skill.intimidate"]["keyAbility"], "charisma")
         resolved = {
             "skill.climb", "skill.intimidate", "skill.bluff", "skill.spellcraft", "skill.use-magic-device",
-            "skill.heal", "skill.knowledge-nature", "skill.survival", "skill.perception",
+            "skill.heal", "skill.knowledge-nature", "skill.survival",
         }
         self.assertEqual(self.catalog["skills"]["skill.heal"]["keyAbility"], "wisdom")
         self.assertEqual(self.catalog["skills"]["skill.knowledge-nature"]["keyAbility"], "intelligence")
-        self.assertEqual(self.catalog["skills"]["skill.perception"]["keyAbility"], "wisdom")
+        self.assertEqual(self.catalog["skills"]["skill.perception"]["catalogStatus"], "gap")
         self.assertTrue(all(skill["catalogStatus"] == "gap" for skill_id, skill in self.catalog["skills"].items() if skill_id not in resolved))
 
     def test_four_source_backed_general_feats_are_resolved(self):

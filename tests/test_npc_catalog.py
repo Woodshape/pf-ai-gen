@@ -142,8 +142,7 @@ class NpcCatalogTests(unittest.TestCase):
         orisons = catalog["classFeatures"]["npc-class-feature.druid-orisons"]
         self.assertEqual(orisons["catalogStatus"], "resolved")
         self.assertEqual(orisons["effects"], {"notExpendedWhenCast": True, "mayBePreparedMultipleTimes": True})
-        self.assertEqual(catalog["skills"]["skill.perception"]["catalogStatus"], "resolved")
-        self.assertEqual(catalog["skills"]["skill.perception"]["keyAbility"], "wisdom")
+        self.assertEqual(catalog["skills"]["skill.perception"]["catalogStatus"], "gap")
         self.assertEqual(catalog["items"]["item.sickle"]["weightLbBySize"], {"small": 1, "medium": 2})
         self.assertEqual(catalog["items"]["item.leather-armor"]["weightLbBySize"], {"small": 7.5, "medium": 15})
         self.assertEqual(catalog["items"]["item.heavy-wooden-shield"]["weightLbBySize"], {"small": 5, "medium": 10})

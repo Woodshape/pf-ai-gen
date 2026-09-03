@@ -118,7 +118,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:d921705463f10779c8446f9e678b1dd5f36a5dd711c7786f5d0dcbc9b4be9a16",
+  "catalogVersion": "sha256:0a09e639d29f4c9b93c269c96e07581c18087a2d81b6437cbc311df61d366e0c",
   "classFeatures": {
     "npc-class-feature.class-specific-feats": {
       "catalogStatus": "gap",
@@ -15499,25 +15499,25 @@
       "trainedOnly": null
     },
     "skill.perception": {
-      "armorCheckPenalty": false,
-      "catalogStatus": "resolved",
+      "armorCheckPenalty": null,
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
       "id": "skill.perception",
-      "keyAbility": "wisdom",
+      "keyAbility": null,
       "name": "Perception",
       "sourceRef": {
-        "entry": "Perception",
-        "file": "sources/npc/aonprd/skill-descriptions.txt",
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#perception",
-        "provenanceStatus": "resolved",
-        "section": "Table: Skill Summary",
-        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
-        "sourceId": "source.aon-skill-descriptions",
+        "entry": "Core skill list",
+        "file": "docs/npc-source-gap-matrix.md",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sha256": "d5be451d995c33fdc034ceb3001230f497a6d19bb3a944b9c9f365ebb68aebe6",
+        "sourceId": "source.npc-gap-matrix",
         "txtLines": [
-          29,
-          29
+          24,
+          24
         ]
       },
-      "trainedOnly": false
+      "trainedOnly": null
     },
     "skill.perform": {
       "armorCheckPenalty": null,

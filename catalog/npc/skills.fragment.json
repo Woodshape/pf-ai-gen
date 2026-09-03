@@ -4,17 +4,17 @@
     {
       "id": "skill.perception",
       "name": "Perception",
-      "catalogStatus": "resolved",
-      "keyAbility": "wisdom",
-      "trainedOnly": false,
-      "armorCheckPenalty": false,
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-skills",
+      "keyAbility": null,
+      "trainedOnly": null,
+      "armorCheckPenalty": null,
       "sourceRef": {
-        "sourceId": "source.aon-skill-descriptions",
-        "section": "Table: Skill Summary",
-        "txtLines": [29, 29],
-        "entry": "Perception",
-        "provenanceStatus": "resolved",
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#perception"
+        "sourceId": "source.npc-gap-matrix",
+        "section": "NPC Source-Gap Matrix",
+        "txtLines": [24, 24],
+        "entry": "Core skill list",
+        "provenanceStatus": "catalog-gap"
       }
     },
     {
