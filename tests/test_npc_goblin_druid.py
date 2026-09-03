@@ -242,8 +242,8 @@ class GoblinDruidTests(unittest.TestCase):
                 "# Zarka CR 2/Level 3",
                 "Init +5 (darkvision 60 ft.)",
                 "NE Small humanoid (goblinoid); Speed 30 ft.",
-                "AC 16 (+2 armor, +1 Dex, +2 shield, +1 size); touch AC 12; flat-footed AC 15; hp 19 (3d8+6); Fort +5; Ref +2; Will +7; CMD 12",
-                "Sickle (1d4; S)",
+                "AC 16 (+2 armor, +2 shield, +1 Dex, +1 size); touch AC 12; flat-footed AC 15; hp 19 (3d8+6); Fort +5; Ref +2; Will +7; CMD 12",
+                "Sickle +3 (1d4; S)",
                 "Fire Bolt +4 ranged touch (1d6+1 fire), 30 ft., 5/day",
                 "Skills Knowledge (Nature) +8, Heal +8, Spellcraft +6, Survival +10",
                 "Feats Iron Will, Improved Initiative",
@@ -267,7 +267,7 @@ class GoblinDruidTests(unittest.TestCase):
                 "Druid Spells (CL 3rd; Wis-based)",
                 "1st (4 slots: 2 base, 1 Wis, 1 domain, DC 13)—Produce Flame, Entangle, Cure Light Wounds, Burning Handsᴰ",
                 "Spontaneous conversion: prepared spells may become Summon Nature’s Ally I–II (domain slots excluded)",
-                "AC 16 (+2 armor, +1 Dex, +2 shield, +1 size)",
+                "AC 16 (+2 armor, +2 shield, +1 Dex, +1 size)",
                 "Fire Bolt +4 ranged touch (1d6+1 fire), 30 ft., 5/day",
             ):
                 self.assertIn(expected, html)

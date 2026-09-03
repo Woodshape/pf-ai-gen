@@ -49,6 +49,19 @@ class NpcExportTests(unittest.TestCase):
             self.assertIn(expected, markdown)
             self.assertIn(expected, html)
 
+    def test_npc_weapon_attack_projects_bonus_expression(self):
+        snapshot = self.snapshot()
+        snapshot["result"]["attacks"].append({
+            "name": "Sickle",
+            "itemId": "item.sickle",
+            "attackBonuses": [3],
+            "attackBonusExpression": "+3",
+            "damageExpression": "1d4",
+            "damageType": "S",
+        })
+        markdown = render_markdown(snapshot, "audit")
+        self.assertIn("Sickle +3 (1d4; S)", markdown)
+
 
 if __name__ == "__main__":
     unittest.main()

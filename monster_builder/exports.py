@@ -279,7 +279,7 @@ def _defense_text(key: str, value: Any, defenses: Mapping[str, Any]) -> str | No
     if key != "ac" or not isinstance(defenses.get("acBreakdown"), Mapping):
         return None
     labels = {"armor": "armor", "shield": "shield", "dexterity": "Dex", "size": "size"}
-    parts = [f"{_signed(bonus)} {labels.get(source, _human(source))}" for source, bonus in defenses["acBreakdown"].items()]
+    parts = [f"{_signed(defenses['acBreakdown'][source])} {label}" for source, label in labels.items() if source in defenses["acBreakdown"]]
     return f"{value} ({', '.join(parts)})" if parts else str(value)
 
 
@@ -311,7 +311,9 @@ def _attack(value: Mapping[str, Any], index: int, annotations: Mapping[str, Any]
         if result.get("usesPerDay") is not None:
             text += f", {result['usesPerDay']}/day"
     else:
-        bonus = result.get("attackBonusText") or ("/".join(_signed(item) for item in result.get("attackBonus", [])) if isinstance(result.get("attackBonus"), list) else "")
+        bonus = (result.get("attackBonusText") or result.get("attackBonusExpression")
+                 or ("/".join(_signed(item) for item in result.get("attackBonus", result.get("attackBonuses", [])))
+                     if isinstance(result.get("attackBonus", result.get("attackBonuses")), list) else ""))
         details = []
         if result.get("damageExpression") is not None:
             details.append(str(result["damageExpression"]))
