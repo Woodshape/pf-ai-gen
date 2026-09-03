@@ -219,9 +219,9 @@ class ElementalAllyValidEvaluationTests(unittest.TestCase):
         self.assertTrue(created["ok"], created)
         block = created["result"]["evaluation"]["canonical"]["linkedCreature"]
         self.assertEqual(block["attacks"], [{
-            "name": "claws", "attackType": "melee", "attackBonus": "+6",
-            "damage": "1d4+3", "count": 2,
-            "notes": "primary natural attacks each add full Strength bonus",
+            "name": "slam", "attackType": "melee", "attackBonus": "+6",
+            "damage": "1d8+4", "count": 1,
+            "notes": "primary attack; sole natural attack adds 1-1/2 Strength bonus to damage",
         }])
         self.assertEqual(block["speed"], {"land": 30})
         self.assertEqual(block["defenses"], {

@@ -73,7 +73,9 @@ SOURCE_FILES = (
     ("source.aon-eidolon-unchained", "sources/npc/aonprd/eidolon-unchained.txt", "Official current AoN unchained Eidolon rules and Table 1-6 base statistics"),
     ("source.aon-eidolon-uc-subtypes", "sources/npc/aonprd/eidolon-uc-subtypes.txt", "Official current AoN unchained eidolon Elemental subtype rules (Pathfinder Unchained pg. 33)"),
     ("source.aon-eidolon-base-forms", "sources/npc/aonprd/eidolon-base-forms.txt", "Official current AoN Quadruped eidolon base form starting statistics"),
-    ("source.aon-eidolon-base-forms-biped", "sources/npc/aonprd/eidolon-base-forms-biped.txt", "Official current AoN Biped eidolon base form starting statistics"),
+    ("source.aon-eidolon-base-forms-biped", "sources/npc/aonprd/eidolon-base-forms-biped.txt", "Official current AoN Biped eidolon base form starting statistics (APG, reference only)"),
+    ("source.aon-eidolon-uc-base-forms-biped", "sources/npc/aonprd/eidolon-uc-base-forms-biped.txt", "Official current AoN unchained Biped eidolon base form starting statistics (PFU pg. 34)"),
+    ("source.aon-summoner-uc-evolutions-slam", "sources/npc/aonprd/summoner-uc-evolutions-slam.txt", "Official current AoN unchained summoner Slam evolution (PFU pg. 36)"),
     *((
         f"source.aon-spell-{name}",
         f"sources/npc/aonprd/spell-{name}.txt",

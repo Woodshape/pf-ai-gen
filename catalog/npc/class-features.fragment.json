@@ -761,12 +761,12 @@
             },
             "sourceRef": [
               {
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "section": "Biped",
                 "txtLines": [3, 3],
                 "entry": "Biped starting ability scores (Str 16, Dex 12, Con 13, Int 7, Wis 10, Cha 11)",
                 "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
               },
               {
                 "sourceId": "source.aon-eidolon-unchained",
@@ -807,22 +807,38 @@
           "attacks": {
             "value": [
               {
-                "name": "claws",
+                "name": "slam",
                 "attackType": "melee",
                 "attackBonus": "+6",
-                "damage": "1d4+3",
-                "count": 2,
-                "notes": "primary natural attacks each add full Strength bonus"
+                "damage": "1d8+4",
+                "count": 1,
+                "notes": "primary attack; sole natural attack adds 1-1/2 Strength bonus to damage"
               }
             ],
             "sourceRef": [
               {
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sourceId": "source.aon-eidolon-uc-subtypes",
+                "section": "Elemental",
+                "txtLines": [5, 5],
+                "entry": "Elemental base forms: Biped (limbs [arms], limbs [legs], slam)",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
+              },
+              {
+                "sourceId": "source.aon-summoner-uc-evolutions-slam",
+                "section": "Slam",
+                "txtLines": [1, 1],
+                "entry": "Slam deals 1d8 (primary attack); limbs (arms) prerequisite; replaces base-form claws",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/SummonerUCEvolutions.aspx"
+              },
+              {
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "section": "Biped",
                 "txtLines": [3, 3],
-                "entry": "Biped 2 claws (1d4) and Strength 16",
+                "entry": "PFU Biped starting statistics: Str 16, Dex 12, Con 13; limbs (arms) available for the slam",
                 "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
               },
               {
                 "sourceId": "source.aon-eidolon-unchained",
@@ -851,7 +867,7 @@
                 "sourceId": "source.aon-combat",
                 "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
                 "txtLines": [195, 195],
-                "entry": "Natural attacks use full attack bonus; two primary attacks each add full Strength (no 1-1/2)",
+                "entry": "Sole natural attack adds 1-1/2 Strength bonus to damage (+3 x 1.5 = +4)",
                 "provenanceStatus": "resolved"
               }
             ]
@@ -896,12 +912,12 @@
                 "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
               },
               {
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "section": "Biped",
                 "txtLines": [3, 3],
                 "entry": "Biped Strength 16 and Dexterity 12",
                 "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
               },
               {
                 "sourceId": "source.aon-eidolon-unchained",
@@ -939,12 +955,12 @@
                 "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
               },
               {
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "section": "Biped",
                 "txtLines": [3, 3],
                 "entry": "Biped Strength 16",
                 "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
               },
               {
                 "sourceId": "source.aon-eidolon-unchained",
@@ -1010,12 +1026,12 @@
                 "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
               },
               {
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "section": "Biped",
                 "txtLines": [3, 3],
                 "entry": "Biped: +2 natural armor, Fort good, Ref bad, Will good; Con 13, Dex 12, Wis 10",
                 "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
               },
               {
                 "sourceId": "source.aon-getting-started",
@@ -1095,12 +1111,12 @@
                 "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
               },
               {
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "section": "Biped",
                 "txtLines": [3, 3],
                 "entry": "Biped Con 13 (+1 modifier)",
                 "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
               },
               {
                 "sourceId": "source.aon-getting-started",
@@ -1122,12 +1138,12 @@
                 "provenanceStatus": "resolved"
               },
               {
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "section": "Biped",
                 "txtLines": [3, 3],
                 "entry": "Biped Dexterity 12",
                 "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
               },
               {
                 "sourceId": "source.aon-eidolon-unchained",
@@ -1213,12 +1229,12 @@
             "value": "Medium",
             "sourceRef": [
               {
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "section": "Biped",
                 "txtLines": [3, 3],
                 "entry": "Biped starting size Medium",
                 "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
               }
             ]
           },
@@ -1257,12 +1273,12 @@
             },
             "sourceRef": [
               {
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "section": "Biped",
                 "txtLines": [3, 3],
                 "entry": "Biped speed 30 ft.",
                 "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
               }
             ]
           },
@@ -1298,12 +1314,12 @@
             "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
           },
           {
-            "sourceId": "source.aon-eidolon-base-forms-biped",
+            "sourceId": "source.aon-eidolon-uc-base-forms-biped",
             "section": "Biped",
             "txtLines": [3, 3],
             "entry": "Biped base form pinned by the curated slice",
             "provenanceStatus": "resolved",
-            "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+            "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
           },
           {
             "sourceId": "source.aon-eidolon-unchained",

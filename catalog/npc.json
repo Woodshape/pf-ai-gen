@@ -118,7 +118,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:1af9311916086719399651b61f4d875186d931a9570ebee0a648fffde7ece00d",
+  "catalogVersion": "sha256:826dffe8f6dd070eb2213f87a8d1b53550fcb82c2916570ee7d876df2b8b3e84",
   "classFeatures": {
     "npc-class-feature.class-specific-feats": {
       "catalogStatus": "gap",
@@ -199,12 +199,12 @@
             "sourceRef": [
               {
                 "entry": "Biped starting ability scores (Str 16, Dex 12, Con 13, Int 7, Wis 10, Cha 11)",
-                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
+                "file": "sources/npc/aonprd/eidolon-uc-base-forms-biped.txt",
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx",
                 "provenanceStatus": "resolved",
                 "section": "Biped",
-                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sha256": "5ab9f4734f9674515cea68ddfcb1211910b319171e7a2ab8824925b22387dff5",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -277,13 +277,39 @@
           "attacks": {
             "sourceRef": [
               {
-                "entry": "Biped 2 claws (1d4) and Strength 16",
-                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
+                "entry": "Elemental base forms: Biped (limbs [arms], limbs [legs], slam)",
+                "file": "sources/npc/aonprd/eidolon-uc-subtypes.txt",
+                "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx",
+                "provenanceStatus": "resolved",
+                "section": "Elemental",
+                "sha256": "63cc8e5e26c7842a508ddd46d2508d497ee9c87c3015164f2b2b05aab9b8c34d",
+                "sourceId": "source.aon-eidolon-uc-subtypes",
+                "txtLines": [
+                  5,
+                  5
+                ]
+              },
+              {
+                "entry": "Slam deals 1d8 (primary attack); limbs (arms) prerequisite; replaces base-form claws",
+                "file": "sources/npc/aonprd/summoner-uc-evolutions-slam.txt",
+                "officialUrl": "https://aonprd.com/SummonerUCEvolutions.aspx",
+                "provenanceStatus": "resolved",
+                "section": "Slam",
+                "sha256": "96b9f3f7ee02aa03c90d16fa778e94e661c3b56b39535c0f4748edaa210b89b9",
+                "sourceId": "source.aon-summoner-uc-evolutions-slam",
+                "txtLines": [
+                  1,
+                  1
+                ]
+              },
+              {
+                "entry": "PFU Biped starting statistics: Str 16, Dex 12, Con 13; limbs (arms) available for the slam",
+                "file": "sources/npc/aonprd/eidolon-uc-base-forms-biped.txt",
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx",
                 "provenanceStatus": "resolved",
                 "section": "Biped",
-                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sha256": "5ab9f4734f9674515cea68ddfcb1211910b319171e7a2ab8824925b22387dff5",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -328,7 +354,7 @@
                 ]
               },
               {
-                "entry": "Natural attacks use full attack bonus; two primary attacks each add full Strength (no 1-1/2)",
+                "entry": "Sole natural attack adds 1-1/2 Strength bonus to damage (+3 x 1.5 = +4)",
                 "file": "sources/npc/aonprd/combat.txt",
                 "provenanceStatus": "resolved",
                 "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
@@ -344,10 +370,10 @@
               {
                 "attackBonus": "+6",
                 "attackType": "melee",
-                "count": 2,
-                "damage": "1d4+3",
-                "name": "claws",
-                "notes": "primary natural attacks each add full Strength bonus"
+                "count": 1,
+                "damage": "1d8+4",
+                "name": "slam",
+                "notes": "primary attack; sole natural attack adds 1-1/2 Strength bonus to damage"
               }
             ]
           },
@@ -411,12 +437,12 @@
               },
               {
                 "entry": "Biped Strength 16",
-                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
+                "file": "sources/npc/aonprd/eidolon-uc-base-forms-biped.txt",
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx",
                 "provenanceStatus": "resolved",
                 "section": "Biped",
-                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sha256": "5ab9f4734f9674515cea68ddfcb1211910b319171e7a2ab8824925b22387dff5",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -479,12 +505,12 @@
               },
               {
                 "entry": "Biped Strength 16 and Dexterity 12",
-                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
+                "file": "sources/npc/aonprd/eidolon-uc-base-forms-biped.txt",
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx",
                 "provenanceStatus": "resolved",
                 "section": "Biped",
-                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sha256": "5ab9f4734f9674515cea68ddfcb1211910b319171e7a2ab8824925b22387dff5",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -574,12 +600,12 @@
               },
               {
                 "entry": "Biped: +2 natural armor, Fort good, Ref bad, Will good; Con 13, Dex 12, Wis 10",
-                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
+                "file": "sources/npc/aonprd/eidolon-uc-base-forms-biped.txt",
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx",
                 "provenanceStatus": "resolved",
                 "section": "Biped",
-                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sha256": "5ab9f4734f9674515cea68ddfcb1211910b319171e7a2ab8824925b22387dff5",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -715,12 +741,12 @@
               },
               {
                 "entry": "Biped Con 13 (+1 modifier)",
-                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
+                "file": "sources/npc/aonprd/eidolon-uc-base-forms-biped.txt",
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx",
                 "provenanceStatus": "resolved",
                 "section": "Biped",
-                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sha256": "5ab9f4734f9674515cea68ddfcb1211910b319171e7a2ab8824925b22387dff5",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -757,12 +783,12 @@
               },
               {
                 "entry": "Biped Dexterity 12",
-                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
+                "file": "sources/npc/aonprd/eidolon-uc-base-forms-biped.txt",
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx",
                 "provenanceStatus": "resolved",
                 "section": "Biped",
-                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sha256": "5ab9f4734f9674515cea68ddfcb1211910b319171e7a2ab8824925b22387dff5",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -902,12 +928,12 @@
             "sourceRef": [
               {
                 "entry": "Biped starting size Medium",
-                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
+                "file": "sources/npc/aonprd/eidolon-uc-base-forms-biped.txt",
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx",
                 "provenanceStatus": "resolved",
                 "section": "Biped",
-                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sha256": "5ab9f4734f9674515cea68ddfcb1211910b319171e7a2ab8824925b22387dff5",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -964,12 +990,12 @@
             "sourceRef": [
               {
                 "entry": "Biped speed 30 ft.",
-                "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
-                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
+                "file": "sources/npc/aonprd/eidolon-uc-base-forms-biped.txt",
+                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx",
                 "provenanceStatus": "resolved",
                 "section": "Biped",
-                "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
-                "sourceId": "source.aon-eidolon-base-forms-biped",
+                "sha256": "5ab9f4734f9674515cea68ddfcb1211910b319171e7a2ab8824925b22387dff5",
+                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
                 "txtLines": [
                   3,
                   3
@@ -1030,12 +1056,12 @@
           },
           {
             "entry": "Biped base form pinned by the curated slice",
-            "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
-            "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
+            "file": "sources/npc/aonprd/eidolon-uc-base-forms-biped.txt",
+            "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx",
             "provenanceStatus": "resolved",
             "section": "Biped",
-            "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
-            "sourceId": "source.aon-eidolon-base-forms-biped",
+            "sha256": "5ab9f4734f9674515cea68ddfcb1211910b319171e7a2ab8824925b22387dff5",
+            "sourceId": "source.aon-eidolon-uc-base-forms-biped",
             "txtLines": [
               3,
               3
@@ -16737,10 +16763,16 @@
       "sourceId": "source.aon-eidolon-base-forms"
     },
     "source.aon-eidolon-base-forms-biped": {
-      "description": "Official current AoN Biped eidolon base form starting statistics",
+      "description": "Official current AoN Biped eidolon base form starting statistics (APG, reference only)",
       "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
       "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
       "sourceId": "source.aon-eidolon-base-forms-biped"
+    },
+    "source.aon-eidolon-uc-base-forms-biped": {
+      "description": "Official current AoN unchained Biped eidolon base form starting statistics (PFU pg. 34)",
+      "file": "sources/npc/aonprd/eidolon-uc-base-forms-biped.txt",
+      "sha256": "5ab9f4734f9674515cea68ddfcb1211910b319171e7a2ab8824925b22387dff5",
+      "sourceId": "source.aon-eidolon-uc-base-forms-biped"
     },
     "source.aon-eidolon-uc-subtypes": {
       "description": "Official current AoN unchained eidolon Elemental subtype rules (Pathfinder Unchained pg. 33)",
@@ -16964,6 +16996,12 @@
       "sha256": "119b4acebe526e3b4afc2c7c30521d75be09827720be566cde1aef88f15a92c0",
       "sourceId": "source.aon-spell-summon-natures-ally-ii"
     },
+    "source.aon-summoner-uc-evolutions-slam": {
+      "description": "Official current AoN unchained summoner Slam evolution (PFU pg. 36)",
+      "file": "sources/npc/aonprd/summoner-uc-evolutions-slam.txt",
+      "sha256": "96b9f3f7ee02aa03c90d16fa778e94e661c3b56b39535c0f4748edaa210b89b9",
+      "sourceId": "source.aon-summoner-uc-evolutions-slam"
+    },
     "source.aon-use-magic-device": {
       "description": "Official current AoN Use Magic Device rules",
       "file": "sources/npc/aonprd/use-magic-device.txt",
@@ -17003,7 +17041,7 @@
     "source.npc-manifest": {
       "description": "Hash manifest for the local NPC source foundation",
       "file": "sources/npc/MANIFEST.json",
-      "sha256": "b95cf6bbd26664e814880a4a8a1458415c969260135f79e9e498e11fc9c525b6",
+      "sha256": "1f2a70631c0d48683ce868c2adf7222c6b97733574fd4d79c6ec28f11d27b44f",
       "sourceId": "source.npc-manifest"
     },
     "source.npc-mode-plan": {

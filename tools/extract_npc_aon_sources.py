@@ -16,6 +16,8 @@ RAW = ROOT / "sources" / "reference" / "aonprd"
 # Sections extracted from an already-archived page: extract name -> archived HTML name.
 HTML_SOURCE_ALIASES = {
     "eidolon-base-forms-biped": "eidolon-base-forms",
+    "eidolon-uc-base-forms-biped": "eidolon-uc-base-forms",
+    "summoner-uc-evolutions-slam": "summoner-uc-evolutions",
 }
 
 
@@ -66,6 +68,8 @@ SOURCES = {
     "elemental-ally": ("id", "MainContent_DataListTypes_LabelName_0"),
     "eidolon-unchained": ("id", "MainContent_DataListTypes_LabelName_0"),
     "eidolon-uc-subtypes": ("heading", "Elemental"),
+    "eidolon-uc-base-forms-biped": ("id", "MainContent_DataListTypes_LabelName_1"),
+    "summoner-uc-evolutions-slam": ("id", "MainContent_DataListTypes_LabelName_17"),
     "eidolon-base-forms": ("heading", "Quadruped"),
     "eidolon-base-forms-biped": ("heading", "Biped"),
 }
