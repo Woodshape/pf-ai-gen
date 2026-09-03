@@ -9,3 +9,9 @@ fusion *ARGS:
     pi -e "{{fusion_harness}}/extensions/fusion-harness/fusion-harness.ts" \
         --fh-config "{{fusion_harness}}/.pi/fusion-harness/model-stack-fusion.yaml" \
         {{ARGS}}
+
+# Outage fallback stack (Codex backend 404); see model-stack-fusion-fallback.yaml.
+fusion-fallback *ARGS:
+    pi -e "{{fusion_harness}}/extensions/fusion-harness/fusion-harness.ts" \
+        --fh-config "{{fusion_harness}}/.pi/fusion-harness/model-stack-fusion-fallback.yaml" \
+        {{ARGS}}
