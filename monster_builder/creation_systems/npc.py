@@ -59,6 +59,12 @@ def _bonus(value: int) -> str:
     return f"+{value}" if value >= 0 else str(value)
 
 
+def _bonus_spell_count(ability_modifier: int, spell_level: int) -> int:
+    if spell_level == 0 or ability_modifier < spell_level:
+        return 0
+    return 1 + (ability_modifier - spell_level) // 4
+
+
 class NpcCreation(CreationSystem):
     """Evaluate the bounded, locally sourced Core NPC slice."""
 
@@ -96,19 +102,40 @@ class NpcCreation(CreationSystem):
         class_record = self._optional("class", progression[0].get("classId")) if progression and isinstance(progression[0], dict) else None
         feat_slots = self._feat_slots(level, race)
         gear_budget = self._gear_budget(selections, level)
-        spell_counts = copy.deepcopy((class_record or {}).get("levels", {}).get(str(level), {}).get("spellsKnown", {}))
+        class_row = (class_record or {}).get("levels", {}).get(str(level), {})
+        spell_counts = copy.deepcopy(class_row.get("spellsKnown", {}))
+        druid_slots: dict[str, dict[str, int]] = {}
+        if class_record and class_record.get("id") == "npc-class.druid":
+            wisdom = self._preview_ability(selections, race, "wisdom", divine_allowed=True)
+            fire_domain = self._optional("classFeature", "npc-class-feature.fire-domain")
+            if wisdom is not None and fire_domain:
+                wisdom_modifier = _ability_modifier(wisdom)
+                for spell_level, base in class_row.get("spellsPerDay", {}).items():
+                    numeric_level = int(spell_level)
+                    wisdom_bonus = _bonus_spell_count(wisdom_modifier, numeric_level)
+                    domain = fire_domain["slotsPerSpellLevel"] if numeric_level > 0 else 0
+                    druid_slots[spell_level] = {
+                        "base": base, "wisdomBonus": wisdom_bonus, "domain": domain,
+                        "total": base + wisdom_bonus + domain,
+                    }
         skill_count = None
         if class_record and class_record.get("catalogStatus") == "resolved":
-            intelligence = self._preview_intelligence(selections, race)
+            intelligence = self._preview_ability(
+                selections, race, "intelligence", divine_allowed=class_record.get("id") == "npc-class.druid",
+            )
             if intelligence is not None:
                 skill_count = max(1, class_record.get("skillSelections", 0) + _ability_modifier(intelligence)) + (race or {}).get("skillSelectionsBonus", 0)
 
+        class_id = (class_record or {}).get("id")
+        method_values = ["melee-preset", "arcane-preset", "assigned-array"]
+        if class_id == "npc-class.druid":
+            method_values.insert(1, "divine-preset")
         requirements = [
             self._requirement("/selections/statblockUse", "Statblock use", "enum", ["full", "encounter"]),
             self._requirement("/selections/raceId", "Race", "catalog-id", self._catalog_values("race")),
             self._requirement("/selections/classProgression/0/classId", "Class", "catalog-id", self._catalog_values("class")),
             self._requirement("/selections/classProgression/0/levels", "Class levels", "integer"),
-            self._requirement("/selections/abilityGeneration/method", "Ability method", "enum", ["melee-preset", "arcane-preset", "assigned-array"]),
+            self._requirement("/selections/abilityGeneration/method", "Ability method", "enum", method_values),
             self._requirement("/selections/skillGeneration/method", "Skill method", "enum", ["simplified"]),
             self._requirement("/selections/skillGeneration/skills", "Skills", "catalog-id-array", self._catalog_values("skill")),
             self._requirement("/selections/gearProfile/experienceProgression", "Experience progression", "enum", ["medium"]),
@@ -127,6 +154,18 @@ class NpcCreation(CreationSystem):
             requirements.append(self._requirement(
                 "/selections/spellLoadout/known", "Spells known", "spell-loadout"
             ))
+        elif class_record and class_record["id"] == "npc-class.druid":
+            requirements.extend((
+                self._requirement(
+                    "/selections/classFeatureChoices/natureBond", "Nature Bond", "enum", ["fire-domain"]
+                ),
+                self._requirement(
+                    "/selections/spellLoadout/prepared", "Prepared Druid spells", "spell-loadout"
+                ),
+                self._requirement(
+                    "/selections/spellLoadout/domainPrepared", "Prepared Fire-domain spells", "spell-loadout"
+                ),
+            ))
 
         selected_skills = selections.get("skillGeneration", {}).get("skills", []) if isinstance(selections.get("skillGeneration"), dict) else []
         selected_feats = selections.get("feats", []) if isinstance(selections.get("feats"), list) else []
@@ -142,7 +181,11 @@ class NpcCreation(CreationSystem):
             "selectionBudgets": {
                 "skills": {"method": "simplified", "count": skill_count, "selected": len(selected_skills)},
                 "feats": {"slots": feat_slots, "selected": len(selected_feats)},
-                "spells": {"required": bool(spell_counts), "levels": spell_counts},
+                "spells": (
+                    {"required": True, "mode": "prepared", "levels": druid_slots}
+                    if class_record and class_record.get("id") == "npc-class.druid"
+                    else {"required": bool(spell_counts), "levels": spell_counts}
+                ),
                 "gear": {
                     **(gear_budget or {"budgetCp": None, "categories": None}),
                     "spentCp": self._preview_gear_cost(gear),
@@ -223,21 +266,23 @@ class NpcCreation(CreationSystem):
         slice_id = (selections["raceId"], progression[0]["classId"], total_level)
         supported = (
             slice_id[0] == "npc-race.human" and slice_id[1] == "npc-class.warrior" and 1 <= total_level <= 5
-        ) or (slice_id[0] == "npc-race.goblin" and slice_id[1] == "npc-class.sorcerer" and 5 <= total_level <= 6)
+        ) or (
+            slice_id[0] == "npc-race.goblin" and slice_id[1] == "npc-class.sorcerer" and 5 <= total_level <= 6
+        ) or slice_id == ("npc-race.goblin", "npc-class.druid", 3)
         if not supported:
             issues.append(self._issue(
-                "npc.slice-unsupported", "production evaluation supports human warriors 1–5 and goblin sorcerers at levels 5–6",
+                "npc.slice-unsupported", "production evaluation supports human warriors 1–5, goblin sorcerers at levels 5–6, and goblin druids at level 3",
                 path="/selections/classProgression", source_refs=_refs(class_records[0]) if class_records else [],
             ))
         if issues:
             return self._evaluation("invalid", mode, issues)
 
         class_record, row = class_records[0], rows[0]
-        scores, ability_refs, ability_issues = self._abilities(selections, race, total_level)
+        scores, ability_refs, ability_issues = self._abilities(selections, race, total_level, class_record)
         issues.extend(ability_issues)
         if not scores:
             return self._evaluation("invalid", mode, issues)
-        gear_result, gear_refs, gear_issues, gear_warnings = self._gear(selections, total_level)
+        gear_result, gear_refs, gear_issues, gear_warnings = self._gear(selections, total_level, race.get("sizeId"))
         issues.extend(gear_issues)
         warnings.extend(gear_warnings)
         feats, feat_effects, feat_refs, feat_issues = self._feats(selections, race, total_level, scores)
@@ -247,7 +292,7 @@ class NpcCreation(CreationSystem):
         modifiers = {ability: _ability_modifier(score) for ability, score in scores.items()}
         class_features, feature_refs, feature_issues = self._selected_class_features(selections, race, class_record, total_level, modifiers)
         issues.extend(feature_issues)
-        spells, spell_refs, spell_issues = self._spells(selections, class_record, row, total_level, modifiers)
+        spells, spell_refs, spell_issues = self._spells(selections, class_record, row, total_level, scores, modifiers)
         issues.extend(spell_issues)
         if issues:
             return self._evaluation("invalid", mode, issues, warnings)
@@ -284,14 +329,14 @@ class NpcCreation(CreationSystem):
             "will": row["will"] + modifiers["wisdom"] + feat_saves.get("will", 0) + resistance_bonus,
             "acBreakdown": ac_breakdown,
         }
-        attacks = self._attacks(equipped, bab, modifiers, size_modifiers)
+        attacks = self._attacks(equipped, bab, modifiers, size_modifiers, race.get("sizeId"))
         resistances: dict[str, int] = {}
         for feature in class_features:
             for power in feature.get("powers", []):
                 if power.get("damageExpression") and power.get("attackBonus") is not None:
                     attacks.append({
                         "name": power["name"], "attackBonuses": [power["attackBonus"]],
-                        "attackBonusExpression": _bonus(power["attackBonus"]), "attackType": "ranged touch",
+                        "attackBonusExpression": _bonus(power["attackBonus"]), "attackType": power.get("attackType", "ranged touch"),
                         "damageExpression": power["damageExpression"], "damageType": power.get("damageType"),
                         "range": power.get("range"), "usesPerDay": power.get("usesPerDay"),
                     })
@@ -340,7 +385,11 @@ class NpcCreation(CreationSystem):
             "gear": gear_result["items"],
             "speed": copy.deepcopy(race.get("speed", {"land": 30})),
             "senses": copy.deepcopy(race.get("senses", [])),
-            "languages": copy.deepcopy(race.get("languages", [])),
+            "languages": copy.deepcopy(race.get("languages", [])) + [
+                language
+                for feature in class_features
+                for language in self._record("classFeature", feature["featureId"]).get("effects", {}).get("languages", [])
+            ],
             "size": {"id": race.get("sizeId", "size.medium"), "name": race.get("sizeId", "size.medium").split(".")[-1].title()},
             "creatureType": f"humanoid ({race['subtype']})" if race.get("subtype") else "humanoid",
             "alignment": selections.get("details", {}).get("alignment"),
@@ -358,10 +407,28 @@ class NpcCreation(CreationSystem):
             self._trace("/canonical/attacks", attacks, "BAB plus ability and size modifiers; weapon die plus Strength", source_groups["combat"]),
             self._trace("/canonical/cmb", cmb, "BAB + Strength modifier + size modifier", source_groups["maneuvers"]),
             self._trace("/canonical/cmd", cmd, "10 + BAB + Strength modifier + Dexterity modifier + size modifier", source_groups["maneuvers"]),
-            self._trace("/canonical/skills", skills, "level ranks plus class-skill bonus, ability modifier, and armor check penalty", skill_refs),
+            self._trace(
+                "/canonical/skills", skills,
+                "level ranks plus class-skill bonus, ability modifier, armor check penalty, and Nature Sense"
+                if class_record["id"] == "npc-class.druid"
+                else "level ranks plus class-skill bonus, ability modifier, and armor check penalty",
+                skill_refs,
+            ),
             self._trace("/canonical/feats", feats, "fill granted feat slots", feat_refs),
-            self._trace("/canonical/classFeatures", class_features, "apply automatic features and selected class-feature options", source_groups["features"]),
-            self._trace("/canonical/spells", spells, "validate spells known, add bloodline spells, and apply Charisma bonus spells", source_groups["spells"]),
+            self._trace(
+                "/canonical/classFeatures", class_features,
+                "apply cumulative Druid features and derive Fire Bolt damage, uses, and attack bonus"
+                if class_record["id"] == "npc-class.druid"
+                else "apply automatic features and selected class-feature options",
+                source_groups["features"],
+            ),
+            self._trace(
+                "/canonical/spells", spells,
+                "validate prepared, Wisdom-bonus, and Fire-domain slots; apply caster level, save DCs, and spontaneous conversion"
+                if class_record["id"] == "npc-class.druid"
+                else "validate spells known, add bloodline spells, and apply Charisma bonus spells",
+                source_groups["spells"],
+            ),
             self._trace("/canonical/gearBudget", gear_result["budget"], "read the NPC category and level row from Table 14-9", gear_refs),
         ]
         return self._evaluation("valid", mode, [], warnings, canonical, trace)
@@ -399,7 +466,7 @@ class NpcCreation(CreationSystem):
             if not isinstance(ability, dict):
                 raise BoundaryError("selection.type-invalid", "abilityGeneration must be an object", "/selections/abilityGeneration")
             self._reject_unknown(ability, {"method", "arrayId", "scores", "assignments", "levelIncreases", "preset", "role", "rationale"}, "/selections/abilityGeneration")
-            if "method" in ability and ability["method"] not in {"melee-preset", "arcane-preset", "skill-preset", "assigned-array", "custom", "rolled", "purchase"}:
+            if "method" in ability and ability["method"] not in {"melee-preset", "divine-preset", "arcane-preset", "skill-preset", "assigned-array", "custom", "rolled", "purchase"}:
                 raise BoundaryError("selection.value-invalid", "abilityGeneration.method is not supported", "/selections/abilityGeneration/method")
             if "arrayId" in ability and not isinstance(ability["arrayId"], str):
                 raise BoundaryError("selection.type-invalid", "abilityGeneration.arrayId must be a string", "/selections/abilityGeneration/arrayId")
@@ -430,13 +497,19 @@ class NpcCreation(CreationSystem):
                 raise BoundaryError("selection.type-invalid", "precise ranks must map skill IDs to non-negative integers", "/selections/skillGeneration/ranks")
 
         spell_loadout = selections.get("spellLoadout")
-        if isinstance(spell_loadout, dict) and "known" in spell_loadout:
-            known = spell_loadout["known"]
-            if not isinstance(known, dict) or any(
-                not str(level).isdigit() or not isinstance(spells, list) or any(not isinstance(spell, str) for spell in spells)
-                for level, spells in known.items()
-            ):
-                raise BoundaryError("selection.type-invalid", "spellLoadout.known must map spell levels to arrays of IDs", "/selections/spellLoadout/known")
+        if isinstance(spell_loadout, dict):
+            for field in ("known", "prepared", "domainPrepared"):
+                if field not in spell_loadout:
+                    continue
+                by_level = spell_loadout[field]
+                if not isinstance(by_level, dict) or any(
+                    not str(level).isdigit() or not isinstance(spells, list) or any(not isinstance(spell, str) for spell in spells)
+                    for level, spells in by_level.items()
+                ):
+                    raise BoundaryError(
+                        "selection.type-invalid", f"spellLoadout.{field} must map spell levels to arrays of IDs",
+                        f"/selections/spellLoadout/{field}",
+                    )
 
         feats = selections.get("feats")
         if feats is not None:
@@ -497,9 +570,10 @@ class NpcCreation(CreationSystem):
             lookups.append(("feat", item["featId"], f"/selections/feats/{index}/featId"))
         spell_loadout = selections.get("spellLoadout", {})
         if isinstance(spell_loadout, dict):
-            for level, spells in spell_loadout.get("known", {}).items():
-                for index, spell_id in enumerate(spells):
-                    lookups.append(("spell", spell_id, f"/selections/spellLoadout/known/{level}/{index}"))
+            for field in ("known", "prepared", "domainPrepared"):
+                for level, spells in spell_loadout.get(field, {}).items():
+                    for index, spell_id in enumerate(spells):
+                        lookups.append(("spell", spell_id, f"/selections/spellLoadout/{field}/{level}/{index}"))
         for index, item in enumerate(selections.get("gear", [])):
             lookups.append(("item", item["itemId"], f"/selections/gear/{index}/itemId"))
         profile = selections.get("gearProfile", {})
@@ -533,14 +607,19 @@ class NpcCreation(CreationSystem):
     # ------------------------------------------------------------------
     # Slice evaluation helpers
     # ------------------------------------------------------------------
-    def _abilities(self, selections: dict[str, Any], race: dict[str, Any], level: int) -> tuple[dict[str, int], list[dict[str, Any]], list[dict[str, Any]]]:
+    def _abilities(self, selections: dict[str, Any], race: dict[str, Any], level: int, class_record: dict[str, Any] | None = None) -> tuple[dict[str, int], list[dict[str, Any]], list[dict[str, Any]]]:
         generation = selections["abilityGeneration"]
         array = self._record("abilityArray", generation.get("arrayId", "npc-ability-array.basic"))
         issues: list[dict[str, Any]] = []
         if array.get("catalogStatus") != "resolved":
             return {}, _refs(array), [self._gap(array, "/selections/abilityGeneration/arrayId")]
         method = generation.get("method")
-        if method in {"melee-preset", "arcane-preset"}:
+        if method == "divine-preset" and (not class_record or class_record["id"] != "npc-class.druid"):
+            return {}, _refs(array), [self._issue(
+                "npc.slice-unsupported", "the divine preset is part of the source-gated Druid slice",
+                path="/selections/abilityGeneration/method", source_refs=_refs(array),
+            )]
+        if method in {"melee-preset", "divine-preset", "arcane-preset"}:
             scores = copy.deepcopy(array["presets"][method.removesuffix("-preset")])
         elif method == "assigned-array":
             scores = copy.deepcopy(generation.get("assignments", generation.get("scores", {})))
@@ -586,6 +665,12 @@ class NpcCreation(CreationSystem):
         armor_check_penalty = sum(item["effects"].get("armorCheckPenalty", 0) for item in gear["items"] if item["equipped"])
         results: list[dict[str, Any]] = []
         refs = _refs(class_record)
+        nature_sense = (
+            self._optional("classFeature", "npc-class-feature.druid-nature-sense")
+            if class_record["id"] == "npc-class.druid" else None
+        )
+        if nature_sense:
+            refs = _dedupe_refs(refs, _refs(nature_sense))
         for index, skill_id in enumerate(selected):
             record = self._record("skill", skill_id)
             refs = _dedupe_refs(refs, _refs(record))
@@ -597,8 +682,14 @@ class NpcCreation(CreationSystem):
                 issues.append(self._issue("npc.skill-not-class-skill", "simplified selections must be class skills", path=f"/selections/skillGeneration/skills/{index}", source_refs=_refs(record)))
             ability = record["keyAbility"]
             acp = armor_check_penalty if record.get("armorCheckPenalty") else 0
-            total = level + (3 if class_skill else 0) + _ability_modifier(scores[ability]) + acp
-            results.append({"skillId": skill_id, "name": record["name"], "ability": ability, "ranks": level, "classSkill": class_skill, "armorCheckPenalty": acp, "total": total, "sourceRefs": _refs(record)})
+            feature_bonus = (nature_sense or {}).get("effects", {}).get("skillBonuses", {}).get(skill_id, 0)
+            total = level + (3 if class_skill else 0) + _ability_modifier(scores[ability]) + acp + feature_bonus
+            results.append({
+                "skillId": skill_id, "name": record["name"], "ability": ability, "ranks": level,
+                "classSkill": class_skill, "armorCheckPenalty": acp,
+                **({"classFeatureBonus": feature_bonus} if feature_bonus else {}),
+                "total": total, "sourceRefs": _dedupe_refs(_refs(record), _refs(nature_sense) if feature_bonus else []),
+            })
         return results, refs, issues
 
     def _selected_class_features(
@@ -607,38 +698,87 @@ class NpcCreation(CreationSystem):
         features = self._class_features(class_record, level)
         refs = _dedupe_refs(_refs(class_record), *[feature.get("sourceRefs", []) for feature in features])
         choices = selections.get("classFeatureChoices", {})
-        if class_record["id"] != "npc-class.sorcerer":
-            issues = [self._issue("npc.slice-unsupported", "class feature choices are not part of this production slice", path="/selections/classFeatureChoices")] if choices else []
-            return features, refs, issues
+        if class_record["id"] == "npc-class.sorcerer":
+            bloodline = self._record("classFeature", "npc-class-feature.sorcerer-bloodlines")
+            choice = choices.get("bloodline")
+            if choice != "elemental-fire":
+                return features, _dedupe_refs(refs, _refs(bloodline)), [self._issue(
+                    "npc.choice-invalid", "the source-gated Sorcerer slice requires the elemental fire bloodline",
+                    path="/selections/classFeatureChoices/bloodline", source_refs=_refs(bloodline),
+                )]
+            option = bloodline["options"][choice]
+            powers = []
+            for power in option["powers"]:
+                if power["level"] > level:
+                    continue
+                selected = copy.deepcopy(power)
+                if selected["name"] == "Elemental Ray":
+                    selected["damageExpression"] = f"{selected['damageDie']}+{level // 2}"
+                    selected["usesPerDay"] = 3 + modifiers["charisma"]
+                    selected["attackBonus"] = class_record["levels"][str(level)]["bab"] + modifiers["dexterity"] + race.get("sizeModifiers", {}).get("attack", 0)
+                powers.append(selected)
+            for feature in features:
+                if feature["featureId"] == bloodline["id"]:
+                    feature.update(choice=choice, name=option["name"], energyType=option["energyType"], arcana=copy.deepcopy(option["arcana"]), powers=powers)
+            return features, _dedupe_refs(refs, _refs(bloodline)), []
 
-        bloodline = self._record("classFeature", "npc-class-feature.sorcerer-bloodlines")
-        choice = choices.get("bloodline")
-        if choice != "elemental-fire":
-            return features, _dedupe_refs(refs, _refs(bloodline)), [self._issue(
-                "npc.choice-invalid", "the source-gated Sorcerer slice requires the elemental fire bloodline",
-                path="/selections/classFeatureChoices/bloodline", source_refs=_refs(bloodline),
-            )]
-        option = bloodline["options"][choice]
-        powers = []
-        for power in option["powers"]:
-            if power["level"] > level:
-                continue
-            selected = copy.deepcopy(power)
-            if selected["name"] == "Elemental Ray":
-                selected["damageExpression"] = f"{selected['damageDie']}+{level // 2}"
-                selected["usesPerDay"] = 3 + modifiers["charisma"]
-                selected["attackBonus"] = class_record["levels"][str(level)]["bab"] + modifiers["dexterity"] + race.get("sizeModifiers", {}).get("attack", 0)
-            powers.append(selected)
-        for feature in features:
-            if feature["featureId"] == bloodline["id"]:
-                feature.update(choice=choice, name=option["name"], energyType=option["energyType"], arcana=copy.deepcopy(option["arcana"]), powers=powers)
-        return features, _dedupe_refs(refs, _refs(bloodline)), []
+        if class_record["id"] == "npc-class.druid":
+            nature_bond = self._record("classFeature", "npc-class-feature.druid-nature-bond")
+            fire_domain = self._record("classFeature", "npc-class-feature.fire-domain")
+            feature_refs = _dedupe_refs(refs, _refs(nature_bond), _refs(fire_domain))
+            choice = choices.get("natureBond")
+            if choice != "fire-domain" or set(choices) != {"natureBond"}:
+                return features, feature_refs, [self._issue(
+                    "npc.choice-invalid", "the source-gated Druid slice requires Nature Bond with the Fire domain",
+                    path="/selections/classFeatureChoices/natureBond", source_refs=_dedupe_refs(_refs(nature_bond), _refs(fire_domain)),
+                )]
+            option = nature_bond.get("options", {}).get(choice, {})
+            if option.get("featureId") not in {None, fire_domain["id"]}:
+                return features, feature_refs, [self._issue(
+                    "npc.choice-invalid", "the selected Nature Bond does not grant the Fire domain",
+                    path="/selections/classFeatureChoices/natureBond", source_refs=_refs(nature_bond),
+                )]
+            for feature in features:
+                if feature["featureId"] == nature_bond["id"]:
+                    feature.update(choice=choice, name="Nature Bond (Fire domain)")
+                elif feature["featureId"] in {"npc-class-feature.druid-proficiencies", "npc-class-feature.druid-orisons"}:
+                    feature["effects"] = copy.deepcopy(self._record("classFeature", feature["featureId"]).get("effects", {}))
+                elif feature["featureId"] == "npc-class-feature.druid-nature-sense":
+                    feature["skillBonuses"] = copy.deepcopy(
+                        self._record("classFeature", feature["featureId"])["effects"]["skillBonuses"]
+                    )
+                elif feature["featureId"] == "npc-class-feature.druid-wild-empathy":
+                    feature["checkBonus"] = level + modifiers["charisma"]
+            powers = []
+            for power in fire_domain.get("powers", []):
+                if power.get("level", 1) > level:
+                    continue
+                selected = copy.deepcopy(power)
+                if selected.get("name") == "Fire Bolt":
+                    damage_bonus = (level // 2) * selected["damageBonusPerTwoLevels"]
+                    selected["damageExpression"] = selected["damageDie"] + (_bonus(damage_bonus) if damage_bonus else "")
+                    selected["usesPerDay"] = selected["usesBase"] + modifiers[selected["usesAbility"]]
+                    selected["attackBonus"] = class_record["levels"][str(level)]["bab"] + modifiers["dexterity"] + race.get("sizeModifiers", {}).get("attack", 0)
+                powers.append(selected)
+            features.append({
+                "featureId": fire_domain["id"], "name": fire_domain["name"], "powers": powers,
+                "sourceRefs": _refs(fire_domain),
+            })
+            return features, feature_refs, []
+
+        issues = [self._issue(
+            "npc.slice-unsupported", "class feature choices are not part of this production slice",
+            path="/selections/classFeatureChoices",
+        )] if choices else []
+        return features, refs, issues
 
     def _spells(
         self, selections: dict[str, Any], class_record: dict[str, Any], row: dict[str, Any], level: int,
-        modifiers: dict[str, int],
+        scores: dict[str, int], modifiers: dict[str, int],
     ) -> tuple[Any, list[dict[str, Any]], list[dict[str, Any]]]:
         loadout = selections.get("spellLoadout", {})
+        if class_record["id"] == "npc-class.druid":
+            return self._druid_spells(loadout, class_record, row, level, scores, modifiers)
         if class_record["id"] != "npc-class.sorcerer":
             issues = [self._issue("npc.slice-unsupported", "spells are not part of this production slice", path="/selections/spellLoadout")] if loadout else []
             return [], _refs(class_record), issues
@@ -694,7 +834,7 @@ class NpcCreation(CreationSystem):
         per_day: dict[str, Any] = {"0": "at-will"}
         for spell_level, base in row["spellsPerDay"].items():
             numeric_level = int(spell_level)
-            bonus_spells = 1 + (charisma - numeric_level) // 4 if charisma >= numeric_level else 0
+            bonus_spells = _bonus_spell_count(charisma, numeric_level)
             per_day[spell_level] = base + bonus_spells
         bonus_ref = self._source_ref("source.aon-getting-started", "Table: Ability Modifiers and Bonus Spells", [89, 101])
         refs = _dedupe_refs(refs, [bonus_ref])
@@ -703,6 +843,165 @@ class NpcCreation(CreationSystem):
             "castingAbility": "charisma", "castingAbilityModifier": charisma,
             "perDay": per_day, "saveDcByLevel": {spell_level: 10 + int(spell_level) + charisma for spell_level in expected},
             "known": resolved, "bloodlineSpells": bloodline_spells,
+        }
+        return result, refs, issues
+
+    def _druid_spells(
+        self, loadout: Any, class_record: dict[str, Any], row: dict[str, Any], level: int,
+        scores: dict[str, int], modifiers: dict[str, int],
+    ) -> tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]:
+        prepared = loadout.get("prepared", {}) if isinstance(loadout, dict) else {}
+        domain_prepared = loadout.get("domainPrepared", {}) if isinstance(loadout, dict) else {}
+        base_slots = row["spellsPerDay"]
+        spellcasting = self._record("classFeature", "npc-class-feature.druid-spellcasting")
+        casting_effects = spellcasting.get("effects", {})
+        fire_domain = self._record("classFeature", "npc-class-feature.fire-domain")
+        casting_mode = casting_effects.get("castingMode")
+        casting_ability = casting_effects.get("castingAbility")
+        conversion_catalog = casting_effects.get("spontaneousConversion")
+        slots_per_spell_level = fire_domain.get("slotsPerSpellLevel")
+        domain_spells = fire_domain.get("domainSpells")
+        druid_ref = self._source_ref("source.aon-druid", "Spells; Spontaneous Casting; Nature Bond", [37, 49])
+        repeat_ref = self._source_ref("source.aon-creating-npcs", "Step 5: Class Features", [70, 70])
+        cleric_ref = self._source_ref("source.aon-cleric", "Domains", [45, 45])
+        caster_level_ref = self._source_ref("source.aon-caster-level", "Caster Level", [4, 6])
+        bonus_ref = self._source_ref("source.aon-getting-started", "Table: Ability Modifiers and Bonus Spells", [89, 101])
+        refs = _dedupe_refs(
+            _refs(class_record), _refs(row), _refs(spellcasting), _refs(fire_domain),
+            [druid_ref, repeat_ref, cleric_ref, caster_level_ref, bonus_ref],
+        )
+        issues: list[dict[str, Any]] = []
+        missing_rules = [
+            ("npc-class-feature.druid-spellcasting.effects.castingMode", casting_mode),
+            ("npc-class-feature.druid-spellcasting.effects.castingAbility", casting_ability),
+            ("npc-class-feature.druid-spellcasting.effects.spontaneousConversion", conversion_catalog),
+            ("npc-class-feature.fire-domain.slotsPerSpellLevel", slots_per_spell_level),
+            ("npc-class-feature.fire-domain.domainSpells", domain_spells),
+        ]
+        for rule_id, value in missing_rules:
+            if value is None:
+                issues.append(self._gap({"id": rule_id}, "/selections/spellLoadout"))
+        if isinstance(conversion_catalog, dict):
+            for field in ("name", "from", "excludesDomainSlots", "spellIdsBySlotLevel"):
+                if conversion_catalog.get(field) is None:
+                    issues.append(self._gap({"id": f"npc-class-feature.druid-spellcasting.effects.spontaneousConversion.{field}"}, "/selections/spellLoadout"))
+        if any(issue["code"] == "npc.catalog-gap" for issue in issues):
+            return {}, refs, issues
+        available_domain_spells = {
+            spell_level: spell_id for spell_level, spell_id in domain_spells.items()
+            if spell_level in base_slots and int(spell_level) > 0
+        }
+
+        unexpected_fields = set(loadout) - {"prepared", "domainPrepared"} if isinstance(loadout, dict) else set()
+        if unexpected_fields:
+            issues.append(self._issue(
+                "npc.spell-loadout-invalid", "the Druid spell loadout accepts only prepared and domainPrepared spells",
+                path="/selections/spellLoadout", details={"unexpectedFields": sorted(unexpected_fields)}, source_refs=[druid_ref],
+            ))
+        expected_levels = set(base_slots)
+        if set(prepared) != expected_levels:
+            issues.append(self._issue(
+                "npc.spell-levels-invalid", "prepared spells must include exactly the available Druid spell levels",
+                path="/selections/spellLoadout/prepared", details={"expectedLevels": sorted(expected_levels, key=int)}, source_refs=_refs(row),
+            ))
+        expected_domain_levels = set(available_domain_spells)
+        if set(domain_prepared) != expected_domain_levels:
+            issues.append(self._issue(
+                "npc.spell-levels-invalid", "domain preparations must include exactly the available Fire-domain spell levels",
+                path="/selections/spellLoadout/domainPrepared", details={"expectedLevels": sorted(expected_domain_levels, key=int)},
+                source_refs=_dedupe_refs(_refs(fire_domain), [cleric_ref]),
+            ))
+
+        wisdom = modifiers["wisdom"]
+        highest_level = max(map(int, base_slots))
+        wisdom_score = scores["wisdom"]
+        required_wisdom = 10 + highest_level
+        if wisdom_score < required_wisdom:
+            issues.append(self._issue(
+                "npc.casting-ability-insufficient", "Wisdom is too low to prepare the highest available Druid spell level",
+                path="/selections/abilityGeneration", details={"actual": wisdom_score, "required": required_wisdom, "spellLevel": highest_level},
+                source_refs=[druid_ref],
+            ))
+
+        slots_by_level: dict[str, dict[str, int]] = {}
+        resolved_prepared: dict[str, list[str]] = {}
+        for spell_level, base in base_slots.items():
+            numeric_level = int(spell_level)
+            wisdom_bonus = _bonus_spell_count(wisdom, numeric_level)
+            domain_count = slots_per_spell_level if spell_level in available_domain_spells else 0
+            slots_by_level[spell_level] = {
+                "base": base, "wisdomBonus": wisdom_bonus, "domain": domain_count,
+                "total": base + wisdom_bonus + domain_count,
+            }
+            selected = prepared.get(spell_level, [])
+            expected_count = base + wisdom_bonus
+            if len(selected) != expected_count:
+                issues.append(self._issue(
+                    "npc.spell-count-invalid", "prepared spells must fill the base and Wisdom-bonus slots exactly",
+                    path=f"/selections/spellLoadout/prepared/{spell_level}",
+                    details={"expected": expected_count, "selected": len(selected), "base": base, "wisdomBonus": wisdom_bonus},
+                    source_refs=_dedupe_refs(_refs(row), [druid_ref, bonus_ref]),
+                ))
+            resolved_prepared[spell_level] = []
+            for index, spell_id in enumerate(selected):
+                spell = self._record("spell", spell_id)
+                refs = _dedupe_refs(refs, _refs(spell))
+                path = f"/selections/spellLoadout/prepared/{spell_level}/{index}"
+                if spell.get("catalogStatus") != "resolved":
+                    issues.append(self._gap(spell, path))
+                elif spell.get("levelsByClass", {}).get("druid") != numeric_level:
+                    issues.append(self._issue(
+                        "npc.spell-level-invalid", "spell is not a Druid spell of the prepared level",
+                        path=path, source_refs=_refs(spell),
+                    ))
+                resolved_prepared[spell_level].append(spell["id"])
+
+        resolved_domain: dict[str, list[str]] = {}
+        for spell_level, expected_spell_id in available_domain_spells.items():
+            selected = domain_prepared.get(spell_level, [])
+            expected_count = slots_per_spell_level
+            if len(selected) != expected_count:
+                issues.append(self._issue(
+                    "npc.spell-count-invalid", "each available Fire-domain slot requires exactly one preparation",
+                    path=f"/selections/spellLoadout/domainPrepared/{spell_level}",
+                    details={"expected": expected_count, "selected": len(selected)}, source_refs=_dedupe_refs(_refs(fire_domain), [cleric_ref]),
+                ))
+            resolved_domain[spell_level] = []
+            for index, spell_id in enumerate(selected):
+                spell = self._record("spell", spell_id)
+                refs = _dedupe_refs(refs, _refs(spell))
+                path = f"/selections/spellLoadout/domainPrepared/{spell_level}/{index}"
+                if spell.get("catalogStatus") != "resolved":
+                    issues.append(self._gap(spell, path))
+                elif spell["id"] != expected_spell_id:
+                    issues.append(self._issue(
+                        "npc.domain-spell-invalid", "spell does not match the Fire-domain spell for this slot level",
+                        path=path, details={"expectedSpellId": expected_spell_id}, source_refs=_refs(fire_domain),
+                    ))
+                resolved_domain[spell_level].append(spell["id"])
+
+        summon_by_level = {
+            1: self._record("spell", "spell.summon-nature-s-ally-i"),
+            2: self._record("spell", "spell.summon-nature-s-ally-ii"),
+        }
+        for spell in summon_by_level.values():
+            refs = _dedupe_refs(refs, _refs(spell))
+            if spell.get("catalogStatus") != "resolved":
+                issues.append(self._gap(spell, "/selections/spellLoadout"))
+        conversion_ids = conversion_catalog.get("spellIdsBySlotLevel") or {}
+        conversion = {
+            "name": conversion_catalog["name"], "from": conversion_catalog["from"],
+            "excludesDomainSlots": conversion_catalog["excludesDomainSlots"],
+            "spellIdsBySlotLevel": copy.deepcopy(conversion_ids),
+        }
+        result = {
+            "className": class_record["name"], "castingMode": casting_effects["castingMode"],
+            "casterLevel": level, "castingAbility": casting_effects["castingAbility"],
+            "castingAbilityModifier": wisdom,
+            "slotsByLevel": slots_by_level, "prepared": resolved_prepared,
+            "domainPrepared": resolved_domain,
+            "saveDcByLevel": {spell_level: 10 + int(spell_level) + wisdom for spell_level in base_slots},
+            "spontaneousConversion": conversion,
         }
         return result, refs, issues
 
@@ -739,7 +1038,9 @@ class NpcCreation(CreationSystem):
             results.append({"slotId": item["slotId"], "featId": record["id"], "name": record["name"], "sourceRefs": _refs(record)})
         return results, effects, refs, issues
 
-    def _gear(self, selections: dict[str, Any], level: int) -> tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    def _gear(
+        self, selections: dict[str, Any], level: int, size_id: str | None,
+    ) -> tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
         budget = self._gear_budget(selections, level)
         issues: list[dict[str, Any]] = []
         warnings: list[dict[str, Any]] = []
@@ -761,11 +1062,18 @@ class NpcCreation(CreationSystem):
             quantity = selected.get("quantity", 1)
             cost = record["priceCp"] * quantity
             spent += cost
+            effects = copy.deepcopy(record.get("effects", {}))
+            size_key = size_id.removeprefix("size.") if size_id else None
+            damage_by_size = effects.get("damageDieBySize", {})
+            if size_key in damage_by_size:
+                effects["damageDie"] = damage_by_size[size_key]
+            weight_by_size = record.get("weightLbBySize", {})
+            weight = weight_by_size.get(size_key, record.get("weightLb", 0))
             items.append({
                 "itemId": record["id"], "name": record["name"], "category": record["category"],
                 "npcGearCategory": record.get("npcGearCategory"),
                 "quantity": quantity, "equipped": selected.get("equipped", True), "priceCp": cost,
-                "weightLb": record.get("weightLb", 0) * quantity, "effects": copy.deepcopy(record.get("effects", {})),
+                "weightLb": weight * quantity, "effects": effects,
                 "sourceRefs": _refs(record),
             })
         if spent != budget["budgetCp"]:
@@ -781,18 +1089,27 @@ class NpcCreation(CreationSystem):
         return {"budget": result_budget, "items": items}, refs, issues, warnings
 
     @staticmethod
-    def _attacks(items: list[dict[str, Any]], bab: int, modifiers: dict[str, int], size_modifiers: dict[str, int]) -> list[dict[str, Any]]:
+    def _attacks(
+        items: list[dict[str, Any]], bab: int, modifiers: dict[str, int], size_modifiers: dict[str, int],
+        size_id: str | None,
+    ) -> list[dict[str, Any]]:
         attacks = []
         for item in items:
-            if item["category"] != "weapon" or "damageDie" not in item["effects"]:
+            if item["category"] != "weapon":
+                continue
+            effects = item["effects"]
+            damage_die = effects.get("damageDie")
+            if damage_die is None and size_id:
+                damage_die = effects.get("damageDieBySize", {}).get(size_id.removeprefix("size."))
+            if damage_die is None:
                 continue
             attack_bonus = bab + modifiers["strength"] + size_modifiers.get("attack", 0)
             damage_bonus = modifiers["strength"]
             attacks.append({
                 "name": item["name"], "itemId": item["itemId"], "attackBonuses": [attack_bonus],
                 "attackBonusExpression": _bonus(attack_bonus),
-                "damageExpression": f"{item['effects']['damageDie']}{_bonus(damage_bonus) if damage_bonus else ''}",
-                "damageType": item["effects"].get("damageType"),
+                "damageExpression": f"{damage_die}{_bonus(damage_bonus) if damage_bonus else ''}",
+                "damageType": effects.get("damageType"),
             })
         return attacks
 
@@ -869,7 +1186,10 @@ class NpcCreation(CreationSystem):
                 return {"gearBudgetId": record["id"], **copy.deepcopy(row)}
         return record
 
-    def _preview_intelligence(self, selections: dict[str, Any], race: dict[str, Any] | None) -> int | None:
+    def _preview_ability(
+        self, selections: dict[str, Any], race: dict[str, Any] | None, ability_name: str,
+        *, divine_allowed: bool = False,
+    ) -> int | None:
         generation = selections.get("abilityGeneration", {})
         if not isinstance(generation, dict):
             return None
@@ -877,14 +1197,16 @@ class NpcCreation(CreationSystem):
         if not array or array.get("catalogStatus") != "resolved":
             return None
         method = generation.get("method")
-        if method in {"melee-preset", "arcane-preset"}:
-            score = array.get("presets", {}).get(method.removesuffix("-preset"), {}).get("intelligence")
+        if method in {"melee-preset", "divine-preset", "arcane-preset"}:
+            if method == "divine-preset" and not divine_allowed:
+                return None
+            score = array.get("presets", {}).get(method.removesuffix("-preset"), {}).get(ability_name)
         else:
-            score = generation.get("assignments", generation.get("scores", {})).get("intelligence")
+            score = generation.get("assignments", generation.get("scores", {})).get(ability_name)
         if not _is_int(score):
             return None
-        score += (race or {}).get("abilityAdjustments", {}).get("intelligence", 0)
-        if selections.get("racialChoices", {}).get("ability-bonus") == "intelligence":
+        score += (race or {}).get("abilityAdjustments", {}).get(ability_name, 0)
+        if selections.get("racialChoices", {}).get("ability-bonus") == ability_name:
             score += 2
         return score
 

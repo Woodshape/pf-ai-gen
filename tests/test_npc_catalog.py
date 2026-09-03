@@ -95,6 +95,83 @@ class NpcCatalogTests(unittest.TestCase):
         self.assertEqual(heroic_five["budgetCp"], 345000)
         self.assertEqual(catalog["derivedRules"]["npc-rule.classed-npc-cr"]["pcClassAdjustment"], -1)
 
+    def test_goblin_druid_level_three_fire_catalog_slice_is_resolved(self):
+        catalog = NpcCatalog.load().data
+        heroic = catalog["abilityArrays"]["npc-ability-array.heroic"]
+        self.assertEqual(heroic["presets"]["divine"], {
+            "strength": 12, "dexterity": 8, "constitution": 14,
+            "intelligence": 10, "wisdom": 15, "charisma": 13,
+        })
+
+        druid = catalog["classes"]["npc-class.druid"]
+        self.assertEqual(druid["catalogStatus"], "resolved")
+        self.assertEqual(druid["hitDie"], "d8")
+        self.assertEqual(druid["skillSelections"], 4)
+        self.assertEqual(druid["castingAbility"], "wisdom")
+        self.assertEqual(druid["castingMode"], "prepared")
+        self.assertEqual(druid["supportedLevels"], [3])
+        self.assertEqual(druid["levels"]["3"]["catalogStatus"], "resolved")
+        self.assertEqual(druid["levels"]["3"]["bab"], 2)
+        self.assertEqual(druid["levels"]["3"]["spellsPerDay"], {"0": 4, "1": 2, "2": 1})
+        self.assertTrue(all(druid["levels"][str(level)]["catalogStatus"] == "gap" for level in range(1, 21) if level != 3))
+        self.assertIn("npc-class-feature.druidic", druid["levels"]["3"]["featureGrants"])
+
+        nature_bond = catalog["classFeatures"]["npc-class-feature.druid-nature-bond"]
+        self.assertEqual(nature_bond["allowedValues"], ["fire-domain"])
+        self.assertEqual(nature_bond["options"]["fire-domain"]["featureId"], "npc-class-feature.fire-domain")
+        fire = catalog["classFeatures"]["npc-class-feature.fire-domain"]
+        self.assertEqual(fire["slotsPerSpellLevel"], 1)
+        self.assertEqual(fire["domainSpells"], {"1": "spell.burning-hands", "2": "spell.produce-flame"})
+        self.assertEqual(fire["powers"][0]["damageDie"], "1d6")
+        self.assertEqual(fire["powers"][0]["damageBonusPerTwoLevels"], 1)
+        self.assertEqual(fire["powers"][0]["usesBase"], 3)
+        self.assertEqual(fire["powers"][0]["usesAbility"], "wisdom")
+        self.assertEqual(catalog["classFeatures"]["npc-class-feature.druid-spellcasting"]["effects"]["castingMode"], "prepared")
+        self.assertEqual(
+            catalog["classFeatures"]["npc-class-feature.druid-spellcasting"]["effects"]["spontaneousConversion"]["spellIdsBySlotLevel"],
+            {"1": ["spell.summon-nature-s-ally-i"], "2": ["spell.summon-nature-s-ally-i", "spell.summon-nature-s-ally-ii"]},
+        )
+        proficiencies = catalog["classFeatures"]["npc-class-feature.druid-proficiencies"]
+        self.assertEqual(proficiencies["catalogStatus"], "resolved")
+        self.assertIn("sickle", proficiencies["effects"]["weaponProficiencies"])
+        self.assertEqual(proficiencies["effects"]["armorProficiencies"], ["light", "medium"])
+        self.assertIn(
+            "npc-class-feature.druid-proficiencies",
+            catalog["classes"]["npc-class.druid"]["levels"]["3"]["featureGrants"],
+        )
+        orisons = catalog["classFeatures"]["npc-class-feature.druid-orisons"]
+        self.assertEqual(orisons["catalogStatus"], "resolved")
+        self.assertEqual(orisons["effects"], {"notExpendedWhenCast": True, "mayBePreparedMultipleTimes": True})
+        self.assertEqual(catalog["skills"]["skill.perception"]["catalogStatus"], "resolved")
+        self.assertEqual(catalog["skills"]["skill.perception"]["keyAbility"], "wisdom")
+        self.assertEqual(catalog["items"]["item.sickle"]["weightLbBySize"], {"small": 1, "medium": 2})
+        self.assertEqual(catalog["items"]["item.leather-armor"]["weightLbBySize"], {"small": 7.5, "medium": 15})
+        self.assertEqual(catalog["items"]["item.heavy-wooden-shield"]["weightLbBySize"], {"small": 5, "medium": 10})
+
+        for spell_id in (
+            "barkskin", "cure-light-wounds", "entangle", "produce-flame",
+            "summon-nature-s-ally-i", "summon-nature-s-ally-ii",
+        ):
+            self.assertEqual(catalog["spells"][f"spell.{spell_id}"]["catalogStatus"], "resolved")
+        self.assertEqual(catalog["spells"]["spell.barkskin"]["levelsByClass"]["druid"], 2)
+        self.assertEqual(catalog["spells"]["spell.summon-nature-s-ally-ii"]["levelsByClass"]["druid"], 2)
+
+        self.assertEqual(catalog["skills"]["skill.heal"]["catalogStatus"], "resolved")
+        self.assertEqual(catalog["skills"]["skill.knowledge-nature"]["catalogStatus"], "resolved")
+        self.assertEqual(catalog["skills"]["skill.survival"]["catalogStatus"], "resolved")
+        self.assertEqual(catalog["items"]["item.sickle"]["priceCp"], 600)
+        self.assertEqual(catalog["items"]["item.leather-armor"]["effects"]["armorBonus"], 2)
+        self.assertEqual(catalog["items"]["item.heavy-wooden-shield"]["effects"]["shieldBonus"], 2)
+        heroic_three = next(
+            row for row in catalog["gearBudgets"]["npc-gear.medium.normal"]["rows"]
+            if row["npcCategory"] == "heroic" and row["level"] == 3
+        )
+        self.assertEqual(heroic_three["budgetCp"], 165000)
+        self.assertEqual(heroic_three["categories"], {
+            "weapons": 65000, "protection": 80000, "magic": 0,
+            "limitedUse": 10000, "gear": 20000,
+        })
+
     def test_money_is_integer_copper_and_prerequisite_examples_are_typed(self):
         catalog = NpcCatalog.load().data
 

@@ -96,6 +96,7 @@ function NpcClassStep({ draft, catalog, step, choiceRequirements, onPreview, onS
 function NpcAbilityStep({ draft, catalog, step, onSave, onBack }: Props) {
   const current = objectValue(draft.selections.abilityGeneration);
   const [method, setMethod] = useState(String(current.method || "assigned"));
+  const primaryClass = Array.isArray(draft.selections.classProgression) && draft.selections.classProgression.length > 0 && typeof (draft.selections.classProgression as JsonObject[])[0]?.classId === "string" ? String((draft.selections.classProgression as JsonObject[])[0].classId) : "";
   const [arrayId, setArrayId] = useState(String(current.arrayId || ""));
   const [preset, setPreset] = useState(String(current.preset || current.role || ""));
   const [scores, setScores] = useState(formatJson(current.scores || current.assignments || {}));
@@ -111,7 +112,7 @@ function NpcAbilityStep({ draft, catalog, step, onSave, onBack }: Props) {
     } catch (caught) { setError(String(caught)); }
   };
   return <StepFrame step={step} onBack={onBack} onApply={submit}><div class="grid">
-    <Select label="Ability generation" value={method} onChange={setMethod}><option value="assigned">Assigned array</option><option value="preset">Source preset</option><option value="melee-preset">Melee preset</option><option value="ranged-preset">Ranged preset</option><option value="skill-preset">Skill preset</option><option value="arcane-preset">Arcane preset</option><option value="custom">Custom scores</option></Select>
+    <Select label="Ability generation" value={method} onChange={setMethod}><option value="assigned">Assigned array</option><option value="preset">Source preset</option><option value="melee-preset">Melee preset</option>{primaryClass === "npc-class.druid" ? <option value="divine-preset">Divine preset</option> : null}<option value="ranged-preset">Ranged preset</option><option value="skill-preset">Skill preset</option><option value="arcane-preset">Arcane preset</option><option value="custom">Custom scores</option></Select>
     <CatalogSelect label="NPC ability array" records={catalog.abilityArrays} value={arrayId} onChange={setArrayId} blank="Choose source array…" />
     <Field label="Preset name (when applicable)" value={preset} onInput={setPreset} />
     <Field label="Custom rationale (required for custom)" value={rationale} onInput={setRationale} full />

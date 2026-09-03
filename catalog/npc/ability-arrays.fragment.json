@@ -51,6 +51,14 @@
           "intelligence": 13,
           "wisdom": 10,
           "charisma": 15
+        },
+        "divine": {
+          "strength": 12,
+          "dexterity": 8,
+          "constitution": 14,
+          "intelligence": 10,
+          "wisdom": 15,
+          "charisma": 13
         }
       }
     }

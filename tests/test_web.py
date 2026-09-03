@@ -118,6 +118,8 @@ class WebTransportTests(unittest.TestCase):
         self.assertIn("NpcWorkflow", npc_steps)
         self.assertIn("classProgression", npc_steps)
         self.assertIn("Canonical NPC preview", npc_steps)
+        self.assertIn('value="divine-preset"', npc_steps)
+        self.assertIn('primaryClass === "npc-class.druid"', npc_steps)
         self.assertIn("loadNpcCatalog", app)
         self.assertIn('creationSystem: "npc"', app)
         self.assertNotIn('<JsonField label="Explicit spell selections"', grafts)
@@ -145,6 +147,43 @@ class WebTransportTests(unittest.TestCase):
         self.assertNotIn("window.prompt", app)
         self.assertIn('/assets/', built)
         self.assertNotIn('<script>', built)
+
+    def test_druid_npc_projection_is_served_and_executable_through_the_browser_transport(self):
+        fixture = json.loads((Path(__file__).parents[1] / "tests" / "fixtures" / "goblin-druid-3-fire.json").read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as root:
+            server = self.start_server(root)
+            status, content_type, body = self.request(server, "GET", "/npc.json")
+            self.assertEqual(status, 200)
+            self.assertTrue(content_type.startswith("application/json"))
+            npc_catalog = json.loads(body)
+            self.assertEqual(npc_catalog["classes"]["npc-class.druid"]["catalogStatus"], "resolved")
+            self.assertEqual(npc_catalog["classes"]["npc-class.druid"]["levels"]["3"]["catalogStatus"], "resolved")
+            self.assertEqual(npc_catalog["classFeatures"]["npc-class-feature.fire-domain"]["catalogStatus"], "resolved")
+            self.assertEqual(npc_catalog["items"]["item.sickle"]["catalogStatus"], "resolved")
+
+            def http_execute(request_id, operation, payload):
+                request = {"protocolVersion": "1", "requestId": request_id, "operation": operation, "payload": payload}
+                status, _, body = self.request(server, "POST", "/api/execute", json.dumps(request).encode("utf-8"))
+                self.assertEqual(status, 200)
+                response = json.loads(body)
+                self.assertTrue(response["ok"], response)
+                return response
+
+            created = http_execute("druid-web-create", "draft.create", {"draft": fixture})
+            self.assertEqual(created["result"]["evaluation"]["status"], "valid")
+            draft = created["result"]["draft"]
+            finalized = http_execute("druid-web-finalize", "monster.finalize", {
+                "draftId": draft["draftId"], "baseRevision": draft["revision"], "baseFingerprint": draft["fingerprint"],
+            })
+            monster_id = finalized["result"]["monster"]["monsterId"]
+            exported = http_execute("druid-web-export", "monster.export", {"monsterId": monster_id, "format": "markdown"})
+            markdown = exported["result"]["content"]
+            for expected in (
+                "Druid Spells (CL 3rd; Wis-based)",
+                "1st (4 slots: 2 base, 1 Wis, 1 domain, DC 13)—Produce Flame, Entangle, Cure Light Wounds, Burning Handsᴰ",
+                "Spontaneous conversion: prepared spells may become Summon Nature’s Ally I–II (domain slots excluded)",
+            ):
+                self.assertIn(expected, markdown)
 
     def test_post_forwards_engine_response_and_reuses_workspace(self):
         with tempfile.TemporaryDirectory() as root:

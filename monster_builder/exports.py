@@ -414,9 +414,14 @@ def _speed(value: Any) -> str:
     return "Speed " + ", ".join((f"{_human(key)} " if len(value) > 1 or key != "land" else "") + f"{value[key]} ft." for key in keys)
 
 
+_SPELL_LEVEL_NUMERALS = {1: "I", 2: "II", 3: "III", 4: "IV", 5: "V", 6: "VI", 7: "VII", 8: "VIII", 9: "IX"}
+
+
 def _spell_lines(statistics: Mapping[str, Any]) -> list[str]:
     spells = statistics["spells"]
     if isinstance(spells, Mapping):
+        if spells.get("castingMode") == "prepared" and isinstance(spells.get("prepared"), Mapping):
+            return _prepared_spell_lines(spells)
         known = spells.get("known", {})
         if not isinstance(known, Mapping):
             return []
@@ -463,6 +468,38 @@ def _spell_lines(statistics: Mapping[str, Any]) -> list[str]:
             lines.append((f"{spell['frequency']}—" if spell.get("frequency") else "") + name + (" (" + ", ".join(details) + ")" if details else ""))
     if metadata.get("spellListBenefit") not in (None, {}, [], ""):
         lines.append("Spell List Benefit: " + _value_text(metadata["spellListBenefit"]))
+    return lines
+
+
+def _prepared_spell_lines(spells: Mapping[str, Any]) -> list[str]:
+    class_name = str(spells.get("className", "Prepared Caster"))
+    ability = {"charisma": "Cha-based", "intelligence": "Int-based", "wisdom": "Wis-based"}.get(spells.get("castingAbility"), _human(spells.get("castingAbility", "")))
+    caster_level = int(spells.get("casterLevel", 0))
+    lines = [f"{class_name} Spells (CL {caster_level}{_ordinal_suffix(caster_level)}; {ability})"]
+    prepared = spells["prepared"]
+    domain_prepared = spells.get("domainPrepared", {})
+    has_domain = any(isinstance(level_spells, list) and level_spells for level_spells in domain_prepared.values()) if isinstance(domain_prepared, Mapping) else False
+    slots_by_level = spells.get("slotsByLevel", {})
+    dcs = spells.get("saveDcByLevel", {})
+    for level in sorted(prepared, key=int, reverse=True):
+        slots = slots_by_level.get(level, {}) if isinstance(slots_by_level, Mapping) else {}
+        parts = [f"{slots[key]} {label}" for key, label in (("base", "base"), ("wisdomBonus", "Wis"), ("domain", "domain")) if slots.get(key)]
+        total = slots.get("total", len(prepared[level]))
+        names = ", ".join(_human(spell_id) for spell_id in prepared[level])
+        if isinstance(domain_prepared, Mapping) and domain_prepared.get(level):
+            names = (names + ", " if names else "") + ", ".join(_human(spell_id) + "ᴰ" for spell_id in domain_prepared[level])
+        label = "0" if level == "0" else f"{level}{_ordinal_suffix(int(level))}"
+        lines.append(f"{label} ({total} slots: {', '.join(parts)}, DC {dcs.get(level)})—{names}")
+    if has_domain:
+        lines.append("ᴰ Fire-domain spell")
+    conversion = spells.get("spontaneousConversion")
+    if isinstance(conversion, Mapping) and conversion.get("name"):
+        levels = sorted(int(value) for value in (conversion.get("spellIdsBySlotLevel") or {}))
+        span = "–".join(_SPELL_LEVEL_NUMERALS[value] for value in dict.fromkeys((levels[:1] + levels[-1:]) if levels else []))
+        lines.append(
+            f"Spontaneous conversion: prepared spells may become {conversion['name']} {span}"
+            + (" (domain slots excluded)" if conversion.get("excludesDomainSlots") else "")
+        )
     return lines
 
 

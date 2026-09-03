@@ -109,19 +109,34 @@
     {
       "id": "item.leather-armor",
       "name": "Leather Armor",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-equipment",
+      "catalogStatus": "resolved",
       "category": "armor",
-      "priceCp": null,
-      "weightLb": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [26, 26],
-        "entry": "Mundane armor",
-        "provenanceStatus": "catalog-gap"
-      }
+      "priceCp": 1000,
+      "weightLb": 15,
+      "weightLbBySize": {"small": 7.5, "medium": 15},
+      "effects": {
+        "armorBonus": 2,
+        "maxDex": 6,
+        "armorCheckPenalty": 0
+      },
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-equipment",
+          "section": "Table: Armor and Shields",
+          "txtLines": [324, 324],
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+          "entry": "Leather armor",
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-equipment",
+          "section": "Armor Weight column",
+          "txtLines": [317, 317],
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+          "entry": "Armor fitted for Small characters weighs half as much",
+          "provenanceStatus": "resolved"
+        }
+      ]
     },
     {
       "id": "item.chain-shirt",
@@ -745,19 +760,33 @@
     {
       "id": "item.heavy-wooden-shield",
       "name": "Heavy Wooden Shield",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-equipment",
+      "catalogStatus": "resolved",
       "category": "shield",
-      "priceCp": null,
-      "weightLb": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [26, 26],
-        "entry": "Core weapons, armor, goods, and required magic items",
-        "provenanceStatus": "catalog-gap"
-      }
+      "priceCp": 700,
+      "weightLb": 10,
+      "weightLbBySize": {"small": 5, "medium": 10},
+      "effects": {
+        "shieldBonus": 2,
+        "armorCheckPenalty": -2
+      },
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-equipment",
+          "section": "Table: Armor and Shields",
+          "txtLines": [341, 341],
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+          "entry": "Shield, heavy wooden",
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-equipment",
+          "section": "Armor Weight column",
+          "txtLines": [317, 317],
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+          "entry": "Armor fitted for Small characters weighs half as much (shields share Table: Armor and Shields)",
+          "provenanceStatus": "resolved"
+        }
+      ]
     },
     {
       "id": "item.tower-shield",
@@ -1128,6 +1157,41 @@
         }
       ],
       "npcGearCategory": "protection"
+    },
+    {
+      "id": "item.sickle",
+      "name": "Sickle",
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "priceCp": 600,
+      "weightLb": 2,
+      "weightLbBySize": {"small": 1, "medium": 2},
+      "effects": {
+        "damageDie": "1d6",
+        "damageDieBySize": {
+          "small": "1d4",
+          "medium": "1d6"
+        },
+        "damageType": "S"
+      },
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-equipment",
+          "section": "Table: Weapons",
+          "txtLines": [118, 118],
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+          "entry": "Sickle",
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-equipment",
+          "section": "Table: Weapons — Weight column",
+          "txtLines": [95, 95],
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+          "entry": "Small weapons weigh half the listed Medium weight",
+          "provenanceStatus": "resolved"
+        }
+      ]
     }
   ]
 }

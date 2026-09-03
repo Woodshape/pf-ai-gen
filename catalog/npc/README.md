@@ -12,7 +12,8 @@ of Nethys pages for the Phase 2 rules are now archived and hash-anchored under
 Source acquisition does not silently resolve the scaffold: records keep
 `catalogStatus: "gap"` until a parser or curated fragment supplies exact values
 and line-level `sourceRef` provenance. The current resolved slices are human
-warrior levels 1–5 and an elemental-fire goblin Sorcerer at levels 5–6. Everything
+warrior levels 1–5, an elemental-fire goblin Sorcerer at levels 5–6, and a
+Fire-domain goblin Druid at level 3 (prepared divine casting). Everything
 outside those bounded slices remains a gap.
 
 The complete class spell lists in the PDF excerpt remain independently
@@ -20,9 +21,10 @@ anchored. `spells.fragment.json` is **generated** by
 `tools/parse_npc_sources.py` from `sources/npc/core-rulebook-extract.spell-lists.txt`
 (hash in `sources/npc/MANIFEST.json`). Every spell record carries
 `levelsByClass` plus per-row `listMembership` line provenance with
-`catalogStatus: "partial"` — list membership is resolved. Sixteen spells used
-by the goblin Sorcerer slice are curated from current AoN pages and resolved;
-other spell rules remain gaps. The excerpt's two-column extraction lost
+`catalogStatus: "partial"` — list membership is resolved. Twenty-two spells
+used by the goblin Sorcerer and Druid slices are curated from current AoN
+pages and resolved; other spell rules remain gaps. The excerpt's two-column
+extraction lost
 the cleric 7th-level and druid 3rd-level lists at page boundaries; the parser
 records these as `emptySections` instead of guessing.
 
@@ -32,11 +34,11 @@ records these as `emptySections` instead of guessing.
 |----------|---------|--------|
 | `ability-arrays.fragment.json` | 2 (basic, heroic) | resolved |
 | `races.fragment.json` | 8 races | human and goblin resolved |
-| `classes.fragment.json` | 16 classes (5 NPC + 11 PC) × levels 1–20 | warrior levels 1–5 and Sorcerer levels 1–6 resolved |
-| `class-features.fragment.json` | 19 feat-slot and choice-slot kinds | bounded warrior/Sorcerer features resolved |
+| `classes.fragment.json` | 16 classes (5 NPC + 11 PC) × levels 1–20 | warrior levels 1–5, Sorcerer levels 1–6, and Druid level 3 resolved |
+| `class-features.fragment.json` | 21 feat-slot, choice-slot, and automatic kinds | bounded warrior, Sorcerer, and Druid features resolved |
 | `skills.fragment.json` | 35 Core skills | slice selections resolved |
 | `feats.fragment.json` | 142 Core feats | slice selections resolved |
-| `items.fragment.json` | 64 items | slice selections resolved |
+| `items.fragment.json` | 65 items | slice selections resolved |
 | `gear-budgets.fragment.json` | 9 profiles (slow/medium/fast × low/normal/high) | medium/normal rows for production slices resolved |
 | `spells.fragment.json` | 616 spells, 1431 membership rows | selected loadout resolved; remainder partial |
 

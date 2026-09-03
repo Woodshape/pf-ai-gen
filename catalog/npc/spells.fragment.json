@@ -1378,8 +1378,7 @@
     {
       "id": "spell.barkskin",
       "name": "Barkskin",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -1405,14 +1404,18 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
-        "txtLines": [
-          637,
-          637
-        ],
-        "entry": "Barkskin",
-        "provenanceStatus": "list-membership-resolved"
+        "sourceId": "source.aon-spell-barkskin",
+        "section": "Barkskin",
+        "txtLines": [1, 14],
+        "entry": "Barkskin spell description",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Barkskin"
+      },
+      "effects": {
+        "naturalArmorBonus": 2,
+        "maximumNaturalArmorBonus": 5,
+        "scalingIntervalCasterLevels": 3,
+        "scalingStartsAboveCasterLevel": 3
       }
     },
     {
@@ -4706,8 +4709,7 @@
     {
       "id": "spell.cure-light-wounds",
       "name": "Cure Light Wounds",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -4760,14 +4762,16 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
-        "txtLines": [
-          60,
-          60
-        ],
-        "entry": "Cure Light Wounds",
-        "provenanceStatus": "list-membership-resolved"
+        "sourceId": "source.aon-spell-cure-light-wounds",
+        "section": "Cure Light Wounds",
+        "txtLines": [1, 13],
+        "entry": "Cure Light Wounds spell description",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Cure%20Light%20Wounds"
+      },
+      "effects": {
+        "healing": "1d8 + 1 per caster level (maximum +5)",
+        "target": "living creature touched"
       }
     },
     {
@@ -7969,8 +7973,7 @@
     {
       "id": "spell.entangle",
       "name": "Entangle",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -7996,14 +7999,18 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
-        "txtLines": [
-          615,
-          615
-        ],
-        "entry": "Entangle",
-        "provenanceStatus": "list-membership-resolved"
+        "sourceId": "source.aon-spell-entangle",
+        "section": "Entangle",
+        "txtLines": [1, 14],
+        "entry": "Entangle spell description",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Entangle"
+      },
+      "effects": {
+        "area": "plants in a 40-ft.-radius spread",
+        "duration": "1 min./level (D)",
+        "save": "Reflex partial",
+        "condition": "entangled"
       }
     },
     {
@@ -17496,8 +17503,7 @@
     {
       "id": "spell.produce-flame",
       "name": "Produce Flame",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -17514,14 +17520,17 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
-        "txtLines": [
-          628,
-          628
-        ],
-        "entry": "Produce Flame",
-        "provenanceStatus": "list-membership-resolved"
+        "sourceId": "source.aon-spell-produce-flame",
+        "section": "Produce Flame",
+        "txtLines": [1, 15],
+        "entry": "Produce Flame spell description",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Produce%20Flame"
+      },
+      "effects": {
+        "damage": "1d6 + 1 per caster level (maximum +5)",
+        "attack": "melee or ranged touch",
+        "thrownRange": "120 ft."
       }
     },
     {
@@ -23071,8 +23080,7 @@
     {
       "id": "spell.summon-nature-s-ally-i",
       "name": "Summon Nature’s Ally I",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -23098,21 +23106,24 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
-        "txtLines": [
-          632,
-          632
-        ],
-        "entry": "Summon Nature’s Ally I",
-        "provenanceStatus": "list-membership-resolved"
+        "sourceId": "source.aon-spell-summon-natures-ally-i",
+        "section": "Summon Nature's Ally 1",
+        "txtLines": [1, 16],
+        "entry": "Summon Nature's Ally I spell description",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%201"
+      },
+      "effects": {
+        "summonCount": 1,
+        "choiceTableLevel": 1,
+        "choiceChangesEachCasting": true,
+        "linkedStatblocks": false
       }
     },
     {
       "id": "spell.summon-nature-s-ally-ii",
       "name": "Summon Nature’s Ally II",
-      "catalogStatus": "partial",
-      "gapCode": "core-rulebook-spell-descriptions",
+      "catalogStatus": "resolved",
       "school": null,
       "components": null,
       "levelsByClass": {
@@ -23138,14 +23149,17 @@
         }
       ],
       "sourceRef": {
-        "sourceId": "source.npc-crb-spell-lists",
-        "section": "Core Rulebook class spell lists",
-        "txtLines": [
-          661,
-          661
-        ],
-        "entry": "Summon Nature’s Ally II",
-        "provenanceStatus": "list-membership-resolved"
+        "sourceId": "source.aon-spell-summon-natures-ally-ii",
+        "section": "Summon Nature's Ally 2",
+        "txtLines": [1, 13],
+        "entry": "Summon Nature's Ally II spell description",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%202"
+      },
+      "effects": {
+        "oneHigherLevelCreature": 1,
+        "oneLowerLevelCreatures": "1d3",
+        "linkedStatblocks": false
       }
     },
     {

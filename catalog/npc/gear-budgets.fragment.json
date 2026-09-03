@@ -244,6 +244,28 @@
         },
         {
           "npcCategory": "heroic",
+          "level": 3,
+          "effectiveLevel": 3,
+          "budgetCp": 165000,
+          "categories": {
+            "weapons": 65000,
+            "protection": 80000,
+            "magic": 0,
+            "limitedUse": 10000,
+            "gear": 20000
+          },
+          "catalogStatus": "resolved",
+          "sourceRef": {
+            "sourceId": "source.aon-creating-npcs",
+            "section": "Table 14-9: NPC Gear",
+            "txtLines": [85, 85],
+            "entry": "Heroic level 3",
+            "provenanceStatus": "resolved",
+            "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+          }
+        },
+        {
+          "npcCategory": "heroic",
           "level": 5,
           "effectiveLevel": 5,
           "budgetCp": 345000,

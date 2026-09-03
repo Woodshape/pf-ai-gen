@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import re
 import sys
+from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -15,9 +16,11 @@ RAW = ROOT / "sources" / "reference" / "aonprd"
 OUTPUT = ROOT / "sources" / "npc" / "aonprd"
 SOURCES = {
     "creating-npcs": ("id", "MainContent_DetailedOutput"),
+    "caster-level": ("id", "MainContent_DetailedOutput"),
     "getting-started": ("class", "body"),
     "core-races": ("class", "body"),
     "character-classes": ("class", "body"),
+    "cleric": ("id", "MainContent_DataListTypes_LabelName_0"),
     "npc-classes": ("class", "body"),
     "skills": ("class", "body"),
     "skill-descriptions": ("class", "body"),
@@ -25,7 +28,9 @@ SOURCES = {
     "equipment": ("class", "body"),
     "combat": ("class", "body"),
     "goblin-race": ("id", "MainContent_DataListTypes_LabelName_0"),
+    "druid": ("id", "MainContent_DataListTypes_LabelName_0"),
     "sorcerer": ("id", "MainContent_DataListTypes_LabelName_0"),
+    "fire-domain": ("heading", "Fire"),
     "elemental-bloodline": ("id", "MainContent_DataListTypes_LabelName_0"),
     "wands": ("id", "MainContent_DetailedOutput"),
     "use-magic-device": ("id", "MainContent_DataListTalentsAll_LabelName_0"),
@@ -38,10 +43,17 @@ SOURCES = {
         for name in (
             "acid-splash", "detect-magic", "light", "mage-hand", "prestidigitation", "read-magic",
             "burning-hands", "mage-armor", "magic-missile", "shield", "flaming-sphere", "mirror-image",
-            "scorching-ray", "grease", "fireball", "flare",
+            "scorching-ray", "grease", "fireball", "flare", "barkskin", "cure-light-wounds",
+            "entangle", "produce-flame", "summon-natures-ally-i", "summon-natures-ally-ii",
         )
     },
     "spell-fireball": ("id", "MainContent_DataListTypes_LabelName_1"),
+    "spell-barkskin": ("heading", "Barkskin"),
+    "spell-cure-light-wounds": ("heading", "Cure Light Wounds"),
+    "spell-entangle": ("heading", "Entangle"),
+    "spell-produce-flame": ("heading", "Produce Flame"),
+    "spell-summon-natures-ally-i": ("heading", "Summon Nature's Ally 1"),
+    "spell-summon-natures-ally-ii": ("heading", "Summon Nature's Ally 2"),
 }
 BLOCK_TAGS = {
     "address", "article", "aside", "blockquote", "dd", "div", "dl", "dt",
@@ -145,7 +157,37 @@ def extract(path: Path, attribute: str, value: str) -> str:
     return parser.extracted_text()
 
 
+TITLE_HEADING = re.compile(
+    r'<(?P<tag>h[12])\b[^>]*\bclass=["\\\']title["\\\'][^>]*>.*?</(?P=tag)>',
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+def _heading_text(markup: str) -> str:
+    without_images = re.sub(r"<img\b[^>]*>", " ", markup, flags=re.IGNORECASE)
+    without_tags = re.sub(r"<[^>]+>", " ", without_images)
+    return re.sub(r"\s+", " ", unescape(without_tags)).strip()
+
+
+def extract_heading_section(path: Path, heading: str, stop_tag: str) -> str:
+    """Extract one titled AoN entry without adjacent variants or subdomains."""
+    html = path.read_text(encoding="utf-8")
+    matches = list(TITLE_HEADING.finditer(html))
+    targets = [match for match in matches if _heading_text(match.group(0)) == heading]
+    if len(targets) != 1:
+        raise ValueError(f"expected one {heading!r} title heading, found {len(targets)}")
+    target = targets[0]
+    stops = [match.start() for match in matches if match.start() > target.start() and match.group("tag").lower() == stop_tag]
+    end = stops[0] if stops else len(html)
+    parser = ContentExtractor("id", "named-section")
+    parser.feed(f'<div id="named-section">{html[target.start():end]}</div>')
+    parser.close()
+    return parser.extracted_text()
+
+
 def extract_source(name: str, path: Path, attribute: str, value: str) -> str:
+    if attribute == "heading":
+        return extract_heading_section(path, value, "h2" if name == "fire-domain" else "h1")
     html = path.read_text(encoding="utf-8")
     if name == "designing-encounters":
         start = html.find("<b>Adding NPCs</b>:")
@@ -157,7 +199,7 @@ def extract_source(name: str, path: Path, attribute: str, value: str) -> str:
         parser.close()
         return parser.extracted_text()
     content = extract(path, attribute, value)
-    if name != "sorcerer":
+    if name not in {"sorcerer", "druid"}:
         return content
     start = html.find("<b>Weapon and Armor Proficiency</b>")
     end = html.find('<h2 class="title">Alternate Capstones</h2>', start)

@@ -2398,12 +2398,25 @@
     {
       "id": "npc-class.druid",
       "name": "Druid",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
+      "catalogStatus": "resolved",
       "category": "pc",
-      "hitDie": null,
-      "classSkills": null,
-      "skillSelections": null,
+      "hitDie": "d8",
+      "classSkills": [
+        "skill.climb",
+        "skill.craft",
+        "skill.fly",
+        "skill.handle-animal",
+        "skill.heal",
+        "skill.knowledge-geography",
+        "skill.knowledge-nature",
+        "skill.perception",
+        "skill.profession",
+        "skill.ride",
+        "skill.spellcraft",
+        "skill.survival",
+        "skill.swim"
+      ],
+      "skillSelections": 4,
       "levels": {
         "1": {
           "level": 1,
@@ -2445,22 +2458,44 @@
         },
         "3": {
           "level": 3,
-          "bab": null,
-          "fortitude": null,
-          "reflex": null,
-          "will": null,
-          "hitDie": null,
-          "skillSelections": null,
-          "featureGrants": null,
-          "choiceSlots": null,
-          "catalogStatus": "gap",
-          "sourceRef": {
-            "sourceId": "source.npc-gap-matrix",
-            "section": "NPC Source-Gap Matrix",
-            "txtLines": [22, 22],
-            "entry": "Druid level 3",
-            "provenanceStatus": "catalog-gap"
-          }
+          "bab": 2,
+          "fortitude": 3,
+          "reflex": 1,
+          "will": 3,
+          "hitDie": "d8",
+          "skillSelections": 4,
+          "featureGrants": [
+            "npc-class-feature.druid-proficiencies",
+            "npc-class-feature.druid-spellcasting",
+            "npc-class-feature.druid-orisons",
+            "npc-class-feature.druid-nature-bond",
+            "npc-class-feature.druidic",
+            "npc-class-feature.druid-nature-sense",
+            "npc-class-feature.druid-wild-empathy",
+            "npc-class-feature.druid-woodland-stride",
+            "npc-class-feature.druid-trackless-step"
+          ],
+          "choiceSlots": [],
+          "spellsPerDay": {"0": 4, "1": 2, "2": 1},
+          "catalogStatus": "resolved",
+          "sourceRef": [
+            {
+              "sourceId": "source.aon-druid",
+              "section": "Table: Druid",
+              "txtLines": [13, 16],
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid",
+              "entry": "Druid level 3",
+              "provenanceStatus": "resolved"
+            },
+            {
+              "sourceId": "source.aon-creating-npcs",
+              "section": "Step 3: Skills",
+              "txtLines": [40, 44],
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "entry": "Druid skill selections",
+              "provenanceStatus": "resolved"
+            }
+          ]
         },
         "4": {
           "level": 4,
@@ -2786,13 +2821,27 @@
           }
         }
       },
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [22, 22],
-        "entry": "Eleven Core PC class tables through level 20",
-        "provenanceStatus": "catalog-gap"
-      }
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-druid",
+          "section": "Druid; Class Skills; Class Features",
+          "txtLines": [1, 56],
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid",
+          "entry": "Druid class through level 3",
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Step 3: Skills",
+          "txtLines": [40, 44],
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+          "entry": "Druid skill selections",
+          "provenanceStatus": "resolved"
+        }
+      ],
+      "castingAbility": "wisdom",
+      "castingMode": "prepared",
+      "supportedLevels": [3]
     },
     {
       "id": "npc-class.expert",

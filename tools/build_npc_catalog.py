@@ -47,9 +47,11 @@ SOURCE_FILES = (
     ("source.npc-crb-spell-lists", "sources/npc/core-rulebook-extract.spell-lists.txt", "Hash-anchored Core Rulebook class spell lists (16-page local excerpt)"),
     ("source.npc-crb-extract", "sources/npc/core-rulebook-extract.txt", "Full pdftotext extraction of the local 16-page Core Rulebook excerpt"),
     ("source.aon-creating-npcs", "sources/npc/aonprd/creating-npcs.txt", "Official AoN Creating NPCs rules, tables, and Kiramor example"),
+    ("source.aon-caster-level", "sources/npc/aonprd/caster-level.txt", "Official AoN caster-level rule for spellcasting characters"),
     ("source.aon-getting-started", "sources/npc/aonprd/getting-started.txt", "Official AoN rounding and ability rules"),
     ("source.aon-core-races", "sources/npc/aonprd/core-races.txt", "Official AoN Core race rules"),
     ("source.aon-character-classes", "sources/npc/aonprd/character-classes.txt", "Official AoN advancement and multiclass rules"),
+    ("source.aon-cleric", "sources/npc/aonprd/cleric.txt", "Official AoN Cleric domain-slot and spontaneous-casting rules used by Druid Nature Bond"),
     ("source.aon-npc-classes", "sources/npc/aonprd/npc-classes.txt", "Official AoN NPC class tables and rules"),
     ("source.aon-skills", "sources/npc/aonprd/skills.txt", "Official AoN skill calculation rules"),
     ("source.aon-skill-descriptions", "sources/npc/aonprd/skill-descriptions.txt", "Official AoN Core skill summary"),
@@ -57,7 +59,9 @@ SOURCE_FILES = (
     ("source.aon-equipment", "sources/npc/aonprd/equipment.txt", "Official AoN Core mundane equipment rules and tables"),
     ("source.aon-combat", "sources/npc/aonprd/combat.txt", "Official AoN Core combat rules"),
     ("source.aon-goblin-race", "sources/npc/aonprd/goblin-race.txt", "Official current AoN Goblin racial rules"),
+    ("source.aon-druid", "sources/npc/aonprd/druid.txt", "Official current AoN Druid class rules and level progression"),
     ("source.aon-sorcerer", "sources/npc/aonprd/sorcerer.txt", "Official current AoN Sorcerer class rules"),
+    ("source.aon-fire-domain", "sources/npc/aonprd/fire-domain.txt", "Official current AoN Fire domain powers and domain spell list"),
     ("source.aon-elemental-bloodline", "sources/npc/aonprd/elemental-bloodline.txt", "Official current AoN Elemental bloodline rules"),
     ("source.aon-wands", "sources/npc/aonprd/wands.txt", "Official current AoN Core wand rules"),
     ("source.aon-use-magic-device", "sources/npc/aonprd/use-magic-device.txt", "Official current AoN Use Magic Device rules"),
@@ -72,7 +76,8 @@ SOURCE_FILES = (
     ) for name in (
         "acid-splash", "detect-magic", "light", "mage-hand", "prestidigitation", "read-magic",
         "burning-hands", "mage-armor", "magic-missile", "shield", "flaming-sphere", "mirror-image",
-        "scorching-ray", "grease", "fireball", "flare",
+        "scorching-ray", "grease", "fireball", "flare", "barkskin", "cure-light-wounds",
+        "entangle", "produce-flame", "summon-natures-ally-i", "summon-natures-ally-ii",
     )),
 )
 

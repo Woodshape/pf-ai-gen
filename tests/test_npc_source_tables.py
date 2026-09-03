@@ -2,8 +2,8 @@
 
 These tests re-parse hash-anchored source extracts with independent literals
 and verify the generated catalog against the planned Core scope. Nothing here
-invents rules: domains outside the human warrior levels 1–5 and goblin
-Sorcerer levels 5–6 remain explicit catalog gaps.
+invents rules: domains outside the human warrior levels 1–5, goblin Sorcerer
+levels 5–6, and goblin Druid level 3 with Fire remain explicit catalog gaps.
 """
 
 import json
@@ -91,6 +91,8 @@ RESOLVED_SPELLS = {
     "spell.prestidigitation", "spell.read-magic", "spell.burning-hands", "spell.grease",
     "spell.mage-armor", "spell.magic-missile", "spell.shield", "spell.flaming-sphere",
     "spell.mirror-image", "spell.scorching-ray", "spell.fireball", "spell.flare",
+    "spell.barkskin", "spell.cure-light-wounds", "spell.entangle", "spell.produce-flame",
+    "spell.summon-nature-s-ally-i", "spell.summon-nature-s-ally-ii",
 }
 
 
@@ -187,6 +189,16 @@ class CatalogCompletenessTests(unittest.TestCase):
                     maximum = 6 if class_id == "npc-class.sorcerer" else 5
                     expected = "resolved" if level <= maximum else "gap"
                     self.assertEqual(record["levels"][str(level)]["catalogStatus"], expected)
+            elif class_id == "npc-class.druid":
+                self.assertEqual(record["catalogStatus"], "resolved")
+                self.assertEqual(record["hitDie"], "d8")
+                self.assertEqual(record["skillSelections"], 4)
+                self.assertEqual(record["castingAbility"], "wisdom")
+                self.assertEqual(record["castingMode"], "prepared")
+                self.assertEqual(record["supportedLevels"], [3])
+                self.assertEqual(record["levels"]["3"]["catalogStatus"], "resolved")
+                self.assertEqual(record["levels"]["3"]["spellsPerDay"], {"0": 4, "1": 2, "2": 1})
+                self.assertTrue(all(record["levels"][str(level)]["catalogStatus"] == "gap" for level in range(1, 21) if level != 3))
             else:
                 self.assertEqual(record["catalogStatus"], "gap")
 
@@ -194,18 +206,30 @@ class CatalogCompletenessTests(unittest.TestCase):
         features = self.catalog["classFeatures"]
         kinds = [record["kind"] for record in features.values()]
         self.assertEqual(kinds.count("feat-slot"), 6)
-        self.assertEqual(kinds.count("choice-slot"), 10)
+        self.assertEqual(kinds.count("choice-slot"), 11)
+        self.assertEqual(kinds.count("automatic"), 12)
         resolved = {record_id for record_id, record in features.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
             "npc-class-feature.warrior-proficiencies", "npc-class-feature.sorcerer-spellcasting",
             "npc-class-feature.sorcerer-bloodlines", "npc-class-feature.sorcerer-eschew-materials",
+            "npc-class-feature.druid-spellcasting", "npc-class-feature.druid-nature-bond",
+            "npc-class-feature.druidic", "npc-class-feature.druid-nature-sense", "npc-class-feature.druid-wild-empathy",
+            "npc-class-feature.druid-woodland-stride", "npc-class-feature.druid-trackless-step",
+            "npc-class-feature.druid-proficiencies", "npc-class-feature.druid-orisons",
+            "npc-class-feature.fire-domain",
         })
 
     def test_thirty_five_core_skills_keep_slice_selection_resolved(self):
         self.assertEqual(set(self.catalog["skills"]), EXACT_IDS["skills"])
         self.assertEqual(self.catalog["skills"]["skill.climb"]["keyAbility"], "strength")
         self.assertEqual(self.catalog["skills"]["skill.intimidate"]["keyAbility"], "charisma")
-        resolved = {"skill.climb", "skill.intimidate", "skill.bluff", "skill.spellcraft", "skill.use-magic-device"}
+        resolved = {
+            "skill.climb", "skill.intimidate", "skill.bluff", "skill.spellcraft", "skill.use-magic-device",
+            "skill.heal", "skill.knowledge-nature", "skill.survival", "skill.perception",
+        }
+        self.assertEqual(self.catalog["skills"]["skill.heal"]["keyAbility"], "wisdom")
+        self.assertEqual(self.catalog["skills"]["skill.knowledge-nature"]["keyAbility"], "intelligence")
+        self.assertEqual(self.catalog["skills"]["skill.perception"]["keyAbility"], "wisdom")
         self.assertTrue(all(skill["catalogStatus"] == "gap" for skill_id, skill in self.catalog["skills"].items() if skill_id not in resolved))
 
     def test_four_source_backed_general_feats_are_resolved(self):
@@ -216,12 +240,13 @@ class CatalogCompletenessTests(unittest.TestCase):
 
     def test_only_production_items_are_resolved(self):
         items = self.catalog["items"]
-        self.assertEqual(len(items), 64)
+        self.assertEqual(len(items), 65)
         self.assertTrue(all(item["category"] in ITEM_CATEGORIES for item in items.values()))
         resolved = {record_id for record_id, record in items.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
             "item.longsword", "item.chain-shirt", "item.light-steel-shield",
             "item.wand-of-burning-hands", "item.cloak-of-resistance-1",
+            "item.sickle", "item.leather-armor", "item.heavy-wooden-shield",
         })
 
     def test_all_nine_gear_profiles_remain_but_only_phase_two_rows_are_resolved(self):
@@ -233,19 +258,32 @@ class CatalogCompletenessTests(unittest.TestCase):
         resolved = budgets["npc-gear.medium.normal"]
         self.assertEqual(resolved["catalogStatus"], "resolved")
         self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "basic"], [1, 2, 3, 4, 5])
-        self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "heroic"], [5, 6])
+        self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "heroic"], [3, 5, 6])
+        self.assertEqual(next(row for row in resolved["rows"] if row["npcCategory"] == "heroic" and row["level"] == 3)["budgetCp"], 165000)
         self.assertTrue(all(record["catalogStatus"] == "gap" for record_id, record in budgets.items() if record_id != "npc-gear.medium.normal"))
 
     def test_phase_two_values_match_the_archived_aon_rows(self):
         npc_classes = (ROOT / "sources/npc/aonprd/npc-classes.txt").read_text(encoding="utf-8").splitlines()
         equipment = (ROOT / "sources/npc/aonprd/equipment.txt").read_text(encoding="utf-8").splitlines()
         creating = (ROOT / "sources/npc/aonprd/creating-npcs.txt").read_text(encoding="utf-8").splitlines()
+        druid = (ROOT / "sources/npc/aonprd/druid.txt").read_text(encoding="utf-8").splitlines()
         self.assertEqual(npc_classes[150], "3rd\t+3\t+3\t+1\t+1")
         self.assertEqual(equipment[154], "Longsword\t15 gp\t1d6\t1d8\t19–20/×2\t—\t4 lbs.\tS\t—")
         self.assertEqual(creating[83], "3\t2\t780 gp\t350 gp\t200 gp\t—\t80 gp\t150 gp")
+        self.assertEqual(creating[84], "4\t3\t1,650 gp\t650 gp\t800 gp\t—\t100 gp\t200 gp")
+        self.assertEqual(druid[15], "3rd\t+2\t+3\t+1\t+3\tTrackless step\t4\t2\t1\t-\t-\t-\t-\t-\t-\t-")
+        self.assertEqual(equipment[117], "Sickle\t6 gp\t1d4\t1d6\t×2\t—\t2 lbs.\tS\ttrip")
+        self.assertEqual(equipment[323], "Leather\t10 gp\t+2\t+6\t0\t10%\t30 ft.\t20 ft.\t15 lbs.")
+        self.assertEqual(equipment[340], "Shield, heavy wooden\t7 gp\t+2\t—\t–2\t15%\t—\t—\t10 lbs.")
         self.assertEqual(self.catalog["classes"]["npc-class.warrior"]["levels"]["3"]["bab"], 3)
+        self.assertEqual(self.catalog["classes"]["npc-class.druid"]["levels"]["3"]["bab"], 2)
         self.assertEqual(self.catalog["items"]["item.longsword"]["priceCp"], 1500)
+        self.assertEqual(self.catalog["items"]["item.sickle"]["effects"]["damageDieBySize"], {"small": "1d4", "medium": "1d6"})
+        self.assertEqual(self.catalog["items"]["item.sickle"]["weightLbBySize"], {"small": 1, "medium": 2})
+        self.assertEqual(self.catalog["items"]["item.leather-armor"]["weightLbBySize"], {"small": 7.5, "medium": 15})
+        self.assertEqual(self.catalog["items"]["item.heavy-wooden-shield"]["weightLbBySize"], {"small": 5, "medium": 10})
         self.assertEqual(self.catalog["gearBudgets"]["npc-gear.medium.normal"]["rows"][2]["budgetCp"], 78000)
+        self.assertEqual(self.catalog["gearBudgets"]["npc-gear.medium.normal"]["rows"][5]["budgetCp"], 165000)
 
     def test_money_policy_stays_integer_copper_with_null_gaps(self):
         def check(value):

@@ -453,6 +453,279 @@
         "provenanceStatus": "resolved",
         "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer"
       }
+    },
+    {
+      "id": "npc-class-feature.druid-proficiencies",
+      "name": "Druid Proficiencies",
+      "catalogStatus": "resolved",
+      "kind": "automatic",
+      "effects": {
+        "weaponProficiencies": ["club", "dagger", "dart", "quarterstaff", "scimitar", "scythe", "sickle", "shortspear", "sling", "spear"],
+        "armorProficiencies": ["light", "medium"],
+        "armorRestriction": "no metal armor; padded, leather, or hide only",
+        "shieldProficiencies": "shields except tower shields, wooden only"
+      },
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-druid",
+          "section": "Weapon and Armor Proficiency",
+          "txtLines": [34, 36],
+          "entry": "Druid weapon, armor, and shield proficiencies and restrictions",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.druid-spellcasting",
+      "name": "Druid spellcasting",
+      "catalogStatus": "resolved",
+      "kind": "automatic",
+      "effects": {
+        "castingAbility": "wisdom",
+        "castingMode": "prepared",
+        "spontaneousConversion": {
+          "name": "Summon Nature’s Ally",
+          "from": "prepared",
+          "excludesDomainSlots": true,
+          "spellIdsBySlotLevel": {
+            "1": ["spell.summon-nature-s-ally-i"],
+            "2": ["spell.summon-nature-s-ally-i", "spell.summon-nature-s-ally-ii"]
+          }
+        }
+      },
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-druid",
+          "section": "Spells; Spontaneous Casting",
+          "txtLines": [37, 43],
+          "entry": "Druid prepared divine spellcasting and spontaneous conversion",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+        },
+        {
+          "sourceId": "source.aon-caster-level",
+          "section": "Caster Level",
+          "txtLines": [1, 6],
+          "entry": "Druid caster level",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/Rules.aspx?ID=207"
+        },
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Step 5: Class Features",
+          "txtLines": [70, 70],
+          "entry": "Basic spells may be prepared multiple times",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+        },
+        {
+          "sourceId": "source.aon-spell-summon-natures-ally-i",
+          "section": "Summon Nature's Ally 1",
+          "txtLines": [1, 16],
+          "entry": "Level-1 spontaneous conversion target",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%201"
+        },
+        {
+          "sourceId": "source.aon-spell-summon-natures-ally-ii",
+          "section": "Summon Nature's Ally 2",
+          "txtLines": [1, 13],
+          "entry": "Level-2 spontaneous conversion target",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%202"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.druid-orisons",
+      "name": "Orisons",
+      "catalogStatus": "resolved",
+      "kind": "automatic",
+      "effects": {
+        "notExpendedWhenCast": true,
+        "mayBePreparedMultipleTimes": true
+      },
+      "sourceRef": {
+        "sourceId": "source.aon-druid",
+        "section": "Orisons",
+        "txtLines": [43, 43],
+        "entry": "Orisons are not expended when cast and may be used again",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+      }
+    },
+    {
+      "id": "npc-class-feature.druid-nature-bond",
+      "name": "Nature Bond",
+      "catalogStatus": "resolved",
+      "kind": "choice-slot",
+      "choiceId": "natureBond",
+      "allowedValues": ["fire-domain"],
+      "options": {
+        "fire-domain": {
+          "name": "Fire domain",
+          "featureId": "npc-class-feature.fire-domain"
+        }
+      },
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-druid",
+          "section": "Nature Bond",
+          "txtLines": [47, 47],
+          "entry": "Nature Bond domain choice",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+        },
+        {
+          "sourceId": "source.aon-cleric",
+          "section": "Domains",
+          "txtLines": [45, 45],
+          "entry": "Domain spell slots and domain preparation",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric"
+        }
+      ]
+    },
+    {
+      "id": "npc-class-feature.druidic",
+      "name": "Druidic",
+      "catalogStatus": "resolved",
+      "kind": "automatic",
+      "effects": {
+        "languages": ["Druidic"]
+      },
+      "sourceRef": {
+        "sourceId": "source.aon-druid",
+        "section": "Bonus Languages; Druidic",
+        "txtLines": [44, 46],
+        "entry": "Druidic language",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+      }
+    },
+    {
+      "id": "npc-class-feature.druid-nature-sense",
+      "name": "Nature Sense",
+      "catalogStatus": "resolved",
+      "kind": "automatic",
+      "effects": {
+        "skillBonuses": {
+          "skill.knowledge-nature": 2,
+          "skill.survival": 2
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.aon-druid",
+        "section": "Nature Sense",
+        "txtLines": [51, 51],
+        "entry": "Nature Sense",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+      }
+    },
+    {
+      "id": "npc-class-feature.druid-wild-empathy",
+      "name": "Wild Empathy",
+      "catalogStatus": "resolved",
+      "kind": "automatic",
+      "effects": {},
+      "sourceRef": {
+        "sourceId": "source.aon-druid",
+        "section": "Wild Empathy",
+        "txtLines": [52, 54],
+        "entry": "Wild Empathy",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+      }
+    },
+    {
+      "id": "npc-class-feature.druid-woodland-stride",
+      "name": "Woodland Stride",
+      "catalogStatus": "resolved",
+      "kind": "automatic",
+      "effects": {},
+      "sourceRef": {
+        "sourceId": "source.aon-druid",
+        "section": "Woodland Stride",
+        "txtLines": [55, 55],
+        "entry": "Woodland Stride",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+      }
+    },
+    {
+      "id": "npc-class-feature.druid-trackless-step",
+      "name": "Trackless Step",
+      "catalogStatus": "resolved",
+      "kind": "automatic",
+      "effects": {},
+      "sourceRef": {
+        "sourceId": "source.aon-druid",
+        "section": "Trackless Step",
+        "txtLines": [56, 56],
+        "entry": "Trackless Step",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+      }
+    },
+    {
+      "id": "npc-class-feature.fire-domain",
+      "name": "Fire Domain",
+      "catalogStatus": "resolved",
+      "kind": "automatic",
+      "slotsPerSpellLevel": 1,
+      "domainSpells": {
+        "1": "spell.burning-hands",
+        "2": "spell.produce-flame"
+      },
+      "powers": [
+        {
+          "level": 1,
+          "name": "Fire Bolt",
+          "attackType": "ranged touch",
+          "range": "30 ft.",
+          "damageType": "fire",
+          "damageDie": "1d6",
+          "damageBonusPerTwoLevels": 1,
+          "usesBase": 3,
+          "usesAbility": "wisdom"
+        }
+      ],
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-fire-domain",
+          "section": "Granted Powers; Domain Spells",
+          "txtLines": [4, 7],
+          "entry": "Fire domain through level 2",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/DomainDisplay.aspx?ItemName=Fire"
+        },
+        {
+          "sourceId": "source.aon-cleric",
+          "section": "Domains",
+          "txtLines": [45, 45],
+          "entry": "One domain slot per castable spell level",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric"
+        },
+        {
+          "sourceId": "source.aon-spell-burning-hands",
+          "section": "Spell description",
+          "txtLines": [1, 16],
+          "entry": "Fire domain first-level spell",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Burning%20Hands"
+        },
+        {
+          "sourceId": "source.aon-spell-produce-flame",
+          "section": "Spell description",
+          "txtLines": [1, 15],
+          "entry": "Fire domain second-level spell",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Produce%20Flame"
+        }
+      ]
     }
   ]
 }
