@@ -93,32 +93,62 @@ function NpcClassStep({ draft, catalog, step, choiceRequirements, onPreview, onS
   </StepFrame>;
 }
 
+const ABILITIES = ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"] as const;
+const METHOD_OPTIONS = ["melee-preset", "arcane-preset", "assigned-array", "divine-preset"] as const;
+function abilityLabel(value: string): string { return value.charAt(0).toUpperCase() + value.slice(1); }
+function abilityEntryValue(value: unknown, fallback: JsonObject): JsonObject {
+  const map = objectValue(value);
+  return ABILITIES.reduce<JsonObject>((out, ability) => {
+    const score = map[ability] ?? fallback[ability];
+    if (score !== undefined && score !== "") out[ability] = String(score);
+    return out;
+  }, {});
+}
+function increaseRows(value: unknown): Array<{ level: string; ability: string }> {
+  const map = objectValue(value);
+  return Object.entries(map).map(([level, ability]) => ({ level, ability: String(ability ?? "") }));
+}
+
 function NpcAbilityStep({ draft, catalog, step, onSave, onBack }: Props) {
   const current = objectValue(draft.selections.abilityGeneration);
-  const [method, setMethod] = useState(String(current.method || "assigned"));
   const primaryClass = Array.isArray(draft.selections.classProgression) && draft.selections.classProgression.length > 0 && typeof (draft.selections.classProgression as JsonObject[])[0]?.classId === "string" ? String((draft.selections.classProgression as JsonObject[])[0].classId) : "";
-  const [arrayId, setArrayId] = useState(String(current.arrayId || ""));
-  const [preset, setPreset] = useState(String(current.preset || current.role || ""));
-  const [scores, setScores] = useState(formatJson(current.scores || current.assignments || {}));
-  const [rationale, setRationale] = useState(String(current.rationale || ""));
-  const [increases, setIncreases] = useState(formatJson(draft.selections.levelIncreases || {}));
-  const [error, setError] = useState("");
+  const isDruid = primaryClass === "npc-class.druid";
+  const [method, setMethod] = useState(typeof current.method === "string" && (METHOD_OPTIONS as readonly string[]).includes(current.method) ? String(current.method) : "assigned-array");
+  const [arrayId, setArrayId] = useState(String(current.arrayId || "npc-ability-array.heroic"));
+  const array = catalog.abilityArrays[arrayId];
+  const pool = Array.isArray(array?.scores) ? [...(array.scores as number[])].sort((a, b) => b - a) : [];
+  const poolMap = (source: unknown): JsonObject => { const values = Array.isArray(source) ? [...(source as number[])].sort((a, b) => b - a) : []; return Object.fromEntries(ABILITIES.map((ability, index) => [ability, values[index]])); };
+  const [scores, setScores] = useState<JsonObject>(() => {
+    const stored = current.scores || current.assignments;
+    if (stored && typeof stored === "object" && !Array.isArray(stored)) return abilityEntryValue(stored, {});
+    return method === "assigned-array" ? poolMap(array?.scores) : {};
+  });
+  const [rows, setRows] = useState<Array<{ level: string; ability: string }>>(increaseRows(draft.selections.levelIncreases));
+  const [arrayIdTouched, setArrayIdTouched] = useState(Boolean(current.arrayId));
+  useEffect(() => { if (method === "assigned-array" && !arrayIdTouched) setScores(poolMap(array?.scores)); }, [method, arrayId, arrayIdTouched]);
+  const setScore = (ability: string, value: string) => setScores((currentScores) => (
+    value === ""
+      ? Object.fromEntries(Object.entries(currentScores).filter(([key]) => key !== ability))
+      : { ...currentScores, [ability]: value }
+  ));
+  const setRow = (index: number, field: "level" | "ability", value: string) => setRows((currentRows) => currentRows.map((row, rowIndex) => rowIndex === index ? { ...row, [field]: value } : row));
+  const addRow = () => setRows((currentRows) => [...currentRows, { level: "", ability: "" }]);
   const submit = (next: boolean) => {
-    try {
-      const parsedScores = parseJson(scores, "ability scores");
-      const parsedIncreases = parseJson(increases, "level increases");
-      setError("");
-      onSave({ abilityGeneration: { method, arrayId: arrayId || undefined, preset: preset || undefined, scores: parsedScores, rationale: rationale || undefined }, levelIncreases: parsedIncreases }, {}, next);
-    } catch (caught) { setError(String(caught)); }
+    const increases = Object.fromEntries(rows.filter((row) => row.level !== "" && row.ability !== "").map((row) => [row.level, row.ability]));
+    const numericScores = method === "assigned-array" ? Object.fromEntries(Object.entries(scores).filter(([, score]) => score !== "").map(([ability, score]) => [ability, Number(score)])) : undefined;
+    onSave({ abilityGeneration: { method, arrayId: arrayId || undefined, scores: numericScores }, levelIncreases: Object.keys(increases).length ? increases : undefined }, {}, next);
   };
   return <StepFrame step={step} onBack={onBack} onApply={submit}><div class="grid">
-    <Select label="Ability generation" value={method} onChange={setMethod}><option value="assigned">Assigned array</option><option value="preset">Source preset</option><option value="melee-preset">Melee preset</option>{primaryClass === "npc-class.druid" ? <option value="divine-preset">Divine preset</option> : null}<option value="ranged-preset">Ranged preset</option><option value="skill-preset">Skill preset</option><option value="arcane-preset">Arcane preset</option><option value="custom">Custom scores</option></Select>
-    <CatalogSelect label="NPC ability array" records={catalog.abilityArrays} value={arrayId} onChange={setArrayId} blank="Choose source array…" />
-    <Field label="Preset name (when applicable)" value={preset} onInput={setPreset} />
-    <Field label="Custom rationale (required for custom)" value={rationale} onInput={setRationale} full />
-    <JsonArea label="Assigned or custom scores (JSON object)" value={scores} onChange={setScores} full />
-    <JsonArea label="Level increases (JSON object, for example {&quot;4&quot;:&quot;strength&quot;})" value={increases} onChange={setIncreases} full />
-  </div>{error && <div class="issue invalid"><p>{error}</p></div>}<p class="hint">Computed scores, modifiers, BAB, saves, and defenses are preview-only. The engine rejects them if placed in the draft.</p></StepFrame>;
+    <Select label="Ability generation" value={method} onChange={(value) => { setMethod(value); setScores(value === "assigned-array" ? poolMap(array?.scores) : {}); setArrayIdTouched(true); }}>
+      <option value="melee-preset">Melee preset</option><option value="arcane-preset">Arcane preset</option><option value="assigned-array">Assigned array</option>{isDruid ? <option value="divine-preset">Divine preset</option> : null}
+    </Select>
+    {method === "assigned-array" ? <CatalogSelect label="NPC ability array" records={catalog.abilityArrays} value={arrayId} onChange={(value) => { setArrayId(value); setArrayIdTouched(true); setScores(poolMap(catalog.abilityArrays[value]?.scores)); }} /> : <div class="field"><label>NPC ability array</label><span class="hint">{(catalog.abilityArrays[arrayId]?.name || arrayId)} — the {method.replace("-preset", "")} preset assigns these scores automatically.</span></div>}
+    {method === "assigned-array" && <section class="field full"><div class="builder-head"><div><span class="label">Assigned ability scores</span><small>Assign each of the array's {pool.length} values to an ability. Use every value exactly once.</small></div></div><div class="grid three">{ABILITIES.map((ability) => <div class="field" key={ability}><label>{abilityLabel(ability)}</label><select value={String(scores[ability] ?? "")} onChange={(event) => setScore(ability, event.currentTarget.value)}><option value="">Choose…</option>{pool.map((value) => <option value={value} key={value}>{value}</option>)}</select></div>)}</div></section>}
+    <section class="field full"><div class="builder-head"><div><span class="label">Level increases</span><small>Ability score increases gained at class levels (e.g. the 4th-level increase).</small></div><button type="button" class="btn small" onClick={addRow}>Add increase</button></div>
+      <div class="builder-list">{rows.length ? rows.map((row, index) => <div class="builder-card"><div class="builder-fields"><div class="field"><label>Level</label><input type="number" min="1" value={row.level} onInput={(event) => setRow(index, "level", event.currentTarget.value)} /></div><div class="field"><label>Ability</label><select value={row.ability} onChange={(event) => setRow(index, "ability", event.currentTarget.value)}><option value="">Choose…</option>{ABILITIES.map((ability) => <option value={ability} key={ability}>{abilityLabel(ability)}</option>)}</select></div></div><button type="button" class="btn small" onClick={() => setRows((currentRows) => currentRows.filter((_, rowIndex) => rowIndex !== index))}>Remove</button></div>) : <div class="empty">No level increases. Add one to give an ability bonus at a class level.</div>}</div>
+    </section>
+    <p class="hint full">Computed scores, modifiers, BAB, saves, and defenses are preview-only. The engine rejects them if placed in the draft. Only the catalog's supported methods are shown.</p>
+  </div></StepFrame>;
 }
 
 function NpcSkillsFeatsStep({ draft, catalog, step, onSave, onBack }: Props) {
