@@ -1,0 +1,55 @@
+Bard
+Source PRPG Core Rulebook pg. 34
+Untold wonders and secrets exist for those skillful enough to discover them. Through cleverness, talent, and magic, these cunning few unravel the wiles of the world, becoming adept in the arts of persuasion, manipulation, and inspiration. Typically masters of one or many forms of artistry, bards possess an uncanny ability to know more than they should and use what they learn to keep themselves and their allies ever one step ahead of danger. Bards are quick-witted and captivating, and their skills might lead them down many paths, be they gamblers or jacks-of-all-trades, scholars or performers, leaders or scoundrels, or even all of the above. For bards, every day brings its own opportunities, adventures, and challenges, and only by bucking the odds, knowing the most, and being the best might they claim the treasures of each.
+Role: Bards capably confuse and confound their foes while inspiring their allies to ever-greater daring. While accomplished with both weapons and magic, the true strength of bards lies outside melee, where they can support their companions and undermine their foes without fear of interruptions to their performances.
+Alignment: Any.
+Hit Die: d8.
+Starting Wealth: 3d6 x 10 gp (average 105 gp).
+Class Skills
+The Bard's class skills are Acrobatics (Dex), Appraise (Int), Bluff (Cha), Climb (Str), Craft (Int), Diplomacy (Cha), Disguise (Cha), Escape Artist (Dex), Intimidate (Cha), Knowledge (all) (Int), Linguistics (Int), Perception (Wis), Perform (Cha), Profession (Wis), Sense Motive (Wis), Sleight of Hand (Dex), Spellcraft (Int), Stealth (Dex), and Use Magic Device (Cha).
+Skill Points at each Level: 6 + Int modifier.
+Class Features
+	Spells Per Day
+Level	Base Attack Bonus	Fort Save	Ref Save	Will Save	Special	1st	2nd	3rd	4th	5th	6th
+1st	+0	+0	+2	+2	Bardic knowledge, bardic performance, cantrips, countersong, distraction, fascinate, inspire courage +1	1	-	-	-	-	-
+2nd	+1	+0	+3	+3	Versatile performance, well-versed	2	-	-	-	-	-
+3rd	+2	+1	+3	+3	Inspire competence +2	3	-	-	-	-	-
+4th	+3	+1	+4	+4	—	3	1	-	-	-	-
+5th	+3	+1	+4	+4	Inspire courage +2, lore master 1/day	4	2	-	-	-	-
+6th	+4	+2	+5	+5	Suggestion, Versatile performance	4	3	-	-	-	-
+7th	+5	+2	+5	+5	Inspire competence +3	4	3	1	-	-	-
+8th	+6/+1	+2	+6	+6	Dirge of doom	4	4	2	-	-	-
+9th	+6/+1	+3	+6	+6	Inspire greatness	5	4	3	-	-	-
+10th	+7/+2	+3	+7	+7	Jack-of-all-trades, Versatile performance	5	4	3	1	-	-
+11th	+8/+3	+3	+7	+7	Inspire competence +4, inspire courage +3, lore master 2/day	5	4	4	2	-	-
+12th	+9/+4	+4	+8	+8	Soothing performance	5	5	4	3	-	-
+13th	+9/+4	+4	+8	+8	—	5	5	4	3	1	-
+14th	+10/+5	+4	+9	+9	Frightening tune, Versatile performance	5	5	4	4	2	-
+15th	+11/+6/+1	+5	+9	+9	Inspire competence +5, inspire heroics	5	5	5	4	3	-
+16th	+12/+7/+2	+5	+10	+10	—	5	5	5	4	3	1
+17th	+12/+7/+2	+5	+10	+10	Inspire courage +4, lore master 3/day	5	5	5	4	4	2
+18th	+13/+8/+3	+6	+11	+11	Mass suggestion, Versatile performance	5	5	5	5	4	3
+19th	+14/+9/+4	+6	+11	+11	Inspire competence +6	5	5	5	5	5	4
+20th	+15/+10/+5	+6	+12	+12	Deadly performance	5	5	5	5	5	5
+Spells Known
+Level	0	1st	2nd	3rd	4th	5th	6th
+1st	4	2	-	-	-	-
+2nd	5	3	-	-	-	-
+3rd	6	4	-	-	-	-
+4th	6	4	2	-	-	-
+5th	6	4	3	-	-	-
+6th	6	4	4	-	-	-
+7th	6	5	4	2	-	-
+8th	6	5	4	3	-	-
+9th	6	5	4	4	-	-
+10th	6	5	5	4	2	-
+11th	6	6	5	4	3	-
+12th	6	6	5	4	4	-
+13th	6	6	5	5	4	2
+14th	6	6	6	5	4	3
+15th	6	6	6	5	4	4
+16th	6	6	6	5	5	4
+17th	6	6	6	6	5	4
+18th	6	6	6	6	5	4
+19th	6	6	6	6	5	5
+20th	6	6	6	6	6	5

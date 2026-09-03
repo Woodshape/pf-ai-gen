@@ -1,1107 +1,1240 @@
 {
-  "schemaVersion": "1",
-  "description": "Hash-anchored source extracts for class-based NPC creation (NPC_MODE_PLAN.md Phase 0). Anchors the local Core Rulebook excerpt and official Archives of Nethys snapshots, curates fragments consumed by the NPC catalog builders, and records the remaining source gaps for the bounded Sorcerer and Druid slices.",
-  "extraction": {
-    "pdfTool": "pdftotext 24.02.0 (poppler)",
-    "htmlTool": "python3 tools/extract_npc_aon_sources.py",
-    "note": "Extract line ranges are stable because every parent file and derived text file is immutable and hash-anchored. Downstream code does not fetch live web pages or re-run PDF extraction."
+ "schemaVersion": "1",
+ "description": "Hash-anchored source extracts for class-based NPC creation (NPC_MODE_PLAN.md Phase 0). Anchors the local Core Rulebook excerpt and official Archives of Nethys snapshots, curates fragments consumed by the NPC catalog builders, and records the remaining source gaps for the bounded Sorcerer and Druid slices.",
+ "extraction": {
+  "pdfTool": "pdftotext 24.02.0 (poppler)",
+  "htmlTool": "python3 tools/extract_npc_aon_sources.py",
+  "note": "Extract line ranges are stable because every parent file and derived text file is immutable and hash-anchored. Downstream code does not fetch live web pages or re-run PDF extraction."
+ },
+ "parentSources": {
+  "core-rulebook-pdf": {
+   "file": "Pathfinder_RPG_Core_Rulebook.pdf",
+   "sha256": "e1b520f1d8f1983741b56181d3d823d520c88eb9b888b342b90896dec9a5ccef",
+   "description": "16-page Core Rulebook PDF excerpt: complete class spell lists (Bard 0-6, Cleric 0-9, Druid 0-9, Paladin 1-4, Ranger 1-4, Sorcerer/Wizard 0-9) plus the first alphabetical spell descriptions. This is the ONLY local Core Rulebook content; NPC creation pages 448-454, races, class tables, skills, feats, equipment, and Appendix gear tables are not present."
   },
-  "parentSources": {
-    "core-rulebook-pdf": {
-      "file": "Pathfinder_RPG_Core_Rulebook.pdf",
-      "sha256": "e1b520f1d8f1983741b56181d3d823d520c88eb9b888b342b90896dec9a5ccef",
-      "description": "16-page Core Rulebook PDF excerpt: complete class spell lists (Bard 0-6, Cleric 0-9, Druid 0-9, Paladin 1-4, Ranger 1-4, Sorcerer/Wizard 0-9) plus the first alphabetical spell descriptions. This is the ONLY local Core Rulebook content; NPC creation pages 448-454, races, class tables, skills, feats, equipment, and Appendix gear tables are not present."
-    },
-    "core-rulebook-txt-legacy": {
-      "file": "Pathfinder_RPG_Core_Rulebook.txt",
-      "sha256": "b7756690294e9322d7ba6cf3dc56ae92237175214b85a2fc80125dad7f75351b",
-      "description": "Existing 1749-line extraction of the 16-page spell excerpt; anchored by catalog/catalog.json as pathfinder-core-txt. Must not be modified."
-    },
-    "pathfinder-unchained-txt": {
-      "file": "Pathfinder Unchained.txt",
-      "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
-      "description": "Existing full Simple Monster Creation chapter (5566 lines); anchored by catalog/catalog.json as pathfinder-unchained-txt. Must not be modified."
-    },
-    "bestiary-txt": {
-      "file": "beastiary.txt",
-      "sha256": "ece9130992edbfba27d6151e6a8a254a20fb1fd15375a0f56c94f81186b1b4ff",
-      "description": "Existing 2-page Bestiary appendix: Table 1-1 (Monster Statistics by CR) and Table 1-2 (Creature Hit Dice by CR); anchored by catalog/catalog.json as bestiary-txt."
-    },
-    "pathfinder-unchained-pdf": {
-      "file": "Pathfinder Unchained.pdf",
-      "sha256": "8c244211a77e71fba994a1e236a8154a213fa871c222b1852993c19b2ed7cb69",
-      "description": "60-page Simple Monster Creation chapter PDF."
-    },
-    "beastiary-pdf": {
-      "file": "beastiary.pdf",
-      "sha256": "c79cd92d0e1af0e961db87b233341c944bbe217187aa85612a8f5f44c1db6880",
-      "description": "2-page Bestiary appendix PDF."
-    },
-    "npc-mode-plan": {
-      "file": "NPC_MODE_PLAN.md",
-      "sha256": "934c509d33764d284d124597af2efd82c7d4a18b92605e47d13d56e424afe3b5",
-      "description": "Local implementation plan."
-    },
-    "aon-creating-npcs-html": {
-      "file": "sources/reference/aonprd/creating-npcs.html",
-      "sha256": "a1c9f2075311b9330f9a9211badf260973c1cbb16cb219a1c43357099b83c26c",
-      "officialUrl": "https://aonprd.com/Rules.aspx?ID=353",
-      "retrievedAt": "2026-09-02T08:18:33Z",
-      "description": "Official Archives of Nethys Creating NPCs page: Core Rulebook pages 448-454, including Steps 1-7, Tables 14-6 through 14-9, and Kiramor."
-    },
-    "aon-caster-level-html": {
-      "file": "sources/reference/aonprd/caster-level.html",
-      "sha256": "cb5c7079727a8038ae92c02509587c966dfd4cec79f8910591452ba3fdda94ca",
-      "officialUrl": "https://aonprd.com/Rules.aspx?ID=207",
-      "retrievedAt": "2026-09-03T11:27:33Z",
-      "description": "Official current Archives of Nethys Caster Level rule for spellcasting characters."
-    },
-    "aon-getting-started-html": {
-      "file": "sources/reference/aonprd/getting-started.html",
-      "sha256": "0fcfce8f6057b5ff2fcc02927dcac65ce5e97ca6472769e971207b0ebe1bd452",
-      "officialUrl": "https://legacy.aonprd.com/coreRulebook/gettingStarted.html",
-      "retrievedAt": "2026-09-02T08:46:57Z",
-      "description": "Official Archives of Nethys legacy Core Rulebook general rules, including rounding and ability modifiers."
-    },
-    "aon-core-races-html": {
-      "file": "sources/reference/aonprd/core-races.html",
-      "sha256": "beb28dcb3f0a1d404ae850ca5c7e29117aa6dbc32cba106b9c733dca5f53f222",
-      "officialUrl": "https://legacy.aonprd.com/coreRulebook/races.html",
-      "retrievedAt": "2026-09-02T08:18:33Z",
-      "description": "Official Archives of Nethys legacy Core Rulebook race chapter."
-    },
-    "aon-character-classes-html": {
-      "file": "sources/reference/aonprd/character-classes.html",
-      "sha256": "7c5b8349f9cb5238a213c354eaced69cef2d5dd843a0bac9332ae7bcbd7463ca",
-      "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html",
-      "retrievedAt": "2026-09-02T08:18:33Z",
-      "description": "Official Archives of Nethys legacy Core Rulebook class and advancement rules."
-    },
-    "aon-cleric-html": {
-      "file": "sources/reference/aonprd/cleric.html",
-      "sha256": "85138bdb3a11e2c9d1c90248450f504b5bacb0bac43376f3c58d8da20ae9a2e8",
-      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
-      "retrievedAt": "2026-09-03T11:27:50Z",
-      "description": "Official current Archives of Nethys Cleric domain-slot rule used by the Druid Nature Bond implementation."
-    },
-    "aon-npc-classes-html": {
-      "file": "sources/reference/aonprd/npc-classes.html",
-      "sha256": "09fc5c001d42dcdf4c8a49e1680d32554bbac485aa3160cef1de91749a99c770",
-      "officialUrl": "https://legacy.aonprd.com/coreRulebook/NPCClasses.html",
-      "retrievedAt": "2026-09-02T08:18:33Z",
-      "description": "Official Archives of Nethys legacy Core Rulebook tables and rules for the five NPC classes."
-    },
-    "aon-skills-html": {
-      "file": "sources/reference/aonprd/skills.html",
-      "sha256": "26b888c3e3adbd583d722576cfc3ad1b048fc69c2997f2aa063bf85f95ff9ffd",
-      "officialUrl": "https://legacy.aonprd.com/coreRulebook/usingSkills.html",
-      "retrievedAt": "2026-09-02T08:18:33Z",
-      "description": "Official Archives of Nethys legacy Core Rulebook rules for acquiring and using skills."
-    },
-    "aon-skill-descriptions-html": {
-      "file": "sources/reference/aonprd/skill-descriptions.html",
-      "sha256": "f0a474ef5da089308cc2ebb260add613715dd637df875ae0beb0e412bdcf454f",
-      "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html",
-      "retrievedAt": "2026-09-02T08:26:11Z",
-      "description": "Official Archives of Nethys legacy Core Rulebook skill summary table and skill-description conventions."
-    },
-    "aon-feats-html": {
-      "file": "sources/reference/aonprd/feats.html",
-      "sha256": "ac2039ee953b216f55d15bf100963f9cedf2d1da9b72216df925714a3725459e",
-      "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
-      "retrievedAt": "2026-09-02T08:18:33Z",
-      "description": "Official Archives of Nethys legacy Core Rulebook feat rules, table, and descriptions."
-    },
-    "aon-equipment-html": {
-      "file": "sources/reference/aonprd/equipment.html",
-      "sha256": "a6b945662c32f2753e0f974214bd2f23692854b57ecc837e017bf0d235b23d68",
-      "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
-      "retrievedAt": "2026-09-02T08:18:33Z",
-      "description": "Official Archives of Nethys legacy Core Rulebook mundane equipment rules and tables."
-    },
-    "aon-combat-html": {
-      "file": "sources/reference/aonprd/combat.html",
-      "sha256": "9f72ecd45a8d4b3ebde5681c88fafe483224ae7ec617e9fb21174ecfcf533e00",
-      "officialUrl": "https://legacy.aonprd.com/coreRulebook/combat.html",
-      "retrievedAt": "2026-09-02T08:18:33Z",
-      "description": "Official Archives of Nethys legacy Core Rulebook combat rules."
-    },
-    "aon-goblin-race-html": {
-      "file": "sources/reference/aonprd/goblin-race.html",
-      "sha256": "3ed9274cd131460b29d14b8bd691f46ccc81375e1e7700f2cef87d47dc692017",
-      "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Goblin race page and standard racial traits."
-    },
-    "aon-druid-html": {
-      "file": "sources/reference/aonprd/druid.html",
-      "sha256": "4488e4f43e81f8a31c992b55b6aabb29744af3523e4bf8954422825d2cc9e5e6",
-      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid",
-      "retrievedAt": "2026-09-03T11:16:31Z",
-      "description": "Official current Archives of Nethys Druid class page, progression, prepared divine spellcasting, Nature Bond, and spontaneous casting rules."
-    },
-    "aon-sorcerer-html": {
-      "file": "sources/reference/aonprd/sorcerer.html",
-      "sha256": "988a272dfd7779734c35b555981d86a8be6dafa38316a806f560a9eea07f8eff",
-      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Sorcerer class page, progression, spellcasting, and class features."
-    },
-    "aon-fire-domain-html": {
-      "file": "sources/reference/aonprd/fire-domain.html",
-      "sha256": "d018a2532ab805bd4ead0c0b33aaed63eb0b86f2a13afb721de322b7c0f4d30d",
-      "officialUrl": "https://aonprd.com/DomainDisplay.aspx?ItemName=Fire",
-      "retrievedAt": "2026-09-03T11:16:32Z",
-      "description": "Official current Archives of Nethys Core Fire domain page, granted powers, domain slots, and domain spell list."
-    },
-    "aon-elemental-bloodline-html": {
-      "file": "sources/reference/aonprd/elemental-bloodline.html",
-      "sha256": "1dbba6022411f137e46498b525fa554299ec1f02ee3e452e4c6e1347f8904efb",
-      "officialUrl": "https://aonprd.com/BloodlineDisplay.aspx?ItemName=Elemental",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Elemental sorcerer bloodline page."
-    },
-    "aon-wands-html": {
-      "file": "sources/reference/aonprd/wands.html",
-      "sha256": "4722c05485a7ff15b0920bbfb997fda0cb515279370d8dce7f908b5e28e38db4",
-      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Wands&Category=Magic%20Items",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Core wand rules and price table."
-    },
-    "aon-use-magic-device-html": {
-      "file": "sources/reference/aonprd/use-magic-device.html",
-      "sha256": "0b020b27087845573b4d46023e003682f76231b4d269e113af4f3a9988d94ebf",
-      "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Use%20Magic%20Device",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Use Magic Device skill rules."
-    },
-    "aon-spell-acid-splash-html": {
-      "file": "sources/reference/aonprd/spell-acid-splash.html",
-      "sha256": "5d2eef0885f723aadfb0bb50f19f806b70fdd6e5d40fbdd642fe64de32a35607",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Acid%20Splash",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Acid Splash spell page."
-    },
-    "aon-spell-detect-magic-html": {
-      "file": "sources/reference/aonprd/spell-detect-magic.html",
-      "sha256": "2c4792fa85995364b025e3aa6e39d9bd90f4ef7dd58ef0ed718f841d113aae49",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Detect%20Magic",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Detect Magic spell page."
-    },
-    "aon-spell-light-html": {
-      "file": "sources/reference/aonprd/spell-light.html",
-      "sha256": "647bc63299845dc245748236eee8dbd360dd3771e1ddec55a98d9cb91495a079",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Light",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Light spell page."
-    },
-    "aon-spell-mage-hand-html": {
-      "file": "sources/reference/aonprd/spell-mage-hand.html",
-      "sha256": "d58bdcde471a6d77c5894b9c65018421a88f9b736e776459984cb3a4f9798b7c",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Hand",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Mage Hand spell page."
-    },
-    "aon-spell-prestidigitation-html": {
-      "file": "sources/reference/aonprd/spell-prestidigitation.html",
-      "sha256": "b577ec1eeb2c9546fa5e1e4287121e7353fdc4347d1e8e075e8aa2060bacf2b4",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Prestidigitation",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Prestidigitation spell page."
-    },
-    "aon-spell-read-magic-html": {
-      "file": "sources/reference/aonprd/spell-read-magic.html",
-      "sha256": "f5c1664b8c7050ad1243488d6f3f4573cb657e6b0884ef395bae3f5cb35464bf",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Read%20Magic",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Read Magic spell page."
-    },
-    "aon-spell-burning-hands-html": {
-      "file": "sources/reference/aonprd/spell-burning-hands.html",
-      "sha256": "9cb0dd8126752a0e9dafd7a183b75cfa21f6a44f29d690bc22e1140994814f39",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Burning%20Hands",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Burning Hands spell page."
-    },
-    "aon-spell-mage-armor-html": {
-      "file": "sources/reference/aonprd/spell-mage-armor.html",
-      "sha256": "d562b7477a5276488db8e76077c4af5d8e00b4d6e1ddbdd887ab087230b99c7d",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Armor",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Mage Armor spell page."
-    },
-    "aon-spell-magic-missile-html": {
-      "file": "sources/reference/aonprd/spell-magic-missile.html",
-      "sha256": "513d779d7a95738068a2651bc3bd8b724b7a322466084e4753cf9bfba440835e",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Magic%20Missile",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Magic Missile spell page."
-    },
-    "aon-spell-shield-html": {
-      "file": "sources/reference/aonprd/spell-shield.html",
-      "sha256": "6d932171206ba0f29fe4c62a38becc378f2525ff2b049a3da879ce46e8c423e2",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Shield",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Shield spell page."
-    },
-    "aon-spell-flaming-sphere-html": {
-      "file": "sources/reference/aonprd/spell-flaming-sphere.html",
-      "sha256": "85582a4a3a81e31728f5e4d3cd774084d731a6ffb982262bd2588188fe5389b7",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Flaming%20Sphere",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Flaming Sphere spell page."
-    },
-    "aon-spell-mirror-image-html": {
-      "file": "sources/reference/aonprd/spell-mirror-image.html",
-      "sha256": "e8a8dd3bd213a1d4e1ec2c13ef57782d090ef684a297a33115b1fff11707320e",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mirror%20Image",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Mirror Image spell page."
-    },
-    "aon-spell-scorching-ray-html": {
-      "file": "sources/reference/aonprd/spell-scorching-ray.html",
-      "sha256": "46ab2c057eecaf0188dad28d43ae0d5cc3fc271a0568c3db93008df1cfe5fd40",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Scorching%20Ray",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Scorching Ray spell page."
-    },
-    "aon-cloak-of-resistance-html": {
-      "file": "sources/reference/aonprd/cloak-of-resistance.html",
-      "sha256": "2ce06482d0fe2ba47aac1a05d527832d4820e3d7cefff2942b6c581e880921bb",
-      "officialUrl": "https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=Cloak%20of%20Resistance1",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Cloak of Resistance page."
-    },
-    "aon-skill-bluff-html": {
-      "file": "sources/reference/aonprd/skill-bluff.html",
-      "sha256": "d853041c76e048a3965bf21627c6e9632de4d98035766ee8b6a12d1a619c4199",
-      "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Bluff",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Bluff skill page."
-    },
-    "aon-skill-spellcraft-html": {
-      "file": "sources/reference/aonprd/skill-spellcraft.html",
-      "sha256": "451d15f593dcfd9d14d923ae99d1653e6a4d6b7ea4e976edb39cfe89c3128c2f",
-      "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Spellcraft",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Spellcraft skill page."
-    },
-    "aon-spell-grease-html": {
-      "file": "sources/reference/aonprd/spell-grease.html",
-      "sha256": "1143bd067b9199a4a7b22701f29b0081e3f3ee94685eb6b9c6ac0d80c3820870",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Grease",
-      "retrievedAt": "2026-09-02T10:55:56Z",
-      "description": "Official current Archives of Nethys Grease spell page."
-    },
-    "aon-designing-encounters-html": {
-      "file": "sources/reference/aonprd/designing-encounters.html",
-      "sha256": "76fba00504c7c4cfa9cdf252d3cc4e2d3f551aafec80704ad0797bf928cfeba7",
-      "officialUrl": "https://aonprd.com/Rules.aspx?ID=252",
-      "retrievedAt": "2026-09-02T11:46:09Z",
-      "description": "Official current Archives of Nethys encounter-design and classed-NPC CR rules."
-    },
-    "aon-spell-fireball-html": {
-      "file": "sources/reference/aonprd/spell-fireball.html",
-      "sha256": "9cc0a87491b10e1a72c3bdfadc2a75b2bcb65d6c94342774422e9bc775e6729a",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Fireball",
-      "retrievedAt": "2026-09-02T11:46:09Z",
-      "description": "Official current Archives of Nethys Fireball spell page."
-    },
-    "aon-spell-flare-html": {
-      "file": "sources/reference/aonprd/spell-flare.html",
-      "sha256": "1cc9242c7137eee33c561ef75ad03d92b44a8e061597b3f589d8a6ca4436a27a",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Flare",
-      "retrievedAt": "2026-09-02T11:46:09Z",
-      "description": "Official current Archives of Nethys Flare spell page."
-    },
-    "aon-spell-barkskin-html": {
-      "file": "sources/reference/aonprd/spell-barkskin.html",
-      "sha256": "29d9a50d26ae89706013851ff27506ca49c2e498187e880c553540d338d46be3",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Barkskin",
-      "retrievedAt": "2026-09-03T11:16:33Z",
-      "description": "Official current Archives of Nethys Barkskin spell page."
-    },
-    "aon-spell-cure-light-wounds-html": {
-      "file": "sources/reference/aonprd/spell-cure-light-wounds.html",
-      "sha256": "c478f043c769e2fbf5dd92134283581a93d3abf885bf86b1b37e921ab6ddc200",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Cure%20Light%20Wounds",
-      "retrievedAt": "2026-09-03T11:16:33Z",
-      "description": "Official current Archives of Nethys Cure Light Wounds spell page."
-    },
-    "aon-spell-entangle-html": {
-      "file": "sources/reference/aonprd/spell-entangle.html",
-      "sha256": "d348be5fa221bf69a6523f1c72d2f25c92497fad44091d8ea48ee55d185de801",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Entangle",
-      "retrievedAt": "2026-09-03T11:16:34Z",
-      "description": "Official current Archives of Nethys Entangle spell page."
-    },
-    "aon-spell-produce-flame-html": {
-      "file": "sources/reference/aonprd/spell-produce-flame.html",
-      "sha256": "89724e25208890f1a8d7922ffd28433f800a1d61f031a16c019652b277de2a66",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Produce%20Flame",
-      "retrievedAt": "2026-09-03T11:16:34Z",
-      "description": "Official current Archives of Nethys Produce Flame spell page."
-    },
-    "aon-spell-summon-natures-ally-i-html": {
-      "file": "sources/reference/aonprd/spell-summon-natures-ally-i.html",
-      "sha256": "a42df28825057e9fc3e9c2a139f37b6bb57d2ac327107ce9122029c51da794d6",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%201",
-      "retrievedAt": "2026-09-03T11:17:19Z",
-      "description": "Official current Archives of Nethys Summon Nature's Ally I spell page."
-    },
-    "aon-spell-summon-natures-ally-ii-html": {
-      "file": "sources/reference/aonprd/spell-summon-natures-ally-ii.html",
-      "sha256": "a0680f1264389d84ef19d0d771c7d934e55cdac752c8bc1bf651750e87cf6b3f",
-      "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%202",
-      "retrievedAt": "2026-09-03T11:17:19Z",
-      "description": "Official current Archives of Nethys Summon Nature's Ally II spell page."
-    },
-    "aon-elemental-ally-html": {
-      "file": "sources/reference/aonprd/elemental-ally.html",
-      "sha256": "f2f971fafee9dbfe39556a580aac52a5dd2a1a54e9c3b0b88037ba7d180401e7",
-      "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally",
-      "retrievedAt": "2026-09-03T16:02:09Z",
-      "description": "Official current Archives of Nethys Elemental Ally druid archetype (Monster Summoner's Handbook pg. 16): Elemental Eidolons, Elemental Empathy, Elemental Magic, Elemental Resistance."
-    },
-    "aon-eidolon-unchained-html": {
-      "file": "sources/reference/aonprd/eidolon-unchained.html",
-      "sha256": "c9ff24260a682fd34a58b566a851d479ba1b73b2b4aad4f73cb6c8a7d9d29334",
-      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)",
-      "retrievedAt": "2026-09-03T16:02:09Z",
-      "description": "Official current Archives of Nethys unchained Eidolon companion page: Table 1-6 Eidolon Base Statistics and the eidolon rules the Elemental Ally archetype cites via Pathfinder Unchained page 33."
-    },
-    "aon-eidolon-uc-subtypes-html": {
-      "file": "sources/reference/aonprd/eidolon-uc-subtypes.html",
-      "sha256": "961e0932ecdffe313226abc113d531b0b38fc42e8988829e22b2b253f5e3dfb7",
-      "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx",
-      "retrievedAt": "2026-09-03T16:02:09Z",
-      "description": "Official current Archives of Nethys unchained eidolon subtypes page: the Elemental subtype (Pathfinder Unchained pg. 33) with base forms and per-level base evolutions."
-    },
-    "aon-eidolon-uc-base-forms-html": {
-      "file": "sources/reference/aonprd/eidolon-uc-base-forms.html",
-      "sha256": "90e455f786667e1355f6c9f7cf3294498baaaa9c8a2ef4c6234acb79e372d702",
-      "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx",
-      "retrievedAt": "2026-09-03T16:52:10Z",
-      "description": "Official current Archives of Nethys unchained eidolon base forms page: the Biped starting statistics (Pathfinder Unchained pg. 34) used by the level-3 fire elemental eidolon row."
-    },
-    "aon-summoner-uc-evolutions-html": {
-      "file": "sources/reference/aonprd/summoner-uc-evolutions.html",
-      "sha256": "18498ec787bcb04aa198ba3478c26ffc213ff96ea35fbf510b575fbd6f211ef1",
-      "officialUrl": "https://aonprd.com/SummonerUCEvolutions.aspx",
-      "retrievedAt": "2026-09-03T16:52:10Z",
-      "description": "Official current Archives of Nethys unchained summoner evolutions page: the Slam evolution (Pathfinder Unchained pg. 36) granting the elemental biped's slam attack."
-    },
-    "aon-eidolon-base-forms-html": {
-      "file": "sources/reference/aonprd/eidolon-base-forms.html",
-      "sha256": "841ebabbe8446e6596f61984684d23bfed47147819d638628505addc6444b096",
-      "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
-      "retrievedAt": "2026-09-03T16:02:09Z",
-      "description": "Official current Archives of Nethys eidolon base forms page: the Quadruped starting statistics used by the level-3 fire elemental eidolon row."
-    }
+  "core-rulebook-txt-legacy": {
+   "file": "Pathfinder_RPG_Core_Rulebook.txt",
+   "sha256": "b7756690294e9322d7ba6cf3dc56ae92237175214b85a2fc80125dad7f75351b",
+   "description": "Existing 1749-line extraction of the 16-page spell excerpt; anchored by catalog/catalog.json as pathfinder-core-txt. Must not be modified."
   },
-  "extracts": {
-    "core-rulebook-extract": {
-      "file": "sources/npc/core-rulebook-extract.txt",
-      "sha256": "0871da03406f898a23be03dd0732392104a58d5978dd281270ffc729300b68e9",
-      "derivedFrom": "core-rulebook-pdf",
-      "command": "pdftotext Pathfinder_RPG_Core_Rulebook.pdf sources/npc/core-rulebook-extract.txt",
-      "pdfPages": "1-16 of 16",
-      "lines": [
-        1,
-        1770
-      ],
-      "contents": "Complete spell-list chapter for Bard (0-6), Cleric (0-9), Druid (0-9), Paladin (1-4), Ranger (1-4), Sorcerer/Wizard (0-9), followed by the opening of the alphabetical spell descriptions (roughly the letter A: Acid Fog, Acid Splash, Air Walker, Astral Projection, Energy Drain, Etherealness, Shapechange, Soul Bind, Time Stop, Wail of the Banshee, Wish). Two-column PDF; reading order is reliable in the list section, partially scrambled in the description section.",
-      "catalogUse": "NPC spell lists (adept = cleric/druid lists; PC casters) for tasks 3.b and 5.a."
-    },
-    "core-rulebook-extract-spell-lists": {
-      "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
-      "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
-      "derivedFrom": "core-rulebook-extract",
-      "command": "sed -n '1,1691p' sources/npc/core-rulebook-extract.txt > sources/npc/core-rulebook-extract.spell-lists.txt",
-      "lines": [
-        1,
-        1691
-      ],
-      "contents": "Spell-list portion only: complete class lists for Bard (0-6), Cleric (0-9), Druid (0-9), Paladin (1-4), Ranger (1-4), and Sorcerer/Wizard (0-9), ending immediately before the alphabetical spell-description section. Two-column extraction losses: the cleric 7th-level and druid 3rd-level lists are empty in the excerpt at page boundaries; the parser records these as emptySections.",
-      "catalogUse": "Stable parse target for spell list membership in the NPC catalog (tools/parse_npc_sources.py)."
-    },
-    "aon-creating-npcs": {
-      "file": "sources/npc/aonprd/creating-npcs.txt",
-      "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
-      "derivedFrom": "aon-creating-npcs-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        133
-      ],
-      "contents": "Creating NPCs Steps 1-7, ability arrays and presets, racial adjustments, simplified skill ranks, feat recommendations, NPC gear budgets and allocations, and the Kiramor worked example.",
-      "catalogUse": "Authoritative workflow and numeric tables for class-based NPC creation."
-    },
-    "aon-caster-level": {
-      "file": "sources/npc/aonprd/caster-level.txt",
-      "sha256": "a9ff6089dc79f2e2daab6f57401a935e2c5478ec5ac200c7f44f036d8124314a",
-      "derivedFrom": "aon-caster-level-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        6
-      ],
-      "contents": "Official current Archives of Nethys caster-level definition and class-level relationship.",
-      "catalogUse": "Druid caster level and level-dependent spell arithmetic."
-    },
-    "aon-getting-started": {
-      "file": "sources/npc/aonprd/getting-started.txt",
-      "sha256": "2a59a8c5aaf2c1bc734c1ed47efaccecc037e3c703fe26f09e1b29c57535d78d",
-      "derivedFrom": "aon-getting-started-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        159
-      ],
-      "contents": "Core general rules, including round-down policy, ability modifiers, and ability applications.",
-      "catalogUse": "Average-HP rounding and ability modifier calculations."
-    },
-    "aon-core-races": {
-      "file": "sources/npc/aonprd/core-races.txt",
-      "sha256": "281a370dc1bff2a537f68449fcf808c2a6d8d8a131012e56522c1c5db60cab90",
-      "derivedFrom": "aon-core-races-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        128
-      ],
-      "contents": "Core racial traits for dwarf, elf, gnome, half-elf, half-orc, halfling, and human.",
-      "catalogUse": "Race adjustments and traits."
-    },
-    "aon-character-classes": {
-      "file": "sources/npc/aonprd/character-classes.txt",
-      "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
-      "derivedFrom": "aon-character-classes-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        48
-      ],
-      "contents": "Class selection, level advancement, favored-class, multiclassing, and general feat and ability-score advancement rules.",
-      "catalogUse": "Shared character advancement rules."
-    },
-    "aon-cleric": {
-      "file": "sources/npc/aonprd/cleric.txt",
-      "sha256": "a31087ad6598a80d691dcb5b5759f8a8fd7dd67b2c7a14bdf5ddbef1421b849e",
-      "derivedFrom": "aon-cleric-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        103
-      ],
-      "contents": "Official current Archives of Nethys Cleric class rules, including one domain spell slot for each castable spell level and domain-slot spontaneous-casting restrictions.",
-      "catalogUse": "Shared domain-slot rule required by Druid Nature Bond; no Cleric catalog slice is enabled."
-    },
-    "aon-npc-classes": {
-      "file": "sources/npc/aonprd/npc-classes.txt",
-      "sha256": "17c52d1bc3df506a81c3d077fa252350b98301db9479fd282a7e4f1f28af2f3f",
-      "derivedFrom": "aon-npc-classes-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        172
-      ],
-      "contents": "Adept, aristocrat, commoner, expert, and warrior class rules and level tables.",
-      "catalogUse": "Basic NPC class tables and features."
-    },
-    "aon-skills": {
-      "file": "sources/npc/aonprd/skills.txt",
-      "sha256": "56cdedfa6a3ae326bf8531f45fa9cfc93ecb1aa1a60e767819c7f259cb5ec18a",
-      "derivedFrom": "aon-skills-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        38
-      ],
-      "contents": "Skill ranks, class-skill bonus, rank cap, checks, and armor check penalty rule.",
-      "catalogUse": "Skill calculation and validation."
-    },
-    "aon-skill-descriptions": {
-      "file": "sources/npc/aonprd/skill-descriptions.txt",
-      "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
-      "derivedFrom": "aon-skill-descriptions-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        53
-      ],
-      "contents": "Core skill names, PC class-skill assignments, key abilities, trained-only flags, and armor check penalty applicability.",
-      "catalogUse": "Core skill records and PC class-skill mappings."
-    },
-    "aon-feats": {
-      "file": "sources/npc/aonprd/feats.txt",
-      "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
-      "derivedFrom": "aon-feats-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        1062
-      ],
-      "contents": "Core feat progression, feat table, prerequisites, benefits, and descriptions.",
-      "catalogUse": "Core feat records and typed prerequisites."
-    },
-    "aon-equipment": {
-      "file": "sources/npc/aonprd/equipment.txt",
-      "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-      "derivedFrom": "aon-equipment-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        774
-      ],
-      "contents": "Core mundane weapons, armor, goods, services, prices, damage, maximum Dexterity bonuses, and armor check penalties.",
-      "catalogUse": "Mundane item records and equipment-derived statistics."
-    },
-    "aon-combat": {
-      "file": "sources/npc/aonprd/combat.txt",
-      "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-      "derivedFrom": "aon-combat-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        617
-      ],
-      "contents": "Core combat calculations and rules for attacks, AC, saves, initiative, CMB, CMD, and iterative attacks.",
-      "catalogUse": "Derived NPC combat statistics."
-    },
-    "aon-goblin-race": {
-      "file": "sources/npc/aonprd/goblin-race.txt",
-      "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
-      "derivedFrom": "aon-goblin-race-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        69
-      ],
-      "contents": "Official current Archives of Nethys Goblin race page and standard racial traits",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-druid": {
-      "file": "sources/npc/aonprd/druid.txt",
-      "sha256": "c65a4408988886a02872be131428210a6e287e206b8f181717d170e62d34e944",
-      "derivedFrom": "aon-druid-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        159
-      ],
-      "contents": "Official current Archives of Nethys Druid class page, progression, prepared divine spellcasting, Nature Bond, and spontaneous summon nature's ally conversion.",
-      "catalogUse": "Goblin Druid level 3 source-gated production slice."
-    },
-    "aon-sorcerer": {
-      "file": "sources/npc/aonprd/sorcerer.txt",
-      "sha256": "ebe8943d2e0582ba82f0a180d35ab9ba56e2e9f2f9fb24a9f29d4b8d58fb80af",
-      "derivedFrom": "aon-sorcerer-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        66
-      ],
-      "contents": "Official current Archives of Nethys Sorcerer class page, progression, spellcasting, and class features",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-fire-domain": {
-      "file": "sources/npc/aonprd/fire-domain.txt",
-      "sha256": "fe6873fb95ecacb37198240a888c9453b4198a974a1294eec4585cb2c7eca2ab",
-      "derivedFrom": "aon-fire-domain-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        7
-      ],
-      "contents": "Official current Archives of Nethys Core Fire domain granted powers, domain slots, and domain spell list.",
-      "catalogUse": "Goblin Druid level 3 Fire domain choice and power."
-    },
-    "aon-elemental-bloodline": {
-      "file": "sources/npc/aonprd/elemental-bloodline.txt",
-      "sha256": "b654638572f9597e498032d5bf439f073e07c3c4062313631beb20b80ae6805f",
-      "derivedFrom": "aon-elemental-bloodline-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        19
-      ],
-      "contents": "Official current Archives of Nethys Elemental sorcerer bloodline page",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-wands": {
-      "file": "sources/npc/aonprd/wands.txt",
-      "sha256": "70ffb82a3ded2be78064d7cc10bb5d7895ad4f679732a1fb9b06374a69cf7957",
-      "derivedFrom": "aon-wands-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        21
-      ],
-      "contents": "Official current Archives of Nethys Core wand rules and price table",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-use-magic-device": {
-      "file": "sources/npc/aonprd/use-magic-device.txt",
-      "sha256": "61c5d6abf9956fd07978213a34375b1255cf8d1b8a26ae350b74242457ea314c",
-      "derivedFrom": "aon-use-magic-device-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        40
-      ],
-      "contents": "Official current Archives of Nethys Use Magic Device skill rules",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-spell-acid-splash": {
-      "file": "sources/npc/aonprd/spell-acid-splash.txt",
-      "sha256": "b4ad758edb41b90ddbc15fe50667ddbd2fb954a6608832b56062def909faaa35",
-      "derivedFrom": "aon-spell-acid-splash-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        13
-      ],
-      "contents": "Official current Archives of Nethys Acid Splash spell page",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-spell-detect-magic": {
-      "file": "sources/npc/aonprd/spell-detect-magic.txt",
-      "sha256": "6d75ee9f310bdd3911eab59b8abceffc5f698ba3cef36a4200b1748dfda88ab6",
-      "derivedFrom": "aon-spell-detect-magic-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        58
-      ],
-      "contents": "Official current Archives of Nethys Detect Magic spell page",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-spell-light": {
-      "file": "sources/npc/aonprd/spell-light.txt",
-      "sha256": "3722f8addac74a7ba5774fdb273d4cae9542b0b162e55a7aa37be35132fc11e0",
-      "derivedFrom": "aon-spell-light-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        14
-      ],
-      "contents": "Official current Archives of Nethys Light spell page",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-spell-mage-hand": {
-      "file": "sources/npc/aonprd/spell-mage-hand.txt",
-      "sha256": "5361d41fdbaf39a6baebcee3e4d26d38cee5f710bb806f36510b8e15c86fa7ff",
-      "derivedFrom": "aon-spell-mage-hand-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        13
-      ],
-      "contents": "Official current Archives of Nethys Mage Hand spell page",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-spell-prestidigitation": {
-      "file": "sources/npc/aonprd/spell-prestidigitation.txt",
-      "sha256": "fcc0f9a72a4adae21b38f9a6bde121926e856e6a29af341c57dd1cf468161962",
-      "derivedFrom": "aon-spell-prestidigitation-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        13
-      ],
-      "contents": "Official current Archives of Nethys Prestidigitation spell page",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-spell-read-magic": {
-      "file": "sources/npc/aonprd/spell-read-magic.txt",
-      "sha256": "1e1b52a23fdb1453f5d976863127b7621ae5880a8d5a4024b05fad6d942ddf8f",
-      "derivedFrom": "aon-spell-read-magic-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        13
-      ],
-      "contents": "Official current Archives of Nethys Read Magic spell page",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-spell-burning-hands": {
-      "file": "sources/npc/aonprd/spell-burning-hands.txt",
-      "sha256": "45592b0968a019ae0016d7b8190fab3f6d98dd8ca41dd49c8f2b036aba93d727",
-      "derivedFrom": "aon-spell-burning-hands-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        16
-      ],
-      "contents": "Official current Archives of Nethys Burning Hands spell page",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-spell-mage-armor": {
-      "file": "sources/npc/aonprd/spell-mage-armor.txt",
-      "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
-      "derivedFrom": "aon-spell-mage-armor-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        17
-      ],
-      "contents": "Official current Archives of Nethys Mage Armor spell page",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-spell-magic-missile": {
-      "file": "sources/npc/aonprd/spell-magic-missile.txt",
-      "sha256": "82e54a13f4e8a2e77a642780c0dc2474bb5e49f90f84728204916bfd485f1c35",
-      "derivedFrom": "aon-spell-magic-missile-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        19
-      ],
-      "contents": "Official current Archives of Nethys Magic Missile spell page",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-spell-shield": {
-      "file": "sources/npc/aonprd/spell-shield.txt",
-      "sha256": "426fd2722e6ff650ef50163c2be7dd2a9b664d9071ebacef3e72bbd27b3511d0",
-      "derivedFrom": "aon-spell-shield-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        12
-      ],
-      "contents": "Official current Archives of Nethys Shield spell page",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-spell-flaming-sphere": {
-      "file": "sources/npc/aonprd/spell-flaming-sphere.txt",
-      "sha256": "3e86b3f2f739e99037cff2e142d6a9d1a19a3d805f6acf6e936211157cdc9e1d",
-      "derivedFrom": "aon-spell-flaming-sphere-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        27
-      ],
-      "contents": "Official current Archives of Nethys Flaming Sphere spell page",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-spell-mirror-image": {
-      "file": "sources/npc/aonprd/spell-mirror-image.txt",
-      "sha256": "8d4f9a05b6af81b8a434b08a024dd20468f099bb8e84aa916f894323ac9d994e",
-      "derivedFrom": "aon-spell-mirror-image-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        17
-      ],
-      "contents": "Official current Archives of Nethys Mirror Image spell page",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-spell-scorching-ray": {
-      "file": "sources/npc/aonprd/spell-scorching-ray.txt",
-      "sha256": "6cd9453cd80241ed34a8535e926a1863d9b9fe82da1d3bec34c2d286f91aeafd",
-      "derivedFrom": "aon-spell-scorching-ray-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        16
-      ],
-      "contents": "Official current Archives of Nethys Scorching Ray spell page",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-cloak-of-resistance": {
-      "file": "sources/npc/aonprd/cloak-of-resistance.txt",
-      "sha256": "49a91f48c74be1ec7f01ed11f3d4c80c14133b60f5cc1c23250434297b8d7176",
-      "derivedFrom": "aon-cloak-of-resistance-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        11
-      ],
-      "contents": "Cloak of Resistance prices and saving-throw effects",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-skill-bluff": {
-      "file": "sources/npc/aonprd/skill-bluff.txt",
-      "sha256": "f79d3c05889b0e2b54f3c48d1fd9c64a09ba705bf4f89a07dc095ecc155ef73d",
-      "derivedFrom": "aon-skill-bluff-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        33
-      ],
-      "contents": "Bluff skill rules",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-skill-spellcraft": {
-      "file": "sources/npc/aonprd/skill-spellcraft.txt",
-      "sha256": "31d7d09a88421c45a45cf4d5a2452e1d6de4a75ac027d7f271b9ae0be223e7c7",
-      "derivedFrom": "aon-skill-spellcraft-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        31
-      ],
-      "contents": "Spellcraft skill rules",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-spell-grease": {
-      "file": "sources/npc/aonprd/spell-grease.txt",
-      "sha256": "f5955826cec6d9c6be4ae6028266fab81797e90536d8d739b1172b1ffd8f899d",
-      "derivedFrom": "aon-spell-grease-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        30
-      ],
-      "contents": "Grease spell rules",
-      "catalogUse": "Goblin sorcerer levels 5–6 source-gated production slice."
-    },
-    "aon-designing-encounters": {
-      "file": "sources/npc/aonprd/designing-encounters.txt",
-      "sha256": "fcfea8b5b372ba39e132818cbe9c1c46e2d556ec3bb6ce73cee6ec2c686d3716",
-      "derivedFrom": "aon-designing-encounters-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        1
-      ],
-      "contents": "Official current Archives of Nethys encounter-design and classed-NPC CR rules",
-      "catalogUse": "Goblin sorcerer level-6 source-gated production slice."
-    },
-    "aon-spell-fireball": {
-      "file": "sources/npc/aonprd/spell-fireball.txt",
-      "sha256": "45c8ba2e29b37f76f97691e27c1e3c500853daf3960d4e88cd93e1c36f85c38a",
-      "derivedFrom": "aon-spell-fireball-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        33
-      ],
-      "contents": "Official current Archives of Nethys Fireball spell page",
-      "catalogUse": "Goblin sorcerer level-6 source-gated production slice."
-    },
-    "aon-spell-flare": {
-      "file": "sources/npc/aonprd/spell-flare.txt",
-      "sha256": "3abf681f9013db7442803defbd14abb4606761273e6e92b35ea24823c164eda4",
-      "derivedFrom": "aon-spell-flare-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        26
-      ],
-      "contents": "Official current Archives of Nethys Flare spell page",
-      "catalogUse": "Goblin sorcerer level-6 source-gated production slice."
-    },
-    "aon-spell-barkskin": {
-      "file": "sources/npc/aonprd/spell-barkskin.txt",
-      "sha256": "d6310e9e8d211d5d19892710f2e5aae5010aee137cedc0695596970540ae09fa",
-      "derivedFrom": "aon-spell-barkskin-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        18
-      ],
-      "contents": "Official current Archives of Nethys Barkskin spell page",
-      "catalogUse": "Goblin Druid level-3 prepared spell loadout."
-    },
-    "aon-spell-cure-light-wounds": {
-      "file": "sources/npc/aonprd/spell-cure-light-wounds.txt",
-      "sha256": "19f70b0f4de69b30266dc74ab0ee1d8fda5a4fe54850c846e1e6445090dc20e0",
-      "derivedFrom": "aon-spell-cure-light-wounds-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        16
-      ],
-      "contents": "Official current Archives of Nethys Cure Light Wounds spell page",
-      "catalogUse": "Goblin Druid level-3 prepared spell loadout."
-    },
-    "aon-spell-entangle": {
-      "file": "sources/npc/aonprd/spell-entangle.txt",
-      "sha256": "80202a19d906df069d55d50a63328fe5507b0b8f731ae8f3f2a6c29c238b6c90",
-      "derivedFrom": "aon-spell-entangle-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        17
-      ],
-      "contents": "Official current Archives of Nethys Entangle spell page",
-      "catalogUse": "Goblin Druid level-3 prepared spell loadout."
-    },
-    "aon-spell-produce-flame": {
-      "file": "sources/npc/aonprd/spell-produce-flame.txt",
-      "sha256": "6c1979ac5e2c1eaf905a5882c1256d3086ae6fae0a74222ace367eec7da480b9",
-      "derivedFrom": "aon-spell-produce-flame-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        15
-      ],
-      "contents": "Official current Archives of Nethys Produce Flame spell page",
-      "catalogUse": "Goblin Druid level-3 prepared spell loadout and Fire domain spell membership."
-    },
-    "aon-spell-summon-natures-ally-i": {
-      "file": "sources/npc/aonprd/spell-summon-natures-ally-i.txt",
-      "sha256": "7391d4d8fe159711270a5ab267597a786801b4488a45b6921fd3a3cb0b1124e1",
-      "derivedFrom": "aon-spell-summon-natures-ally-i-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        115
-      ],
-      "contents": "Official current Archives of Nethys Summon Nature's Ally I spell page and its Core creature choice table.",
-      "catalogUse": "Goblin Druid level-3 spontaneous summon nature's ally behavior metadata."
-    },
-    "aon-spell-summon-natures-ally-ii": {
-      "file": "sources/npc/aonprd/spell-summon-natures-ally-ii.txt",
-      "sha256": "119b4acebe526e3b4afc2c7c30521d75be09827720be566cde1aef88f15a92c0",
-      "derivedFrom": "aon-spell-summon-natures-ally-ii-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        13
-      ],
-      "contents": "Official current Archives of Nethys Summon Nature's Ally II spell page.",
-      "catalogUse": "Goblin Druid level-3 spontaneous summon nature's ally behavior metadata."
-    },
-    "aon-elemental-ally": {
-      "file": "sources/npc/aonprd/elemental-ally.txt",
-      "sha256": "e67cbb2f095fac4d0e79e7497f08335fa04d969725632ea15b59c48f5794d3eb",
-      "derivedFrom": "aon-elemental-ally-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        16
-      ],
-      "contents": "Official current Archives of Nethys Elemental Ally druid archetype: Elemental Eidolons, Elemental Empathy, Elemental Magic, and Elemental Resistance.",
-      "catalogUse": "Elemental Ally archetype record and its linked-creature row."
-    },
-    "aon-eidolon-unchained": {
-      "file": "sources/npc/aonprd/eidolon-unchained.txt",
-      "sha256": "bad316ffdd9fa9a086e39fc433b6168f1289f198805cb9798b3445cab309640b",
-      "derivedFrom": "aon-eidolon-unchained-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        46
-      ],
-      "contents": "Official current Archives of Nethys unchained Eidolon rules and Table 1-6: Eidolon Base Statistics.",
-      "catalogUse": "Eidolon base statistics rows and HD/BAB/saves/armor/skills/feats rules for the level-3 fire elemental eidolon row."
-    },
-    "aon-eidolon-uc-subtypes": {
-      "file": "sources/npc/aonprd/eidolon-uc-subtypes.txt",
-      "sha256": "63cc8e5e26c7842a508ddd46d2508d497ee9c87c3015164f2b2b05aab9b8c34d",
-      "derivedFrom": "aon-eidolon-uc-subtypes-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        12
-      ],
-      "contents": "Official current Archives of Nethys unchained eidolon Elemental subtype: base forms and 1st-level base evolutions (immunity to paralysis and sleep; immunity (fire)).",
-      "catalogUse": "Elemental eidolon base evolutions and base form options for the level-3 fire row."
-    },
-    "aon-eidolon-base-forms": {
-      "file": "sources/npc/aonprd/eidolon-base-forms.txt",
-      "sha256": "c9b7213bca3eb59ac0fc7c32155b38d9fd6eacd5f2b82c0d26e9565eaa6b503f",
-      "derivedFrom": "aon-eidolon-base-forms-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        3
-      ],
-      "contents": "Official current Archives of Nethys Quadruped eidolon base form: size, speed, natural armor, save assignments, bite attack, ability scores, and free evolutions.",
-      "catalogUse": "Quadruped starting statistics retained for reference; the fire eidolon row now uses Biped."
-    },
-    "aon-eidolon-base-forms-biped": {
-      "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
-      "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
-      "derivedFrom": "aon-eidolon-base-forms-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        3
-      ],
-      "contents": "Official current Archives of Nethys Biped eidolon base form: size, speed, natural armor, save assignments, claw attacks, ability scores, and free evolutions.",
-      "catalogUse": "APG Biped starting statistics retained for reference; the unchained elemental eidolon row now cites the PFU Biped extract."
-    },
-    "aon-eidolon-uc-base-forms-biped": {
-      "file": "sources/npc/aonprd/eidolon-uc-base-forms-biped.txt",
-      "sha256": "5ab9f4734f9674515cea68ddfcb1211910b319171e7a2ab8824925b22387dff5",
-      "derivedFrom": "aon-eidolon-uc-base-forms-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        3
-      ],
-      "contents": "Official current Archives of Nethys unchained Biped eidolon base form (Pathfinder Unchained pg. 34): size, speed, natural armor, save assignments, claw attack line, and ability scores.",
-      "catalogUse": "PFU Biped starting statistics for the level-3 fire elemental eidolon row."
-    },
-    "aon-summoner-uc-evolutions-slam": {
-      "file": "sources/npc/aonprd/summoner-uc-evolutions-slam.txt",
-      "sha256": "96b9f3f7ee02aa03c90d16fa778e94e661c3b56b39535c0f4748edaa210b89b9",
-      "derivedFrom": "aon-summoner-uc-evolutions-html",
-      "command": "python3 tools/extract_npc_aon_sources.py",
-      "lines": [
-        1,
-        1
-      ],
-      "contents": "Official current Archives of Nethys unchained summoner Slam evolution (Pathfinder Unchained pg. 36): primary attack, 1d8 damage (2d6 Large, 2d8 Huge), limbs (arms) prerequisite, and the claws-replacement rule.",
-      "catalogUse": "Slam attack granted by the Elemental subtype's Biped base form for the level-3 fire elemental eidolon row."
-    }
+  "pathfinder-unchained-txt": {
+   "file": "Pathfinder Unchained.txt",
+   "sha256": "0522ba4096593332b5e82d0411b99bd96c39b4c9c49789d268dc239df889b5f2",
+   "description": "Existing full Simple Monster Creation chapter (5566 lines); anchored by catalog/catalog.json as pathfinder-unchained-txt. Must not be modified."
   },
-  "fragments": {
-    "pathfinder-unchained-npc-likeness": {
-      "file": "sources/npc/pathfinder-unchained.npc-likeness.txt",
-      "sha256": "3d7700919b14054dc9283c4e37a3c147251655634be413eac19579281a605ae3",
-      "derivedFrom": "pathfinder-unchained-txt",
-      "command": "sed -n '3555,3559p' 'Pathfinder Unchained.txt' > sources/npc/pathfinder-unchained.npc-likeness.txt",
-      "parentLines": [
-        3555,
-        3559
-      ],
-      "contents": "Simple Monster Creation guidance that a monster meant to be more like an NPC, especially one using a PC race, should avoid monstrous combat options.",
-      "catalogUse": "Policy grounding: NPC-likeness expectations and the future Simple Monster comparison benchmark (plan section 13)."
-    },
-    "bestiary-table-1-1": {
-      "file": "sources/npc/bestiary.table-1-1.txt",
-      "sha256": "3e808a21ffa19a9b44f76b4c5f91b9263e9b113a1381e194fd077eddba19a822",
-      "derivedFrom": "bestiary-txt",
-      "command": "sed -n '5,27p' beastiary.txt > sources/npc/bestiary.table-1-1.txt",
-      "parentLines": [
-        5,
-        27
-      ],
-      "contents": "Bestiary Table 1-1: Monster Statistics by CR (CR 1/2 through 20 rows).",
-      "catalogUse": "Future draft.compareBenchmarks comparisons (plan section 13); never used to compute NPC statistics."
-    }
+  "bestiary-txt": {
+   "file": "beastiary.txt",
+   "sha256": "ece9130992edbfba27d6151e6a8a254a20fb1fd15375a0f56c94f81186b1b4ff",
+   "description": "Existing 2-page Bestiary appendix: Table 1-1 (Monster Statistics by CR) and Table 1-2 (Creature Hit Dice by CR); anchored by catalog/catalog.json as bestiary-txt."
   },
-  "missing": {
-    "core-rulebook-pc-class-pages": {
-      "needed": "PC classes and levels outside the source-gated Sorcerer levels 1–6 and Druid level 3 slices",
-      "availability": "The official Archives of Nethys Druid class page is archived for the bounded level-3 slice; other unarchived class pages remain unavailable locally.",
-      "consequence": "Sorcerer levels 1–6 and Druid level 3 are eligible for hydration; Druid levels 1–2 and 4–20 and other heroic PC-class rows remain explicit source gaps until separately archived and curated."
-    },
-    "core-rulebook-magic-items": {
-      "needed": "Magic items other than the source-gated wand rules and selected wand records",
-      "availability": "Available in the official Archives of Nethys Core rules but not yet archived locally.",
-      "consequence": "The bounded wand and cloak records are hydrated; other heroic magic-item records remain source gaps."
-    },
-    "core-rulebook-spell-descriptions": {
-      "needed": "Spell descriptions other than the source-gated Goblin Sorcerer loadout and the bounded Druid loadout and Summon Nature's Ally I–II records",
-      "availability": "The selected Druid and Summon Nature's Ally pages are archived from official Archives of Nethys; other spell pages remain unavailable locally.",
-      "consequence": "The selected Sorcerer spells and bounded Druid spell records are eligible for hydration; all other spell rules remain explicit gaps."
-    },
-    "core-rulebook-druid-expansions": {
-      "needed": "Druid levels outside level 3, domains outside Fire, and animal companions",
-      "availability": "The official Archives of Nethys Druid class page plus the Elemental Ally archetype page and its cited eidolon statistics (unchained Eidolon rules, Elemental subtype, Quadruped base form) are archived for the bounded level-3 archetype slice; other unarchived pages remain unavailable locally.",
-      "consequence": "The Fire-domain choice, the Elemental Ally archetype with its level-3 fire eidolon row, and level-3 spontaneous Summon Nature's Ally I-II metadata are in scope; companions, druid levels outside 3, other elements, other archetypes, and other eidolon levels remain unresolved gaps."
-    },
-    "core-rulebook-conditions": {
-      "needed": "Condition definitions used by class features, feats, equipment, and spells",
-      "availability": "Available in the official Archives of Nethys Core rules but not yet archived locally.",
-      "consequence": "Rules text that depends on unsnapshotted condition definitions remains a source gap."
-    }
+  "pathfinder-unchained-pdf": {
+   "file": "Pathfinder Unchained.pdf",
+   "sha256": "8c244211a77e71fba994a1e236a8154a213fa871c222b1852993c19b2ed7cb69",
+   "description": "60-page Simple Monster Creation chapter PDF."
+  },
+  "beastiary-pdf": {
+   "file": "beastiary.pdf",
+   "sha256": "c79cd92d0e1af0e961db87b233341c944bbe217187aa85612a8f5f44c1db6880",
+   "description": "2-page Bestiary appendix PDF."
+  },
+  "npc-mode-plan": {
+   "file": "NPC_MODE_PLAN.md",
+   "sha256": "934c509d33764d284d124597af2efd82c7d4a18b92605e47d13d56e424afe3b5",
+   "description": "Local implementation plan."
+  },
+  "aon-creating-npcs-html": {
+   "file": "sources/reference/aonprd/creating-npcs.html",
+   "sha256": "a1c9f2075311b9330f9a9211badf260973c1cbb16cb219a1c43357099b83c26c",
+   "officialUrl": "https://aonprd.com/Rules.aspx?ID=353",
+   "retrievedAt": "2026-09-02T08:18:33Z",
+   "description": "Official Archives of Nethys Creating NPCs page: Core Rulebook pages 448-454, including Steps 1-7, Tables 14-6 through 14-9, and Kiramor."
+  },
+  "aon-caster-level-html": {
+   "file": "sources/reference/aonprd/caster-level.html",
+   "sha256": "cb5c7079727a8038ae92c02509587c966dfd4cec79f8910591452ba3fdda94ca",
+   "officialUrl": "https://aonprd.com/Rules.aspx?ID=207",
+   "retrievedAt": "2026-09-03T11:27:33Z",
+   "description": "Official current Archives of Nethys Caster Level rule for spellcasting characters."
+  },
+  "aon-getting-started-html": {
+   "file": "sources/reference/aonprd/getting-started.html",
+   "sha256": "0fcfce8f6057b5ff2fcc02927dcac65ce5e97ca6472769e971207b0ebe1bd452",
+   "officialUrl": "https://legacy.aonprd.com/coreRulebook/gettingStarted.html",
+   "retrievedAt": "2026-09-02T08:46:57Z",
+   "description": "Official Archives of Nethys legacy Core Rulebook general rules, including rounding and ability modifiers."
+  },
+  "aon-core-races-html": {
+   "file": "sources/reference/aonprd/core-races.html",
+   "sha256": "beb28dcb3f0a1d404ae850ca5c7e29117aa6dbc32cba106b9c733dca5f53f222",
+   "officialUrl": "https://legacy.aonprd.com/coreRulebook/races.html",
+   "retrievedAt": "2026-09-02T08:18:33Z",
+   "description": "Official Archives of Nethys legacy Core Rulebook race chapter."
+  },
+  "aon-character-classes-html": {
+   "file": "sources/reference/aonprd/character-classes.html",
+   "sha256": "7c5b8349f9cb5238a213c354eaced69cef2d5dd843a0bac9332ae7bcbd7463ca",
+   "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html",
+   "retrievedAt": "2026-09-02T08:18:33Z",
+   "description": "Official Archives of Nethys legacy Core Rulebook class and advancement rules."
+  },
+  "aon-cleric-html": {
+   "file": "sources/reference/aonprd/cleric.html",
+   "sha256": "85138bdb3a11e2c9d1c90248450f504b5bacb0bac43376f3c58d8da20ae9a2e8",
+   "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+   "retrievedAt": "2026-09-03T11:27:50Z",
+   "description": "Official current Archives of Nethys Cleric domain-slot rule used by the Druid Nature Bond implementation."
+  },
+  "aon-npc-classes-html": {
+   "file": "sources/reference/aonprd/npc-classes.html",
+   "sha256": "09fc5c001d42dcdf4c8a49e1680d32554bbac485aa3160cef1de91749a99c770",
+   "officialUrl": "https://legacy.aonprd.com/coreRulebook/NPCClasses.html",
+   "retrievedAt": "2026-09-02T08:18:33Z",
+   "description": "Official Archives of Nethys legacy Core Rulebook tables and rules for the five NPC classes."
+  },
+  "aon-skills-html": {
+   "file": "sources/reference/aonprd/skills.html",
+   "sha256": "26b888c3e3adbd583d722576cfc3ad1b048fc69c2997f2aa063bf85f95ff9ffd",
+   "officialUrl": "https://legacy.aonprd.com/coreRulebook/usingSkills.html",
+   "retrievedAt": "2026-09-02T08:18:33Z",
+   "description": "Official Archives of Nethys legacy Core Rulebook rules for acquiring and using skills."
+  },
+  "aon-skill-descriptions-html": {
+   "file": "sources/reference/aonprd/skill-descriptions.html",
+   "sha256": "f0a474ef5da089308cc2ebb260add613715dd637df875ae0beb0e412bdcf454f",
+   "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html",
+   "retrievedAt": "2026-09-02T08:26:11Z",
+   "description": "Official Archives of Nethys legacy Core Rulebook skill summary table and skill-description conventions."
+  },
+  "aon-feats-html": {
+   "file": "sources/reference/aonprd/feats.html",
+   "sha256": "ac2039ee953b216f55d15bf100963f9cedf2d1da9b72216df925714a3725459e",
+   "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
+   "retrievedAt": "2026-09-02T08:18:33Z",
+   "description": "Official Archives of Nethys legacy Core Rulebook feat rules, table, and descriptions."
+  },
+  "aon-equipment-html": {
+   "file": "sources/reference/aonprd/equipment.html",
+   "sha256": "a6b945662c32f2753e0f974214bd2f23692854b57ecc837e017bf0d235b23d68",
+   "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+   "retrievedAt": "2026-09-02T08:18:33Z",
+   "description": "Official Archives of Nethys legacy Core Rulebook mundane equipment rules and tables."
+  },
+  "aon-combat-html": {
+   "file": "sources/reference/aonprd/combat.html",
+   "sha256": "9f72ecd45a8d4b3ebde5681c88fafe483224ae7ec617e9fb21174ecfcf533e00",
+   "officialUrl": "https://legacy.aonprd.com/coreRulebook/combat.html",
+   "retrievedAt": "2026-09-02T08:18:33Z",
+   "description": "Official Archives of Nethys legacy Core Rulebook combat rules."
+  },
+  "aon-goblin-race-html": {
+   "file": "sources/reference/aonprd/goblin-race.html",
+   "sha256": "3ed9274cd131460b29d14b8bd691f46ccc81375e1e7700f2cef87d47dc692017",
+   "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Goblin race page and standard racial traits."
+  },
+  "aon-druid-html": {
+   "file": "sources/reference/aonprd/druid.html",
+   "sha256": "4488e4f43e81f8a31c992b55b6aabb29744af3523e4bf8954422825d2cc9e5e6",
+   "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid",
+   "retrievedAt": "2026-09-03T11:16:31Z",
+   "description": "Official current Archives of Nethys Druid class page, progression, prepared divine spellcasting, Nature Bond, and spontaneous casting rules."
+  },
+  "aon-sorcerer-html": {
+   "file": "sources/reference/aonprd/sorcerer.html",
+   "sha256": "988a272dfd7779734c35b555981d86a8be6dafa38316a806f560a9eea07f8eff",
+   "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Sorcerer class page, progression, spellcasting, and class features."
+  },
+  "aon-fire-domain-html": {
+   "file": "sources/reference/aonprd/fire-domain.html",
+   "sha256": "d018a2532ab805bd4ead0c0b33aaed63eb0b86f2a13afb721de322b7c0f4d30d",
+   "officialUrl": "https://aonprd.com/DomainDisplay.aspx?ItemName=Fire",
+   "retrievedAt": "2026-09-03T11:16:32Z",
+   "description": "Official current Archives of Nethys Core Fire domain page, granted powers, domain slots, and domain spell list."
+  },
+  "aon-elemental-bloodline-html": {
+   "file": "sources/reference/aonprd/elemental-bloodline.html",
+   "sha256": "1dbba6022411f137e46498b525fa554299ec1f02ee3e452e4c6e1347f8904efb",
+   "officialUrl": "https://aonprd.com/BloodlineDisplay.aspx?ItemName=Elemental",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Elemental sorcerer bloodline page."
+  },
+  "aon-wands-html": {
+   "file": "sources/reference/aonprd/wands.html",
+   "sha256": "4722c05485a7ff15b0920bbfb997fda0cb515279370d8dce7f908b5e28e38db4",
+   "officialUrl": "https://aonprd.com/Rules.aspx?Name=Wands&Category=Magic%20Items",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Core wand rules and price table."
+  },
+  "aon-use-magic-device-html": {
+   "file": "sources/reference/aonprd/use-magic-device.html",
+   "sha256": "0b020b27087845573b4d46023e003682f76231b4d269e113af4f3a9988d94ebf",
+   "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Use%20Magic%20Device",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Use Magic Device skill rules."
+  },
+  "aon-spell-acid-splash-html": {
+   "file": "sources/reference/aonprd/spell-acid-splash.html",
+   "sha256": "5d2eef0885f723aadfb0bb50f19f806b70fdd6e5d40fbdd642fe64de32a35607",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Acid%20Splash",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Acid Splash spell page."
+  },
+  "aon-spell-detect-magic-html": {
+   "file": "sources/reference/aonprd/spell-detect-magic.html",
+   "sha256": "2c4792fa85995364b025e3aa6e39d9bd90f4ef7dd58ef0ed718f841d113aae49",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Detect%20Magic",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Detect Magic spell page."
+  },
+  "aon-spell-light-html": {
+   "file": "sources/reference/aonprd/spell-light.html",
+   "sha256": "647bc63299845dc245748236eee8dbd360dd3771e1ddec55a98d9cb91495a079",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Light",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Light spell page."
+  },
+  "aon-spell-mage-hand-html": {
+   "file": "sources/reference/aonprd/spell-mage-hand.html",
+   "sha256": "d58bdcde471a6d77c5894b9c65018421a88f9b736e776459984cb3a4f9798b7c",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Hand",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Mage Hand spell page."
+  },
+  "aon-spell-prestidigitation-html": {
+   "file": "sources/reference/aonprd/spell-prestidigitation.html",
+   "sha256": "b577ec1eeb2c9546fa5e1e4287121e7353fdc4347d1e8e075e8aa2060bacf2b4",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Prestidigitation",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Prestidigitation spell page."
+  },
+  "aon-spell-read-magic-html": {
+   "file": "sources/reference/aonprd/spell-read-magic.html",
+   "sha256": "f5c1664b8c7050ad1243488d6f3f4573cb657e6b0884ef395bae3f5cb35464bf",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Read%20Magic",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Read Magic spell page."
+  },
+  "aon-spell-burning-hands-html": {
+   "file": "sources/reference/aonprd/spell-burning-hands.html",
+   "sha256": "9cb0dd8126752a0e9dafd7a183b75cfa21f6a44f29d690bc22e1140994814f39",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Burning%20Hands",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Burning Hands spell page."
+  },
+  "aon-spell-mage-armor-html": {
+   "file": "sources/reference/aonprd/spell-mage-armor.html",
+   "sha256": "d562b7477a5276488db8e76077c4af5d8e00b4d6e1ddbdd887ab087230b99c7d",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Armor",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Mage Armor spell page."
+  },
+  "aon-spell-magic-missile-html": {
+   "file": "sources/reference/aonprd/spell-magic-missile.html",
+   "sha256": "513d779d7a95738068a2651bc3bd8b724b7a322466084e4753cf9bfba440835e",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Magic%20Missile",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Magic Missile spell page."
+  },
+  "aon-spell-shield-html": {
+   "file": "sources/reference/aonprd/spell-shield.html",
+   "sha256": "6d932171206ba0f29fe4c62a38becc378f2525ff2b049a3da879ce46e8c423e2",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Shield",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Shield spell page."
+  },
+  "aon-spell-flaming-sphere-html": {
+   "file": "sources/reference/aonprd/spell-flaming-sphere.html",
+   "sha256": "85582a4a3a81e31728f5e4d3cd774084d731a6ffb982262bd2588188fe5389b7",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Flaming%20Sphere",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Flaming Sphere spell page."
+  },
+  "aon-spell-mirror-image-html": {
+   "file": "sources/reference/aonprd/spell-mirror-image.html",
+   "sha256": "e8a8dd3bd213a1d4e1ec2c13ef57782d090ef684a297a33115b1fff11707320e",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mirror%20Image",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Mirror Image spell page."
+  },
+  "aon-spell-scorching-ray-html": {
+   "file": "sources/reference/aonprd/spell-scorching-ray.html",
+   "sha256": "46ab2c057eecaf0188dad28d43ae0d5cc3fc271a0568c3db93008df1cfe5fd40",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Scorching%20Ray",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Scorching Ray spell page."
+  },
+  "aon-cloak-of-resistance-html": {
+   "file": "sources/reference/aonprd/cloak-of-resistance.html",
+   "sha256": "2ce06482d0fe2ba47aac1a05d527832d4820e3d7cefff2942b6c581e880921bb",
+   "officialUrl": "https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=Cloak%20of%20Resistance1",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Cloak of Resistance page."
+  },
+  "aon-skill-bluff-html": {
+   "file": "sources/reference/aonprd/skill-bluff.html",
+   "sha256": "d853041c76e048a3965bf21627c6e9632de4d98035766ee8b6a12d1a619c4199",
+   "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Bluff",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Bluff skill page."
+  },
+  "aon-skill-spellcraft-html": {
+   "file": "sources/reference/aonprd/skill-spellcraft.html",
+   "sha256": "451d15f593dcfd9d14d923ae99d1653e6a4d6b7ea4e976edb39cfe89c3128c2f",
+   "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Spellcraft",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Spellcraft skill page."
+  },
+  "aon-spell-grease-html": {
+   "file": "sources/reference/aonprd/spell-grease.html",
+   "sha256": "1143bd067b9199a4a7b22701f29b0081e3f3ee94685eb6b9c6ac0d80c3820870",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Grease",
+   "retrievedAt": "2026-09-02T10:55:56Z",
+   "description": "Official current Archives of Nethys Grease spell page."
+  },
+  "aon-designing-encounters-html": {
+   "file": "sources/reference/aonprd/designing-encounters.html",
+   "sha256": "76fba00504c7c4cfa9cdf252d3cc4e2d3f551aafec80704ad0797bf928cfeba7",
+   "officialUrl": "https://aonprd.com/Rules.aspx?ID=252",
+   "retrievedAt": "2026-09-02T11:46:09Z",
+   "description": "Official current Archives of Nethys encounter-design and classed-NPC CR rules."
+  },
+  "aon-spell-fireball-html": {
+   "file": "sources/reference/aonprd/spell-fireball.html",
+   "sha256": "9cc0a87491b10e1a72c3bdfadc2a75b2bcb65d6c94342774422e9bc775e6729a",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Fireball",
+   "retrievedAt": "2026-09-02T11:46:09Z",
+   "description": "Official current Archives of Nethys Fireball spell page."
+  },
+  "aon-spell-flare-html": {
+   "file": "sources/reference/aonprd/spell-flare.html",
+   "sha256": "1cc9242c7137eee33c561ef75ad03d92b44a8e061597b3f589d8a6ca4436a27a",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Flare",
+   "retrievedAt": "2026-09-02T11:46:09Z",
+   "description": "Official current Archives of Nethys Flare spell page."
+  },
+  "aon-spell-barkskin-html": {
+   "file": "sources/reference/aonprd/spell-barkskin.html",
+   "sha256": "29d9a50d26ae89706013851ff27506ca49c2e498187e880c553540d338d46be3",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Barkskin",
+   "retrievedAt": "2026-09-03T11:16:33Z",
+   "description": "Official current Archives of Nethys Barkskin spell page."
+  },
+  "aon-spell-cure-light-wounds-html": {
+   "file": "sources/reference/aonprd/spell-cure-light-wounds.html",
+   "sha256": "c478f043c769e2fbf5dd92134283581a93d3abf885bf86b1b37e921ab6ddc200",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Cure%20Light%20Wounds",
+   "retrievedAt": "2026-09-03T11:16:33Z",
+   "description": "Official current Archives of Nethys Cure Light Wounds spell page."
+  },
+  "aon-spell-entangle-html": {
+   "file": "sources/reference/aonprd/spell-entangle.html",
+   "sha256": "d348be5fa221bf69a6523f1c72d2f25c92497fad44091d8ea48ee55d185de801",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Entangle",
+   "retrievedAt": "2026-09-03T11:16:34Z",
+   "description": "Official current Archives of Nethys Entangle spell page."
+  },
+  "aon-spell-produce-flame-html": {
+   "file": "sources/reference/aonprd/spell-produce-flame.html",
+   "sha256": "89724e25208890f1a8d7922ffd28433f800a1d61f031a16c019652b277de2a66",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Produce%20Flame",
+   "retrievedAt": "2026-09-03T11:16:34Z",
+   "description": "Official current Archives of Nethys Produce Flame spell page."
+  },
+  "aon-spell-summon-natures-ally-i-html": {
+   "file": "sources/reference/aonprd/spell-summon-natures-ally-i.html",
+   "sha256": "a42df28825057e9fc3e9c2a139f37b6bb57d2ac327107ce9122029c51da794d6",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%201",
+   "retrievedAt": "2026-09-03T11:17:19Z",
+   "description": "Official current Archives of Nethys Summon Nature's Ally I spell page."
+  },
+  "aon-spell-summon-natures-ally-ii-html": {
+   "file": "sources/reference/aonprd/spell-summon-natures-ally-ii.html",
+   "sha256": "a0680f1264389d84ef19d0d771c7d934e55cdac752c8bc1bf651750e87cf6b3f",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%202",
+   "retrievedAt": "2026-09-03T11:17:19Z",
+   "description": "Official current Archives of Nethys Summon Nature's Ally II spell page."
+  },
+  "aon-elemental-ally-html": {
+   "file": "sources/reference/aonprd/elemental-ally.html",
+   "sha256": "f2f971fafee9dbfe39556a580aac52a5dd2a1a54e9c3b0b88037ba7d180401e7",
+   "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally",
+   "retrievedAt": "2026-09-03T16:02:09Z",
+   "description": "Official current Archives of Nethys Elemental Ally druid archetype (Monster Summoner's Handbook pg. 16): Elemental Eidolons, Elemental Empathy, Elemental Magic, Elemental Resistance."
+  },
+  "aon-eidolon-unchained-html": {
+   "file": "sources/reference/aonprd/eidolon-unchained.html",
+   "sha256": "c9ff24260a682fd34a58b566a851d479ba1b73b2b4aad4f73cb6c8a7d9d29334",
+   "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)",
+   "retrievedAt": "2026-09-03T16:02:09Z",
+   "description": "Official current Archives of Nethys unchained Eidolon companion page: Table 1-6 Eidolon Base Statistics and the eidolon rules the Elemental Ally archetype cites via Pathfinder Unchained page 33."
+  },
+  "aon-eidolon-uc-subtypes-html": {
+   "file": "sources/reference/aonprd/eidolon-uc-subtypes.html",
+   "sha256": "961e0932ecdffe313226abc113d531b0b38fc42e8988829e22b2b253f5e3dfb7",
+   "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx",
+   "retrievedAt": "2026-09-03T16:02:09Z",
+   "description": "Official current Archives of Nethys unchained eidolon subtypes page: the Elemental subtype (Pathfinder Unchained pg. 33) with base forms and per-level base evolutions."
+  },
+  "aon-eidolon-uc-base-forms-html": {
+   "file": "sources/reference/aonprd/eidolon-uc-base-forms.html",
+   "sha256": "90e455f786667e1355f6c9f7cf3294498baaaa9c8a2ef4c6234acb79e372d702",
+   "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx",
+   "retrievedAt": "2026-09-03T16:52:10Z",
+   "description": "Official current Archives of Nethys unchained eidolon base forms page: the Biped starting statistics (Pathfinder Unchained pg. 34) used by the level-3 fire elemental eidolon row."
+  },
+  "aon-summoner-uc-evolutions-html": {
+   "file": "sources/reference/aonprd/summoner-uc-evolutions.html",
+   "sha256": "18498ec787bcb04aa198ba3478c26ffc213ff96ea35fbf510b575fbd6f211ef1",
+   "officialUrl": "https://aonprd.com/SummonerUCEvolutions.aspx",
+   "retrievedAt": "2026-09-03T16:52:10Z",
+   "description": "Official current Archives of Nethys unchained summoner evolutions page: the Slam evolution (Pathfinder Unchained pg. 36) granting the elemental biped's slam attack."
+  },
+  "aon-eidolon-base-forms-html": {
+   "file": "sources/reference/aonprd/eidolon-base-forms.html",
+   "sha256": "841ebabbe8446e6596f61984684d23bfed47147819d638628505addc6444b096",
+   "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
+   "retrievedAt": "2026-09-03T16:02:09Z",
+   "description": "Official current Archives of Nethys eidolon base forms page: the Quadruped starting statistics used by the level-3 fire elemental eidolon row."
+  },
+  "aon-halfling-html": {
+   "file": "sources/reference/aonprd/halfling.html",
+   "sha256": "ffcf82e44b808a995b6287453f4200d6ad6d8eb22d4e93c9d0ae6a40f8d0e708",
+   "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Halfling",
+   "retrievedAt": "2026-09-03T18:10:20Z",
+   "description": "Official current Archives of Nethys Halfling race page and standard racial traits."
+  },
+  "aon-bard-html": {
+   "file": "sources/reference/aonprd/bard.html",
+   "sha256": "64a764f897c04d957a0ffd406c420b04baa0d8d374a58b39bcc958b731ace931",
+   "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+   "retrievedAt": "2026-09-03T18:10:20Z",
+   "description": "Official current Archives of Nethys Bard class page, progression, spellcasting, and class features."
+  },
+  "aon-spell-charm-person-html": {
+   "file": "sources/reference/aonprd/spell-charm-person.html",
+   "sha256": "4f8f2ec50bbed8f68a763bc78312e4a67307ed16356a280848a70a516731b9f7",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Charm+Person",
+   "retrievedAt": "2026-09-03T18:11:27Z",
+   "description": "Official current Archives of Nethys Charm Person spell page."
+  },
+  "aon-spell-sleep-html": {
+   "file": "sources/reference/aonprd/spell-sleep.html",
+   "sha256": "79f399250a4d0d5dbddd953aa1eb8bcd764c2dbddea0a9b2c285be4f5f963161",
+   "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Sleep",
+   "retrievedAt": "2026-09-03T18:11:27Z",
+   "description": "Official current Archives of Nethys Sleep spell page."
+  },
+  "aon-skill-perform-html": {
+   "file": "sources/reference/aonprd/skill-perform.html",
+   "sha256": "e7551d1ddcc1ffdb7cc91165f728678d85bfe2b2af0e29360c20f1f98f67393f",
+   "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Perform",
+   "retrievedAt": "2026-09-03T18:13:56Z",
+   "description": "Official current Archives of Nethys Perform skill page."
+  },
+  "aon-skill-perception-html": {
+   "file": "sources/reference/aonprd/skill-perception.html",
+   "sha256": "11a74615aa73a39c6a458ebf9d0bcdec023852952302ceb9ff347e281f425e90",
+   "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Perception",
+   "retrievedAt": "2026-09-03T18:13:56Z",
+   "description": "Official current Archives of Nethys Perception skill page."
+  },
+  "aon-skill-diplomacy-html": {
+   "file": "sources/reference/aonprd/skill-diplomacy.html",
+   "sha256": "fd8d6c63ba4d7f291aa85fb280f4fd200657cfba211745bcddf8749d3195bd15",
+   "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Diplomacy",
+   "retrievedAt": "2026-09-03T18:13:56Z",
+   "description": "Official current Archives of Nethys Diplomacy skill page."
   }
+ },
+ "extracts": {
+  "core-rulebook-extract": {
+   "file": "sources/npc/core-rulebook-extract.txt",
+   "sha256": "0871da03406f898a23be03dd0732392104a58d5978dd281270ffc729300b68e9",
+   "derivedFrom": "core-rulebook-pdf",
+   "command": "pdftotext Pathfinder_RPG_Core_Rulebook.pdf sources/npc/core-rulebook-extract.txt",
+   "pdfPages": "1-16 of 16",
+   "lines": [
+    1,
+    1770
+   ],
+   "contents": "Complete spell-list chapter for Bard (0-6), Cleric (0-9), Druid (0-9), Paladin (1-4), Ranger (1-4), Sorcerer/Wizard (0-9), followed by the opening of the alphabetical spell descriptions (roughly the letter A: Acid Fog, Acid Splash, Air Walker, Astral Projection, Energy Drain, Etherealness, Shapechange, Soul Bind, Time Stop, Wail of the Banshee, Wish). Two-column PDF; reading order is reliable in the list section, partially scrambled in the description section.",
+   "catalogUse": "NPC spell lists (adept = cleric/druid lists; PC casters) for tasks 3.b and 5.a."
+  },
+  "core-rulebook-extract-spell-lists": {
+   "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
+   "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
+   "derivedFrom": "core-rulebook-extract",
+   "command": "sed -n '1,1691p' sources/npc/core-rulebook-extract.txt > sources/npc/core-rulebook-extract.spell-lists.txt",
+   "lines": [
+    1,
+    1691
+   ],
+   "contents": "Spell-list portion only: complete class lists for Bard (0-6), Cleric (0-9), Druid (0-9), Paladin (1-4), Ranger (1-4), and Sorcerer/Wizard (0-9), ending immediately before the alphabetical spell-description section. Two-column extraction losses: the cleric 7th-level and druid 3rd-level lists are empty in the excerpt at page boundaries; the parser records these as emptySections.",
+   "catalogUse": "Stable parse target for spell list membership in the NPC catalog (tools/parse_npc_sources.py)."
+  },
+  "aon-creating-npcs": {
+   "file": "sources/npc/aonprd/creating-npcs.txt",
+   "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+   "derivedFrom": "aon-creating-npcs-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    133
+   ],
+   "contents": "Creating NPCs Steps 1-7, ability arrays and presets, racial adjustments, simplified skill ranks, feat recommendations, NPC gear budgets and allocations, and the Kiramor worked example.",
+   "catalogUse": "Authoritative workflow and numeric tables for class-based NPC creation."
+  },
+  "aon-caster-level": {
+   "file": "sources/npc/aonprd/caster-level.txt",
+   "sha256": "a9ff6089dc79f2e2daab6f57401a935e2c5478ec5ac200c7f44f036d8124314a",
+   "derivedFrom": "aon-caster-level-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    6
+   ],
+   "contents": "Official current Archives of Nethys caster-level definition and class-level relationship.",
+   "catalogUse": "Druid caster level and level-dependent spell arithmetic."
+  },
+  "aon-getting-started": {
+   "file": "sources/npc/aonprd/getting-started.txt",
+   "sha256": "2a59a8c5aaf2c1bc734c1ed47efaccecc037e3c703fe26f09e1b29c57535d78d",
+   "derivedFrom": "aon-getting-started-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    159
+   ],
+   "contents": "Core general rules, including round-down policy, ability modifiers, and ability applications.",
+   "catalogUse": "Average-HP rounding and ability modifier calculations."
+  },
+  "aon-core-races": {
+   "file": "sources/npc/aonprd/core-races.txt",
+   "sha256": "281a370dc1bff2a537f68449fcf808c2a6d8d8a131012e56522c1c5db60cab90",
+   "derivedFrom": "aon-core-races-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    128
+   ],
+   "contents": "Core racial traits for dwarf, elf, gnome, half-elf, half-orc, halfling, and human.",
+   "catalogUse": "Race adjustments and traits."
+  },
+  "aon-character-classes": {
+   "file": "sources/npc/aonprd/character-classes.txt",
+   "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
+   "derivedFrom": "aon-character-classes-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    48
+   ],
+   "contents": "Class selection, level advancement, favored-class, multiclassing, and general feat and ability-score advancement rules.",
+   "catalogUse": "Shared character advancement rules."
+  },
+  "aon-cleric": {
+   "file": "sources/npc/aonprd/cleric.txt",
+   "sha256": "a31087ad6598a80d691dcb5b5759f8a8fd7dd67b2c7a14bdf5ddbef1421b849e",
+   "derivedFrom": "aon-cleric-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    103
+   ],
+   "contents": "Official current Archives of Nethys Cleric class rules, including one domain spell slot for each castable spell level and domain-slot spontaneous-casting restrictions.",
+   "catalogUse": "Shared domain-slot rule required by Druid Nature Bond; no Cleric catalog slice is enabled."
+  },
+  "aon-npc-classes": {
+   "file": "sources/npc/aonprd/npc-classes.txt",
+   "sha256": "17c52d1bc3df506a81c3d077fa252350b98301db9479fd282a7e4f1f28af2f3f",
+   "derivedFrom": "aon-npc-classes-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    172
+   ],
+   "contents": "Adept, aristocrat, commoner, expert, and warrior class rules and level tables.",
+   "catalogUse": "Basic NPC class tables and features."
+  },
+  "aon-skills": {
+   "file": "sources/npc/aonprd/skills.txt",
+   "sha256": "56cdedfa6a3ae326bf8531f45fa9cfc93ecb1aa1a60e767819c7f259cb5ec18a",
+   "derivedFrom": "aon-skills-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    38
+   ],
+   "contents": "Skill ranks, class-skill bonus, rank cap, checks, and armor check penalty rule.",
+   "catalogUse": "Skill calculation and validation."
+  },
+  "aon-skill-descriptions": {
+   "file": "sources/npc/aonprd/skill-descriptions.txt",
+   "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+   "derivedFrom": "aon-skill-descriptions-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    53
+   ],
+   "contents": "Core skill names, PC class-skill assignments, key abilities, trained-only flags, and armor check penalty applicability.",
+   "catalogUse": "Core skill records and PC class-skill mappings."
+  },
+  "aon-feats": {
+   "file": "sources/npc/aonprd/feats.txt",
+   "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+   "derivedFrom": "aon-feats-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    1062
+   ],
+   "contents": "Core feat progression, feat table, prerequisites, benefits, and descriptions.",
+   "catalogUse": "Core feat records and typed prerequisites."
+  },
+  "aon-equipment": {
+   "file": "sources/npc/aonprd/equipment.txt",
+   "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+   "derivedFrom": "aon-equipment-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    774
+   ],
+   "contents": "Core mundane weapons, armor, goods, services, prices, damage, maximum Dexterity bonuses, and armor check penalties.",
+   "catalogUse": "Mundane item records and equipment-derived statistics."
+  },
+  "aon-combat": {
+   "file": "sources/npc/aonprd/combat.txt",
+   "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+   "derivedFrom": "aon-combat-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    617
+   ],
+   "contents": "Core combat calculations and rules for attacks, AC, saves, initiative, CMB, CMD, and iterative attacks.",
+   "catalogUse": "Derived NPC combat statistics."
+  },
+  "aon-goblin-race": {
+   "file": "sources/npc/aonprd/goblin-race.txt",
+   "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+   "derivedFrom": "aon-goblin-race-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    69
+   ],
+   "contents": "Official current Archives of Nethys Goblin race page and standard racial traits",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-druid": {
+   "file": "sources/npc/aonprd/druid.txt",
+   "sha256": "c65a4408988886a02872be131428210a6e287e206b8f181717d170e62d34e944",
+   "derivedFrom": "aon-druid-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    159
+   ],
+   "contents": "Official current Archives of Nethys Druid class page, progression, prepared divine spellcasting, Nature Bond, and spontaneous summon nature's ally conversion.",
+   "catalogUse": "Goblin Druid level 3 source-gated production slice."
+  },
+  "aon-sorcerer": {
+   "file": "sources/npc/aonprd/sorcerer.txt",
+   "sha256": "ebe8943d2e0582ba82f0a180d35ab9ba56e2e9f2f9fb24a9f29d4b8d58fb80af",
+   "derivedFrom": "aon-sorcerer-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    66
+   ],
+   "contents": "Official current Archives of Nethys Sorcerer class page, progression, spellcasting, and class features",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-fire-domain": {
+   "file": "sources/npc/aonprd/fire-domain.txt",
+   "sha256": "fe6873fb95ecacb37198240a888c9453b4198a974a1294eec4585cb2c7eca2ab",
+   "derivedFrom": "aon-fire-domain-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    7
+   ],
+   "contents": "Official current Archives of Nethys Core Fire domain granted powers, domain slots, and domain spell list.",
+   "catalogUse": "Goblin Druid level 3 Fire domain choice and power."
+  },
+  "aon-elemental-bloodline": {
+   "file": "sources/npc/aonprd/elemental-bloodline.txt",
+   "sha256": "b654638572f9597e498032d5bf439f073e07c3c4062313631beb20b80ae6805f",
+   "derivedFrom": "aon-elemental-bloodline-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    19
+   ],
+   "contents": "Official current Archives of Nethys Elemental sorcerer bloodline page",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-wands": {
+   "file": "sources/npc/aonprd/wands.txt",
+   "sha256": "70ffb82a3ded2be78064d7cc10bb5d7895ad4f679732a1fb9b06374a69cf7957",
+   "derivedFrom": "aon-wands-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    21
+   ],
+   "contents": "Official current Archives of Nethys Core wand rules and price table",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-use-magic-device": {
+   "file": "sources/npc/aonprd/use-magic-device.txt",
+   "sha256": "61c5d6abf9956fd07978213a34375b1255cf8d1b8a26ae350b74242457ea314c",
+   "derivedFrom": "aon-use-magic-device-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    40
+   ],
+   "contents": "Official current Archives of Nethys Use Magic Device skill rules",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-spell-acid-splash": {
+   "file": "sources/npc/aonprd/spell-acid-splash.txt",
+   "sha256": "b4ad758edb41b90ddbc15fe50667ddbd2fb954a6608832b56062def909faaa35",
+   "derivedFrom": "aon-spell-acid-splash-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    13
+   ],
+   "contents": "Official current Archives of Nethys Acid Splash spell page",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-spell-detect-magic": {
+   "file": "sources/npc/aonprd/spell-detect-magic.txt",
+   "sha256": "6d75ee9f310bdd3911eab59b8abceffc5f698ba3cef36a4200b1748dfda88ab6",
+   "derivedFrom": "aon-spell-detect-magic-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    58
+   ],
+   "contents": "Official current Archives of Nethys Detect Magic spell page",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-spell-light": {
+   "file": "sources/npc/aonprd/spell-light.txt",
+   "sha256": "3722f8addac74a7ba5774fdb273d4cae9542b0b162e55a7aa37be35132fc11e0",
+   "derivedFrom": "aon-spell-light-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    14
+   ],
+   "contents": "Official current Archives of Nethys Light spell page",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-spell-mage-hand": {
+   "file": "sources/npc/aonprd/spell-mage-hand.txt",
+   "sha256": "5361d41fdbaf39a6baebcee3e4d26d38cee5f710bb806f36510b8e15c86fa7ff",
+   "derivedFrom": "aon-spell-mage-hand-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    13
+   ],
+   "contents": "Official current Archives of Nethys Mage Hand spell page",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-spell-prestidigitation": {
+   "file": "sources/npc/aonprd/spell-prestidigitation.txt",
+   "sha256": "fcc0f9a72a4adae21b38f9a6bde121926e856e6a29af341c57dd1cf468161962",
+   "derivedFrom": "aon-spell-prestidigitation-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    13
+   ],
+   "contents": "Official current Archives of Nethys Prestidigitation spell page",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-spell-read-magic": {
+   "file": "sources/npc/aonprd/spell-read-magic.txt",
+   "sha256": "1e1b52a23fdb1453f5d976863127b7621ae5880a8d5a4024b05fad6d942ddf8f",
+   "derivedFrom": "aon-spell-read-magic-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    13
+   ],
+   "contents": "Official current Archives of Nethys Read Magic spell page",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-spell-burning-hands": {
+   "file": "sources/npc/aonprd/spell-burning-hands.txt",
+   "sha256": "45592b0968a019ae0016d7b8190fab3f6d98dd8ca41dd49c8f2b036aba93d727",
+   "derivedFrom": "aon-spell-burning-hands-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    16
+   ],
+   "contents": "Official current Archives of Nethys Burning Hands spell page",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-spell-mage-armor": {
+   "file": "sources/npc/aonprd/spell-mage-armor.txt",
+   "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+   "derivedFrom": "aon-spell-mage-armor-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    17
+   ],
+   "contents": "Official current Archives of Nethys Mage Armor spell page",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-spell-magic-missile": {
+   "file": "sources/npc/aonprd/spell-magic-missile.txt",
+   "sha256": "82e54a13f4e8a2e77a642780c0dc2474bb5e49f90f84728204916bfd485f1c35",
+   "derivedFrom": "aon-spell-magic-missile-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    19
+   ],
+   "contents": "Official current Archives of Nethys Magic Missile spell page",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-spell-shield": {
+   "file": "sources/npc/aonprd/spell-shield.txt",
+   "sha256": "426fd2722e6ff650ef50163c2be7dd2a9b664d9071ebacef3e72bbd27b3511d0",
+   "derivedFrom": "aon-spell-shield-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    12
+   ],
+   "contents": "Official current Archives of Nethys Shield spell page",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-spell-flaming-sphere": {
+   "file": "sources/npc/aonprd/spell-flaming-sphere.txt",
+   "sha256": "3e86b3f2f739e99037cff2e142d6a9d1a19a3d805f6acf6e936211157cdc9e1d",
+   "derivedFrom": "aon-spell-flaming-sphere-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    27
+   ],
+   "contents": "Official current Archives of Nethys Flaming Sphere spell page",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-spell-mirror-image": {
+   "file": "sources/npc/aonprd/spell-mirror-image.txt",
+   "sha256": "8d4f9a05b6af81b8a434b08a024dd20468f099bb8e84aa916f894323ac9d994e",
+   "derivedFrom": "aon-spell-mirror-image-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    17
+   ],
+   "contents": "Official current Archives of Nethys Mirror Image spell page",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-spell-scorching-ray": {
+   "file": "sources/npc/aonprd/spell-scorching-ray.txt",
+   "sha256": "6cd9453cd80241ed34a8535e926a1863d9b9fe82da1d3bec34c2d286f91aeafd",
+   "derivedFrom": "aon-spell-scorching-ray-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    16
+   ],
+   "contents": "Official current Archives of Nethys Scorching Ray spell page",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-cloak-of-resistance": {
+   "file": "sources/npc/aonprd/cloak-of-resistance.txt",
+   "sha256": "49a91f48c74be1ec7f01ed11f3d4c80c14133b60f5cc1c23250434297b8d7176",
+   "derivedFrom": "aon-cloak-of-resistance-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    11
+   ],
+   "contents": "Cloak of Resistance prices and saving-throw effects",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-skill-bluff": {
+   "file": "sources/npc/aonprd/skill-bluff.txt",
+   "sha256": "f79d3c05889b0e2b54f3c48d1fd9c64a09ba705bf4f89a07dc095ecc155ef73d",
+   "derivedFrom": "aon-skill-bluff-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    33
+   ],
+   "contents": "Bluff skill rules",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-skill-spellcraft": {
+   "file": "sources/npc/aonprd/skill-spellcraft.txt",
+   "sha256": "31d7d09a88421c45a45cf4d5a2452e1d6de4a75ac027d7f271b9ae0be223e7c7",
+   "derivedFrom": "aon-skill-spellcraft-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    31
+   ],
+   "contents": "Spellcraft skill rules",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-spell-grease": {
+   "file": "sources/npc/aonprd/spell-grease.txt",
+   "sha256": "f5955826cec6d9c6be4ae6028266fab81797e90536d8d739b1172b1ffd8f899d",
+   "derivedFrom": "aon-spell-grease-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    30
+   ],
+   "contents": "Grease spell rules",
+   "catalogUse": "Goblin sorcerer levels 5\u20136 source-gated production slice."
+  },
+  "aon-designing-encounters": {
+   "file": "sources/npc/aonprd/designing-encounters.txt",
+   "sha256": "fcfea8b5b372ba39e132818cbe9c1c46e2d556ec3bb6ce73cee6ec2c686d3716",
+   "derivedFrom": "aon-designing-encounters-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    1
+   ],
+   "contents": "Official current Archives of Nethys encounter-design and classed-NPC CR rules",
+   "catalogUse": "Goblin sorcerer level-6 source-gated production slice."
+  },
+  "aon-spell-fireball": {
+   "file": "sources/npc/aonprd/spell-fireball.txt",
+   "sha256": "45c8ba2e29b37f76f97691e27c1e3c500853daf3960d4e88cd93e1c36f85c38a",
+   "derivedFrom": "aon-spell-fireball-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    33
+   ],
+   "contents": "Official current Archives of Nethys Fireball spell page",
+   "catalogUse": "Goblin sorcerer level-6 source-gated production slice."
+  },
+  "aon-spell-flare": {
+   "file": "sources/npc/aonprd/spell-flare.txt",
+   "sha256": "3abf681f9013db7442803defbd14abb4606761273e6e92b35ea24823c164eda4",
+   "derivedFrom": "aon-spell-flare-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    26
+   ],
+   "contents": "Official current Archives of Nethys Flare spell page",
+   "catalogUse": "Goblin sorcerer level-6 source-gated production slice."
+  },
+  "aon-spell-barkskin": {
+   "file": "sources/npc/aonprd/spell-barkskin.txt",
+   "sha256": "d6310e9e8d211d5d19892710f2e5aae5010aee137cedc0695596970540ae09fa",
+   "derivedFrom": "aon-spell-barkskin-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    18
+   ],
+   "contents": "Official current Archives of Nethys Barkskin spell page",
+   "catalogUse": "Goblin Druid level-3 prepared spell loadout."
+  },
+  "aon-spell-cure-light-wounds": {
+   "file": "sources/npc/aonprd/spell-cure-light-wounds.txt",
+   "sha256": "19f70b0f4de69b30266dc74ab0ee1d8fda5a4fe54850c846e1e6445090dc20e0",
+   "derivedFrom": "aon-spell-cure-light-wounds-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    16
+   ],
+   "contents": "Official current Archives of Nethys Cure Light Wounds spell page",
+   "catalogUse": "Goblin Druid level-3 prepared spell loadout."
+  },
+  "aon-spell-entangle": {
+   "file": "sources/npc/aonprd/spell-entangle.txt",
+   "sha256": "80202a19d906df069d55d50a63328fe5507b0b8f731ae8f3f2a6c29c238b6c90",
+   "derivedFrom": "aon-spell-entangle-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    17
+   ],
+   "contents": "Official current Archives of Nethys Entangle spell page",
+   "catalogUse": "Goblin Druid level-3 prepared spell loadout."
+  },
+  "aon-spell-produce-flame": {
+   "file": "sources/npc/aonprd/spell-produce-flame.txt",
+   "sha256": "6c1979ac5e2c1eaf905a5882c1256d3086ae6fae0a74222ace367eec7da480b9",
+   "derivedFrom": "aon-spell-produce-flame-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    15
+   ],
+   "contents": "Official current Archives of Nethys Produce Flame spell page",
+   "catalogUse": "Goblin Druid level-3 prepared spell loadout and Fire domain spell membership."
+  },
+  "aon-spell-summon-natures-ally-i": {
+   "file": "sources/npc/aonprd/spell-summon-natures-ally-i.txt",
+   "sha256": "7391d4d8fe159711270a5ab267597a786801b4488a45b6921fd3a3cb0b1124e1",
+   "derivedFrom": "aon-spell-summon-natures-ally-i-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    115
+   ],
+   "contents": "Official current Archives of Nethys Summon Nature's Ally I spell page and its Core creature choice table.",
+   "catalogUse": "Goblin Druid level-3 spontaneous summon nature's ally behavior metadata."
+  },
+  "aon-spell-summon-natures-ally-ii": {
+   "file": "sources/npc/aonprd/spell-summon-natures-ally-ii.txt",
+   "sha256": "119b4acebe526e3b4afc2c7c30521d75be09827720be566cde1aef88f15a92c0",
+   "derivedFrom": "aon-spell-summon-natures-ally-ii-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    13
+   ],
+   "contents": "Official current Archives of Nethys Summon Nature's Ally II spell page.",
+   "catalogUse": "Goblin Druid level-3 spontaneous summon nature's ally behavior metadata."
+  },
+  "aon-elemental-ally": {
+   "file": "sources/npc/aonprd/elemental-ally.txt",
+   "sha256": "e67cbb2f095fac4d0e79e7497f08335fa04d969725632ea15b59c48f5794d3eb",
+   "derivedFrom": "aon-elemental-ally-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    16
+   ],
+   "contents": "Official current Archives of Nethys Elemental Ally druid archetype: Elemental Eidolons, Elemental Empathy, Elemental Magic, and Elemental Resistance.",
+   "catalogUse": "Elemental Ally archetype record and its linked-creature row."
+  },
+  "aon-eidolon-unchained": {
+   "file": "sources/npc/aonprd/eidolon-unchained.txt",
+   "sha256": "bad316ffdd9fa9a086e39fc433b6168f1289f198805cb9798b3445cab309640b",
+   "derivedFrom": "aon-eidolon-unchained-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    46
+   ],
+   "contents": "Official current Archives of Nethys unchained Eidolon rules and Table 1-6: Eidolon Base Statistics.",
+   "catalogUse": "Eidolon base statistics rows and HD/BAB/saves/armor/skills/feats rules for the level-3 fire elemental eidolon row."
+  },
+  "aon-eidolon-uc-subtypes": {
+   "file": "sources/npc/aonprd/eidolon-uc-subtypes.txt",
+   "sha256": "63cc8e5e26c7842a508ddd46d2508d497ee9c87c3015164f2b2b05aab9b8c34d",
+   "derivedFrom": "aon-eidolon-uc-subtypes-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    12
+   ],
+   "contents": "Official current Archives of Nethys unchained eidolon Elemental subtype: base forms and 1st-level base evolutions (immunity to paralysis and sleep; immunity (fire)).",
+   "catalogUse": "Elemental eidolon base evolutions and base form options for the level-3 fire row."
+  },
+  "aon-eidolon-base-forms": {
+   "file": "sources/npc/aonprd/eidolon-base-forms.txt",
+   "sha256": "c9b7213bca3eb59ac0fc7c32155b38d9fd6eacd5f2b82c0d26e9565eaa6b503f",
+   "derivedFrom": "aon-eidolon-base-forms-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    3
+   ],
+   "contents": "Official current Archives of Nethys Quadruped eidolon base form: size, speed, natural armor, save assignments, bite attack, ability scores, and free evolutions.",
+   "catalogUse": "Quadruped starting statistics retained for reference; the fire eidolon row now uses Biped."
+  },
+  "aon-eidolon-base-forms-biped": {
+   "file": "sources/npc/aonprd/eidolon-base-forms-biped.txt",
+   "sha256": "c787d9b56e20b6fd5f513a03432c98649ffd4634f2a4a7b70a38fb15fff9ea84",
+   "derivedFrom": "aon-eidolon-base-forms-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    3
+   ],
+   "contents": "Official current Archives of Nethys Biped eidolon base form: size, speed, natural armor, save assignments, claw attacks, ability scores, and free evolutions.",
+   "catalogUse": "APG Biped starting statistics retained for reference; the unchained elemental eidolon row now cites the PFU Biped extract."
+  },
+  "aon-eidolon-uc-base-forms-biped": {
+   "file": "sources/npc/aonprd/eidolon-uc-base-forms-biped.txt",
+   "sha256": "5ab9f4734f9674515cea68ddfcb1211910b319171e7a2ab8824925b22387dff5",
+   "derivedFrom": "aon-eidolon-uc-base-forms-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    3
+   ],
+   "contents": "Official current Archives of Nethys unchained Biped eidolon base form (Pathfinder Unchained pg. 34): size, speed, natural armor, save assignments, claw attack line, and ability scores.",
+   "catalogUse": "PFU Biped starting statistics for the level-3 fire elemental eidolon row."
+  },
+  "aon-summoner-uc-evolutions-slam": {
+   "file": "sources/npc/aonprd/summoner-uc-evolutions-slam.txt",
+   "sha256": "96b9f3f7ee02aa03c90d16fa778e94e661c3b56b39535c0f4748edaa210b89b9",
+   "derivedFrom": "aon-summoner-uc-evolutions-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    1
+   ],
+   "contents": "Official current Archives of Nethys unchained summoner Slam evolution (Pathfinder Unchained pg. 36): primary attack, 1d8 damage (2d6 Large, 2d8 Huge), limbs (arms) prerequisite, and the claws-replacement rule.",
+   "catalogUse": "Slam attack granted by the Elemental subtype's Biped base form for the level-3 fire elemental eidolon row."
+  },
+  "aon-halfling": {
+   "file": "sources/npc/aonprd/halfling.txt",
+   "sha256": "2a9d00a27d461db36b20b545eb04f1a18ee8e363c6396f7e4e73ce142db0f501",
+   "derivedFrom": "aon-halfling-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    247
+   ],
+   "contents": "Official current Archives of Nethys Halfling race page and standard racial traits.",
+   "catalogUse": "Halfling race racial traits for the halfling bard levels 1-3 slice."
+  },
+  "aon-bard": {
+   "file": "sources/npc/aonprd/bard.txt",
+   "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+   "derivedFrom": "aon-bard-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    55
+   ],
+   "contents": "Official current Archives of Nethys Bard class page, progression, spellcasting, and class features.",
+   "catalogUse": "Halfling bard levels 1-3 source-gated production slice."
+  },
+  "aon-spell-charm-person": {
+   "file": "sources/npc/aonprd/spell-charm-person.txt",
+   "sha256": "6bb8a4176b05dc9dbe7b882db1603f5d3eebca55fedb6228126c921cd11a0b60",
+   "derivedFrom": "aon-spell-charm-person-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    15
+   ],
+   "contents": "Official current Archives of Nethys Charm Person spell description.",
+   "catalogUse": "Bard level-1 known-spell option for the halfling bard slice."
+  },
+  "aon-spell-sleep": {
+   "file": "sources/npc/aonprd/spell-sleep.txt",
+   "sha256": "5ad0e37095817c2eee3326e407973779363f900777f0f576d40a82779a13b3af",
+   "derivedFrom": "aon-spell-sleep-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    13
+   ],
+   "contents": "Official current Archives of Nethys Sleep spell description (base text, lines 1-13; mythic variants below remain uncurated).",
+   "catalogUse": "Bard level-1 known-spell option for the halfling bard slice."
+  },
+  "aon-skill-perform": {
+   "file": "sources/npc/aonprd/skill-perform.txt",
+   "sha256": "06a025bab1ba9bfa8450da7b4b4aaf515929dc694874c9f67a49c128e53244e7",
+   "derivedFrom": "aon-skill-perform-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    31
+   ],
+   "contents": "Official current Archives of Nethys Perform skill rules.",
+   "catalogUse": "Perform skill for the halfling bard levels 1-3 slice."
+  },
+  "aon-skill-perception": {
+   "file": "sources/npc/aonprd/skill-perception.txt",
+   "sha256": "eb254ef704191e6199067fbe7c53a532b9b4475ca667d4911b86e5f932f24996",
+   "derivedFrom": "aon-skill-perception-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    64
+   ],
+   "contents": "Official current Archives of Nethys Perception skill rules.",
+   "catalogUse": "Perception skill for the halfling bard levels 1-3 slice."
+  },
+  "aon-skill-diplomacy": {
+   "file": "sources/npc/aonprd/skill-diplomacy.txt",
+   "sha256": "5fbe4a2ef25ca81fef5ce5842aa431c6924a34253fe520a193ebf135ebe3ee93",
+   "derivedFrom": "aon-skill-diplomacy-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    49
+   ],
+   "contents": "Official current Archives of Nethys Diplomacy skill rules.",
+   "catalogUse": "Diplomacy skill for the halfling bard levels 1-3 slice."
+  }
+ },
+ "fragments": {
+  "pathfinder-unchained-npc-likeness": {
+   "file": "sources/npc/pathfinder-unchained.npc-likeness.txt",
+   "sha256": "3d7700919b14054dc9283c4e37a3c147251655634be413eac19579281a605ae3",
+   "derivedFrom": "pathfinder-unchained-txt",
+   "command": "sed -n '3555,3559p' 'Pathfinder Unchained.txt' > sources/npc/pathfinder-unchained.npc-likeness.txt",
+   "parentLines": [
+    3555,
+    3559
+   ],
+   "contents": "Simple Monster Creation guidance that a monster meant to be more like an NPC, especially one using a PC race, should avoid monstrous combat options.",
+   "catalogUse": "Policy grounding: NPC-likeness expectations and the future Simple Monster comparison benchmark (plan section 13)."
+  },
+  "bestiary-table-1-1": {
+   "file": "sources/npc/bestiary.table-1-1.txt",
+   "sha256": "3e808a21ffa19a9b44f76b4c5f91b9263e9b113a1381e194fd077eddba19a822",
+   "derivedFrom": "bestiary-txt",
+   "command": "sed -n '5,27p' beastiary.txt > sources/npc/bestiary.table-1-1.txt",
+   "parentLines": [
+    5,
+    27
+   ],
+   "contents": "Bestiary Table 1-1: Monster Statistics by CR (CR 1/2 through 20 rows).",
+   "catalogUse": "Future draft.compareBenchmarks comparisons (plan section 13); never used to compute NPC statistics."
+  }
+ },
+ "missing": {
+  "core-rulebook-pc-class-pages": {
+   "needed": "PC classes and levels outside the source-gated Sorcerer levels 1\u20136 and Druid level 3 slices",
+   "availability": "The official Archives of Nethys Druid class page is archived for the bounded level-3 slice; other unarchived class pages remain unavailable locally.",
+   "consequence": "Sorcerer levels 1\u20136 and Druid level 3 are eligible for hydration; Druid levels 1\u20132 and 4\u201320 and other heroic PC-class rows remain explicit source gaps until separately archived and curated."
+  },
+  "core-rulebook-magic-items": {
+   "needed": "Magic items other than the source-gated wand rules and selected wand records",
+   "availability": "Available in the official Archives of Nethys Core rules but not yet archived locally.",
+   "consequence": "The bounded wand and cloak records are hydrated; other heroic magic-item records remain source gaps."
+  },
+  "core-rulebook-spell-descriptions": {
+   "needed": "Spell descriptions other than the source-gated Goblin Sorcerer loadout and the bounded Druid loadout and Summon Nature's Ally I\u2013II records",
+   "availability": "The selected Druid and Summon Nature's Ally pages are archived from official Archives of Nethys; other spell pages remain unavailable locally.",
+   "consequence": "The selected Sorcerer spells and bounded Druid spell records are eligible for hydration; all other spell rules remain explicit gaps."
+  },
+  "core-rulebook-druid-expansions": {
+   "needed": "Druid levels outside level 3, domains outside Fire, and animal companions",
+   "availability": "The official Archives of Nethys Druid class page plus the Elemental Ally archetype page and its cited eidolon statistics (unchained Eidolon rules, Elemental subtype, Quadruped base form) are archived for the bounded level-3 archetype slice; other unarchived pages remain unavailable locally.",
+   "consequence": "The Fire-domain choice, the Elemental Ally archetype with its level-3 fire eidolon row, and level-3 spontaneous Summon Nature's Ally I-II metadata are in scope; companions, druid levels outside 3, other elements, other archetypes, and other eidolon levels remain unresolved gaps."
+  },
+  "core-rulebook-conditions": {
+   "needed": "Condition definitions used by class features, feats, equipment, and spells",
+   "availability": "Available in the official Archives of Nethys Core rules but not yet archived locally.",
+   "consequence": "Rules text that depends on unsnapshotted condition definitions remains a source gap."
+  }
+ }
 }

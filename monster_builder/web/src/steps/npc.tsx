@@ -189,8 +189,9 @@ function NpcSpellsGearStep({ draft, catalog, step, selectionBudgets, onSave, onB
   const classKey = classId.replace("npc-class.", "");
   const isSorcerer = classId === "npc-class.sorcerer";
   const isDruid = classId === "npc-class.druid";
-  const sections: Array<{ field: string; label: string; hint: string }> = isSorcerer
-    ? [{ field: "known", label: "Spells known", hint: "Choose the spells the sorcerer knows." }]
+  const isBard = classId === "npc-class.bard";
+  const sections: Array<{ field: string; label: string; hint: string }> = isSorcerer || isBard
+    ? [{ field: "known", label: isBard ? "Spells known (bard)" : "Spells known", hint: "Choose the spells the caster knows." }]
     : isDruid
       ? [{ field: "prepared", label: "Prepared druid spells", hint: "Choose the spells the druid prepares." }, { field: "domainPrepared", label: "Prepared fire-domain spells", hint: "Optional extra domain spells; the engine validates domain membership." }]
       : [];

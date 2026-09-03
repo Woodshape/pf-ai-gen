@@ -1,0 +1,49 @@
+Diplomacy (Cha)
+Source PRPG Core Rulebook pg. 93
+You can use this skill to persuade others to agree with your arguments, to resolve differences, and to gather valuable information or rumors from people. This skill is also used to negotiate conflicts by using the proper etiquette and manners suitable to the problem.
+Check: You can change the initial attitudes of nonplayer characters with a successful check. The DC of this check depends on the creature’s starting attitude toward you, adjusted by its Charisma modifier. If you succeed, the character’s attitude toward you is improved by one step. For every 5 by which your check result exceeds the DC, the character’s attitude toward you increases by one additional step. A creature’s attitude cannot be shifted more than two steps up in this way, although the GM can override this rule in some situations. If you fail the check by 4 or less, the character’s attitude toward you is unchanged. If you fail by 5 or more, the character’s attitude toward you is decreased by one step.
+You cannot use Diplomacy against a creature that does not understand you or has an Intelligence of 3 or less. Diplomacy is generally ineffective in combat and against creatures that intend to harm you or your allies in the immediate future. Any attitude shift caused through Diplomacy generally lasts for 1d4 hours but can last much longer or shorter depending upon the situation (GM discretion).
+Starting Attitude	Diplomacy DC
+Hostile	25 + creature’s Cha modifier
+Unfriendly	20 + creature’s Cha modifier
+Indifferent	15 + creature’s Cha modifier
+Friendly	10 + creature’s Cha modifier
+Helpful	0 + creature’s Cha modifier
+If a creature’s attitude toward you is at least indifferent, you can make requests of the creature. This is an additional Diplomacy check, using the creature’s current attitude to determine the base DC, with one of the following modifiers. Once a creature’s attitude has shifted to helpful, the creature gives in to most requests without a check, unless the request is against its nature or puts it in serious peril. Some requests automatically fail if the request goes against the creature’s values or its nature, subject to GM discretion.
+Request	Diplomacy DC Modifier
+Give simple advice or directions	–5
+Give detailed advice	+0
+Give simple aid	+0
+Reveal an unimportant secret	+5
+Give lengthy or complicated aid	+5
+Give dangerous aid	+10
+Reveal an important secret	+10 or more
+Give aid that could result in punishment	+15 or more
+Additional requests	+5 per request
+Gather Information: You can also use Diplomacy to gather information about a specific topic or individual. To do this, you must spend at least 1d4 hours canvassing people at local taverns, markets, and gathering places. The DC of this check depends on the obscurity of the information sought, but for most commonly known facts or rumors it is 10. For obscure or secret knowledge, the DC might increase to 20 or higher. The GM might rule that some topics are simply unknown to common folk.
+Action: Using Diplomacy to influence a creature’s attitude takes 1 minute of continuous interaction. Making a request of a creature takes 1 or more rounds of interaction, depending upon the complexity of the request. Using Diplomacy to gather information takes 1d4 hours of work searching for rumors and informants.
+Try Again: You cannot use Diplomacy to influence a given creature’s attitude more than once in a 24-hour period. If a request is refused, the result does not change with additional checks, although other requests might be made. You can retry Diplomacy checks made to gather information.
+Special: If you have the Persuasive feat, you gain a bonus on Diplomacy checks (see Feats).
+Calling for the Guards
+Source GameMastery Guide pg. 204
+It’s inevitable—sooner or later, the PCs will want to call upon the town guard or cause a situation where citizens do so instead. Calling for the guard requires a Diplomacy check modified by the settlement’s law modifier. It’s only a DC 5 check to call for the guard—with a success, the guards generally arrive on the scene in 1d6 minutes. Every 5 points by which the Diplomacy check exceeds DC 5 (rounding down) reduces the arrival time by 1 minute—if this reduces their arrival time below 1 minute, the increments of reduction instead change to 1 round. For example, Ezren is being mugged by thugs and calls for the guard. The result of his Diplomacy check is a 23, and the GM rolls a 2 on 1d6 to determine how long it’ll be before the guards arrive. Since Ezren rolled three times the amount he needed, the 2-minute wait time is reduced to 8 rounds.
+Directing Crowds
+Source PRPG Core Rulebook pg. 436
+It takes a DC 15 Diplomacy check or DC 20 Intimidate check to convince a crowd to move in a particular direction, and the crowd must be able to hear or see the character making the attempt. It takes a full-round action to make the Diplomacy check, but only a free action to make the Intimidate check.
+Hypnotism
+Source Occult Adventures pg. 195
+You use the power of suggestion and subtle psychic influence to alter a subject’s mind and dredge up repressed memories.
+Check: You can use hypnotism once per day. The DC of a Diplomacy check to hypnotize is 20 + the subject’s Will save modifier against mind-affecting enchantment (compulsion) effects. All uses of hypnotism are mind-affecting enchantment (compulsion) effects.
+Implant Suggestion: You can implant a suggested course of reasonable action in the mind of a willing creature, along with a defined trigger. To implant a suggestion, you spend 1 minute inducing a trance-like state in the subject, after which you attempt a Diplomacy check. If the check is successful, you implant the course of action, as a suggestion spell with a duration of 10 minutes plus 10 additional minutes for every 1 by which your check result exceeds the DC. If the subject ceases to be willing, it can attempt a Will save once each round to shake off the effects. The save DC is equal to 10 + 1/2 your character level + your Charisma modifier. You can attempt to subtly implant a suggestion in the mind of an unwilling creature with an attitude of indifferent or better after 1 minute of continuous, calm interaction with that creature, but the DC is 10 higher.
+Recall Memory: You can draw out forgotten memories from a willing subject. You spend 1 minute inducing a calming, trance-like state in the subject, after which you attempt a Diplomacy check. If you succeed at the check, the hypnotized creature can reroll any previously failed Intelligence or Knowledge check to recall the forgotten information with a +4 bonus. The information must be something the subject once knew or was exposed to.
+Action: Hypnotism takes 1 minute of calm interaction.
+Try Again: Yes. You can try to hypnotize the same creature more than once, but only once per day.
+Occult Skill Unlocks
+Characters capable of casting psychic spells or who have the Psychic Sensitivity feat gain access to skill unlocks—a host of esoteric skill uses not available to other PCs. These are not entirely new skills, but rather new uses of existing skills for those trained in the occult arts. A character must be trained in the appropriate skill to use that skill’s unlock, even if the skill can normally be used untrained. It’s impossible to take 10 for an occult skill unlock. Occult skill unlocks require intense concentration and strenuous effort, so the amount a character can use each skill unlock is limited to once per day or per week. This limit is for all uses of the skill unlock; if a character uses hypnotism to implant a suggestion, he can’t also use it to recall memories on the same day.
+Unchained - Skill Unlock
+Source Pathfinder Unchained pg. 83
+With sufficient ranks in Diplomacy, you earn the following.
+5 Ranks: The time required to influence a creature’s attitude or gather information is halved.
+10 Ranks: You can attempt to adjust a creature’s attitude in 1 round by taking a –10 penalty. If you take 1 minute to adjust a creature’s attitude, add your Charisma bonus to the number of hours that attitude change persists.
+15 Ranks: You can attempt to adjust a creature’s attitude in 1 round with no penalty. If you take 1 minute to adjust a creature’s attitude, the duration of the resulting change is measured in days, not hours. You can gather information in 10 minutes by taking a –5 penalty.
+20 Ranks: You can attempt to adjust a creature’s attitude in 1 round with no penalty. If you take 1 minute to adjust a creature’s attitude, the duration of the resulting change is measured in weeks, not hours. You can gather information in 1d4 minutes with no penalty.

@@ -152,10 +152,11 @@ class NpcCreation(CreationSystem):
                 requirements.append(self._requirement(
                     f"/selections/racialChoices/{slot['choiceId']}", slot.get("name", slot["choiceId"]), "enum", slot.get("allowedValues", [])
                 ))
-        if class_record and class_record["id"] == "npc-class.sorcerer":
-            requirements.append(self._requirement(
-                "/selections/classFeatureChoices/bloodline", "Bloodline", "enum", ["elemental-fire"]
-            ))
+        if class_record and class_record["id"] in {"npc-class.sorcerer", "npc-class.bard"}:
+            if class_record["id"] == "npc-class.sorcerer":
+                requirements.append(self._requirement(
+                    "/selections/classFeatureChoices/bloodline", "Bloodline", "enum", ["elemental-fire"]
+                ))
             requirements.append(self._requirement(
                 "/selections/spellLoadout/known", "Spells known", "spell-loadout"
             ))
@@ -274,10 +275,12 @@ class NpcCreation(CreationSystem):
             slice_id[0] == "npc-race.human" and slice_id[1] == "npc-class.warrior" and 1 <= total_level <= 5
         ) or (
             slice_id[0] == "npc-race.goblin" and slice_id[1] == "npc-class.sorcerer" and 5 <= total_level <= 6
-        ) or slice_id == ("npc-race.goblin", "npc-class.druid", 3)
+        ) or slice_id == ("npc-race.goblin", "npc-class.druid", 3) or (
+            slice_id[0] == "npc-race.halfling" and slice_id[1] == "npc-class.bard" and 1 <= total_level <= 3
+        )
         if not supported:
             issues.append(self._issue(
-                "npc.slice-unsupported", "production evaluation supports human warriors 1–5, goblin sorcerers at levels 5–6, and goblin druids at level 3",
+                "npc.slice-unsupported", "production evaluation supports human warriors 1–5, goblin sorcerers at levels 5–6, goblin druids at level 3, and halfling bards at levels 1–3",
                 path="/selections/classProgression", source_refs=_refs(class_records[0]) if class_records else [],
             ))
         if issues:
@@ -327,6 +330,7 @@ class NpcCreation(CreationSystem):
         dex_to_ac = min([modifiers["dexterity"], *max_dex_values]) if max_dex_values else modifiers["dexterity"]
         feat_saves = feat_effects.get("saves", {})
         resistance_bonus = max((entry["effects"].get("resistanceBonus", 0) for entry in equipped), default=0)
+        race_saves = race.get("saveBonuses", {}) if isinstance(race.get("saveBonuses"), dict) else {}
         ac_breakdown = {
             key: value for key, value in (
                 ("armor", armor_bonus), ("shield", shield_bonus),
@@ -337,9 +341,9 @@ class NpcCreation(CreationSystem):
             "ac": 10 + armor_bonus + shield_bonus + dex_to_ac + size_modifiers.get("ac", 0),
             "touch": 10 + modifiers["dexterity"] + size_modifiers.get("ac", 0),
             "flatFooted": 10 + armor_bonus + shield_bonus + size_modifiers.get("ac", 0),
-            "fortitude": row["fortitude"] + modifiers["constitution"] + feat_saves.get("fortitude", 0) + resistance_bonus,
-            "reflex": row["reflex"] + modifiers["dexterity"] + feat_saves.get("reflex", 0) + resistance_bonus,
-            "will": row["will"] + modifiers["wisdom"] + feat_saves.get("will", 0) + resistance_bonus,
+            "fortitude": row["fortitude"] + modifiers["constitution"] + feat_saves.get("fortitude", 0) + resistance_bonus + race_saves.get("fortitude", 0),
+            "reflex": row["reflex"] + modifiers["dexterity"] + feat_saves.get("reflex", 0) + resistance_bonus + race_saves.get("reflex", 0),
+            "will": row["will"] + modifiers["wisdom"] + feat_saves.get("will", 0) + resistance_bonus + race_saves.get("will", 0),
             "acBreakdown": ac_breakdown,
         }
         attacks = self._attacks(equipped, bab, modifiers, size_modifiers, race.get("sizeId"))
@@ -719,12 +723,14 @@ class NpcCreation(CreationSystem):
             ability = record["keyAbility"]
             acp = armor_check_penalty if record.get("armorCheckPenalty") else 0
             feature_bonus = (nature_sense or {}).get("effects", {}).get("skillBonuses", {}).get(skill_id, 0)
-            total = level + (3 if class_skill else 0) + _ability_modifier(scores[ability]) + acp + feature_bonus
+            race_bonus = (race.get("skillBonuses") or {}).get(skill_id, 0) if isinstance(race.get("skillBonuses"), dict) else 0
+            total = level + (3 if class_skill else 0) + _ability_modifier(scores[ability]) + acp + feature_bonus + race_bonus
             results.append({
                 "skillId": skill_id, "name": record["name"], "ability": ability, "ranks": level,
                 "classSkill": class_skill, "armorCheckPenalty": acp,
                 **({"classFeatureBonus": feature_bonus} if feature_bonus else {}),
-                "total": total, "sourceRefs": _dedupe_refs(_refs(record), _refs(nature_sense) if feature_bonus else []),
+                **({"raceBonus": race_bonus} if race_bonus else {}),
+                "total": total, "sourceRefs": _dedupe_refs(_refs(record), _refs(nature_sense) if feature_bonus else [], _refs(race) if race_bonus else []),
             })
         return results, refs, issues
 
@@ -973,10 +979,12 @@ class NpcCreation(CreationSystem):
         loadout = selections.get("spellLoadout", {})
         if class_record["id"] == "npc-class.druid":
             return self._druid_spells(loadout, class_record, row, level, scores, modifiers, archetype_id=archetype_id, archetype=archetype)
-        if class_record["id"] != "npc-class.sorcerer":
+        if class_record["id"] not in {"npc-class.sorcerer", "npc-class.bard"}:
             issues = [self._issue("npc.slice-unsupported", "spells are not part of this production slice", path="/selections/spellLoadout")] if loadout else []
             return [], _refs(class_record), issues
 
+        class_key = "sorcerer" if class_record["id"] == "npc-class.sorcerer" else "bard"
+        casting_ability = class_record.get("castingAbility", "charisma")
         known = loadout.get("known", {}) if isinstance(loadout, dict) else {}
         expected = row["spellsKnown"]
         issues: list[dict[str, Any]] = []
@@ -1002,9 +1010,9 @@ class NpcCreation(CreationSystem):
                 refs = _dedupe_refs(refs, _refs(record))
                 if record.get("catalogStatus") != "resolved":
                     issues.append(self._gap(record, f"/selections/spellLoadout/known/{spell_level}/{index}"))
-                elif record.get("levelsByClass", {}).get("sorcerer") != int(spell_level):
+                elif record.get("levelsByClass", {}).get(class_key) != int(spell_level):
                     issues.append(self._issue(
-                        "npc.spell-level-invalid", "spell is not a Sorcerer spell of the selected level",
+                        "npc.spell-level-invalid", f"spell is not a {class_record['name']} spell of the selected level",
                         path=f"/selections/spellLoadout/known/{spell_level}/{index}", source_refs=_refs(record),
                     ))
                 if spell_id in selected_ids:
@@ -1012,19 +1020,21 @@ class NpcCreation(CreationSystem):
                 selected_ids.add(spell_id)
                 resolved[spell_level].append(record["id"])
 
-        bloodline = self._record("classFeature", "npc-class-feature.sorcerer-bloodlines")
-        option = bloodline["options"]["elemental-fire"]
-        refs = _dedupe_refs(refs, _refs(bloodline))
+        bloodline: dict[str, Any] | None = None
         bloodline_spells: list[str] = []
-        for granted_level, spell_id in option["bonusSpells"].items():
-            if int(granted_level) <= level:
-                spell = self._record("spell", spell_id)
-                spell_level = str(spell["levelsByClass"]["sorcerer"])
-                resolved.setdefault(spell_level, []).append(spell["id"])
-                bloodline_spells.append(spell["id"])
-                refs = _dedupe_refs(refs, _refs(spell))
+        if class_record["id"] == "npc-class.sorcerer":
+            bloodline = self._record("classFeature", "npc-class-feature.sorcerer-bloodlines")
+            option = bloodline["options"]["elemental-fire"]
+            refs = _dedupe_refs(refs, _refs(bloodline))
+            for granted_level, spell_id in option["bonusSpells"].items():
+                if int(granted_level) <= level:
+                    spell = self._record("spell", spell_id)
+                    spell_level = str(spell["levelsByClass"]["sorcerer"])
+                    resolved.setdefault(spell_level, []).append(spell["id"])
+                    bloodline_spells.append(spell["id"])
+                    refs = _dedupe_refs(refs, _refs(spell))
 
-        charisma = modifiers["charisma"]
+        charisma = modifiers[casting_ability]
         per_day: dict[str, Any] = {"0": "at-will"}
         for spell_level, base in row["spellsPerDay"].items():
             numeric_level = int(spell_level)
@@ -1034,7 +1044,7 @@ class NpcCreation(CreationSystem):
         refs = _dedupe_refs(refs, [bonus_ref])
         result = {
             "className": class_record["name"], "casterLevel": level,
-            "castingAbility": "charisma", "castingAbilityModifier": charisma,
+            "castingAbility": casting_ability, "castingAbilityModifier": charisma,
             "perDay": per_day, "saveDcByLevel": {spell_level: 10 + int(spell_level) + charisma for spell_level in expected},
             "known": resolved, "bloodlineSpells": bloodline_spells,
         }

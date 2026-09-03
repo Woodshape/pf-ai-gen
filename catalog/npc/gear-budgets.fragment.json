@@ -1,395 +1,499 @@
 {
-  "section": "gearBudgets",
-  "records": [
+ "section": "gearBudgets",
+ "records": [
+  {
+   "id": "npc-gear.fast.high",
+   "name": "Fast progression, high fantasy",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-gear-budgets",
+   "progression": "fast",
+   "fantasyLevel": "high",
+   "effectiveLevel": null,
+   "budgetCp": null,
+   "categories": {
+    "weapons": null,
+    "protection": null,
+    "magic": null,
+    "limitedUse": null,
+    "gear": null
+   },
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     27,
+     27
+    ],
+    "entry": "Table 14-9 NPC gear budgets",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "npc-gear.fast.low",
+   "name": "Fast progression, low fantasy",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-gear-budgets",
+   "progression": "fast",
+   "fantasyLevel": "low",
+   "effectiveLevel": null,
+   "budgetCp": null,
+   "categories": {
+    "weapons": null,
+    "protection": null,
+    "magic": null,
+    "limitedUse": null,
+    "gear": null
+   },
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     27,
+     27
+    ],
+    "entry": "Table 14-9 NPC gear budgets",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "npc-gear.fast.normal",
+   "name": "Fast progression, normal fantasy",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-gear-budgets",
+   "progression": "fast",
+   "fantasyLevel": "normal",
+   "effectiveLevel": null,
+   "budgetCp": null,
+   "categories": {
+    "weapons": null,
+    "protection": null,
+    "magic": null,
+    "limitedUse": null,
+    "gear": null
+   },
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     27,
+     27
+    ],
+    "entry": "Table 14-9 NPC gear budgets",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "npc-gear.medium.high",
+   "name": "Medium progression, high fantasy",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-gear-budgets",
+   "progression": "medium",
+   "fantasyLevel": "high",
+   "effectiveLevel": null,
+   "budgetCp": null,
+   "categories": {
+    "weapons": null,
+    "protection": null,
+    "magic": null,
+    "limitedUse": null,
+    "gear": null
+   },
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     27,
+     27
+    ],
+    "entry": "Table 14-9 NPC gear budgets",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "npc-gear.medium.low",
+   "name": "Medium progression, low fantasy",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-gear-budgets",
+   "progression": "medium",
+   "fantasyLevel": "low",
+   "effectiveLevel": null,
+   "budgetCp": null,
+   "categories": {
+    "weapons": null,
+    "protection": null,
+    "magic": null,
+    "limitedUse": null,
+    "gear": null
+   },
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     27,
+     27
+    ],
+    "entry": "Table 14-9 NPC gear budgets",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "npc-gear.medium.normal",
+   "name": "Medium progression, normal fantasy",
+   "catalogStatus": "resolved",
+   "progression": "medium",
+   "fantasyLevel": "normal",
+   "effectiveLevel": null,
+   "budgetCp": null,
+   "categories": {
+    "weapons": null,
+    "protection": null,
+    "magic": null,
+    "limitedUse": null,
+    "gear": null
+   },
+   "rows": [
     {
-      "id": "npc-gear.fast.high",
-      "name": "Fast progression, high fantasy",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-gear-budgets",
-      "progression": "fast",
-      "fantasyLevel": "high",
-      "effectiveLevel": null,
-      "budgetCp": null,
-      "categories": {
-        "weapons": null,
-        "protection": null,
-        "magic": null,
-        "limitedUse": null,
-        "gear": null
-      },
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [27, 27],
-        "entry": "Table 14-9 NPC gear budgets",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "npc-gear.fast.low",
-      "name": "Fast progression, low fantasy",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-gear-budgets",
-      "progression": "fast",
-      "fantasyLevel": "low",
-      "effectiveLevel": null,
-      "budgetCp": null,
-      "categories": {
-        "weapons": null,
-        "protection": null,
-        "magic": null,
-        "limitedUse": null,
-        "gear": null
-      },
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [27, 27],
-        "entry": "Table 14-9 NPC gear budgets",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "npc-gear.fast.normal",
-      "name": "Fast progression, normal fantasy",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-gear-budgets",
-      "progression": "fast",
-      "fantasyLevel": "normal",
-      "effectiveLevel": null,
-      "budgetCp": null,
-      "categories": {
-        "weapons": null,
-        "protection": null,
-        "magic": null,
-        "limitedUse": null,
-        "gear": null
-      },
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [27, 27],
-        "entry": "Table 14-9 NPC gear budgets",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "npc-gear.medium.high",
-      "name": "Medium progression, high fantasy",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-gear-budgets",
-      "progression": "medium",
-      "fantasyLevel": "high",
-      "effectiveLevel": null,
-      "budgetCp": null,
-      "categories": {
-        "weapons": null,
-        "protection": null,
-        "magic": null,
-        "limitedUse": null,
-        "gear": null
-      },
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [27, 27],
-        "entry": "Table 14-9 NPC gear budgets",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "npc-gear.medium.low",
-      "name": "Medium progression, low fantasy",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-gear-budgets",
-      "progression": "medium",
-      "fantasyLevel": "low",
-      "effectiveLevel": null,
-      "budgetCp": null,
-      "categories": {
-        "weapons": null,
-        "protection": null,
-        "magic": null,
-        "limitedUse": null,
-        "gear": null
-      },
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [27, 27],
-        "entry": "Table 14-9 NPC gear budgets",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "npc-gear.medium.normal",
-      "name": "Medium progression, normal fantasy",
-      "catalogStatus": "resolved",
-      "progression": "medium",
-      "fantasyLevel": "normal",
-      "effectiveLevel": null,
-      "budgetCp": null,
-      "categories": {
-        "weapons": null,
-        "protection": null,
-        "magic": null,
-        "limitedUse": null,
-        "gear": null
-      },
-      "rows": [
-        {
-          "npcCategory": "basic",
-          "level": 1,
-          "effectiveLevel": 1,
-          "budgetCp": 26000,
-          "categories": {
-            "weapons": 5000,
-            "protection": 13000,
-            "magic": 0,
-            "limitedUse": 4000,
-            "gear": 4000
-          },
-          "catalogStatus": "resolved",
-          "sourceRef": {
-            "sourceId": "source.aon-creating-npcs",
-            "section": "Table 14-9: NPC Gear",
-            "txtLines": [82, 82],
-            "entry": "Basic level 1",
-            "provenanceStatus": "resolved"
-          }
-        },
-        {
-          "npcCategory": "basic",
-          "level": 2,
-          "effectiveLevel": 2,
-          "budgetCp": 39000,
-          "categories": {
-            "weapons": 10000,
-            "protection": 15000,
-            "magic": 0,
-            "limitedUse": 4000,
-            "gear": 10000
-          },
-          "catalogStatus": "resolved",
-          "sourceRef": {
-            "sourceId": "source.aon-creating-npcs",
-            "section": "Table 14-9: NPC Gear",
-            "txtLines": [83, 83],
-            "entry": "Basic level 2",
-            "provenanceStatus": "resolved"
-          }
-        },
-        {
-          "npcCategory": "basic",
-          "level": 3,
-          "effectiveLevel": 3,
-          "budgetCp": 78000,
-          "categories": {
-            "weapons": 35000,
-            "protection": 20000,
-            "magic": 0,
-            "limitedUse": 8000,
-            "gear": 15000
-          },
-          "catalogStatus": "resolved",
-          "sourceRef": {
-            "sourceId": "source.aon-creating-npcs",
-            "section": "Table 14-9: NPC Gear",
-            "txtLines": [84, 84],
-            "entry": "Basic level 3",
-            "provenanceStatus": "resolved"
-          }
-        },
-        {
-          "npcCategory": "basic",
-          "level": 4,
-          "effectiveLevel": 4,
-          "budgetCp": 165000,
-          "categories": {
-            "weapons": 65000,
-            "protection": 80000,
-            "magic": 0,
-            "limitedUse": 10000,
-            "gear": 20000
-          },
-          "catalogStatus": "resolved",
-          "sourceRef": {
-            "sourceId": "source.aon-creating-npcs",
-            "section": "Table 14-9: NPC Gear",
-            "txtLines": [85, 85],
-            "entry": "Basic level 4",
-            "provenanceStatus": "resolved"
-          }
-        },
-        {
-          "npcCategory": "basic",
-          "level": 5,
-          "effectiveLevel": 5,
-          "budgetCp": 240000,
-          "categories": {
-            "weapons": 90000,
-            "protection": 100000,
-            "magic": 0,
-            "limitedUse": 30000,
-            "gear": 20000
-          },
-          "catalogStatus": "resolved",
-          "sourceRef": {
-            "sourceId": "source.aon-creating-npcs",
-            "section": "Table 14-9: NPC Gear",
-            "txtLines": [86, 86],
-            "entry": "Basic level 5",
-            "provenanceStatus": "resolved"
-          }
-        },
-        {
-          "npcCategory": "heroic",
-          "level": 3,
-          "effectiveLevel": 3,
-          "budgetCp": 165000,
-          "categories": {
-            "weapons": 65000,
-            "protection": 80000,
-            "magic": 0,
-            "limitedUse": 10000,
-            "gear": 20000
-          },
-          "catalogStatus": "resolved",
-          "sourceRef": {
-            "sourceId": "source.aon-creating-npcs",
-            "section": "Table 14-9: NPC Gear",
-            "txtLines": [85, 85],
-            "entry": "Heroic level 3",
-            "provenanceStatus": "resolved",
-            "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
-          }
-        },
-        {
-          "npcCategory": "heroic",
-          "level": 5,
-          "effectiveLevel": 5,
-          "budgetCp": 345000,
-          "categories": {
-            "weapons": 140000,
-            "protection": 140000,
-            "magic": 0,
-            "limitedUse": 45000,
-            "gear": 20000
-          },
-          "catalogStatus": "resolved",
-          "sourceRef": {
-            "sourceId": "source.aon-creating-npcs",
-            "section": "Table 14-9: NPC Gear",
-            "txtLines": [87, 87],
-            "entry": "Heroic level 5",
-            "provenanceStatus": "resolved",
-            "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
-          }
-        },
-        {
-          "npcCategory": "heroic",
-          "level": 6,
-          "effectiveLevel": 6,
-          "budgetCp": 465000,
-          "categories": {
-            "weapons": 235000,
-            "protection": 165000,
-            "magic": 0,
-            "limitedUse": 45000,
-            "gear": 20000
-          },
-          "catalogStatus": "resolved",
-          "sourceRef": {
-            "sourceId": "source.aon-creating-npcs",
-            "section": "Table 14-9: NPC Gear",
-            "txtLines": [88, 88],
-            "entry": "Heroic level 6",
-            "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
-            "provenanceStatus": "resolved"
-          }
-        }
+     "npcCategory": "basic",
+     "level": 1,
+     "effectiveLevel": 1,
+     "budgetCp": 26000,
+     "categories": {
+      "weapons": 5000,
+      "protection": 13000,
+      "magic": 0,
+      "limitedUse": 4000,
+      "gear": 4000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       82,
+       82
       ],
-      "sourceRef": {
-        "sourceId": "source.aon-creating-npcs",
-        "section": "Step 6: Gear; Table 14-9: NPC Gear",
-        "txtLines": [71, 102],
-        "printedPages": [453, 454],
-        "officialUrl": "https://aonprd.com/Rules.aspx?ID=359",
-        "entry": "Medium progression, normal fantasy",
-        "provenanceStatus": "resolved"
-      }
+      "entry": "Basic level 1",
+      "provenanceStatus": "resolved"
+     }
     },
     {
-      "id": "npc-gear.slow.high",
-      "name": "Slow progression, high fantasy",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-gear-budgets",
-      "progression": "slow",
-      "fantasyLevel": "high",
-      "effectiveLevel": null,
-      "budgetCp": null,
-      "categories": {
-        "weapons": null,
-        "protection": null,
-        "magic": null,
-        "limitedUse": null,
-        "gear": null
-      },
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [27, 27],
-        "entry": "Table 14-9 NPC gear budgets",
-        "provenanceStatus": "catalog-gap"
-      }
+     "npcCategory": "heroic",
+     "level": 1,
+     "effectiveLevel": 1,
+     "budgetCp": 39000,
+     "categories": {
+      "weapons": 10000,
+      "protection": 15000,
+      "magic": 0,
+      "limitedUse": 4000,
+      "gear": 10000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       83,
+       83
+      ],
+      "entry": "Heroic level 1",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
     },
     {
-      "id": "npc-gear.slow.low",
-      "name": "Slow progression, low fantasy",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-gear-budgets",
-      "progression": "slow",
-      "fantasyLevel": "low",
-      "effectiveLevel": null,
-      "budgetCp": null,
-      "categories": {
-        "weapons": null,
-        "protection": null,
-        "magic": null,
-        "limitedUse": null,
-        "gear": null
-      },
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [27, 27],
-        "entry": "Table 14-9 NPC gear budgets",
-        "provenanceStatus": "catalog-gap"
-      }
+     "npcCategory": "basic",
+     "level": 2,
+     "effectiveLevel": 2,
+     "budgetCp": 39000,
+     "categories": {
+      "weapons": 10000,
+      "protection": 15000,
+      "magic": 0,
+      "limitedUse": 4000,
+      "gear": 10000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       83,
+       83
+      ],
+      "entry": "Basic level 2",
+      "provenanceStatus": "resolved"
+     }
     },
     {
-      "id": "npc-gear.slow.normal",
-      "name": "Slow progression, normal fantasy",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-gear-budgets",
-      "progression": "slow",
-      "fantasyLevel": "normal",
-      "effectiveLevel": null,
-      "budgetCp": null,
-      "categories": {
-        "weapons": null,
-        "protection": null,
-        "magic": null,
-        "limitedUse": null,
-        "gear": null
-      },
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [27, 27],
-        "entry": "Table 14-9 NPC gear budgets",
-        "provenanceStatus": "catalog-gap"
-      }
+     "npcCategory": "heroic",
+     "level": 2,
+     "effectiveLevel": 2,
+     "budgetCp": 78000,
+     "categories": {
+      "weapons": 35000,
+      "protection": 20000,
+      "magic": 0,
+      "limitedUse": 8000,
+      "gear": 15000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       84,
+       84
+      ],
+      "entry": "Heroic level 2",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 3,
+     "effectiveLevel": 3,
+     "budgetCp": 78000,
+     "categories": {
+      "weapons": 35000,
+      "protection": 20000,
+      "magic": 0,
+      "limitedUse": 8000,
+      "gear": 15000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       84,
+       84
+      ],
+      "entry": "Basic level 3",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 3,
+     "effectiveLevel": 3,
+     "budgetCp": 165000,
+     "categories": {
+      "weapons": 65000,
+      "protection": 80000,
+      "magic": 0,
+      "limitedUse": 10000,
+      "gear": 20000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       85,
+       85
+      ],
+      "entry": "Heroic level 3",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 4,
+     "effectiveLevel": 4,
+     "budgetCp": 165000,
+     "categories": {
+      "weapons": 65000,
+      "protection": 80000,
+      "magic": 0,
+      "limitedUse": 10000,
+      "gear": 20000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       85,
+       85
+      ],
+      "entry": "Basic level 4",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 5,
+     "effectiveLevel": 5,
+     "budgetCp": 240000,
+     "categories": {
+      "weapons": 90000,
+      "protection": 100000,
+      "magic": 0,
+      "limitedUse": 30000,
+      "gear": 20000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       86,
+       86
+      ],
+      "entry": "Basic level 5",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 5,
+     "effectiveLevel": 5,
+     "budgetCp": 345000,
+     "categories": {
+      "weapons": 140000,
+      "protection": 140000,
+      "magic": 0,
+      "limitedUse": 45000,
+      "gear": 20000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       87,
+       87
+      ],
+      "entry": "Heroic level 5",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 6,
+     "effectiveLevel": 6,
+     "budgetCp": 465000,
+     "categories": {
+      "weapons": 235000,
+      "protection": 165000,
+      "magic": 0,
+      "limitedUse": 45000,
+      "gear": 20000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       88,
+       88
+      ],
+      "entry": "Heroic level 6",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+      "provenanceStatus": "resolved"
+     }
     }
-  ]
+   ],
+   "sourceRef": {
+    "sourceId": "source.aon-creating-npcs",
+    "section": "Step 6: Gear; Table 14-9: NPC Gear",
+    "txtLines": [
+     71,
+     102
+    ],
+    "printedPages": [
+     453,
+     454
+    ],
+    "officialUrl": "https://aonprd.com/Rules.aspx?ID=359",
+    "entry": "Medium progression, normal fantasy",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "npc-gear.slow.high",
+   "name": "Slow progression, high fantasy",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-gear-budgets",
+   "progression": "slow",
+   "fantasyLevel": "high",
+   "effectiveLevel": null,
+   "budgetCp": null,
+   "categories": {
+    "weapons": null,
+    "protection": null,
+    "magic": null,
+    "limitedUse": null,
+    "gear": null
+   },
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     27,
+     27
+    ],
+    "entry": "Table 14-9 NPC gear budgets",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "npc-gear.slow.low",
+   "name": "Slow progression, low fantasy",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-gear-budgets",
+   "progression": "slow",
+   "fantasyLevel": "low",
+   "effectiveLevel": null,
+   "budgetCp": null,
+   "categories": {
+    "weapons": null,
+    "protection": null,
+    "magic": null,
+    "limitedUse": null,
+    "gear": null
+   },
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     27,
+     27
+    ],
+    "entry": "Table 14-9 NPC gear budgets",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "npc-gear.slow.normal",
+   "name": "Slow progression, normal fantasy",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-gear-budgets",
+   "progression": "slow",
+   "fantasyLevel": "normal",
+   "effectiveLevel": null,
+   "budgetCp": null,
+   "categories": {
+    "weapons": null,
+    "protection": null,
+    "magic": null,
+    "limitedUse": null,
+    "gear": null
+   },
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     27,
+     27
+    ],
+    "entry": "Table 14-9 NPC gear budgets",
+    "provenanceStatus": "catalog-gap"
+   }
+  }
+ ]
 }

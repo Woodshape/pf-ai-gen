@@ -92,7 +92,7 @@ RESOLVED_SPELLS = {
     "spell.mage-armor", "spell.magic-missile", "spell.shield", "spell.flaming-sphere",
     "spell.mirror-image", "spell.scorching-ray", "spell.fireball", "spell.flare",
     "spell.barkskin", "spell.cure-light-wounds", "spell.entangle", "spell.produce-flame",
-    "spell.summon-nature-s-ally-i", "spell.summon-nature-s-ally-ii",
+    "spell.summon-nature-s-ally-i", "spell.summon-nature-s-ally-ii", "spell.charm-person", "spell.sleep",
 }
 
 
@@ -173,8 +173,14 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(human["catalogStatus"], "resolved")
         self.assertEqual(human["sizeId"], "size.medium")
         self.assertEqual(self.catalog["races"]["npc-race.goblin"]["catalogStatus"], "resolved")
+        halfling = self.catalog["races"]["npc-race.halfling"]
+        self.assertEqual(halfling["catalogStatus"], "resolved")
+        self.assertEqual(halfling["abilityAdjustments"], {"strength": -2, "dexterity": 2, "charisma": 2})
+        self.assertEqual((halfling["sizeId"], halfling["speed"]), ("size.small", {"land": 20}))
+        self.assertEqual(halfling["saveBonuses"], {"fortitude": 1, "reflex": 1, "will": 1})
+        self.assertEqual(halfling["skillBonuses"], {"skill.perception": 2, "skill.acrobatics": 2, "skill.climb": 2, "skill.stealth": 4})
         for race_id, race in self.catalog["races"].items():
-            if race_id not in {"npc-race.human", "npc-race.goblin"}:
+            if race_id not in {"npc-race.human", "npc-race.goblin", "npc-race.halfling"}:
                 self.assertEqual(race["catalogStatus"], "gap")
 
     def test_sixteen_classes_keep_only_production_levels_resolved(self):
@@ -199,6 +205,16 @@ class CatalogCompletenessTests(unittest.TestCase):
                 self.assertEqual(record["levels"]["3"]["catalogStatus"], "resolved")
                 self.assertEqual(record["levels"]["3"]["spellsPerDay"], {"0": 4, "1": 2, "2": 1})
                 self.assertTrue(all(record["levels"][str(level)]["catalogStatus"] == "gap" for level in range(1, 21) if level != 3))
+            elif class_id == "npc-class.bard":
+                self.assertEqual(record["catalogStatus"], "resolved")
+                self.assertEqual(record["hitDie"], "d8")
+                self.assertEqual(record["skillSelections"], 6)
+                self.assertEqual(record["castingAbility"], "charisma")
+                self.assertEqual(record["castingMode"], "spontaneous")
+                self.assertEqual(record["supportedLevels"], [1, 2, 3])
+                self.assertEqual(record["levels"]["1"]["spellsPerDay"], {"1": 1})
+                self.assertEqual(record["levels"]["3"]["spellsKnown"], {"0": 6, "1": 4})
+                self.assertTrue(all(record["levels"][str(level)]["catalogStatus"] == "gap" for level in range(1, 21) if level > 3))
             else:
                 self.assertEqual(record["catalogStatus"], "gap")
 
@@ -208,7 +224,7 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(kinds.count("feat-slot"), 6)
         self.assertEqual(kinds.count("choice-slot"), 11)
         self.assertEqual(kinds.count("archetype"), 1)
-        self.assertEqual(kinds.count("automatic"), 12)
+        self.assertEqual(kinds.count("automatic"), 24)
         resolved = {record_id for record_id, record in features.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
             "npc-class-feature.warrior-proficiencies", "npc-class-feature.sorcerer-spellcasting",
@@ -218,6 +234,10 @@ class CatalogCompletenessTests(unittest.TestCase):
             "npc-class-feature.druid-woodland-stride", "npc-class-feature.druid-trackless-step",
             "npc-class-feature.druid-proficiencies", "npc-class-feature.druid-orisons",
             "npc-class-feature.fire-domain", "npc-class-feature.druid-elemental-ally",
+            "npc-class-feature.bard-proficiencies", "npc-class-feature.bard-spellcasting", "npc-class-feature.bard-cantrips",
+            "npc-class-feature.bardic-knowledge", "npc-class-feature.bardic-performance", "npc-class-feature.countersong",
+            "npc-class-feature.distraction", "npc-class-feature.fascinate", "npc-class-feature.inspire-courage",
+            "npc-class-feature.versatile-performance", "npc-class-feature.well-versed", "npc-class-feature.inspire-competence",
         })
 
     def test_thirty_five_core_skills_keep_slice_selection_resolved(self):
@@ -227,10 +247,12 @@ class CatalogCompletenessTests(unittest.TestCase):
         resolved = {
             "skill.climb", "skill.intimidate", "skill.bluff", "skill.spellcraft", "skill.use-magic-device",
             "skill.heal", "skill.knowledge-nature", "skill.survival",
+            "skill.perform", "skill.perception", "skill.diplomacy",
         }
         self.assertEqual(self.catalog["skills"]["skill.heal"]["keyAbility"], "wisdom")
         self.assertEqual(self.catalog["skills"]["skill.knowledge-nature"]["keyAbility"], "intelligence")
-        self.assertEqual(self.catalog["skills"]["skill.perception"]["catalogStatus"], "gap")
+        self.assertEqual(self.catalog["skills"]["skill.perform"]["keyAbility"], "charisma")
+        self.assertEqual(self.catalog["skills"]["skill.perception"]["keyAbility"], "wisdom")
         self.assertTrue(all(skill["catalogStatus"] == "gap" for skill_id, skill in self.catalog["skills"].items() if skill_id not in resolved))
 
     def test_four_source_backed_general_feats_are_resolved(self):
@@ -259,7 +281,9 @@ class CatalogCompletenessTests(unittest.TestCase):
         resolved = budgets["npc-gear.medium.normal"]
         self.assertEqual(resolved["catalogStatus"], "resolved")
         self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "basic"], [1, 2, 3, 4, 5])
-        self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "heroic"], [3, 5, 6])
+        self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "heroic"], [1, 2, 3, 5, 6])
+        self.assertEqual(next(row for row in resolved["rows"] if row["npcCategory"] == "heroic" and row["level"] == 1)["budgetCp"], 39000)
+        self.assertEqual(next(row for row in resolved["rows"] if row["npcCategory"] == "heroic" and row["level"] == 2)["budgetCp"], 78000)
         self.assertEqual(next(row for row in resolved["rows"] if row["npcCategory"] == "heroic" and row["level"] == 3)["budgetCp"], 165000)
         self.assertTrue(all(record["catalogStatus"] == "gap" for record_id, record in budgets.items() if record_id != "npc-gear.medium.normal"))
 
@@ -283,8 +307,10 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(self.catalog["items"]["item.sickle"]["weightLbBySize"], {"small": 1, "medium": 2})
         self.assertEqual(self.catalog["items"]["item.leather-armor"]["weightLbBySize"], {"small": 7.5, "medium": 15})
         self.assertEqual(self.catalog["items"]["item.heavy-wooden-shield"]["weightLbBySize"], {"small": 5, "medium": 10})
-        self.assertEqual(self.catalog["gearBudgets"]["npc-gear.medium.normal"]["rows"][2]["budgetCp"], 78000)
-        self.assertEqual(self.catalog["gearBudgets"]["npc-gear.medium.normal"]["rows"][5]["budgetCp"], 165000)
+        gear_rows = self.catalog["gearBudgets"]["npc-gear.medium.normal"]["rows"]
+        self.assertEqual(next(row for row in gear_rows if row["npcCategory"] == "basic" and row["level"] == 3)["budgetCp"], 78000)
+        self.assertEqual(next(row for row in gear_rows if row["npcCategory"] == "heroic" and row["level"] == 1)["budgetCp"], 39000)
+        self.assertEqual(next(row for row in gear_rows if row["npcCategory"] == "heroic" and row["level"] == 3)["budgetCp"], 165000)
 
     def test_money_policy_stays_integer_copper_with_null_gaps(self):
         def check(value):

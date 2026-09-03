@@ -66,10 +66,15 @@ SOURCE_FILES = (
     ("source.aon-wands", "sources/npc/aonprd/wands.txt", "Official current AoN Core wand rules"),
     ("source.aon-use-magic-device", "sources/npc/aonprd/use-magic-device.txt", "Official current AoN Use Magic Device rules"),
     ("source.aon-skill-bluff", "sources/npc/aonprd/skill-bluff.txt", "Official current AoN Bluff skill rules"),
+    ("source.aon-skill-perform", "sources/npc/aonprd/skill-perform.txt", "Official current AoN Perform skill rules"),
+    ("source.aon-skill-perception", "sources/npc/aonprd/skill-perception.txt", "Official current AoN Perception skill rules"),
+    ("source.aon-skill-diplomacy", "sources/npc/aonprd/skill-diplomacy.txt", "Official current AoN Diplomacy skill rules"),
     ("source.aon-skill-spellcraft", "sources/npc/aonprd/skill-spellcraft.txt", "Official current AoN Spellcraft skill rules"),
     ("source.aon-cloak-of-resistance", "sources/npc/aonprd/cloak-of-resistance.txt", "Official current AoN Cloak of Resistance rules"),
     ("source.aon-designing-encounters", "sources/npc/aonprd/designing-encounters.txt", "Official current AoN classed-NPC CR rules"),
     ("source.aon-elemental-ally", "sources/npc/aonprd/elemental-ally.txt", "Official current AoN Elemental Ally druid archetype (Monster Summoner's Handbook)"),
+    ("source.aon-halfling", "sources/npc/aonprd/halfling.txt", "Official current AoN Halfling race page and standard racial traits"),
+    ("source.aon-bard", "sources/npc/aonprd/bard.txt", "Official current AoN Bard class page, progression, spellcasting, and class features"),
     ("source.aon-eidolon-unchained", "sources/npc/aonprd/eidolon-unchained.txt", "Official current AoN unchained Eidolon rules and Table 1-6 base statistics"),
     ("source.aon-eidolon-uc-subtypes", "sources/npc/aonprd/eidolon-uc-subtypes.txt", "Official current AoN unchained eidolon Elemental subtype rules (Pathfinder Unchained pg. 33)"),
     ("source.aon-eidolon-base-forms", "sources/npc/aonprd/eidolon-base-forms.txt", "Official current AoN Quadruped eidolon base form starting statistics"),
@@ -85,6 +90,7 @@ SOURCE_FILES = (
         "burning-hands", "mage-armor", "magic-missile", "shield", "flaming-sphere", "mirror-image",
         "scorching-ray", "grease", "fireball", "flare", "barkskin", "cure-light-wounds",
         "entangle", "produce-flame", "summon-natures-ally-i", "summon-natures-ally-ii",
+        "charm-person", "sleep",
     )),
 )
 

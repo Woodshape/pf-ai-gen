@@ -1,0 +1,247 @@
+Halflings
+Source Inner Sea Races pg. 238, PRPG Core Rulebook pg. 26, Advanced Race Guide pg. 60
+Optimistic and cheerful by nature, blessed with uncanny luck, and driven by a powerful wanderlust, halflings make up for their short stature with an abundance of bravado and curiosity. At once excitable and easy-going, halflings like to keep an even temper and a steady eye on opportunity, and are not as prone to violent or emotional outbursts as some of the more volatile races. Even in the jaws of catastrophe, halflings almost never lose their sense of humor. Their ability to find humor in the absurd, no matter how dire the situation, often allows halflings to distance themselves ever so slightly from the dangers that surround them. This sense of detachment can also help shield them from terrors that might immobilize their allies.
+Halflings are inveterate opportunists. They firmly believe they can turn any situation to their advantage, and sometimes gleefully leap into trouble without any solid plan to extricate themselves if things go awry. Often unable to physically defend themselves from the rigors of the world, they know when to bend with the wind and when to hide away. Yet halflings' curiosity often overwhelms their good sense, leading to poor decisions and narrow escapes. While harsh experience sometimes teaches halflings a measure of caution, it rarely makes them completely lose faith in their luck or stop believing that the universe, in some strange way, exists for their entertainment and would never really allow them to come to harm.
+Though their curiosity drives them to seek out new places and experiences, halflings possess a strong sense of hearth and home, often spending above their means to enhance the comforts of domestic life. Without a doubt, halflings enjoy luxury and comfort, but they have equally strong reasons to make their homes a showcase. Halflings consider this urge to devote time, money, and energy toward improving their dwellings a sign of both respect for strangers and affection for their loved ones. Whether for their own blood kin, cherished friends, or honored guests, halflings make their homes beautiful in order to express their feelings toward those they welcome inside. Even traveling halflings typically decorate their wagons or carry a few cherished keepsakes to adorn their campsites.
+Physical Description: Halflings rise to a humble height of 3 feet. They prefer to walk barefoot, leading the bottoms of their feet to become roughly calloused. Tufts of thick, curly hair warm the tops of their broad, tanned feet. Their skin tends toward a rich cinnamon color and their hair toward light shades of brown. A halfling's ears are pointed, but proportionately not much larger than those of a human.
+Halflings prefer simple and modest clothing. Though willing and able to dress up if the situation demands it, their racial urge to remain quietly in the background makes them rather conservative dressers in most situations. Halfling entertainers, on the other hand, make their livings by drawing attention, and tend to go overboard with gaudy and flashy costumes.
+Society: Rather than place their faith in empires or great causes, many halflings prefer to focus on the simpler and humbler virtues of their families and local communities. Halflings claim no cultural homeland and control no settlements larger than rural assemblies of free towns. Most often, they dwell at the knees of their human cousins in human cities, eking out livings as they can from the scraps of larger societies. Many halflings lead perfectly fulfilling lives in the shadow of their larger neighbors, while some prefer more nomadic lives, traveling the world and experiencing all it has to offer.
+Halflings rely on customs and traditions to maintain their own culture. They have an extensive oral history filled with important stories about folk heroes who exemplify particular halfling virtues, but otherwise see little purpose in studying history in and of itself. Given a choice between a pointless truth and a useful fable, halflings almost always opt for the fable. This tendency helps to explain at least something of the famous halfling adaptability. Halflings look to the future and find it very easy to cast off the weight of ancient grudges or obligations that drag down so many other races.
+Relations: A typical halfling prides himself on his ability to go unnoticed by other races—a trait that allows many halflings to excel at thievery and trickery. Most halflings know full well the stereotypical view other races take of them as a result, and go out of their way to be forthcoming and friendly to the bigger races when they're not trying to go unnoticed. They get along fairly well with gnomes, although most halflings regard these eccentric creatures with a hefty dose of caution. Halflings respect elves and dwarves, but these races often live in remote regions far from the comforts of civilization that halflings enjoy, thus limiting opportunities for interaction. By and large, only half-orcs are shunned by halflings, for their great size and violent natures are a bit too intimidating for most halflings to cope with.
+Halflings coexist well with humans as a general rule, but since some of the more aggressive human societies value halflings as slaves, they try not to grow too complacent. Halflings strongly value their freedom, especially the ability to travel in search of new experiences and the autonomy this requires. However, practical and flexible as always, enslaved halflings seldom fight back directly against their masters. When possible, they wait for the perfect opportunity and then simply slip away. Sometimes, if enslaved for long enough, halflings even come to adopt their owners as their new families. Though they still dream of escape and liberty, these halflings also make the best of their lives.
+Alignment and Religion: Halflings are loyal to their friends and families, but since they dwell in a world dominated by races twice as large as themselves, they have come to grips with the fact that sometimes they need to scrape and scrounge for survival. Most halflings are neutral as a result. Though they usually make a show of respecting the laws and endorsing the prejudices of their communities, halflings place an even greater emphasis on the innate common sense of the individual. When a halfling disagrees with society at large, he will do what he thinks is best.
+Always practical, halflings frequently worship the deity most favored by their larger and more powerful neighbors. The goddess of both luck and travel seems a natural fit for most halflings and offering her a quick prayer every now and then is only common sense.
+Adventurers: Their inherent luck coupled with their insatiable wanderlust makes halflings ideal candidates for lives of adventure. Though perfectly willing to pocket any valuables they come across, halflings often care more for the new experiences adventuring brings them than for any material reward. Halflings tend to view money as a means of making their lives easier and more comfortable, not as an end in and of itself.
+Other such vagabonds often put up with this curious race in hopes that some of their mystical luck will rub off. Halflings see nothing wrong with encouraging this belief, not just in their traveling companions, but also in the larger world. Many try to use their reputation for luck to haggle for reduced fare when traveling by ship or caravan, or even for an overnight stay at an inn. They meet with mixed success, but there are just enough stories circulating about the good fortune that befalls people traveling with halflings to give even the most skeptical pause. Of course, some suspect that halflings deliberately spread these reports for just that reason.
+Male Names: Antal, Boram, Hyrgan, Jamir, Lem, Miro, Sumak, Tribin, Uldar, Vraxim.
+Female Names: Anafa, Bellis, Etune, Filiu, Irlana, Marra, Pressi, Rilka, Sistra, Wyssal, Yamyra.
+Halfling Racial Traits
++2 Dexterity, +2 Charisma, –2 Strength: Halflings are nimble and strong-willed, but their small statures make them weaker than other races.
+Small: Halflings are Small creatures and gain a +1 size bonus to their AC, a +1 size bonus on attack rolls, a –1 penalty on combat maneuver checks and to their Combat Maneuver Defense, and a +4 size bonus on Stealth checks.
+Slow Speed: Halflings have a base speed of 20 feet.
+Fearless: Halflings receive a +2 racial bonus on all saving throws against fear. This bonus stacks with the bonus granted by halfling luck.
+Halfling Luck: Halflings receive a +1 racial bonus on all saving throws.
+Keen Senses: Halflings receive a +2 racial bonus on Perception checks.
+Sure-Footed: Halflings receive a +2 racial bonus on Acrobatics and Climb checks.
+Weapon Familiarity: Halflings are proficient with slings and treat any weapon with the word “halfling” in its name as a martial weapon.
+Languages: Halflings begin play speaking Common and Halfling. Halflings with high Intelligence scores can choose from the following languages: Dwarven, Elven, Gnome, and Goblin.
+Subraces
+Avenging
+Source Advanced Race Guide pg. 62
+Unlike most halflings, members of this subtype actively look for trouble in their quest to avenge slights and wrongdoings. Whether resisting a local bully, monster, or troops of an oppressive ruler, halfling warriors of this secret subculture don masks and strike back on behalf of their community. These halflings have the low blow, underfoot, and warslinger alternate racial traits.
+Nomadic
+Source Advanced Race Guide pg. 62
+These halflings were born on the road and most follow it until the end of their days. They travel fast and light and never miss a chance for either profit or adventure. These halflings have the fleet-footed, polyglot, and wanderlust alternate racial traits.
+Segadan Halflings
+Source Heroes from the Fringe pg. 28
+Hailing from the bureaucratic Degasi city of Segada, Segadan halflings relish the comforts their prosperous city provides. The halflings of Segada nonetheless remain suspicious of Chelish settlers in the Segadan protectorates of Anchor’s End and Canorus, given Cheliax’s history of enslaving halflings. Segadan halflings are well suited to take the attentive alternate racial trait, as well as the festive and small quarter ally alternate racial traits described below.
+Slave Born
+Source Advanced Race Guide pg. 62
+These halflings come from lineages that have spent countless generations as property. Though usually free themselves, the weight of slavery still bears down on their souls, making them eager to please and prone to sudden fits of fear. These halflings have the craven and ingratiating alternate racial traits.
+Song'o Halflings
+Source Heroes from the Fringe pg. 28
+Deep in the jungles outside the former Chelish colony of Sargava in the Mwangi Expanse, the mysterious Song’o halflings avoid almost all non-Mwangi. These halflings live in temporary villages, abandoning sites when they are discovered and resettling in ever more isolated areas of the jungle. Many believe this intense aversion to outside interaction is due to early Chelish slavers settling the region and Sargava’s oppression of the native Mwangi. Song’o halflings are well represented by the deep jungle alternate racial trait, as well as the danger detection and evasive nomad alternate racial traits described below.
+Halfling Alternate Racial Trait
+Replaces Fearless
+Blessed
+Source Horror Adventures pg. 40
+Halflings with this trait receive a +2 racial bonus on saving throws against curse effects and hexes. This bonus stacks with the bonus granted by halfling luck. This racial trait replaces fearless.
+Evasive Nomad
+Source Heroes from the Fringe pg. 28
+Song’o halflings rarely grow up in one place, as they are quick to move to a new home whenever they are discovered. Halflings with this racial trait gain a +2 racial bonus on Reflex saves, but they take a –2 penalty on saving throws against fear effects.
+This replaces fearless.
+Fey Thoughts
+Source Heroes of the Wild pg. 5
+The character sees the world more like a native of the First World. Select two of the following skills: Acrobatics, Bluff, Climb, Diplomacy, Disguise, Escape Artist, Fly, Knowledge (nature), Perception, Perform, Sense Motive, Sleight of Hand, Stealth, Swim, or Use Magic Device. The selected skills are always class skills for the character.
+A dwarf can take this trait in place of hatred. An elf, gnome, or half-orc can take this trait in place of racial weapon familiarity. A half-elf can take this trait in place of multitalented. A halfling can take it in place of fearless. In the case of humans, this trait replaces the skilled trait (and the human also gains fey magic and low-light vision, as detailed in Fey Magic, above).
+Irrepressible
+Source Horror Adventures pg. 40
+Halflings with this trait receive a +2 racial bonus on saving throws against dominate and possession effects. This bonus stacks with the bonus granted by halfling luck. This racial trait replaces fearless.
+Small Quarter Ally
+Source Heroes from the Fringe pg. 28
+Segadan halflings most often live in the Small Quarter alongside other people of similar stature, such as gnomes. A halfling with this racial trait grants herself and all allies of the same size category within 60 feet a +1 luck bonus on saving throws against fear effects.
+This replaces fearless.
+Replaces Fearless, Halfling Luck
+Craven
+Source Advanced Race Guide pg. 62, Advanced Player's Guide pg. 21
+While most halflings are fearless, some are skittish, making them particularly alert. Halflings with this racial trait gain a +1 bonus on initiative checks and a +1 bonus on attack rolls when flanking. They take a –2 penalty on saves against fear effects and gain no benefit from morale bonuses on such saves. When affected by a fear effect, their base speed increases by 10 feet and they gain a +1 dodge bonus to Armor Class. This racial trait replaces fearless and halfling luck.
+Wanderlust
+Source Advanced Race Guide pg. 62, Advanced Player's Guide pg. 21
+Halflings love travel and maps. Halflings with this racial trait receive a +2 bonus on Knowledge (geography) and Survival checks. When casting spells or using abilities that provide or enhance movement, halflings treat their caster level as +1 higher than normal. This racial trait replaces fearless and halfling luck.
+Replaces Fearless, Keen Senses
+Fey-Quickened
+Source Legacy of the First World pg. 5
+Some fey-blooded halflings are faster than their kin, yet retain a sharp eye for danger. These halflings gain Run as a bonus feat and a +2 racial bonus on initiative checks. This racial trait replaces fearless and keen senses.
+Replaces Fearless, Sure-Footed
+Practicality
+Source Advanced Race Guide pg. 62, Advanced Player's Guide pg. 21
+Halflings value hard work and common sense. Halflings with this racial trait gain a +2 bonus on any one Craft or Profession skill, as well as on Sense Motive checks and saves against illusions. This racial trait replaces fearless and sure-footed.
+Replaces Fearless, Weapon Familiarity
+Joyous Companion
+Source Legacy of Dragons pg. 11
+Halflings enjoy the companionship of copper dragons and other lighthearted representatives of dragonkind and learn to share the joyousness of that bond with others. When halflings with this trait cast spells or use spell-like abilities of the abjuration school or with the emotionUM descriptor, they can confer a +1 morale bonus on saves versus fear on all adjacent allies for a number of rounds equal to the spell’s level. This trait replaces fearless and weapon familiarity.
+Skulker
+Source Inner Sea Races pg. 213
+Oppressed halflings train from a young age to take advantage of times when their oppressors ignore them. Such halflings gain a +1 racial bonus on attacks against foes who are denied their Dexterity bonus to AC. This racial trait replaces fearless and weapon familiarity.
+Underfoot Dodger
+Source Heroes of the Streets pg. 9
+City-dwelling halflings do not treat crowd squares as difficult terrain and they gain a +5 bonus on Acrobatics checks to move through the spaces of larger foes. This racial trait replaces fearless and weapon familiarity.
+Replaces Halfling Luck
+Adaptable Luck
+Source Advanced Race Guide pg. 62
+Some halflings have greater control over their innate luck. This ability gives them more options for how they can apply their good fortune from day to day, but also narrows its scope. Three times per day, a halfling can gain a +2 luck bonus on an ability check, attack roll, saving throw, or skill check. If halflings choose to use the ability before they make the roll or check, they gain the full +2 bonus; if they choose to do so afterward, they only gain a +1 bonus. Using adaptive luck in this way is not an action. This racial trait replaces halfling luck.
+Halfling Jinx
+Source Halflings of Golarion pg. 27
+You lose the halfling luck racial trait (and its +1 racial bonus on saving throws) and instead gain the ability to curse another creature with bad luck at will as a standard action. This curse has a range of 30 feet, and you must be able to see the target and have line of effect to it. The target gets a Will saving throw to resist this jinx (DC = 10 + 1/2 your level + your Charisma modifier). If your target makes this saving throw, it is immune to your jinx ability for 24 hours. A jinxed creature takes a –1 penalty on all saving throws. This jinx lasts for 24 hours or until you attempt to use your jinx again. A jinx is a supernatural ability, is not mind-affecting, does not allow spell resistance, and can affect any kind of creature not immune to luck effects.
+From Halflings of Golarion, pg. 26, relating to all the Halfling Jinx feats. - Nethys
+Only halflings may select the Halfling Jinx trait. All but one of the feats in this article require the Halfling Jinx racial trait as a prerequisite. A halfling jinx wizard can select these feats using his class bonus feats as long as he meets all the prerequisites. Many of these feats add to the effect of a halfling’s jinx; unless otherwise stated, the feat’s effect is in addition to the basic jinx’s penalty on saving throws. For example, a halfling with the Alchemical Obstruction feat creates jinxes that penalize saving throws and interfere with alchemical items. A halfling can select the Ability Focus monster feat (see page 314 of the Pathfinder RPG Bestiary) to increase the DC of his jinx.
+Luckbringer
+Source Legacy of Dragons pg. 11
+Halflings with this trait learn to share their luck with others much in the way a gold dragon can imbue objects with good fortune. Once per day as a standard action, a halfling with this trait can confer good luck on a single nonmagical token (such as a button or a ring). Any creature carrying this token gains a +1 luck bonus on Will saves. This effect lasts for 1 hour. This trait replaces lucky.
+Underfoot
+Source Advanced Race Guide pg. 62, Advanced Player's Guide pg. 21
+Halflings must train hard to effectively fight bigger opponents. Halflings with this racial trait gain a +1 dodge bonus to AC against foes larger than themselves and a +1 bonus on Reflex saving throws to avoid trample attacks. This racial trait replaces halfling luck.
+Unlucky Halfling
+Source Inner Sea Races pg. 213
+These halflings take a –1 penalty on saving throws but also gain a +1 racial bonus to the caster level and save DC of all curse spells and spell-like abilities. In addition, such halflings can use ill omenAPG as a spell-like ability once per day. This racial trait replaces halfling luck.
+Replaces Halfling Luck, Keen Senses
+Unfettered
+Source Inner Sea Races pg. 213
+Former slips liberated from slavery train to ensure they will never be slaves again. They gain a +4 racial bonus on Escape Artist checks and a +2 racial bonus on saving throws against effects that cause the entangled condition, to CMD against grapples, and on combat maneuver checks to escape a grapple. This racial trait replaces halfling luck and keen senses.
+Replaces Halfling Luck, Sure-Footed, Weapon Familiarity
+Caretaker
+Source Inner Sea Races pg. 212
+Humans often entrust halfling families with the care of children and animals, a task that has helped them develop keen insight. Such halflings gain a +2 racial bonus on Sense Motive checks. In addition, when they acquire an animal companion, bonded mount, cohort, or familiar, that creature gains a +2 bonus to one ability score of the character’s choice. This racial trait replaces halfling luck, sure-footed, and weapon familiarity.
+Replaces Keen Senses
+Acquisitive
+Source Horror Adventures pg. 40
+Halflings with this trait receive a +2 racial bonus on Appraise checks. This bonus increases to +4 when used to determine the most valuable item visible in a treasure hoard. This racial trait replaces keen senses.
+Attentive
+Source Horror Adventures pg. 40
+Halflings with this trait receive a +2 racial bonus on Sense Motive checks. This bonus increases to +4 to notice when someone is enchanted or possessed. This racial trait replaces keen senses.
+Danger Detection
+Source Heroes from the Fringe pg. 28
+Song’o halflings have learned to hone in on any indication of danger. Halflings with this racial trait gain a +4 racial bonus on Perception checks to notice a creature using Stealth, as well as Perception checks to notice a weapon being drawn or a hidden trap (or similar signs of danger, subject to the GM’s discretion).
+This replaces keen senses.
+Dusksight
+Source Blood of Shadows pg. 4
+Characters who operate below canopies or fight in dimly lit caves and shadowy planes of existence learn to use their low-light vision to deduce a foe’s position from the flickers of shadows around a target. When making ranged attacks, characters with this trait can reroll the miss chance granted by cover to any target in dim light, and take the better of the two rolls. The miss chance for total concealment applies normally.
+Dwarves can take this trait in place of hatred and darkvision, also gaining low-light vision. Elves, gnomes, half-elves, and halflings can take this trait in place of keen senses. Half-orcs can take this trait in place of weapon familiarity, also gaining low-light vision.
+Fey Magic
+Source Heroes of the Wild pg. 5
+The character has a mystic connection to one terrain type, selected from the ranger's favored terrain list. The character selects three 0-level druid spells and one 1st-level druid spell. If the character has a Charisma score of 11 or higher, when in the selected terrain, she gains these spells as spell-like abilities that can be cast once per day. The caster level for these effects is equal to the user's character level. The DC for the spell-like abilities is equal to 10 + the spell's level + the user's Charisma modifier. These spells are treated as being from a fey source for the purposes of the druid's resist nature's lure class feature and similar abilities.
+A dwarf can take this trait in place of greed and stonecunning. An elf, half-elf, or halfling can take this trait in place of keen senses. A gnome can take this trait in place of obsessive. A half-orc can take it in place of orc ferocity. A human can take it in place of skilled. A human who replaces skilled with fey magic also gains fey thoughts and low-light vision.
+Low Blow
+Source Advanced Race Guide pg. 62, Advanced Player's Guide pg. 21
+Some halflings train extensively in the art of attacking larger creatures. Halflings with this racial trait gain a +1 bonus on critical confirmation rolls against opponents larger than themselves. This racial trait replaces keen senses.
+Replaces Keen Senses, Language
+Polyglot
+Source Advanced Race Guide pg. 62
+Some halflings, especially those who spend a lot of time traveling, develop a talent for learning new languages. These halflings gain a +2 racial bonus on Linguistics checks, and it is always a class skill for them. Halflings with this racial trait also begin play with the ability to speak Common, Halfling, and any one other language of their choice (except for secret languages, such as Druidic) in addition to bonus languages due to high Intelligence. They still gain the normal list of halfling bonus languages. This racial trait replaces keen senses and alters the halfling language racial trait.
+Replaces Keen Senses, Sure-Footed
+Creepy Doll
+Source Horror Adventures pg. 40
+Glassy eyes and porcelain skin make some halflings look more like dolls than living creatures. If they cease moving and pretend to be a doll while they aren’t being observed, they can use the Stealth skill without cover or concealment. A successful Stealth check still allows other creatures to notice the halfling; they just believe the halfling is a doll, similar to the freeze universal monster ability (without being able to take 20). In addition, they take no size penalty on Intimidate checks against larger humanoids. The racial trait replaces keen senses and sure-footed.
+Human Shadow
+Source Inner Sea Races pg. 213
+Halflings seem to pop up wherever humans are found, in part because they actively support and move with human explorers, settlers, and travelers without drawing attention to themselves. These halflings can use Stealth to hide behind creatures at least one size category larger than themselves, without any other source of concealment or cover. As long as the halflings are within 30 feet of a human, they gain a +2 racial bonus on Sleight of Hand checks and Stealth checks. This racial trait replaces keen senses and sure-footed.
+Ingratiating
+Source Advanced Race Guide pg. 62
+Halflings often survive at the whims of larger, more aggressive races. Because of this, they go out of their way to make themselves more useful, or at least entertaining, to larger folk. Halflings with this racial trait gain a +2 bonus on skill checks for a single Perform skill of their choice, and Perform is always a class skill for them. They also gain a +2 bonus on Craft and Profession checks. This racial trait replaces keen senses and sure-footed.
+Replaces Slow Speed, Sure-Footed
+Fleet of Foot
+Source Advanced Race Guide pg. 62
+Some halflings are quicker than their kin but less cautious. Halflings with this racial trait move at normal speed and have a base speed of 30 feet. This racial trait replaces slow speed and sure-footed.
+Replaces Sure-Footed
+Driven Worker
+Source Inner Sea Races pg. 213
+Many halfling families have developed techniques to accomplish work faster and more efficiently, whether to contribute to the community or to please overbearing masters. These halflings gain a +4 racial bonus on checks with one Craft, Perform, or Profession skill. This racial trait replaces sure-footed.
+Festive
+Source Heroes from the Fringe pg. 28
+Halflings who hail from Segada partake in the City of Keys’ many festivals to foster a strong sense of community and bring fortune to their peers. Once per day, a halfling with this racial trait can grant an ally within 60 feet a +2 luck bonus on one skill check as a free action; this bonus can be applied after the ally’s check result is determined.
+This replaces sure-footed.
+Outrider
+Source Advanced Race Guide pg. 62, Advanced Player's Guide pg. 19
+Some halflings specialize in mounted combat. Halflings with this racial trait gain a +2 bonus on Handle Animal and Ride checks. This racial trait replaces sure-footed.
+Secretive Survivor
+Source Inner Sea Races pg. 213
+Halflings from poor and desperate communities, most often in big cities, must take what they need without getting caught in order to survive. They gain a +2 racial bonus on Bluff and Stealth checks. This racial trait replaces sure-footed.
+Shiftless
+Source Advanced Race Guide pg. 62
+Halflings have a reputation for larceny and guile—and sometimes it’s well deserved. Halflings with this racial trait gain a +2 racial bonus on Bluff and Sleight of Hand checks, and Sleight of Hand is always a class skill for them. This racial trait replaces sure-footed.
+Surreptitious
+Source Heroes of the High Court pg. 15
+Halflings skilled in eavesdropping on suspicious visitors are highly prized in human courts. These halflings are skilled at maintaining innocuous disguises and vanishing before being confronted. Halflings with this trait gain a +2 racial bonus on Disguise and Stealth checks. This racial trait replaces sure-footed.
+Swift as Shadows
+Source Advanced Race Guide pg. 62, Advanced Player's Guide pg. 21
+Halflings possess incredible stealth even while moving through obstructed areas. Halflings with this racial trait reduce the penalty for using Stealth while moving by 5, and reduce the Stealth check penalty for sniping by 10. This racial trait replaces sure-footed.
+Warslinger
+Source Advanced Race Guide pg. 62, Advanced Player's Guide pg. 21
+Halflings are experts at the use of the sling. Halflings with this racial trait can reload a sling as a free action. Reloading a sling still requires two hands and provokes attacks of opportunity. This racial trait replaces sure-footed.
+Replaces Sure-Footed, Weapon Familiarity
+Deep Jungle
+Source Horror Adventures pg. 40
+Some reclusive halfling tribes flourish in tropical locales. These halflings begin play speaking only Halfling (in addition to any additional languages gained from having a high Intelligence score), rather than Common and Halfling. They gain a +2 racial bonus on Survival checks and are proficient with blowguns. In addition, they have the poison use ability (they never risk poisoning themselves accidentally). This racial trait alters halflings’ languages and replaces sure-footed and weapon familiarity.
+Resourceful
+Source Horror Adventures pg. 41
+Halflings with this trait do not take any penalties for using improvised weapons. This trait counts as the Catch Off Guard or Throw Anything feats for the purpose of qualifying for feats. This racial talent replaces sure-footed and weapon familiarity.
+Replaces Weapon Familiarity
+Behind the Veil
+Source Blood of Shadows pg. 4
+Characters with this trait slyly cover their body language and movements by acting in a shadowed or partitioned areas. These characters gain a +2 bonus on Bluff and Sleight of Hand checks while benefiting from concealment or cover.
+Dwarves can take this trait in place of stonecunning. Elves, gnomes, and half-elves can take this trait in place of low-light vision. Half-orcs can take this trait in place of intimidating, also gaining the shadow blendingARG fetchling racial trait. Halflings can take this trait in place of weapon familiarity.
+Dimdweller
+Source Blood of Shadows pg. 4
+Characters with this trait are at home in gloomy conditions. Whenever these characters benefit from concealment or full concealment due to darkness or dim light, they gain a +2 racial bonus on Intimidate, Perception, and Stealth checks.
+Dwarves can take this trait in place of the greed and stonecunning traits. Elves, gnomes, halflings, and half-orcs can take this trait in place of weapon familiarity. Half-elves can take this trait in place of adaptability. Humans can take this trait in place of the skilled trait, also gaining darkvision to a range of 60 feet.
+Shadowhunter
+Source Blood of Shadows pg. 5
+Those who understand the connection between shadows and the Negative Energy Plane know how to fight the spirits of darkness. Characters with this trait deal 50% weapon damage to incorporeal creatures when using nonmagical weapons (including natural and unarmed attacks), as if using magic weapons. They also gain a +2 bonus on saving throws to remove negative levels, and recover physical ability damage from attacks by undead creatures at a rate of 2 points per ability score per day (rather than the normal 1 point per ability score per day).
+Dwarves, elves, gnomes, half-orcs, and halflings can take this trait in place of weapon familiarity. Half-elves can take this trait in place of elven immunities. Humans can take this trait in place of their bonus feat, also gaining Iron Will as a bonus feat.
+Shadowplay
+Source Blood of Shadows pg. 5
+Some illusionists are experts in manipulating light and darkness. Characters with this trait cast spells with the darkness, light, or shadowUM descriptor at +1 caster level.
+Dwarves can take this trait in place of greed. Elves can take this trait in place of elven magic, also gaining the fetchling’s spell-like abilitiesARG racial trait. Gnomes can take this trait in place of gnome magic. Halflings can take this trait in place of weapon familiarity. Half-orcs can take this trait in place of intimidating, also gaining the gnome’s illusion resistance racial trait.
+Halfling Favored Class Options
+Instead of receiving an additional skill rank or hit point whenever they gain a level in a favored class, Halflings have the option of choosing from a number of other bonuses, depending upon their favored class.
+The following options are available to all Halflings who have the listed favored class.
+Alchemist (Advanced Race Guide pg. 63): Add one extract formula from the alchemist’s list to the alchemist’s formula book. This formula must be at least one level below the highest formula level the alchemist can create.
+Arcanist (Advanced Class Guide pg. 70): Gain 1/6 of a new arcanist exploit.
+Barbarian (Advanced Race Guide pg. 63): Add a +1/2 bonus to trap sense or +1/3 to the bonus from the surprise accuracy rage power.
+Barbarian (Horror Adventures pg. 41): Add 1 foot to the range increment of thrown weapons the barbarian wields. This option has no effect unless the barbarian has selected it 5 times (or another increment of 5).
+Bard (Advanced Race Guide pg. 63, Advanced Player's Guide pg. 21): Add +1/2 on Bluff checks to pass secret messages, +1/2 on Diplomacy checks to gather information, and +1/2 on Disguise checks to appear as an elven, half-elven, or human child.
+Bloodrager (Advanced Class Guide pg. 70): Gain a +1/4 dodge bonus to AC while bloodraging against creatures at least one size category larger than the bloodrager.
+Brawler (Advanced Class Guide pg. 70): Gain a +1 bonus to the brawler’s CMD when resisting a grapple or overrun combat maneuver.
+Cavalier (Advanced Race Guide pg. 63): Add +1/2 to the cavalier’s effective class level for the purposes of determining the damage he deals when making an attack of opportunity against a challenged foe.
+Cavalier (Horror Adventures pg. 41): The cavalier’s mount gains a +1/2 bonus on saving throws against fear effects. If the cavalier ever replaces his mount, the new mount gains this bonus.
+Cleric (Advanced Race Guide pg. 63, Advanced Player's Guide pg. 21): Select one domain power granted at 1st level that is normally usable a number of times per day equal to 3 + the cleric’s Wisdom modifier. The cleric adds +1/2 to the number of uses per day of that domain power.
+Druid (Advanced Race Guide pg. 63): Add a +1/4 luck bonus on the saving throws of the druid’s animal companion.
+Fighter (Advanced Race Guide pg. 63, Advanced Player's Guide pg. 21): Add +1 to the fighter’s CMD when resisting a trip or grapple attempt.
+Gunslinger (Advanced Race Guide pg. 63): Add +1/4 to the dodge bonus to AC granted by the nimble class feature (maximum +2) or +1/4 to the AC bonus gained when using the gunslinger’s dodge deed.
+Hunter (Advanced Class Guide pg. 70): The hunter’s animal companion gains a +1/4 luck bonus on saving throws. If the hunter replaces her animal companion, the new animal companion gains this bonus.
+Inquisitor (Advanced Race Guide pg. 63): Add +1/4 to the number of times per day that an inquisitor can change her most recent teamwork feat.
+Investigator (Advanced Class Guide pg. 70): Add one extract formula from the investigator’s list to his formula book. This formula must be at least 1 formula level below the highest level the investigator can create.
+Kineticist (Occult Adventures pg. 85): Increase the capacity of the kineticist’s internal buffer by 1/6 point.
+Magus (Advanced Race Guide pg. 63): The magus gains 1/6 of a new magus arcana.
+Medium (Occult Adventures pg. 85): Increase the bonus the medium gains from its seance boon by 1/3 point. This doesn’t increase the bonus allies gain from shared seance.
+Mesmerist (Occult Adventures pg. 85): Increase the number of mesmerist tricks the mesmerist can use per day by 1/3.
+Monk (Advanced Race Guide pg. 63, Advanced Player's Guide pg. 21): Add +1 to the monk’s CMD when resisting a grapple and +1/2 to the number of stunning attacks he can attempt per day.
+Monk (Horror Adventures pg. 41): Gain a +1/4 bonus to CMD against trip and on damage rolls against prone targets that add the monk’s Strength modifier.
+Occultist (Occult Adventures pg. 85): Add 1/2 point of mental focus per day.
+Oracle (Advanced Race Guide pg. 63): Add +1/2 to the oracle’s level for the purpose of determining the effects of the oracle’s curse ability.
+Paladin (Advanced Race Guide pg. 63, Advanced Player's Guide pg. 21): Add +1/2 hit point to the paladin’s lay on hands ability (whether using it to heal or harm).
+Psychic (Occult Adventures pg. 85): The psychic treats her Charisma bonus as 1/3 point higher for the purpose of determining the number of uses or rounds per day of her discipline powers.
+Ranger (Advanced Race Guide pg. 63, Advanced Player's Guide pg. 21): Add a +1/4 dodge bonus to Armor Class against the ranger’s favored enemies.
+Rogue (Advanced Race Guide pg. 63, Advanced Player's Guide pg. 21): Choose a weapon from the following list: sling, dagger, or any weapon with "halfling" in its name. Add a +1/2 bonus on critical hit confirmation rolls with that weapon (maximum bonus +4). This bonus does not stack with Critical Focus.
+Shaman (Advanced Class Guide pg. 70): Add 1/2 to the shaman’s effective class level for the purpose of determining her spirit animal’s natural armor adjustment, Intelligence, and special abilities.
+Shifter (Ultimate Wilderness pg. 31): Increase the AC bonus from defensive instinct by 1/4 against creatures of size Large or larger.
+Skald (Advanced Class Guide pg. 70): Choose a weapon from the following list: dagger, sling, or any weapon with the word “halfling” in its name. Add a +1/2 bonus on critical hit confirmation rolls with that weapon (maximum bonus +4). This bonus doesn’t stack with those gained through Critical Focus and similar effects.
+Slayer (Advanced Class Guide pg. 70): Add a +1/4 dodge bonus to Armor Class against the slayer’s studied target.
+Sorcerer (Advanced Race Guide pg. 63): Select one bloodline power at 1st level that is normally usable a number of times per day equal to 3 + the sorcerer’s Charisma modifier. The sorcerer adds +1/2 to the number of uses per day of that bloodline power.
+Spiritualist (Occult Adventures pg. 85): Add 1/4 to the number of rounds that the spiritualist’s incorporeal phantom can be out of sight and line of effect before being sent back to the Ethereal Plane.
+Summoner (Advanced Race Guide pg. 63, Advanced Player's Guide pg. 21): Add +1 skill rank to the summoner’s eidolon.
+Swashbuckler (Advanced Class Guide pg. 70): Increase the number of times the swashbuckler can use charmed life by 1/4.
+Vigilante (Ultimate Intrigue pg. 17): Gain 1/6 of a new social talent.
+Warpriest (Advanced Class Guide pg. 70): Add 1/4 to the warpriest’s effective level when determining the damage of his sacred weapon.
+Witch (Advanced Race Guide pg. 63): Add +1/4 to the witch’s caster level when determining the effects of the spells granted to her by her patron.
+Wizard (Advanced Race Guide pg. 63): Add +1/2 to the wizard’s effective class level for the purposes of determining his familiar’s natural armor adjustment, Intelligence, and special abilities.

@@ -118,8 +118,111 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:826dffe8f6dd070eb2213f87a8d1b53550fcb82c2916570ee7d876df2b8b3e84",
+  "catalogVersion": "sha256:3c2a2827550ce18a47783d00e803ff357bcbe40cb475e269b5566e096defeaac",
   "classFeatures": {
+    "npc-class-feature.bard-cantrips": {
+      "catalogStatus": "resolved",
+      "effects": {},
+      "id": "npc-class-feature.bard-cantrips",
+      "kind": "automatic",
+      "name": "Bard cantrips",
+      "sourceRef": {
+        "entry": "Bard cantrips",
+        "file": "sources/npc/aonprd/bard.txt",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "provenanceStatus": "resolved",
+        "section": "Class Features; Table: Bard (Special)",
+        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+        "sourceId": "source.aon-bard",
+        "txtLines": [
+          14,
+          14
+        ]
+      }
+    },
+    "npc-class-feature.bard-proficiencies": {
+      "catalogStatus": "resolved",
+      "effects": {},
+      "id": "npc-class-feature.bard-proficiencies",
+      "kind": "automatic",
+      "name": "Bard proficiencies",
+      "sourceRef": {
+        "entry": "Bard proficiencies",
+        "file": "sources/npc/aonprd/bard.txt",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "provenanceStatus": "resolved",
+        "section": "Bard",
+        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+        "sourceId": "source.aon-bard",
+        "txtLines": [
+          6,
+          6
+        ]
+      }
+    },
+    "npc-class-feature.bard-spellcasting": {
+      "catalogStatus": "resolved",
+      "effects": {
+        "castingAbility": "charisma",
+        "castingMode": "spontaneous"
+      },
+      "id": "npc-class-feature.bard-spellcasting",
+      "kind": "automatic",
+      "name": "Bard spellcasting",
+      "sourceRef": {
+        "entry": "Bard spellcasting",
+        "file": "sources/npc/aonprd/bard.txt",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "provenanceStatus": "resolved",
+        "section": "Bard",
+        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+        "sourceId": "source.aon-bard",
+        "txtLines": [
+          11,
+          12
+        ]
+      }
+    },
+    "npc-class-feature.bardic-knowledge": {
+      "catalogStatus": "resolved",
+      "effects": {},
+      "id": "npc-class-feature.bardic-knowledge",
+      "kind": "automatic",
+      "name": "Bardic knowledge",
+      "sourceRef": {
+        "entry": "Bardic knowledge",
+        "file": "sources/npc/aonprd/bard.txt",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "provenanceStatus": "resolved",
+        "section": "Class Features; Table: Bard (Special)",
+        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+        "sourceId": "source.aon-bard",
+        "txtLines": [
+          14,
+          14
+        ]
+      }
+    },
+    "npc-class-feature.bardic-performance": {
+      "catalogStatus": "resolved",
+      "effects": {},
+      "id": "npc-class-feature.bardic-performance",
+      "kind": "automatic",
+      "name": "Bardic performance",
+      "sourceRef": {
+        "entry": "Bardic performance",
+        "file": "sources/npc/aonprd/bard.txt",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "provenanceStatus": "resolved",
+        "section": "Class Features; Table: Bard (Special)",
+        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+        "sourceId": "source.aon-bard",
+        "txtLines": [
+          14,
+          14
+        ]
+      }
+    },
     "npc-class-feature.class-specific-feats": {
       "catalogStatus": "gap",
       "gapCode": "core-rulebook-class-tables",
@@ -185,6 +288,46 @@
           ]
         }
       ]
+    },
+    "npc-class-feature.countersong": {
+      "catalogStatus": "resolved",
+      "effects": {},
+      "id": "npc-class-feature.countersong",
+      "kind": "automatic",
+      "name": "Countersong",
+      "sourceRef": {
+        "entry": "Countersong",
+        "file": "sources/npc/aonprd/bard.txt",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "provenanceStatus": "resolved",
+        "section": "Class Features; Table: Bard (Special)",
+        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+        "sourceId": "source.aon-bard",
+        "txtLines": [
+          14,
+          14
+        ]
+      }
+    },
+    "npc-class-feature.distraction": {
+      "catalogStatus": "resolved",
+      "effects": {},
+      "id": "npc-class-feature.distraction",
+      "kind": "automatic",
+      "name": "Distraction",
+      "sourceRef": {
+        "entry": "Distraction",
+        "file": "sources/npc/aonprd/bard.txt",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "provenanceStatus": "resolved",
+        "section": "Class Features; Table: Bard (Special)",
+        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+        "sourceId": "source.aon-bard",
+        "txtLines": [
+          14,
+          14
+        ]
+      }
     },
     "npc-class-feature.druid-elemental-ally": {
       "catalogStatus": "resolved",
@@ -1513,6 +1656,26 @@
         }
       ]
     },
+    "npc-class-feature.fascinate": {
+      "catalogStatus": "resolved",
+      "effects": {},
+      "id": "npc-class-feature.fascinate",
+      "kind": "automatic",
+      "name": "Fascinate",
+      "sourceRef": {
+        "entry": "Fascinate",
+        "file": "sources/npc/aonprd/bard.txt",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "provenanceStatus": "resolved",
+        "section": "Class Features; Table: Bard (Special)",
+        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+        "sourceId": "source.aon-bard",
+        "txtLines": [
+          14,
+          14
+        ]
+      }
+    },
     "npc-class-feature.favored-enemies": {
       "catalogStatus": "gap",
       "gapCode": "core-rulebook-class-tables",
@@ -1755,6 +1918,46 @@
           ]
         }
       ]
+    },
+    "npc-class-feature.inspire-competence": {
+      "catalogStatus": "resolved",
+      "effects": {},
+      "id": "npc-class-feature.inspire-competence",
+      "kind": "automatic",
+      "name": "Inspire competence +2",
+      "sourceRef": {
+        "entry": "Inspire competence +2",
+        "file": "sources/npc/aonprd/bard.txt",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "provenanceStatus": "resolved",
+        "section": "Class Features; Table: Bard (Special)",
+        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+        "sourceId": "source.aon-bard",
+        "txtLines": [
+          16,
+          16
+        ]
+      }
+    },
+    "npc-class-feature.inspire-courage": {
+      "catalogStatus": "resolved",
+      "effects": {},
+      "id": "npc-class-feature.inspire-courage",
+      "kind": "automatic",
+      "name": "Inspire courage +1",
+      "sourceRef": {
+        "entry": "Inspire courage +1",
+        "file": "sources/npc/aonprd/bard.txt",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "provenanceStatus": "resolved",
+        "section": "Class Features; Table: Bard (Special)",
+        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+        "sourceId": "source.aon-bard",
+        "txtLines": [
+          14,
+          14
+        ]
+      }
     },
     "npc-class-feature.monk-bonus-feats": {
       "catalogStatus": "gap",
@@ -2036,6 +2239,26 @@
         ]
       }
     },
+    "npc-class-feature.versatile-performance": {
+      "catalogStatus": "resolved",
+      "effects": {},
+      "id": "npc-class-feature.versatile-performance",
+      "kind": "automatic",
+      "name": "Versatile performance",
+      "sourceRef": {
+        "entry": "Versatile performance",
+        "file": "sources/npc/aonprd/bard.txt",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "provenanceStatus": "resolved",
+        "section": "Class Features; Table: Bard (Special)",
+        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+        "sourceId": "source.aon-bard",
+        "txtLines": [
+          15,
+          15
+        ]
+      }
+    },
     "npc-class-feature.warrior-proficiencies": {
       "catalogStatus": "resolved",
       "effects": {},
@@ -2053,6 +2276,26 @@
         "txtLines": [
           169,
           172
+        ]
+      }
+    },
+    "npc-class-feature.well-versed": {
+      "catalogStatus": "resolved",
+      "effects": {},
+      "id": "npc-class-feature.well-versed",
+      "kind": "automatic",
+      "name": "Well-versed",
+      "sourceRef": {
+        "entry": "Well-versed",
+        "file": "sources/npc/aonprd/bard.txt",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "provenanceStatus": "resolved",
+        "section": "Class Features; Table: Bard (Special)",
+        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+        "sourceId": "source.aon-bard",
+        "txtLines": [
+          15,
+          15
         ]
       }
     },
@@ -3637,36 +3880,85 @@
       }
     },
     "npc-class.bard": {
-      "catalogStatus": "gap",
+      "castingAbility": "charisma",
+      "castingMode": "spontaneous",
+      "catalogStatus": "resolved",
       "category": "pc",
-      "classSkills": null,
+      "classSkills": [
+        "skill.acrobatics",
+        "skill.appraise",
+        "skill.bluff",
+        "skill.climb",
+        "skill.craft",
+        "skill.diplomacy",
+        "skill.disguise",
+        "skill.escape-artist",
+        "skill.intimidate",
+        "skill.knowledge-arcana",
+        "skill.knowledge-dungeoneering",
+        "skill.knowledge-engineering",
+        "skill.knowledge-geography",
+        "skill.knowledge-history",
+        "skill.knowledge-local",
+        "skill.knowledge-nature",
+        "skill.knowledge-nobility",
+        "skill.knowledge-planes",
+        "skill.knowledge-religion",
+        "skill.linguistics",
+        "skill.perception",
+        "skill.perform",
+        "skill.profession",
+        "skill.sense-motive",
+        "skill.sleight-of-hand",
+        "skill.spellcraft",
+        "skill.stealth",
+        "skill.use-magic-device"
+      ],
       "gapCode": "core-rulebook-class-tables",
-      "hitDie": null,
+      "hitDie": "d8",
       "id": "npc-class.bard",
       "levels": {
         "1": {
-          "bab": null,
-          "catalogStatus": "gap",
-          "choiceSlots": null,
-          "featureGrants": null,
-          "fortitude": null,
-          "hitDie": null,
+          "bab": 0,
+          "catalogStatus": "resolved",
+          "choiceSlots": [],
+          "featureGrants": [
+            "npc-class-feature.bard-proficiencies",
+            "npc-class-feature.bard-spellcasting",
+            "npc-class-feature.bard-cantrips",
+            "npc-class-feature.bardic-knowledge",
+            "npc-class-feature.bardic-performance",
+            "npc-class-feature.countersong",
+            "npc-class-feature.distraction",
+            "npc-class-feature.fascinate",
+            "npc-class-feature.inspire-courage"
+          ],
+          "fortitude": 0,
+          "hitDie": "d8",
           "level": 1,
-          "reflex": null,
-          "skillSelections": null,
+          "reflex": 2,
+          "skillSelections": 6,
           "sourceRef": {
             "entry": "Bard level 1",
-            "file": "docs/npc-source-gap-matrix.md",
-            "provenanceStatus": "catalog-gap",
-            "section": "NPC Source-Gap Matrix",
-            "sha256": "82bc9cfeda15fc493553ca4015db3a1d94afbf997ad92aa9ef5adc860029c1d3",
-            "sourceId": "source.npc-gap-matrix",
+            "file": "sources/npc/aonprd/bard.txt",
+            "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+            "provenanceStatus": "resolved",
+            "section": "Table: Bard",
+            "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+            "sourceId": "source.aon-bard",
             "txtLines": [
-              22,
-              22
+              14,
+              14
             ]
           },
-          "will": null
+          "spellsKnown": {
+            "0": 4,
+            "1": 2
+          },
+          "spellsPerDay": {
+            "1": 1
+          },
+          "will": 2
         },
         "10": {
           "bab": null,
@@ -3909,28 +4201,39 @@
           "will": null
         },
         "2": {
-          "bab": null,
-          "catalogStatus": "gap",
-          "choiceSlots": null,
-          "featureGrants": null,
-          "fortitude": null,
-          "hitDie": null,
+          "bab": 1,
+          "catalogStatus": "resolved",
+          "choiceSlots": [],
+          "featureGrants": [
+            "npc-class-feature.versatile-performance",
+            "npc-class-feature.well-versed"
+          ],
+          "fortitude": 0,
+          "hitDie": "d8",
           "level": 2,
-          "reflex": null,
-          "skillSelections": null,
+          "reflex": 3,
+          "skillSelections": 6,
           "sourceRef": {
             "entry": "Bard level 2",
-            "file": "docs/npc-source-gap-matrix.md",
-            "provenanceStatus": "catalog-gap",
-            "section": "NPC Source-Gap Matrix",
-            "sha256": "82bc9cfeda15fc493553ca4015db3a1d94afbf997ad92aa9ef5adc860029c1d3",
-            "sourceId": "source.npc-gap-matrix",
+            "file": "sources/npc/aonprd/bard.txt",
+            "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+            "provenanceStatus": "resolved",
+            "section": "Table: Bard",
+            "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+            "sourceId": "source.aon-bard",
             "txtLines": [
-              22,
-              22
+              15,
+              15
             ]
           },
-          "will": null
+          "spellsKnown": {
+            "0": 5,
+            "1": 3
+          },
+          "spellsPerDay": {
+            "1": 2
+          },
+          "will": 3
         },
         "20": {
           "bab": null,
@@ -3957,28 +4260,38 @@
           "will": null
         },
         "3": {
-          "bab": null,
-          "catalogStatus": "gap",
-          "choiceSlots": null,
-          "featureGrants": null,
-          "fortitude": null,
-          "hitDie": null,
+          "bab": 2,
+          "catalogStatus": "resolved",
+          "choiceSlots": [],
+          "featureGrants": [
+            "npc-class-feature.inspire-competence"
+          ],
+          "fortitude": 1,
+          "hitDie": "d8",
           "level": 3,
-          "reflex": null,
-          "skillSelections": null,
+          "reflex": 3,
+          "skillSelections": 6,
           "sourceRef": {
             "entry": "Bard level 3",
-            "file": "docs/npc-source-gap-matrix.md",
-            "provenanceStatus": "catalog-gap",
-            "section": "NPC Source-Gap Matrix",
-            "sha256": "82bc9cfeda15fc493553ca4015db3a1d94afbf997ad92aa9ef5adc860029c1d3",
-            "sourceId": "source.npc-gap-matrix",
+            "file": "sources/npc/aonprd/bard.txt",
+            "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+            "provenanceStatus": "resolved",
+            "section": "Table: Bard",
+            "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+            "sourceId": "source.aon-bard",
             "txtLines": [
-              22,
-              22
+              16,
+              16
             ]
           },
-          "will": null
+          "spellsKnown": {
+            "0": 6,
+            "1": 4
+          },
+          "spellsPerDay": {
+            "1": 3
+          },
+          "will": 3
         },
         "4": {
           "bab": null,
@@ -4126,19 +4439,25 @@
         }
       },
       "name": "Bard",
-      "skillSelections": null,
+      "skillSelections": 6,
       "sourceRef": {
-        "entry": "Eleven Core PC class tables through level 20",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "82bc9cfeda15fc493553ca4015db3a1d94afbf997ad92aa9ef5adc860029c1d3",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Bard",
+        "file": "sources/npc/aonprd/bard.txt",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "provenanceStatus": "resolved",
+        "section": "Bard; Class Skills; Class Features",
+        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+        "sourceId": "source.aon-bard",
         "txtLines": [
-          22,
-          22
+          1,
+          55
         ]
-      }
+      },
+      "supportedLevels": [
+        1,
+        2,
+        3
+      ]
     },
     "npc-class.cleric": {
       "catalogStatus": "gap",
@@ -13780,6 +14099,33 @@
             "protection": 15000,
             "weapons": 10000
           },
+          "effectiveLevel": 1,
+          "level": 1,
+          "npcCategory": "heroic",
+          "sourceRef": {
+            "entry": "Heroic level 1",
+            "file": "sources/npc/aonprd/creating-npcs.txt",
+            "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+            "provenanceStatus": "resolved",
+            "section": "Table 14-9: NPC Gear",
+            "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+            "sourceId": "source.aon-creating-npcs",
+            "txtLines": [
+              83,
+              83
+            ]
+          }
+        },
+        {
+          "budgetCp": 39000,
+          "catalogStatus": "resolved",
+          "categories": {
+            "gear": 10000,
+            "limitedUse": 4000,
+            "magic": 0,
+            "protection": 15000,
+            "weapons": 10000
+          },
           "effectiveLevel": 2,
           "level": 2,
           "npcCategory": "basic",
@@ -13806,6 +14152,33 @@
             "protection": 20000,
             "weapons": 35000
           },
+          "effectiveLevel": 2,
+          "level": 2,
+          "npcCategory": "heroic",
+          "sourceRef": {
+            "entry": "Heroic level 2",
+            "file": "sources/npc/aonprd/creating-npcs.txt",
+            "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+            "provenanceStatus": "resolved",
+            "section": "Table 14-9: NPC Gear",
+            "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+            "sourceId": "source.aon-creating-npcs",
+            "txtLines": [
+              84,
+              84
+            ]
+          }
+        },
+        {
+          "budgetCp": 78000,
+          "catalogStatus": "resolved",
+          "categories": {
+            "gear": 15000,
+            "limitedUse": 8000,
+            "magic": 0,
+            "protection": 20000,
+            "weapons": 35000
+          },
           "effectiveLevel": 3,
           "level": 3,
           "npcCategory": "basic",
@@ -13819,6 +14192,33 @@
             "txtLines": [
               84,
               84
+            ]
+          }
+        },
+        {
+          "budgetCp": 165000,
+          "catalogStatus": "resolved",
+          "categories": {
+            "gear": 20000,
+            "limitedUse": 10000,
+            "magic": 0,
+            "protection": 80000,
+            "weapons": 65000
+          },
+          "effectiveLevel": 3,
+          "level": 3,
+          "npcCategory": "heroic",
+          "sourceRef": {
+            "entry": "Heroic level 3",
+            "file": "sources/npc/aonprd/creating-npcs.txt",
+            "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+            "provenanceStatus": "resolved",
+            "section": "Table 14-9: NPC Gear",
+            "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+            "sourceId": "source.aon-creating-npcs",
+            "txtLines": [
+              85,
+              85
             ]
           }
         },
@@ -13871,33 +14271,6 @@
             "txtLines": [
               86,
               86
-            ]
-          }
-        },
-        {
-          "budgetCp": 165000,
-          "catalogStatus": "resolved",
-          "categories": {
-            "gear": 20000,
-            "limitedUse": 10000,
-            "magic": 0,
-            "protection": 80000,
-            "weapons": 65000
-          },
-          "effectiveLevel": 3,
-          "level": 3,
-          "npcCategory": "heroic",
-          "sourceRef": {
-            "entry": "Heroic level 3",
-            "file": "sources/npc/aonprd/creating-npcs.txt",
-            "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
-            "provenanceStatus": "resolved",
-            "section": "Table 14-9: NPC Gear",
-            "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
-            "sourceId": "source.aon-creating-npcs",
-            "txtLines": [
-              85,
-              85
             ]
           }
         },
@@ -15798,28 +16171,71 @@
       "traits": null
     },
     "npc-race.halfling": {
-      "abilityAdjustments": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-races",
+      "abilityAdjustments": {
+        "charisma": 2,
+        "dexterity": 2,
+        "strength": -2
+      },
+      "bonusLanguages": [
+        "Dwarven",
+        "Elven",
+        "Gnome",
+        "Goblin"
+      ],
+      "catalogStatus": "resolved",
+      "choiceSlots": [],
+      "featSlots": [],
       "id": "npc-race.halfling",
-      "languages": null,
+      "languages": [
+        "Common",
+        "Halfling"
+      ],
       "name": "Halfling",
-      "senses": null,
-      "sizeId": null,
+      "saveBonuses": {
+        "fortitude": 1,
+        "reflex": 1,
+        "will": 1
+      },
+      "senses": [],
+      "sizeId": "size.small",
+      "sizeModifiers": {
+        "ac": 1,
+        "attack": 1,
+        "cmb": -1,
+        "cmd": -1
+      },
+      "skillBonuses": {
+        "skill.acrobatics": 2,
+        "skill.climb": 2,
+        "skill.perception": 2,
+        "skill.stealth": 4
+      },
+      "skillSelectionsBonus": 0,
       "sourceRef": {
-        "entry": "Seven Core races",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "82bc9cfeda15fc493553ca4015db3a1d94afbf997ad92aa9ef5adc860029c1d3",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Standard Halfling racial traits",
+        "file": "sources/npc/aonprd/halfling.txt",
+        "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Halfling",
+        "provenanceStatus": "resolved",
+        "section": "Halfling Racial Traits",
+        "sha256": "2a9d00a27d461db36b20b545eb04f1a18ee8e363c6396f7e4e73ce142db0f501",
+        "sourceId": "source.aon-halfling",
         "txtLines": [
-          20,
-          20
+          18,
+          27
         ]
       },
-      "speed": null,
-      "traits": null
+      "speed": {
+        "land": 20
+      },
+      "subtype": "halfling",
+      "traits": [
+        "Slow Speed",
+        "Fearless",
+        "Halfling Luck",
+        "Keen Senses",
+        "Sure-Footed",
+        "Weapon Familiarity"
+      ]
     },
     "npc-race.human": {
       "abilityAdjustments": {
@@ -16071,25 +16487,25 @@
       "trainedOnly": null
     },
     "skill.diplomacy": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
       "id": "skill.diplomacy",
-      "keyAbility": null,
+      "keyAbility": "charisma",
       "name": "Diplomacy",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "82bc9cfeda15fc493553ca4015db3a1d94afbf997ad92aa9ef5adc860029c1d3",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Diplomacy (CHA)",
+        "file": "sources/npc/aonprd/skill-diplomacy.txt",
+        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Diplomacy",
+        "provenanceStatus": "resolved",
+        "section": "Diplomacy",
+        "sha256": "5fbe4a2ef25ca81fef5ce5842aa431c6924a34253fe520a193ebf135ebe3ee93",
+        "sourceId": "source.aon-skill-diplomacy",
         "txtLines": [
-          24,
-          24
+          1,
+          1
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": false
     },
     "skill.disable-device": {
       "armorCheckPenalty": null,
@@ -16470,46 +16886,46 @@
       "trainedOnly": null
     },
     "skill.perception": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
       "id": "skill.perception",
-      "keyAbility": null,
+      "keyAbility": "wisdom",
       "name": "Perception",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "82bc9cfeda15fc493553ca4015db3a1d94afbf997ad92aa9ef5adc860029c1d3",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Perception (WIS)",
+        "file": "sources/npc/aonprd/skill-perception.txt",
+        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Perception",
+        "provenanceStatus": "resolved",
+        "section": "Perception",
+        "sha256": "eb254ef704191e6199067fbe7c53a532b9b4475ca667d4911b86e5f932f24996",
+        "sourceId": "source.aon-skill-perception",
         "txtLines": [
-          24,
-          24
+          1,
+          1
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": false
     },
     "skill.perform": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
       "id": "skill.perform",
-      "keyAbility": null,
+      "keyAbility": "charisma",
       "name": "Perform",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "82bc9cfeda15fc493553ca4015db3a1d94afbf997ad92aa9ef5adc860029c1d3",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Perform (CHA)",
+        "file": "sources/npc/aonprd/skill-perform.txt",
+        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Perform",
+        "provenanceStatus": "resolved",
+        "section": "Perform",
+        "sha256": "06a025bab1ba9bfa8450da7b4b4aaf515929dc694874c9f67a49c128e53244e7",
+        "sourceId": "source.aon-skill-perform",
         "txtLines": [
-          24,
-          24
+          1,
+          1
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": false
     },
     "skill.profession": {
       "armorCheckPenalty": null,
@@ -16702,6 +17118,12 @@
     }
   },
   "sources": {
+    "source.aon-bard": {
+      "description": "Official current AoN Bard class page, progression, spellcasting, and class features",
+      "file": "sources/npc/aonprd/bard.txt",
+      "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+      "sourceId": "source.aon-bard"
+    },
     "source.aon-caster-level": {
       "description": "Official AoN caster-level rule for spellcasting characters",
       "file": "sources/npc/aonprd/caster-level.txt",
@@ -16828,6 +17250,12 @@
       "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
       "sourceId": "source.aon-goblin-race"
     },
+    "source.aon-halfling": {
+      "description": "Official current AoN Halfling race page and standard racial traits",
+      "file": "sources/npc/aonprd/halfling.txt",
+      "sha256": "2a9d00a27d461db36b20b545eb04f1a18ee8e363c6396f7e4e73ce142db0f501",
+      "sourceId": "source.aon-halfling"
+    },
     "source.aon-npc-classes": {
       "description": "Official AoN NPC class tables and rules",
       "file": "sources/npc/aonprd/npc-classes.txt",
@@ -16845,6 +17273,24 @@
       "file": "sources/npc/aonprd/skill-descriptions.txt",
       "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
       "sourceId": "source.aon-skill-descriptions"
+    },
+    "source.aon-skill-diplomacy": {
+      "description": "Official current AoN Diplomacy skill rules",
+      "file": "sources/npc/aonprd/skill-diplomacy.txt",
+      "sha256": "5fbe4a2ef25ca81fef5ce5842aa431c6924a34253fe520a193ebf135ebe3ee93",
+      "sourceId": "source.aon-skill-diplomacy"
+    },
+    "source.aon-skill-perception": {
+      "description": "Official current AoN Perception skill rules",
+      "file": "sources/npc/aonprd/skill-perception.txt",
+      "sha256": "eb254ef704191e6199067fbe7c53a532b9b4475ca667d4911b86e5f932f24996",
+      "sourceId": "source.aon-skill-perception"
+    },
+    "source.aon-skill-perform": {
+      "description": "Official current AoN Perform skill rules",
+      "file": "sources/npc/aonprd/skill-perform.txt",
+      "sha256": "06a025bab1ba9bfa8450da7b4b4aaf515929dc694874c9f67a49c128e53244e7",
+      "sourceId": "source.aon-skill-perform"
     },
     "source.aon-skill-spellcraft": {
       "description": "Official current AoN Spellcraft skill rules",
@@ -16881,6 +17327,12 @@
       "file": "sources/npc/aonprd/spell-burning-hands.txt",
       "sha256": "45592b0968a019ae0016d7b8190fab3f6d98dd8ca41dd49c8f2b036aba93d727",
       "sourceId": "source.aon-spell-burning-hands"
+    },
+    "source.aon-spell-charm-person": {
+      "description": "Official current AoN Charm Person spell rules",
+      "file": "sources/npc/aonprd/spell-charm-person.txt",
+      "sha256": "6bb8a4176b05dc9dbe7b882db1603f5d3eebca55fedb6228126c921cd11a0b60",
+      "sourceId": "source.aon-spell-charm-person"
     },
     "source.aon-spell-cure-light-wounds": {
       "description": "Official current AoN Cure Light Wounds spell rules",
@@ -16984,6 +17436,12 @@
       "sha256": "426fd2722e6ff650ef50163c2be7dd2a9b664d9071ebacef3e72bbd27b3511d0",
       "sourceId": "source.aon-spell-shield"
     },
+    "source.aon-spell-sleep": {
+      "description": "Official current AoN Sleep spell rules",
+      "file": "sources/npc/aonprd/spell-sleep.txt",
+      "sha256": "5ad0e37095817c2eee3326e407973779363f900777f0f576d40a82779a13b3af",
+      "sourceId": "source.aon-spell-sleep"
+    },
     "source.aon-spell-summon-natures-ally-i": {
       "description": "Official current AoN Summon Natures Ally I spell rules",
       "file": "sources/npc/aonprd/spell-summon-natures-ally-i.txt",
@@ -17041,7 +17499,7 @@
     "source.npc-manifest": {
       "description": "Hash manifest for the local NPC source foundation",
       "file": "sources/npc/MANIFEST.json",
-      "sha256": "1f2a70631c0d48683ce868c2adf7222c6b97733574fd4d79c6ec28f11d27b44f",
+      "sha256": "d2326f1d7918fb4744ec11b2fd63538dc5e900c770c69e8979a5258259b83c25",
       "sourceId": "source.npc-manifest"
     },
     "source.npc-mode-plan": {
@@ -20289,9 +20747,8 @@
       }
     },
     "spell.charm-person": {
-      "catalogStatus": "partial",
+      "catalogStatus": "resolved",
       "components": null,
-      "gapCode": "core-rulebook-spell-descriptions",
       "id": "spell.charm-person",
       "levelsByClass": {
         "bard": 1,
@@ -20328,14 +20785,15 @@
       "school": null,
       "sourceRef": {
         "entry": "Charm Person",
-        "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
-        "provenanceStatus": "list-membership-resolved",
-        "section": "Core Rulebook class spell lists",
-        "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
-        "sourceId": "source.npc-crb-spell-lists",
+        "file": "sources/npc/aonprd/spell-charm-person.txt",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Charm+Person",
+        "provenanceStatus": "resolved",
+        "section": "Spell description",
+        "sha256": "6bb8a4176b05dc9dbe7b882db1603f5d3eebca55fedb6228126c921cd11a0b60",
+        "sourceId": "source.aon-spell-charm-person",
         "txtLines": [
-          54,
-          54
+          1,
+          14
         ]
       }
     },
@@ -39270,9 +39728,8 @@
       }
     },
     "spell.sleep": {
-      "catalogStatus": "partial",
+      "catalogStatus": "resolved",
       "components": null,
-      "gapCode": "core-rulebook-spell-descriptions",
       "id": "spell.sleep",
       "levelsByClass": {
         "bard": 1,
@@ -39309,14 +39766,15 @@
       "school": null,
       "sourceRef": {
         "entry": "Sleep",
-        "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
-        "provenanceStatus": "list-membership-resolved",
-        "section": "Core Rulebook class spell lists",
-        "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
-        "sourceId": "source.npc-crb-spell-lists",
+        "file": "sources/npc/aonprd/spell-sleep.txt",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Sleep",
+        "provenanceStatus": "resolved",
+        "section": "Spell description",
+        "sha256": "5ad0e37095817c2eee3326e407973779363f900777f0f576d40a82779a13b3af",
+        "sourceId": "source.aon-spell-sleep",
         "txtLines": [
-          76,
-          76
+          1,
+          13
         ]
       }
     },

@@ -1,565 +1,670 @@
 {
-  "section": "skills",
-  "records": [
-    {
-      "id": "skill.perception",
-      "name": "Perception",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.climb",
-      "name": "Climb",
-      "catalogStatus": "resolved",
-      "keyAbility": "strength",
-      "trainedOnly": false,
-      "armorCheckPenalty": true,
-      "sourceRef": {
-        "sourceId": "source.aon-skill-descriptions",
-        "section": "Table: Skill Summary",
-        "txtLines": [8, 8],
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#climb",
-        "entry": "Climb",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "skill.handle-animal",
-      "name": "Handle Animal",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.intimidate",
-      "name": "Intimidate",
-      "catalogStatus": "resolved",
-      "keyAbility": "charisma",
-      "trainedOnly": false,
-      "armorCheckPenalty": false,
-      "sourceRef": {
-        "sourceId": "source.aon-skill-descriptions",
-        "section": "Table: Skill Summary",
-        "txtLines": [17, 17],
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#intimidate",
-        "entry": "Intimidate",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "skill.ride",
-      "name": "Ride",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.swim",
-      "name": "Swim",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.acrobatics",
-      "name": "Acrobatics",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.appraise",
-      "name": "Appraise",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.bluff",
-      "name": "Bluff",
-      "catalogStatus": "resolved",
-      "keyAbility": "charisma",
-      "trainedOnly": false,
-      "armorCheckPenalty": false,
-      "sourceRef": {
-        "sourceId": "source.aon-skill-bluff",
-        "section": "Bluff",
-        "txtLines": [1, 33],
-        "entry": "Bluff",
-        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Bluff",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "skill.craft",
-      "name": "Craft",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.diplomacy",
-      "name": "Diplomacy",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.disable-device",
-      "name": "Disable Device",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.disguise",
-      "name": "Disguise",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.escape-artist",
-      "name": "Escape Artist",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.fly",
-      "name": "Fly",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.heal",
-      "name": "Heal",
-      "catalogStatus": "resolved",
-      "keyAbility": "wisdom",
-      "trainedOnly": false,
-      "armorCheckPenalty": false,
-      "sourceRef": {
-        "sourceId": "source.aon-skill-descriptions",
-        "section": "Table: Skill Summary",
-        "txtLines": [16, 16],
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#heal",
-        "entry": "Heal",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "skill.knowledge-arcana",
-      "name": "Knowledge (Arcana)",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.knowledge-dungeoneering",
-      "name": "Knowledge (Dungeoneering)",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.knowledge-engineering",
-      "name": "Knowledge (Engineering)",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.knowledge-geography",
-      "name": "Knowledge (Geography)",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.knowledge-history",
-      "name": "Knowledge (History)",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.knowledge-local",
-      "name": "Knowledge (Local)",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.knowledge-nature",
-      "name": "Knowledge (Nature)",
-      "catalogStatus": "resolved",
-      "keyAbility": "intelligence",
-      "trainedOnly": true,
-      "armorCheckPenalty": false,
-      "sourceRef": {
-        "sourceId": "source.aon-skill-descriptions",
-        "section": "Table: Skill Summary",
-        "txtLines": [24, 24],
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#knowledge",
-        "entry": "Knowledge (nature)",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "skill.knowledge-nobility",
-      "name": "Knowledge (Nobility)",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.knowledge-planes",
-      "name": "Knowledge (Planes)",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.knowledge-religion",
-      "name": "Knowledge (Religion)",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.linguistics",
-      "name": "Linguistics",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.perform",
-      "name": "Perform",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.profession",
-      "name": "Profession",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.sense-motive",
-      "name": "Sense Motive",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.sleight-of-hand",
-      "name": "Sleight of Hand",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.spellcraft",
-      "name": "Spellcraft",
-      "catalogStatus": "resolved",
-      "keyAbility": "intelligence",
-      "trainedOnly": true,
-      "armorCheckPenalty": false,
-      "sourceRef": {
-        "sourceId": "source.aon-skill-spellcraft",
-        "section": "Spellcraft",
-        "txtLines": [1, 31],
-        "entry": "Spellcraft",
-        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Spellcraft",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "skill.stealth",
-      "name": "Stealth",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
-      "keyAbility": null,
-      "trainedOnly": null,
-      "armorCheckPenalty": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [24, 24],
-        "entry": "Core skill list",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "skill.survival",
-      "name": "Survival",
-      "catalogStatus": "resolved",
-      "keyAbility": "wisdom",
-      "trainedOnly": false,
-      "armorCheckPenalty": false,
-      "sourceRef": {
-        "sourceId": "source.aon-skill-descriptions",
-        "section": "Table: Skill Summary",
-        "txtLines": [37, 37],
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#survival",
-        "entry": "Survival",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "skill.use-magic-device",
-      "name": "Use Magic Device",
-      "catalogStatus": "resolved",
-      "keyAbility": "charisma",
-      "trainedOnly": true,
-      "armorCheckPenalty": false,
-      "sourceRef": {
-        "sourceId": "source.aon-use-magic-device",
-        "section": "Use Magic Device",
-        "txtLines": [1, 40],
-        "entry": "Use Magic Device",
-        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Use%20Magic%20Device",
-        "provenanceStatus": "resolved"
-      }
-    }
-  ]
+ "section": "skills",
+ "records": [
+  {
+   "id": "skill.perception",
+   "name": "Perception",
+   "catalogStatus": "resolved",
+   "keyAbility": "wisdom",
+   "trainedOnly": false,
+   "armorCheckPenalty": false,
+   "sourceRef": {
+    "sourceId": "source.aon-skill-perception",
+    "section": "Perception",
+    "txtLines": [
+     1,
+     1
+    ],
+    "entry": "Perception (WIS)",
+    "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Perception",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "skill.climb",
+   "name": "Climb",
+   "catalogStatus": "resolved",
+   "keyAbility": "strength",
+   "trainedOnly": false,
+   "armorCheckPenalty": true,
+   "sourceRef": {
+    "sourceId": "source.aon-skill-descriptions",
+    "section": "Table: Skill Summary",
+    "txtLines": [
+     8,
+     8
+    ],
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#climb",
+    "entry": "Climb",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "skill.handle-animal",
+   "name": "Handle Animal",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.intimidate",
+   "name": "Intimidate",
+   "catalogStatus": "resolved",
+   "keyAbility": "charisma",
+   "trainedOnly": false,
+   "armorCheckPenalty": false,
+   "sourceRef": {
+    "sourceId": "source.aon-skill-descriptions",
+    "section": "Table: Skill Summary",
+    "txtLines": [
+     17,
+     17
+    ],
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#intimidate",
+    "entry": "Intimidate",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "skill.ride",
+   "name": "Ride",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.swim",
+   "name": "Swim",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.acrobatics",
+   "name": "Acrobatics",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.appraise",
+   "name": "Appraise",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.bluff",
+   "name": "Bluff",
+   "catalogStatus": "resolved",
+   "keyAbility": "charisma",
+   "trainedOnly": false,
+   "armorCheckPenalty": false,
+   "sourceRef": {
+    "sourceId": "source.aon-skill-bluff",
+    "section": "Bluff",
+    "txtLines": [
+     1,
+     33
+    ],
+    "entry": "Bluff",
+    "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Bluff",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "skill.craft",
+   "name": "Craft",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.diplomacy",
+   "name": "Diplomacy",
+   "catalogStatus": "resolved",
+   "keyAbility": "charisma",
+   "trainedOnly": false,
+   "armorCheckPenalty": false,
+   "sourceRef": {
+    "sourceId": "source.aon-skill-diplomacy",
+    "section": "Diplomacy",
+    "txtLines": [
+     1,
+     1
+    ],
+    "entry": "Diplomacy (CHA)",
+    "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Diplomacy",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "skill.disable-device",
+   "name": "Disable Device",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.disguise",
+   "name": "Disguise",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.escape-artist",
+   "name": "Escape Artist",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.fly",
+   "name": "Fly",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.heal",
+   "name": "Heal",
+   "catalogStatus": "resolved",
+   "keyAbility": "wisdom",
+   "trainedOnly": false,
+   "armorCheckPenalty": false,
+   "sourceRef": {
+    "sourceId": "source.aon-skill-descriptions",
+    "section": "Table: Skill Summary",
+    "txtLines": [
+     16,
+     16
+    ],
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#heal",
+    "entry": "Heal",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "skill.knowledge-arcana",
+   "name": "Knowledge (Arcana)",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.knowledge-dungeoneering",
+   "name": "Knowledge (Dungeoneering)",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.knowledge-engineering",
+   "name": "Knowledge (Engineering)",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.knowledge-geography",
+   "name": "Knowledge (Geography)",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.knowledge-history",
+   "name": "Knowledge (History)",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.knowledge-local",
+   "name": "Knowledge (Local)",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.knowledge-nature",
+   "name": "Knowledge (Nature)",
+   "catalogStatus": "resolved",
+   "keyAbility": "intelligence",
+   "trainedOnly": true,
+   "armorCheckPenalty": false,
+   "sourceRef": {
+    "sourceId": "source.aon-skill-descriptions",
+    "section": "Table: Skill Summary",
+    "txtLines": [
+     24,
+     24
+    ],
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#knowledge",
+    "entry": "Knowledge (nature)",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "skill.knowledge-nobility",
+   "name": "Knowledge (Nobility)",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.knowledge-planes",
+   "name": "Knowledge (Planes)",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.knowledge-religion",
+   "name": "Knowledge (Religion)",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.linguistics",
+   "name": "Linguistics",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.perform",
+   "name": "Perform",
+   "catalogStatus": "resolved",
+   "keyAbility": "charisma",
+   "trainedOnly": false,
+   "armorCheckPenalty": false,
+   "sourceRef": {
+    "sourceId": "source.aon-skill-perform",
+    "section": "Perform",
+    "txtLines": [
+     1,
+     1
+    ],
+    "entry": "Perform (CHA)",
+    "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Perform",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "skill.profession",
+   "name": "Profession",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.sense-motive",
+   "name": "Sense Motive",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.sleight-of-hand",
+   "name": "Sleight of Hand",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.spellcraft",
+   "name": "Spellcraft",
+   "catalogStatus": "resolved",
+   "keyAbility": "intelligence",
+   "trainedOnly": true,
+   "armorCheckPenalty": false,
+   "sourceRef": {
+    "sourceId": "source.aon-skill-spellcraft",
+    "section": "Spellcraft",
+    "txtLines": [
+     1,
+     31
+    ],
+    "entry": "Spellcraft",
+    "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Spellcraft",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "skill.stealth",
+   "name": "Stealth",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-skills",
+   "keyAbility": null,
+   "trainedOnly": null,
+   "armorCheckPenalty": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     24,
+     24
+    ],
+    "entry": "Core skill list",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "skill.survival",
+   "name": "Survival",
+   "catalogStatus": "resolved",
+   "keyAbility": "wisdom",
+   "trainedOnly": false,
+   "armorCheckPenalty": false,
+   "sourceRef": {
+    "sourceId": "source.aon-skill-descriptions",
+    "section": "Table: Skill Summary",
+    "txtLines": [
+     37,
+     37
+    ],
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#survival",
+    "entry": "Survival",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "skill.use-magic-device",
+   "name": "Use Magic Device",
+   "catalogStatus": "resolved",
+   "keyAbility": "charisma",
+   "trainedOnly": true,
+   "armorCheckPenalty": false,
+   "sourceRef": {
+    "sourceId": "source.aon-use-magic-device",
+    "section": "Use Magic Device",
+    "txtLines": [
+     1,
+     40
+    ],
+    "entry": "Use Magic Device",
+    "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Use%20Magic%20Device",
+    "provenanceStatus": "resolved"
+   }
+  }
+ ]
 }

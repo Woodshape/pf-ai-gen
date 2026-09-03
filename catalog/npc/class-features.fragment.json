@@ -1,1378 +1,1990 @@
 {
-  "section": "classFeatures",
-  "records": [
+ "section": "classFeatures",
+ "records": [
+  {
+   "id": "npc-class-feature.general-feats",
+   "name": "General feat slots",
+   "kind": "feat-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
     {
-      "id": "npc-class-feature.general-feats",
-      "name": "General feat slots",
-      "kind": "feat-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [476, 482],
-          "entry": "Step 4: Feats - slot kinds",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
     },
     {
-      "id": "npc-class-feature.fighter-bonus-feats",
-      "name": "Fighter bonus feat slots",
-      "kind": "feat-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [476, 482],
-          "entry": "Step 4: Feats - slot kinds",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.ranger-combat-style-feats",
-      "name": "Ranger combat style feat slots",
-      "kind": "feat-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [476, 482],
-          "entry": "Step 4: Feats - slot kinds",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.monk-bonus-feats",
-      "name": "Monk bonus feat slots",
-      "kind": "feat-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [476, 482],
-          "entry": "Step 4: Feats - slot kinds",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.wizard-bonus-feats",
-      "name": "Wizard bonus feat slots",
-      "kind": "feat-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [476, 482],
-          "entry": "Step 4: Feats - slot kinds",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.class-specific-feats",
-      "name": "Other class-specific feat slots",
-      "kind": "feat-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [476, 482],
-          "entry": "Step 4: Feats - slot kinds",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.rage-powers",
-      "name": "Rage powers",
-      "kind": "choice-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [501, 513],
-          "entry": "Step 5: Class Features - choice slots",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.rogue-talents",
-      "name": "Rogue talents",
-      "kind": "choice-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [501, 513],
-          "entry": "Step 5: Class Features - choice slots",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.favored-enemies",
-      "name": "Favored enemies",
-      "kind": "choice-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [501, 513],
-          "entry": "Step 5: Class Features - choice slots",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.favored-terrains",
-      "name": "Favored terrains",
-      "kind": "choice-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [501, 513],
-          "entry": "Step 5: Class Features - choice slots",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.ranger-combat-styles",
-      "name": "Ranger combat styles",
-      "kind": "choice-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [501, 513],
-          "entry": "Step 5: Class Features - choice slots",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.hunters-bond",
-      "name": "Hunter's bond",
-      "kind": "choice-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [501, 513],
-          "entry": "Step 5: Class Features - choice slots",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.cleric-domains",
-      "name": "Cleric domains",
-      "kind": "choice-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [501, 513],
-          "entry": "Step 5: Class Features - choice slots",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.sorcerer-bloodlines",
-      "name": "Sorcerer bloodlines",
-      "kind": "choice-slot",
-      "catalogStatus": "resolved",
-      "sourceRef": [
-        {
-          "sourceId": "source.aon-sorcerer",
-          "section": "Bloodline",
-          "txtLines": [62, 64],
-          "entry": "Sorcerer bloodline choice and bonus spells",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer"
-        },
-        {
-          "sourceId": "source.aon-elemental-bloodline",
-          "section": "Elemental Bloodline",
-          "txtLines": [1, 16],
-          "entry": "Elemental fire bloodline through level 6",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/BloodlineDisplay.aspx?ItemName=Elemental"
-        }
-      ],
-      "choiceId": "bloodline",
-      "allowedValues": ["elemental-fire"],
-      "options": {
-        "elemental-fire": {
-          "name": "Elemental (fire)",
-          "energyType": "fire",
-          "classSkill": "skill.knowledge-planes",
-          "bonusSpells": {
-            "3": "spell.burning-hands",
-            "5": "spell.scorching-ray"
-          },
-          "powers": [
-            {
-              "level": 1,
-              "name": "Elemental Ray",
-              "damageType": "fire",
-              "range": "30 ft.",
-              "usesFormula": "3 + Charisma modifier",
-              "damageDie": "1d6",
-              "damageBonusFormula": "floor(Sorcerer level / 2)"
-            },
-            {
-              "level": 3,
-              "name": "Elemental Resistance",
-              "resistance": {
-                "fire": 10
-              }
-            }
-          ],
-          "arcana": {
-            "name": "Elemental bloodline arcana",
-            "energyType": "fire",
-            "effect": "energy-damage spells may change their damage type to fire"
-          }
-        }
-      }
-    },
-    {
-      "id": "npc-class-feature.wizard-schools",
-      "name": "Wizard schools",
-      "kind": "choice-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [501, 513],
-          "entry": "Step 5: Class Features - choice slots",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.familiar-bond",
-      "name": "Familiar/bond choices",
-      "kind": "choice-slot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
-      "sourceRef": [
-        {
-          "sourceId": "source.npc-gap-matrix",
-          "section": "NPC Source-Gap Matrix",
-          "txtLines": [21, 21],
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap"
-        },
-        {
-          "sourceId": "source.npc-mode-plan",
-          "section": "NPC_MODE_PLAN.md",
-          "txtLines": [501, 513],
-          "entry": "Step 5: Class Features - choice slots",
-          "provenanceStatus": "structural-reference"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.warrior-proficiencies",
-      "name": "Warrior weapon and armor proficiencies",
-      "kind": "automatic",
-      "catalogStatus": "resolved",
-      "effects": {},
-      "sourceRef": {
-        "sourceId": "source.aon-npc-classes",
-        "section": "Warrior Class Features",
-        "txtLines": [169, 172],
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/NPCClasses.html#warrior",
-        "entry": "Weapon and Armor Proficiency",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "npc-class-feature.sorcerer-eschew-materials",
-      "name": "Eschew Materials",
-      "catalogStatus": "resolved",
-      "kind": "automatic",
-      "effects": {},
-      "sourceRef": {
-        "sourceId": "source.aon-sorcerer",
-        "section": "Eschew Materials",
-        "txtLines": [66, 66],
-        "entry": "Sorcerer bonus feat",
-        "provenanceStatus": "resolved",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer"
-      }
-    },
-    {
-      "id": "npc-class-feature.sorcerer-spellcasting",
-      "name": "Sorcerer spellcasting",
-      "catalogStatus": "resolved",
-      "kind": "automatic",
-      "effects": {
-        "castingAbility": "charisma",
-        "castingMode": "spontaneous"
-      },
-      "sourceRef": {
-        "sourceId": "source.aon-sorcerer",
-        "section": "Spells; Cantrips",
-        "txtLines": [57, 65],
-        "entry": "Sorcerer spontaneous spellcasting",
-        "provenanceStatus": "resolved",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer"
-      }
-    },
-    {
-      "id": "npc-class-feature.druid-proficiencies",
-      "name": "Druid Proficiencies",
-      "catalogStatus": "resolved",
-      "kind": "automatic",
-      "effects": {
-        "weaponProficiencies": ["club", "dagger", "dart", "quarterstaff", "scimitar", "scythe", "sickle", "shortspear", "sling", "spear"],
-        "armorProficiencies": ["light", "medium"],
-        "armorRestriction": "no metal armor; padded, leather, or hide only",
-        "shieldProficiencies": "shields except tower shields, wooden only"
-      },
-      "sourceRef": [
-        {
-          "sourceId": "source.aon-druid",
-          "section": "Weapon and Armor Proficiency",
-          "txtLines": [34, 36],
-          "entry": "Druid weapon, armor, and shield proficiencies and restrictions",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.druid-spellcasting",
-      "name": "Druid spellcasting",
-      "catalogStatus": "resolved",
-      "kind": "automatic",
-      "effects": {
-        "castingAbility": "wisdom",
-        "castingMode": "prepared",
-        "spontaneousConversion": {
-          "name": "Summon Nature’s Ally",
-          "from": "prepared",
-          "excludesDomainSlots": true,
-          "spellIdsBySlotLevel": {
-            "1": ["spell.summon-nature-s-ally-i"],
-            "2": ["spell.summon-nature-s-ally-i", "spell.summon-nature-s-ally-ii"]
-          }
-        }
-      },
-      "sourceRef": [
-        {
-          "sourceId": "source.aon-druid",
-          "section": "Spells; Spontaneous Casting",
-          "txtLines": [37, 43],
-          "entry": "Druid prepared divine spellcasting and spontaneous conversion",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
-        },
-        {
-          "sourceId": "source.aon-caster-level",
-          "section": "Caster Level",
-          "txtLines": [1, 6],
-          "entry": "Druid caster level",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/Rules.aspx?ID=207"
-        },
-        {
-          "sourceId": "source.aon-creating-npcs",
-          "section": "Step 5: Class Features",
-          "txtLines": [70, 70],
-          "entry": "Basic spells may be prepared multiple times",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
-        },
-        {
-          "sourceId": "source.aon-spell-summon-natures-ally-i",
-          "section": "Summon Nature's Ally 1",
-          "txtLines": [1, 16],
-          "entry": "Level-1 spontaneous conversion target",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%201"
-        },
-        {
-          "sourceId": "source.aon-spell-summon-natures-ally-ii",
-          "section": "Summon Nature's Ally 2",
-          "txtLines": [1, 13],
-          "entry": "Level-2 spontaneous conversion target",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%202"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.druid-orisons",
-      "name": "Orisons",
-      "catalogStatus": "resolved",
-      "kind": "automatic",
-      "effects": {
-        "notExpendedWhenCast": true,
-        "mayBePreparedMultipleTimes": true
-      },
-      "sourceRef": [
-        {
-          "sourceId": "source.aon-druid",
-          "section": "Orisons",
-          "txtLines": [43, 43],
-          "entry": "Orisons are not expended when cast and may be used again",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
-        },
-        {
-          "sourceId": "source.aon-creating-npcs",
-          "section": "Step 5: Class Features",
-          "txtLines": [70, 70],
-          "entry": "Basic spells may be prepared multiple times",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.druid-nature-bond",
-      "name": "Nature Bond",
-      "catalogStatus": "resolved",
-      "kind": "choice-slot",
-      "choiceId": "natureBond",
-      "allowedValues": ["fire-domain"],
-      "options": {
-        "fire-domain": {
-          "name": "Fire domain",
-          "featureId": "npc-class-feature.fire-domain"
-        }
-      },
-      "sourceRef": [
-        {
-          "sourceId": "source.aon-druid",
-          "section": "Nature Bond",
-          "txtLines": [47, 47],
-          "entry": "Nature Bond domain choice",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
-        },
-        {
-          "sourceId": "source.aon-cleric",
-          "section": "Domains",
-          "txtLines": [45, 45],
-          "entry": "Domain spell slots and domain preparation",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.druidic",
-      "name": "Druidic",
-      "catalogStatus": "resolved",
-      "kind": "automatic",
-      "effects": {
-        "languages": ["Druidic"]
-      },
-      "sourceRef": {
-        "sourceId": "source.aon-druid",
-        "section": "Bonus Languages; Druidic",
-        "txtLines": [44, 46],
-        "entry": "Druidic language",
-        "provenanceStatus": "resolved",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
-      }
-    },
-    {
-      "id": "npc-class-feature.druid-nature-sense",
-      "name": "Nature Sense",
-      "catalogStatus": "resolved",
-      "kind": "automatic",
-      "effects": {
-        "skillBonuses": {
-          "skill.knowledge-nature": 2,
-          "skill.survival": 2
-        }
-      },
-      "sourceRef": {
-        "sourceId": "source.aon-druid",
-        "section": "Nature Sense",
-        "txtLines": [51, 51],
-        "entry": "Nature Sense",
-        "provenanceStatus": "resolved",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
-      }
-    },
-    {
-      "id": "npc-class-feature.druid-wild-empathy",
-      "name": "Wild Empathy",
-      "catalogStatus": "resolved",
-      "kind": "automatic",
-      "effects": {},
-      "sourceRef": {
-        "sourceId": "source.aon-druid",
-        "section": "Wild Empathy",
-        "txtLines": [52, 54],
-        "entry": "Wild Empathy",
-        "provenanceStatus": "resolved",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
-      }
-    },
-    {
-      "id": "npc-class-feature.druid-woodland-stride",
-      "name": "Woodland Stride",
-      "catalogStatus": "resolved",
-      "kind": "automatic",
-      "effects": {},
-      "sourceRef": {
-        "sourceId": "source.aon-druid",
-        "section": "Woodland Stride",
-        "txtLines": [55, 55],
-        "entry": "Woodland Stride",
-        "provenanceStatus": "resolved",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
-      }
-    },
-    {
-      "id": "npc-class-feature.druid-trackless-step",
-      "name": "Trackless Step",
-      "catalogStatus": "resolved",
-      "kind": "automatic",
-      "effects": {},
-      "sourceRef": {
-        "sourceId": "source.aon-druid",
-        "section": "Trackless Step",
-        "txtLines": [56, 56],
-        "entry": "Trackless Step",
-        "provenanceStatus": "resolved",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
-      }
-    },
-    {
-      "id": "npc-class-feature.fire-domain",
-      "name": "Fire Domain",
-      "catalogStatus": "resolved",
-      "kind": "automatic",
-      "slotsPerSpellLevel": 1,
-      "domainSpells": {
-        "1": "spell.burning-hands",
-        "2": "spell.produce-flame"
-      },
-      "powers": [
-        {
-          "level": 1,
-          "name": "Fire Bolt",
-          "attackType": "ranged touch",
-          "range": "30 ft.",
-          "damageType": "fire",
-          "damageDie": "1d6",
-          "damageBonusPerTwoLevels": 1,
-          "usesBase": 3,
-          "usesAbility": "wisdom"
-        }
-      ],
-      "sourceRef": [
-        {
-          "sourceId": "source.aon-fire-domain",
-          "section": "Granted Powers; Domain Spells",
-          "txtLines": [4, 7],
-          "entry": "Fire domain through level 2",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/DomainDisplay.aspx?ItemName=Fire"
-        },
-        {
-          "sourceId": "source.aon-cleric",
-          "section": "Domains",
-          "txtLines": [45, 45],
-          "entry": "One domain slot per castable spell level",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric"
-        },
-        {
-          "sourceId": "source.aon-spell-burning-hands",
-          "section": "Spell description",
-          "txtLines": [1, 16],
-          "entry": "Fire domain first-level spell",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Burning%20Hands"
-        },
-        {
-          "sourceId": "source.aon-spell-produce-flame",
-          "section": "Spell description",
-          "txtLines": [1, 15],
-          "entry": "Fire domain second-level spell",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Produce%20Flame"
-        }
-      ]
-    },
-    {
-      "id": "npc-class-feature.druid-elemental-ally",
-      "name": "Elemental Ally",
-      "kind": "archetype",
-      "classId": "npc-class.druid",
-      "catalogStatus": "resolved",
-      "replaces": ["npc-class-feature.druid-nature-bond", "npc-class-feature.druid-wild-empathy", "npc-class-feature.druid-wild-shape", "npc-class-feature.druid-resist-natures-lure"],
-      "linkedCreatureRow": {
-        "catalogStatus": "resolved",
-        "level": 3,
-        "element": "fire",
-        "name": "Fire Elemental Eidolon",
-        "fields": {
-          "abilities": {
-            "value": {
-              "strength": 17,
-              "dexterity": 13,
-              "constitution": 13,
-              "intelligence": 7,
-              "wisdom": 10,
-              "charisma": 11
-            },
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
-                "section": "Biped",
-                "txtLines": [3, 3],
-                "entry": "Biped starting ability scores (Str 16, Dex 12, Con 13, Int 7, Wis 10, Cha 11)",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [8, 8],
-                "entry": "Str/Dex Bonus +1 at 3rd",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [33, 33],
-                "entry": "Str/Dex Bonus applied to Strength and Dexterity",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-getting-started",
-                "section": "Rounding; Ability Modifiers",
-                "txtLines": [89, 101],
-                "entry": "Ability modifiers +3 at score 17 and +1 at score 13",
-                "provenanceStatus": "resolved"
-              }
-            ]
-          },
-          "alignment": {
-            "value": "Neutral",
-            "sourceRef": {
-              "sourceId": "source.aon-eidolon-uc-subtypes",
-              "section": "Elemental",
-              "txtLines": [4, 4],
-              "entry": "Elemental eidolon alignment",
-              "provenanceStatus": "resolved",
-              "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
-            }
-          },
-          "attacks": {
-            "value": [
-              {
-                "name": "slam",
-                "attackType": "melee",
-                "attackBonus": "+6",
-                "damage": "1d8+4",
-                "count": 1,
-                "notes": "primary attack; sole natural attack adds 1-1/2 Strength bonus to damage"
-              }
-            ],
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-eidolon-uc-subtypes",
-                "section": "Elemental",
-                "txtLines": [5, 5],
-                "entry": "Elemental base forms: Biped (limbs [arms], limbs [legs], slam)",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
-              },
-              {
-                "sourceId": "source.aon-summoner-uc-evolutions-slam",
-                "section": "Slam",
-                "txtLines": [1, 1],
-                "entry": "Slam deals 1d8 (primary attack); limbs (arms) prerequisite; replaces base-form claws",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/SummonerUCEvolutions.aspx"
-              },
-              {
-                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
-                "section": "Biped",
-                "txtLines": [3, 3],
-                "entry": "PFU Biped starting statistics: Str 16, Dex 12, Con 13; limbs (arms) available for the slam",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [8, 8],
-                "entry": "3rd-row BAB +3",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [33, 33],
-                "entry": "Str/Dex Bonus applied to Strength",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-getting-started",
-                "section": "Rounding; Ability Modifiers",
-                "txtLines": [89, 101],
-                "entry": "Strength modifier +3 at score 17",
-                "provenanceStatus": "resolved"
-              },
-              {
-                "sourceId": "source.aon-combat",
-                "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
-                "txtLines": [195, 195],
-                "entry": "Sole natural attack adds 1-1/2 Strength bonus to damage (+3 x 1.5 = +4)",
-                "provenanceStatus": "resolved"
-              }
-            ]
-          },
-          "bab": {
-            "value": 3,
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [8, 8],
-                "entry": "3rd-row BAB +3",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [28, 28],
-                "entry": "Eidolon BAB equals its Hit Dice",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              }
-            ]
-          },
-          "cmd": {
-            "value": 17,
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-combat",
-                "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
-                "txtLines": [543, 544],
-                "entry": "CMD = 10 + BAB + Strength + Dexterity + size (Medium +0)",
-                "provenanceStatus": "resolved"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [8, 8],
-                "entry": "3rd-row BAB +3",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
-                "section": "Biped",
-                "txtLines": [3, 3],
-                "entry": "Biped Strength 16 and Dexterity 12",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [33, 33],
-                "entry": "Str/Dex Bonus applied to both scores",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-getting-started",
-                "section": "Rounding; Ability Modifiers",
-                "txtLines": [89, 101],
-                "entry": "Modifiers +3 at score 17 and +1 at score 13",
-                "provenanceStatus": "resolved"
-              }
-            ]
-          },
-          "cmb": {
-            "value": 6,
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-combat",
-                "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
-                "txtLines": [539, 540],
-                "entry": "CMB = BAB + Strength modifier + size (Medium +0)",
-                "provenanceStatus": "resolved"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [8, 8],
-                "entry": "3rd-row BAB +3",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
-                "section": "Biped",
-                "txtLines": [3, 3],
-                "entry": "Biped Strength 16",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [33, 33],
-                "entry": "Str/Dex Bonus applied to Strength",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-getting-started",
-                "section": "Rounding; Ability Modifiers",
-                "txtLines": [89, 101],
-                "entry": "Strength modifier +3 at score 17",
-                "provenanceStatus": "resolved"
-              }
-            ]
-          },
-          "defenses": {
-            "value": {
-              "ac": 15,
-              "touch": 11,
-              "flatFooted": 14,
-              "fortitude": 4,
-              "reflex": 2,
-              "will": 3,
-              "acBreakdown": {
-                "armor": 4,
-                "dexterity": 1
-              }
-            },
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [8, 8],
-                "entry": "3rd row: armor bonus +2, good saves +3, bad save +1",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [29, 29],
-                "entry": "Two good saves and one bad save per base form",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [32, 32],
-                "entry": "Armor bonus modified by the base form",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [33, 33],
-                "entry": "Str/Dex Bonus applied to Dexterity",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
-                "section": "Biped",
-                "txtLines": [3, 3],
-                "entry": "Biped: +2 natural armor, Fort good, Ref bad, Will good; Con 13, Dex 12, Wis 10",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
-              },
-              {
-                "sourceId": "source.aon-getting-started",
-                "section": "Rounding; Ability Modifiers",
-                "txtLines": [89, 101],
-                "entry": "Dexterity modifier +1 at score 13",
-                "provenanceStatus": "resolved"
-              },
-              {
-                "sourceId": "source.aon-combat",
-                "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
-                "txtLines": [35, 41],
-                "entry": "AC = 10 + armor + shield + Dexterity + other modifiers; natural armor adds to AC",
-                "provenanceStatus": "resolved"
-              }
-            ]
-          },
-          "feats": {
-            "value": 2,
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [8, 8],
-                "entry": "3rd-row feats 2",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [31, 31],
-                "entry": "Total feats possessed by the eidolon",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              }
-            ]
-          },
-          "hitDice": {
-            "value": 3,
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [8, 8],
-                "entry": "3rd-row HD 3",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [27, 27],
-                "entry": "d10 Hit Dice gaining the Constitution modifier each",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              }
-            ]
-          },
-          "hp": {
-            "value": 19,
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [8, 8],
-                "entry": "3rd-row HD 3",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [27, 27],
-                "entry": "d10 Hit Dice + Constitution modifier each",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
-                "section": "Biped",
-                "txtLines": [3, 3],
-                "entry": "Biped Con 13 (+1 modifier)",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
-              },
-              {
-                "sourceId": "source.aon-getting-started",
-                "section": "Rounding; Ability Modifiers",
-                "txtLines": [39, 39],
-                "entry": "Round down (3 x 5.5 + 3 = 19.5)",
-                "provenanceStatus": "resolved"
-              }
-            ]
-          },
-          "initiative": {
-            "value": 1,
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-combat",
-                "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
-                "txtLines": [13, 13],
-                "entry": "Initiative check adds the Dexterity modifier",
-                "provenanceStatus": "resolved"
-              },
-              {
-                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
-                "section": "Biped",
-                "txtLines": [3, 3],
-                "entry": "Biped Dexterity 12",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [33, 33],
-                "entry": "Str/Dex Bonus applied to Dexterity",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-getting-started",
-                "section": "Rounding; Ability Modifiers",
-                "txtLines": [89, 101],
-                "entry": "Dexterity modifier +1 at score 13",
-                "provenanceStatus": "resolved"
-              }
-            ]
-          },
-          "maxAttacks": {
-            "value": 3,
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [8, 8],
-                "entry": "3rd-row max. attacks 3",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [35, 35],
-                "entry": "Maximum natural attacks at the given level",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              }
-            ]
-          },
-          "qualities": {
-            "value": ["link", "share spells", "evasion", "immunity to paralysis and sleep", "immunity (fire) evolution", "cannot wear armor"],
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [38, 40],
-                "entry": "Link, share spells, evasion specials",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [32, 32],
-                "entry": "An eidolon cannot wear armor of any kind",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-uc-subtypes",
-                "section": "Elemental",
-                "txtLines": [7, 7],
-                "entry": "1st level: immunity to paralysis and sleep; fire gains the immunity (fire) evolution",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
-              }
-            ]
-          },
-          "senses": {
-            "value": ["darkvision 60 ft."],
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [37, 37],
-                "entry": "Darkvision 60 feet special",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              }
-            ]
-          },
-          "size": {
-            "value": "Medium",
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
-                "section": "Biped",
-                "txtLines": [3, 3],
-                "entry": "Biped starting size Medium",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
-              }
-            ]
-          },
-          "skills": {
-            "value": 12,
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [8, 8],
-                "entry": "3rd-row skills 12",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [30, 30],
-                "entry": "Total skill ranks; rank cap and assignment rules",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              },
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [46, 46],
-                "entry": "Eidolon class skills and four chosen class skills",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              }
-            ]
-          },
-          "speed": {
-            "value": {
-              "land": 30
-            },
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-eidolon-uc-base-forms-biped",
-                "section": "Biped",
-                "txtLines": [3, 3],
-                "entry": "Biped speed 30 ft.",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
-              }
-            ]
-          },
-          "type": {
-            "value": "outsider",
-            "sourceRef": [
-              {
-                "sourceId": "source.aon-eidolon-unchained",
-                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-                "txtLines": [3, 3],
-                "entry": "Eidolons are outsiders",
-                "provenanceStatus": "resolved",
-                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-              }
-            ]
-          }
-        },
-        "sourceRef": [
-          {
-            "sourceId": "source.aon-elemental-ally",
-            "section": "Elemental Ally",
-            "txtLines": [4, 6],
-            "entry": "Elemental eidolons at summoner level = druid level, no evolution pool",
-            "provenanceStatus": "resolved",
-            "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
-          },
-          {
-            "sourceId": "source.aon-eidolon-uc-subtypes",
-            "section": "Elemental",
-            "txtLines": [5, 7],
-            "entry": "Elemental base forms and 1st-level fire base evolutions",
-            "provenanceStatus": "resolved",
-            "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
-          },
-          {
-            "sourceId": "source.aon-eidolon-uc-base-forms-biped",
-            "section": "Biped",
-            "txtLines": [3, 3],
-            "entry": "Biped base form pinned by the curated slice",
-            "provenanceStatus": "resolved",
-            "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
-          },
-          {
-            "sourceId": "source.aon-eidolon-unchained",
-            "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
-            "txtLines": [5, 8],
-            "entry": "Table 1-6 3rd-level base statistics row",
-            "provenanceStatus": "resolved",
-            "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
-          }
-        ]
-      },
-      "sourceRef": [
-        {
-          "sourceId": "source.aon-elemental-ally",
-          "section": "Elemental Ally",
-          "txtLines": [1, 2],
-          "entry": "Elemental Ally archetype; Monster Summoner's Handbook pg. 16",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
-        },
-        {
-          "sourceId": "source.aon-elemental-ally",
-          "section": "Elemental Ally",
-          "txtLines": [4, 7],
-          "entry": "Elemental Eidolons replaces Nature Bond and Wild Shape",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
-        },
-        {
-          "sourceId": "source.aon-elemental-ally",
-          "section": "Elemental Ally",
-          "txtLines": [8, 11],
-          "entry": "Elemental Empathy replaces Wild Empathy",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
-        },
-        {
-          "sourceId": "source.aon-elemental-ally",
-          "section": "Elemental Ally",
-          "txtLines": [13, 13],
-          "entry": "Elemental Resistance at 4th level replaces Resist Nature's Lure",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
-        },
-        {
-          "sourceId": "source.aon-eidolon-uc-subtypes",
-          "section": "Elemental",
-          "txtLines": [2, 2],
-          "entry": "Elemental subtype source: Pathfinder Unchained pg. 33",
-          "provenanceStatus": "resolved",
-          "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
-        }
-      ]
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      476,
+      482
+     ],
+     "entry": "Step 4: Feats - slot kinds",
+     "provenanceStatus": "structural-reference"
     }
-  ]
+   ]
+  },
+  {
+   "id": "npc-class-feature.fighter-bonus-feats",
+   "name": "Fighter bonus feat slots",
+   "kind": "feat-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    },
+    {
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      476,
+      482
+     ],
+     "entry": "Step 4: Feats - slot kinds",
+     "provenanceStatus": "structural-reference"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.ranger-combat-style-feats",
+   "name": "Ranger combat style feat slots",
+   "kind": "feat-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    },
+    {
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      476,
+      482
+     ],
+     "entry": "Step 4: Feats - slot kinds",
+     "provenanceStatus": "structural-reference"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.monk-bonus-feats",
+   "name": "Monk bonus feat slots",
+   "kind": "feat-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    },
+    {
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      476,
+      482
+     ],
+     "entry": "Step 4: Feats - slot kinds",
+     "provenanceStatus": "structural-reference"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.wizard-bonus-feats",
+   "name": "Wizard bonus feat slots",
+   "kind": "feat-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    },
+    {
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      476,
+      482
+     ],
+     "entry": "Step 4: Feats - slot kinds",
+     "provenanceStatus": "structural-reference"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.class-specific-feats",
+   "name": "Other class-specific feat slots",
+   "kind": "feat-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    },
+    {
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      476,
+      482
+     ],
+     "entry": "Step 4: Feats - slot kinds",
+     "provenanceStatus": "structural-reference"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.rage-powers",
+   "name": "Rage powers",
+   "kind": "choice-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    },
+    {
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      501,
+      513
+     ],
+     "entry": "Step 5: Class Features - choice slots",
+     "provenanceStatus": "structural-reference"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.rogue-talents",
+   "name": "Rogue talents",
+   "kind": "choice-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    },
+    {
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      501,
+      513
+     ],
+     "entry": "Step 5: Class Features - choice slots",
+     "provenanceStatus": "structural-reference"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.favored-enemies",
+   "name": "Favored enemies",
+   "kind": "choice-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    },
+    {
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      501,
+      513
+     ],
+     "entry": "Step 5: Class Features - choice slots",
+     "provenanceStatus": "structural-reference"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.favored-terrains",
+   "name": "Favored terrains",
+   "kind": "choice-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    },
+    {
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      501,
+      513
+     ],
+     "entry": "Step 5: Class Features - choice slots",
+     "provenanceStatus": "structural-reference"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.ranger-combat-styles",
+   "name": "Ranger combat styles",
+   "kind": "choice-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    },
+    {
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      501,
+      513
+     ],
+     "entry": "Step 5: Class Features - choice slots",
+     "provenanceStatus": "structural-reference"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.hunters-bond",
+   "name": "Hunter's bond",
+   "kind": "choice-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    },
+    {
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      501,
+      513
+     ],
+     "entry": "Step 5: Class Features - choice slots",
+     "provenanceStatus": "structural-reference"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.cleric-domains",
+   "name": "Cleric domains",
+   "kind": "choice-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    },
+    {
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      501,
+      513
+     ],
+     "entry": "Step 5: Class Features - choice slots",
+     "provenanceStatus": "structural-reference"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.sorcerer-bloodlines",
+   "name": "Sorcerer bloodlines",
+   "kind": "choice-slot",
+   "catalogStatus": "resolved",
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-sorcerer",
+     "section": "Bloodline",
+     "txtLines": [
+      62,
+      64
+     ],
+     "entry": "Sorcerer bloodline choice and bonus spells",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer"
+    },
+    {
+     "sourceId": "source.aon-elemental-bloodline",
+     "section": "Elemental Bloodline",
+     "txtLines": [
+      1,
+      16
+     ],
+     "entry": "Elemental fire bloodline through level 6",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/BloodlineDisplay.aspx?ItemName=Elemental"
+    }
+   ],
+   "choiceId": "bloodline",
+   "allowedValues": [
+    "elemental-fire"
+   ],
+   "options": {
+    "elemental-fire": {
+     "name": "Elemental (fire)",
+     "energyType": "fire",
+     "classSkill": "skill.knowledge-planes",
+     "bonusSpells": {
+      "3": "spell.burning-hands",
+      "5": "spell.scorching-ray"
+     },
+     "powers": [
+      {
+       "level": 1,
+       "name": "Elemental Ray",
+       "damageType": "fire",
+       "range": "30 ft.",
+       "usesFormula": "3 + Charisma modifier",
+       "damageDie": "1d6",
+       "damageBonusFormula": "floor(Sorcerer level / 2)"
+      },
+      {
+       "level": 3,
+       "name": "Elemental Resistance",
+       "resistance": {
+        "fire": 10
+       }
+      }
+     ],
+     "arcana": {
+      "name": "Elemental bloodline arcana",
+      "energyType": "fire",
+      "effect": "energy-damage spells may change their damage type to fire"
+     }
+    }
+   }
+  },
+  {
+   "id": "npc-class-feature.wizard-schools",
+   "name": "Wizard schools",
+   "kind": "choice-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    },
+    {
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      501,
+      513
+     ],
+     "entry": "Step 5: Class Features - choice slots",
+     "provenanceStatus": "structural-reference"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.familiar-bond",
+   "name": "Familiar/bond choices",
+   "kind": "choice-slot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-class-tables",
+   "sourceRef": [
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "Five NPC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    },
+    {
+     "sourceId": "source.npc-mode-plan",
+     "section": "NPC_MODE_PLAN.md",
+     "txtLines": [
+      501,
+      513
+     ],
+     "entry": "Step 5: Class Features - choice slots",
+     "provenanceStatus": "structural-reference"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.warrior-proficiencies",
+   "name": "Warrior weapon and armor proficiencies",
+   "kind": "automatic",
+   "catalogStatus": "resolved",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-npc-classes",
+    "section": "Warrior Class Features",
+    "txtLines": [
+     169,
+     172
+    ],
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/NPCClasses.html#warrior",
+    "entry": "Weapon and Armor Proficiency",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "npc-class-feature.sorcerer-eschew-materials",
+   "name": "Eschew Materials",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-sorcerer",
+    "section": "Eschew Materials",
+    "txtLines": [
+     66,
+     66
+    ],
+    "entry": "Sorcerer bonus feat",
+    "provenanceStatus": "resolved",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer"
+   }
+  },
+  {
+   "id": "npc-class-feature.sorcerer-spellcasting",
+   "name": "Sorcerer spellcasting",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {
+    "castingAbility": "charisma",
+    "castingMode": "spontaneous"
+   },
+   "sourceRef": {
+    "sourceId": "source.aon-sorcerer",
+    "section": "Spells; Cantrips",
+    "txtLines": [
+     57,
+     65
+    ],
+    "entry": "Sorcerer spontaneous spellcasting",
+    "provenanceStatus": "resolved",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer"
+   }
+  },
+  {
+   "id": "npc-class-feature.druid-proficiencies",
+   "name": "Druid Proficiencies",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {
+    "weaponProficiencies": [
+     "club",
+     "dagger",
+     "dart",
+     "quarterstaff",
+     "scimitar",
+     "scythe",
+     "sickle",
+     "shortspear",
+     "sling",
+     "spear"
+    ],
+    "armorProficiencies": [
+     "light",
+     "medium"
+    ],
+    "armorRestriction": "no metal armor; padded, leather, or hide only",
+    "shieldProficiencies": "shields except tower shields, wooden only"
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-druid",
+     "section": "Weapon and Armor Proficiency",
+     "txtLines": [
+      34,
+      36
+     ],
+     "entry": "Druid weapon, armor, and shield proficiencies and restrictions",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.druid-spellcasting",
+   "name": "Druid spellcasting",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {
+    "castingAbility": "wisdom",
+    "castingMode": "prepared",
+    "spontaneousConversion": {
+     "name": "Summon Nature\u2019s Ally",
+     "from": "prepared",
+     "excludesDomainSlots": true,
+     "spellIdsBySlotLevel": {
+      "1": [
+       "spell.summon-nature-s-ally-i"
+      ],
+      "2": [
+       "spell.summon-nature-s-ally-i",
+       "spell.summon-nature-s-ally-ii"
+      ]
+     }
+    }
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-druid",
+     "section": "Spells; Spontaneous Casting",
+     "txtLines": [
+      37,
+      43
+     ],
+     "entry": "Druid prepared divine spellcasting and spontaneous conversion",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+    },
+    {
+     "sourceId": "source.aon-caster-level",
+     "section": "Caster Level",
+     "txtLines": [
+      1,
+      6
+     ],
+     "entry": "Druid caster level",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/Rules.aspx?ID=207"
+    },
+    {
+     "sourceId": "source.aon-creating-npcs",
+     "section": "Step 5: Class Features",
+     "txtLines": [
+      70,
+      70
+     ],
+     "entry": "Basic spells may be prepared multiple times",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+    },
+    {
+     "sourceId": "source.aon-spell-summon-natures-ally-i",
+     "section": "Summon Nature's Ally 1",
+     "txtLines": [
+      1,
+      16
+     ],
+     "entry": "Level-1 spontaneous conversion target",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%201"
+    },
+    {
+     "sourceId": "source.aon-spell-summon-natures-ally-ii",
+     "section": "Summon Nature's Ally 2",
+     "txtLines": [
+      1,
+      13
+     ],
+     "entry": "Level-2 spontaneous conversion target",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%202"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.druid-orisons",
+   "name": "Orisons",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {
+    "notExpendedWhenCast": true,
+    "mayBePreparedMultipleTimes": true
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-druid",
+     "section": "Orisons",
+     "txtLines": [
+      43,
+      43
+     ],
+     "entry": "Orisons are not expended when cast and may be used again",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+    },
+    {
+     "sourceId": "source.aon-creating-npcs",
+     "section": "Step 5: Class Features",
+     "txtLines": [
+      70,
+      70
+     ],
+     "entry": "Basic spells may be prepared multiple times",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.druid-nature-bond",
+   "name": "Nature Bond",
+   "catalogStatus": "resolved",
+   "kind": "choice-slot",
+   "choiceId": "natureBond",
+   "allowedValues": [
+    "fire-domain"
+   ],
+   "options": {
+    "fire-domain": {
+     "name": "Fire domain",
+     "featureId": "npc-class-feature.fire-domain"
+    }
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-druid",
+     "section": "Nature Bond",
+     "txtLines": [
+      47,
+      47
+     ],
+     "entry": "Nature Bond domain choice",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+    },
+    {
+     "sourceId": "source.aon-cleric",
+     "section": "Domains",
+     "txtLines": [
+      45,
+      45
+     ],
+     "entry": "Domain spell slots and domain preparation",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.druidic",
+   "name": "Druidic",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {
+    "languages": [
+     "Druidic"
+    ]
+   },
+   "sourceRef": {
+    "sourceId": "source.aon-druid",
+    "section": "Bonus Languages; Druidic",
+    "txtLines": [
+     44,
+     46
+    ],
+    "entry": "Druidic language",
+    "provenanceStatus": "resolved",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+   }
+  },
+  {
+   "id": "npc-class-feature.druid-nature-sense",
+   "name": "Nature Sense",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {
+    "skillBonuses": {
+     "skill.knowledge-nature": 2,
+     "skill.survival": 2
+    }
+   },
+   "sourceRef": {
+    "sourceId": "source.aon-druid",
+    "section": "Nature Sense",
+    "txtLines": [
+     51,
+     51
+    ],
+    "entry": "Nature Sense",
+    "provenanceStatus": "resolved",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+   }
+  },
+  {
+   "id": "npc-class-feature.druid-wild-empathy",
+   "name": "Wild Empathy",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-druid",
+    "section": "Wild Empathy",
+    "txtLines": [
+     52,
+     54
+    ],
+    "entry": "Wild Empathy",
+    "provenanceStatus": "resolved",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+   }
+  },
+  {
+   "id": "npc-class-feature.druid-woodland-stride",
+   "name": "Woodland Stride",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-druid",
+    "section": "Woodland Stride",
+    "txtLines": [
+     55,
+     55
+    ],
+    "entry": "Woodland Stride",
+    "provenanceStatus": "resolved",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+   }
+  },
+  {
+   "id": "npc-class-feature.druid-trackless-step",
+   "name": "Trackless Step",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-druid",
+    "section": "Trackless Step",
+    "txtLines": [
+     56,
+     56
+    ],
+    "entry": "Trackless Step",
+    "provenanceStatus": "resolved",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+   }
+  },
+  {
+   "id": "npc-class-feature.fire-domain",
+   "name": "Fire Domain",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "slotsPerSpellLevel": 1,
+   "domainSpells": {
+    "1": "spell.burning-hands",
+    "2": "spell.produce-flame"
+   },
+   "powers": [
+    {
+     "level": 1,
+     "name": "Fire Bolt",
+     "attackType": "ranged touch",
+     "range": "30 ft.",
+     "damageType": "fire",
+     "damageDie": "1d6",
+     "damageBonusPerTwoLevels": 1,
+     "usesBase": 3,
+     "usesAbility": "wisdom"
+    }
+   ],
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-fire-domain",
+     "section": "Granted Powers; Domain Spells",
+     "txtLines": [
+      4,
+      7
+     ],
+     "entry": "Fire domain through level 2",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/DomainDisplay.aspx?ItemName=Fire"
+    },
+    {
+     "sourceId": "source.aon-cleric",
+     "section": "Domains",
+     "txtLines": [
+      45,
+      45
+     ],
+     "entry": "One domain slot per castable spell level",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric"
+    },
+    {
+     "sourceId": "source.aon-spell-burning-hands",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      16
+     ],
+     "entry": "Fire domain first-level spell",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Burning%20Hands"
+    },
+    {
+     "sourceId": "source.aon-spell-produce-flame",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      15
+     ],
+     "entry": "Fire domain second-level spell",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Produce%20Flame"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.druid-elemental-ally",
+   "name": "Elemental Ally",
+   "kind": "archetype",
+   "classId": "npc-class.druid",
+   "catalogStatus": "resolved",
+   "replaces": [
+    "npc-class-feature.druid-nature-bond",
+    "npc-class-feature.druid-wild-empathy",
+    "npc-class-feature.druid-wild-shape",
+    "npc-class-feature.druid-resist-natures-lure"
+   ],
+   "linkedCreatureRow": {
+    "catalogStatus": "resolved",
+    "level": 3,
+    "element": "fire",
+    "name": "Fire Elemental Eidolon",
+    "fields": {
+     "abilities": {
+      "value": {
+       "strength": 17,
+       "dexterity": 13,
+       "constitution": 13,
+       "intelligence": 7,
+       "wisdom": 10,
+       "charisma": 11
+      },
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-eidolon-uc-base-forms-biped",
+        "section": "Biped",
+        "txtLines": [
+         3,
+         3
+        ],
+        "entry": "Biped starting ability scores (Str 16, Dex 12, Con 13, Int 7, Wis 10, Cha 11)",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         8,
+         8
+        ],
+        "entry": "Str/Dex Bonus +1 at 3rd",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         33,
+         33
+        ],
+        "entry": "Str/Dex Bonus applied to Strength and Dexterity",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-getting-started",
+        "section": "Rounding; Ability Modifiers",
+        "txtLines": [
+         89,
+         101
+        ],
+        "entry": "Ability modifiers +3 at score 17 and +1 at score 13",
+        "provenanceStatus": "resolved"
+       }
+      ]
+     },
+     "alignment": {
+      "value": "Neutral",
+      "sourceRef": {
+       "sourceId": "source.aon-eidolon-uc-subtypes",
+       "section": "Elemental",
+       "txtLines": [
+        4,
+        4
+       ],
+       "entry": "Elemental eidolon alignment",
+       "provenanceStatus": "resolved",
+       "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
+      }
+     },
+     "attacks": {
+      "value": [
+       {
+        "name": "slam",
+        "attackType": "melee",
+        "attackBonus": "+6",
+        "damage": "1d8+4",
+        "count": 1,
+        "notes": "primary attack; sole natural attack adds 1-1/2 Strength bonus to damage"
+       }
+      ],
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-eidolon-uc-subtypes",
+        "section": "Elemental",
+        "txtLines": [
+         5,
+         5
+        ],
+        "entry": "Elemental base forms: Biped (limbs [arms], limbs [legs], slam)",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
+       },
+       {
+        "sourceId": "source.aon-summoner-uc-evolutions-slam",
+        "section": "Slam",
+        "txtLines": [
+         1,
+         1
+        ],
+        "entry": "Slam deals 1d8 (primary attack); limbs (arms) prerequisite; replaces base-form claws",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/SummonerUCEvolutions.aspx"
+       },
+       {
+        "sourceId": "source.aon-eidolon-uc-base-forms-biped",
+        "section": "Biped",
+        "txtLines": [
+         3,
+         3
+        ],
+        "entry": "PFU Biped starting statistics: Str 16, Dex 12, Con 13; limbs (arms) available for the slam",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         8,
+         8
+        ],
+        "entry": "3rd-row BAB +3",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         33,
+         33
+        ],
+        "entry": "Str/Dex Bonus applied to Strength",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-getting-started",
+        "section": "Rounding; Ability Modifiers",
+        "txtLines": [
+         89,
+         101
+        ],
+        "entry": "Strength modifier +3 at score 17",
+        "provenanceStatus": "resolved"
+       },
+       {
+        "sourceId": "source.aon-combat",
+        "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
+        "txtLines": [
+         195,
+         195
+        ],
+        "entry": "Sole natural attack adds 1-1/2 Strength bonus to damage (+3 x 1.5 = +4)",
+        "provenanceStatus": "resolved"
+       }
+      ]
+     },
+     "bab": {
+      "value": 3,
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         8,
+         8
+        ],
+        "entry": "3rd-row BAB +3",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         28,
+         28
+        ],
+        "entry": "Eidolon BAB equals its Hit Dice",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       }
+      ]
+     },
+     "cmd": {
+      "value": 17,
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-combat",
+        "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
+        "txtLines": [
+         543,
+         544
+        ],
+        "entry": "CMD = 10 + BAB + Strength + Dexterity + size (Medium +0)",
+        "provenanceStatus": "resolved"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         8,
+         8
+        ],
+        "entry": "3rd-row BAB +3",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-uc-base-forms-biped",
+        "section": "Biped",
+        "txtLines": [
+         3,
+         3
+        ],
+        "entry": "Biped Strength 16 and Dexterity 12",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         33,
+         33
+        ],
+        "entry": "Str/Dex Bonus applied to both scores",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-getting-started",
+        "section": "Rounding; Ability Modifiers",
+        "txtLines": [
+         89,
+         101
+        ],
+        "entry": "Modifiers +3 at score 17 and +1 at score 13",
+        "provenanceStatus": "resolved"
+       }
+      ]
+     },
+     "cmb": {
+      "value": 6,
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-combat",
+        "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
+        "txtLines": [
+         539,
+         540
+        ],
+        "entry": "CMB = BAB + Strength modifier + size (Medium +0)",
+        "provenanceStatus": "resolved"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         8,
+         8
+        ],
+        "entry": "3rd-row BAB +3",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-uc-base-forms-biped",
+        "section": "Biped",
+        "txtLines": [
+         3,
+         3
+        ],
+        "entry": "Biped Strength 16",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         33,
+         33
+        ],
+        "entry": "Str/Dex Bonus applied to Strength",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-getting-started",
+        "section": "Rounding; Ability Modifiers",
+        "txtLines": [
+         89,
+         101
+        ],
+        "entry": "Strength modifier +3 at score 17",
+        "provenanceStatus": "resolved"
+       }
+      ]
+     },
+     "defenses": {
+      "value": {
+       "ac": 15,
+       "touch": 11,
+       "flatFooted": 14,
+       "fortitude": 4,
+       "reflex": 2,
+       "will": 3,
+       "acBreakdown": {
+        "armor": 4,
+        "dexterity": 1
+       }
+      },
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         8,
+         8
+        ],
+        "entry": "3rd row: armor bonus +2, good saves +3, bad save +1",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         29,
+         29
+        ],
+        "entry": "Two good saves and one bad save per base form",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         32,
+         32
+        ],
+        "entry": "Armor bonus modified by the base form",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         33,
+         33
+        ],
+        "entry": "Str/Dex Bonus applied to Dexterity",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-uc-base-forms-biped",
+        "section": "Biped",
+        "txtLines": [
+         3,
+         3
+        ],
+        "entry": "Biped: +2 natural armor, Fort good, Ref bad, Will good; Con 13, Dex 12, Wis 10",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
+       },
+       {
+        "sourceId": "source.aon-getting-started",
+        "section": "Rounding; Ability Modifiers",
+        "txtLines": [
+         89,
+         101
+        ],
+        "entry": "Dexterity modifier +1 at score 13",
+        "provenanceStatus": "resolved"
+       },
+       {
+        "sourceId": "source.aon-combat",
+        "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
+        "txtLines": [
+         35,
+         41
+        ],
+        "entry": "AC = 10 + armor + shield + Dexterity + other modifiers; natural armor adds to AC",
+        "provenanceStatus": "resolved"
+       }
+      ]
+     },
+     "feats": {
+      "value": 2,
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         8,
+         8
+        ],
+        "entry": "3rd-row feats 2",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         31,
+         31
+        ],
+        "entry": "Total feats possessed by the eidolon",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       }
+      ]
+     },
+     "hitDice": {
+      "value": 3,
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         8,
+         8
+        ],
+        "entry": "3rd-row HD 3",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         27,
+         27
+        ],
+        "entry": "d10 Hit Dice gaining the Constitution modifier each",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       }
+      ]
+     },
+     "hp": {
+      "value": 19,
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         8,
+         8
+        ],
+        "entry": "3rd-row HD 3",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         27,
+         27
+        ],
+        "entry": "d10 Hit Dice + Constitution modifier each",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-uc-base-forms-biped",
+        "section": "Biped",
+        "txtLines": [
+         3,
+         3
+        ],
+        "entry": "Biped Con 13 (+1 modifier)",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
+       },
+       {
+        "sourceId": "source.aon-getting-started",
+        "section": "Rounding; Ability Modifiers",
+        "txtLines": [
+         39,
+         39
+        ],
+        "entry": "Round down (3 x 5.5 + 3 = 19.5)",
+        "provenanceStatus": "resolved"
+       }
+      ]
+     },
+     "initiative": {
+      "value": 1,
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-combat",
+        "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
+        "txtLines": [
+         13,
+         13
+        ],
+        "entry": "Initiative check adds the Dexterity modifier",
+        "provenanceStatus": "resolved"
+       },
+       {
+        "sourceId": "source.aon-eidolon-uc-base-forms-biped",
+        "section": "Biped",
+        "txtLines": [
+         3,
+         3
+        ],
+        "entry": "Biped Dexterity 12",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         33,
+         33
+        ],
+        "entry": "Str/Dex Bonus applied to Dexterity",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-getting-started",
+        "section": "Rounding; Ability Modifiers",
+        "txtLines": [
+         89,
+         101
+        ],
+        "entry": "Dexterity modifier +1 at score 13",
+        "provenanceStatus": "resolved"
+       }
+      ]
+     },
+     "maxAttacks": {
+      "value": 3,
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         8,
+         8
+        ],
+        "entry": "3rd-row max. attacks 3",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         35,
+         35
+        ],
+        "entry": "Maximum natural attacks at the given level",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       }
+      ]
+     },
+     "qualities": {
+      "value": [
+       "link",
+       "share spells",
+       "evasion",
+       "immunity to paralysis and sleep",
+       "immunity (fire) evolution",
+       "cannot wear armor"
+      ],
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         38,
+         40
+        ],
+        "entry": "Link, share spells, evasion specials",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         32,
+         32
+        ],
+        "entry": "An eidolon cannot wear armor of any kind",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-uc-subtypes",
+        "section": "Elemental",
+        "txtLines": [
+         7,
+         7
+        ],
+        "entry": "1st level: immunity to paralysis and sleep; fire gains the immunity (fire) evolution",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
+       }
+      ]
+     },
+     "senses": {
+      "value": [
+       "darkvision 60 ft."
+      ],
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         37,
+         37
+        ],
+        "entry": "Darkvision 60 feet special",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       }
+      ]
+     },
+     "size": {
+      "value": "Medium",
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-eidolon-uc-base-forms-biped",
+        "section": "Biped",
+        "txtLines": [
+         3,
+         3
+        ],
+        "entry": "Biped starting size Medium",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
+       }
+      ]
+     },
+     "skills": {
+      "value": 12,
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         8,
+         8
+        ],
+        "entry": "3rd-row skills 12",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         30,
+         30
+        ],
+        "entry": "Total skill ranks; rank cap and assignment rules",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       },
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         46,
+         46
+        ],
+        "entry": "Eidolon class skills and four chosen class skills",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       }
+      ]
+     },
+     "speed": {
+      "value": {
+       "land": 30
+      },
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-eidolon-uc-base-forms-biped",
+        "section": "Biped",
+        "txtLines": [
+         3,
+         3
+        ],
+        "entry": "Biped speed 30 ft.",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
+       }
+      ]
+     },
+     "type": {
+      "value": "outsider",
+      "sourceRef": [
+       {
+        "sourceId": "source.aon-eidolon-unchained",
+        "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+        "txtLines": [
+         3,
+         3
+        ],
+        "entry": "Eidolons are outsiders",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+       }
+      ]
+     }
+    },
+    "sourceRef": [
+     {
+      "sourceId": "source.aon-elemental-ally",
+      "section": "Elemental Ally",
+      "txtLines": [
+       4,
+       6
+      ],
+      "entry": "Elemental eidolons at summoner level = druid level, no evolution pool",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
+     },
+     {
+      "sourceId": "source.aon-eidolon-uc-subtypes",
+      "section": "Elemental",
+      "txtLines": [
+       5,
+       7
+      ],
+      "entry": "Elemental base forms and 1st-level fire base evolutions",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
+     },
+     {
+      "sourceId": "source.aon-eidolon-uc-base-forms-biped",
+      "section": "Biped",
+      "txtLines": [
+       3,
+       3
+      ],
+      "entry": "Biped base form pinned by the curated slice",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/EidolonUCBaseForms.aspx"
+     },
+     {
+      "sourceId": "source.aon-eidolon-unchained",
+      "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+      "txtLines": [
+       5,
+       8
+      ],
+      "entry": "Table 1-6 3rd-level base statistics row",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+     }
+    ]
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-elemental-ally",
+     "section": "Elemental Ally",
+     "txtLines": [
+      1,
+      2
+     ],
+     "entry": "Elemental Ally archetype; Monster Summoner's Handbook pg. 16",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
+    },
+    {
+     "sourceId": "source.aon-elemental-ally",
+     "section": "Elemental Ally",
+     "txtLines": [
+      4,
+      7
+     ],
+     "entry": "Elemental Eidolons replaces Nature Bond and Wild Shape",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
+    },
+    {
+     "sourceId": "source.aon-elemental-ally",
+     "section": "Elemental Ally",
+     "txtLines": [
+      8,
+      11
+     ],
+     "entry": "Elemental Empathy replaces Wild Empathy",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
+    },
+    {
+     "sourceId": "source.aon-elemental-ally",
+     "section": "Elemental Ally",
+     "txtLines": [
+      13,
+      13
+     ],
+     "entry": "Elemental Resistance at 4th level replaces Resist Nature's Lure",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
+    },
+    {
+     "sourceId": "source.aon-eidolon-uc-subtypes",
+     "section": "Elemental",
+     "txtLines": [
+      2,
+      2
+     ],
+     "entry": "Elemental subtype source: Pathfinder Unchained pg. 33",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.bard-proficiencies",
+   "name": "Bard proficiencies",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-bard",
+    "section": "Bard",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+    "provenanceStatus": "resolved",
+    "txtLines": [
+     6,
+     6
+    ],
+    "entry": "Bard proficiencies"
+   }
+  },
+  {
+   "id": "npc-class-feature.bard-spellcasting",
+   "name": "Bard spellcasting",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {
+    "castingAbility": "charisma",
+    "castingMode": "spontaneous"
+   },
+   "sourceRef": {
+    "sourceId": "source.aon-bard",
+    "section": "Bard",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+    "provenanceStatus": "resolved",
+    "txtLines": [
+     11,
+     12
+    ],
+    "entry": "Bard spellcasting"
+   }
+  },
+  {
+   "id": "npc-class-feature.bard-cantrips",
+   "name": "Bard cantrips",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-bard",
+    "section": "Class Features; Table: Bard (Special)",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+    "provenanceStatus": "resolved",
+    "txtLines": [
+     14,
+     14
+    ],
+    "entry": "Bard cantrips"
+   }
+  },
+  {
+   "id": "npc-class-feature.bardic-knowledge",
+   "name": "Bardic knowledge",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-bard",
+    "section": "Class Features; Table: Bard (Special)",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+    "provenanceStatus": "resolved",
+    "txtLines": [
+     14,
+     14
+    ],
+    "entry": "Bardic knowledge"
+   }
+  },
+  {
+   "id": "npc-class-feature.bardic-performance",
+   "name": "Bardic performance",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-bard",
+    "section": "Class Features; Table: Bard (Special)",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+    "provenanceStatus": "resolved",
+    "txtLines": [
+     14,
+     14
+    ],
+    "entry": "Bardic performance"
+   }
+  },
+  {
+   "id": "npc-class-feature.countersong",
+   "name": "Countersong",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-bard",
+    "section": "Class Features; Table: Bard (Special)",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+    "provenanceStatus": "resolved",
+    "txtLines": [
+     14,
+     14
+    ],
+    "entry": "Countersong"
+   }
+  },
+  {
+   "id": "npc-class-feature.distraction",
+   "name": "Distraction",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-bard",
+    "section": "Class Features; Table: Bard (Special)",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+    "provenanceStatus": "resolved",
+    "txtLines": [
+     14,
+     14
+    ],
+    "entry": "Distraction"
+   }
+  },
+  {
+   "id": "npc-class-feature.fascinate",
+   "name": "Fascinate",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-bard",
+    "section": "Class Features; Table: Bard (Special)",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+    "provenanceStatus": "resolved",
+    "txtLines": [
+     14,
+     14
+    ],
+    "entry": "Fascinate"
+   }
+  },
+  {
+   "id": "npc-class-feature.inspire-courage",
+   "name": "Inspire courage +1",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-bard",
+    "section": "Class Features; Table: Bard (Special)",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+    "provenanceStatus": "resolved",
+    "txtLines": [
+     14,
+     14
+    ],
+    "entry": "Inspire courage +1"
+   }
+  },
+  {
+   "id": "npc-class-feature.versatile-performance",
+   "name": "Versatile performance",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-bard",
+    "section": "Class Features; Table: Bard (Special)",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+    "provenanceStatus": "resolved",
+    "txtLines": [
+     15,
+     15
+    ],
+    "entry": "Versatile performance"
+   }
+  },
+  {
+   "id": "npc-class-feature.well-versed",
+   "name": "Well-versed",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-bard",
+    "section": "Class Features; Table: Bard (Special)",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+    "provenanceStatus": "resolved",
+    "txtLines": [
+     15,
+     15
+    ],
+    "entry": "Well-versed"
+   }
+  },
+  {
+   "id": "npc-class-feature.inspire-competence",
+   "name": "Inspire competence +2",
+   "catalogStatus": "resolved",
+   "kind": "automatic",
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-bard",
+    "section": "Class Features; Table: Bard (Special)",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+    "provenanceStatus": "resolved",
+    "txtLines": [
+     16,
+     16
+    ],
+    "entry": "Inspire competence +2"
+   }
+  }
+ ]
 }

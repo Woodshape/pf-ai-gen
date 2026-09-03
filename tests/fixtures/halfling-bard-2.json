@@ -1,0 +1,69 @@
+{
+    "creationSystem": "npc",
+    "concept": {
+        "name": "Perrin Underbough",
+        "role": "inspiring support performer",
+        "description": "A level 2 halfling bard."
+    },
+    "selections": {
+        "statblockUse": "full",
+        "raceId": "npc-race.halfling",
+        "racialChoices": {},
+        "classProgression": [
+            {
+                "classId": "npc-class.bard",
+                "levels": 2
+            }
+        ],
+        "abilityGeneration": {
+            "method": "arcane-preset",
+            "arrayId": "npc-ability-array.heroic"
+        },
+        "skillGeneration": {
+            "method": "simplified",
+            "skills": [
+                "skill.perform",
+                "skill.perception",
+                "skill.use-magic-device",
+                "skill.bluff",
+                "skill.diplomacy",
+                "skill.spellcraft",
+                "skill.intimidate"
+            ]
+        },
+        "feats": [
+            {
+                "slotId": "general-1",
+                "featId": "feat.improved-initiative"
+            }
+        ],
+        "spellLoadout": {
+            "known": {
+                "0": [
+                    "spell.detect-magic",
+                    "spell.flare",
+                    "spell.light",
+                    "spell.mage-hand",
+                    "spell.prestidigitation"
+                ],
+                "1": [
+                    "spell.charm-person",
+                    "spell.grease",
+                    "spell.sleep"
+                ]
+            }
+        },
+        "gearProfile": {
+            "experienceProgression": "medium",
+            "fantasyLevel": "normal"
+        },
+        "gear": [
+            {
+                "itemId": "item.cloak-of-resistance-1"
+            }
+        ],
+        "details": {
+            "alignment": "CN"
+        }
+    }
+}

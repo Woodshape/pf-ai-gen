@@ -48,7 +48,7 @@ class NpcCatalogTests(unittest.TestCase):
         human = catalog["races"]["npc-race.human"]
         self.assertEqual(human["catalogStatus"], "resolved")
         self.assertEqual(human["speed"], {"land": 30})
-        self.assertTrue(all(race["catalogStatus"] == "gap" for race_id, race in catalog["races"].items() if race_id not in {"npc-race.human", "npc-race.goblin"}))
+        self.assertTrue(all(race["catalogStatus"] == "gap" for race_id, race in catalog["races"].items() if race_id not in {"npc-race.human", "npc-race.goblin", "npc-race.halfling"}))
 
         warrior = catalog["classes"]["npc-class.warrior"]
         self.assertEqual(set(warrior["levels"]), {str(level) for level in range(1, 21)})
@@ -142,7 +142,8 @@ class NpcCatalogTests(unittest.TestCase):
         orisons = catalog["classFeatures"]["npc-class-feature.druid-orisons"]
         self.assertEqual(orisons["catalogStatus"], "resolved")
         self.assertEqual(orisons["effects"], {"notExpendedWhenCast": True, "mayBePreparedMultipleTimes": True})
-        self.assertEqual(catalog["skills"]["skill.perception"]["catalogStatus"], "gap")
+        self.assertEqual(catalog["skills"]["skill.perception"]["catalogStatus"], "resolved")
+        self.assertEqual(catalog["skills"]["skill.perform"]["catalogStatus"], "resolved")
         self.assertEqual(catalog["items"]["item.sickle"]["weightLbBySize"], {"small": 1, "medium": 2})
         self.assertEqual(catalog["items"]["item.leather-armor"]["weightLbBySize"], {"small": 7.5, "medium": 15})
         self.assertEqual(catalog["items"]["item.heavy-wooden-shield"]["weightLbBySize"], {"small": 5, "medium": 10})
