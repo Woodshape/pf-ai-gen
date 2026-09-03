@@ -118,7 +118,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:41446af81317ebe927f7458f83578b5118c8fcb0757e7db5449f2e1dcd482e6c",
+  "catalogVersion": "sha256:d921705463f10779c8446f9e678b1dd5f36a5dd711c7786f5d0dcbc9b4be9a16",
   "classFeatures": {
     "npc-class-feature.class-specific-feats": {
       "catalogStatus": "gap",
@@ -264,19 +264,34 @@
       "id": "npc-class-feature.druid-orisons",
       "kind": "automatic",
       "name": "Orisons",
-      "sourceRef": {
-        "entry": "Orisons are not expended when cast and may be used again",
-        "file": "sources/npc/aonprd/druid.txt",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid",
-        "provenanceStatus": "resolved",
-        "section": "Orisons",
-        "sha256": "c65a4408988886a02872be131428210a6e287e206b8f181717d170e62d34e944",
-        "sourceId": "source.aon-druid",
-        "txtLines": [
-          43,
-          43
-        ]
-      }
+      "sourceRef": [
+        {
+          "entry": "Orisons are not expended when cast and may be used again",
+          "file": "sources/npc/aonprd/druid.txt",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid",
+          "provenanceStatus": "resolved",
+          "section": "Orisons",
+          "sha256": "c65a4408988886a02872be131428210a6e287e206b8f181717d170e62d34e944",
+          "sourceId": "source.aon-druid",
+          "txtLines": [
+            43,
+            43
+          ]
+        },
+        {
+          "entry": "Basic spells may be prepared multiple times",
+          "file": "sources/npc/aonprd/creating-npcs.txt",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+          "provenanceStatus": "resolved",
+          "section": "Step 5: Class Features",
+          "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+          "sourceId": "source.aon-creating-npcs",
+          "txtLines": [
+            70,
+            70
+          ]
+        }
+      ]
     },
     "npc-class-feature.druid-proficiencies": {
       "catalogStatus": "resolved",

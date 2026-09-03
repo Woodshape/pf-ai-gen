@@ -546,14 +546,24 @@
         "notExpendedWhenCast": true,
         "mayBePreparedMultipleTimes": true
       },
-      "sourceRef": {
-        "sourceId": "source.aon-druid",
-        "section": "Orisons",
-        "txtLines": [43, 43],
-        "entry": "Orisons are not expended when cast and may be used again",
-        "provenanceStatus": "resolved",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
-      }
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-druid",
+          "section": "Orisons",
+          "txtLines": [43, 43],
+          "entry": "Orisons are not expended when cast and may be used again",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid"
+        },
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Step 5: Class Features",
+          "txtLines": [70, 70],
+          "entry": "Basic spells may be prepared multiple times",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+        }
+      ]
     },
     {
       "id": "npc-class-feature.druid-nature-bond",
