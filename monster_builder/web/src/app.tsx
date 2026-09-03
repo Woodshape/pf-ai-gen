@@ -26,6 +26,7 @@ export function App() {
   const [automaticSelections, setAutomaticSelections] = useState<AutomaticSelections>({ skills: { master: [], good: [] } });
   const [selectionBudgets, setSelectionBudgets] = useState<SelectionBudgets>({ skills: { master: null, good: null } });
   const choiceRequest = useRef(0);
+  const [noDraft, setNoDraft] = useState(false);
   const [message, setMessage] = useState<{ text: string; good?: boolean }>();
 
   useEffect(() => { void boot(); }, []);
@@ -36,10 +37,24 @@ export function App() {
       setNpcCatalog(npcCatalogValue);
       const saved = localStorage.getItem("monster-builder.draftId");
       if (saved) {
-        try { await getDraft(saved); return; } catch { localStorage.removeItem("monster-builder.draftId"); show("Saved draft uses an older catalog version; started a new draft. Previous items remain in the Library."); }
+        try {
+          await getDraft(saved);
+          return;
+        } catch (error) {
+          const code = (error as Error & { data?: { code?: string } }).data?.code;
+          if (code === "catalog.version-unsupported") {
+            try {
+              accept(await execute("draft.duplicate", { draftId: saved }));
+              show("Saved draft was created with an older catalog; opened a fresh duplicate of it.", true);
+              return;
+            } catch { /* fall through to the start screen */ }
+          }
+          localStorage.removeItem("monster-builder.draftId");
+          show("Saved draft could not be opened. Start a new draft or pick one from the Library.");
+        }
       }
-      accept(await execute("draft.create", { draft: {} }));
-    } catch (error) { show(error instanceof Error ? error.message : String(error)); }
+      setNoDraft(true);
+    } catch (error) { setNoDraft(true); show(error instanceof Error ? error.message : String(error)); }
   }
   function accept(result: EngineResult) {
     if (result.draft) {
@@ -92,7 +107,8 @@ export function App() {
     setMessage({ text, good });
     window.setTimeout(() => setMessage(undefined), 4500);
   }
-  if (!catalog || !npcCatalog || !draft || !evaluation) return <main class="app"><div class="panel step-form"><h1>Loading Guided Rail…</h1>{message && <p>{message.text}</p>}</div></main>;
+  if (!catalog || !npcCatalog) return <main class="app"><div class="panel step-form"><h1>Loading Guided Rail…</h1>{message && <p>{message.text}</p>}</div></main>;
+  if (!draft) return <main class="app"><div class="panel step-form"><h1>Guided Rail</h1><p class="hint">{message?.text || "No draft open. Nothing is created until you start one."}</p><div class="actions"><button type="button" class="btn primary" onClick={createDraft}>New Simple Monster draft</button><button type="button" class="btn primary" onClick={createNpcDraft}>New class-based NPC draft</button><button type="button" class="btn" onClick={resume}>Open Library</button></div></div>{library && <LibraryModal library={library} currentDraftId="" onClose={() => setLibrary(undefined)} onSelect={openSaved} onDelete={deleteEntry} />}{message && <div class={`toast ${message.good ? "good" : ""}`}>{message.text}</div>}</main>;
 
   const guard = (target: Draft = draft) => ({ draftId: target.draftId, baseRevision: target.revision, baseFingerprint: target.fingerprint });
   async function save(selections: JsonObject, concept: JsonObject, andContinue: boolean) {
@@ -223,6 +239,7 @@ export function App() {
     const anchor = document.createElement("a"); anchor.href = url; anchor.download = `${String(draft!.concept.name || "monster").replace(/[^a-z0-9]+/gi, "-").toLowerCase()}.${format === "markdown" ? "md" : format}`; anchor.click(); URL.revokeObjectURL(url);
   }
 
+  if (!evaluation) return <main class="app"><div class="panel step-form"><h1>Loading Guided Rail…</h1>{message && <p>{message.text}</p>}</div></main>;
   const editorProps: EditorProps = { draft, catalog, evaluation, choiceRequirements, automaticSelections, selectionBudgets, onPreview: previewChoiceRequirements, onSave: save, onBack: () => setStep((current) => Math.max(0, current - 1)) };
   const side = <Side draft={draft} evaluation={evaluation} monster={monster} proposal={proposal} busy={busy} aiRunning={aiRunning} aiError={aiError} setStep={setStep} issueStep={draft.creationSystem === "npc" ? npcStepForPath : undefined} onGenerate={generateProposal} onAccept={acceptProposal} onClearProposal={() => setProposal(undefined)} />;
   if (draft.creationSystem === "npc") {
