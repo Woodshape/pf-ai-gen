@@ -9,6 +9,7 @@ from monster_builder import Engine
 
 WORG_DRAFT = json.loads((Path(__file__).parent / "fixtures" / "worg-cr2.json").read_text())
 MEDUSA_DRAFT = json.loads((Path(__file__).parent / "fixtures" / "medusa-cr7.json").read_text())
+NPC_FIXTURE = json.loads((Path(__file__).parents[1] / "tests" / "fixtures" / "human-warrior-3.json").read_text())
 
 
 def request(request_id, operation, payload):
@@ -132,6 +133,33 @@ class FinishedMonsterTests(unittest.TestCase):
             self.assertEqual(draft["derivedFrom"], {"type": "monster", "monsterId": monster["monsterId"]})
             self.assertEqual(draft["concept"], monster["concept"])
             self.assertEqual(draft["selections"], monster["selections"])
+
+    def test_orphaned_monster_recovery_after_source_draft_delete(self):
+        """Web app recovery for a finished monster whose source draft was deleted:
+        monster.duplicate rehomes an editable copy, monster.get reloads the original."""
+        cases = ((WORG_DRAFT, "simple"), (NPC_FIXTURE, "npc"))
+        for raw, name in cases:
+            with self.subTest(name):
+                with tempfile.TemporaryDirectory() as directory:
+                    engine = Engine(workspace=directory)
+                    created = engine.execute(request("create", "draft.create", {"draft": copy.deepcopy(raw)}))
+                    self.assertTrue(created["ok"], created)
+                    finalized = engine.execute(request("finalize", "monster.finalize", guard(created["result"]["draft"])))
+                    self.assertTrue(finalized["ok"], finalized)
+                    monster = finalized["result"]["monster"]
+
+                    deleted = Engine(workspace=directory).execute(request("delete", "draft.delete", {"draftId": created["result"]["draft"]["draftId"]}))
+                    self.assertTrue(deleted["ok"], deleted)
+                    orphaned = Engine(workspace=directory).execute(request("get", "draft.get", {"draftId": created["result"]["draft"]["draftId"]}))
+                    self.assertEqual(orphaned["error"]["code"], "draft.not-found")
+
+                    duplicated = Engine(workspace=directory).execute(request("duplicate", "monster.duplicate", {"monsterId": monster["monsterId"]}))
+                    self.assertTrue(duplicated["ok"], duplicated)
+                    self.assertEqual(duplicated["result"]["draft"]["concept"], monster["concept"])
+                    self.assertEqual(duplicated["result"]["evaluation"]["status"], "valid")
+                    loaded = Engine(workspace=directory).execute(request("reload", "monster.get", {"monsterId": monster["monsterId"]}))
+                    self.assertTrue(loaded["ok"], loaded)
+                    self.assertEqual(loaded["result"]["monster"], monster)
 
     def test_json_export_is_the_self_contained_finished_snapshot(self):
         engine = Engine()

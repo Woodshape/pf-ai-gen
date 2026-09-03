@@ -187,7 +187,10 @@ export function App() {
         await getDraft(draftId);
       } catch (error) {
         const code = (error as Error & { data?: { code?: string } }).data?.code;
-        if (code !== "catalog.version-unsupported") throw error;
+        // A finished monster's snapshot is self-contained, so a missing or
+        // corrupt source draft must not make it unopenable: rehome a copy.
+        const orphaned = entry.kind === "monster" && (code === "draft.not-found" || code === "draft.file-corrupt");
+        if (code !== "catalog.version-unsupported" && !orphaned) throw error;
         if (entry.kind === "monster") {
           const duplicate = await execute("monster.duplicate", { monsterId: entry.id });
           accept(duplicate);
@@ -198,7 +201,7 @@ export function App() {
           accept(duplicate);
           if (duplicate.draft) localStorage.setItem("monster-builder.draftId", duplicate.draft.draftId);
         }
-        show(`"${entry.name || "Entry"}" was created with an older catalog; opened a fresh duplicate for editing.${entry.kind === "monster" ? " The original finished monster stays attached for export." : " The original draft stays in the Library."}`, true);
+        show(`"${entry.name || "Entry"}" ${orphaned ? "no longer has its source draft" : "was created with an older catalog"}; opened a fresh duplicate for editing.${entry.kind === "monster" ? " The original finished monster stays attached for export." : " The original draft stays in the Library."}`, true);
         setLibrary(undefined); setStep(0);
         return;
       }
