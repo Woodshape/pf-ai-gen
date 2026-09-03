@@ -19,7 +19,10 @@ export function Select(props: { label: string; value?: string; onChange: (value:
 export function CatalogSelect(props: { label: string; records: Dict<CatalogEntry>; value?: string; onChange: (value: string) => void; blank?: string; full?: boolean }) {
   return <Select label={props.label} value={props.value || ""} onChange={props.onChange} full={props.full}>
     <option value="">{props.blank || "Choose…"}</option>
-    {Object.values(props.records).map((entry) => <option value={entry.id} key={entry.id}>{entry.name || entry.id}</option>)}
+    {Object.values(props.records).map((entry) => {
+      const unresolved = entry.catalogStatus !== undefined && entry.catalogStatus !== "resolved";
+      return <option value={entry.id} key={entry.id} disabled={unresolved}>{entry.name || entry.id}{unresolved ? " — not yet source-resolved" : ""}</option>;
+    })}
   </Select>;
 }
 
