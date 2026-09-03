@@ -28,7 +28,7 @@ class GoblinSorcererTests(unittest.TestCase):
             "strength": 6, "dexterity": 18, "constitution": 12,
             "intelligence": 13, "wisdom": 10, "charisma": 14,
         })
-        self.assertEqual((canonical["hp"], canonical["bab"]), (27, 3))
+        self.assertEqual((canonical["hp"], canonical["bab"]), (34, 3))
         self.assertEqual(canonical["defenses"], {
             "ac": 15, "touch": 15, "flatFooted": 11,
             "fortitude": 4, "reflex": 9, "will": 8,
@@ -92,7 +92,7 @@ class GoblinSorcererTests(unittest.TestCase):
                 if format_name != "json":
                     for expected in (
                         "Cinder CR 5/Level 6", "AC 15 (+4 Dex, +1 size)", "touch AC 15",
-                        "flat-footed AC 11", "hp 27 (6d6+6)", "CMD 14",
+                        "flat-footed AC 11", "hp 34 (6d6+6)", "CMD 14",
                         "Elemental Ray +8 ranged touch (1d6+3 fire), 30 ft., 5/day",
                         "Skills Bluff +11, Spellcraft +10, Use Magic Device +11",
                         "Feats Improved Initiative, Iron Will, Lightning Reflexes, Eschew Materials",

@@ -90,7 +90,7 @@
    "id": "npc-rule.average-hp",
    "name": "Average NPC hit points",
    "kind": "average-hp",
-   "firstLevelMax": false,
+   "firstLevelMax": true,
    "rounding": "floor",
    "constitutionPerLevel": true,
    "catalogStatus": "resolved",
@@ -127,6 +127,17 @@
      ],
      "entry": "Constitution modifier applies to each Hit Die",
      "provenanceStatus": "resolved"
+    },
+    {
+     "entry": "A creature gains maximum hit points if its first Hit Die roll is for a character class level",
+     "file": "sources/npc/aonprd/getting-started.txt",
+     "provenanceStatus": "resolved",
+     "section": "Hit Points (hp)",
+     "sourceId": "source.aon-getting-started",
+     "txtLines": [
+      30,
+      30
+     ]
     }
    ]
   },

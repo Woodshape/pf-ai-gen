@@ -140,7 +140,7 @@ class ElementalAllyValidEvaluationTests(unittest.TestCase):
             "strength": 10, "dexterity": 12, "constitution": 14,
             "intelligence": 10, "wisdom": 15, "charisma": 11,
         })
-        self.assertEqual((canonical["hp"], canonical["hitDiceExpression"], canonical["bab"]), (19, "3d8+6", 2))
+        self.assertEqual((canonical["hp"], canonical["hitDiceExpression"], canonical["bab"]), (27, "3d8+6", 2))
         self.assertEqual(canonical["defenses"], {
             "ac": 16, "touch": 12, "flatFooted": 15,
             "fortitude": 5, "reflex": 2, "will": 7,

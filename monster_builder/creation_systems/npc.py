@@ -320,7 +320,12 @@ class NpcCreation(CreationSystem):
         cr_rule = self._record("derivedRule", "npc-rule.classed-npc-cr")
         cr = total_level + cr_rule["pcClassAdjustment"] if class_record["category"] == "pc" else None
         die_size = int(class_record["hitDie"].removeprefix("d"))
-        hp = math.floor(total_level * ((die_size + 1) / 2 + modifiers["constitution"]))
+        # ponytail: per getting-started.txt line 30, a first Hit Die from a character (PC) class grants
+        # maximum hit points; NPC-class or racial first Hit Dice roll normally. Multiclass is out of slice.
+        if class_record["category"] == "pc":
+            hp = math.floor(die_size + (total_level - 1) * ((die_size + 1) / 2 + modifiers["constitution"]) + total_level * modifiers["constitution"])
+        else:
+            hp = math.floor(total_level * ((die_size + 1) / 2 + modifiers["constitution"]))
         bab = row["bab"]
         size_modifiers = race.get("sizeModifiers", {})
         equipped = [entry for entry in gear_result["items"] if entry["equipped"]]

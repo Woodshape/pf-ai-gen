@@ -46,7 +46,7 @@ class GoblinDruidTests(unittest.TestCase):
             "strength": 0, "dexterity": 1, "constitution": 2,
             "intelligence": 0, "wisdom": 2, "charisma": 0,
         })
-        self.assertEqual((canonical["hp"], canonical["hitDiceExpression"], canonical["bab"]), (19, "3d8+6", 2))
+        self.assertEqual((canonical["hp"], canonical["hitDiceExpression"], canonical["bab"]), (27, "3d8+6", 2))
         self.assertEqual(canonical["defenses"], {
             "ac": 16, "touch": 12, "flatFooted": 15,
             "fortitude": 5, "reflex": 2, "will": 7,
@@ -242,7 +242,7 @@ class GoblinDruidTests(unittest.TestCase):
                 "# Zarka CR 2/Level 3",
                 "Init +5 (darkvision 60 ft.)",
                 "NE Small humanoid (goblinoid); Speed 30 ft.",
-                "AC 16 (+2 armor, +2 shield, +1 Dex, +1 size); touch AC 12; flat-footed AC 15; hp 19 (3d8+6); Fort +5; Ref +2; Will +7; CMD 12",
+                "AC 16 (+2 armor, +2 shield, +1 Dex, +1 size); touch AC 12; flat-footed AC 15; hp 27 (3d8+6); Fort +5; Ref +2; Will +7; CMD 12",
                 "Sickle +3 (1d4; S)",
                 "Fire Bolt +4 ranged touch (1d6+1 fire), 30 ft., 5/day",
                 "Skills Knowledge (Nature) +8, Heal +8, Spellcraft +6, Survival +10",

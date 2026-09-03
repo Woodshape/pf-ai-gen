@@ -28,7 +28,7 @@ class HalflingBardTests(unittest.TestCase):
             "strength": 6, "dexterity": 16, "constitution": 12,
             "intelligence": 13, "wisdom": 10, "charisma": 17,
         })
-        self.assertEqual((canonical["hp"], canonical["hitDiceExpression"], canonical["bab"]), (11, "2d8+2", 1))
+        self.assertEqual((canonical["hp"], canonical["hitDiceExpression"], canonical["bab"]), (15, "2d8+2", 1))
         self.assertEqual(canonical["defenses"], {
             "ac": 14, "touch": 14, "flatFooted": 11,
             "fortitude": 3, "reflex": 8, "will": 5,
@@ -65,9 +65,9 @@ class HalflingBardTests(unittest.TestCase):
     def test_public_engine_builds_level_one_and_level_three_variants(self):
         engine = Engine()
         for level, expected in (
-            (1, {"hp": 5, "bab": 0, "known": {"0": 4, "1": 2}, "perDay": {"0": "at-will", "1": 2},
+            (1, {"hp": 9, "bab": 0, "known": {"0": 4, "1": 2}, "perDay": {"0": "at-will", "1": 2},
                  "saves": (3, 7, 4), "ac": 14}),
-            (3, {"hp": 16, "bab": 2, "known": {"0": 6, "1": 4}, "perDay": {"0": "at-will", "1": 4},
+            (3, {"hp": 22, "bab": 2, "known": {"0": 6, "1": 4}, "perDay": {"0": "at-will", "1": 4},
                  "saves": (4, 8, 7), "ac": 14}),
         ):
             draft = copy.deepcopy(FIXTURE)
@@ -167,7 +167,7 @@ class HalflingBardTests(unittest.TestCase):
             for expected in (
                 "# Perrin Underbough CR 1/Level 2",
                 "CN Small humanoid (halfling); Speed 20 ft.",
-                "AC 14 (+3 Dex, +1 size); touch AC 14; flat-footed AC 11; hp 11 (2d8+2); Fort +3; Ref +8; Will +5; CMD 11",
+                "AC 14 (+3 Dex, +1 size); touch AC 14; flat-footed AC 11; hp 15 (2d8+2); Fort +3; Ref +8; Will +5; CMD 11",
                 "Bard Spells (CL 2nd; Cha-based)",
                 "0 (at will, DC 13)—Detect Magic, Flare, Light, Mage Hand, Prestidigitation",
                 "1st (3/day, DC 14)—Charm Person, Grease, Sleep",

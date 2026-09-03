@@ -118,7 +118,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:d79ecd1d783fbe1d561240b488ee4f6015231ad3327c63b79ae4c9c8057402c5",
+  "catalogVersion": "sha256:1a88b2b70a27bbfe6b202be5b89c93e6f4f8280f577b6da39d138a43ccc49f51",
   "classFeatures": {
     "npc-class-feature.bard-cantrips": {
       "catalogStatus": "resolved",
@@ -10709,7 +10709,7 @@
     "npc-rule.average-hp": {
       "catalogStatus": "resolved",
       "constitutionPerLevel": true,
-      "firstLevelMax": false,
+      "firstLevelMax": true,
       "id": "npc-rule.average-hp",
       "kind": "average-hp",
       "name": "Average NPC hit points",
@@ -10752,6 +10752,18 @@
           "txtLines": [
             133,
             138
+          ]
+        },
+        {
+          "entry": "A creature gains maximum hit points if its first Hit Die roll is for a character class level",
+          "file": "sources/npc/aonprd/getting-started.txt",
+          "provenanceStatus": "resolved",
+          "section": "Hit Points (hp)",
+          "sha256": "2a59a8c5aaf2c1bc734c1ed47efaccecc037e3c703fe26f09e1b29c57535d78d",
+          "sourceId": "source.aon-getting-started",
+          "txtLines": [
+            30,
+            30
           ]
         }
       ]
