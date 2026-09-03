@@ -111,6 +111,25 @@ class HalflingBardTests(unittest.TestCase):
             codes = [issue["code"] for issue in evaluation["issues"]]
             self.assertIn("npc.slice-unsupported", codes)
 
+    def test_weapon_finesse_applies_dexterity_to_light_and_rapier_attacks(self):
+        draft = copy.deepcopy(FIXTURE)
+        draft["selections"]["classProgression"][0]["levels"] = 1
+        draft["selections"]["feats"] = [{"slotId": "general-1", "featId": "feat.weapon-finesse"}]
+        draft["selections"]["gear"] = [{"itemId": "item.rapier", "quantity": 1}, {"itemId": "item.shortsword", "quantity": 1}]
+        draft["selections"]["skillGeneration"]["skills"] = draft["selections"]["skillGeneration"]["skills"][:7]
+        draft["selections"]["spellLoadout"]["known"] = {"0": ["spell.detect-magic", "spell.flare", "spell.light", "spell.mage-hand"],
+                                                        "1": ["spell.charm-person", "spell.grease"]}
+        created = Engine().execute(request("bard-finesse", "draft.create", {"draft": draft}))
+        self.assertTrue(created["ok"], created)
+        evaluation = created["result"]["evaluation"]
+        self.assertEqual(evaluation["status"], "valid", evaluation["issues"])
+        attacks = {attack["name"]: attack for attack in evaluation["canonical"]["attacks"]}
+        self.assertEqual(set(attacks), {"Rapier", "Shortsword"})
+        for attack in attacks.values():
+            # bab 0 + Dex +3 + Small +1; damage keeps the Strength penalty.
+            self.assertEqual(attack["attackBonuses"], [4])
+            self.assertEqual(attack["damageExpression"], "1d4-2")
+
     def test_finalize_reload_and_exports_preserve_the_canonical_result(self):
         with tempfile.TemporaryDirectory() as workspace:
             engine = Engine(workspace=workspace)

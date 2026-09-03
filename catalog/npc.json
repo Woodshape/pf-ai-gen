@@ -118,7 +118,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:3c2a2827550ce18a47783d00e803ff357bcbe40cb475e269b5566e096defeaac",
+  "catalogVersion": "sha256:3c1c1ac992fa33ef441cbb95e7efdda561a88587dcdd184df5c2e6ccecc1a0c1",
   "classFeatures": {
     "npc-class-feature.bard-cantrips": {
       "catalogStatus": "resolved",
@@ -10805,7 +10805,8 @@
         "feat.endurance",
         "feat.improved-initiative",
         "feat.iron-will",
-        "feat.lightning-reflexes"
+        "feat.lightning-reflexes",
+        "feat.weapon-finesse"
       ],
       "catalogStatus": "resolved",
       "id": "npc-rule.general-feat-slots",
@@ -13796,23 +13797,27 @@
       }
     },
     "feat.weapon-finesse": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "general",
-      "effects": null,
-      "gapCode": "core-rulebook-feats",
+      "effects": {
+        "finesse": true
+      },
       "id": "feat.weapon-finesse",
       "name": "Weapon Finesse",
-      "prerequisites": null,
+      "prerequisites": {
+        "all": []
+      },
       "sourceRef": {
-        "entry": "Core feats",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "82bc9cfeda15fc493553ca4015db3a1d94afbf997ad92aa9ef5adc860029c1d3",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Weapon Finesse",
+        "file": "sources/npc/aonprd/feats.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#weapon-finesse",
+        "provenanceStatus": "resolved",
+        "section": "Weapon Finesse",
+        "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+        "sourceId": "source.aon-feats",
         "txtLines": [
-          25,
-          25
+          1035,
+          1038
         ]
       }
     },
@@ -14639,26 +14644,34 @@
       "weightLb": 25
     },
     "item.chainmail": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "armor",
-      "effects": null,
-      "gapCode": "core-rulebook-equipment",
+      "effects": {
+        "armorBonus": 6,
+        "armorCheckPenalty": -5,
+        "maxDex": 2
+      },
       "id": "item.chainmail",
       "name": "Chainmail",
-      "priceCp": null,
+      "priceCp": 15000,
       "sourceRef": {
-        "entry": "Core weapons, armor, goods, and required magic items",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "82bc9cfeda15fc493553ca4015db3a1d94afbf997ad92aa9ef5adc860029c1d3",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Chainmail",
+        "file": "sources/npc/aonprd/equipment.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+        "provenanceStatus": "resolved",
+        "section": "Table: Armor and Shields",
+        "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+        "sourceId": "source.aon-equipment",
         "txtLines": [
-          26,
-          26
+          330,
+          330
         ]
       },
-      "weightLb": null
+      "weightLb": 40,
+      "weightLbBySize": {
+        "medium": 40,
+        "small": 20
+      }
     },
     "item.cloak-of-resistance": {
       "catalogStatus": "gap",
@@ -15456,26 +15469,37 @@
       "weightLb": null
     },
     "item.rapier": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "weapon",
-      "effects": null,
-      "gapCode": "core-rulebook-equipment",
+      "effects": {
+        "damageDieBySize": {
+          "medium": "1d6",
+          "small": "1d4"
+        },
+        "damageType": "P",
+        "finesseWeapon": true
+      },
       "id": "item.rapier",
       "name": "Rapier",
-      "priceCp": null,
+      "priceCp": 2000,
       "sourceRef": {
-        "entry": "Core weapons, armor, goods, and required magic items",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "82bc9cfeda15fc493553ca4015db3a1d94afbf997ad92aa9ef5adc860029c1d3",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Rapier",
+        "file": "sources/npc/aonprd/equipment.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+        "provenanceStatus": "resolved",
+        "section": "Table: Weapons",
+        "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+        "sourceId": "source.aon-equipment",
         "txtLines": [
-          26,
-          26
+          157,
+          157
         ]
       },
-      "weightLb": null
+      "weightLb": 2,
+      "weightLbBySize": {
+        "medium": 2,
+        "small": 1
+      }
     },
     "item.ring-of-protection": {
       "catalogStatus": "gap",
@@ -15587,6 +15611,39 @@
       },
       "weightLb": null
     },
+    "item.shortsword": {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "damageDieBySize": {
+          "medium": "1d6",
+          "small": "1d4"
+        },
+        "damageType": "P",
+        "lightWeapon": true
+      },
+      "id": "item.shortsword",
+      "name": "Shortsword",
+      "priceCp": 1000,
+      "sourceRef": {
+        "entry": "Sword, short",
+        "file": "sources/npc/aonprd/equipment.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+        "provenanceStatus": "resolved",
+        "section": "Table: Weapons",
+        "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+        "sourceId": "source.aon-equipment",
+        "txtLines": [
+          151,
+          151
+        ]
+      },
+      "weightLb": 2,
+      "weightLbBySize": {
+        "medium": 2,
+        "small": 1
+      }
+    },
     "item.sickle": {
       "catalogStatus": "resolved",
       "category": "weapon",
@@ -15636,26 +15693,36 @@
       }
     },
     "item.sling": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "weapon",
-      "effects": null,
-      "gapCode": "core-rulebook-equipment",
+      "effects": {
+        "damageDieBySize": {
+          "medium": "1d4",
+          "small": "1d3"
+        },
+        "damageType": "B"
+      },
       "id": "item.sling",
       "name": "Sling",
-      "priceCp": null,
+      "priceCp": 0,
       "sourceRef": {
-        "entry": "Core weapons, armor, goods, and required magic items",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "82bc9cfeda15fc493553ca4015db3a1d94afbf997ad92aa9ef5adc860029c1d3",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Sling",
+        "file": "sources/npc/aonprd/equipment.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+        "provenanceStatus": "resolved",
+        "section": "Table: Weapons",
+        "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+        "sourceId": "source.aon-equipment",
         "txtLines": [
-          26,
-          26
+          137,
+          137
         ]
       },
-      "weightLb": null
+      "weightLb": 0,
+      "weightLbBySize": {
+        "medium": 0,
+        "small": 0
+      }
     },
     "item.spear": {
       "catalogStatus": "gap",
@@ -15744,6 +15811,36 @@
         ]
       },
       "weightLb": null
+    },
+    "item.studded-leather-armor": {
+      "catalogStatus": "resolved",
+      "category": "armor",
+      "effects": {
+        "armorBonus": 3,
+        "armorCheckPenalty": -1,
+        "maxDex": 5
+      },
+      "id": "item.studded-leather-armor",
+      "name": "Studded Leather",
+      "priceCp": 2500,
+      "sourceRef": {
+        "entry": "Studded leather",
+        "file": "sources/npc/aonprd/equipment.txt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+        "provenanceStatus": "resolved",
+        "section": "Table: Armor and Shields",
+        "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+        "sourceId": "source.aon-equipment",
+        "txtLines": [
+          325,
+          325
+        ]
+      },
+      "weightLb": 20,
+      "weightLbBySize": {
+        "medium": 20,
+        "small": 10
+      }
     },
     "item.torch": {
       "catalogStatus": "gap",
@@ -17352,6 +17449,12 @@
       "sha256": "80202a19d906df069d55d50a63328fe5507b0b8f731ae8f3f2a6c29c238b6c90",
       "sourceId": "source.aon-spell-entangle"
     },
+    "source.aon-spell-feather-fall": {
+      "description": "Official current AoN Feather Fall spell rules",
+      "file": "sources/npc/aonprd/spell-feather-fall.txt",
+      "sha256": "6931039338a2ade6f50d53f6ff200bdc9deeca2f0292bd0e9dfbf62ef498c018",
+      "sourceId": "source.aon-spell-feather-fall"
+    },
     "source.aon-spell-fireball": {
       "description": "Official current AoN Fireball spell rules",
       "file": "sources/npc/aonprd/spell-fireball.txt",
@@ -17436,6 +17539,12 @@
       "sha256": "426fd2722e6ff650ef50163c2be7dd2a9b664d9071ebacef3e72bbd27b3511d0",
       "sourceId": "source.aon-spell-shield"
     },
+    "source.aon-spell-silent-image": {
+      "description": "Official current AoN Silent Image spell rules",
+      "file": "sources/npc/aonprd/spell-silent-image.txt",
+      "sha256": "989ad86c58733e0b946f2c403168fe5e0b0f5a0ddb0ad7ed7e8d7cdc9fc8c8b1",
+      "sourceId": "source.aon-spell-silent-image"
+    },
     "source.aon-spell-sleep": {
       "description": "Official current AoN Sleep spell rules",
       "file": "sources/npc/aonprd/spell-sleep.txt",
@@ -17499,7 +17608,7 @@
     "source.npc-manifest": {
       "description": "Hash manifest for the local NPC source foundation",
       "file": "sources/npc/MANIFEST.json",
-      "sha256": "d2326f1d7918fb4744ec11b2fd63538dc5e900c770c69e8979a5258259b83c25",
+      "sha256": "10d54ab7a487e71b95d5735a758c61d8af7979dc41b94a77bc1923e36090c551",
       "sourceId": "source.npc-manifest"
     },
     "source.npc-mode-plan": {
@@ -26487,9 +26596,8 @@
       }
     },
     "spell.feather-fall": {
-      "catalogStatus": "partial",
+      "catalogStatus": "resolved",
       "components": null,
-      "gapCode": "core-rulebook-spell-descriptions",
       "id": "spell.feather-fall",
       "levelsByClass": {
         "bard": 1,
@@ -26526,14 +26634,15 @@
       "school": null,
       "sourceRef": {
         "entry": "Feather Fall",
-        "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
-        "provenanceStatus": "list-membership-resolved",
-        "section": "Core Rulebook class spell lists",
-        "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
-        "sourceId": "source.npc-crb-spell-lists",
+        "file": "sources/npc/aonprd/spell-feather-fall.txt",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Feather+Fall",
+        "provenanceStatus": "resolved",
+        "section": "Spell description",
+        "sha256": "6931039338a2ade6f50d53f6ff200bdc9deeca2f0292bd0e9dfbf62ef498c018",
+        "sourceId": "source.aon-spell-feather-fall",
         "txtLines": [
-          65,
-          65
+          1,
+          16
         ]
       }
     },
@@ -39602,9 +39711,8 @@
       }
     },
     "spell.silent-image": {
-      "catalogStatus": "partial",
+      "catalogStatus": "resolved",
       "components": null,
-      "gapCode": "core-rulebook-spell-descriptions",
       "id": "spell.silent-image",
       "levelsByClass": {
         "bard": 1,
@@ -39641,14 +39749,15 @@
       "school": null,
       "sourceRef": {
         "entry": "Silent Image",
-        "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
-        "provenanceStatus": "list-membership-resolved",
-        "section": "Core Rulebook class spell lists",
-        "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
-        "sourceId": "source.npc-crb-spell-lists",
+        "file": "sources/npc/aonprd/spell-silent-image.txt",
+        "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Silent+Image",
+        "provenanceStatus": "resolved",
+        "section": "Spell description",
+        "sha256": "989ad86c58733e0b946f2c403168fe5e0b0f5a0ddb0ad7ed7e8d7cdc9fc8c8b1",
+        "sourceId": "source.aon-spell-silent-image",
         "txtLines": [
-          75,
-          75
+          1,
+          13
         ]
       }
     },

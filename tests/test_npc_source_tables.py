@@ -93,6 +93,7 @@ RESOLVED_SPELLS = {
     "spell.mirror-image", "spell.scorching-ray", "spell.fireball", "spell.flare",
     "spell.barkskin", "spell.cure-light-wounds", "spell.entangle", "spell.produce-flame",
     "spell.summon-nature-s-ally-i", "spell.summon-nature-s-ally-ii", "spell.charm-person", "spell.sleep",
+    "spell.silent-image", "spell.feather-fall",
 }
 
 
@@ -258,19 +259,23 @@ class CatalogCompletenessTests(unittest.TestCase):
     def test_four_source_backed_general_feats_are_resolved(self):
         feats = self.catalog["feats"]
         resolved = {record_id for record_id, record in feats.items() if record["catalogStatus"] == "resolved"}
-        self.assertEqual(resolved, {"feat.endurance", "feat.improved-initiative", "feat.iron-will", "feat.lightning-reflexes"})
+        self.assertEqual(resolved, {"feat.endurance", "feat.improved-initiative", "feat.iron-will", "feat.lightning-reflexes", "feat.weapon-finesse"})
         self.assertTrue(all(record["category"] == "general" for record in feats.values()))
 
     def test_only_production_items_are_resolved(self):
         items = self.catalog["items"]
-        self.assertEqual(len(items), 65)
+        self.assertEqual(len(items), 67)
         self.assertTrue(all(item["category"] in ITEM_CATEGORIES for item in items.values()))
         resolved = {record_id for record_id, record in items.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
             "item.longsword", "item.chain-shirt", "item.light-steel-shield",
             "item.wand-of-burning-hands", "item.cloak-of-resistance-1",
             "item.sickle", "item.leather-armor", "item.heavy-wooden-shield",
+            "item.rapier", "item.shortsword", "item.chainmail", "item.studded-leather-armor", "item.sling",
         })
+        self.assertEqual(self.catalog["items"]["item.shortsword"]["effects"]["damageDieBySize"], {"small": "1d4", "medium": "1d6"})
+        self.assertEqual(self.catalog["items"]["item.studded-leather-armor"]["effects"], {"armorBonus": 3, "maxDex": 5, "armorCheckPenalty": -1})
+        self.assertEqual(self.catalog["items"]["item.chainmail"]["priceCp"], 15000)
 
     def test_all_nine_gear_profiles_remain_but_only_phase_two_rows_are_resolved(self):
         budgets = self.catalog["gearBudgets"]

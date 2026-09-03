@@ -1,2277 +1,2721 @@
 {
-  "section": "feats",
-  "records": [
-    {
-      "id": "feat.alertness",
-      "name": "Alertness",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.dodge",
-      "name": "Dodge",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.endurance",
-      "name": "Endurance",
-      "catalogStatus": "resolved",
-      "category": "general",
-      "prerequisites": {"all": []},
-      "effects": {},
-      "sourceRef": {
-        "sourceId": "source.aon-feats",
-        "section": "Endurance",
-        "txtLines": [425, 429],
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#endurance",
-        "entry": "Endurance",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "feat.improved-initiative",
-      "name": "Improved Initiative",
-      "catalogStatus": "resolved",
-      "category": "general",
-      "prerequisites": {"all": []},
-      "effects": {"initiative": 4},
-      "sourceRef": {
-        "sourceId": "source.aon-feats",
-        "section": "Improved Initiative",
-        "txtLines": [635, 637],
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#improved-initiative",
-        "entry": "Improved Initiative",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "feat.power-attack",
-      "name": "Power Attack",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.toughness",
-      "name": "Toughness",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.weapon-focus",
-      "name": "Weapon Focus",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.acrobatic",
-      "name": "Acrobatic",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.acrobatic-steps",
-      "name": "Acrobatic Steps",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.agile-maneuvers",
-      "name": "Agile Maneuvers",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.animal-affinity",
-      "name": "Animal Affinity",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.arcane-armor-mastery",
-      "name": "Arcane Armor Mastery",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.arcane-armor-training",
-      "name": "Arcane Armor Training",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.arcane-strike",
-      "name": "Arcane Strike",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.armor-proficiency-heavy",
-      "name": "Armor Proficiency (Heavy)",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.armor-proficiency-light",
-      "name": "Armor Proficiency (Light)",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.armor-proficiency-medium",
-      "name": "Armor Proficiency (Medium)",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.athletic",
-      "name": "Athletic",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.augment-summoning",
-      "name": "Augment Summoning",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.blind-fight",
-      "name": "Blind-Fight",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.brew-potion",
-      "name": "Brew Potion",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.catch-off-guard",
-      "name": "Catch Off-Guard",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.channel-smite",
-      "name": "Channel Smite",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.combat-casting",
-      "name": "Combat Casting",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.combat-expertise",
-      "name": "Combat Expertise",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.combat-reflexes",
-      "name": "Combat Reflexes",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.command-undead",
-      "name": "Command Undead",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.craft-magic-arms-and-armor",
-      "name": "Craft Magic Arms and Armor",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.craft-rod",
-      "name": "Craft Rod",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.craft-staff",
-      "name": "Craft Staff",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.craft-wand",
-      "name": "Craft Wand",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.craft-wondrous-item",
-      "name": "Craft Wondrous Item",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.critical-focus",
-      "name": "Critical Focus",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.dazzling-display",
-      "name": "Dazzling Display",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.deflect-arrows",
-      "name": "Deflect Arrows",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.diehard",
-      "name": "Diehard",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.disruptive",
-      "name": "Disruptive",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.double-slice",
-      "name": "Double Slice",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.empower-spell",
-      "name": "Empower Spell",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.energy-resistance",
-      "name": "Energy Resistance",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.enlarge-spell",
-      "name": "Enlarge Spell",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.exotic-weapon-proficiency",
-      "name": "Exotic Weapon Proficiency",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.extend-spell",
-      "name": "Extend Spell",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.extra-channel",
-      "name": "Extra Channel",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.extra-performance",
-      "name": "Extra Performance",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.extra-rage",
-      "name": "Extra Rage",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.far-shot",
-      "name": "Far Shot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.fleet",
-      "name": "Fleet",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.forge-ring",
-      "name": "Forge Ring",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.gorgon-s-fist",
-      "name": "Gorgon's Fist",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.greater-bull-rush",
-      "name": "Greater Bull Rush",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.greater-disarm",
-      "name": "Greater Disarm",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.greater-feint",
-      "name": "Greater Feint",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.greater-grapple",
-      "name": "Greater Grapple",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.greater-overrun",
-      "name": "Greater Overrun",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.greater-penetrating-strike",
-      "name": "Greater Penetrating Strike",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.greater-shield-focus",
-      "name": "Greater Shield Focus",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.greater-sunder",
-      "name": "Greater Sunder",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.greater-trip",
-      "name": "Greater Trip",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.greater-two-weapon-fighting",
-      "name": "Greater Two-Weapon Fighting",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.greater-vital-strike",
-      "name": "Greater Vital Strike",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.greater-weapon-focus",
-      "name": "Greater Weapon Focus",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.greater-weapon-specialization",
-      "name": "Greater Weapon Specialization",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.heighten-spell",
-      "name": "Heighten Spell",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-bull-rush",
-      "name": "Improved Bull Rush",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-counterspell",
-      "name": "Improved Counterspell",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-critical",
-      "name": "Improved Critical",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-disarm",
-      "name": "Improved Disarm",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-familiar",
-      "name": "Improved Familiar",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-feint",
-      "name": "Improved Feint",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-grapple",
-      "name": "Improved Grapple",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-great-fortitude",
-      "name": "Improved Great Fortitude",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-iron-will",
-      "name": "Improved Iron Will",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-lightning-reflexes",
-      "name": "Improved Lightning Reflexes",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-natural-attack",
-      "name": "Improved Natural Attack",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-overrun",
-      "name": "Improved Overrun",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-precise-shot",
-      "name": "Improved Precise Shot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-shield-bash",
-      "name": "Improved Shield Bash",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-sunder",
-      "name": "Improved Sunder",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-trip",
-      "name": "Improved Trip",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-two-weapon-fighting",
-      "name": "Improved Two-Weapon Fighting",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improved-unarmed-strike",
-      "name": "Improved Unarmed Strike",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.improvised-weapon-mastery",
-      "name": "Improvised Weapon Mastery",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.intimidating-prowess",
-      "name": "Intimidating Prowess",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.iron-will",
-      "name": "Iron Will",
-      "catalogStatus": "resolved",
-      "category": "general",
-      "prerequisites": {"all": []},
-      "effects": {"will": 2},
-      "sourceRef": {
-        "sourceId": "source.aon-feats",
-        "section": "Iron Will",
-        "txtLines": [691, 693],
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#iron-will",
-        "entry": "Iron Will",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "feat.leadership",
-      "name": "Leadership",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.lightning-reflexes",
-      "name": "Lightning Reflexes",
-      "catalogStatus": "resolved",
-      "category": "general",
-      "prerequisites": {"all": []},
-      "effects": {"reflex": 2},
-      "sourceRef": {
-        "sourceId": "source.aon-feats",
-        "section": "Lightning Reflexes",
-        "txtLines": [751, 753],
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#lightning-reflexes",
-        "entry": "Lightning Reflexes",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "feat.lightning-stance",
-      "name": "Lightning Stance",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.lunge",
-      "name": "Lunge",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.martial-weapon-proficiency",
-      "name": "Martial Weapon Proficiency",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.maximize-spell",
-      "name": "Maximize Spell",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.medusa-s-wrath",
-      "name": "Medusa's Wrath",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.mobility",
-      "name": "Mobility",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.mounted-archery",
-      "name": "Mounted Archery",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.mounted-combat",
-      "name": "Mounted Combat",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.natural-spell",
-      "name": "Natural Spell",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.negotiator",
-      "name": "Negotiator",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.penetrating-strike",
-      "name": "Penetrating Strike",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.persuasive",
-      "name": "Persuasive",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.point-blank-shot",
-      "name": "Point-Blank Shot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.precise-shot",
-      "name": "Precise Shot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.quick-draw",
-      "name": "Quick Draw",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.quicken-spell",
-      "name": "Quicken Spell",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.rapid-reload",
-      "name": "Rapid Reload",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.rapid-shot",
-      "name": "Rapid Shot",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.ride-by-attack",
-      "name": "Ride-By Attack",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.run",
-      "name": "Run",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.scorpion-style",
-      "name": "Scorpion Style",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.scribe-scroll",
-      "name": "Scribe Scroll",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.self-sufficient",
-      "name": "Self-Sufficient",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.shield-focus",
-      "name": "Shield Focus",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.shield-master",
-      "name": "Shield Master",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.shield-proficiency",
-      "name": "Shield Proficiency",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.shield-slam",
-      "name": "Shield Slam",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.shot-on-the-run",
-      "name": "Shot on the Run",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.silent-spell",
-      "name": "Silent Spell",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.simple-weapon-proficiency",
-      "name": "Simple Weapon Proficiency",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.snatch-arrows",
-      "name": "Snatch Arrows",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.spell-focus",
-      "name": "Spell Focus",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.spell-mastery",
-      "name": "Spell Mastery",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.spell-penetration",
-      "name": "Spell Penetration",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.spirited-charge",
-      "name": "Spirited Charge",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.spring-attack",
-      "name": "Spring Attack",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.staggering-critical",
-      "name": "Staggering Critical",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.stand-still",
-      "name": "Stand Still",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.stealthy",
-      "name": "Stealthy",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.step-up",
-      "name": "Step Up",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.still-spell",
-      "name": "Still Spell",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.strike-back",
-      "name": "Strike Back",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.stunning-fist",
-      "name": "Stunning Fist",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.throw-anything",
-      "name": "Throw Anything",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.tower-shield-proficiency",
-      "name": "Tower Shield Proficiency",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.trample",
-      "name": "Trample",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.trip",
-      "name": "Trip",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.two-weapon-defense",
-      "name": "Two-Weapon Defense",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.two-weapon-fighting",
-      "name": "Two-Weapon Fighting",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.two-weapon-rend",
-      "name": "Two-Weapon Rend",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.vital-strike",
-      "name": "Vital Strike",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.weapon-finesse",
-      "name": "Weapon Finesse",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.whirlwind-attack",
-      "name": "Whirlwind Attack",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.widen-spell",
-      "name": "Widen Spell",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    },
-    {
-      "id": "feat.wind-stance",
-      "name": "Wind Stance",
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-feats",
-      "category": "general",
-      "prerequisites": null,
-      "effects": null,
-      "sourceRef": {
-        "sourceId": "source.npc-gap-matrix",
-        "section": "NPC Source-Gap Matrix",
-        "txtLines": [25, 25],
-        "entry": "Core feats",
-        "provenanceStatus": "catalog-gap"
-      }
-    }
-  ]
+ "section": "feats",
+ "records": [
+  {
+   "id": "feat.alertness",
+   "name": "Alertness",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.dodge",
+   "name": "Dodge",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.endurance",
+   "name": "Endurance",
+   "catalogStatus": "resolved",
+   "category": "general",
+   "prerequisites": {
+    "all": []
+   },
+   "effects": {},
+   "sourceRef": {
+    "sourceId": "source.aon-feats",
+    "section": "Endurance",
+    "txtLines": [
+     425,
+     429
+    ],
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#endurance",
+    "entry": "Endurance",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "feat.improved-initiative",
+   "name": "Improved Initiative",
+   "catalogStatus": "resolved",
+   "category": "general",
+   "prerequisites": {
+    "all": []
+   },
+   "effects": {
+    "initiative": 4
+   },
+   "sourceRef": {
+    "sourceId": "source.aon-feats",
+    "section": "Improved Initiative",
+    "txtLines": [
+     635,
+     637
+    ],
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#improved-initiative",
+    "entry": "Improved Initiative",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "feat.power-attack",
+   "name": "Power Attack",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.toughness",
+   "name": "Toughness",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.weapon-focus",
+   "name": "Weapon Focus",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.acrobatic",
+   "name": "Acrobatic",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.acrobatic-steps",
+   "name": "Acrobatic Steps",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.agile-maneuvers",
+   "name": "Agile Maneuvers",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.animal-affinity",
+   "name": "Animal Affinity",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.arcane-armor-mastery",
+   "name": "Arcane Armor Mastery",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.arcane-armor-training",
+   "name": "Arcane Armor Training",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.arcane-strike",
+   "name": "Arcane Strike",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.armor-proficiency-heavy",
+   "name": "Armor Proficiency (Heavy)",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.armor-proficiency-light",
+   "name": "Armor Proficiency (Light)",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.armor-proficiency-medium",
+   "name": "Armor Proficiency (Medium)",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.athletic",
+   "name": "Athletic",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.augment-summoning",
+   "name": "Augment Summoning",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.blind-fight",
+   "name": "Blind-Fight",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.brew-potion",
+   "name": "Brew Potion",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.catch-off-guard",
+   "name": "Catch Off-Guard",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.channel-smite",
+   "name": "Channel Smite",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.combat-casting",
+   "name": "Combat Casting",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.combat-expertise",
+   "name": "Combat Expertise",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.combat-reflexes",
+   "name": "Combat Reflexes",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.command-undead",
+   "name": "Command Undead",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.craft-magic-arms-and-armor",
+   "name": "Craft Magic Arms and Armor",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.craft-rod",
+   "name": "Craft Rod",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.craft-staff",
+   "name": "Craft Staff",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.craft-wand",
+   "name": "Craft Wand",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.craft-wondrous-item",
+   "name": "Craft Wondrous Item",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.critical-focus",
+   "name": "Critical Focus",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.dazzling-display",
+   "name": "Dazzling Display",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.deflect-arrows",
+   "name": "Deflect Arrows",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.diehard",
+   "name": "Diehard",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.disruptive",
+   "name": "Disruptive",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.double-slice",
+   "name": "Double Slice",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.empower-spell",
+   "name": "Empower Spell",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.energy-resistance",
+   "name": "Energy Resistance",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.enlarge-spell",
+   "name": "Enlarge Spell",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.exotic-weapon-proficiency",
+   "name": "Exotic Weapon Proficiency",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.extend-spell",
+   "name": "Extend Spell",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.extra-channel",
+   "name": "Extra Channel",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.extra-performance",
+   "name": "Extra Performance",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.extra-rage",
+   "name": "Extra Rage",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.far-shot",
+   "name": "Far Shot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.fleet",
+   "name": "Fleet",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.forge-ring",
+   "name": "Forge Ring",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.gorgon-s-fist",
+   "name": "Gorgon's Fist",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.greater-bull-rush",
+   "name": "Greater Bull Rush",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.greater-disarm",
+   "name": "Greater Disarm",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.greater-feint",
+   "name": "Greater Feint",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.greater-grapple",
+   "name": "Greater Grapple",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.greater-overrun",
+   "name": "Greater Overrun",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.greater-penetrating-strike",
+   "name": "Greater Penetrating Strike",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.greater-shield-focus",
+   "name": "Greater Shield Focus",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.greater-sunder",
+   "name": "Greater Sunder",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.greater-trip",
+   "name": "Greater Trip",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.greater-two-weapon-fighting",
+   "name": "Greater Two-Weapon Fighting",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.greater-vital-strike",
+   "name": "Greater Vital Strike",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.greater-weapon-focus",
+   "name": "Greater Weapon Focus",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.greater-weapon-specialization",
+   "name": "Greater Weapon Specialization",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.heighten-spell",
+   "name": "Heighten Spell",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-bull-rush",
+   "name": "Improved Bull Rush",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-counterspell",
+   "name": "Improved Counterspell",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-critical",
+   "name": "Improved Critical",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-disarm",
+   "name": "Improved Disarm",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-familiar",
+   "name": "Improved Familiar",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-feint",
+   "name": "Improved Feint",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-grapple",
+   "name": "Improved Grapple",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-great-fortitude",
+   "name": "Improved Great Fortitude",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-iron-will",
+   "name": "Improved Iron Will",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-lightning-reflexes",
+   "name": "Improved Lightning Reflexes",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-natural-attack",
+   "name": "Improved Natural Attack",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-overrun",
+   "name": "Improved Overrun",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-precise-shot",
+   "name": "Improved Precise Shot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-shield-bash",
+   "name": "Improved Shield Bash",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-sunder",
+   "name": "Improved Sunder",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-trip",
+   "name": "Improved Trip",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-two-weapon-fighting",
+   "name": "Improved Two-Weapon Fighting",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improved-unarmed-strike",
+   "name": "Improved Unarmed Strike",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.improvised-weapon-mastery",
+   "name": "Improvised Weapon Mastery",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.intimidating-prowess",
+   "name": "Intimidating Prowess",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.iron-will",
+   "name": "Iron Will",
+   "catalogStatus": "resolved",
+   "category": "general",
+   "prerequisites": {
+    "all": []
+   },
+   "effects": {
+    "will": 2
+   },
+   "sourceRef": {
+    "sourceId": "source.aon-feats",
+    "section": "Iron Will",
+    "txtLines": [
+     691,
+     693
+    ],
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#iron-will",
+    "entry": "Iron Will",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "feat.leadership",
+   "name": "Leadership",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.lightning-reflexes",
+   "name": "Lightning Reflexes",
+   "catalogStatus": "resolved",
+   "category": "general",
+   "prerequisites": {
+    "all": []
+   },
+   "effects": {
+    "reflex": 2
+   },
+   "sourceRef": {
+    "sourceId": "source.aon-feats",
+    "section": "Lightning Reflexes",
+    "txtLines": [
+     751,
+     753
+    ],
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#lightning-reflexes",
+    "entry": "Lightning Reflexes",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "feat.lightning-stance",
+   "name": "Lightning Stance",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.lunge",
+   "name": "Lunge",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.martial-weapon-proficiency",
+   "name": "Martial Weapon Proficiency",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.maximize-spell",
+   "name": "Maximize Spell",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.medusa-s-wrath",
+   "name": "Medusa's Wrath",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.mobility",
+   "name": "Mobility",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.mounted-archery",
+   "name": "Mounted Archery",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.mounted-combat",
+   "name": "Mounted Combat",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.natural-spell",
+   "name": "Natural Spell",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.negotiator",
+   "name": "Negotiator",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.penetrating-strike",
+   "name": "Penetrating Strike",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.persuasive",
+   "name": "Persuasive",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.point-blank-shot",
+   "name": "Point-Blank Shot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.precise-shot",
+   "name": "Precise Shot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.quick-draw",
+   "name": "Quick Draw",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.quicken-spell",
+   "name": "Quicken Spell",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.rapid-reload",
+   "name": "Rapid Reload",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.rapid-shot",
+   "name": "Rapid Shot",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.ride-by-attack",
+   "name": "Ride-By Attack",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.run",
+   "name": "Run",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.scorpion-style",
+   "name": "Scorpion Style",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.scribe-scroll",
+   "name": "Scribe Scroll",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.self-sufficient",
+   "name": "Self-Sufficient",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.shield-focus",
+   "name": "Shield Focus",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.shield-master",
+   "name": "Shield Master",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.shield-proficiency",
+   "name": "Shield Proficiency",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.shield-slam",
+   "name": "Shield Slam",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.shot-on-the-run",
+   "name": "Shot on the Run",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.silent-spell",
+   "name": "Silent Spell",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.simple-weapon-proficiency",
+   "name": "Simple Weapon Proficiency",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.snatch-arrows",
+   "name": "Snatch Arrows",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.spell-focus",
+   "name": "Spell Focus",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.spell-mastery",
+   "name": "Spell Mastery",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.spell-penetration",
+   "name": "Spell Penetration",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.spirited-charge",
+   "name": "Spirited Charge",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.spring-attack",
+   "name": "Spring Attack",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.staggering-critical",
+   "name": "Staggering Critical",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.stand-still",
+   "name": "Stand Still",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.stealthy",
+   "name": "Stealthy",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.step-up",
+   "name": "Step Up",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.still-spell",
+   "name": "Still Spell",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.strike-back",
+   "name": "Strike Back",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.stunning-fist",
+   "name": "Stunning Fist",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.throw-anything",
+   "name": "Throw Anything",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.tower-shield-proficiency",
+   "name": "Tower Shield Proficiency",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.trample",
+   "name": "Trample",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.trip",
+   "name": "Trip",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.two-weapon-defense",
+   "name": "Two-Weapon Defense",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.two-weapon-fighting",
+   "name": "Two-Weapon Fighting",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.two-weapon-rend",
+   "name": "Two-Weapon Rend",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.vital-strike",
+   "name": "Vital Strike",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.weapon-finesse",
+   "name": "Weapon Finesse",
+   "catalogStatus": "resolved",
+   "category": "general",
+   "prerequisites": {
+    "all": []
+   },
+   "effects": {
+    "finesse": true
+   },
+   "sourceRef": {
+    "sourceId": "source.aon-feats",
+    "section": "Weapon Finesse",
+    "txtLines": [
+     1035,
+     1038
+    ],
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html#weapon-finesse",
+    "entry": "Weapon Finesse",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "feat.whirlwind-attack",
+   "name": "Whirlwind Attack",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.widen-spell",
+   "name": "Widen Spell",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  },
+  {
+   "id": "feat.wind-stance",
+   "name": "Wind Stance",
+   "catalogStatus": "gap",
+   "gapCode": "core-rulebook-feats",
+   "category": "general",
+   "prerequisites": null,
+   "effects": null,
+   "sourceRef": {
+    "sourceId": "source.npc-gap-matrix",
+    "section": "NPC Source-Gap Matrix",
+    "txtLines": [
+     25,
+     25
+    ],
+    "entry": "Core feats",
+    "provenanceStatus": "catalog-gap"
+   }
+  }
+ ]
 }

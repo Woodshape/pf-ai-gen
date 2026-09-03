@@ -8590,8 +8590,7 @@
   {
    "id": "spell.feather-fall",
    "name": "Feather Fall",
-   "catalogStatus": "partial",
-   "gapCode": "core-rulebook-spell-descriptions",
+   "catalogStatus": "resolved",
    "school": null,
    "components": null,
    "levelsByClass": {
@@ -8626,14 +8625,15 @@
     }
    ],
    "sourceRef": {
-    "sourceId": "source.npc-crb-spell-lists",
-    "section": "Core Rulebook class spell lists",
+    "sourceId": "source.aon-spell-feather-fall",
+    "section": "Spell description",
     "txtLines": [
-     65,
-     65
+     1,
+     16
     ],
     "entry": "Feather Fall",
-    "provenanceStatus": "list-membership-resolved"
+    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Feather+Fall",
+    "provenanceStatus": "resolved"
    }
   },
   {
@@ -21117,8 +21117,7 @@
   {
    "id": "spell.silent-image",
    "name": "Silent Image",
-   "catalogStatus": "partial",
-   "gapCode": "core-rulebook-spell-descriptions",
+   "catalogStatus": "resolved",
    "school": null,
    "components": null,
    "levelsByClass": {
@@ -21153,14 +21152,15 @@
     }
    ],
    "sourceRef": {
-    "sourceId": "source.npc-crb-spell-lists",
-    "section": "Core Rulebook class spell lists",
+    "sourceId": "source.aon-spell-silent-image",
+    "section": "Spell description",
     "txtLines": [
-     75,
-     75
+     1,
+     13
     ],
     "entry": "Silent Image",
-    "provenanceStatus": "list-membership-resolved"
+    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Silent+Image",
+    "provenanceStatus": "resolved"
    }
   },
   {

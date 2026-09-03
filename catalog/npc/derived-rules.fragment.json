@@ -1,155 +1,211 @@
 {
-  "section": "derivedRules",
-  "records": [
+ "section": "derivedRules",
+ "records": [
+  {
+   "id": "npc-rule.money-copper",
+   "name": "Money representation",
+   "kind": "money",
+   "unit": "cp",
+   "integerOnly": true,
+   "catalogStatus": "policy",
+   "sourceRef": {
+    "sourceId": "source.npc-adr",
+    "section": "D7 Evaluation determinism",
+    "txtLines": [],
+    "entry": "Money is represented as integer copper pieces",
+    "provenanceStatus": "product-policy"
+   }
+  },
+  {
+   "id": "npc-rule.typed-prerequisites",
+   "name": "Typed prerequisite expressions",
+   "kind": "prerequisite-expression",
+   "catalogStatus": "policy",
+   "supportedOperands": [
+    "all",
+    "any",
+    "not",
+    "abilityAtLeast",
+    "babAtLeast",
+    "characterLevelAtLeast",
+    "classLevelAtLeast",
+    "skillRanksAtLeast",
+    "race",
+    "alignment",
+    "hasFeat",
+    "hasClassFeature",
+    "casterLevelAtLeast"
+   ],
+   "examples": [
     {
-      "id": "npc-rule.money-copper",
-      "name": "Money representation",
-      "kind": "money",
-      "unit": "cp",
-      "integerOnly": true,
-      "catalogStatus": "policy",
-      "sourceRef": {
-        "sourceId": "source.npc-adr",
-        "section": "D7 Evaluation determinism",
-        "txtLines": [],
-        "entry": "Money is represented as integer copper pieces",
-        "provenanceStatus": "product-policy"
+     "all": [
+      {
+       "abilityAtLeast": {
+        "strength": 13
+       }
+      },
+      {
+       "babAtLeast": 1
       }
+     ]
     },
     {
-      "id": "npc-rule.typed-prerequisites",
-      "name": "Typed prerequisite expressions",
-      "kind": "prerequisite-expression",
-      "catalogStatus": "policy",
-      "supportedOperands": [
-        "all",
-        "any",
-        "not",
-        "abilityAtLeast",
-        "babAtLeast",
-        "characterLevelAtLeast",
-        "classLevelAtLeast",
-        "skillRanksAtLeast",
-        "race",
-        "alignment",
-        "hasFeat",
-        "hasClassFeature",
-        "casterLevelAtLeast"
-      ],
-      "examples": [
-        {
-          "all": [
-            {"abilityAtLeast": {"strength": 13}},
-            {"babAtLeast": 1}
-          ]
-        },
-        {"hasFeat": "feat.point-blank-shot"}
-      ],
-      "sourceRef": {
-        "sourceId": "source.npc-adr",
-        "section": "D7 Evaluation determinism",
-        "txtLines": [],
-        "entry": "Typed prerequisite expressions are required",
-        "provenanceStatus": "product-policy"
-      }
-    },
-    {
-      "id": "npc-rule.ability-increase",
-      "name": "Ability score increases",
-      "kind": "ability-increase",
-      "levels": [4, 8, 12, 16, 20],
-      "amount": 1,
-      "catalogStatus": "resolved",
-      "sourceRef": {
-        "sourceId": "source.aon-character-classes",
-        "section": "Table: Character Advancement and Level-Dependent Bonuses",
-        "txtLines": [19, 40],
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
-        "entry": "Ability Score",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "npc-rule.average-hp",
-      "name": "Average NPC hit points",
-      "kind": "average-hp",
-      "firstLevelMax": false,
-      "rounding": "floor",
-      "constitutionPerLevel": true,
-      "catalogStatus": "resolved",
-      "sourceRef": [
-        {
-          "sourceId": "source.aon-creating-npcs",
-          "section": "Step 7: Details",
-          "txtLines": [103, 106],
-          "printedPages": [454],
-          "entry": "Determine total hit points by assuming the average result",
-          "provenanceStatus": "resolved"
-        },
-        {
-          "sourceId": "source.aon-getting-started",
-          "section": "Rounding; Constitution",
-          "txtLines": [39, 39],
-          "entry": "Always round down",
-          "provenanceStatus": "resolved"
-        },
-        {
-          "sourceId": "source.aon-getting-started",
-          "section": "Constitution",
-          "txtLines": [133, 138],
-          "entry": "Constitution modifier applies to each Hit Die",
-          "provenanceStatus": "resolved"
-        }
-      ]
-    },
-    {
-      "id": "npc-rule.general-feat-slots",
-      "name": "General feat slots",
-      "kind": "general-feat-slots",
-      "levels": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
-      "allowedFeatIds": ["feat.endurance", "feat.improved-initiative", "feat.iron-will", "feat.lightning-reflexes"],
-      "allowedCategories": ["general"],
-      "required": true,
-      "catalogStatus": "resolved",
-      "sourceRef": {
-        "sourceId": "source.aon-character-classes",
-        "section": "Table: Character Advancement and Level-Dependent Bonuses",
-        "txtLines": [19, 40],
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
-        "entry": "Feats",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "npc-rule.class-skill-bonus",
-      "name": "Class skill bonus",
-      "kind": "class-skill-bonus",
-      "value": 3,
-      "catalogStatus": "resolved",
-      "sourceRef": {
-        "sourceId": "source.aon-skills",
-        "section": "Acquiring Skills",
-        "txtLines": [3, 4],
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/usingSkills.html#acquiring-skills",
-        "entry": "Class skill bonus",
-        "provenanceStatus": "resolved"
-      }
-    },
-    {
-      "id": "npc-rule.classed-npc-cr",
-      "name": "Classed NPC challenge rating",
-      "catalogStatus": "resolved",
-      "kind": "classed-npc-cr",
-      "pcClassAdjustment": -1,
-      "npcClassAdjustment": -2,
-      "sourceRef": {
-        "sourceId": "source.aon-designing-encounters",
-        "section": "Adding NPCs",
-        "txtLines": [1, 1],
-        "entry": "Class levels without racial Hit Dice determine NPC CR",
-        "officialUrl": "https://aonprd.com/Rules.aspx?ID=252",
-        "provenanceStatus": "resolved"
-      }
+     "hasFeat": "feat.point-blank-shot"
     }
-  ]
+   ],
+   "sourceRef": {
+    "sourceId": "source.npc-adr",
+    "section": "D7 Evaluation determinism",
+    "txtLines": [],
+    "entry": "Typed prerequisite expressions are required",
+    "provenanceStatus": "product-policy"
+   }
+  },
+  {
+   "id": "npc-rule.ability-increase",
+   "name": "Ability score increases",
+   "kind": "ability-increase",
+   "levels": [
+    4,
+    8,
+    12,
+    16,
+    20
+   ],
+   "amount": 1,
+   "catalogStatus": "resolved",
+   "sourceRef": {
+    "sourceId": "source.aon-character-classes",
+    "section": "Table: Character Advancement and Level-Dependent Bonuses",
+    "txtLines": [
+     19,
+     40
+    ],
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+    "entry": "Ability Score",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "npc-rule.average-hp",
+   "name": "Average NPC hit points",
+   "kind": "average-hp",
+   "firstLevelMax": false,
+   "rounding": "floor",
+   "constitutionPerLevel": true,
+   "catalogStatus": "resolved",
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-creating-npcs",
+     "section": "Step 7: Details",
+     "txtLines": [
+      103,
+      106
+     ],
+     "printedPages": [
+      454
+     ],
+     "entry": "Determine total hit points by assuming the average result",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-getting-started",
+     "section": "Rounding; Constitution",
+     "txtLines": [
+      39,
+      39
+     ],
+     "entry": "Always round down",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-getting-started",
+     "section": "Constitution",
+     "txtLines": [
+      133,
+      138
+     ],
+     "entry": "Constitution modifier applies to each Hit Die",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
+   "id": "npc-rule.general-feat-slots",
+   "name": "General feat slots",
+   "kind": "general-feat-slots",
+   "levels": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    11,
+    13,
+    15,
+    17,
+    19
+   ],
+   "allowedFeatIds": [
+    "feat.endurance",
+    "feat.improved-initiative",
+    "feat.iron-will",
+    "feat.lightning-reflexes",
+    "feat.weapon-finesse"
+   ],
+   "allowedCategories": [
+    "general"
+   ],
+   "required": true,
+   "catalogStatus": "resolved",
+   "sourceRef": {
+    "sourceId": "source.aon-character-classes",
+    "section": "Table: Character Advancement and Level-Dependent Bonuses",
+    "txtLines": [
+     19,
+     40
+    ],
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+    "entry": "Feats",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "npc-rule.class-skill-bonus",
+   "name": "Class skill bonus",
+   "kind": "class-skill-bonus",
+   "value": 3,
+   "catalogStatus": "resolved",
+   "sourceRef": {
+    "sourceId": "source.aon-skills",
+    "section": "Acquiring Skills",
+    "txtLines": [
+     3,
+     4
+    ],
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/usingSkills.html#acquiring-skills",
+    "entry": "Class skill bonus",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "npc-rule.classed-npc-cr",
+   "name": "Classed NPC challenge rating",
+   "catalogStatus": "resolved",
+   "kind": "classed-npc-cr",
+   "pcClassAdjustment": -1,
+   "npcClassAdjustment": -2,
+   "sourceRef": {
+    "sourceId": "source.aon-designing-encounters",
+    "section": "Adding NPCs",
+    "txtLines": [
+     1,
+     1
+    ],
+    "entry": "Class levels without racial Hit Dice determine NPC CR",
+    "officialUrl": "https://aonprd.com/Rules.aspx?ID=252",
+    "provenanceStatus": "resolved"
+   }
+  }
+ ]
 }

@@ -346,7 +346,7 @@ class NpcCreation(CreationSystem):
             "will": row["will"] + modifiers["wisdom"] + feat_saves.get("will", 0) + resistance_bonus + race_saves.get("will", 0),
             "acBreakdown": ac_breakdown,
         }
-        attacks = self._attacks(equipped, bab, modifiers, size_modifiers, race.get("sizeId"))
+        attacks = self._attacks(equipped, bab, modifiers, size_modifiers, race.get("sizeId"), finesse=any(feat.get("featId") == "feat.weapon-finesse" for feat in feats))
         resistances: dict[str, int] = {}
         for feature in class_features:
             for power in feature.get("powers", []):
@@ -1329,7 +1329,7 @@ class NpcCreation(CreationSystem):
     @staticmethod
     def _attacks(
         items: list[dict[str, Any]], bab: int, modifiers: dict[str, int], size_modifiers: dict[str, int],
-        size_id: str | None,
+        size_id: str | None, *, finesse: bool = False,
     ) -> list[dict[str, Any]]:
         attacks = []
         for item in items:
@@ -1341,7 +1341,10 @@ class NpcCreation(CreationSystem):
                 damage_die = effects.get("damageDieBySize", {}).get(size_id.removeprefix("size."))
             if damage_die is None:
                 continue
-            attack_bonus = bab + modifiers["strength"] + size_modifiers.get("attack", 0)
+            # ponytail: Weapon Finesse is 'may use Dex instead of Str', applied only when it helps.
+            finesse_eligible = finesse and (effects.get("lightWeapon") or effects.get("finesseWeapon"))
+            hit_ability = modifiers["dexterity"] if finesse_eligible and modifiers["dexterity"] > modifiers["strength"] else modifiers["strength"]
+            attack_bonus = bab + hit_ability + size_modifiers.get("attack", 0)
             damage_bonus = modifiers["strength"]
             attacks.append({
                 "name": item["name"], "itemId": item["itemId"], "attackBonuses": [attack_bonus],

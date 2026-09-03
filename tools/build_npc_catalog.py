@@ -90,7 +90,7 @@ SOURCE_FILES = (
         "burning-hands", "mage-armor", "magic-missile", "shield", "flaming-sphere", "mirror-image",
         "scorching-ray", "grease", "fireball", "flare", "barkskin", "cure-light-wounds",
         "entangle", "produce-flame", "summon-natures-ally-i", "summon-natures-ally-ii",
-        "charm-person", "sleep",
+        "charm-person", "sleep", "silent-image", "feather-fall",
     )),
 )
 

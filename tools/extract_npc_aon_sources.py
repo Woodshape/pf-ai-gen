@@ -61,7 +61,7 @@ SOURCES = {
             "burning-hands", "mage-armor", "magic-missile", "shield", "flaming-sphere", "mirror-image",
             "scorching-ray", "grease", "fireball", "flare", "barkskin", "cure-light-wounds",
             "entangle", "produce-flame", "summon-natures-ally-i", "summon-natures-ally-ii",
-            "charm-person", "sleep",
+            "charm-person", "sleep", "silent-image", "feather-fall",
         )
     },
     "spell-fireball": ("id", "MainContent_DataListTypes_LabelName_1"),
@@ -69,6 +69,8 @@ SOURCES = {
     "spell-cure-light-wounds": ("heading", "Cure Light Wounds"),
     "spell-charm-person": ("heading", "Charm Person"),
     "spell-sleep": ("heading", "Sleep"),
+    "spell-silent-image": ("heading", "Silent Image"),
+    "spell-feather-fall": ("heading", "Feather Fall"),
     "spell-entangle": ("heading", "Entangle"),
     "spell-produce-flame": ("heading", "Produce Flame"),
     "spell-summon-natures-ally-i": ("heading", "Summon Nature's Ally 1"),
