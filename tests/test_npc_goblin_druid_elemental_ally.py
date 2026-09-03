@@ -336,10 +336,14 @@ class ElementalAllyRequirementsAndExportTests(unittest.TestCase):
             identity_parts = [part for part in (block.get("name"), element_title, f"level {block['level']}") if part]
             self.assertIn(f"## LINKED CREATURE\n{'; '.join(identity_parts)}", markdown)
             section = markdown.split("## LINKED CREATURE", 1)[1]
-            for key in sorted(block):
-                if key in {"archetypeId", "element", "level", "name", "fieldSourceRefs", "sourceRefs"}:
-                    continue
-                self.assertIn(key.rsplit(".", 1)[-1].replace("-", " ").replace("_", " ").title(), section)
+            self.assertIn("Neutral Medium outsider; Speed 30 ft.", section)
+            self.assertIn("Init +1; Senses darkvision 60 ft.", section)
+            self.assertIn("AC 15 (+4 armor, +1 Dex), touch 11, flat-footed 14; hp 19 (3 HD); Fort +4, Ref +2, Will +3", section)
+            self.assertIn("Melee slam +6 (1d8+4)", section)
+            self.assertIn("Str 17, Dex 13, Con 13, Int 7, Wis 10, Cha 11", section)
+            self.assertIn("BAB +3; CMB +6; CMD 17", section)
+            self.assertIn("Skills 12 ranks; Feats 2; Max Attacks 3", section)
+            self.assertIn("Qualities link, share spells, evasion", section)
             html = engine.execute(request("ea-html", "monster.export", {
                 "monsterId": monster["monsterId"], "format": "html",
             }))["result"]["content"]

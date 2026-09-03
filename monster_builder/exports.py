@@ -397,6 +397,7 @@ def _npc_specials(features: Any) -> list[dict[str, Any]]:
 
 
 _LINKED_CREATURE_META = {"archetypeId", "element", "level", "name", "fieldSourceRefs", "sourceRefs"}
+_LINKED_AC_LABELS = {"armor": "armor", "shield": "shield", "dexterity": "Dex", "size": "size"}
 
 
 def _linked_creature_identity(block: Mapping[str, Any]) -> list[str]:
@@ -410,28 +411,112 @@ def _linked_creature_identity(block: Mapping[str, Any]) -> list[str]:
     return identity
 
 
-def _linked_creature_fields(block: Mapping[str, Any]) -> list[dict[str, Any]]:
-    fields = []
-    identity = _linked_creature_identity(block)
-    if identity:
-        fields.append({"key": "identity", "label": "Linked Creature", "value": copy.deepcopy(identity), "text": "; ".join(identity)})
-    for key in sorted(block):
-        if key in _LINKED_CREATURE_META:
-            continue
-        fields.append(_field(key, _human(key), block[key], {}, _value_text(block[key])))
-    return fields
-
-
-def _linked_creature_lines(block: Mapping[str, Any]) -> list[str]:
+def _linked_statblock_lines(block: Mapping[str, Any]) -> list[str]:
+    """Arrange curated linked-creature fields into conventional statblock lines; no recalculation."""
     lines = []
     identity = _linked_creature_identity(block)
     if identity:
         lines.append("; ".join(identity))
-    for key in sorted(block):
-        if key in _LINKED_CREATURE_META:
-            continue
-        lines.append(f"{_human(key)}: {_value_text(block[key])}")
+    second = []
+    if block.get("alignment"):
+        second.append(str(block["alignment"]))
+    if block.get("size"):
+        second.append(_human(block["size"]))
+    if block.get("type"):
+        second.append(str(block["type"]))
+    speed = _speed(block.get("speed"))
+    if second:
+        lines.append(" ".join(second) + (f"; {speed}" if speed else ""))
+    elif speed:
+        lines.append(speed)
+    senses = []
+    if block.get("initiative") is not None:
+        senses.append(f"Init {_signed(block['initiative'])}")
+    if isinstance(block.get("senses"), list) and block["senses"]:
+        senses.append("Senses " + ", ".join(str(value) for value in block["senses"]))
+    if senses:
+        lines.append("; ".join(senses))
+    defense = _linked_defense_line(block)
+    if defense:
+        lines.append(defense)
+    if isinstance(block.get("attacks"), list):
+        for attack in block["attacks"]:
+            if not isinstance(attack, Mapping):
+                continue
+            kind = str(attack.get("attackType", "melee")).title()
+            name = str(attack.get("name", "attack"))
+            count = attack.get("count")
+            bonus = str(attack.get("attackBonus", "")).strip()
+            damage = str(attack.get("damage", "")).strip()
+            text = f"{kind} {count if count not in (None, 1) else ''}{name} {bonus}".replace("  ", " ").strip()
+            if damage:
+                text += f" ({damage})"
+            lines.append(text)
+    if isinstance(block.get("abilities"), Mapping) and block["abilities"]:
+        lines.append(_ability_values(block["abilities"], signed=False))
+    stats = []
+    if block.get("bab") is not None:
+        stats.append(f"BAB {_signed(block['bab'])}")
+    if block.get("cmb") is not None:
+        stats.append(f"CMB {_signed(block['cmb'])}")
+    if block.get("cmd") is not None:
+        stats.append(f"CMD {block['cmd']}")
+    if stats:
+        lines.append("; ".join(stats))
+    budgets = []
+    if block.get("skills") is not None:
+        budgets.append(f"Skills {block['skills']} ranks")
+    if block.get("feats") is not None:
+        budgets.append(f"Feats {block['feats']}")
+    if block.get("maxAttacks") is not None:
+        budgets.append(f"Max Attacks {block['maxAttacks']}")
+    if budgets:
+        lines.append("; ".join(budgets))
+    if isinstance(block.get("qualities"), list) and block["qualities"]:
+        lines.append("Qualities " + ", ".join(str(value) for value in block["qualities"]))
     return lines
+
+
+def _linked_defense_line(block: Mapping[str, Any]) -> str | None:
+    defenses = block.get("defenses")
+    if not isinstance(defenses, Mapping):
+        return None
+    parts = []
+    if defenses.get("ac") is not None:
+        ac = f"AC {defenses['ac']}"
+        if isinstance(defenses.get("acBreakdown"), Mapping) and defenses["acBreakdown"]:
+            ac += f" ({', '.join(f'{_signed(bonus)} {_LINKED_AC_LABELS.get(source, _human(source))}' for source, bonus in defenses['acBreakdown'].items())})"
+        if defenses.get("touch") is not None:
+            ac += f", touch {defenses['touch']}"
+        if defenses.get("flatFooted") is not None:
+            ac += f", flat-footed {defenses['flatFooted']}"
+        parts.append(ac)
+    if defenses.get("hp") is not None:
+        hp = f"hp {defenses['hp']}"
+        if defenses.get("hitDice") is not None:
+            hp += f" ({defenses['hitDice']} HD)"
+        parts.append(hp)
+    elif block.get("hp") is not None:
+        hp = f"hp {block['hp']}"
+        if block.get("hitDice") is not None:
+            hp += f" ({block['hitDice']} HD)"
+        parts.append(hp)
+    saves = [("fortitude", "Fort"), ("reflex", "Ref"), ("will", "Will")]
+    saves_text = ", ".join(f"{label} {_signed(defenses[key])}" for key, label in saves if defenses.get(key) is not None)
+    if saves_text:
+        parts.append(saves_text)
+    return "; ".join(parts) if parts else None
+
+
+def _linked_creature_fields(block: Mapping[str, Any]) -> list[dict[str, Any]]:
+    return [
+        {"key": f"linkedLine{index}", "label": "Linked Creature" if index == 0 else "", "value": line, "text": line}
+        for index, line in enumerate(_linked_statblock_lines(block))
+    ]
+
+
+def _linked_creature_lines(block: Mapping[str, Any]) -> list[str]:
+    return _linked_statblock_lines(block)
 
 
 def _identity(basics: Mapping[str, Any], creation_system: str) -> str:
@@ -547,7 +632,7 @@ def _prepared_spell_lines(spells: Mapping[str, Any]) -> list[str]:
         span = "–".join(_SPELL_LEVEL_NUMERALS[value] for value in dict.fromkeys((levels[:1] + levels[-1:]) if levels else []))
         lines.append(
             f"Spontaneous conversion: prepared spells may become {conversion['name']} {span}"
-            + (" (domain slots excluded)" if conversion.get("excludesDomainSlots") else "")
+            + (" (domain slots excluded)" if conversion.get("excludesDomainSlots") and has_domain else "")
         )
     return lines
 
