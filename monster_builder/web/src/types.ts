@@ -59,9 +59,22 @@ export interface AutomaticSelections {
   options?: AutomaticOption[];
 }
 
+export interface FeatSlot {
+  slotId: string;
+  kind: string;
+  grantedAtLevel: number;
+  required: boolean;
+  allowedCategories?: string[];
+  allowedFeatIds?: string[];
+  sourceRef?: unknown;
+}
+
 export interface SelectionBudgets {
   skills: { master: number | null; good: number | null };
   options?: { categories: Dict<number>; total: number };
+  feats?: { slots: FeatSlot[]; selected: number };
+  spells?: { required: boolean; mode: string; levels?: unknown };
+  gear?: { budgetCp: number | null; categories: unknown; spentCp?: number };
 }
 
 export interface ChoiceRequirement {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import { ChoiceSection } from "../choice-fields";
+import { ChoiceSection, humanize } from "../choice-fields";
 import { CatalogSelect, Field, Select, StepFrame } from "../components";
 import type { AutomaticSelections, ChoiceRequirement, Draft, Evaluation, JsonObject, NpcCatalog, SelectionBudgets } from "../types";
 
@@ -151,41 +151,96 @@ function NpcAbilityStep({ draft, catalog, step, onSave, onBack }: Props) {
   </div></StepFrame>;
 }
 
-function NpcSkillsFeatsStep({ draft, catalog, step, onSave, onBack }: Props) {
+function NpcSkillsFeatsStep({ draft, catalog, step, selectionBudgets, onSave, onBack }: Props) {
   const generation = objectValue(draft.selections.skillGeneration);
   const [method, setMethod] = useState(String(generation.method || "simplified"));
   const [skills, setSkills] = useState<string[]>(Array.isArray(generation.skills) ? generation.skills.filter((value): value is string => typeof value === "string") : []);
-  const [ranks, setRanks] = useState(formatJson(generation.ranks || {}));
-  const [feats, setFeats] = useState(formatJson(draft.selections.feats || []));
+  const storedRanks = objectValue(generation.ranks);
+  const [ranks, setRanks] = useState<JsonObject>(() => Object.fromEntries(Object.entries(storedRanks).map(([skill, rank]) => [skill, String(rank ?? "")])));
+  const selectedFeats = Array.isArray(draft.selections.feats) ? draft.selections.feats.filter((item): item is JsonObject => Boolean(item && typeof item === "object" && typeof (item as JsonObject).slotId === "string")) : [];
+  const [featsBySlot, setFeatsBySlot] = useState<JsonObject>(Object.fromEntries(selectedFeats.map((item) => [String(item.slotId), item.featId ?? ""])));
   const [addSkill, setAddSkill] = useState("");
-  const [error, setError] = useState("");
+  const slots = Array.isArray(selectionBudgets?.feats?.slots) ? selectionBudgets.feats.slots : [];
+  const allFeats = Object.values(catalog.feats || {}).sort((a, b) => a.name.localeCompare(b.name));
   const available = Object.values(catalog.skills).filter((skill) => !skills.includes(skill.id)).sort((a, b) => a.name.localeCompare(b.name));
-  const submit = (next: boolean) => { try { setError(""); onSave({ skillGeneration: { method, skills, ranks: parseJson(ranks, "skill ranks") }, feats: parseJson(feats, "feats") }, {}, next); } catch (caught) { setError(String(caught)); } };
+  const submit = (next: boolean) => {
+    const numericRanks = Object.fromEntries(Object.entries(ranks).filter(([, rank]) => rank !== "" && Number(rank) > 0).map(([skill, rank]) => [skill, Number(rank)]));
+    const feats = slots.filter((slot) => featsBySlot[slot.slotId]).map((slot) => ({ slotId: slot.slotId, featId: featsBySlot[slot.slotId] }));
+    onSave({ skillGeneration: { method, skills, ranks: Object.keys(numericRanks).length ? numericRanks : undefined }, feats: feats.length ? feats : undefined }, {}, next);
+  };
   return <StepFrame step={step} onBack={onBack} onApply={submit}><div class="grid">
     <Select label="Skill method" value={method} onChange={setMethod}><option value="simplified">Simplified skills</option><option value="precise">Precise skill ranks</option></Select>
-    <div class="field"><label>Add simplified skill</label><div class="add-row"><select value={addSkill} onChange={(event) => setAddSkill(event.currentTarget.value)}><option value="">Choose a skill…</option>{available.map((skill) => <option value={skill.id}>{skill.name}</option>)}</select><button type="button" class="btn" disabled={!addSkill} onClick={() => { setSkills([...skills, addSkill]); setAddSkill(""); }}>Add</button></div></div>
-    <div class="field full"><div class="builder-list">{skills.map((id) => <div class="builder-card"><div class="builder-head"><strong>{catalog.skills[id]?.name || id}</strong><button type="button" class="btn small" onClick={() => setSkills(skills.filter((value) => value !== id))}>Remove</button></div></div>)}</div></div>
-    <JsonArea label="Precise skill ranks (JSON object)" value={ranks} onChange={setRanks} full />
-    <JsonArea label="Feat selections (JSON array of {slotId, featId})" value={feats} onChange={setFeats} full />
-  </div>{error && <div class="issue invalid"><p>{error}</p></div>}<p class="hint">The engine supplies automatic class skills, enforces simplified multiclass limits, validates precise rank budgets, and checks feat prerequisites.</p></StepFrame>;
+    {method === "simplified" ? <div class="field"><label>Add simplified skill</label><div class="add-row"><select value={addSkill} onChange={(event) => setAddSkill(event.currentTarget.value)}><option value="">Choose a skill…</option>{available.map((skill) => <option value={skill.id}>{skill.name}</option>)}</select><button type="button" class="btn" disabled={!addSkill} onClick={() => { setSkills([...skills, addSkill]); setAddSkill(""); }}>Add</button></div></div> : <div class="field"><label>Precise skill ranks</label><span class="hint">Set a rank value for each trained skill; the engine validates the class rank budget on review.</span></div>}
+    {method === "simplified" ? <div class="field full"><div class="builder-list">{skills.map((id) => <div class="builder-card"><div class="builder-head"><strong>{catalog.skills[id]?.name || id}</strong><button type="button" class="btn small" onClick={() => setSkills(skills.filter((value) => value !== id))}>Remove</button></div></div>)}</div>{!skills.length && <div class="empty">No simplified skills. Pick from the list to add class skills.</div>}</div>
+      : <section class="field full"><div class="builder-head"><div><span class="label">Skill ranks</span><small>Ranks assigned to skills. Leave 0 for untrained skills.</small></div></div><div class="builder-list">{Object.values(catalog.skills).sort((a, b) => a.name.localeCompare(b.name)).map((skill) => <div class="builder-card"><div class="builder-fields"><div class="field"><label>{skill.name}</label><input type="number" min="0" value={String(ranks[skill.id] ?? "")} onInput={(event) => setRanks((current) => (event.currentTarget.value === "" ? Object.fromEntries(Object.entries(current).filter(([key]) => key !== skill.id)) : { ...current, [skill.id]: event.currentTarget.value }))} /></div></div></div>)}</div></section>}
+    <section class="field full"><div class="builder-head"><div><span class="label">Feats</span><small>{slots.length} feat slot(s). Pick a feat for each; prerequisites are enforced by the engine on review.</small></div></div>
+      <div class="builder-list">{slots.length ? slots.map((slot) => <div class="builder-card" key={slot.slotId}><div class="builder-fields"><div class="field"><label>{humanize(slot.slotId)}</label><select value={String(featsBySlot[slot.slotId] ?? "")} onChange={(event) => setFeatsBySlot((current) => (event.currentTarget.value === "" ? Object.fromEntries(Object.entries(current).filter(([key]) => key !== slot.slotId)) : { ...current, [slot.slotId]: event.currentTarget.value }))}><option value="">Choose a feat…</option>{allFeats.map((feat) => <option value={feat.id} key={feat.id}>{feat.name}</option>)}</select></div></div></div>) : <div class="empty">No feat slots for the current level.</div>}</div>
+    </section>
+  </div><p class="hint">The engine supplies automatic class skills, enforces simplified multiclass limits, validates precise rank budgets, and checks feat prerequisites.</p></StepFrame>;
 }
 
-function NpcSpellsGearStep({ draft, catalog, step, onSave, onBack }: Props) {
-  const [spellText, setSpellText] = useState(formatJson(draft.selections.spellLoadout || {}));
+function NpcSpellsGearStep({ draft, catalog, step, selectionBudgets, onSave, onBack }: Props) {
+  const loadout = objectValue(draft.selections.spellLoadout);
   const profile = objectValue(draft.selections.gearProfile);
+  const classId = Array.isArray(draft.selections.classProgression) && draft.selections.classProgression.length > 0 && typeof (draft.selections.classProgression as JsonObject[])[0]?.classId === "string" ? String((draft.selections.classProgression as JsonObject[])[0].classId) : "";
+  const classKey = classId.replace("npc-class.", "");
+  const isSorcerer = classId === "npc-class.sorcerer";
+  const isDruid = classId === "npc-class.druid";
+  const sections: Array<{ field: string; label: string; hint: string }> = isSorcerer
+    ? [{ field: "known", label: "Spells known", hint: "Choose the spells the sorcerer knows." }]
+    : isDruid
+      ? [{ field: "prepared", label: "Prepared druid spells", hint: "Choose the spells the druid prepares." }, { field: "domainPrepared", label: "Prepared fire-domain spells", hint: "Optional extra domain spells; the engine validates domain membership." }]
+      : [];
   const [progression, setProgression] = useState(String(profile.experienceProgression || "medium"));
   const [fantasy, setFantasy] = useState(String(profile.fantasyLevel || "normal"));
-  const [gearText, setGearText] = useState(formatJson(draft.selections.gear || []));
-  const [error, setError] = useState("");
-  const submit = (next: boolean) => { try { setError(""); onSave({ spellLoadout: parseJson(spellText, "spell loadout"), gearProfile: { experienceProgression: progression, fantasyLevel: fantasy }, gear: parseJson(gearText, "gear") }, {}, next); } catch (caught) { setError(String(caught)); } };
-  const spellCount = Object.keys(catalog.spells).length;
-  const itemCount = Object.keys(catalog.items).length;
+  const gear = Array.isArray(draft.selections.gear) ? draft.selections.gear.filter((item): item is JsonObject => Boolean(item && typeof item === "object" && typeof (item as JsonObject).itemId === "string")) : [];
+  const [gearRows, setGearRows] = useState<Array<{ itemId: string; quantity: string }>>(gear.map((item) => ({ itemId: String(item.itemId), quantity: String(item.quantity ?? 1) })));
+  const [addGear, setAddGear] = useState("");
+  const [addGearQty, setAddGearQty] = useState("1");
+  const gearUsed = new Set(gearRows.map((row) => row.itemId));
+  const gearItems = Object.values(catalog.items || {}).sort((a, b) => a.name.localeCompare(b.name));
+  const spellLevels = Array.from(new Set(Object.values(catalog.spells || {}).map((spell) => Number((spell.levelsByClass as Record<string, number> | undefined)?.[classKey])).filter((level) => Number.isFinite(level))).add(0)).sort((a, b) => a - b);
+  const spellsForLevel = (level: number) => Object.values(catalog.spells || {}).filter((spell) => Number((spell.levelsByClass as Record<string, number> | undefined)?.[classKey]) === level).sort((a, b) => a.name.localeCompare(b.name));
+  const [loadoutRows, setLoadoutRows] = useState<JsonObject>(() => {
+    const result: JsonObject = {};
+    for (const section of sections) {
+      const stored = objectValue(loadout[section.field]);
+      result[section.field] = Object.fromEntries(Object.entries(stored).map(([level, ids]) => [level, Array.isArray(ids) ? ids.filter((id): id is string => typeof id === "string") : []]));
+    }
+    return result;
+  });
+  const [pickers, setPickers] = useState<JsonObject>(() => Object.fromEntries(sections.map((section) => [section.field, {}])));
+  const setLoadout = (field: string, level: string, ids: string[]) => setLoadoutRows((current) => ({ ...current, [field]: { ...objectValue(current[field]), [level]: ids } }));
+  const setPicker = (field: string, level: string, value: string) => setPickers((current) => ({ ...current, [field]: { ...objectValue(current[field]), [level]: value } }));
+  const budget = objectValue(selectionBudgets?.spells?.levels as unknown);
+  const slotCount = (field: string, level: string) => {
+    const entry = budget[level];
+    if (field === "known" && typeof entry === "number") return String(entry);
+    if (entry && typeof entry === "object" && !Array.isArray(entry)) {
+      const slots = entry as JsonObject;
+      return field === "domainPrepared" ? String(slots.domain ?? 0) : String(slots.total ?? "");
+    }
+    return "";
+  };
+  const submit = (next: boolean) => {
+    const spellLoadout = Object.fromEntries(sections.map((section) => [section.field, objectValue(loadoutRows[section.field])]));
+    const cleanedGear = gearRows.filter((row) => row.itemId).map((row) => ({ itemId: row.itemId, quantity: Math.max(1, Number(row.quantity) || 1) }));
+    onSave({ spellLoadout: sections.length ? spellLoadout : undefined, gearProfile: { experienceProgression: progression, fantasyLevel: fantasy }, gear: cleanedGear.length ? cleanedGear : undefined }, {}, next);
+  };
   return <StepFrame step={step} onBack={onBack} onApply={submit}><div class="grid">
-    <JsonArea label={`Spell loadout JSON (${spellCount} catalog entries)`} value={spellText} onChange={setSpellText} full />
+    {sections.length ? sections.map((section) => <section class="field full" key={section.field}><div class="builder-head"><div><span class="label">{section.label}</span><small>{section.hint}</small></div></div><div class="builder-list">{spellLevels.map((level) => {
+      const ids = (objectValue(loadoutRows[section.field])[String(level)] || []) as string[];
+      const chosen = String(objectValue(pickers[section.field])[String(level)] ?? "");
+      const slots = slotCount(section.field, String(level));
+      return <div class="builder-card" key={level}><div class="builder-head"><div><strong>Level {level}</strong><small>{ids.length} chosen{slots ? ` · ${slots} slot(s)` : ""}</small></div></div><div class="add-row"><select value={String(chosen)} onChange={(event) => setPicker(section.field, String(level), event.currentTarget.value)}><option value="">Choose a level-{level} spell…</option>{spellsForLevel(level).filter((spell) => !ids.includes(spell.id)).map((spell) => <option value={spell.id} key={spell.id}>{spell.name}</option>)}</select><button type="button" class="btn" disabled={!chosen} onClick={() => { if (!chosen) return; setLoadout(section.field, String(level), [...ids, chosen]); setPicker(section.field, String(level), ""); }}>Add</button></div><div class="builder-list">{ids.map((id) => <div class="builder-card" key={id}><div class="builder-head"><div><strong>{catalog.spells[id]?.name || id}</strong></div><button type="button" class="btn small" onClick={() => setLoadout(section.field, String(level), ids.filter((value) => value !== id))}>Remove</button></div></div>)}</div></div>;
+    })}</div></section>) : <div class="empty">The current class has no source-backed spell list; the loadout stays empty.</div>}
     <Select label="Experience progression" value={progression} onChange={setProgression}><option value="slow">Slow</option><option value="medium">Medium</option><option value="fast">Fast</option></Select>
     <Select label="Fantasy level" value={fantasy} onChange={setFantasy}><option value="low">Low</option><option value="normal">Normal</option><option value="high">High</option></Select>
-    <JsonArea label={`Gear selections JSON (${itemCount} catalog entries)`} value={gearText} onChange={setGearText} full />
-  </div>{error && <div class="issue invalid"><p>{error}</p></div>}<p class="hint">Use an empty spell loadout for noncasters. Gear prices, effects, category budgets, and copper-piece totals come from the NPC catalog only.</p></StepFrame>;
+    <section class="field full"><div class="builder-head"><div><span class="label">Gear</span><small>{gearItems.length} catalog items. Prices and category budgets come from the gear profile.</small></div></div>
+      <div class="add-row"><select value={addGear} onChange={(event) => setAddGear(event.currentTarget.value)}><option value="">Choose an item…</option>{gearItems.filter((item) => !gearUsed.has(item.id)).map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}</select><input type="number" min="1" value={addGearQty} onInput={(event) => setAddGearQty(event.currentTarget.value)} /><button type="button" class="btn primary" disabled={!addGear} onClick={() => { if (!addGear) return; setGearRows((current) => [...current, { itemId: addGear, quantity: addGearQty || "1" }]); setAddGear(""); setAddGearQty("1"); }}>Add</button></div>
+      <div class="builder-list">{gearRows.length ? gearRows.map((row, index) => <div class="builder-card" key={`${row.itemId}-${index}`}><div class="builder-fields"><div class="field"><label>Item</label><span class="hint">{catalog.items[row.itemId]?.name || row.itemId}</span></div><div class="field"><label>Quantity</label><input type="number" min="1" value={row.quantity} onInput={(event) => setGearRows((current) => current.map((item, itemIndex) => itemIndex === index ? { ...item, quantity: event.currentTarget.value } : item))} /></div></div><button type="button" class="btn small" onClick={() => setGearRows((current) => current.filter((_, itemIndex) => itemIndex !== index))}>Remove</button></div>) : <div class="empty">No gear. Add catalog items with quantities.</div>}</div>
+    </section>
+  </div><p class="hint">Use an empty spell loadout for noncasters. Gear prices, effects, category budgets, and copper-piece totals come from the NPC catalog only.</p></StepFrame>;
 }
 
 function NpcReviewStep({ draft, evaluation, choiceRequirements, automaticSelections, selectionBudgets, step, onSave, onBack }: Props) {
