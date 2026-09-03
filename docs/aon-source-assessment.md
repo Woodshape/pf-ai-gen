@@ -5,7 +5,9 @@
 Archives of Nethys is sufficient for the planned Core-only class-based NPC
 system. A full Core Rulebook PDF is not currently needed. The human warrior
 levels 1–5 and elemental-fire goblin Sorcerer levels 5–6 are fully
-source-backed by local, hash-anchored AoN snapshots.
+source-backed by local, hash-anchored AoN snapshots. This bounded production
+milestone closed on 2026-09-02 after Cinder's Markdown and browser export
+acceptance passed; Phase 3–5 catalog breadth remains out of scope.
 
 Builds must consume the local snapshots, not live HTTP responses. Raw pages and
 their SHA-256 hashes are recorded in `sources/npc/MANIFEST.json`; normalized

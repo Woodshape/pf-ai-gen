@@ -1,9 +1,5 @@
 # Detailed Plan: Class-Based NPC Creation System
 
-## Milestone status — closed 2026-09-02
-
-The bounded production milestone is complete: human Warriors levels 1–5 and elemental-fire goblin Sorcerers levels 5–6 can be created, evaluated, finalized, reloaded, and exported through the public engine. Markdown and browser export acceptance passed for Cinder at Sorcerer 6 / CR 5. The remaining Phase 3–5 catalog breadth stays explicitly out of scope for this milestone.
-
 ## 1. Decisions and terminology
 
 ### Use `creationSystem`, not `mode`
