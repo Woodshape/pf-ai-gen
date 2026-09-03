@@ -207,6 +207,7 @@ class CatalogCompletenessTests(unittest.TestCase):
         kinds = [record["kind"] for record in features.values()]
         self.assertEqual(kinds.count("feat-slot"), 6)
         self.assertEqual(kinds.count("choice-slot"), 11)
+        self.assertEqual(kinds.count("archetype"), 1)
         self.assertEqual(kinds.count("automatic"), 12)
         resolved = {record_id for record_id, record in features.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
@@ -216,7 +217,7 @@ class CatalogCompletenessTests(unittest.TestCase):
             "npc-class-feature.druidic", "npc-class-feature.druid-nature-sense", "npc-class-feature.druid-wild-empathy",
             "npc-class-feature.druid-woodland-stride", "npc-class-feature.druid-trackless-step",
             "npc-class-feature.druid-proficiencies", "npc-class-feature.druid-orisons",
-            "npc-class-feature.fire-domain",
+            "npc-class-feature.fire-domain", "npc-class-feature.druid-elemental-ally",
         })
 
     def test_thirty_five_core_skills_keep_slice_selection_resolved(self):

@@ -12,8 +12,12 @@ of Nethys pages for the Phase 2 rules are now archived and hash-anchored under
 Source acquisition does not silently resolve the scaffold: records keep
 `catalogStatus: "gap"` until a parser or curated fragment supplies exact values
 and line-level `sourceRef` provenance. The current resolved slices are human
-warrior levels 1–5, an elemental-fire goblin Sorcerer at levels 5–6, and a
-Fire-domain goblin Druid at level 3 (prepared divine casting). The fixture's
+warrior levels 1–5, an elemental-fire goblin Sorcerer at levels 5–6, a
+Fire-domain goblin Druid at level 3 (prepared divine casting), and a
+goblin Druid at level 3 with the Elemental Ally archetype (Monster Summoner's
+Handbook pg. 16) and its linked level-3 fire elemental eidolon row (unchained
+eidolon rules, Elemental subtype, Quadruped base form; see
+`docs/elemental-ally-source-assessment.md`). The fixture's
 four selected Druid skills are resolved; unselected class-skill records such as
 Perception remain gaps even where their source table is already archived.
 Everything outside those bounded slices remains a gap.
@@ -37,7 +41,7 @@ records these as `emptySections` instead of guessing.
 | `ability-arrays.fragment.json` | 2 (basic, heroic) | resolved |
 | `races.fragment.json` | 8 races | human and goblin resolved |
 | `classes.fragment.json` | 16 classes (5 NPC + 11 PC) × levels 1–20 | warrior levels 1–5, Sorcerer levels 1–6, and Druid level 3 resolved |
-| `class-features.fragment.json` | 21 feat-slot, choice-slot, and automatic kinds | bounded warrior, Sorcerer, and Druid features resolved |
+| `class-features.fragment.json` | 22 feat-slot, choice-slot, archetype, and automatic kinds | bounded warrior, Sorcerer, and Druid features plus the Elemental Ally archetype with its level-3 fire eidolon row resolved |
 | `skills.fragment.json` | 35 Core skills | slice selections resolved |
 | `feats.fragment.json` | 142 Core feats | slice selections resolved |
 | `items.fragment.json` | 65 items | slice selections resolved |

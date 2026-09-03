@@ -32,6 +32,8 @@ curated fragment gives it an anchored `sourceRef`.
 | 15 | Bestiary Table 1-1 benchmark | Future comparison | `sources/npc/bestiary.table-1-1.txt` | **anchored** | Comparison-only; never used to compute NPC statistics. |
 | 16 | Kiramor worked example | Acceptance fixture | `aonprd/creating-npcs.txt` lines 109–133 | **anchored** | The printed values now have a primary-source anchor. Keep the computed and printed oracles distinct where they disagree. |
 | 17 | Errata affecting Kiramor or this printing | Kiramor acceptance | No errata snapshot | **GAP** | Do not invent hidden bonuses or silently normalize printed discrepancies. Add matching official errata only if a discrepancy needs adjudication. |
+| 18 | Elemental Ally druid archetype (Monster Summoner's Handbook pg. 16) | Bounded Druid 3 archetype slice | `aonprd/elemental-ally.txt` lines 1–16 | **anchored** | The archetype exists on official AoN and is hash-anchored. It replaces Nature Bond and Wild Shape (`:7`), Wild Empathy via Elemental Empathy (`:8-11`), and Resist Nature's Lure at 4th (`:13`). Druid 3 resolves Nature Bond and Wild Empathy only; Wild Shape and Resist Nature's Lure are level-4 replacements and stay unresolved. Other archetypes remain gaps. |
+| 19 | Elemental eidolon statistics cited by Elemental Ally (Pathfinder Unchained pg. 33) | Level-3 fire elemental eidolon row | `aonprd/eidolon-unchained.txt` lines 1–46; `aonprd/eidolon-uc-subtypes.txt` lines 1–12; `aonprd/eidolon-base-forms.txt` lines 1–3 | **anchored** | Table 1–6 row 3rd, the Elemental subtype (PFU pg. 33), and the Quadruped base form are anchored. Exactly the level-3 fire row with the pinned Quadruped form is resolved (`docs/elemental-ally-source-assessment.md`); other levels, elements, and base forms remain gaps. Eidolon skill ranks (12) and feats (2) are sourced budgets without pinned assignments. |
 
 ## Rulings binding downstream tasks
 
@@ -45,6 +47,7 @@ curated fragment gives it an anchored `sourceRef`.
    available from official AoN pages and can be archived phase-by-phase; no full
    Core Rulebook PDF is currently required.
 5. **Production remains deliberately bounded.** The source-resolved slices are
-   human warrior levels 1–5, the elemental-fire goblin Sorcerer at levels 5–6, and
-   the Fire-domain goblin Druid at level 3;
-   broader races, classes, spells, and magic items remain explicit gaps.
+   human warrior levels 1–5, the elemental-fire goblin Sorcerer at levels 5–6, the
+   Fire-domain goblin Druid at level 3, and the Elemental Ally goblin Druid at level 3
+   with its linked level-3 fire elemental eidolon;
+   broader races, classes, spells, magic items, and eidolon levels remain explicit gaps.

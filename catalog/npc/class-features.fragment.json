@@ -736,6 +736,626 @@
           "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Produce%20Flame"
         }
       ]
+    },
+    {
+      "id": "npc-class-feature.druid-elemental-ally",
+      "name": "Elemental Ally",
+      "kind": "archetype",
+      "classId": "npc-class.druid",
+      "catalogStatus": "resolved",
+      "replaces": ["npc-class-feature.druid-nature-bond", "npc-class-feature.druid-wild-empathy", "npc-class-feature.druid-wild-shape", "npc-class-feature.druid-resist-natures-lure"],
+      "linkedCreatureRow": {
+        "catalogStatus": "resolved",
+        "level": 3,
+        "element": "fire",
+        "name": "Fire Elemental Eidolon",
+        "fields": {
+          "abilities": {
+            "value": {
+              "strength": 15,
+              "dexterity": 15,
+              "constitution": 13,
+              "intelligence": 7,
+              "wisdom": 10,
+              "charisma": 11
+            },
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Quadruped",
+                "txtLines": [3, 3],
+                "entry": "Quadruped starting ability scores",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [8, 8],
+                "entry": "Str/Dex Bonus +1 at 3rd",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [33, 33],
+                "entry": "Str/Dex Bonus applied to Strength and Dexterity",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-getting-started",
+                "section": "Rounding; Ability Modifiers",
+                "txtLines": [89, 101],
+                "entry": "Ability modifier +2 at score 15",
+                "provenanceStatus": "resolved"
+              }
+            ]
+          },
+          "alignment": {
+            "value": "Neutral",
+            "sourceRef": {
+              "sourceId": "source.aon-eidolon-uc-subtypes",
+              "section": "Elemental",
+              "txtLines": [4, 4],
+              "entry": "Elemental eidolon alignment",
+              "provenanceStatus": "resolved",
+              "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
+            }
+          },
+          "attacks": {
+            "value": [
+              {
+                "name": "bite",
+                "attackType": "melee",
+                "attackBonus": "+5",
+                "damage": "1d6+3",
+                "notes": "sole natural attack adds 1-1/2 Strength bonus"
+              }
+            ],
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Quadruped",
+                "txtLines": [3, 3],
+                "entry": "Quadruped bite (1d6) and Strength 14",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [8, 8],
+                "entry": "3rd-row BAB +3",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [33, 33],
+                "entry": "Str/Dex Bonus applied to Strength",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-getting-started",
+                "section": "Rounding; Ability Modifiers",
+                "txtLines": [89, 101],
+                "entry": "Strength modifier +2 at score 15",
+                "provenanceStatus": "resolved"
+              },
+              {
+                "sourceId": "source.aon-combat",
+                "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
+                "txtLines": [195, 195],
+                "entry": "Natural attacks use full attack bonus; one natural attack adds 1-1/2 Strength bonus to damage",
+                "provenanceStatus": "resolved"
+              }
+            ]
+          },
+          "bab": {
+            "value": 3,
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [8, 8],
+                "entry": "3rd-row BAB +3",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [28, 28],
+                "entry": "Eidolon BAB equals its Hit Dice",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              }
+            ]
+          },
+          "cmd": {
+            "value": 17,
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-combat",
+                "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
+                "txtLines": [543, 544],
+                "entry": "CMD = 10 + BAB + Strength + Dexterity + size (Medium +0)",
+                "provenanceStatus": "resolved"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [8, 8],
+                "entry": "3rd-row BAB +3",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Quadruped",
+                "txtLines": [3, 3],
+                "entry": "Quadruped Strength and Dexterity",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [33, 33],
+                "entry": "Str/Dex Bonus applied to both scores",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-getting-started",
+                "section": "Rounding; Ability Modifiers",
+                "txtLines": [89, 101],
+                "entry": "Modifiers +2 at score 15",
+                "provenanceStatus": "resolved"
+              }
+            ]
+          },
+          "cmb": {
+            "value": 5,
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-combat",
+                "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
+                "txtLines": [539, 540],
+                "entry": "CMB = BAB + Strength modifier + size (Medium +0)",
+                "provenanceStatus": "resolved"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [8, 8],
+                "entry": "3rd-row BAB +3",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Quadruped",
+                "txtLines": [3, 3],
+                "entry": "Quadruped Strength",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [33, 33],
+                "entry": "Str/Dex Bonus applied to Strength",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-getting-started",
+                "section": "Rounding; Ability Modifiers",
+                "txtLines": [89, 101],
+                "entry": "Strength modifier +2 at score 15",
+                "provenanceStatus": "resolved"
+              }
+            ]
+          },
+          "defenses": {
+            "value": {
+              "ac": 16,
+              "touch": 12,
+              "flatFooted": 14,
+              "fortitude": 4,
+              "reflex": 5,
+              "will": 1,
+              "acBreakdown": {
+                "armor": 4,
+                "dexterity": 2
+              }
+            },
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [8, 8],
+                "entry": "3rd row: armor bonus +2, good saves +3, bad save +1",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [29, 29],
+                "entry": "Two good saves and one bad save per base form",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [32, 32],
+                "entry": "Armor bonus modified by the base form",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [33, 33],
+                "entry": "Str/Dex Bonus applied to Dexterity",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Quadruped",
+                "txtLines": [3, 3],
+                "entry": "Quadruped: +2 natural armor, Fort good, Ref good, Will bad; Con 13, Dex 14, Wis 10",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+              },
+              {
+                "sourceId": "source.aon-getting-started",
+                "section": "Rounding; Ability Modifiers",
+                "txtLines": [89, 101],
+                "entry": "Modifiers +2 at 15 and +1 at 13",
+                "provenanceStatus": "resolved"
+              },
+              {
+                "sourceId": "source.aon-combat",
+                "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
+                "txtLines": [35, 41],
+                "entry": "AC = 10 + armor + shield + Dexterity + other modifiers; natural armor adds to AC",
+                "provenanceStatus": "resolved"
+              }
+            ]
+          },
+          "feats": {
+            "value": 2,
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [8, 8],
+                "entry": "3rd-row feats 2",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [31, 31],
+                "entry": "Total feats possessed by the eidolon",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              }
+            ]
+          },
+          "hitDice": {
+            "value": 3,
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [8, 8],
+                "entry": "3rd-row HD 3",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [27, 27],
+                "entry": "d10 Hit Dice gaining the Constitution modifier each",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              }
+            ]
+          },
+          "hp": {
+            "value": 19,
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [8, 8],
+                "entry": "3rd-row HD 3",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [27, 27],
+                "entry": "d10 Hit Dice + Constitution modifier each",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Quadruped",
+                "txtLines": [3, 3],
+                "entry": "Quadruped Con 13 (+1 modifier)",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+              },
+              {
+                "sourceId": "source.aon-getting-started",
+                "section": "Rounding; Ability Modifiers",
+                "txtLines": [39, 39],
+                "entry": "Round down (3 x 5.5 + 3 = 19.5)",
+                "provenanceStatus": "resolved"
+              }
+            ]
+          },
+          "initiative": {
+            "value": 2,
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-combat",
+                "section": "Combat Statistics; Natural Attacks; Combat Maneuvers",
+                "txtLines": [13, 13],
+                "entry": "Initiative check adds the Dexterity modifier",
+                "provenanceStatus": "resolved"
+              },
+              {
+                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Quadruped",
+                "txtLines": [3, 3],
+                "entry": "Quadruped Dex 14",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [33, 33],
+                "entry": "Str/Dex Bonus applied to Dexterity",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-getting-started",
+                "section": "Rounding; Ability Modifiers",
+                "txtLines": [89, 101],
+                "entry": "Dexterity modifier +2 at score 15",
+                "provenanceStatus": "resolved"
+              }
+            ]
+          },
+          "maxAttacks": {
+            "value": 3,
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [8, 8],
+                "entry": "3rd-row max. attacks 3",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [35, 35],
+                "entry": "Maximum natural attacks at the given level",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              }
+            ]
+          },
+          "qualities": {
+            "value": ["link", "share spells", "evasion", "immunity to paralysis and sleep", "immunity (fire) evolution", "cannot wear armor"],
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [38, 40],
+                "entry": "Link, share spells, evasion specials",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [32, 32],
+                "entry": "An eidolon cannot wear armor of any kind",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-uc-subtypes",
+                "section": "Elemental",
+                "txtLines": [7, 7],
+                "entry": "1st level: immunity to paralysis and sleep; fire gains the immunity (fire) evolution",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
+              }
+            ]
+          },
+          "senses": {
+            "value": ["darkvision 60 ft."],
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [37, 37],
+                "entry": "Darkvision 60 feet special",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              }
+            ]
+          },
+          "size": {
+            "value": "Medium",
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Quadruped",
+                "txtLines": [3, 3],
+                "entry": "Quadruped starting size Medium",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+              }
+            ]
+          },
+          "skills": {
+            "value": 12,
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [8, 8],
+                "entry": "3rd-row skills 12",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [30, 30],
+                "entry": "Total skill ranks; rank cap and assignment rules",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              },
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [46, 46],
+                "entry": "Eidolon class skills and four chosen class skills",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              }
+            ]
+          },
+          "speed": {
+            "value": {
+              "land": 40
+            },
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-eidolon-base-forms",
+                "section": "Quadruped",
+                "txtLines": [3, 3],
+                "entry": "Quadruped speed 40 ft.",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+              }
+            ]
+          },
+          "type": {
+            "value": "outsider",
+            "sourceRef": [
+              {
+                "sourceId": "source.aon-eidolon-unchained",
+                "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+                "txtLines": [3, 3],
+                "entry": "Eidolons are outsiders",
+                "provenanceStatus": "resolved",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+              }
+            ]
+          }
+        },
+        "sourceRef": [
+          {
+            "sourceId": "source.aon-elemental-ally",
+            "section": "Elemental Ally",
+            "txtLines": [4, 6],
+            "entry": "Elemental eidolons at summoner level = druid level, no evolution pool",
+            "provenanceStatus": "resolved",
+            "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
+          },
+          {
+            "sourceId": "source.aon-eidolon-uc-subtypes",
+            "section": "Elemental",
+            "txtLines": [5, 7],
+            "entry": "Elemental base forms and 1st-level fire base evolutions",
+            "provenanceStatus": "resolved",
+            "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
+          },
+          {
+            "sourceId": "source.aon-eidolon-base-forms",
+            "section": "Quadruped",
+            "txtLines": [3, 3],
+            "entry": "Quadruped base form pinned by the curated slice",
+            "provenanceStatus": "resolved",
+            "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx"
+          },
+          {
+            "sourceId": "source.aon-eidolon-unchained",
+            "section": "Eidolon (Unchained); Table 1-6 Eidolon Base Statistics",
+            "txtLines": [5, 8],
+            "entry": "Table 1-6 3rd-level base statistics row",
+            "provenanceStatus": "resolved",
+            "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)"
+          }
+        ]
+      },
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-elemental-ally",
+          "section": "Elemental Ally",
+          "txtLines": [1, 2],
+          "entry": "Elemental Ally archetype; Monster Summoner's Handbook pg. 16",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
+        },
+        {
+          "sourceId": "source.aon-elemental-ally",
+          "section": "Elemental Ally",
+          "txtLines": [4, 7],
+          "entry": "Elemental Eidolons replaces Nature Bond and Wild Shape",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
+        },
+        {
+          "sourceId": "source.aon-elemental-ally",
+          "section": "Elemental Ally",
+          "txtLines": [8, 11],
+          "entry": "Elemental Empathy replaces Wild Empathy",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
+        },
+        {
+          "sourceId": "source.aon-elemental-ally",
+          "section": "Elemental Ally",
+          "txtLines": [13, 13],
+          "entry": "Elemental Resistance at 4th level replaces Resist Nature's Lure",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally"
+        },
+        {
+          "sourceId": "source.aon-eidolon-uc-subtypes",
+          "section": "Elemental",
+          "txtLines": [2, 2],
+          "entry": "Elemental subtype source: Pathfinder Unchained pg. 33",
+          "provenanceStatus": "resolved",
+          "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx"
+        }
+      ]
     }
   ]
 }

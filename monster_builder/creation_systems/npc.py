@@ -19,7 +19,7 @@ COMPUTED_FIELDS = {
     "level", "totalLevel", "npcCategory", "abilityScores", "abilityModifiers", "hp", "bab",
     "defenses", "initiative", "attacks", "cmb", "cmd", "skills", "speed", "senses", "languages",
     "size", "classFeatures", "spells", "gearBudget", "canonical", "effective", "derivationTrace",
-    "evaluation", "cr", "ac", "fortitude", "reflex", "will",
+    "evaluation", "cr", "ac", "fortitude", "reflex", "will", "linkedCreature",
 }
 
 
@@ -72,7 +72,7 @@ class NpcCreation(CreationSystem):
     selection_fields = frozenset({
         "statblockUse", "raceId", "racialChoices", "classProgression", "abilityGeneration",
         "levelIncreases", "skillGeneration", "feats", "classFeatureChoices", "spellLoadout",
-        "gearProfile", "gear", "details",
+        "gearProfile", "gear", "details", "archetypeId",
     })
     computed_selection_fields = frozenset(COMPUTED_FIELDS)
 
@@ -105,15 +105,20 @@ class NpcCreation(CreationSystem):
         class_row = (class_record or {}).get("levels", {}).get(str(level), {})
         spell_counts = copy.deepcopy(class_row.get("spellsKnown", {}))
         druid_slots: dict[str, dict[str, int]] = {}
+        archetype_id = selections.get("archetypeId")
+        archetype_selected = isinstance(archetype_id, str) and bool(archetype_id)
         if class_record and class_record.get("id") == "npc-class.druid":
             wisdom = self._preview_ability(selections, race, "wisdom", divine_allowed=True)
-            fire_domain = self._optional("classFeature", "npc-class-feature.fire-domain")
-            if wisdom is not None and fire_domain:
+            fire_domain = None if archetype_selected else self._optional("classFeature", "npc-class-feature.fire-domain")
+            if wisdom is not None and (fire_domain or archetype_selected):
                 wisdom_modifier = _ability_modifier(wisdom)
                 for spell_level, base in class_row.get("spellsPerDay", {}).items():
                     numeric_level = int(spell_level)
                     wisdom_bonus = _bonus_spell_count(wisdom_modifier, numeric_level)
-                    domain = fire_domain["slotsPerSpellLevel"] if numeric_level > 0 else 0
+                    if archetype_selected:
+                        domain = 0
+                    else:
+                        domain = fire_domain["slotsPerSpellLevel"] if numeric_level > 0 else 0
                     druid_slots[spell_level] = {
                         "base": base, "wisdomBonus": wisdom_bonus, "domain": domain,
                         "total": base + wisdom_bonus + domain,
@@ -155,17 +160,18 @@ class NpcCreation(CreationSystem):
                 "/selections/spellLoadout/known", "Spells known", "spell-loadout"
             ))
         elif class_record and class_record["id"] == "npc-class.druid":
-            requirements.extend((
-                self._requirement(
-                    "/selections/classFeatureChoices/natureBond", "Nature Bond", "enum", ["fire-domain"]
-                ),
-                self._requirement(
-                    "/selections/spellLoadout/prepared", "Prepared Druid spells", "spell-loadout"
-                ),
-                self._requirement(
-                    "/selections/spellLoadout/domainPrepared", "Prepared Fire-domain spells", "spell-loadout"
-                ),
+            requirements.append(self._requirement(
+                "/selections/spellLoadout/prepared", "Prepared Druid spells", "spell-loadout"
             ))
+            if not archetype_selected:
+                requirements.extend((
+                    self._requirement(
+                        "/selections/classFeatureChoices/natureBond", "Nature Bond", "enum", ["fire-domain"]
+                    ),
+                    self._requirement(
+                        "/selections/spellLoadout/domainPrepared", "Prepared Fire-domain spells", "spell-loadout"
+                    ),
+                ))
 
         selected_skills = selections.get("skillGeneration", {}).get("skills", []) if isinstance(selections.get("skillGeneration"), dict) else []
         selected_feats = selections.get("feats", []) if isinstance(selections.get("feats"), list) else []
@@ -207,7 +213,7 @@ class NpcCreation(CreationSystem):
     @staticmethod
     def creation_decisions(selections: dict[str, Any], trace: list[dict[str, Any]]) -> list[dict[str, Any]]:
         fields = (
-            (1, ("statblockUse", "raceId", "racialChoices", "classProgression")),
+            (1, ("statblockUse", "raceId", "racialChoices", "classProgression", "archetypeId")),
             (2, ("abilityGeneration", "levelIncreases")),
             (3, ("skillGeneration",)),
             (4, ("feats",)),
@@ -278,6 +284,9 @@ class NpcCreation(CreationSystem):
             return self._evaluation("invalid", mode, issues)
 
         class_record, row = class_records[0], rows[0]
+        archetype_id = selections.get("archetypeId")
+        archetype, archetype_issues = self._archetype(selections, race, class_record, total_level)
+        issues.extend(archetype_issues)
         scores, ability_refs, ability_issues = self._abilities(selections, race, total_level, class_record)
         issues.extend(ability_issues)
         if not scores:
@@ -290,10 +299,14 @@ class NpcCreation(CreationSystem):
         skills, skill_refs, skill_issues = self._skills(selections, race, class_record, total_level, scores, gear_result)
         issues.extend(skill_issues)
         modifiers = {ability: _ability_modifier(score) for ability, score in scores.items()}
-        class_features, feature_refs, feature_issues = self._selected_class_features(selections, race, class_record, total_level, modifiers)
+        class_features, feature_refs, feature_issues = self._selected_class_features(selections, race, class_record, total_level, modifiers, archetype)
         issues.extend(feature_issues)
-        spells, spell_refs, spell_issues = self._spells(selections, class_record, row, total_level, scores, modifiers)
+        spells, spell_refs, spell_issues = self._spells(selections, class_record, row, total_level, scores, modifiers, archetype_id=archetype_id, archetype=archetype)
         issues.extend(spell_issues)
+        linked_creature, linked_refs, linked_issues = None, [], []
+        if archetype is not None:
+            linked_creature, linked_refs, linked_issues = self._linked_creature(archetype, total_level)
+            issues.extend(linked_issues)
         if issues:
             return self._evaluation("invalid", mode, issues, warnings)
 
@@ -380,6 +393,7 @@ class NpcCreation(CreationSystem):
             "skills": skills,
             "feats": feats,
             "classFeatures": class_features,
+            **({"linkedCreature": linked_creature} if linked_creature is not None else {}),
             "spells": spells,
             "gearBudget": gear_result["budget"],
             "gear": gear_result["items"],
@@ -396,6 +410,20 @@ class NpcCreation(CreationSystem):
             "resistances": resistances,
             "details": copy.deepcopy(selections.get("details", {})),
         }
+        if class_record["id"] == "npc-class.druid":
+            feature_calculation = (
+                "apply cumulative Druid features and derive Fire Bolt damage, uses, and attack bonus"
+                if archetype is None
+                else f"apply Druid features with the {archetype['name']} archetype replacing Nature Bond"
+            )
+            spell_calculation = (
+                "validate prepared and Wisdom-bonus slots; apply caster level, save DCs, and spontaneous conversion"
+                if archetype is not None
+                else "validate prepared, Wisdom-bonus, and Fire-domain slots; apply caster level, save DCs, and spontaneous conversion"
+            )
+        else:
+            feature_calculation = "apply automatic features and selected class-feature options"
+            spell_calculation = "validate spells known, add bloodline spells, and apply Charisma bonus spells"
         trace = [
             self._trace("/canonical/level", total_level, "sum selected class levels", class_refs),
             *([self._trace("/canonical/cr", cr, "PC class levels − 1", source_groups["cr"])] if cr is not None else []),
@@ -417,16 +445,19 @@ class NpcCreation(CreationSystem):
             self._trace("/canonical/feats", feats, "fill granted feat slots", feat_refs),
             self._trace(
                 "/canonical/classFeatures", class_features,
-                "apply cumulative Druid features and derive Fire Bolt damage, uses, and attack bonus"
-                if class_record["id"] == "npc-class.druid"
-                else "apply automatic features and selected class-feature options",
+                feature_calculation,
                 source_groups["features"],
             ),
+            *([
+                self._trace(
+                    "/canonical/linkedCreature", linked_creature,
+                    f"project the curated {archetype['name']} level-{linked_creature['level']} linked creature row",
+                    linked_refs,
+                )
+            ] if linked_creature is not None else []),
             self._trace(
                 "/canonical/spells", spells,
-                "validate prepared, Wisdom-bonus, and Fire-domain slots; apply caster level, save DCs, and spontaneous conversion"
-                if class_record["id"] == "npc-class.druid"
-                else "validate spells known, add bloodline spells, and apply Charisma bonus spells",
+                spell_calculation,
                 source_groups["spells"],
             ),
             self._trace("/canonical/gearBudget", gear_result["budget"], "read the NPC category and level row from Table 14-9", gear_refs),
@@ -441,6 +472,8 @@ class NpcCreation(CreationSystem):
             raise BoundaryError("selection.value-invalid", "statblockUse must be full or encounter", "/selections/statblockUse")
         if "raceId" in selections and not isinstance(selections["raceId"], str):
             raise BoundaryError("selection.type-invalid", "raceId must be a string", "/selections/raceId")
+        if "archetypeId" in selections and (not isinstance(selections["archetypeId"], str) or not selections["archetypeId"]):
+            raise BoundaryError("selection.type-invalid", "archetypeId must be a non-empty string", "/selections/archetypeId")
         for field in ("racialChoices", "classFeatureChoices", "spellLoadout", "details"):
             if field in selections and not isinstance(selections[field], dict):
                 raise BoundaryError("selection.type-invalid", f"{field} must be an object", f"/selections/{field}")
@@ -555,7 +588,10 @@ class NpcCreation(CreationSystem):
                         raise BoundaryError("selection.type-invalid", f"{field} must be an array of IDs", f"{path}/{field}")
 
     def _validate_ids(self, selections: dict[str, Any]) -> None:
-        lookups: list[tuple[str, Any, str]] = [("race", selections.get("raceId"), "/selections/raceId")]
+        lookups: list[tuple[str, Any, str]] = [
+            ("race", selections.get("raceId"), "/selections/raceId"),
+            ("classFeature", selections.get("archetypeId"), "/selections/archetypeId"),
+        ]
         ability = selections.get("abilityGeneration", {})
         lookups.append(("abilityArray", ability.get("arrayId") if isinstance(ability, dict) else None, "/selections/abilityGeneration/arrayId"))
         for index, item in enumerate(selections.get("classProgression", [])):
@@ -693,7 +729,8 @@ class NpcCreation(CreationSystem):
         return results, refs, issues
 
     def _selected_class_features(
-        self, selections: dict[str, Any], race: dict[str, Any], class_record: dict[str, Any], level: int, modifiers: dict[str, int]
+        self, selections: dict[str, Any], race: dict[str, Any], class_record: dict[str, Any], level: int, modifiers: dict[str, int],
+        archetype: dict[str, Any] | None = None,
     ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
         features = self._class_features(class_record, level)
         refs = _dedupe_refs(_refs(class_record), *[feature.get("sourceRefs", []) for feature in features])
@@ -724,6 +761,56 @@ class NpcCreation(CreationSystem):
 
         if class_record["id"] == "npc-class.druid":
             nature_bond = self._record("classFeature", "npc-class-feature.druid-nature-bond")
+            archetype_id = selections.get("archetypeId")
+            if archetype_id is not None:
+                feature_refs = _dedupe_refs(refs, *([_refs(archetype)] if archetype else []))
+                archetype_issues: list[dict[str, Any]] = []
+                if choices:
+                    conflict_path = (
+                        "/selections/classFeatureChoices/natureBond"
+                        if "natureBond" in choices else "/selections/classFeatureChoices"
+                    )
+                    archetype_issues.append(self._issue(
+                        "npc.choice-invalid",
+                        f"the {archetype['name'] if archetype else 'selected'} archetype replaces the Nature Bond choice; classFeatureChoices must be empty",
+                        path=conflict_path,
+                        source_refs=_dedupe_refs(*([_refs(archetype)] if archetype else [])),
+                    ))
+                if archetype is not None:
+                    replaces = archetype.get("replaces")
+                    if not isinstance(replaces, list) or any(not isinstance(value, str) for value in replaces):
+                        archetype_issues.append(self._issue(
+                            "npc.catalog-gap", "the archetype replaces field must be an array of feature IDs", kind="catalog-data",
+                            path="/selections/archetypeId", details={"recordId": archetype["id"]}, source_refs=_refs(archetype),
+                        ))
+                    elif "npc-class-feature.druid-nature-bond" not in replaces:
+                        archetype_issues.append(self._issue(
+                            "npc.catalog-gap", "the archetype must replace the Druid Nature Bond feature", kind="catalog-data",
+                            path="/selections/archetypeId", details={"recordId": archetype["id"], "replaces": copy.deepcopy(replaces)},
+                            source_refs=_refs(archetype),
+                        ))
+                bond_index = next(
+                    (index for index, feature in enumerate(features) if feature["featureId"] == nature_bond["id"]), None,
+                )
+                features = [feature for feature in features if feature["featureId"] not in {nature_bond["id"], "npc-class-feature.druid-wild-empathy"}]
+                if archetype is not None and not any(
+                    issue["code"] == "npc.catalog-gap" for issue in archetype_issues
+                ):
+                    entry: dict[str, Any] = {
+                        "featureId": archetype["id"], "name": archetype["name"], "sourceRefs": _refs(archetype),
+                        "elementalEmpathy": {"checkBonus": level + modifiers["charisma"]},
+                    }
+                    if archetype.get("replaces"):
+                        entry["replaces"] = copy.deepcopy(archetype["replaces"])
+                    features.insert(bond_index if bond_index is not None else len(features), entry)
+                for feature in features:
+                    if feature["featureId"] in {"npc-class-feature.druid-proficiencies", "npc-class-feature.druid-orisons"}:
+                        feature["effects"] = copy.deepcopy(self._record("classFeature", feature["featureId"]).get("effects", {}))
+                    elif feature["featureId"] == "npc-class-feature.druid-nature-sense":
+                        feature["skillBonuses"] = copy.deepcopy(
+                            self._record("classFeature", feature["featureId"])["effects"]["skillBonuses"]
+                        )
+                return features, feature_refs, archetype_issues
             fire_domain = self._record("classFeature", "npc-class-feature.fire-domain")
             feature_refs = _dedupe_refs(refs, _refs(nature_bond), _refs(fire_domain))
             choice = choices.get("natureBond")
@@ -772,13 +859,120 @@ class NpcCreation(CreationSystem):
         )] if choices else []
         return features, refs, issues
 
+    def _archetype(
+        self, selections: dict[str, Any], race: dict[str, Any], class_record: dict[str, Any], level: int,
+    ) -> tuple[dict[str, Any] | None, list[dict[str, Any]]]:
+        """Resolve an optional NPC archetype selection against its catalog record."""
+        archetype_id = selections.get("archetypeId")
+        if archetype_id is None:
+            return None, []
+        path = "/selections/archetypeId"
+        if not isinstance(archetype_id, str) or not archetype_id:
+            return None, [self._issue(
+                "npc.slice-unsupported", "archetypeId must be a non-empty string", path=path,
+            )]
+        try:
+            record = self._record("classFeature", archetype_id)
+        except CatalogError:
+            return None, [self._issue(
+                "npc.catalog-gap", "catalog data required for this selection is not source-resolved", kind="catalog-data",
+                path=path, details={"recordId": archetype_id, "catalogStatus": "gap"},
+            )]
+        refs = _refs(record)
+        issues: list[dict[str, Any]] = []
+        if record.get("catalogStatus") != "resolved":
+            issues.append(self._gap(record, path))
+        if record.get("kind") != "archetype":
+            issues.append(self._issue(
+                "npc.catalog-gap", "the selected class feature is not an archetype record", kind="catalog-data",
+                path=path, details={"recordId": record.get("id"), "kind": record.get("kind")}, source_refs=refs,
+            ))
+        if record.get("classId") != class_record["id"]:
+            issues.append(self._issue(
+                "npc.catalog-gap", "the archetype does not belong to the selected class", kind="catalog-data",
+                path=path, details={"recordId": record.get("id"), "classId": record.get("classId")}, source_refs=refs,
+            ))
+        if not (race["id"] == "npc-race.goblin" and class_record["id"] == "npc-class.druid" and level == 3):
+            issues.append(self._issue(
+                "npc.slice-unsupported", "the archetype is part of the source-gated goblin druid level-3 slice",
+                path=path, source_refs=refs,
+            ))
+        if issues:
+            return None, issues
+        return record, []
+
+    def _linked_creature(
+        self, archetype: dict[str, Any], level: int,
+    ) -> tuple[dict[str, Any] | None, list[dict[str, Any]], list[dict[str, Any]]]:
+        """Project the archetype's curated linked creature row into the canonical block."""
+        path = "/selections/archetypeId"
+        refs = _refs(archetype)
+        row = archetype.get("linkedCreatureRow")
+        if not isinstance(row, dict) or row.get("catalogStatus") != "resolved":
+            return None, refs, [self._issue(
+                "npc.catalog-gap", "the linked creature row is not source-resolved", kind="catalog-data",
+                path=path, details={"recordId": archetype.get("id"), "catalogStatus": "gap"}, source_refs=refs,
+            )]
+
+        def gap(details: dict[str, Any]) -> dict[str, Any]:
+            return self._issue(
+                "npc.catalog-gap", "the linked creature row is not fully curated", kind="catalog-data",
+                path=path, details={"recordId": archetype.get("id"), **details}, source_refs=refs,
+            )
+
+        issues: list[dict[str, Any]] = []
+        unexpected = set(row) - {"catalogStatus", "level", "element", "name", "fields", "sourceRef"}
+        if unexpected:
+            issues.append(gap({"unexpectedRowFields": sorted(unexpected)}))
+        row_level = row.get("level")
+        if not _is_int(row_level) or row_level != level:
+            issues.append(gap({"field": "level", "expected": level, "actual": row_level}))
+        element = row.get("element")
+        if not isinstance(element, str) or not element:
+            issues.append(gap({"field": "element", "problem": "missing-element"}))
+        name = row.get("name")
+        if "name" in row and (not isinstance(name, str) or not name):
+            issues.append(gap({"field": "name", "problem": "invalid-name"}))
+        fields = row.get("fields")
+        resolved: dict[str, Any] = {}
+        field_refs: dict[str, list[dict[str, Any]]] = {}
+        if isinstance(fields, dict) and fields:
+            for key in sorted(fields):
+                entry = fields[key]
+                if not isinstance(entry, dict) or "value" not in entry:
+                    issues.append(gap({"field": key, "problem": "missing-value"}))
+                    continue
+                raw_refs = entry.get("sourceRef")
+                normalized = raw_refs if isinstance(raw_refs, list) else ([raw_refs] if isinstance(raw_refs, dict) else [])
+                if not normalized or any(not isinstance(ref, dict) for ref in normalized):
+                    issues.append(gap({"field": key, "problem": "missing-sourceRef"}))
+                    continue
+                resolved[key] = copy.deepcopy(entry["value"])
+                field_refs[key] = copy.deepcopy(normalized)
+        else:
+            issues.append(gap({"problem": "missing-fields"}))
+        if issues:
+            return None, refs, issues
+        block: dict[str, Any] = {
+            "archetypeId": archetype["id"],
+            "element": element,
+            "level": row_level,
+        }
+        if isinstance(name, str) and name:
+            block["name"] = name
+        block.update(resolved)
+        block["fieldSourceRefs"] = field_refs
+        block["sourceRefs"] = _dedupe_refs(refs, _refs(row), *field_refs.values())
+        return block, block["sourceRefs"], []
+
     def _spells(
         self, selections: dict[str, Any], class_record: dict[str, Any], row: dict[str, Any], level: int,
-        scores: dict[str, int], modifiers: dict[str, int],
+        scores: dict[str, int], modifiers: dict[str, int], *,
+        archetype_id: str | None = None, archetype: dict[str, Any] | None = None,
     ) -> tuple[Any, list[dict[str, Any]], list[dict[str, Any]]]:
         loadout = selections.get("spellLoadout", {})
         if class_record["id"] == "npc-class.druid":
-            return self._druid_spells(loadout, class_record, row, level, scores, modifiers)
+            return self._druid_spells(loadout, class_record, row, level, scores, modifiers, archetype_id=archetype_id, archetype=archetype)
         if class_record["id"] != "npc-class.sorcerer":
             issues = [self._issue("npc.slice-unsupported", "spells are not part of this production slice", path="/selections/spellLoadout")] if loadout else []
             return [], _refs(class_record), issues
@@ -848,36 +1042,52 @@ class NpcCreation(CreationSystem):
 
     def _druid_spells(
         self, loadout: Any, class_record: dict[str, Any], row: dict[str, Any], level: int,
-        scores: dict[str, int], modifiers: dict[str, int],
+        scores: dict[str, int], modifiers: dict[str, int], *,
+        archetype_id: str | None = None, archetype: dict[str, Any] | None = None,
     ) -> tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]:
         prepared = loadout.get("prepared", {}) if isinstance(loadout, dict) else {}
         domain_prepared = loadout.get("domainPrepared", {}) if isinstance(loadout, dict) else {}
         base_slots = row["spellsPerDay"]
         spellcasting = self._record("classFeature", "npc-class-feature.druid-spellcasting")
         casting_effects = spellcasting.get("effects", {})
-        fire_domain = self._record("classFeature", "npc-class-feature.fire-domain")
+        archetype_refs = _refs(archetype) if archetype_id else []
+        if archetype_id:
+            fire_domain = None
+            slots_per_spell_level = None
+            domain_spells = {}
+        else:
+            fire_domain = self._record("classFeature", "npc-class-feature.fire-domain")
+            slots_per_spell_level = fire_domain.get("slotsPerSpellLevel")
+            domain_spells = fire_domain.get("domainSpells")
         casting_mode = casting_effects.get("castingMode")
         casting_ability = casting_effects.get("castingAbility")
         conversion_catalog = casting_effects.get("spontaneousConversion")
-        slots_per_spell_level = fire_domain.get("slotsPerSpellLevel")
-        domain_spells = fire_domain.get("domainSpells")
         druid_ref = self._source_ref("source.aon-druid", "Spells; Spontaneous Casting; Nature Bond", [37, 49])
         repeat_ref = self._source_ref("source.aon-creating-npcs", "Step 5: Class Features", [70, 70])
         cleric_ref = self._source_ref("source.aon-cleric", "Domains", [45, 45])
         caster_level_ref = self._source_ref("source.aon-caster-level", "Caster Level", [4, 6])
         bonus_ref = self._source_ref("source.aon-getting-started", "Table: Ability Modifiers and Bonus Spells", [89, 101])
-        refs = _dedupe_refs(
-            _refs(class_record), _refs(row), _refs(spellcasting), _refs(fire_domain),
-            [druid_ref, repeat_ref, cleric_ref, caster_level_ref, bonus_ref],
-        )
+        if archetype_id:
+            refs = _dedupe_refs(
+                _refs(class_record), _refs(row), _refs(spellcasting), archetype_refs,
+                [druid_ref, repeat_ref, caster_level_ref, bonus_ref],
+            )
+        else:
+            refs = _dedupe_refs(
+                _refs(class_record), _refs(row), _refs(spellcasting), _refs(fire_domain),
+                [druid_ref, repeat_ref, cleric_ref, caster_level_ref, bonus_ref],
+            )
         issues: list[dict[str, Any]] = []
         missing_rules = [
             ("npc-class-feature.druid-spellcasting.effects.castingMode", casting_mode),
             ("npc-class-feature.druid-spellcasting.effects.castingAbility", casting_ability),
             ("npc-class-feature.druid-spellcasting.effects.spontaneousConversion", conversion_catalog),
-            ("npc-class-feature.fire-domain.slotsPerSpellLevel", slots_per_spell_level),
-            ("npc-class-feature.fire-domain.domainSpells", domain_spells),
         ]
+        if not archetype_id:
+            missing_rules.extend([
+                ("npc-class-feature.fire-domain.slotsPerSpellLevel", slots_per_spell_level),
+                ("npc-class-feature.fire-domain.domainSpells", domain_spells),
+            ])
         for rule_id, value in missing_rules:
             if value is None:
                 issues.append(self._gap({"id": rule_id}, "/selections/spellLoadout"))
@@ -898,19 +1108,27 @@ class NpcCreation(CreationSystem):
                 "npc.spell-loadout-invalid", "the Druid spell loadout accepts only prepared and domainPrepared spells",
                 path="/selections/spellLoadout", details={"unexpectedFields": sorted(unexpected_fields)}, source_refs=[druid_ref],
             ))
+        if archetype_id and isinstance(loadout, dict) and "domainPrepared" in loadout:
+            issues.append(self._issue(
+                "npc.spell-levels-invalid",
+                f"the {archetype['name'] if archetype else 'selected'} archetype replaces the Nature Bond domain slots; domainPrepared must be absent",
+                path="/selections/spellLoadout/domainPrepared", details={"expectedLevels": []},
+                source_refs=_dedupe_refs(archetype_refs, [druid_ref]),
+            ))
         expected_levels = set(base_slots)
         if set(prepared) != expected_levels:
             issues.append(self._issue(
                 "npc.spell-levels-invalid", "prepared spells must include exactly the available Druid spell levels",
                 path="/selections/spellLoadout/prepared", details={"expectedLevels": sorted(expected_levels, key=int)}, source_refs=_refs(row),
             ))
-        expected_domain_levels = set(available_domain_spells)
-        if set(domain_prepared) != expected_domain_levels:
-            issues.append(self._issue(
-                "npc.spell-levels-invalid", "domain preparations must include exactly the available Fire-domain spell levels",
-                path="/selections/spellLoadout/domainPrepared", details={"expectedLevels": sorted(expected_domain_levels, key=int)},
-                source_refs=_dedupe_refs(_refs(fire_domain), [cleric_ref]),
-            ))
+        if not archetype_id:
+            expected_domain_levels = set(available_domain_spells)
+            if set(domain_prepared) != expected_domain_levels:
+                issues.append(self._issue(
+                    "npc.spell-levels-invalid", "domain preparations must include exactly the available Fire-domain spell levels",
+                    path="/selections/spellLoadout/domainPrepared", details={"expectedLevels": sorted(expected_domain_levels, key=int)},
+                    source_refs=_dedupe_refs(_refs(fire_domain), [cleric_ref]),
+                ))
 
         wisdom = modifiers["wisdom"]
         highest_level = max(map(int, base_slots))
@@ -928,7 +1146,7 @@ class NpcCreation(CreationSystem):
         for spell_level, base in base_slots.items():
             numeric_level = int(spell_level)
             wisdom_bonus = _bonus_spell_count(wisdom, numeric_level)
-            domain_count = slots_per_spell_level if spell_level in available_domain_spells else 0
+            domain_count = 0 if archetype_id else (slots_per_spell_level if spell_level in available_domain_spells else 0)
             slots_by_level[spell_level] = {
                 "base": base, "wisdomBonus": wisdom_bonus, "domain": domain_count,
                 "total": base + wisdom_bonus + domain_count,
@@ -994,15 +1212,25 @@ class NpcCreation(CreationSystem):
             "excludesDomainSlots": conversion_catalog["excludesDomainSlots"],
             "spellIdsBySlotLevel": copy.deepcopy(conversion_ids),
         }
-        result = {
-            "className": class_record["name"], "castingMode": casting_effects["castingMode"],
-            "casterLevel": level, "castingAbility": casting_effects["castingAbility"],
-            "castingAbilityModifier": wisdom,
-            "slotsByLevel": slots_by_level, "prepared": resolved_prepared,
-            "domainPrepared": resolved_domain,
-            "saveDcByLevel": {spell_level: 10 + int(spell_level) + wisdom for spell_level in base_slots},
-            "spontaneousConversion": conversion,
-        }
+        if archetype_id:
+            result = {
+                "className": class_record["name"], "castingMode": casting_effects["castingMode"],
+                "casterLevel": level, "castingAbility": casting_effects["castingAbility"],
+                "castingAbilityModifier": wisdom,
+                "slotsByLevel": slots_by_level, "prepared": resolved_prepared,
+                "saveDcByLevel": {spell_level: 10 + int(spell_level) + wisdom for spell_level in base_slots},
+                "spontaneousConversion": conversion,
+            }
+        else:
+            result = {
+                "className": class_record["name"], "castingMode": casting_effects["castingMode"],
+                "casterLevel": level, "castingAbility": casting_effects["castingAbility"],
+                "castingAbilityModifier": wisdom,
+                "slotsByLevel": slots_by_level, "prepared": resolved_prepared,
+                "domainPrepared": resolved_domain,
+                "saveDcByLevel": {spell_level: 10 + int(spell_level) + wisdom for spell_level in base_slots},
+                "spontaneousConversion": conversion,
+            }
         return result, refs, issues
 
     def _feats(self, selections: dict[str, Any], race: dict[str, Any], level: int, scores: dict[str, int]) -> tuple[list[dict[str, Any]], dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]:

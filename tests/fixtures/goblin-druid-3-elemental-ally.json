@@ -1,0 +1,80 @@
+{
+  "creationSystem": "npc",
+  "concept": {
+    "name": "Zarka",
+    "role": "fire-themed divine caster",
+    "description": "A level 3 goblin druid with the Elemental Ally archetype and a bound fire elemental eidolon."
+  },
+  "selections": {
+    "statblockUse": "full",
+    "raceId": "npc-race.goblin",
+    "racialChoices": {},
+    "archetypeId": "npc-class-feature.druid-elemental-ally",
+    "classProgression": [
+      {
+        "classId": "npc-class.druid",
+        "levels": 3
+      }
+    ],
+    "abilityGeneration": {
+      "method": "divine-preset",
+      "arrayId": "npc-ability-array.heroic"
+    },
+    "skillGeneration": {
+      "method": "simplified",
+      "skills": [
+        "skill.knowledge-nature",
+        "skill.heal",
+        "skill.spellcraft",
+        "skill.survival"
+      ]
+    },
+    "feats": [
+      {
+        "slotId": "general-1",
+        "featId": "feat.iron-will"
+      },
+      {
+        "slotId": "general-3",
+        "featId": "feat.improved-initiative"
+      }
+    ],
+    "spellLoadout": {
+      "prepared": {
+        "0": [
+          "spell.detect-magic",
+          "spell.light",
+          "spell.flare",
+          "spell.detect-magic"
+        ],
+        "1": [
+          "spell.produce-flame",
+          "spell.entangle",
+          "spell.cure-light-wounds"
+        ],
+        "2": [
+          "spell.flaming-sphere",
+          "spell.barkskin"
+        ]
+      }
+    },
+    "gearProfile": {
+      "experienceProgression": "medium",
+      "fantasyLevel": "normal"
+    },
+    "gear": [
+      {
+        "itemId": "item.sickle"
+      },
+      {
+        "itemId": "item.leather-armor"
+      },
+      {
+        "itemId": "item.heavy-wooden-shield"
+      }
+    ],
+    "details": {
+      "alignment": "NE"
+    }
+  }
+}

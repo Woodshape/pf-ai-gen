@@ -82,3 +82,11 @@ The mapping from creation system to its independently versioned catalog. Each dr
 **Creation-System Comparison**:
 A read-only benchmark comparison between an evaluation of one creation system and reference rows of another (Simple Monster arrays, Bestiary Table 1-1). Comparisons never mutate the draft or apply foreign arithmetic; class-derived bonuses and array totals must never coexist in one evaluation.
 _Avoid_: conversion inside an evaluation, mixed arithmetic.
+
+**NPC Archetype**:
+A source-defined class-feature record (`kind: "archetype"`) selected through the optional `archetypeId` NPC selection field. It replaces the named class features listed in its archived source text and may grant a Linked Creature row. Only resolved archetype records can be selected; unarchived archetypes remain catalog gaps.
+_Avoid_: shoehorning an archetype into a class-feature choice slot, applying several archetypes to one draft.
+
+**Linked Creature**:
+The canonical companion/eidolon block attached to an NPC draft's evaluation result and FinishedMonster snapshot (`result.linkedCreature`), derived only from its source row with per-field line-level sourceRefs and projected as a LINKED CREATURE section in Markdown and HTML exports. It never feeds the owning NPC's own statistics.
+_Avoid_: folding companion statistics into the NPC, storing resolved companion objects as draft selections.

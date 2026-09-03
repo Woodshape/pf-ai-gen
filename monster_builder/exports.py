@@ -158,6 +158,9 @@ def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dic
     ]
     if specials:
         sections.append({"id": "specialAbilities", "title": "SPECIAL ABILITIES", "abilities": copy.deepcopy(specials)})
+    linked_creature = result.get("linkedCreature")
+    if isinstance(linked_creature, Mapping):
+        sections.append({"id": "linkedCreature", "title": "LINKED CREATURE", "fields": _linked_creature_fields(linked_creature)})
     model = {
         "profile": profile,
         "schemaVersion": copy.deepcopy(snapshot.get("schemaVersion")),
@@ -183,6 +186,8 @@ def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dic
         "specialAbilities": specials,
         "sections": sections,
     }
+    if isinstance(linked_creature, Mapping):
+        model["linkedCreature"] = copy.deepcopy(linked_creature)
     if profile == "audit":
         audit = snapshot.get("audit") if isinstance(snapshot.get("audit"), Mapping) else {}
         model["audit"] = {
@@ -219,6 +224,8 @@ def render_markdown(snapshot: Mapping[str, Any], profile: str = "sheet") -> str:
     lines.extend(_spell_lines(model["statistics"]))
     if model["specialAbilities"]:
         lines.extend(["", "## SPECIAL ABILITIES", *[f"**{value['name']}:** {value['text']}" for value in model["specialAbilities"]]])
+    if model.get("linkedCreature"):
+        lines.extend(["", "## LINKED CREATURE", *_linked_creature_lines(model["linkedCreature"])])
     if model.get("catalogVersion"):
         lines.extend(["", f"_Generated from catalog {model['catalogVersion']}._"])
     if profile == "audit":
@@ -242,6 +249,8 @@ def render_html(snapshot: Mapping[str, Any], profile: str = "sheet") -> str:
     parts.append(_html_section("STATISTICS", [_field_text(value) for value in model["statistics"]["fields"]] + _spell_lines(model["statistics"]), "Utility Options", model["statistics"]["options"]))
     if model["specialAbilities"]:
         parts.append(_html_section("SPECIAL ABILITIES", [f"{value['name']}: {value['text']}" for value in model["specialAbilities"]]))
+    if model.get("linkedCreature"):
+        parts.append(_html_section("LINKED CREATURE", _linked_creature_lines(model["linkedCreature"])))
     if model.get("catalogVersion"):
         parts.append(f'<footer>Generated from catalog {_esc(model["catalogVersion"])}</footer>')
     if profile == "audit":
@@ -385,6 +394,44 @@ def _npc_specials(features: Any) -> list[dict[str, Any]]:
                 text = ", ".join(f"{_human(kind)} resistance {value}" for kind, value in power["resistance"].items())
                 result.append({"name": str(power.get("name", "Resistance")), "text": text})
     return result
+
+
+_LINKED_CREATURE_META = {"archetypeId", "element", "level", "name", "fieldSourceRefs", "sourceRefs"}
+
+
+def _linked_creature_identity(block: Mapping[str, Any]) -> list[str]:
+    identity = []
+    if block.get("name"):
+        identity.append(str(block["name"]))
+    if block.get("element"):
+        identity.append(_human(block["element"]))
+    if block.get("level") is not None:
+        identity.append(f"level {block['level']}")
+    return identity
+
+
+def _linked_creature_fields(block: Mapping[str, Any]) -> list[dict[str, Any]]:
+    fields = []
+    identity = _linked_creature_identity(block)
+    if identity:
+        fields.append({"key": "identity", "label": "Linked Creature", "value": copy.deepcopy(identity), "text": "; ".join(identity)})
+    for key in sorted(block):
+        if key in _LINKED_CREATURE_META:
+            continue
+        fields.append(_field(key, _human(key), block[key], {}, _value_text(block[key])))
+    return fields
+
+
+def _linked_creature_lines(block: Mapping[str, Any]) -> list[str]:
+    lines = []
+    identity = _linked_creature_identity(block)
+    if identity:
+        lines.append("; ".join(identity))
+    for key in sorted(block):
+        if key in _LINKED_CREATURE_META:
+            continue
+        lines.append(f"{_human(key)}: {_value_text(block[key])}")
+    return lines
 
 
 def _identity(basics: Mapping[str, Any], creation_system: str) -> str:

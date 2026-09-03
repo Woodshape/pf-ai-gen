@@ -356,6 +356,34 @@
       "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%202",
       "retrievedAt": "2026-09-03T11:17:19Z",
       "description": "Official current Archives of Nethys Summon Nature's Ally II spell page."
+    },
+    "aon-elemental-ally-html": {
+      "file": "sources/reference/aonprd/elemental-ally.html",
+      "sha256": "f2f971fafee9dbfe39556a580aac52a5dd2a1a54e9c3b0b88037ba7d180401e7",
+      "officialUrl": "https://aonprd.com/ArchetypeDisplay.aspx?FixedName=Druid%20Elemental%20Ally",
+      "retrievedAt": "2026-09-03T16:02:09Z",
+      "description": "Official current Archives of Nethys Elemental Ally druid archetype (Monster Summoner's Handbook pg. 16): Elemental Eidolons, Elemental Empathy, Elemental Magic, Elemental Resistance."
+    },
+    "aon-eidolon-unchained-html": {
+      "file": "sources/reference/aonprd/eidolon-unchained.html",
+      "sha256": "c9ff24260a682fd34a58b566a851d479ba1b73b2b4aad4f73cb6c8a7d9d29334",
+      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Eidolon%20(Unchained)",
+      "retrievedAt": "2026-09-03T16:02:09Z",
+      "description": "Official current Archives of Nethys unchained Eidolon companion page: Table 1-6 Eidolon Base Statistics and the eidolon rules the Elemental Ally archetype cites via Pathfinder Unchained page 33."
+    },
+    "aon-eidolon-uc-subtypes-html": {
+      "file": "sources/reference/aonprd/eidolon-uc-subtypes.html",
+      "sha256": "961e0932ecdffe313226abc113d531b0b38fc42e8988829e22b2b253f5e3dfb7",
+      "officialUrl": "https://aonprd.com/EidolonUCSubtypes.aspx",
+      "retrievedAt": "2026-09-03T16:02:09Z",
+      "description": "Official current Archives of Nethys unchained eidolon subtypes page: the Elemental subtype (Pathfinder Unchained pg. 33) with base forms and per-level base evolutions."
+    },
+    "aon-eidolon-base-forms-html": {
+      "file": "sources/reference/aonprd/eidolon-base-forms.html",
+      "sha256": "841ebabbe8446e6596f61984684d23bfed47147819d638628505addc6444b096",
+      "officialUrl": "https://aonprd.com/EidolonBaseForms.aspx",
+      "retrievedAt": "2026-09-03T16:02:09Z",
+      "description": "Official current Archives of Nethys eidolon base forms page: the Quadruped starting statistics used by the level-3 fire elemental eidolon row."
     }
   },
   "extracts": {
@@ -923,6 +951,54 @@
       ],
       "contents": "Official current Archives of Nethys Summon Nature's Ally II spell page.",
       "catalogUse": "Goblin Druid level-3 spontaneous summon nature's ally behavior metadata."
+    },
+    "aon-elemental-ally": {
+      "file": "sources/npc/aonprd/elemental-ally.txt",
+      "sha256": "e67cbb2f095fac4d0e79e7497f08335fa04d969725632ea15b59c48f5794d3eb",
+      "derivedFrom": "aon-elemental-ally-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        16
+      ],
+      "contents": "Official current Archives of Nethys Elemental Ally druid archetype: Elemental Eidolons, Elemental Empathy, Elemental Magic, and Elemental Resistance.",
+      "catalogUse": "Elemental Ally archetype record and its linked-creature row."
+    },
+    "aon-eidolon-unchained": {
+      "file": "sources/npc/aonprd/eidolon-unchained.txt",
+      "sha256": "bad316ffdd9fa9a086e39fc433b6168f1289f198805cb9798b3445cab309640b",
+      "derivedFrom": "aon-eidolon-unchained-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        46
+      ],
+      "contents": "Official current Archives of Nethys unchained Eidolon rules and Table 1-6: Eidolon Base Statistics.",
+      "catalogUse": "Eidolon base statistics rows and HD/BAB/saves/armor/skills/feats rules for the level-3 fire elemental eidolon row."
+    },
+    "aon-eidolon-uc-subtypes": {
+      "file": "sources/npc/aonprd/eidolon-uc-subtypes.txt",
+      "sha256": "63cc8e5e26c7842a508ddd46d2508d497ee9c87c3015164f2b2b05aab9b8c34d",
+      "derivedFrom": "aon-eidolon-uc-subtypes-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        12
+      ],
+      "contents": "Official current Archives of Nethys unchained eidolon Elemental subtype: base forms and 1st-level base evolutions (immunity to paralysis and sleep; immunity (fire)).",
+      "catalogUse": "Elemental eidolon base evolutions and base form options for the level-3 fire row."
+    },
+    "aon-eidolon-base-forms": {
+      "file": "sources/npc/aonprd/eidolon-base-forms.txt",
+      "sha256": "c9b7213bca3eb59ac0fc7c32155b38d9fd6eacd5f2b82c0d26e9565eaa6b503f",
+      "derivedFrom": "aon-eidolon-base-forms-html",
+      "command": "python3 tools/extract_npc_aon_sources.py",
+      "lines": [
+        1,
+        3
+      ],
+      "contents": "Official current Archives of Nethys Quadruped eidolon base form: size, speed, natural armor, save assignments, bite attack, ability scores, and free evolutions.",
+      "catalogUse": "Quadruped starting statistics for the level-3 fire elemental eidolon row."
     }
   },
   "fragments": {
@@ -968,9 +1044,9 @@
       "consequence": "The selected Sorcerer spells and bounded Druid spell records are eligible for hydration; all other spell rules remain explicit gaps."
     },
     "core-rulebook-druid-expansions": {
-      "needed": "Druid levels outside level 3, domains outside Fire, animal companions, Elemental Ally, and linked summon or eidolon statblocks",
-      "availability": "These rules are outside this bounded source gate and are not curated as NPC catalog records.",
-      "consequence": "Only the Fire-domain choice and level-3 spontaneous Summon Nature's Ally I–II metadata are in scope; companions, Elemental Ally, eidolons, and linked summon statblocks remain unresolved gaps."
+      "needed": "Druid levels outside level 3, domains outside Fire, and animal companions",
+      "availability": "The official Archives of Nethys Druid class page plus the Elemental Ally archetype page and its cited eidolon statistics (unchained Eidolon rules, Elemental subtype, Quadruped base form) are archived for the bounded level-3 archetype slice; other unarchived pages remain unavailable locally.",
+      "consequence": "The Fire-domain choice, the Elemental Ally archetype with its level-3 fire eidolon row, and level-3 spontaneous Summon Nature's Ally I-II metadata are in scope; companions, druid levels outside 3, other elements, other archetypes, and other eidolon levels remain unresolved gaps."
     },
     "core-rulebook-conditions": {
       "needed": "Condition definitions used by class features, feats, equipment, and spells",

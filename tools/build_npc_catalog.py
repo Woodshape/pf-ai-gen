@@ -69,6 +69,10 @@ SOURCE_FILES = (
     ("source.aon-skill-spellcraft", "sources/npc/aonprd/skill-spellcraft.txt", "Official current AoN Spellcraft skill rules"),
     ("source.aon-cloak-of-resistance", "sources/npc/aonprd/cloak-of-resistance.txt", "Official current AoN Cloak of Resistance rules"),
     ("source.aon-designing-encounters", "sources/npc/aonprd/designing-encounters.txt", "Official current AoN classed-NPC CR rules"),
+    ("source.aon-elemental-ally", "sources/npc/aonprd/elemental-ally.txt", "Official current AoN Elemental Ally druid archetype (Monster Summoner's Handbook)"),
+    ("source.aon-eidolon-unchained", "sources/npc/aonprd/eidolon-unchained.txt", "Official current AoN unchained Eidolon rules and Table 1-6 base statistics"),
+    ("source.aon-eidolon-uc-subtypes", "sources/npc/aonprd/eidolon-uc-subtypes.txt", "Official current AoN unchained eidolon Elemental subtype rules (Pathfinder Unchained pg. 33)"),
+    ("source.aon-eidolon-base-forms", "sources/npc/aonprd/eidolon-base-forms.txt", "Official current AoN Quadruped eidolon base form starting statistics"),
     *((
         f"source.aon-spell-{name}",
         f"sources/npc/aonprd/spell-{name}.txt",

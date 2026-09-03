@@ -54,6 +54,15 @@ SOURCES = {
     "spell-produce-flame": ("heading", "Produce Flame"),
     "spell-summon-natures-ally-i": ("heading", "Summon Nature's Ally 1"),
     "spell-summon-natures-ally-ii": ("heading", "Summon Nature's Ally 2"),
+    "elemental-ally": ("id", "MainContent_DataListTypes_LabelName_0"),
+    "eidolon-unchained": ("id", "MainContent_DataListTypes_LabelName_0"),
+    "eidolon-uc-subtypes": ("heading", "Elemental"),
+    "eidolon-base-forms": ("heading", "Quadruped"),
+}
+
+# Stop tag for heading-based extractions: the tag of the next titled entry.
+HEADING_STOPS = {
+    "fire-domain": "h2", "eidolon-uc-subtypes": "h2", "eidolon-base-forms": "h2",
 }
 BLOCK_TAGS = {
     "address", "article", "aside", "blockquote", "dd", "div", "dl", "dt",
@@ -187,7 +196,7 @@ def extract_heading_section(path: Path, heading: str, stop_tag: str) -> str:
 
 def extract_source(name: str, path: Path, attribute: str, value: str) -> str:
     if attribute == "heading":
-        return extract_heading_section(path, value, "h2" if name == "fire-domain" else "h1")
+        return extract_heading_section(path, value, HEADING_STOPS.get(name, "h1"))
     html = path.read_text(encoding="utf-8")
     if name == "designing-encounters":
         start = html.find("<b>Adding NPCs</b>:")
