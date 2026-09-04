@@ -1,1800 +1,1800 @@
 {
- "section": "items",
- "records": [
-  {
-   "id": "item.amulet-of-natural-armor",
-   "name": "Amulet of Natural Armor",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "magic",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.backpack",
-   "name": "Backpack",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "goods",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.arrows-20",
-   "name": "Arrows (20)",
-   "catalogStatus": "resolved",
-   "category": "goods",
-   "priceCp": 100,
-   "weightLb": 3,
-   "effects": {},
-   "sourceRef": [
+  "records": [
     {
-     "sourceId": "source.aon-equipment",
-     "section": "Table: Weapons",
-     "txtLines": [
-      177,
-      177
-     ],
-     "entry": "Arrows (20): 1 gp, 3 lbs.",
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
-     "provenanceStatus": "resolved"
+      "catalogStatus": "gap",
+      "category": "magic",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.amulet-of-natural-armor",
+      "name": "Amulet of Natural Armor",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "goods",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.backpack",
+      "name": "Backpack",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "goods",
+      "effects": {},
+      "id": "item.arrows-20",
+      "name": "arrows (20)",
+      "priceCp": 100,
+      "sourceRef": [
+        {
+          "entry": "Arrows (20): 1 gp, 3 lbs.",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            177,
+            177
+          ]
+        }
+      ],
+      "weightLb": 3
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "armor",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.banded-mail",
+      "name": "Banded Mail",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.battleaxe",
+      "name": "Battleaxe",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Mundane weapons",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "goods",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.bedroll",
+      "name": "Bedroll",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "magic",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.belt-of-giant-strength",
+      "name": "Belt of Giant Strength",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "armor",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.breastplate",
+      "name": "Breastplate",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Mundane armor",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "shield",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.buckler",
+      "name": "Buckler",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "armor",
+      "effects": {
+        "armorBonus": 4,
+        "armorCheckPenalty": -2,
+        "maxDex": 4
+      },
+      "id": "item.chain-shirt",
+      "name": "Chain Shirt",
+      "priceCp": 10000,
+      "sourceRef": {
+        "entry": "Chain shirt",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+        "provenanceStatus": "resolved",
+        "section": "Table: Armor and Shields",
+        "sourceId": "source.aon-equipment",
+        "txtLines": [
+          326,
+          326
+        ]
+      },
+      "weightLb": 25
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "armor",
+      "effects": {
+        "armorBonus": 6,
+        "armorCheckPenalty": -5,
+        "maxDex": 2
+      },
+      "id": "item.chainmail",
+      "name": "Chainmail",
+      "priceCp": 15000,
+      "sourceRef": {
+        "entry": "Chainmail",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+        "provenanceStatus": "resolved",
+        "section": "Table: Armor and Shields",
+        "sourceId": "source.aon-equipment",
+        "txtLines": [
+          330,
+          330
+        ]
+      },
+      "weightLb": 40,
+      "weightLbBySize": {
+        "medium": 40,
+        "small": 20
+      }
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "magic",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.cloak-of-resistance",
+      "name": "Cloak of Resistance",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "magic",
+      "effects": {
+        "resistanceBonus": 1
+      },
+      "id": "item.cloak-of-resistance-1",
+      "name": "Cloak of Resistance +1",
+      "npcGearCategory": "protection",
+      "priceCp": 100000,
+      "sourceRef": [
+        {
+          "entry": "Cloak of Resistance +1",
+          "officialUrl": "https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=Cloak%20of%20Resistance1",
+          "provenanceStatus": "resolved",
+          "section": "Cloak of Resistance",
+          "sourceId": "source.aon-cloak-of-resistance",
+          "txtLines": [
+            1,
+            11
+          ]
+        },
+        {
+          "entry": "Save-augmenting magic items count as protection",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+          "provenanceStatus": "resolved",
+          "section": "Step 6: Gear categories",
+          "sourceId": "source.aon-creating-npcs",
+          "txtLines": [
+            78,
+            78
+          ]
+        }
+      ],
+      "weightLb": 1
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.club",
+      "name": "Club",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Mundane weapons",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.dagger",
+      "name": "Dagger",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Mundane weapons",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "goods",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.explorers-outfit",
+      "name": "Explorer's Outfit",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.falchion",
+      "name": "Falchion",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "goods",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.flint-and-steel",
+      "name": "Flint and Steel",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "armor",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.full-plate",
+      "name": "Full-Plate",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.gauntlet",
+      "name": "Gauntlet",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.greataxe",
+      "name": "Greataxe",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.greatsword",
+      "name": "Greatsword",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.halberd",
+      "name": "Halberd",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "armor",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.half-plate",
+      "name": "Half-Plate",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.handaxe",
+      "name": "Handaxe",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "magic",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.headband-of-vast-intelligence",
+      "name": "Headband of Vast Intelligence",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.heavy-crossbow",
+      "name": "Heavy Crossbow",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.heavy-flail",
+      "name": "Heavy Flail",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "shield",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.heavy-steel-shield",
+      "name": "Heavy Steel Shield",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Mundane shields",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "shield",
+      "effects": {
+        "armorCheckPenalty": -2,
+        "shieldBonus": 2
+      },
+      "id": "item.heavy-wooden-shield",
+      "name": "Heavy Wooden Shield",
+      "priceCp": 700,
+      "sourceRef": [
+        {
+          "entry": "Shield, heavy wooden",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+          "provenanceStatus": "resolved",
+          "section": "Table: Armor and Shields",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            341,
+            341
+          ]
+        },
+        {
+          "entry": "Armor fitted for Small characters weighs half as much (shields share Table: Armor and Shields)",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+          "provenanceStatus": "resolved",
+          "section": "Armor Weight column",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            317,
+            317
+          ]
+        }
+      ],
+      "weightLb": 10,
+      "weightLbBySize": {
+        "medium": 10,
+        "small": 5
+      }
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "goods",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.hempen-rope",
+      "name": "Hempen Rope (50 ft.)",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "armor",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.hide-armor",
+      "name": "Hide Armor",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.javelin",
+      "name": "Javelin",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.lance",
+      "name": "Lance",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "armor",
+      "effects": {
+        "armorBonus": 2,
+        "armorCheckPenalty": 0,
+        "maxDex": 6
+      },
+      "id": "item.leather-armor",
+      "name": "Leather Armor",
+      "priceCp": 1000,
+      "sourceRef": [
+        {
+          "entry": "Leather armor",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+          "provenanceStatus": "resolved",
+          "section": "Table: Armor and Shields",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            324,
+            324
+          ]
+        },
+        {
+          "entry": "Armor fitted for Small characters weighs half as much",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+          "provenanceStatus": "resolved",
+          "section": "Armor Weight column",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            317,
+            317
+          ]
+        }
+      ],
+      "weightLb": 15,
+      "weightLbBySize": {
+        "medium": 15,
+        "small": 7.5
+      }
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.light-crossbow",
+      "name": "Light Crossbow",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.light-flail",
+      "name": "Light Flail",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.light-hammer",
+      "name": "Light Hammer",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "shield",
+      "effects": {
+        "armorCheckPenalty": -1,
+        "shieldBonus": 1
+      },
+      "id": "item.light-steel-shield",
+      "name": "Light Steel Shield",
+      "priceCp": 900,
+      "sourceRef": {
+        "entry": "Shield, light steel",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+        "provenanceStatus": "resolved",
+        "section": "Table: Armor and Shields",
+        "sourceId": "source.aon-equipment",
+        "txtLines": [
+          340,
+          340
+        ]
+      },
+      "weightLb": 6
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "critMultiplier": 3,
+        "damageDieBySize": {
+          "medium": "1d8",
+          "small": "1d6"
+        },
+        "damageType": "P",
+        "noStrengthToDamage": true,
+        "rangeIncrement": 100
+      },
+      "id": "item.longbow",
+      "name": "Longbow",
+      "priceCp": 7500,
+      "sourceRef": [
+        {
+          "entry": "Longbow: 75 gp, 1d6/1d8, x3, 100 ft. range increment, 3 lbs., P",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            176,
+            176
+          ]
+        },
+        {
+          "entry": "No Strength bonus on damage rolls with projectile weapons",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+          "provenanceStatus": "resolved",
+          "section": "Projectile Weapons",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            55,
+            55
+          ]
+        },
+        {
+          "entry": "Two-handed; a Strength penalty applies but a non-composite longbow gains no Strength bonus",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+          "provenanceStatus": "resolved",
+          "section": "Weapon Descriptions: Longbow",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            250,
+            250
+          ]
+        }
+      ],
+      "weightLb": 3
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "attackBonus": 1,
+        "critMultiplier": 3,
+        "damageBonus": 1,
+        "damageDieBySize": {
+          "medium": "1d8",
+          "small": "1d6"
+        },
+        "damageType": "P",
+        "noStrengthToDamage": true,
+        "rangeIncrement": 100
+      },
+      "id": "item.longbow-plus-1",
+      "name": "+1 longbow",
+      "priceCp": 237500,
+      "sourceRef": [
+        {
+          "entry": "Longbow base price 75 gp",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            176,
+            176
+          ]
+        },
+        {
+          "entry": "+1 weapon enhancement base price 2,000 gp",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Magic%20Weapons&Category=Magic%20Items",
+          "provenanceStatus": "resolved",
+          "section": "Table 15-8: Weapons",
+          "sourceId": "source.aon-magic-weapons",
+          "txtLines": [
+            21,
+            21
+          ]
+        },
+        {
+          "entry": "Masterwork quality adds 300 gp and a +1 attack bonus",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+          "provenanceStatus": "resolved",
+          "section": "Masterwork Weapons",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            294,
+            295
+          ]
+        },
+        {
+          "entry": "Enhancement bonuses apply to both attack and damage; the masterwork attack bonus does not stack with the enhancement bonus",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Magic%20Weapons&Category=Magic%20Items",
+          "provenanceStatus": "resolved",
+          "section": "Magic Weapons",
+          "sourceId": "source.aon-magic-weapons",
+          "txtLines": [
+            4,
+            4
+          ]
+        }
+      ],
+      "weightLb": 3
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "damageDie": "1d8",
+        "damageType": "S"
+      },
+      "id": "item.longsword",
+      "name": "Longsword",
+      "priceCp": 1500,
+      "sourceRef": {
+        "entry": "Longsword",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+        "provenanceStatus": "resolved",
+        "section": "Table: Weapons",
+        "sourceId": "source.aon-equipment",
+        "txtLines": [
+          155,
+          155
+        ]
+      },
+      "weightLb": 4
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.morningstar",
+      "name": "Morningstar",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "armor",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.padded-armor",
+      "name": "Padded Armor",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "magic",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.potion-of-cure-light-wounds",
+      "name": "Potion of Cure Light Wounds",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "magic",
+      "effects": {},
+      "id": "item.potion-of-cure-moderate-wounds",
+      "name": "potion of cure moderate wounds",
+      "npcGearCategory": "limitedUse",
+      "priceCp": 30000,
+      "sourceRef": [
+        {
+          "entry": "2nd-level potion brewed by a cleric, druid, or wizard at caster level 3rd costs 300 gp",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Potions&Category=Magic%20Items",
+          "provenanceStatus": "resolved",
+          "section": "Table 15-12: Potions; Potion Costs",
+          "sourceId": "source.aon-potions",
+          "txtLines": [
+            19,
+            23
+          ]
+        },
+        {
+          "entry": "Cure Moderate Wounds is a 2nd-level cleric spell",
+          "provenanceStatus": "resolved",
+          "section": "2nd-Level Cleric Spells",
+          "sourceId": "source.npc-crb-spell-lists",
+          "txtLines": [
+            306,
+            315
+          ]
+        }
+      ]
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "magic",
+      "effects": {},
+      "id": "item.potion-of-invisibility",
+      "name": "potion of invisibility",
+      "npcGearCategory": "limitedUse",
+      "priceCp": 40000,
+      "sourceRef": [
+        {
+          "entry": "2nd-level potion brewed by a sorcerer costs 400 gp",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Potions&Category=Magic%20Items",
+          "provenanceStatus": "resolved",
+          "section": "Table 15-12: Potions; Potion Costs",
+          "sourceId": "source.aon-potions",
+          "txtLines": [
+            19,
+            23
+          ]
+        },
+        {
+          "entry": "Invisibility is a 2nd-level sorcerer/wizard spell",
+          "provenanceStatus": "resolved",
+          "section": "2nd-Level Sorcerer/Wizard Spells",
+          "sourceId": "source.npc-crb-spell-lists",
+          "txtLines": [
+            1077,
+            1123
+          ]
+        }
+      ]
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "damageDieBySize": {
+          "medium": "1d6",
+          "small": "1d4"
+        },
+        "damageType": "P",
+        "finesseWeapon": true
+      },
+      "id": "item.rapier",
+      "name": "Rapier",
+      "priceCp": 2000,
+      "sourceRef": {
+        "entry": "Rapier",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+        "provenanceStatus": "resolved",
+        "section": "Table: Weapons",
+        "sourceId": "source.aon-equipment",
+        "txtLines": [
+          157,
+          157
+        ]
+      },
+      "weightLb": 2,
+      "weightLbBySize": {
+        "medium": 2,
+        "small": 1
+      }
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "attackBonus": 1,
+        "critMultiplier": 2,
+        "critRange": 18,
+        "damageDieBySize": {
+          "medium": "1d6",
+          "small": "1d4"
+        },
+        "damageType": "P",
+        "finesseWeapon": true
+      },
+      "id": "item.rapier-masterwork",
+      "name": "mwk rapier",
+      "priceCp": 32000,
+      "sourceRef": [
+        {
+          "entry": "Rapier: 20 gp, 1d4/1d6, 18-20/x2, 2 lbs., P; Weapon Finesse applies",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            157,
+            157
+          ]
+        },
+        {
+          "entry": "Masterwork weapon: +1 enhancement bonus on attack rolls; +300 gp",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+          "provenanceStatus": "resolved",
+          "section": "Masterwork Weapons",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            294,
+            295
+          ]
+        }
+      ],
+      "weightLb": 2,
+      "weightLbBySize": {
+        "medium": 2,
+        "small": 1
+      }
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "magic",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.ring-of-protection",
+      "name": "Ring of Protection",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.sap",
+      "name": "Sap",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "armor",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.scale-mail",
+      "name": "Scale Mail",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.scythe",
+      "name": "Scythe",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.shortbow",
+      "name": "Shortbow",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Mundane weapons",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "damageDieBySize": {
+          "medium": "1d6",
+          "small": "1d4"
+        },
+        "damageType": "P",
+        "lightWeapon": true
+      },
+      "id": "item.shortsword",
+      "name": "Shortsword",
+      "priceCp": 1000,
+      "sourceRef": {
+        "entry": "Sword, short",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+        "provenanceStatus": "resolved",
+        "section": "Table: Weapons",
+        "sourceId": "source.aon-equipment",
+        "txtLines": [
+          151,
+          151
+        ]
+      },
+      "weightLb": 2,
+      "weightLbBySize": {
+        "medium": 2,
+        "small": 1
+      }
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "damageDie": "1d6",
+        "damageDieBySize": {
+          "medium": "1d6",
+          "small": "1d4"
+        },
+        "damageType": "S"
+      },
+      "id": "item.sickle",
+      "name": "Sickle",
+      "priceCp": 600,
+      "sourceRef": [
+        {
+          "entry": "Sickle",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            118,
+            118
+          ]
+        },
+        {
+          "entry": "Small weapons weigh half the listed Medium weight",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons — Weight column",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            95,
+            95
+          ]
+        }
+      ],
+      "weightLb": 2,
+      "weightLbBySize": {
+        "medium": 2,
+        "small": 1
+      }
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "damageDieBySize": {
+          "medium": "1d4",
+          "small": "1d3"
+        },
+        "damageType": "B"
+      },
+      "id": "item.sling",
+      "name": "Sling",
+      "priceCp": 0,
+      "sourceRef": {
+        "entry": "Sling",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+        "provenanceStatus": "resolved",
+        "section": "Table: Weapons",
+        "sourceId": "source.aon-equipment",
+        "txtLines": [
+          137,
+          137
+        ]
+      },
+      "weightLb": 0,
+      "weightLbBySize": {
+        "medium": 0,
+        "small": 0
+      }
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.spear",
+      "name": "Spear",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Mundane weapons",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "goods",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.spellbook",
+      "name": "Spellbook",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "armor",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.splint-mail",
+      "name": "Splint Mail",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "armor",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.studded-leather",
+      "name": "Studded Leather",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "armor",
+      "effects": {
+        "armorBonus": 3,
+        "armorCheckPenalty": -1,
+        "maxDex": 5
+      },
+      "id": "item.studded-leather-armor",
+      "name": "Studded Leather",
+      "priceCp": 2500,
+      "sourceRef": {
+        "entry": "Studded leather",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+        "provenanceStatus": "resolved",
+        "section": "Table: Armor and Shields",
+        "sourceId": "source.aon-equipment",
+        "txtLines": [
+          325,
+          325
+        ]
+      },
+      "weightLb": 20,
+      "weightLbBySize": {
+        "medium": 20,
+        "small": 10
+      }
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "armor",
+      "effects": {
+        "armorBonus": 4,
+        "armorCheckPenalty": 0,
+        "maxDex": 5
+      },
+      "id": "item.studded-leather-plus-1",
+      "name": "+1 studded leather armor",
+      "npcGearCategory": "protection",
+      "priceCp": 117500,
+      "sourceRef": [
+        {
+          "entry": "Studded leather: 25 gp, +3 armor, +5 max Dex, -1 check penalty",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+          "provenanceStatus": "resolved",
+          "section": "Table: Armor and Shields",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            325,
+            325
+          ]
+        },
+        {
+          "entry": "Masterwork armor costs an extra 150 gp and lessens the armor check penalty by 1",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+          "provenanceStatus": "resolved",
+          "section": "Masterwork Armor",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            381,
+            383
+          ]
+        },
+        {
+          "entry": "+1 armor base price 1,000 gp",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Magic%20Armor&Category=Magic%20Items",
+          "provenanceStatus": "resolved",
+          "section": "Table 15-3: Armor and Shields",
+          "sourceId": "source.aon-magic-armor",
+          "txtLines": [
+            17,
+            17
+          ]
+        },
+        {
+          "entry": "Enhancement bonuses stack with regular armor bonuses; all magic armor is masterwork, reducing the armor check penalty by 1",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Magic%20Armor&Category=Magic%20Items",
+          "provenanceStatus": "resolved",
+          "section": "Magic Armor",
+          "sourceId": "source.aon-magic-armor",
+          "txtLines": [
+            3,
+            3
+          ]
+        }
+      ],
+      "weightLb": 20,
+      "weightLbBySize": {
+        "medium": 20,
+        "small": 10
+      }
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "goods",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.torch",
+      "name": "Torch",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "shield",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.tower-shield",
+      "name": "Tower Shield",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "goods",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.trail-rations",
+      "name": "Trail Rations",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.trident",
+      "name": "Trident",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "magic",
+      "effects": {
+        "activation": "spell-trigger",
+        "casterLevel": 1,
+        "charges": 50,
+        "spellId": "spell.burning-hands",
+        "spellLevel": 1
+      },
+      "id": "item.wand-of-burning-hands",
+      "name": "Wand of Burning Hands",
+      "npcGearCategory": "weapons",
+      "priceCp": 75000,
+      "sourceRef": [
+        {
+          "entry": "1st-level wand formula and price",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Wands&Category=Magic%20Items",
+          "provenanceStatus": "resolved",
+          "section": "Wands; Table 15-17",
+          "sourceId": "source.aon-wands",
+          "txtLines": [
+            3,
+            21
+          ]
+        },
+        {
+          "entry": "Harmful spellcaster wands count as weapons",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+          "provenanceStatus": "resolved",
+          "section": "Step 6: Gear categories",
+          "sourceId": "source.aon-creating-npcs",
+          "txtLines": [
+            77,
+            77
+          ]
+        }
+      ],
+      "weightLb": 0
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "magic",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.wand-of-cure-light-wounds",
+      "name": "Wand of Cure Light Wounds",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.warhammer",
+      "name": "Warhammer",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "goods",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.waterskin",
+      "name": "Waterskin",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "weapon",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.whip",
+      "name": "Whip",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
+    },
+    {
+      "catalogStatus": "gap",
+      "category": "goods",
+      "effects": null,
+      "gapCode": "core-rulebook-equipment",
+      "id": "item.wooden-holy-symbol",
+      "name": "Wooden Holy Symbol",
+      "priceCp": null,
+      "sourceRef": {
+        "entry": "Core weapons, armor, goods, and required magic items",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          26,
+          26
+        ]
+      },
+      "weightLb": null
     }
-   ]
-  },
-  {
-   "id": "item.banded-mail",
-   "name": "Banded Mail",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "armor",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.battleaxe",
-   "name": "Battleaxe",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Mundane weapons",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.bedroll",
-   "name": "Bedroll",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "goods",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.belt-of-giant-strength",
-   "name": "Belt of Giant Strength",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "magic",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.breastplate",
-   "name": "Breastplate",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "armor",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Mundane armor",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.buckler",
-   "name": "Buckler",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "shield",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.chain-shirt",
-   "name": "Chain Shirt",
-   "catalogStatus": "resolved",
-   "category": "armor",
-   "priceCp": 10000,
-   "weightLb": 25,
-   "effects": {
-    "armorBonus": 4,
-    "maxDex": 4,
-    "armorCheckPenalty": -2
-   },
-   "sourceRef": {
-    "sourceId": "source.aon-equipment",
-    "section": "Table: Armor and Shields",
-    "txtLines": [
-     326,
-     326
-    ],
-    "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
-    "entry": "Chain shirt",
-    "provenanceStatus": "resolved"
-   }
-  },
-  {
-   "id": "item.chainmail",
-   "name": "Chainmail",
-   "catalogStatus": "resolved",
-   "category": "armor",
-   "priceCp": 15000,
-   "weightLb": 40,
-   "effects": {
-    "armorBonus": 6,
-    "maxDex": 2,
-    "armorCheckPenalty": -5
-   },
-   "sourceRef": {
-    "sourceId": "source.aon-equipment",
-    "section": "Table: Armor and Shields",
-    "txtLines": [
-     330,
-     330
-    ],
-    "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
-    "entry": "Chainmail",
-    "provenanceStatus": "resolved"
-   },
-   "weightLbBySize": {
-    "small": 20,
-    "medium": 40
-   }
-  },
-  {
-   "id": "item.cloak-of-resistance",
-   "name": "Cloak of Resistance",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "magic",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.cloak-of-resistance-1",
-   "name": "Cloak of Resistance +1",
-   "catalogStatus": "resolved",
-   "category": "magic",
-   "priceCp": 100000,
-   "weightLb": 1,
-   "effects": {
-    "resistanceBonus": 1
-   },
-   "sourceRef": [
-    {
-     "sourceId": "source.aon-cloak-of-resistance",
-     "section": "Cloak of Resistance",
-     "txtLines": [
-      1,
-      11
-     ],
-     "entry": "Cloak of Resistance +1",
-     "provenanceStatus": "resolved",
-     "officialUrl": "https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=Cloak%20of%20Resistance1"
-    },
-    {
-     "sourceId": "source.aon-creating-npcs",
-     "section": "Step 6: Gear categories",
-     "txtLines": [
-      78,
-      78
-     ],
-     "entry": "Save-augmenting magic items count as protection",
-     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
-     "provenanceStatus": "resolved"
-    }
-   ],
-   "npcGearCategory": "protection"
-  },
-  {
-   "id": "item.club",
-   "name": "Club",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Mundane weapons",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.dagger",
-   "name": "Dagger",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Mundane weapons",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.explorers-outfit",
-   "name": "Explorer's Outfit",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "goods",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.falchion",
-   "name": "Falchion",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.flint-and-steel",
-   "name": "Flint and Steel",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "goods",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.full-plate",
-   "name": "Full-Plate",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "armor",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.gauntlet",
-   "name": "Gauntlet",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.greataxe",
-   "name": "Greataxe",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.greatsword",
-   "name": "Greatsword",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.halberd",
-   "name": "Halberd",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.half-plate",
-   "name": "Half-Plate",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "armor",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.handaxe",
-   "name": "Handaxe",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.headband-of-vast-intelligence",
-   "name": "Headband of Vast Intelligence",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "magic",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.heavy-crossbow",
-   "name": "Heavy Crossbow",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.heavy-flail",
-   "name": "Heavy Flail",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.heavy-steel-shield",
-   "name": "Heavy Steel Shield",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "shield",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Mundane shields",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.heavy-wooden-shield",
-   "name": "Heavy Wooden Shield",
-   "catalogStatus": "resolved",
-   "category": "shield",
-   "priceCp": 700,
-   "weightLb": 10,
-   "weightLbBySize": {
-    "small": 5,
-    "medium": 10
-   },
-   "effects": {
-    "shieldBonus": 2,
-    "armorCheckPenalty": -2
-   },
-   "sourceRef": [
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Table: Armor and Shields",
-     "txtLines": [
-      341,
-      341
-     ],
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
-     "entry": "Shield, heavy wooden",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Armor Weight column",
-     "txtLines": [
-      317,
-      317
-     ],
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
-     "entry": "Armor fitted for Small characters weighs half as much (shields share Table: Armor and Shields)",
-     "provenanceStatus": "resolved"
-    }
-   ]
-  },
-  {
-   "id": "item.hempen-rope",
-   "name": "Hempen Rope (50 ft.)",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "goods",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.hide-armor",
-   "name": "Hide Armor",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "armor",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.javelin",
-   "name": "Javelin",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.lance",
-   "name": "Lance",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.leather-armor",
-   "name": "Leather Armor",
-   "catalogStatus": "resolved",
-   "category": "armor",
-   "priceCp": 1000,
-   "weightLb": 15,
-   "weightLbBySize": {
-    "small": 7.5,
-    "medium": 15
-   },
-   "effects": {
-    "armorBonus": 2,
-    "maxDex": 6,
-    "armorCheckPenalty": 0
-   },
-   "sourceRef": [
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Table: Armor and Shields",
-     "txtLines": [
-      324,
-      324
-     ],
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
-     "entry": "Leather armor",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Armor Weight column",
-     "txtLines": [
-      317,
-      317
-     ],
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
-     "entry": "Armor fitted for Small characters weighs half as much",
-     "provenanceStatus": "resolved"
-    }
-   ]
-  },
-  {
-   "id": "item.light-crossbow",
-   "name": "Light Crossbow",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.light-flail",
-   "name": "Light Flail",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.light-hammer",
-   "name": "Light Hammer",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.light-steel-shield",
-   "name": "Light Steel Shield",
-   "catalogStatus": "resolved",
-   "category": "shield",
-   "priceCp": 900,
-   "weightLb": 6,
-   "effects": {
-    "shieldBonus": 1,
-    "armorCheckPenalty": -1
-   },
-   "sourceRef": {
-    "sourceId": "source.aon-equipment",
-    "section": "Table: Armor and Shields",
-    "txtLines": [
-     340,
-     340
-    ],
-    "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
-    "entry": "Shield, light steel",
-    "provenanceStatus": "resolved"
-   }
-  },
-  {
-   "id": "item.longbow",
-   "name": "Longbow",
-   "catalogStatus": "resolved",
-   "category": "weapon",
-   "priceCp": 7500,
-   "weightLb": 3,
-   "effects": {
-    "damageDieBySize": {
-     "small": "1d6",
-     "medium": "1d8"
-    },
-    "damageType": "P",
-    "critMultiplier": 3,
-    "rangeIncrement": 100,
-    "noStrengthToDamage": true
-   },
-   "sourceRef": [
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Table: Weapons",
-     "txtLines": [
-      176,
-      176
-     ],
-     "entry": "Longbow: 75 gp, 1d6/1d8, x3, 100 ft. range increment, 3 lbs., P",
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Projectile Weapons",
-     "txtLines": [
-      55,
-      55
-     ],
-     "entry": "No Strength bonus on damage rolls with projectile weapons",
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Weapon Descriptions: Longbow",
-     "txtLines": [
-      250,
-      250
-     ],
-     "entry": "Two-handed; a Strength penalty applies but a non-composite longbow gains no Strength bonus",
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
-     "provenanceStatus": "resolved"
-    }
-   ]
-  },
-  {
-   "id": "item.longbow-plus-1",
-   "name": "Longbow +1",
-   "catalogStatus": "resolved",
-   "category": "weapon",
-   "priceCp": 237500,
-   "weightLb": 3,
-   "effects": {
-    "damageDieBySize": {
-     "small": "1d6",
-     "medium": "1d8"
-    },
-    "damageType": "P",
-    "critMultiplier": 3,
-    "rangeIncrement": 100,
-    "noStrengthToDamage": true,
-    "attackBonus": 1,
-    "damageBonus": 1
-   },
-   "sourceRef": [
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Table: Weapons",
-     "txtLines": [
-      176,
-      176
-     ],
-     "entry": "Longbow base price 75 gp",
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.aon-magic-weapons",
-     "section": "Table 15-8: Weapons",
-     "txtLines": [
-      21,
-      21
-     ],
-     "entry": "+1 weapon enhancement base price 2,000 gp",
-     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Magic%20Weapons&Category=Magic%20Items",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Masterwork Weapons",
-     "txtLines": [
-      294,
-      295
-     ],
-     "entry": "Masterwork quality adds 300 gp and a +1 attack bonus",
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.aon-magic-weapons",
-     "section": "Magic Weapons",
-     "txtLines": [
-      4,
-      4
-     ],
-     "entry": "Enhancement bonuses apply to both attack and damage; the masterwork attack bonus does not stack with the enhancement bonus",
-     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Magic%20Weapons&Category=Magic%20Items",
-     "provenanceStatus": "resolved"
-    }
-   ]
-  },
-  {
-   "id": "item.longsword",
-   "name": "Longsword",
-   "catalogStatus": "resolved",
-   "category": "weapon",
-   "priceCp": 1500,
-   "weightLb": 4,
-   "effects": {
-    "damageDie": "1d8",
-    "damageType": "S"
-   },
-   "sourceRef": {
-    "sourceId": "source.aon-equipment",
-    "section": "Table: Weapons",
-    "txtLines": [
-     155,
-     155
-    ],
-    "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
-    "entry": "Longsword",
-    "provenanceStatus": "resolved"
-   }
-  },
-  {
-   "id": "item.morningstar",
-   "name": "Morningstar",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.padded-armor",
-   "name": "Padded Armor",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "armor",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.potion-of-cure-light-wounds",
-   "name": "Potion of Cure Light Wounds",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "magic",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.potion-of-cure-moderate-wounds",
-   "name": "Potion of Cure Moderate Wounds",
-   "catalogStatus": "resolved",
-   "category": "magic",
-   "priceCp": 30000,
-   "effects": {},
-   "npcGearCategory": "limitedUse",
-   "sourceRef": [
-    {
-     "sourceId": "source.aon-potions",
-     "section": "Table 15-12: Potions; Potion Costs",
-     "txtLines": [
-      19,
-      23
-     ],
-     "entry": "2nd-level potion brewed by a cleric, druid, or wizard at caster level 3rd costs 300 gp",
-     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Potions&Category=Magic%20Items",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.npc-crb-spell-lists",
-     "section": "2nd-Level Cleric Spells",
-     "txtLines": [
-      306,
-      315
-     ],
-     "entry": "Cure Moderate Wounds is a 2nd-level cleric spell",
-     "provenanceStatus": "resolved"
-    }
-   ]
-  },
-  {
-   "id": "item.potion-of-invisibility",
-   "name": "Potion of Invisibility",
-   "catalogStatus": "resolved",
-   "category": "magic",
-   "priceCp": 40000,
-   "effects": {},
-   "npcGearCategory": "limitedUse",
-   "sourceRef": [
-    {
-     "sourceId": "source.aon-potions",
-     "section": "Table 15-12: Potions; Potion Costs",
-     "txtLines": [
-      19,
-      23
-     ],
-     "entry": "2nd-level potion brewed by a sorcerer costs 400 gp",
-     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Potions&Category=Magic%20Items",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.npc-crb-spell-lists",
-     "section": "2nd-Level Sorcerer/Wizard Spells",
-     "txtLines": [
-      1077,
-      1123
-     ],
-     "entry": "Invisibility is a 2nd-level sorcerer/wizard spell",
-     "provenanceStatus": "resolved"
-    }
-   ]
-  },
-  {
-   "id": "item.rapier",
-   "name": "Rapier",
-   "catalogStatus": "resolved",
-   "category": "weapon",
-   "priceCp": 2000,
-   "weightLb": 2,
-   "effects": {
-    "damageDieBySize": {
-     "small": "1d4",
-     "medium": "1d6"
-    },
-    "damageType": "P",
-    "finesseWeapon": true
-   },
-   "sourceRef": {
-    "sourceId": "source.aon-equipment",
-    "section": "Table: Weapons",
-    "txtLines": [
-     157,
-     157
-    ],
-    "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
-    "entry": "Rapier",
-    "provenanceStatus": "resolved"
-   },
-   "weightLbBySize": {
-    "small": 1,
-    "medium": 2
-   }
-  },
-  {
-   "id": "item.rapier-masterwork",
-   "name": "Masterwork Rapier",
-   "catalogStatus": "resolved",
-   "category": "weapon",
-   "priceCp": 32000,
-   "weightLb": 2,
-   "weightLbBySize": {
-    "small": 1,
-    "medium": 2
-   },
-   "effects": {
-    "damageDieBySize": {
-     "small": "1d4",
-     "medium": "1d6"
-    },
-    "damageType": "P",
-    "critRange": 18,
-    "critMultiplier": 2,
-    "finesseWeapon": true,
-    "attackBonus": 1
-   },
-   "sourceRef": [
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Table: Weapons",
-     "txtLines": [
-      157,
-      157
-     ],
-     "entry": "Rapier: 20 gp, 1d4/1d6, 18-20/x2, 2 lbs., P; Weapon Finesse applies",
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Masterwork Weapons",
-     "txtLines": [
-      294,
-      295
-     ],
-     "entry": "Masterwork weapon: +1 enhancement bonus on attack rolls; +300 gp",
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
-     "provenanceStatus": "resolved"
-    }
-   ]
-  },
-  {
-   "id": "item.ring-of-protection",
-   "name": "Ring of Protection",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "magic",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.sap",
-   "name": "Sap",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.scale-mail",
-   "name": "Scale Mail",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "armor",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.scythe",
-   "name": "Scythe",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.shortbow",
-   "name": "Shortbow",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Mundane weapons",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.shortsword",
-   "name": "Shortsword",
-   "catalogStatus": "resolved",
-   "category": "weapon",
-   "priceCp": 1000,
-   "weightLb": 2,
-   "weightLbBySize": {
-    "small": 1,
-    "medium": 2
-   },
-   "effects": {
-    "damageDieBySize": {
-     "small": "1d4",
-     "medium": "1d6"
-    },
-    "damageType": "P",
-    "lightWeapon": true
-   },
-   "sourceRef": {
-    "sourceId": "source.aon-equipment",
-    "section": "Table: Weapons",
-    "txtLines": [
-     151,
-     151
-    ],
-    "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
-    "entry": "Sword, short",
-    "provenanceStatus": "resolved"
-   }
-  },
-  {
-   "id": "item.sickle",
-   "name": "Sickle",
-   "catalogStatus": "resolved",
-   "category": "weapon",
-   "priceCp": 600,
-   "weightLb": 2,
-   "weightLbBySize": {
-    "small": 1,
-    "medium": 2
-   },
-   "effects": {
-    "damageDie": "1d6",
-    "damageDieBySize": {
-     "small": "1d4",
-     "medium": "1d6"
-    },
-    "damageType": "S"
-   },
-   "sourceRef": [
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Table: Weapons",
-     "txtLines": [
-      118,
-      118
-     ],
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
-     "entry": "Sickle",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Table: Weapons — Weight column",
-     "txtLines": [
-      95,
-      95
-     ],
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
-     "entry": "Small weapons weigh half the listed Medium weight",
-     "provenanceStatus": "resolved"
-    }
-   ]
-  },
-  {
-   "id": "item.sling",
-   "name": "Sling",
-   "catalogStatus": "resolved",
-   "category": "weapon",
-   "priceCp": 0,
-   "weightLb": 0,
-   "effects": {
-    "damageDieBySize": {
-     "small": "1d3",
-     "medium": "1d4"
-    },
-    "damageType": "B"
-   },
-   "sourceRef": {
-    "sourceId": "source.aon-equipment",
-    "section": "Table: Weapons",
-    "txtLines": [
-     137,
-     137
-    ],
-    "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
-    "entry": "Sling",
-    "provenanceStatus": "resolved"
-   },
-   "weightLbBySize": {
-    "small": 0,
-    "medium": 0
-   }
-  },
-  {
-   "id": "item.spear",
-   "name": "Spear",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Mundane weapons",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.spellbook",
-   "name": "Spellbook",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "goods",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.splint-mail",
-   "name": "Splint Mail",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "armor",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.studded-leather",
-   "name": "Studded Leather",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "armor",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.studded-leather-armor",
-   "name": "Studded Leather",
-   "catalogStatus": "resolved",
-   "category": "armor",
-   "priceCp": 2500,
-   "weightLb": 20,
-   "weightLbBySize": {
-    "small": 10,
-    "medium": 20
-   },
-   "effects": {
-    "armorBonus": 3,
-    "maxDex": 5,
-    "armorCheckPenalty": -1
-   },
-   "sourceRef": {
-    "sourceId": "source.aon-equipment",
-    "section": "Table: Armor and Shields",
-    "txtLines": [
-     325,
-     325
-    ],
-    "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
-    "entry": "Studded leather",
-    "provenanceStatus": "resolved"
-   }
-  },
-  {
-   "id": "item.studded-leather-plus-1",
-   "name": "Studded Leather +1",
-   "catalogStatus": "resolved",
-   "category": "armor",
-   "priceCp": 117500,
-   "weightLb": 20,
-   "weightLbBySize": {
-    "small": 10,
-    "medium": 20
-   },
-   "effects": {
-    "armorBonus": 4,
-    "maxDex": 5,
-    "armorCheckPenalty": 0
-   },
-   "npcGearCategory": "protection",
-   "sourceRef": [
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Table: Armor and Shields",
-     "txtLines": [
-      325,
-      325
-     ],
-     "entry": "Studded leather: 25 gp, +3 armor, +5 max Dex, -1 check penalty",
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.aon-equipment",
-     "section": "Masterwork Armor",
-     "txtLines": [
-      381,
-      383
-     ],
-     "entry": "Masterwork armor costs an extra 150 gp and lessens the armor check penalty by 1",
-     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.aon-magic-armor",
-     "section": "Table 15-3: Armor and Shields",
-     "txtLines": [
-      17,
-      17
-     ],
-     "entry": "+1 armor base price 1,000 gp",
-     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Magic%20Armor&Category=Magic%20Items",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.aon-magic-armor",
-     "section": "Magic Armor",
-     "txtLines": [
-      3,
-      3
-     ],
-     "entry": "Enhancement bonuses stack with regular armor bonuses; all magic armor is masterwork, reducing the armor check penalty by 1",
-     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Magic%20Armor&Category=Magic%20Items",
-     "provenanceStatus": "resolved"
-    }
-   ]
-  },
-  {
-   "id": "item.torch",
-   "name": "Torch",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "goods",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.tower-shield",
-   "name": "Tower Shield",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "shield",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.trail-rations",
-   "name": "Trail Rations",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "goods",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.trident",
-   "name": "Trident",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.wand-of-burning-hands",
-   "name": "Wand of Burning Hands",
-   "catalogStatus": "resolved",
-   "category": "magic",
-   "priceCp": 75000,
-   "weightLb": 0,
-   "effects": {
-    "spellId": "spell.burning-hands",
-    "spellLevel": 1,
-    "casterLevel": 1,
-    "charges": 50,
-    "activation": "spell-trigger"
-   },
-   "sourceRef": [
-    {
-     "sourceId": "source.aon-wands",
-     "section": "Wands; Table 15-17",
-     "txtLines": [
-      3,
-      21
-     ],
-     "entry": "1st-level wand formula and price",
-     "provenanceStatus": "resolved",
-     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Wands&Category=Magic%20Items"
-    },
-    {
-     "sourceId": "source.aon-creating-npcs",
-     "section": "Step 6: Gear categories",
-     "txtLines": [
-      77,
-      77
-     ],
-     "entry": "Harmful spellcaster wands count as weapons",
-     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
-     "provenanceStatus": "resolved"
-    }
-   ],
-   "npcGearCategory": "weapons"
-  },
-  {
-   "id": "item.wand-of-cure-light-wounds",
-   "name": "Wand of Cure Light Wounds",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "magic",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.warhammer",
-   "name": "Warhammer",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.waterskin",
-   "name": "Waterskin",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "goods",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.whip",
-   "name": "Whip",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "item.wooden-holy-symbol",
-   "name": "Wooden Holy Symbol",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
-   "category": "goods",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
-  }
- ]
+  ],
+  "section": "items"
 }

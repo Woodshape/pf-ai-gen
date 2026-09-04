@@ -134,7 +134,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:bece814ca99d7fce1afb25c1f4dbab526b10da81112c6ad5b1dd2e99fcf5bfb0",
+  "catalogVersion": "sha256:11791885adc6a12958eb0a9ddefe54bcd4534402e6baaae32a902c99d98cda30",
   "classFeatures": {
     "npc-class-feature.bard-cantrips": {
       "catalogStatus": "resolved",
@@ -2192,7 +2192,8 @@
             70
           ]
         }
-      ]
+      ],
+      "statblockRole": "specialAttack"
     },
     "npc-class-feature.ranger-favored-terrain": {
       "allowedValues": [
@@ -2223,7 +2224,8 @@
             92
           ]
         }
-      ]
+      ],
+      "statblockRole": "specialAttack"
     },
     "npc-class-feature.ranger-hunters-bond": {
       "allowedValues": [
@@ -2254,7 +2256,8 @@
             95
           ]
         }
-      ]
+      ],
+      "statblockRole": "sq"
     },
     "npc-class-feature.ranger-proficiencies": {
       "catalogStatus": "resolved",
@@ -2348,7 +2351,8 @@
             71
           ]
         }
-      ]
+      ],
+      "statblockRole": "sq"
     },
     "npc-class-feature.ranger-wild-empathy": {
       "catalogStatus": "resolved",
@@ -2392,7 +2396,8 @@
             39
           ]
         }
-      ]
+      ],
+      "statblockRole": "defensiveAbility"
     },
     "npc-class-feature.rogue-proficiencies": {
       "catalogStatus": "resolved",
@@ -2467,7 +2472,8 @@
             14
           ]
         }
-      ]
+      ],
+      "statblockRole": "specialAttack"
     },
     "npc-class-feature.rogue-talents": {
       "allowedValues": [
@@ -2532,7 +2538,8 @@
             123
           ]
         }
-      ]
+      ],
+      "statblockRole": "specialAttack"
     },
     "npc-class-feature.rogue-trapfinding": {
       "catalogStatus": "resolved",
@@ -2554,7 +2561,8 @@
             38
           ]
         }
-      ]
+      ],
+      "statblockRole": "sq"
     },
     "npc-class-feature.sorcerer-bloodlines": {
       "allowedValues": [
@@ -15167,7 +15175,7 @@
       "category": "goods",
       "effects": {},
       "id": "item.arrows-20",
-      "name": "Arrows (20)",
+      "name": "arrows (20)",
       "priceCp": 100,
       "sourceRef": [
         {
@@ -16153,7 +16161,7 @@
         "rangeIncrement": 100
       },
       "id": "item.longbow-plus-1",
-      "name": "Longbow +1",
+      "name": "+1 longbow",
       "priceCp": 237500,
       "sourceRef": [
         {
@@ -16307,7 +16315,7 @@
       "category": "magic",
       "effects": {},
       "id": "item.potion-of-cure-moderate-wounds",
-      "name": "Potion of Cure Moderate Wounds",
+      "name": "potion of cure moderate wounds",
       "npcGearCategory": "limitedUse",
       "priceCp": 30000,
       "sourceRef": [
@@ -16343,7 +16351,7 @@
       "category": "magic",
       "effects": {},
       "id": "item.potion-of-invisibility",
-      "name": "Potion of Invisibility",
+      "name": "potion of invisibility",
       "npcGearCategory": "limitedUse",
       "priceCp": 40000,
       "sourceRef": [
@@ -16422,7 +16430,7 @@
         "finesseWeapon": true
       },
       "id": "item.rapier-masterwork",
-      "name": "Masterwork Rapier",
+      "name": "mwk rapier",
       "priceCp": 32000,
       "sourceRef": [
         {
@@ -16808,7 +16816,7 @@
         "maxDex": 5
       },
       "id": "item.studded-leather-plus-1",
-      "name": "Studded Leather +1",
+      "name": "+1 studded leather armor",
       "npcGearCategory": "protection",
       "priceCp": 117500,
       "sourceRef": [
@@ -17156,8 +17164,45 @@
       ],
       "catalogStatus": "resolved",
       "choiceSlots": [],
+      "conditionalSaves": {
+        "will": {
+          "bonus": 2,
+          "condition": "against enchantment",
+          "sourceRef": {
+            "entry": "Standard Elf racial traits; the +2 saving throw bonus against enchantment stays conditional in the Elven Immunities trait text",
+            "file": "sources/npc/aonprd/core-races.txt",
+            "officialUrl": "https://legacy.aonprd.com/coreRulebook/races.html",
+            "provenanceStatus": "resolved",
+            "section": "Elf Racial Traits",
+            "sha256": "281a370dc1bff2a537f68449fcf808c2a6d8d8a131012e56522c1c5db60cab90",
+            "sourceId": "source.aon-core-races",
+            "txtLines": [
+              28,
+              37
+            ]
+          }
+        }
+      },
       "featSlots": [],
       "id": "npc-race.elf",
+      "immunities": {
+        "sourceRef": {
+          "entry": "Standard Elf racial traits; the +2 saving throw bonus against enchantment stays conditional in the Elven Immunities trait text",
+          "file": "sources/npc/aonprd/core-races.txt",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/races.html",
+          "provenanceStatus": "resolved",
+          "section": "Elf Racial Traits",
+          "sha256": "281a370dc1bff2a537f68449fcf808c2a6d8d8a131012e56522c1c5db60cab90",
+          "sourceId": "source.aon-core-races",
+          "txtLines": [
+            28,
+            37
+          ]
+        },
+        "values": [
+          "sleep"
+        ]
+      },
       "languages": [
         "Common",
         "Elven"

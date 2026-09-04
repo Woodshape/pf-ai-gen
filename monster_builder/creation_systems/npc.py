@@ -424,6 +424,8 @@ class NpcCreation(CreationSystem):
             "creatureType": f"humanoid ({race['subtype']})" if race.get("subtype") else "humanoid",
             "alignment": selections.get("details", {}).get("alignment"),
             "resistances": resistances,
+            "immunities": copy.deepcopy((race.get("immunities") or {}).get("values", [])),
+            "conditionalSaves": copy.deepcopy(race.get("conditionalSaves")),
             "details": copy.deepcopy(selections.get("details", {})),
         }
         if class_record["id"] == "npc-class.druid":
@@ -666,6 +668,8 @@ class NpcCreation(CreationSystem):
             "creatureType": f"humanoid ({race['subtype']})" if race.get("subtype") else "humanoid",
             "alignment": selections.get("details", {}).get("alignment"),
             "resistances": resistances,
+            "immunities": copy.deepcopy((race.get("immunities") or {}).get("values", [])),
+            "conditionalSaves": copy.deepcopy(race.get("conditionalSaves")),
             "details": copy.deepcopy(selections.get("details", {})),
         }
         trace = [
@@ -1062,6 +1066,8 @@ class NpcCreation(CreationSystem):
                     entry: dict[str, Any] = {
                         "featureId": record["id"], "name": record["name"], "sourceRefs": _refs(record),
                     }
+                    if record.get("statblockRole"):
+                        entry["statblockRole"] = record["statblockRole"]
                     if record.get("effects"):
                         entry["effects"] = copy.deepcopy(record["effects"])
                     features.append(entry)
@@ -1902,6 +1908,7 @@ class NpcCreation(CreationSystem):
             attack = {
                 "name": item["name"], "itemId": item["itemId"], "attackBonuses": [attack_bonus],
                 "attackBonusExpression": _bonus(attack_bonus),
+                "attackType": "ranged" if ranged else "melee",
                 "damageExpression": f"{damage_die}{_bonus(damage_bonus) if damage_bonus else ''}",
                 "damageType": effects.get("damageType"),
             }

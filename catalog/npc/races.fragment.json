@@ -1,412 +1,445 @@
 {
- "section": "races",
- "records": [
-  {
-   "id": "npc-race.human",
-   "name": "Human",
-   "catalogStatus": "resolved",
-   "abilityAdjustments": {
-    "strength": 0,
-    "dexterity": 0,
-    "constitution": 0,
-    "intelligence": 0,
-    "wisdom": 0,
-    "charisma": 0
-   },
-   "sizeId": "size.medium",
-   "speed": {
-    "land": 30
-   },
-   "senses": [],
-   "traits": [
-    "Bonus Feat",
-    "Skilled"
-   ],
-   "languages": [
-    "Common"
-   ],
-   "skillSelectionsBonus": 1,
-   "sizeModifiers": {
-    "ac": 0,
-    "attack": 0,
-    "cmb": 0,
-    "cmd": 0
-   },
-   "choiceSlots": [
+  "records": [
     {
-     "choiceId": "ability-bonus",
-     "name": "+2 ability score",
-     "kind": "ability",
-     "required": true,
-     "catalogStatus": "resolved",
-     "allowedValues": [
-      "strength",
-      "dexterity",
-      "constitution",
-      "intelligence",
-      "wisdom",
-      "charisma"
-     ],
-     "options": {
-      "strength": {
-       "effects": {
-        "abilityAdjustments": {
-         "strength": 2
-        }
-       }
+      "abilityAdjustments": {
+        "charisma": 0,
+        "constitution": 0,
+        "dexterity": 0,
+        "intelligence": 0,
+        "strength": 0,
+        "wisdom": 0
       },
-      "dexterity": {
-       "effects": {
-        "abilityAdjustments": {
-         "dexterity": 2
+      "catalogStatus": "resolved",
+      "choiceSlots": [
+        {
+          "allowedValues": [
+            "strength",
+            "dexterity",
+            "constitution",
+            "intelligence",
+            "wisdom",
+            "charisma"
+          ],
+          "catalogStatus": "resolved",
+          "choiceId": "ability-bonus",
+          "kind": "ability",
+          "name": "+2 ability score",
+          "options": {
+            "charisma": {
+              "effects": {
+                "abilityAdjustments": {
+                  "charisma": 2
+                }
+              }
+            },
+            "constitution": {
+              "effects": {
+                "abilityAdjustments": {
+                  "constitution": 2
+                }
+              }
+            },
+            "dexterity": {
+              "effects": {
+                "abilityAdjustments": {
+                  "dexterity": 2
+                }
+              }
+            },
+            "intelligence": {
+              "effects": {
+                "abilityAdjustments": {
+                  "intelligence": 2
+                }
+              }
+            },
+            "strength": {
+              "effects": {
+                "abilityAdjustments": {
+                  "strength": 2
+                }
+              }
+            },
+            "wisdom": {
+              "effects": {
+                "abilityAdjustments": {
+                  "wisdom": 2
+                }
+              }
+            }
+          },
+          "required": true,
+          "sourceRef": {
+            "entry": "+2 to One Ability Score",
+            "provenanceStatus": "resolved",
+            "section": "Human Racial Traits",
+            "sourceId": "source.aon-core-races",
+            "txtLines": [
+              121,
+              122
+            ]
+          }
         }
-       }
-      },
-      "constitution": {
-       "effects": {
-        "abilityAdjustments": {
-         "constitution": 2
-        }
-       }
-      },
-      "intelligence": {
-       "effects": {
-        "abilityAdjustments": {
-         "intelligence": 2
-        }
-       }
-      },
-      "wisdom": {
-       "effects": {
-        "abilityAdjustments": {
-         "wisdom": 2
-        }
-       }
-      },
-      "charisma": {
-       "effects": {
-        "abilityAdjustments": {
-         "charisma": 2
-        }
-       }
-      }
-     },
-     "sourceRef": {
-      "sourceId": "source.aon-core-races",
-      "section": "Human Racial Traits",
-      "txtLines": [
-       121,
-       122
       ],
-      "entry": "+2 to One Ability Score",
-      "provenanceStatus": "resolved"
-     }
-    }
-   ],
-   "featSlots": [
+      "featSlots": [
+        {
+          "allowedCategories": [
+            "general"
+          ],
+          "grantedAtLevel": 1,
+          "kind": "general",
+          "required": true,
+          "slotId": "human-bonus-feat",
+          "sourceRef": {
+            "entry": "Bonus Feat",
+            "provenanceStatus": "resolved",
+            "section": "Human Racial Traits",
+            "sourceId": "source.aon-core-races",
+            "txtLines": [
+              125,
+              125
+            ]
+          }
+        }
+      ],
+      "id": "npc-race.human",
+      "languages": [
+        "Common"
+      ],
+      "name": "Human",
+      "senses": [],
+      "sizeId": "size.medium",
+      "sizeModifiers": {
+        "ac": 0,
+        "attack": 0,
+        "cmb": 0,
+        "cmd": 0
+      },
+      "skillSelectionsBonus": 1,
+      "sourceRef": {
+        "entry": "Human",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/races.html#humans",
+        "provenanceStatus": "resolved",
+        "section": "Human Racial Traits",
+        "sourceId": "source.aon-core-races",
+        "txtLines": [
+          121,
+          127
+        ]
+      },
+      "speed": {
+        "land": 30
+      },
+      "traits": [
+        "Bonus Feat",
+        "Skilled"
+      ]
+    },
     {
-     "slotId": "human-bonus-feat",
-     "kind": "general",
-     "grantedAtLevel": 1,
-     "required": true,
-     "allowedCategories": [
-      "general"
-     ],
-     "sourceRef": {
-      "sourceId": "source.aon-core-races",
-      "section": "Human Racial Traits",
-      "txtLines": [
-       125,
-       125
+      "abilityAdjustments": null,
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-races",
+      "id": "npc-race.dwarf",
+      "languages": null,
+      "name": "Dwarf",
+      "senses": null,
+      "sizeId": null,
+      "sourceRef": {
+        "entry": "Seven Core races",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          20,
+          20
+        ]
+      },
+      "speed": null,
+      "traits": null
+    },
+    {
+      "abilityAdjustments": {
+        "constitution": -2,
+        "dexterity": 2,
+        "intelligence": 2
+      },
+      "bonusLanguages": [
+        "Celestial",
+        "Draconic",
+        "Gnoll",
+        "Gnome",
+        "Goblin",
+        "Orc",
+        "Sylvan"
       ],
-      "entry": "Bonus Feat",
-      "provenanceStatus": "resolved"
-     }
+      "catalogStatus": "resolved",
+      "choiceSlots": [],
+      "conditionalSaves": {
+        "will": {
+          "bonus": 2,
+          "condition": "against enchantment",
+          "sourceRef": {
+            "entry": "Standard Elf racial traits; the +2 saving throw bonus against enchantment stays conditional in the Elven Immunities trait text",
+            "officialUrl": "https://legacy.aonprd.com/coreRulebook/races.html",
+            "provenanceStatus": "resolved",
+            "section": "Elf Racial Traits",
+            "sourceId": "source.aon-core-races",
+            "txtLines": [
+              28,
+              37
+            ]
+          }
+        }
+      },
+      "featSlots": [],
+      "id": "npc-race.elf",
+      "immunities": {
+        "sourceRef": {
+          "entry": "Standard Elf racial traits; the +2 saving throw bonus against enchantment stays conditional in the Elven Immunities trait text",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/races.html",
+          "provenanceStatus": "resolved",
+          "section": "Elf Racial Traits",
+          "sourceId": "source.aon-core-races",
+          "txtLines": [
+            28,
+            37
+          ]
+        },
+        "values": [
+          "sleep"
+        ]
+      },
+      "languages": [
+        "Common",
+        "Elven"
+      ],
+      "name": "Elf",
+      "senses": [
+        "Low-Light Vision"
+      ],
+      "sizeId": "size.medium",
+      "sizeModifiers": {
+        "ac": 0,
+        "attack": 0,
+        "cmb": 0,
+        "cmd": 0
+      },
+      "skillBonuses": {
+        "skill.perception": 2
+      },
+      "skillSelectionsBonus": 0,
+      "sourceRef": {
+        "entry": "Standard Elf racial traits; the +2 saving throw bonus against enchantment stays conditional in the Elven Immunities trait text",
+        "officialUrl": "https://legacy.aonprd.com/coreRulebook/races.html",
+        "provenanceStatus": "resolved",
+        "section": "Elf Racial Traits",
+        "sourceId": "source.aon-core-races",
+        "txtLines": [
+          28,
+          37
+        ]
+      },
+      "speed": {
+        "land": 30
+      },
+      "subtype": "elf",
+      "traits": [
+        "Elven Immunities",
+        "Elven Magic",
+        "Keen Senses",
+        "Weapon Familiarity"
+      ]
+    },
+    {
+      "abilityAdjustments": null,
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-races",
+      "id": "npc-race.gnome",
+      "languages": null,
+      "name": "Gnome",
+      "senses": null,
+      "sizeId": null,
+      "sourceRef": {
+        "entry": "Seven Core races",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          20,
+          20
+        ]
+      },
+      "speed": null,
+      "traits": null
+    },
+    {
+      "abilityAdjustments": null,
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-races",
+      "id": "npc-race.half-elf",
+      "languages": null,
+      "name": "Half-Elf",
+      "senses": null,
+      "sizeId": null,
+      "sourceRef": {
+        "entry": "Seven Core races",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          20,
+          20
+        ]
+      },
+      "speed": null,
+      "traits": null
+    },
+    {
+      "abilityAdjustments": null,
+      "catalogStatus": "gap",
+      "gapCode": "core-rulebook-races",
+      "id": "npc-race.half-orc",
+      "languages": null,
+      "name": "Half-Orc",
+      "senses": null,
+      "sizeId": null,
+      "sourceRef": {
+        "entry": "Seven Core races",
+        "provenanceStatus": "catalog-gap",
+        "section": "NPC Source-Gap Matrix",
+        "sourceId": "source.npc-gap-matrix",
+        "txtLines": [
+          20,
+          20
+        ]
+      },
+      "speed": null,
+      "traits": null
+    },
+    {
+      "abilityAdjustments": {
+        "charisma": 2,
+        "dexterity": 2,
+        "strength": -2
+      },
+      "bonusLanguages": [
+        "Dwarven",
+        "Elven",
+        "Gnome",
+        "Goblin"
+      ],
+      "catalogStatus": "resolved",
+      "choiceSlots": [],
+      "featSlots": [],
+      "id": "npc-race.halfling",
+      "languages": [
+        "Common",
+        "Halfling"
+      ],
+      "name": "Halfling",
+      "saveBonuses": {
+        "fortitude": 1,
+        "reflex": 1,
+        "will": 1
+      },
+      "senses": [],
+      "sizeId": "size.small",
+      "sizeModifiers": {
+        "ac": 1,
+        "attack": 1,
+        "cmb": -1,
+        "cmd": -1
+      },
+      "skillBonuses": {
+        "skill.acrobatics": 2,
+        "skill.climb": 2,
+        "skill.perception": 2,
+        "skill.stealth": 4
+      },
+      "skillSelectionsBonus": 0,
+      "sourceRef": {
+        "entry": "Standard Halfling racial traits",
+        "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Halfling",
+        "provenanceStatus": "resolved",
+        "section": "Halfling Racial Traits",
+        "sourceId": "source.aon-halfling",
+        "txtLines": [
+          18,
+          27
+        ]
+      },
+      "speed": {
+        "land": 20
+      },
+      "subtype": "halfling",
+      "traits": [
+        "Slow Speed",
+        "Fearless",
+        "Halfling Luck",
+        "Keen Senses",
+        "Sure-Footed",
+        "Weapon Familiarity"
+      ]
+    },
+    {
+      "abilityAdjustments": {
+        "charisma": -2,
+        "dexterity": 4,
+        "strength": -2
+      },
+      "bonusLanguages": [
+        "Common",
+        "Draconic",
+        "Dwarven",
+        "Gnoll",
+        "Gnome",
+        "Halfling",
+        "Orc"
+      ],
+      "catalogStatus": "resolved",
+      "choiceSlots": [],
+      "featSlots": [],
+      "id": "npc-race.goblin",
+      "languages": [
+        "Goblin"
+      ],
+      "name": "Goblin",
+      "senses": [
+        "darkvision 60 ft."
+      ],
+      "sizeId": "size.small",
+      "sizeModifiers": {
+        "ac": 1,
+        "attack": 1,
+        "cmb": -1,
+        "cmd": -1
+      },
+      "skillBonuses": {
+        "skill.ride": 4,
+        "skill.stealth": 4
+      },
+      "skillSelectionsBonus": 0,
+      "sourceRef": {
+        "entry": "Standard Goblin racial traits",
+        "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+        "provenanceStatus": "resolved",
+        "section": "Goblin Racial Traits",
+        "sourceId": "source.aon-goblin-race",
+        "txtLines": [
+          15,
+          22
+        ]
+      },
+      "speed": {
+        "land": 30
+      },
+      "subtype": "goblinoid",
+      "traits": [
+        "Fast",
+        "Darkvision",
+        "Skilled"
+      ]
     }
-   ],
-   "sourceRef": {
-    "sourceId": "source.aon-core-races",
-    "section": "Human Racial Traits",
-    "txtLines": [
-     121,
-     127
-    ],
-    "officialUrl": "https://legacy.aonprd.com/coreRulebook/races.html#humans",
-    "entry": "Human",
-    "provenanceStatus": "resolved"
-   }
-  },
-  {
-   "id": "npc-race.dwarf",
-   "name": "Dwarf",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-races",
-   "abilityAdjustments": null,
-   "sizeId": null,
-   "speed": null,
-   "senses": null,
-   "traits": null,
-   "languages": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     20,
-     20
-    ],
-    "entry": "Seven Core races",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "npc-race.elf",
-   "name": "Elf",
-   "catalogStatus": "resolved",
-   "subtype": "elf",
-   "abilityAdjustments": {
-    "dexterity": 2,
-    "intelligence": 2,
-    "constitution": -2
-   },
-   "sizeId": "size.medium",
-   "sizeModifiers": {
-    "ac": 0,
-    "attack": 0,
-    "cmb": 0,
-    "cmd": 0
-   },
-   "speed": {
-    "land": 30
-   },
-   "senses": [
-    "Low-Light Vision"
-   ],
-   "traits": [
-    "Elven Immunities",
-    "Elven Magic",
-    "Keen Senses",
-    "Weapon Familiarity"
-   ],
-   "skillBonuses": {
-    "skill.perception": 2
-   },
-   "languages": [
-    "Common",
-    "Elven"
-   ],
-   "bonusLanguages": [
-    "Celestial",
-    "Draconic",
-    "Gnoll",
-    "Gnome",
-    "Goblin",
-    "Orc",
-    "Sylvan"
-   ],
-   "choiceSlots": [],
-   "featSlots": [],
-   "skillSelectionsBonus": 0,
-   "sourceRef": {
-    "sourceId": "source.aon-core-races",
-    "section": "Elf Racial Traits",
-    "txtLines": [
-     28,
-     37
-    ],
-    "entry": "Standard Elf racial traits; the +2 saving throw bonus against enchantment stays conditional in the Elven Immunities trait text",
-    "officialUrl": "https://legacy.aonprd.com/coreRulebook/races.html",
-    "provenanceStatus": "resolved"
-   }
-  },
-  {
-   "id": "npc-race.gnome",
-   "name": "Gnome",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-races",
-   "abilityAdjustments": null,
-   "sizeId": null,
-   "speed": null,
-   "senses": null,
-   "traits": null,
-   "languages": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     20,
-     20
-    ],
-    "entry": "Seven Core races",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "npc-race.half-elf",
-   "name": "Half-Elf",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-races",
-   "abilityAdjustments": null,
-   "sizeId": null,
-   "speed": null,
-   "senses": null,
-   "traits": null,
-   "languages": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     20,
-     20
-    ],
-    "entry": "Seven Core races",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "npc-race.half-orc",
-   "name": "Half-Orc",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-races",
-   "abilityAdjustments": null,
-   "sizeId": null,
-   "speed": null,
-   "senses": null,
-   "traits": null,
-   "languages": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     20,
-     20
-    ],
-    "entry": "Seven Core races",
-    "provenanceStatus": "catalog-gap"
-   }
-  },
-  {
-   "id": "npc-race.halfling",
-   "name": "Halfling",
-   "catalogStatus": "resolved",
-   "subtype": "halfling",
-   "abilityAdjustments": {
-    "strength": -2,
-    "dexterity": 2,
-    "charisma": 2
-   },
-   "sizeId": "size.small",
-   "sizeModifiers": {
-    "ac": 1,
-    "attack": 1,
-    "cmb": -1,
-    "cmd": -1
-   },
-   "speed": {
-    "land": 20
-   },
-   "senses": [],
-   "traits": [
-    "Slow Speed",
-    "Fearless",
-    "Halfling Luck",
-    "Keen Senses",
-    "Sure-Footed",
-    "Weapon Familiarity"
-   ],
-   "skillBonuses": {
-    "skill.perception": 2,
-    "skill.acrobatics": 2,
-    "skill.climb": 2,
-    "skill.stealth": 4
-   },
-   "saveBonuses": {
-    "fortitude": 1,
-    "reflex": 1,
-    "will": 1
-   },
-   "languages": [
-    "Common",
-    "Halfling"
-   ],
-   "bonusLanguages": [
-    "Dwarven",
-    "Elven",
-    "Gnome",
-    "Goblin"
-   ],
-   "choiceSlots": [],
-   "featSlots": [],
-   "skillSelectionsBonus": 0,
-   "sourceRef": {
-    "sourceId": "source.aon-halfling",
-    "section": "Halfling Racial Traits",
-    "txtLines": [
-     18,
-     27
-    ],
-    "entry": "Standard Halfling racial traits",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Halfling"
-   }
-  },
-  {
-   "id": "npc-race.goblin",
-   "name": "Goblin",
-   "catalogStatus": "resolved",
-   "subtype": "goblinoid",
-   "abilityAdjustments": {
-    "strength": -2,
-    "dexterity": 4,
-    "charisma": -2
-   },
-   "sizeId": "size.small",
-   "sizeModifiers": {
-    "ac": 1,
-    "attack": 1,
-    "cmb": -1,
-    "cmd": -1
-   },
-   "speed": {
-    "land": 30
-   },
-   "senses": [
-    "darkvision 60 ft."
-   ],
-   "traits": [
-    "Fast",
-    "Darkvision",
-    "Skilled"
-   ],
-   "skillBonuses": {
-    "skill.ride": 4,
-    "skill.stealth": 4
-   },
-   "languages": [
-    "Goblin"
-   ],
-   "bonusLanguages": [
-    "Common",
-    "Draconic",
-    "Dwarven",
-    "Gnoll",
-    "Gnome",
-    "Halfling",
-    "Orc"
-   ],
-   "choiceSlots": [],
-   "featSlots": [],
-   "skillSelectionsBonus": 0,
-   "sourceRef": {
-    "sourceId": "source.aon-goblin-race",
-    "section": "Goblin Racial Traits",
-    "txtLines": [
-     15,
-     22
-    ],
-    "entry": "Standard Goblin racial traits",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin"
-   }
-  }
- ]
+  ],
+  "section": "races"
 }

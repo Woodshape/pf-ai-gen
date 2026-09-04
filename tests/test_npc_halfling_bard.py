@@ -166,14 +166,20 @@ class HalflingBardTests(unittest.TestCase):
             }))["result"]["content"]
             for expected in (
                 "# Perrin Underbough CR 1/Level 2",
-                "CN Small humanoid (halfling); Speed 20 ft.",
-                "AC 14 (+3 Dex, +1 size); touch AC 14; flat-footed AC 11; hp 15 (2d8+2); Fort +3; Ref +8; Will +5; CMD 11",
+                "halfling bard 2",
+                "CN Small humanoid (halfling)",
+                "## Offense",
+                "Speed 20 ft.",
+                "AC 14, touch 14, flat-footed 11 (+3 Dex, +1 size)",
+                "hp 15 (2d8+2)",
+                "Fort +3, Ref +8, Will +5",
                 "Bard Spells (CL 2nd; Cha-based)",
                 "0 (at will, DC 13)—Detect Magic, Flare, Light, Mage Hand, Prestidigitation",
                 "1st (3/day, DC 14)—Charm Person, Grease, Sleep",
-                "Skills Perform +8, Perception +7, Use Magic Device +8, Bluff +8, Diplomacy +8, Spellcraft +6, Intimidate +8",
+                "Init +7; Perception +7",
+                "Skills Perform +8, Use Magic Device +8, Bluff +8, Diplomacy +8, Spellcraft +6, Intimidate +8",
                 "Feats Improved Initiative",
-                "Class Features Bard proficiencies, Bard spellcasting, Bard cantrips, Bardic knowledge, Bardic performance, Countersong, Distraction, Fascinate, Inspire courage +1, Versatile performance, Well-versed",
+                "Class Features Bard spellcasting, Bard cantrips, Bardic knowledge, Bardic performance, Countersong, Distraction, Fascinate, Inspire courage +1, Versatile performance, Well-versed",
                 "Languages Common, Halfling",
             ):
                 self.assertIn(expected, markdown)

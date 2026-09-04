@@ -91,9 +91,9 @@ class GoblinSorcererTests(unittest.TestCase):
                 self.assertIn("Cinder", rendered)
                 if format_name != "json":
                     for expected in (
-                        "Cinder CR 5/Level 6", "AC 15 (+4 Dex, +1 size)", "touch AC 15",
-                        "flat-footed AC 11", "hp 34 (6d6+6)", "CMD 14",
-                        "Elemental Ray +8 ranged touch (1d6+3 fire), 30 ft., 5/day",
+                        "Cinder CR 5/Level 6", "AC 15, touch 15, flat-footed 11 (+4 Dex, +1 size)",
+                        "hp 34 (6d6+6)", "Base Atk +3; CMB +0; CMD 14",
+                        "Ranged Touch Elemental Ray +8 (1d6+3 fire), 30 ft., 5/day",
                         "Skills Bluff +11, Spellcraft +10, Use Magic Device +11",
                         "Feats Improved Initiative, Iron Will, Lightning Reflexes, Eschew Materials",
                         "Sorcerer Spells (CL 6th; Cha-based)", "3rd (3/day, DC 15)—Fireball",

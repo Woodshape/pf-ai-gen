@@ -116,7 +116,8 @@ class GoblinDruidTests(unittest.TestCase):
 
         self.assertEqual(canonical["attacks"][0], {
             "name": "Sickle", "itemId": "item.sickle", "attackBonuses": [3],
-            "attackBonusExpression": "+3", "damageExpression": "1d4", "damageType": "S",
+            "attackBonusExpression": "+3", "attackType": "melee",
+            "damageExpression": "1d4", "damageType": "S",
         })
         self.assertEqual(canonical["attacks"][1]["name"], "Fire Bolt")
         self.assertEqual((canonical["attacks"][1]["attackBonuses"], canonical["attacks"][1]["attackBonusExpression"]), ([4], "+4"))
@@ -240,17 +241,23 @@ class GoblinDruidTests(unittest.TestCase):
             }))["result"]["content"]
             for expected in (
                 "# Zarka CR 2/Level 3",
-                "Init +5 (darkvision 60 ft.)",
-                "NE Small humanoid (goblinoid); Speed 30 ft.",
-                "AC 16 (+2 armor, +2 shield, +1 Dex, +1 size); touch AC 12; flat-footed AC 15; hp 27 (3d8+6); Fort +5; Ref +2; Will +7; CMD 12",
-                "Sickle +3 (1d4; S)",
-                "Fire Bolt +4 ranged touch (1d6+1 fire), 30 ft., 5/day",
-                "Skills Knowledge (Nature) +8, Heal +8, Spellcraft +6, Survival +10",
+                "goblin druid 3",
+                "Init +5; Senses darkvision 60 ft.",
+                "NE Small humanoid (goblinoid)",
+                "## Defense",
+                "AC 16, touch 12, flat-footed 15 (+2 armor, +2 shield, +1 Dex, +1 size)",
+                "hp 27 (3d8+6)",
+                "Fort +5, Ref +2, Will +7",
+                "## Offense",
+                "Speed 30 ft.",
+                "Melee Sickle +3 (1d4)",
+                "Ranged Touch Fire Bolt +4 (1d6+1 fire), 30 ft., 5/day",
+                "## Statistics",
+                "Skills Knowledge (nature) +8, Heal +8, Spellcraft +6, Survival +10",
                 "Feats Iron Will, Improved Initiative",
-                "Class Features Druid Proficiencies, Druid spellcasting, Orisons, Nature Bond (Fire domain), Druidic, Nature Sense, Wild Empathy, Woodland Stride, Trackless Step, Fire Domain",
+                "Class Features Druid spellcasting, Orisons, Nature Bond (Fire domain), Druidic, Nature Sense, Wild Empathy, Woodland Stride, Trackless Step, Fire Domain",
                 "Languages Goblin, Druidic",
-                "Gear Sickle (6 gp), Leather Armor (10 gp), Heavy Wooden Shield (7 gp)",
-                "Gear Budget 1,650 gp budget, 23 gp spent, 1,627 gp unallocated",
+                "Other Gear Sickle, Leather Armor, Heavy Wooden Shield, 1627 gp in coins and gear",
                 "Druid Spells (CL 3rd; Wis-based)",
                 "2nd (3 slots: 1 base, 1 Wis, 1 domain, DC 14)—Flaming Sphere, Barkskin, Produce Flameᴰ",
                 "1st (4 slots: 2 base, 1 Wis, 1 domain, DC 13)—Produce Flame, Entangle, Cure Light Wounds, Burning Handsᴰ",
@@ -267,8 +274,8 @@ class GoblinDruidTests(unittest.TestCase):
                 "Druid Spells (CL 3rd; Wis-based)",
                 "1st (4 slots: 2 base, 1 Wis, 1 domain, DC 13)—Produce Flame, Entangle, Cure Light Wounds, Burning Handsᴰ",
                 "Spontaneous conversion: prepared spells may become Summon Nature’s Ally I–II (domain slots excluded)",
-                "AC 16 (+2 armor, +2 shield, +1 Dex, +1 size)",
-                "Fire Bolt +4 ranged touch (1d6+1 fire), 30 ft., 5/day",
+                "AC 16, touch 12, flat-footed 15 (+2 armor, +2 shield, +1 Dex, +1 size)",
+                "Ranged Touch Fire Bolt +4 (1d6+1 fire), 30 ft., 5/day",
             ):
                 self.assertIn(expected, html)
 

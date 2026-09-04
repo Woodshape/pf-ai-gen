@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import re
 import html
 import json
 from collections.abc import Mapping
@@ -54,7 +55,7 @@ def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dic
     size = str(raw_size.get("name", _human(raw_size.get("id", "")))) if isinstance(raw_size, Mapping) else _human(result.get("sizeId", selections.get("sizeId", "")))
     basics = {
         "initiative": result.get("initiative"),
-        "perception": skills.get("perception") if isinstance(skills, Mapping) else None,
+        "perception": (skills.get("perception") if isinstance(skills, Mapping) else next((entry.get("total") for entry in skills if isinstance(entry, Mapping) and entry.get("skillId") == "skill.perception"), None)),
         "senses": copy.deepcopy(result.get("senses", [])),
         "size": size,
         "speed": copy.deepcopy(result.get("speed", selections.get("speed", {}))),
@@ -62,6 +63,18 @@ def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dic
         "creatureType": result.get("creatureType"),
         "religion": result.get("religion"),
     }
+    if creation_system == "npc":
+        progression = result.get("classProgression", [])
+        basics["raceName"] = str(result.get("raceName", ""))
+        basics["classSummary"] = " ".join(filter(None, (
+            str(basics.get("raceName", "")).lower(),
+            "/".join(
+                f"{str(entry.get('className', '')).lower()} {entry.get('levels')}"
+                for entry in progression if isinstance(entry, Mapping)
+            ),
+        )))
+        basics["immunities"] = [str(value) for value in result.get("immunities", [])]
+        basics["conditionalSaves"] = copy.deepcopy(result.get("conditionalSaves"))
     raw_defenses = copy.deepcopy(result.get("defenses")) if isinstance(result.get("defenses"), Mapping) else {}
     if creation_system == "npc":
         raw_defenses.update({
@@ -85,6 +98,8 @@ def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dic
             defense_fields.append(_field(key, label, result[key], annotations, _value_text(result[key])))
     defenses = {key: copy.deepcopy(raw_defenses[key]) for key, _ in _DEFENSES if key in raw_defenses}
     defenses.update(aggregate_defenses)
+    if creation_system == "npc" and isinstance(raw_defenses.get("acBreakdown"), Mapping):
+        defenses["acBreakdown"] = copy.deepcopy(raw_defenses["acBreakdown"])
     defenses["fields"] = defense_fields
     attacks = [_attack(value, index, annotations) for index, value in enumerate(result.get("attacks", [])) if isinstance(value, Mapping)]
     raw_options = [value for value in result.get("options", []) if isinstance(value, Mapping)]
@@ -203,6 +218,8 @@ def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dic
 
 def render_markdown(snapshot: Mapping[str, Any], profile: str = "sheet") -> str:
     model = structured_sheet(snapshot, profile)
+    if model["creationSystem"] == "npc" and profile == "sheet":
+        return _npc_markdown(model)
     lines = [f"# {model['header']['label']}", ""]
     summary = _summary(model["basics"])
     if summary:
@@ -238,6 +255,8 @@ def render_markdown(snapshot: Mapping[str, Any], profile: str = "sheet") -> str:
 
 def render_html(snapshot: Mapping[str, Any], profile: str = "sheet") -> str:
     model = structured_sheet(snapshot, profile)
+    if model["creationSystem"] == "npc" and profile == "sheet":
+        return _npc_html(model)
     parts = [f'<main class="monster-sheet"><header><h1>{_esc(model["header"]["label"])}</h1></header>']
     if _summary(model["basics"]):
         parts.append(f"<p>{_esc(_summary(model['basics']))}</p>")
@@ -517,6 +536,382 @@ def _linked_creature_fields(block: Mapping[str, Any]) -> list[dict[str, Any]]:
 
 def _linked_creature_lines(block: Mapping[str, Any]) -> list[str]:
     return _linked_statblock_lines(block)
+
+
+# ------------------------------------------------------------------
+# NPC sheet profile: printed Core-Rulebook statblock composition.
+# ------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------
+# NPC sheet profile: printed Core-Rulebook statblock composition.
+# ------------------------------------------------------------------
+
+
+def _npc_statblock_field(model: Mapping[str, Any], key: str) -> Mapping[str, Any] | None:
+    return next((field for field in model["statistics"]["fields"] if field.get("key") == key), None)
+
+
+def _npc_class_features(model: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    field = _npc_statblock_field(model, "classFeatures")
+    if field and isinstance(field.get("value"), list):
+        return [value for value in field["value"] if isinstance(value, Mapping)]
+    return []
+
+
+def _npc_skills_value(model: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    field = _npc_statblock_field(model, "skills")
+    if field and isinstance(field.get("value"), list):
+        return [value for value in field["value"] if isinstance(value, Mapping)]
+    return []
+
+
+def _npc_choice_text(value: Any, *, bracket_subtype: bool = False) -> str:
+    if bracket_subtype:
+        head, separator, tail = str(value or "").rpartition("-")
+        return f"{head} [{tail}]" if separator else str(value or "")
+    return str(value or "").replace("-", " ")
+
+
+def _npc_riders(model: Mapping[str, Any]) -> dict[str, Any]:
+    """Initiative and per-skill conditional riders from granted features."""
+    initiative: dict[str, Any] | None = None
+    skills: dict[str, dict[str, Any]] = {}
+    for feature in _npc_class_features(model):
+        conditional = feature.get("conditionalBonuses")
+        if not isinstance(conditional, Mapping):
+            continue
+        skill_ids = list(conditional.get("skills", []) or [])
+        if conditional.get("skillId") is not None:
+            skill_ids.append(conditional["skillId"])
+        if conditional.get("initiative"):
+            initiative = {"bonus": conditional["initiative"], "condition": str(conditional.get("condition", ""))}
+        for skill_id in skill_ids:
+            condition = str(conditional.get("condition", ""))
+            if condition == "locate traps":
+                continue  # rendered in the SQ line, not as a skill rider
+            if isinstance(skill_id, str) and (conditional.get("bonus") is not None or conditional.get("initiative")):
+                skills.setdefault(skill_id, {
+                    "bonus": conditional.get("bonus", conditional.get("initiative")),
+                    "condition": condition,
+                })
+    return {"initiative": initiative, "skills": skills}
+
+
+def _npc_condition_text(condition: str) -> str:
+    if not condition:
+        return ""
+    if condition == "forest":
+        return "in forests"
+    return condition
+
+
+def _npc_rider_total(base: Any, bonus: Any) -> Any:
+    return base + bonus if isinstance(base, int) and isinstance(bonus, int) else bonus
+
+
+def _npc_basics_line(model: Mapping[str, Any]) -> str:
+    basics = model["basics"]
+    riders = _npc_riders(model)
+    parts = []
+    if basics.get("initiative") is not None:
+        init = f"Init {_signed(basics['initiative'])}"
+        rider = riders["initiative"]
+        if rider:
+            init += f" (+{_npc_rider_total(basics['initiative'], rider['bonus'])} {_npc_condition_text(rider['condition'])})"
+        parts.append(init)
+    senses = [str(value).lower() for value in basics.get("senses", [])]
+    if senses:
+        parts.append("Senses " + ", ".join(senses))
+    if basics.get("perception") is not None:
+        perception = f"Perception {_signed(basics['perception'])}"
+        rider = riders["skills"].get("skill.perception")
+        if rider:
+            perception += f" (+{_npc_rider_total(basics['perception'], rider['bonus'])} {_npc_condition_text(rider['condition'])})"
+        parts.append(perception)
+    return "; ".join(parts)
+
+
+def _npc_special_attacks_line(model: Mapping[str, Any]) -> str:
+    parts = []
+    for feature in _npc_class_features(model):
+        if feature.get("statblockRole") != "specialAttack":
+            continue
+        feature_id = str(feature.get("featureId", ""))
+        if feature_id == "npc-class-feature.ranger-favored-enemy":
+            parts.append(f"favored enemy ({_npc_choice_text(feature.get('choice'), bracket_subtype=True)})")
+        elif feature_id == "npc-class-feature.ranger-favored-terrain":
+            parts.append(f"favored terrain ({_npc_choice_text(feature.get('choice'))})")
+        elif feature_id == "npc-class-feature.rogue-talents":
+            parts.append(f"rogue talents ({_npc_choice_text(feature.get('choice'))})")
+        elif feature_id == "npc-class-feature.rogue-sneak-attack" and feature.get("sneakAttackDice"):
+            parts.append(f"sneak attack ({feature['sneakAttackDice']})")
+    return "Special Attacks " + ", ".join(sorted(parts)) if parts else ""
+
+
+def _npc_sq_line(model: Mapping[str, Any]) -> str:
+    parts = []
+    for feature in _npc_class_features(model):
+        if feature.get("statblockRole") != "sq":
+            continue
+        feature_id = str(feature.get("featureId", ""))
+        if feature_id == "npc-class-feature.ranger-hunters-bond":
+            parts.append(f"nature bond ({_npc_choice_text(feature.get('choice'))})")
+        elif feature_id == "npc-class-feature.rogue-trapfinding":
+            bonus = _npc_conditional_bonus(feature)
+            parts.append(f"trapfinding +{bonus}" if isinstance(bonus, int) else "trapfinding")
+        else:
+            parts.append(str(feature.get("name", "")).lower())
+    return "SQ " + ", ".join(sorted(parts)) if parts else ""
+
+
+def _npc_conditional_bonus(feature: Mapping[str, Any]) -> Any:
+    conditional = feature.get("conditionalBonuses")
+    return conditional.get("bonus") if isinstance(conditional, Mapping) else None
+
+
+def _npc_defense_lines(model: Mapping[str, Any]) -> list[str]:
+    defenses = model["defenses"]
+    by_key = {field.get("key"): field for field in defenses.get("fields", [])}
+    lines = []
+    breakdown = defenses.get("acBreakdown") if isinstance(defenses.get("acBreakdown"), Mapping) else None
+    labels = {"armor": "armor", "shield": "shield", "dexterity": "Dex", "size": "size"}
+    parts = [f"{_signed(breakdown[source])} {label}" for source, label in labels.items() if isinstance(breakdown, Mapping) and source in breakdown]
+    ac = defenses.get("ac")
+    if ac is not None:
+        line = f"AC {ac}, touch {_npc_field_value(by_key.get('touchAC'))}, flat-footed {_npc_field_value(by_key.get('flatFootedAC'))}"
+        if parts:
+            line += f" ({', '.join(parts)})"
+        lines.append(line)
+    hp = by_key.get("hp")
+    if hp is not None:
+        lines.append(f"hp {_npc_field_text(hp)}")
+    saves = [f"{label} {_npc_field_text(by_key.get(key))}" for key, label in (("fortitude", "Fort"), ("reflex", "Ref"), ("will", "Will")) if by_key.get(key) is not None]
+    conditional = model["basics"].get("conditionalSaves") or {}
+    riders = [f"+{entry['bonus']} {entry['condition']}" for entry in conditional.values() if isinstance(entry, Mapping) and entry.get("bonus") is not None]
+    if saves:
+        lines.append(", ".join(saves) + ("; " + "; ".join(riders) if riders else ""))
+    defensive = _npc_defensive_parts(model)
+    if defensive:
+        lines.append(defensive)
+    return [line for line in lines if line.strip()]
+
+
+def _npc_field_value(field: Mapping[str, Any] | None) -> str:
+    return "\u2014" if field is None else str(field.get("value", "\u2014"))
+
+
+def _npc_field_text(field: Mapping[str, Any] | None) -> str:
+    return "\u2014" if field is None else str(field.get("text", field.get("value", "")))
+
+
+def _npc_offense_lines(model: Mapping[str, Any]) -> list[str]:
+    lines = [_speed(model["basics"]["speed"])]
+    ordered = sorted(
+        [attack for attack in model["attacks"] if isinstance(attack, Mapping)],
+        key=lambda attack: 0 if str(attack.get("attackType", "melee")) == "melee" else 1,
+    )
+    for attack in ordered:
+        kind = str(attack.get("attackType", "melee")).title()
+        bonuses = attack.get("attackBonuses") or []
+        bonus = "/".join(_signed(value) for value in bonuses) if bonuses else str(attack.get("attackBonusExpression", ""))
+        crit = ""
+        if attack.get("critRange") is not None:
+            multiplier = attack.get("critMultiplier", 2)
+            crit = f"{attack['critRange']}-20/x{multiplier}" if multiplier != 2 else f"{attack['critRange']}-20"
+        elif attack.get("critMultiplier") is not None:
+            crit = f"x{attack['critMultiplier']}"
+        damage = str(attack.get("damageExpression", ""))
+        inside = damage + (f"/{crit}" if crit else "")
+        damage_type = str(attack.get("damageType") or "")
+        if damage_type and damage_type not in {"P", "S", "B"}:
+            inside += f" {damage_type}" if inside else damage_type
+        text = f"{kind} {str(attack.get('name', '')).strip()} {bonus}"
+        if inside:
+            text += f" ({inside})"
+        uses = attack.get("usesPerDay")
+        tail = [str(value) for value in (attack.get("range"), f"{uses}/day" if isinstance(uses, int) else uses) if uses is not None]
+        if tail:
+            text += ", " + ", ".join(tail)
+        lines.append(" ".join(text.split()))
+    special = _npc_special_attacks_line(model)
+    if special:
+        lines.append(special)
+    return [line for line in lines if line.strip()]
+
+
+_NPC_FEATURE_SUPPRESS_IDS = (
+    "npc-class-feature.ranger-proficiencies", "npc-class-feature.rogue-proficiencies",
+    "npc-class-feature.druid-proficiencies", "npc-class-feature.bard-proficiencies",
+    "npc-class-feature.warrior-proficiencies", "npc-class-feature.adept-proficiencies",
+    "npc-class-feature.aristocrat-proficiencies", "npc-class-feature.commoner-proficiencies",
+    "npc-class-feature.expert-proficiencies",
+    "npc-class-feature.ranger-endurance", "npc-class-feature.ranger-combat-style",
+)
+
+
+def _npc_class_features_line(model: Mapping[str, Any]) -> str:
+    spells = model["statistics"].get("spells")
+    has_spells = isinstance(spells, Mapping) and bool(spells.get("prepared") or spells.get("known") or spells.get("domainPrepared"))
+    parts = []
+    for feature in _npc_class_features(model):
+        feature_id = str(feature.get("featureId", ""))
+        if feature.get("statblockRole") or feature_id in _NPC_FEATURE_SUPPRESS_IDS:
+            continue
+        if "spellcasting" in feature_id and not has_spells:
+            continue  # the spell block carries spellcasting; suppress when empty
+        parts.append(str(feature.get("name", "")))
+    return "Class Features " + ", ".join(parts) if parts else ""
+
+
+def _npc_statistics_lines(model: Mapping[str, Any]) -> list[str]:
+    by_key = {field.get("key"): field for field in model["statistics"]["fields"]}
+    lines = []
+    scores = by_key.get("abilityScores")
+    if scores is not None:
+        lines.append(_scores(scores.get("value", {})))
+    combat = []
+    bab = by_key.get("bab")
+    if bab is not None:
+        combat.append(f"Base Atk {_signed(bab.get('value'))}")
+    if by_key.get("cmb") is not None:
+        combat.append(f"CMB {_signed(by_key['cmb'].get('value'))}")
+    cmd = next((field for field in model["defenses"]["fields"] if field.get("key") == "cmd"), None)
+    if cmd is not None:
+        combat.append(f"CMD {_npc_field_value(cmd)}")
+    if combat:
+        lines.append("; ".join(combat))
+    feats = by_key.get("feats")
+    if feats is not None and feats.get("text"):
+        lines.append(f"Feats {_npc_field_text(feats)}")
+    skills_field = by_key.get("skills")
+    if skills_field is not None:
+        riders = _npc_riders(model)["skills"]
+        parts = []
+        for entry in _npc_skills_value(model):
+            skill_id = str(entry.get("skillId", ""))
+            if skill_id == "skill.perception":
+                continue  # rendered on the initiative/senses line
+            name = re.sub(r"\(([A-Za-z ]+)\)", lambda match: f"({match.group(1).lower()})", str(entry.get("name", "")))
+            text = f"{name} {_signed(entry.get('total'))}"
+            rider = riders.get(skill_id)
+            if rider and rider.get("condition") == "following tracks":
+                text += f" (+{_npc_rider_total(entry.get('total'), rider['bonus'])} {_npc_condition_text(rider['condition'])})"
+            parts.append(text)
+        if parts:
+            lines.append("Skills " + ", ".join(parts))
+    languages = by_key.get("languages")
+    if languages is not None and _npc_field_text(languages) not in {"\u2014", ""}:
+        lines.append(f"Languages {_npc_field_text(languages)}")
+    sq = _npc_sq_line(model)
+    if sq:
+        lines.append(sq)
+    features_line = _npc_class_features_line(model)
+    if features_line:
+        lines.append(features_line)
+    gear = _npc_gear_lines(model)
+    lines.extend(gear)
+    return [line for line in lines if line.strip()]
+
+
+def _npc_gear_lines(model: Mapping[str, Any]) -> list[str]:
+    gear_field = _npc_statblock_field(model, "gear")
+    if gear_field is None or not isinstance(gear_field.get("value"), list):
+        return []
+    combat, other = [], []
+    for item in gear_field["value"]:
+        if not isinstance(item, Mapping):
+            continue
+        quantity = item.get("quantity", 1)
+        text = str(item.get("name", "")) + (f" \u00d7{quantity}" if isinstance(quantity, int) and quantity > 1 else "")
+        (combat if item.get("npcGearCategory") == "limitedUse" else other).append(text)
+    budget = _npc_statblock_field(model, "gearBudget")
+    remaining = None
+    if budget and isinstance(budget.get("value"), Mapping):
+        remaining = budget["value"].get("remainingCp")
+    if isinstance(remaining, int) and remaining > 0:
+        other.append(f"{remaining // 100} gp in coins and gear")
+    lines = []
+    if combat:
+        lines.append("Combat Gear " + ", ".join(combat))
+    if other:
+        lines.append("Other Gear " + ", ".join(other))
+    return lines
+
+
+def _npc_spell_lines(model: Mapping[str, Any]) -> list[str]:
+    spells = model["statistics"].get("spells")
+    if not isinstance(spells, Mapping):
+        return []
+    if not (spells.get("prepared") or spells.get("known") or spells.get("domainPrepared")):
+        return []
+    return _spell_lines(model["statistics"])
+
+
+def _npc_sheet_lines(model: Mapping[str, Any]) -> list[str]:
+    basics = model["basics"]
+    lines = [f"# {model['header']['label']}", ""]
+    class_line = " ".join(str(value) for value in (basics.get("classSummary"),) if value)
+    identity = " ".join(str(value) for value in (basics.get("alignment"), basics.get("size"), basics.get("creatureType")) if value)
+    for line in (class_line, identity):
+        if line.strip():
+            lines.append(line)
+    lines.append("")
+    summary = _npc_basics_line(model)
+    if summary:
+        lines.extend([summary, ""])
+    lines.extend(["## Defense", *_npc_defense_lines(model), ""])
+    lines.extend(["## Offense", *_npc_offense_lines(model), ""])
+    lines.extend(["## Statistics", *_npc_statistics_lines(model)])
+    lines.extend(_npc_spell_lines(model))
+    if model.get("linkedCreature"):
+        lines.extend(["", "## LINKED CREATURE", *_linked_creature_lines(model["linkedCreature"])])
+    if model.get("catalogVersion"):
+        lines.extend(["", f"_Generated from catalog {model['catalogVersion']}._"])
+    return lines
+
+
+def _npc_markdown(model: Mapping[str, Any]) -> str:
+    return "\n".join(_npc_sheet_lines(model)).rstrip() + "\n"
+
+
+def _npc_html(model: Mapping[str, Any]) -> str:
+    defense = _npc_defense_lines(model)
+    offense = _npc_offense_lines(model)
+    statistics = _npc_statistics_lines(model) + _npc_spell_lines(model)
+    class_line = str(model["basics"].get("classSummary", ""))
+    identity = " ".join(str(value) for value in (model["basics"].get("alignment"), model["basics"].get("size"), model["basics"].get("creatureType")) if value)
+    parts = [f'<main class="monster-sheet"><header><h1>{_esc(model["header"]["label"])}</h1></header>']
+    head = [line for line in (class_line, identity, _npc_basics_line(model)) if line.strip()]
+    if head:
+        parts.append("<p>" + "<br />".join(_esc(line) for line in head) + "</p>")
+    parts.append(_html_section("Defense", defense))
+    parts.append(_html_section("Offense", offense))
+    parts.append(_html_section("Statistics", statistics))
+    if model.get("linkedCreature"):
+        parts.append(_html_section("LINKED CREATURE", _linked_creature_lines(model["linkedCreature"])))
+    if model.get("catalogVersion"):
+        parts.append(f'<footer>Generated from catalog {_esc(model["catalogVersion"])}</footer>')
+    parts.append("</main>")
+    css = "body{font-family:serif;line-height:1.35;max-width:52rem;margin:2rem auto}h2{border-bottom:1px solid}@page{margin:1.5cm}@media print{body{margin:0;max-width:none}section{break-inside:avoid}}"
+    title = _esc(model["header"]["label"])
+    return f'<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title><style>{css}</style></head><body>{"".join(parts)}</body></html>\n'
+
+
+
+
+def _npc_defensive_parts(model: Mapping[str, Any]) -> str:
+    basics = model["basics"]
+    parts = [str(feature.get("name", "")).lower() for feature in _npc_class_features(model) if feature.get("statblockRole") == "defensiveAbility"]
+    parts += [f"Immune {str(value).lower()}" for value in basics.get("immunities", [])]
+    return "Defensive Abilities " + "; ".join(parts) if parts else ""
+
+
+    speed = _speed(basics["speed"])
+    if creation_system != "npc":
+        return "; ".join(value for value in (basics["size"], speed) if value)
+    identity = " ".join(str(value) for value in (basics.get("alignment"), basics.get("size"), basics.get("creatureType")) if value)
+    return "; ".join(value for value in (identity, speed) if value)
 
 
 def _identity(basics: Mapping[str, Any], creation_system: str) -> str:
