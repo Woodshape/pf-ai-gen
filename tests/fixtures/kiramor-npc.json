@@ -1,0 +1,97 @@
+{
+  "creationSystem": "npc",
+  "concept": {
+    "name": "Kiramor, the Forest Shadow",
+    "role": "mysterious elven forest guardian and ranged skirmisher",
+    "description": "A Core Rulebook baseline elf ranger 4/rogue 2."
+  },
+  "selections": {
+    "statblockUse": "full",
+    "raceId": "npc-race.elf",
+    "racialChoices": {},
+    "classProgression": [
+      {
+        "classId": "npc-class.ranger",
+        "levels": 4
+      },
+      {
+        "classId": "npc-class.rogue",
+        "levels": 2
+      }
+    ],
+    "abilityGeneration": {
+      "method": "ranged-preset",
+      "arrayId": "npc-ability-array.heroic",
+      "levelIncreases": {
+        "4": "dexterity"
+      }
+    },
+    "skillGeneration": {
+      "method": "simplified",
+      "skills": [
+        "skill.climb",
+        "skill.heal",
+        "skill.intimidate",
+        "skill.knowledge-geography",
+        "skill.knowledge-nature",
+        "skill.perception",
+        "skill.stealth",
+        "skill.survival",
+        "skill.escape-artist",
+        "skill.swim"
+      ]
+    },
+    "feats": [
+      {
+        "slotId": "general-1",
+        "featId": "feat.point-blank-shot"
+      },
+      {
+        "slotId": "general-3",
+        "featId": "feat.deadly-aim"
+      },
+      {
+        "slotId": "general-5",
+        "featId": "feat.weapon-finesse"
+      }
+    ],
+    "classFeatureChoices": {
+      "favoredEnemy": "humanoid-orc",
+      "combatStyle": "archery",
+      "favoredTerrain": "forest",
+      "huntersBond": "companion-bond",
+      "rogueTalent": "bleeding-attack"
+    },
+    "spellLoadout": {
+      "prepared": {}
+    },
+    "gearProfile": {
+      "experienceProgression": "medium",
+      "fantasyLevel": "normal"
+    },
+    "gear": [
+      {
+        "itemId": "item.longbow-plus-1"
+      },
+      {
+        "itemId": "item.rapier-masterwork"
+      },
+      {
+        "itemId": "item.studded-leather-plus-1"
+      },
+      {
+        "itemId": "item.arrows-20",
+        "quantity": 2
+      },
+      {
+        "itemId": "item.potion-of-cure-moderate-wounds"
+      },
+      {
+        "itemId": "item.potion-of-invisibility"
+      }
+    ],
+    "details": {
+      "alignment": "N"
+    }
+  }
+}

@@ -5223,99 +5223,167 @@
   {
    "id": "npc-class.ranger",
    "name": "Ranger",
-   "catalogStatus": "gap",
+   "catalogStatus": "resolved",
    "gapCode": "core-rulebook-class-tables",
    "category": "pc",
-   "hitDie": null,
-   "classSkills": null,
-   "skillSelections": null,
+   "hitDie": "d10",
+   "classSkills": [
+    "skill.climb",
+    "skill.craft",
+    "skill.handle-animal",
+    "skill.heal",
+    "skill.intimidate",
+    "skill.knowledge-dungeoneering",
+    "skill.knowledge-geography",
+    "skill.knowledge-nature",
+    "skill.perception",
+    "skill.profession",
+    "skill.ride",
+    "skill.spellcraft",
+    "skill.stealth",
+    "skill.survival",
+    "skill.swim"
+   ],
+   "skillSelections": 6,
    "levels": {
     "1": {
      "level": 1,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 1,
+     "fortitude": 2,
+     "reflex": 2,
+     "will": 0,
+     "hitDie": "d10",
+     "skillSelections": 6,
+     "featureGrants": [
+      "npc-class-feature.ranger-proficiencies",
+      "npc-class-feature.ranger-favored-enemy",
+      "npc-class-feature.ranger-track",
+      "npc-class-feature.ranger-wild-empathy"
+     ],
+     "choiceSlots": [
+      {
+       "choiceId": "favoredEnemy",
+       "required": true,
+       "allowedValues": [
+        "humanoid-orc"
+       ]
+      }
+     ],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-ranger",
+      "section": "Table: Ranger",
       "txtLines": [
-       22,
-       22
+       14,
+       14
       ],
       "entry": "Ranger level 1",
-      "provenanceStatus": "catalog-gap"
+      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+      "provenanceStatus": "resolved"
      }
     },
     "2": {
      "level": 2,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 2,
+     "fortitude": 3,
+     "reflex": 3,
+     "will": 0,
+     "hitDie": "d10",
+     "skillSelections": 6,
+     "featureGrants": [
+      "npc-class-feature.ranger-combat-styles"
+     ],
+     "choiceSlots": [
+      {
+       "choiceId": "combatStyle",
+       "required": true,
+       "allowedValues": [
+        "archery"
+       ]
+      }
+     ],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-ranger",
+      "section": "Table: Ranger",
       "txtLines": [
-       22,
-       22
+       15,
+       15
       ],
       "entry": "Ranger level 2",
-      "provenanceStatus": "catalog-gap"
+      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+      "provenanceStatus": "resolved"
      }
     },
     "3": {
      "level": 3,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 3,
+     "fortitude": 3,
+     "reflex": 3,
+     "will": 1,
+     "hitDie": "d10",
+     "skillSelections": 6,
+     "featureGrants": [
+      "npc-class-feature.ranger-endurance",
+      "npc-class-feature.ranger-favored-terrain"
+     ],
+     "choiceSlots": [
+      {
+       "choiceId": "favoredTerrain",
+       "required": true,
+       "allowedValues": [
+        "forest"
+       ]
+      }
+     ],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-ranger",
+      "section": "Table: Ranger",
       "txtLines": [
-       22,
-       22
+       16,
+       16
       ],
       "entry": "Ranger level 3",
-      "provenanceStatus": "catalog-gap"
+      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+      "provenanceStatus": "resolved"
      }
     },
     "4": {
      "level": 4,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 4,
+     "fortitude": 4,
+     "reflex": 4,
+     "will": 1,
+     "hitDie": "d10",
+     "skillSelections": 6,
+     "featureGrants": [
+      "npc-class-feature.ranger-hunters-bond",
+      "npc-class-feature.ranger-spellcasting"
+     ],
+     "choiceSlots": [
+      {
+       "choiceId": "huntersBond",
+       "required": true,
+       "allowedValues": [
+        "companion-bond"
+       ]
+      }
+     ],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-ranger",
+      "section": "Table: Ranger",
       "txtLines": [
-       22,
-       22
+       17,
+       17
       ],
       "entry": "Ranger level 4",
-      "provenanceStatus": "catalog-gap"
+      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+      "provenanceStatus": "resolved"
+     },
+     "spellsPerDay": {
+      "1": 0
      }
     },
     "5": {
@@ -5672,68 +5740,116 @@
     }
    },
    "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
+    "sourceId": "source.aon-ranger",
+    "section": "Ranger; Class Skills; Class Features",
     "txtLines": [
-     22,
-     22
+     1,
+     100
     ],
-    "entry": "Eleven Core PC class tables through level 20",
-    "provenanceStatus": "catalog-gap"
-   }
+    "entry": "Ranger class rules, level progression 1-4, and class features",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+    "provenanceStatus": "resolved"
+   },
+   "castingAbility": "wisdom",
+   "castingMode": "prepared",
+   "supportedLevels": [
+    1,
+    2,
+    3,
+    4
+   ]
   },
   {
    "id": "npc-class.rogue",
    "name": "Rogue",
-   "catalogStatus": "gap",
+   "catalogStatus": "resolved",
    "gapCode": "core-rulebook-class-tables",
    "category": "pc",
-   "hitDie": null,
-   "classSkills": null,
-   "skillSelections": null,
+   "hitDie": "d8",
+   "classSkills": [
+    "skill.acrobatics",
+    "skill.appraise",
+    "skill.bluff",
+    "skill.climb",
+    "skill.craft",
+    "skill.diplomacy",
+    "skill.disable-device",
+    "skill.disguise",
+    "skill.escape-artist",
+    "skill.intimidate",
+    "skill.knowledge-dungeoneering",
+    "skill.knowledge-local",
+    "skill.linguistics",
+    "skill.perception",
+    "skill.perform",
+    "skill.profession",
+    "skill.sense-motive",
+    "skill.sleight-of-hand",
+    "skill.stealth",
+    "skill.swim",
+    "skill.use-magic-device"
+   ],
+   "skillSelections": 8,
    "levels": {
     "1": {
      "level": 1,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 0,
+     "fortitude": 0,
+     "reflex": 2,
+     "will": 0,
+     "hitDie": "d8",
+     "skillSelections": 8,
+     "featureGrants": [
+      "npc-class-feature.rogue-proficiencies",
+      "npc-class-feature.rogue-sneak-attack",
+      "npc-class-feature.rogue-trapfinding"
+     ],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-rogue",
+      "section": "Table: Rogue",
       "txtLines": [
-       22,
-       22
+       13,
+       13
       ],
       "entry": "Rogue level 1",
-      "provenanceStatus": "catalog-gap"
+      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Rogue",
+      "provenanceStatus": "resolved"
      }
     },
     "2": {
      "level": 2,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 1,
+     "fortitude": 0,
+     "reflex": 3,
+     "will": 0,
+     "hitDie": "d8",
+     "skillSelections": 8,
+     "featureGrants": [
+      "npc-class-feature.rogue-evasion",
+      "npc-class-feature.rogue-talents"
+     ],
+     "choiceSlots": [
+      {
+       "choiceId": "rogueTalent",
+       "required": true,
+       "allowedValues": [
+        "bleeding-attack"
+       ]
+      }
+     ],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-rogue",
+      "section": "Table: Rogue",
       "txtLines": [
-       22,
-       22
+       14,
+       14
       ],
       "entry": "Rogue level 2",
-      "provenanceStatus": "catalog-gap"
+      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Rogue",
+      "provenanceStatus": "resolved"
      }
     },
     "3": {
@@ -6134,15 +6250,20 @@
     }
    },
    "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
+    "sourceId": "source.aon-rogue",
+    "section": "Rogue; Class Skills; Class Features",
     "txtLines": [
-     22,
-     22
+     1,
+     41
     ],
-    "entry": "Eleven Core PC class tables through level 20",
-    "provenanceStatus": "catalog-gap"
-   }
+    "entry": "Rogue class rules, level progression 1-2, and class features",
+    "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Rogue",
+    "provenanceStatus": "resolved"
+   },
+   "supportedLevels": [
+    1,
+    2
+   ]
   },
   {
    "id": "npc-class.sorcerer",

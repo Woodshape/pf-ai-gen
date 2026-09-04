@@ -349,6 +349,31 @@
     },
     {
      "npcCategory": "heroic",
+     "level": 4,
+     "effectiveLevel": 4,
+     "budgetCp": 240000,
+     "categories": {
+      "weapons": 90000,
+      "protection": 100000,
+      "magic": 0,
+      "limitedUse": 30000,
+      "gear": 20000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       86,
+       86
+      ],
+      "entry": "Heroic level 4 (2,400 gp row)",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
      "level": 5,
      "effectiveLevel": 5,
      "budgetCp": 345000,

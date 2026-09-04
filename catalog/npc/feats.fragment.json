@@ -635,6 +635,49 @@
    }
   },
   {
+   "id": "feat.deadly-aim",
+   "name": "Deadly Aim",
+   "catalogStatus": "resolved",
+   "category": "general",
+   "prerequisites": {
+    "all": [
+     {
+      "abilityAtLeast": {
+       "dexterity": 13
+      }
+     },
+     {
+      "babAtLeast": 1
+     }
+    ]
+   },
+   "effects": {},
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-feats",
+     "section": "Table: Feats",
+     "txtLines": [
+      86,
+      86
+     ],
+     "entry": "Deadly Aim: Dex 13, base attack bonus +1; trade ranged attack bonus for damage",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-feats",
+     "section": "Deadly Aim (Combat)",
+     "txtLines": [
+      371,
+      374
+     ],
+     "entry": "Voluntary trade-off: -1 on all ranged attack rolls for +2 on all ranged damage rolls; never auto-applied",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
    "id": "feat.dazzling-display",
    "name": "Dazzling Display",
    "catalogStatus": "gap",
@@ -1899,21 +1942,36 @@
   {
    "id": "feat.point-blank-shot",
    "name": "Point-Blank Shot",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-feats",
+   "catalogStatus": "resolved",
    "category": "general",
-   "prerequisites": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     25,
-     25
-    ],
-    "entry": "Core feats",
-    "provenanceStatus": "catalog-gap"
-   }
+   "prerequisites": {
+    "all": []
+   },
+   "effects": {},
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-feats",
+     "section": "Table: Feats",
+     "txtLines": [
+      146,
+      146
+     ],
+     "entry": "Point-Blank Shot: no prerequisites; +1 attack and damage on targets within 30 feet",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-feats",
+     "section": "Point-Blank Shot (Combat)",
+     "txtLines": [
+      821,
+      823
+     ],
+     "entry": "Conditional +1 attack and damage within 30 feet; conditional bonus stays out of unconditional effects",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
+     "provenanceStatus": "resolved"
+    }
+   ]
   },
   {
    "id": "feat.precise-shot",
@@ -1994,21 +2052,45 @@
   {
    "id": "feat.rapid-shot",
    "name": "Rapid Shot",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-feats",
+   "catalogStatus": "resolved",
    "category": "general",
-   "prerequisites": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     25,
-     25
-    ],
-    "entry": "Core feats",
-    "provenanceStatus": "catalog-gap"
-   }
+   "prerequisites": {
+    "all": [
+     {
+      "abilityAtLeast": {
+       "dexterity": 13
+      }
+     },
+     {
+      "hasFeat": "feat.point-blank-shot"
+     }
+    ]
+   },
+   "effects": {},
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-feats",
+     "section": "Table: Feats",
+     "txtLines": [
+      152,
+      152
+     ],
+     "entry": "Rapid Shot: Dex 13, Point-Blank Shot; one extra ranged attack",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-feats",
+     "section": "Rapid Shot (Combat)",
+     "txtLines": [
+      851,
+      854
+     ],
+     "entry": "One additional ranged attack during a full attack at the highest bonus; all attacks take -2; the ranger combat style grant waives the prerequisites",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/feats.html",
+     "provenanceStatus": "resolved"
+    }
+   ]
   },
   {
    "id": "feat.ride-by-attack",

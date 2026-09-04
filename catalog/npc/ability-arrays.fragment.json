@@ -1,66 +1,118 @@
 {
-  "section": "abilityArrays",
-  "records": [
-    {
-      "id": "npc-ability-array.basic",
-      "name": "Basic NPC ability array",
-      "catalogStatus": "resolved",
-      "method": "assigned-array",
-      "scores": [13, 12, 11, 10, 9, 8],
-      "abilityOrder": ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"],
-      "presets": {
-        "melee": {
-          "strength": 13,
-          "dexterity": 11,
-          "constitution": 12,
-          "intelligence": 9,
-          "wisdom": 10,
-          "charisma": 8
-        }
-      },
-      "sourceRef": {
-        "sourceId": "source.aon-creating-npcs",
-        "section": "Step 2: Determine Ability Scores; Table 14-6",
-        "txtLines": [12, 23],
-        "printedPages": [450],
-        "officialUrl": "https://aonprd.com/Rules.aspx?ID=355",
-        "entry": "Basic NPC array and melee preset",
-        "provenanceStatus": "resolved"
-      }
+ "section": "abilityArrays",
+ "records": [
+  {
+   "id": "npc-ability-array.basic",
+   "name": "Basic NPC ability array",
+   "catalogStatus": "resolved",
+   "method": "assigned-array",
+   "scores": [
+    13,
+    12,
+    11,
+    10,
+    9,
+    8
+   ],
+   "abilityOrder": [
+    "strength",
+    "dexterity",
+    "constitution",
+    "intelligence",
+    "wisdom",
+    "charisma"
+   ],
+   "presets": {
+    "melee": {
+     "strength": 13,
+     "dexterity": 11,
+     "constitution": 12,
+     "intelligence": 9,
+     "wisdom": 10,
+     "charisma": 8
     },
-    {
-      "id": "npc-ability-array.heroic",
-      "name": "Heroic NPC ability array",
-      "catalogStatus": "resolved",
-      "method": "assigned-array",
-      "scores": [15, 14, 13, 12, 10, 8],
-      "abilityOrder": ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"],
-      "sourceRef": {
-        "sourceId": "source.aon-creating-npcs",
-        "section": "Step 2: Determine Ability Scores; Table 14-6",
-        "txtLines": [12, 32],
-        "entry": "Heroic NPC array and Charisma-based arcane preset",
-        "provenanceStatus": "resolved",
-        "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
-      },
-      "presets": {
-        "arcane": {
-          "strength": 8,
-          "dexterity": 14,
-          "constitution": 12,
-          "intelligence": 13,
-          "wisdom": 10,
-          "charisma": 15
-        },
-        "divine": {
-          "strength": 12,
-          "dexterity": 8,
-          "constitution": 14,
-          "intelligence": 10,
-          "wisdom": 15,
-          "charisma": 13
-        }
-      }
+    "ranged": {
+     "strength": 11,
+     "dexterity": 13,
+     "constitution": 12,
+     "intelligence": 10,
+     "wisdom": 9,
+     "charisma": 8
     }
-  ]
+   },
+   "sourceRef": {
+    "sourceId": "source.aon-creating-npcs",
+    "section": "Step 2: Determine Ability Scores; Table 14-6",
+    "txtLines": [
+     12,
+     23
+    ],
+    "printedPages": [
+     450
+    ],
+    "officialUrl": "https://aonprd.com/Rules.aspx?ID=355",
+    "entry": "Basic NPC array and melee preset",
+    "provenanceStatus": "resolved"
+   }
+  },
+  {
+   "id": "npc-ability-array.heroic",
+   "name": "Heroic NPC ability array",
+   "catalogStatus": "resolved",
+   "method": "assigned-array",
+   "scores": [
+    15,
+    14,
+    13,
+    12,
+    10,
+    8
+   ],
+   "abilityOrder": [
+    "strength",
+    "dexterity",
+    "constitution",
+    "intelligence",
+    "wisdom",
+    "charisma"
+   ],
+   "sourceRef": {
+    "sourceId": "source.aon-creating-npcs",
+    "section": "Step 2: Determine Ability Scores; Table 14-6",
+    "txtLines": [
+     12,
+     32
+    ],
+    "entry": "Heroic NPC array and Charisma-based arcane preset",
+    "provenanceStatus": "resolved",
+    "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+   },
+   "presets": {
+    "arcane": {
+     "strength": 8,
+     "dexterity": 14,
+     "constitution": 12,
+     "intelligence": 13,
+     "wisdom": 10,
+     "charisma": 15
+    },
+    "divine": {
+     "strength": 12,
+     "dexterity": 8,
+     "constitution": 14,
+     "intelligence": 10,
+     "wisdom": 15,
+     "charisma": 13
+    },
+    "ranged": {
+     "strength": 13,
+     "dexterity": 15,
+     "constitution": 14,
+     "intelligence": 12,
+     "wisdom": 10,
+     "charisma": 8
+    }
+   }
+  }
+ ]
 }

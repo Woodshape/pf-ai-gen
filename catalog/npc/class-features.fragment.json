@@ -208,28 +208,58 @@
    "id": "npc-class-feature.rogue-talents",
    "name": "Rogue talents",
    "kind": "choice-slot",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-class-tables",
+   "catalogStatus": "resolved",
+   "choiceId": "rogueTalent",
+   "allowedValues": [
+    "bleeding-attack"
+   ],
+   "options": {
+    "bleeding-attack": {
+     "name": "Bleeding Attack",
+     "entry": "Text-only in this slice; no numeric effect.",
+     "sourceRef": [
+      {
+       "sourceId": "source.aon-creating-npcs",
+       "section": "Example: Kiramor, the Forest Shadow",
+       "txtLines": [
+        123,
+        123
+       ],
+       "entry": "Printed statblock lists rogue talents (bleeding attack); bounded provenance because the general rogue talent list is not locally archived",
+       "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+       "printedPages": [
+        454
+       ],
+       "provenanceStatus": "resolved"
+      }
+     ]
+    }
+   },
    "sourceRef": [
     {
-     "sourceId": "source.npc-gap-matrix",
-     "section": "NPC Source-Gap Matrix",
+     "sourceId": "source.aon-rogue",
+     "section": "Rogue Talents",
      "txtLines": [
-      21,
-      21
+      40,
+      41
      ],
-     "entry": "Five NPC class tables through level 20",
-     "provenanceStatus": "catalog-gap"
+     "entry": "A rogue gains one rogue talent at 2nd level; the full talent list is not locally archived",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Rogue",
+     "provenanceStatus": "resolved"
     },
     {
-     "sourceId": "source.npc-mode-plan",
-     "section": "NPC_MODE_PLAN.md",
+     "sourceId": "source.aon-creating-npcs",
+     "section": "Example: Kiramor, the Forest Shadow",
      "txtLines": [
-      501,
-      513
+      123,
+      123
      ],
-     "entry": "Step 5: Class Features - choice slots",
-     "provenanceStatus": "structural-reference"
+     "entry": "Printed statblock selects bleeding attack (bounded provenance)",
+     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+     "printedPages": [
+      454
+     ],
+     "provenanceStatus": "resolved"
     }
    ]
   },
@@ -295,28 +325,58 @@
    "id": "npc-class-feature.ranger-combat-styles",
    "name": "Ranger combat styles",
    "kind": "choice-slot",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-class-tables",
+   "catalogStatus": "resolved",
+   "choiceId": "combatStyle",
+   "allowedValues": [
+    "archery"
+   ],
+   "options": {
+    "archery": {
+     "name": "Archery",
+     "grantsFeat": "feat.rapid-shot",
+     "sourceRef": [
+      {
+       "sourceId": "source.aon-creating-npcs",
+       "section": "Example: Kiramor, the Forest Shadow",
+       "txtLines": [
+        108,
+        108
+       ],
+       "entry": "Printed example selects Rapid Shot as the ranger combat style feat; bounded provenance because the full archery style feat list is not locally archived",
+       "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+       "printedPages": [
+        454
+       ],
+       "provenanceStatus": "resolved"
+      }
+     ]
+    }
+   },
    "sourceRef": [
     {
-     "sourceId": "source.npc-gap-matrix",
-     "section": "NPC Source-Gap Matrix",
+     "sourceId": "source.aon-ranger",
+     "section": "Combat Style Feat",
      "txtLines": [
-      21,
-      21
+      75,
+      77
      ],
-     "entry": "Five NPC class tables through level 20",
-     "provenanceStatus": "catalog-gap"
+     "entry": "Archery and two-weapon combat styles at 2nd level; style feats ignore their normal prerequisites",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+     "provenanceStatus": "resolved"
     },
     {
-     "sourceId": "source.npc-mode-plan",
-     "section": "NPC_MODE_PLAN.md",
+     "sourceId": "source.aon-creating-npcs",
+     "section": "Example: Kiramor, the Forest Shadow",
      "txtLines": [
-      501,
-      513
+      108,
+      108
      ],
-     "entry": "Step 5: Class Features - choice slots",
-     "provenanceStatus": "structural-reference"
+     "entry": "Printed example selects the archery combat style (Rapid Shot); bounded provenance: the full style feat list is not archived",
+     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+     "printedPages": [
+      454
+     ],
+     "provenanceStatus": "resolved"
     }
    ]
   },
@@ -609,7 +669,7 @@
     "castingAbility": "wisdom",
     "castingMode": "prepared",
     "spontaneousConversion": {
-     "name": "Summon Nature\u2019s Ally",
+     "name": "Summon Nature’s Ally",
      "from": "prepared",
      "excludesDomainSlots": true,
      "spellIdsBySlotLevel": {
@@ -1985,6 +2045,330 @@
     ],
     "entry": "Inspire competence +2"
    }
+  },
+  {
+   "id": "npc-class-feature.ranger-proficiencies",
+   "name": "Ranger Weapon and Armor Proficiencies",
+   "kind": "automatic",
+   "catalogStatus": "resolved",
+   "effects": {
+    "weaponProficiencies": [
+     "simple",
+     "martial"
+    ],
+    "armorProficiencies": [
+     "light",
+     "medium"
+    ],
+    "shieldProficiencies": "shields except tower shields"
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-ranger",
+     "section": "Weapon and Armor Proficiency",
+     "txtLines": [
+      34,
+      34
+     ],
+     "entry": "Simple and martial weapons, light and medium armor, and shields except tower shields",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.rogue-proficiencies",
+   "name": "Rogue Weapon and Armor Proficiencies",
+   "kind": "automatic",
+   "catalogStatus": "resolved",
+   "effects": {
+    "weaponProficiencies": [
+     "simple",
+     "hand crossbow",
+     "rapier",
+     "sap",
+     "shortbow",
+     "short sword"
+    ],
+    "armorProficiencies": [
+     "light"
+    ],
+    "shieldProficiencies": "none"
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-rogue",
+     "section": "Weapon and Armor Proficiency",
+     "txtLines": [
+      33,
+      33
+     ],
+     "entry": "Simple weapons plus hand crossbow, rapier, sap, shortbow, and short sword; light armor, no shields",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Rogue",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.ranger-favored-enemy",
+   "name": "Favored Enemy",
+   "kind": "choice-slot",
+   "catalogStatus": "resolved",
+   "choiceId": "favoredEnemy",
+   "allowedValues": [
+    "humanoid-orc"
+   ],
+   "options": {
+    "humanoid-orc": {
+     "name": "Humanoid (orc)",
+     "entry": "+2 bonus on Bluff, Knowledge, Perception, Sense Motive, and Survival checks and on weapon attack and damage rolls against the selected creature type; conditional on the favored enemy type, never an unconditional modifier."
+    }
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-ranger",
+     "section": "Favored Enemy",
+     "txtLines": [
+      68,
+      70
+     ],
+     "entry": "+2 attack, damage, and skill bonuses against the selected type; humanoids require an associated subtype",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.ranger-track",
+   "name": "Track",
+   "kind": "automatic",
+   "catalogStatus": "resolved",
+   "effects": {},
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-ranger",
+     "section": "Track",
+     "txtLines": [
+      71,
+      71
+     ],
+     "entry": "+1/2 ranger level (minimum 1) on Survival checks made to follow tracks; conditional task bonus, not an unconditional modifier",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.ranger-wild-empathy",
+   "name": "Wild Empathy",
+   "kind": "automatic",
+   "catalogStatus": "resolved",
+   "effects": {},
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-ranger",
+     "section": "Wild Empathy",
+     "txtLines": [
+      72,
+      74
+     ],
+     "entry": "Wild empathy check result = 1d20 + ranger level + Charisma bonus; -4 for magical beasts of Intelligence 1 or 2",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.ranger-endurance",
+   "name": "Endurance",
+   "kind": "automatic",
+   "catalogStatus": "resolved",
+   "effects": {
+    "grantsFeat": "feat.endurance"
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-ranger",
+     "section": "Endurance",
+     "txtLines": [
+      78,
+      78
+     ],
+     "entry": "Endurance as a bonus feat at 3rd level; granted automatically, never a selectable slot",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.ranger-favored-terrain",
+   "name": "Favored Terrain",
+   "kind": "choice-slot",
+   "catalogStatus": "resolved",
+   "choiceId": "favoredTerrain",
+   "allowedValues": [
+    "forest"
+   ],
+   "options": {
+    "forest": {
+     "name": "Forest",
+     "entry": "+2 bonus on initiative checks and on Knowledge (geography), Perception, Stealth, and Survival skill checks while in the favored terrain; conditional, never an unconditional modifier."
+    }
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-ranger",
+     "section": "Favored Terrain",
+     "txtLines": [
+      81,
+      92
+     ],
+     "entry": "Forest terrain option (line 81) and conditional favored-terrain bonuses",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.ranger-hunters-bond",
+   "name": "Hunter's Bond",
+   "kind": "choice-slot",
+   "catalogStatus": "resolved",
+   "choiceId": "huntersBond",
+   "allowedValues": [
+    "companion-bond"
+   ],
+   "options": {
+    "companion-bond": {
+     "name": "Companion bond",
+     "entry": "Spend a move action to grant half his favored enemy bonus to allies within 30 feet for a number of rounds equal to his Wisdom modifier (minimum 1). The animal-companion form requires Bestiary wolf rows that are not archived; selecting it yields a deterministic npc.catalog-gap issue."
+    }
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-ranger",
+     "section": "Hunter's Bond",
+     "txtLines": [
+      93,
+      95
+     ],
+     "entry": "Two bond forms; the animal-companion list includes Wolf but its statistics are not source-resolved",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.ranger-spellcasting",
+   "name": "Ranger Spells",
+   "kind": "automatic",
+   "catalogStatus": "resolved",
+   "effects": {
+    "castingAbility": "wisdom",
+    "castingMode": "prepared",
+    "casterLevelRule": "ranger level - 3; no caster level through ranger level 3",
+    "zeroSlotRule": "a 0 spells-per-day cell grants only Wisdom bonus spells for that level",
+    "wisdomGate": "Wisdom 10 + spell level required to prepare or cast"
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-ranger",
+     "section": "Spells",
+     "txtLines": [
+      96,
+      100
+     ],
+     "entry": "Divine prepared Wisdom spellcasting, bonus spells, the Wisdom gate, and caster level",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-getting-started",
+     "section": "Table: Ability Modifiers and Bonus Spells",
+     "txtLines": [
+      92,
+      115
+     ],
+     "entry": "Wisdom bonus spells per day",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.rogue-sneak-attack",
+   "name": "Sneak Attack",
+   "kind": "automatic",
+   "catalogStatus": "resolved",
+   "effects": {
+    "sneakAttackDiceByClassLevel": {
+     "1": "1d6",
+     "2": "1d6"
+    }
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-rogue",
+     "section": "Sneak Attack",
+     "txtLines": [
+      34,
+      37
+     ],
+     "entry": "Extra damage against flat-footed or flanked targets; 1d6 at 1st level, +1d6 every two rogue levels",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Rogue",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-rogue",
+     "section": "Table: Rogue",
+     "txtLines": [
+      13,
+      14
+     ],
+     "entry": "Rogue level 1: sneak attack +1d6; level 2 remains +1d6",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Rogue",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.rogue-trapfinding",
+   "name": "Trapfinding",
+   "kind": "automatic",
+   "catalogStatus": "resolved",
+   "effects": {},
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-rogue",
+     "section": "Trapfinding",
+     "txtLines": [
+      38,
+      38
+     ],
+     "entry": "+1/2 rogue level (minimum +1) on Perception to locate traps and on Disable Device; conditional task bonus",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Rogue",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
+   "id": "npc-class-feature.rogue-evasion",
+   "name": "Evasion",
+   "kind": "automatic",
+   "catalogStatus": "resolved",
+   "effects": {},
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-rogue",
+     "section": "Evasion",
+     "txtLines": [
+      39,
+      39
+     ],
+     "entry": "No damage on successful Reflex saves against attacks that allow half damage; light armor or no armor",
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Rogue",
+     "provenanceStatus": "resolved"
+    }
+   ]
   }
  ]
 }

@@ -42,6 +42,28 @@
    }
   },
   {
+   "id": "item.arrows-20",
+   "name": "Arrows (20)",
+   "catalogStatus": "resolved",
+   "category": "goods",
+   "priceCp": 100,
+   "weightLb": 3,
+   "effects": {},
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-equipment",
+     "section": "Table: Weapons",
+     "txtLines": [
+      177,
+      177
+     ],
+     "entry": "Arrows (20): 1 gp, 3 lbs.",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
    "id": "item.banded-mail",
    "name": "Banded Mail",
    "catalogStatus": "gap",
@@ -836,22 +858,121 @@
   {
    "id": "item.longbow",
    "name": "Longbow",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-equipment",
+   "catalogStatus": "resolved",
    "category": "weapon",
-   "priceCp": null,
-   "weightLb": null,
-   "effects": null,
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     26,
-     26
-    ],
-    "entry": "Core weapons, armor, goods, and required magic items",
-    "provenanceStatus": "catalog-gap"
-   }
+   "priceCp": 7500,
+   "weightLb": 3,
+   "effects": {
+    "damageDieBySize": {
+     "small": "1d6",
+     "medium": "1d8"
+    },
+    "damageType": "P",
+    "critMultiplier": 3,
+    "rangeIncrement": 100,
+    "noStrengthToDamage": true
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-equipment",
+     "section": "Table: Weapons",
+     "txtLines": [
+      176,
+      176
+     ],
+     "entry": "Longbow: 75 gp, 1d6/1d8, x3, 100 ft. range increment, 3 lbs., P",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-equipment",
+     "section": "Projectile Weapons",
+     "txtLines": [
+      55,
+      55
+     ],
+     "entry": "No Strength bonus on damage rolls with projectile weapons",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-equipment",
+     "section": "Weapon Descriptions: Longbow",
+     "txtLines": [
+      250,
+      250
+     ],
+     "entry": "Two-handed; a Strength penalty applies but a non-composite longbow gains no Strength bonus",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
+   "id": "item.longbow-plus-1",
+   "name": "Longbow +1",
+   "catalogStatus": "resolved",
+   "category": "weapon",
+   "priceCp": 237500,
+   "weightLb": 3,
+   "effects": {
+    "damageDieBySize": {
+     "small": "1d6",
+     "medium": "1d8"
+    },
+    "damageType": "P",
+    "critMultiplier": 3,
+    "rangeIncrement": 100,
+    "noStrengthToDamage": true,
+    "attackBonus": 1,
+    "damageBonus": 1
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-equipment",
+     "section": "Table: Weapons",
+     "txtLines": [
+      176,
+      176
+     ],
+     "entry": "Longbow base price 75 gp",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-magic-weapons",
+     "section": "Table 15-8: Weapons",
+     "txtLines": [
+      21,
+      21
+     ],
+     "entry": "+1 weapon enhancement base price 2,000 gp",
+     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Magic%20Weapons&Category=Magic%20Items",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-equipment",
+     "section": "Masterwork Weapons",
+     "txtLines": [
+      294,
+      295
+     ],
+     "entry": "Masterwork quality adds 300 gp and a +1 attack bonus",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-magic-weapons",
+     "section": "Magic Weapons",
+     "txtLines": [
+      4,
+      4
+     ],
+     "entry": "Enhancement bonuses apply to both attack and damage; the masterwork attack bonus does not stack with the enhancement bonus",
+     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Magic%20Weapons&Category=Magic%20Items",
+     "provenanceStatus": "resolved"
+    }
+   ]
   },
   {
    "id": "item.longsword",
@@ -937,6 +1058,70 @@
    }
   },
   {
+   "id": "item.potion-of-cure-moderate-wounds",
+   "name": "Potion of Cure Moderate Wounds",
+   "catalogStatus": "resolved",
+   "category": "magic",
+   "priceCp": 30000,
+   "effects": {},
+   "npcGearCategory": "limitedUse",
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-potions",
+     "section": "Table 15-12: Potions; Potion Costs",
+     "txtLines": [
+      19,
+      23
+     ],
+     "entry": "2nd-level potion brewed by a cleric, druid, or wizard at caster level 3rd costs 300 gp",
+     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Potions&Category=Magic%20Items",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.npc-crb-spell-lists",
+     "section": "2nd-Level Cleric Spells",
+     "txtLines": [
+      306,
+      315
+     ],
+     "entry": "Cure Moderate Wounds is a 2nd-level cleric spell",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
+   "id": "item.potion-of-invisibility",
+   "name": "Potion of Invisibility",
+   "catalogStatus": "resolved",
+   "category": "magic",
+   "priceCp": 40000,
+   "effects": {},
+   "npcGearCategory": "limitedUse",
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-potions",
+     "section": "Table 15-12: Potions; Potion Costs",
+     "txtLines": [
+      19,
+      23
+     ],
+     "entry": "2nd-level potion brewed by a sorcerer costs 400 gp",
+     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Potions&Category=Magic%20Items",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.npc-crb-spell-lists",
+     "section": "2nd-Level Sorcerer/Wizard Spells",
+     "txtLines": [
+      1077,
+      1123
+     ],
+     "entry": "Invisibility is a 2nd-level sorcerer/wizard spell",
+     "provenanceStatus": "resolved"
+    }
+   ]
+  },
+  {
    "id": "item.rapier",
    "name": "Rapier",
    "catalogStatus": "resolved",
@@ -966,6 +1151,53 @@
     "small": 1,
     "medium": 2
    }
+  },
+  {
+   "id": "item.rapier-masterwork",
+   "name": "Masterwork Rapier",
+   "catalogStatus": "resolved",
+   "category": "weapon",
+   "priceCp": 32000,
+   "weightLb": 2,
+   "weightLbBySize": {
+    "small": 1,
+    "medium": 2
+   },
+   "effects": {
+    "damageDieBySize": {
+     "small": "1d4",
+     "medium": "1d6"
+    },
+    "damageType": "P",
+    "critRange": 18,
+    "critMultiplier": 2,
+    "finesseWeapon": true,
+    "attackBonus": 1
+   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-equipment",
+     "section": "Table: Weapons",
+     "txtLines": [
+      157,
+      157
+     ],
+     "entry": "Rapier: 20 gp, 1d4/1d6, 18-20/x2, 2 lbs., P; Weapon Finesse applies",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-equipment",
+     "section": "Masterwork Weapons",
+     "txtLines": [
+      294,
+      295
+     ],
+     "entry": "Masterwork weapon: +1 enhancement bonus on attack rolls; +300 gp",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+     "provenanceStatus": "resolved"
+    }
+   ]
   },
   {
    "id": "item.ring-of-protection",
@@ -1131,7 +1363,7 @@
     },
     {
      "sourceId": "source.aon-equipment",
-     "section": "Table: Weapons \u2014 Weight column",
+     "section": "Table: Weapons — Weight column",
      "txtLines": [
       95,
       95
@@ -1279,6 +1511,70 @@
     "entry": "Studded leather",
     "provenanceStatus": "resolved"
    }
+  },
+  {
+   "id": "item.studded-leather-plus-1",
+   "name": "Studded Leather +1",
+   "catalogStatus": "resolved",
+   "category": "armor",
+   "priceCp": 117500,
+   "weightLb": 20,
+   "weightLbBySize": {
+    "small": 10,
+    "medium": 20
+   },
+   "effects": {
+    "armorBonus": 4,
+    "maxDex": 5,
+    "armorCheckPenalty": 0
+   },
+   "npcGearCategory": "protection",
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-equipment",
+     "section": "Table: Armor and Shields",
+     "txtLines": [
+      325,
+      325
+     ],
+     "entry": "Studded leather: 25 gp, +3 armor, +5 max Dex, -1 check penalty",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-equipment",
+     "section": "Masterwork Armor",
+     "txtLines": [
+      381,
+      383
+     ],
+     "entry": "Masterwork armor costs an extra 150 gp and lessens the armor check penalty by 1",
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-magic-armor",
+     "section": "Table 15-3: Armor and Shields",
+     "txtLines": [
+      17,
+      17
+     ],
+     "entry": "+1 armor base price 1,000 gp",
+     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Magic%20Armor&Category=Magic%20Items",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-magic-armor",
+     "section": "Magic Armor",
+     "txtLines": [
+      3,
+      3
+     ],
+     "entry": "Enhancement bonuses stack with regular armor bonuses; all magic armor is masterwork, reducing the armor check penalty by 1",
+     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Magic%20Armor&Category=Magic%20Items",
+     "provenanceStatus": "resolved"
+    }
+   ]
   },
   {
    "id": "item.torch",

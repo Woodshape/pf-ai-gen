@@ -19,8 +19,8 @@ Committed before this run:
 - `sources/reference/aonprd/{ranger,rogue,magic-weapons,magic-armor,potions}.html` —
   official current AoN snapshots fetched 2026-09-03.
 - `sources/npc/aonprd/{ranger,rogue,magic-weapons,magic-armor,potions}.txt` —
-  deterministic extracts written by `tools/extract_npc_aon_sources.py` (68 extracts
-  green, `--check` passes).
+  deterministic extracts written by `tools/extract_npc_aon_sources.py` (70 extracts
+  green after T1 bookkeeping, `--check` passes).
 - `tools/extract_npc_aon_sources.py` — extractor entries added for the five pages.
 - All line numbers below are verified against these extracts.
 
@@ -61,8 +61,9 @@ T1 source-bookkeeping ──► T2 catalog-fragments ──► T3a engine-multic
    - `("source.aon-magic-weapons", "sources/npc/aonprd/magic-weapons.txt", "Official current AoN Core magic weapon enhancement rules and Table 15-8")`
    - `("source.aon-magic-armor", "sources/npc/aonprd/magic-armor.txt", "Official current AoN Core magic armor enhancement rules and Table 15-3")`
    - `("source.aon-potions", "sources/npc/aonprd/potions.txt", "Official current AoN Core potion rules and Table 15-12")`
-3. Gate: `python3 tools/build_npc_catalog.py --check` still passes (no fragment change yet);
-   `python3 -m unittest tests.test_npc_source_tables tests.test_npc_catalog` green.
+3. Gate the source bookkeeping with manifest/hash validation and
+   `python3 tools/extract_npc_aon_sources.py --check`. Adding `SOURCE_FILES` makes the
+   generated catalog intentionally stale until T2 rebuilds it.
 
 ## 3. T2 — Catalog fragments (record shapes follow existing resolved records)
 
@@ -91,7 +92,7 @@ Ranger (anchor `source.aon-ranger`; replace gap stub, `supportedLevels` [1,2,3,4
   4: bab4 F4 R4 W1 grants [hunters-bond], `spellsPerDay` {"1": 0} (L17 — the table cell is 0)
 - `castingAbility` "wisdom", `castingMode` "prepared", `supportedLevels` [1,2,3,4]
 Rogue (anchor `source.aon-rogue`; `supportedLevels` [1,2]):
-- category "pc", hitDie "d8" (L5), classSkills = rogue list (L9), skillSelections 8 (L10)
+- category "pc", hitDie "d8" (L6), classSkills = rogue list (L9), skillSelections 8 (L10)
 - rows (txtLines 13–14): 1: bab0 F0 R2 W0 grants [sneak-attack, trapfinding];
   2: bab1 F0 R3 W0 grants [evasion, rogue-talent]
 Leave levels 3–20 as existing gap rows.
@@ -109,7 +110,7 @@ Anchor lines all in `source.aon-ranger` / `source.aon-rogue` / `source.aon-creat
   allowedValues ["archery"], option archery grants feat `feat.rapid-shot`.
   L75–77 describe the styles; the full style feat list is NOT locally archived —
   the archery→Rapid Shot grant is anchored by the printed example selecting
-  Rapid Shot as his ranger combat style feat (creating-npcs.txt L112). Note this
+  Rapid Shot as his ranger combat style feat (creating-npcs.txt L108). Note this
   bounded provenance in the record's `entry`.
 - `ranger-endurance` — L78 (bonus feat Endurance at 3rd; no numeric integration)
 - `ranger-favored-terrain` — kind "choice-slot", choiceId "favoredTerrain",
@@ -126,7 +127,7 @@ Anchor lines all in `source.aon-ranger` / `source.aon-rogue` / `source.aon-creat
 - `rogue-evasion` — L39
 - `rogue-talent` — kind "choice-slot", choiceId "rogueTalent", allowedValues
   ["bleeding-attack"] — anchored ONLY by the printed example (creating-npcs.txt
-  L121 statblock "rogue talents (bleeding attack)"); the general talent list is not
+  L123 statblock "rogue talents (bleeding attack)"); the general talent list is not
   archived. Record `entry` states this bounded provenance. Text only, no numeric effect.
 
 ### 3.4 `feats.fragment.json`
@@ -156,18 +157,18 @@ Anchor lines all in `source.aon-ranger` / `source.aon-rogue` / `source.aon-creat
   maxDex 5, armorCheckPenalty 0 (magic armor is masterwork: ACP −1, magic-armor.txt L4),
   critRange none.
 - Add `item.potion-of-cure-moderate-wounds` "Potion of Cure Moderate Wounds":
-  category magic, priceCp 30000 (potions.txt L19–23: Table 15-12 2nd-level potion,
+  category magic, priceCp 30000 (potions.txt L23: Table 15-12 2nd-level potion,
   cleric/druid/wizard column 300 gp); category "magic", npcGearCategory "limitedUse".
 - Add `item.potion-of-invisibility` "Potion of Invisibility": priceCp 40000
-  (Table 15-12 sorcerer column, 2nd level; invisibility is sor/wiz 2 per
-  core-rulebook-extract.spell-lists.txt L103); npcGearCategory "limitedUse".
+  (potions.txt L23 sorcerer column, 2nd level; invisibility is sor/wiz 2 per
+  core-rulebook-extract.spell-lists.txt L1077 and L1123); npcGearCategory "limitedUse".
 - Add `item.arrows-20` "Arrows (20)": priceCp 100, weight 3 lb (equipment.txt L177);
   category "goods".
 
 ### 3.6 `ability-arrays.fragment.json`
-Add `ranged` preset to BOTH arrays (creating-npcs.txt Table 14-6, lines 16–22):
-- basic ranged: str 11, dex 13, con 12, int 9, wis 10, cha 8
-- heroic ranged: str 13, dex 15, con 14, int 10, wis 12, cha 8
+Add `ranged` preset to BOTH arrays (creating-npcs.txt Table 14-6, lines 18–24):
+- basic ranged: str 11, dex 13, con 12, int 10, wis 9, cha 8
+- heroic ranged: str 13, dex 15, con 14, int 12, wis 10, cha 8
 Mirror the existing `presets` record shape exactly.
 
 ### 3.7 Rebuild + gates
@@ -181,7 +182,7 @@ Bounded to the new slice; follow existing patterns (sorcerer/druid branches):
 1. **Slice gate**: replace/extend the `supported` whitelist with:
    race `npc-race.elf`, progression exactly `[ranger N1, rogue N2]` (ordered),
    `N1 ∈ 1..4`, `N2 ∈ 1..2`, total level `N1+N2`. Keep all existing slices green.
-2. **Multiclass aggregation** (character-classes.txt L36–38: add hit points, BAB,
+2. **Multiclass aggregation** (character-classes.txt L42–44: add hit points, BAB,
    and save bonuses from each class):
    - `bab = Σ row.bab`; saves = Σ rows; `hitDiceExpression` per class die counts
      ("4d10+2d8+6" for 4/2).
@@ -189,7 +190,7 @@ Bounded to the new slice; follow existing patterns (sorcerer/druid branches):
      FIRST class is maximum; every later HD average + Con. ranger4/rogue2:
      floor(10 + 3×(5.5+1) + 2×(4.5+1)) = 40.
    - `npcCategory` "heroic" from the first PC class; CR = total − 1 = 5.
-3. **Two-class simplified skills** (creating-npcs.txt L21–23, the example's exact
+3. **Two-class simplified skills** (creating-npcs.txt L38–42, the example's exact
    procedure): start with the class with FEWER selections (ranger 6): count =
    6 + Int mod (+ race bonus) skills at ranks = total level, must be that class's
    class skills; the DIFFERENCE (rogue 8 − ranger 6 = 2) more skills must be NEW
@@ -201,13 +202,14 @@ Bounded to the new slice; follow existing patterns (sorcerer/druid branches):
    huntersBond=companion-bond (animal companion selection → catalog-gap issue),
    rogueTalent=bleeding-attack (text only). Wild empathy checkBonus = level + Cha.
 5. **Ranger spells**: extend `_spells` for `npc-class.ranger` (Wis-based prepared):
-   base slots from the row (0 at ranger 4) + Wis bonus spells
-   (`_bonus_spell_count`, getting-started.txt Table lines 89–101). Require
-   `spellLoadout.prepared` to match total slots exactly; validate ranger-list
-   membership (`levelsByClass.ranger`); caster level = ranger level − 3 (ranger.txt
-   Spells paragraph); DC = 10 + level + Wis mod; gate warning (not error) when
-   Wisdom < 10 + spell level makes a slot uncastable (ranger.txt L97). For the
-   fixture (Wis 12): 0 base + 1 bonus slot, spell.entangle prepared, CL 4, DC 13.
+   base slots from the row (0 at ranger 4) + Wisdom bonus spells
+   (`_bonus_spell_count`, getting-started.txt lines 92–100). Require
+   `spellLoadout.prepared` to match accessible slots exactly; validate ranger-list
+   membership (`levelsByClass.ranger`); caster level = ranger level − 3 and DC =
+   10 + spell level + Wisdom modifier (`ranger.txt` lines 96–100). The fixture's
+   Wisdom 10 supplies no bonus slot and cannot access 1st-level spells, so its
+   prepared map is empty and its ranger caster level is 1. Never synthesize the
+   previously stated CL 4, DC 13, or prepared entangle.
 6. **Attacks**: extend `_attacks` with item `effects.attackBonus` (masterwork or
    enhancement, attack only) and `effects.damageBonus` (enhancement), honor
    `effects.noStrengthToDamage` (skip Strength for projectile weapons,
@@ -228,21 +230,22 @@ Bounded to the new slice; follow existing patterns (sorcerer/druid branches):
 - concept: name "Kiramor, the Forest Shadow", role, alignment "N" in details
 - raceId npc-race.elf; classProgression [ranger 4, rogue 2]
 - abilityGeneration: method "ranged-preset", arrayId npc-ability-array.heroic,
-  levelIncreases {"4": "dexterity"}
-- skillGeneration: simplified, ranger 7 skills [climb, heal, knowledge-geography,
-  knowledge-nature, perception, stealth, survival] (Int mod +1 → budget 7)
-  + rogue 2 [escape-artist, swim]
+  levelIncreases {"4": "dexterity"}; after elf adjustments this yields
+  Str 13, Dex 18, Con 12, Int 14, Wis 10, Cha 8
+- skillGeneration: simplified, ranger 8 skills [climb, heal, intimidate,
+  knowledge-geography, knowledge-nature, perception, stealth, survival]
+  (Int modifier +2 → budget 8) + rogue 2 [escape-artist, swim]
 - feats: general-1 point-blank-shot, general-3 deadly-aim, general-5 weapon-finesse
 - classFeatureChoices: favoredEnemy humanoid-orc, combatStyle archery,
   favoredTerrain forest, huntersBond companion-bond, rogueTalent bleeding-attack
-- spellLoadout.prepared {"1": ["spell.entangle"]}
+- spellLoadout.prepared {} (Wisdom 10 gives no 1st-level bonus slot)
 - gearProfile medium/normal (heroic level 6 = 465000 cp)
 - gear: longbow-plus-1, rapier-masterwork, studded-leather-plus-1, arrows ×2,
-  potion-of-cure-moderate-wounds, potion-of-invisibility (spent 457200 cp →
-  budget warning is expected)
+  potion-of-cure-moderate-wounds, potion-of-invisibility (spent 457200 cp;
+  `npc.gear-budget-approximate` warning expected)
 
-`tests/fixtures/kiramor-printed.json` — printed oracle (all refs cite
-`source.aon-creating-npcs` L109–133): init +4 (+6 forests), AC 18/14/14, hp 39
+`tests/fixtures/kiramor-printed.json` — printed oracle (each field cites its exact
+`source.aon-creating-npcs` line within L109–133): init +4 (+6 forests), AC 18/14/14, hp 39
 (4d10+2d8+6), saves +6/+12/+2 (+2 vs enchantment), immune sleep, evasion, Str 13
 Dex 18 Con 12 Int 14 Wis 10 Cha 8, BAB +5, CMB +6, CMD 20, the five feats, the ten
 skills, languages Common/Elven/Orc/Sylvan, SQ nature bond (wolf), track, trapfinding +1,
@@ -252,13 +255,14 @@ gear as printed.
 
 | Field | Rules-derived | Printed | Delta | Classification |
 |---|---|---|---|---|
-| Int / Wis | 12 / 12 | 14 / 10 | ±2 | The example's ability assignment deviates from Table 14-6 ranged-heroic (preset: Int 10, Wis 12 + elf). Unresolved (gap #17: no errata snapshot). |
-| Fort / Ref / Will | +5 / +11 / +2 | +6 / +12 / +2 | +1 / +1 / 0 | Uniform +1 on Fort/Ref fits the unlisted resistance-bonus hypothesis (worksheet §3); Will matches only under preset Wis 12. Unresolved. |
-| HP | 40 | 39 | −1 | Rules-derived now uses the anchored max-first-HD rule (`npc-rule.average-hp.firstLevelMax`, getting-started.txt L30) — supersedes the worksheet's Phase-0 ordinary-averaging estimate of 37. Update worksheet §2/§3 accordingly. Printed 39 stays unexplained. |
-| Skills | 7 ranger + 2 rogue (preset Int 12) | 10 skills (Int 14 → 8+2) | count | Printed skill totals reconcile with printed abilities and ACP 0 magic armor EXCEPT Acrobatics +13, which needs 6 rogue-class ranks the procedure does not grant. Record as example inconsistency. |
-| Languages | Common, Elven | + Orc, Sylvan | — | Int-based bonus languages are not modeled in the slice (Phase 5). |
-| Hunter's bond | companion-bond | nature bond (wolf) | — | Wolf companion rows are not source-resolved; animal-companion form emits a catalog-gap issue. |
-| Initiative | +4 | +4 (+6 in forests) | — | Favored-terrain initiative bonus is conditional; recorded in feature text only. |
+| Abilities | 13 / 18 / 12 / 14 / 10 / 8 | same | 0 | The archived Table 14-6 ranged-heroic row plus elf adjustments and the level-4 Dexterity increase reproduces the printed scores. The earlier Int/Wis transcription was wrong. |
+| Fort / Ref / Will | +5 / +11 / +1 | +6 / +12 / +2 | +1 / +1 / +1 | A uniform unlisted resistance bonus and printed arithmetic error remain hypotheses. With no local errata snapshot, neither is absorbed. |
+| HP | 40 | 39 | −1 | The bounded engine convention uses a fixed maximum first-HD term, averages later dice with Constitution, and floors the total once. Standard per-die flooring would yield 39 but is only a hypothesis. |
+| Skills | 8 ranger + 2 rogue | 10 listed skills | membership/allocation | The fixture uses eight legal ranger skills including Intimidate, then Escape Artist and Swim at two rogue ranks. Print substitutes Acrobatics +13; Acrobatics is not a ranger class skill, while two rogue ranks would produce +9. |
+| Languages | Common, Elven | + Orc, Sylvan | coverage | The two Intelligence bonus-language choices are source-consistent but not modeled in this bounded slice. |
+| Hunter's bond | companion-bond | nature bond (wolf) | selection | Wolf companion statistics are not source-resolved; an animal-companion selection emits a catalog-gap issue. |
+| Initiative | +4 | +4 (+6 in forests) | conditional | Favored-terrain initiative is conditional and remains feature text rather than a global bonus. |
+| Ranger spells | CL 1, no prepared spells | none listed | 0 | Wisdom 10 provides no 1st-level bonus slot and cannot access a 1st-level spell. |
 
 ## 7. Invariants (must hold at the end of the run)
 

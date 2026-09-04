@@ -48,7 +48,8 @@ class NpcCatalogTests(unittest.TestCase):
         human = catalog["races"]["npc-race.human"]
         self.assertEqual(human["catalogStatus"], "resolved")
         self.assertEqual(human["speed"], {"land": 30})
-        self.assertTrue(all(race["catalogStatus"] == "gap" for race_id, race in catalog["races"].items() if race_id not in {"npc-race.human", "npc-race.goblin", "npc-race.halfling"}))
+        self.assertTrue(all(race["catalogStatus"] == "gap" for race_id, race in catalog["races"].items() if race_id not in {"npc-race.human", "npc-race.goblin", "npc-race.halfling", "npc-race.elf"}))
+        self.assertEqual(catalog["abilityArrays"]["npc-ability-array.basic"]["presets"]["ranged"]["intelligence"], 10)
 
         warrior = catalog["classes"]["npc-class.warrior"]
         self.assertEqual(set(warrior["levels"]), {str(level) for level in range(1, 21)})
@@ -171,6 +172,71 @@ class NpcCatalogTests(unittest.TestCase):
             "weapons": 65000, "protection": 80000, "magic": 0,
             "limitedUse": 10000, "gear": 20000,
         })
+
+    def test_elf_ranger_rogue_kiramor_catalog_slice_is_resolved(self):
+        catalog = NpcCatalog.load().data
+        elf = catalog["races"]["npc-race.elf"]
+        self.assertEqual(elf["abilityAdjustments"], {"dexterity": 2, "intelligence": 2, "constitution": -2})
+        self.assertEqual(elf["skillBonuses"], {"skill.perception": 2})
+        self.assertNotIn("saveBonuses", elf)
+
+        ranger = catalog["classes"]["npc-class.ranger"]
+        self.assertEqual(ranger["catalogStatus"], "resolved")
+        self.assertEqual(ranger["hitDie"], "d10")
+        self.assertEqual(ranger["castingAbility"], "wisdom")
+        self.assertEqual(ranger["castingMode"], "prepared")
+        self.assertEqual(ranger["supportedLevels"], [1, 2, 3, 4])
+        for level, row in ((1, (1, 2, 2, 0)), (2, (2, 3, 3, 0)), (3, (3, 3, 3, 1)), (4, (4, 4, 4, 1))):
+            row_record = ranger["levels"][str(level)]
+            self.assertEqual(row_record["catalogStatus"], "resolved")
+            self.assertEqual((row_record["bab"], row_record["fortitude"], row_record["reflex"], row_record["will"]), row)
+        self.assertEqual(ranger["levels"]["1"]["choiceSlots"], [{"choiceId": "favoredEnemy", "required": True, "allowedValues": ["humanoid-orc"]}])
+        self.assertEqual(ranger["levels"]["4"]["spellsPerDay"], {"1": 0})
+        self.assertIn("npc-class-feature.ranger-spellcasting", ranger["levels"]["4"]["featureGrants"])
+
+        rogue = catalog["classes"]["npc-class.rogue"]
+        self.assertEqual(rogue["hitDie"], "d8")
+        self.assertEqual(rogue["skillSelections"], 8)
+        self.assertEqual(rogue["supportedLevels"], [1, 2])
+        self.assertEqual((rogue["levels"]["2"]["bab"], rogue["levels"]["2"]["reflex"]), (1, 3))
+        self.assertIn("npc-class-feature.rogue-talents", rogue["levels"]["2"]["featureGrants"])
+
+        styles = catalog["classFeatures"]["npc-class-feature.ranger-combat-styles"]
+        self.assertEqual(styles["choiceId"], "combatStyle")
+        self.assertEqual(styles["allowedValues"], ["archery"])
+        self.assertEqual(styles["options"]["archery"]["grantsFeat"], "feat.rapid-shot")
+        talents = catalog["classFeatures"]["npc-class-feature.rogue-talents"]
+        self.assertEqual(talents["allowedValues"], ["bleeding-attack"])
+        bond = catalog["classFeatures"]["npc-class-feature.ranger-hunters-bond"]
+        self.assertEqual(bond["allowedValues"], ["companion-bond"])
+        spellcasting = catalog["classFeatures"]["npc-class-feature.ranger-spellcasting"]
+        self.assertEqual(spellcasting["effects"]["castingAbility"], "wisdom")
+        self.assertEqual(spellcasting["effects"]["castingMode"], "prepared")
+        sneak = catalog["classFeatures"]["npc-class-feature.rogue-sneak-attack"]
+        self.assertEqual(sneak["effects"]["sneakAttackDiceByClassLevel"], {"1": "1d6", "2": "1d6"})
+
+        self.assertEqual(catalog["classFeatures"]["npc-class-feature.ranger-endurance"]["effects"], {"grantsFeat": "feat.endurance"})
+        for skill_id, ability in (
+            ("skill.escape-artist", "dexterity"), ("skill.knowledge-geography", "intelligence"),
+            ("skill.stealth", "dexterity"), ("skill.swim", "strength"),
+        ):
+            self.assertEqual(catalog["skills"][skill_id]["catalogStatus"], "resolved")
+            self.assertEqual(catalog["skills"][skill_id]["keyAbility"], ability)
+
+        items = catalog["items"]
+        self.assertEqual(items["item.longbow-plus-1"]["priceCp"], 237500)
+        self.assertEqual(items["item.longbow-plus-1"]["effects"]["noStrengthToDamage"], True)
+        self.assertEqual(items["item.rapier-masterwork"]["effects"]["finesseWeapon"], True)
+        self.assertEqual(items["item.studded-leather-plus-1"]["effects"]["armorBonus"], 4)
+        # Every composed price cites each component with its own sourceRef.
+        for item_id in ("item.longbow-plus-1", "item.rapier-masterwork", "item.studded-leather-plus-1"):
+            self.assertGreaterEqual(len(items[item_id]["sourceRef"]), 2)
+
+        heroic_four = next(
+            row for row in catalog["gearBudgets"]["npc-gear.medium.normal"]["rows"]
+            if row["npcCategory"] == "heroic" and row["level"] == 4
+        )
+        self.assertEqual(heroic_four["budgetCp"], 240000)
 
     def test_money_is_integer_copper_and_prerequisite_examples_are_typed(self):
         catalog = NpcCatalog.load().data

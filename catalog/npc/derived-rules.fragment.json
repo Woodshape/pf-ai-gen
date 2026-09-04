@@ -158,10 +158,12 @@
     19
    ],
    "allowedFeatIds": [
+    "feat.deadly-aim",
     "feat.endurance",
     "feat.improved-initiative",
     "feat.iron-will",
     "feat.lightning-reflexes",
+    "feat.point-blank-shot",
     "feat.weapon-finesse"
    ],
    "allowedCategories": [
@@ -169,17 +171,30 @@
    ],
    "required": true,
    "catalogStatus": "resolved",
-   "sourceRef": {
-    "sourceId": "source.aon-character-classes",
-    "section": "Table: Character Advancement and Level-Dependent Bonuses",
-    "txtLines": [
-     19,
-     40
-    ],
-    "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
-    "entry": "Feats",
-    "provenanceStatus": "resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-character-classes",
+     "section": "Table: Character Advancement and Level-Dependent Bonuses",
+     "txtLines": [
+      19,
+      40
+     ],
+     "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+     "entry": "Feats",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-creating-npcs",
+     "section": "Step 4: Feats",
+     "txtLines": [
+      65,
+      65
+     ],
+     "entry": "Ranged recommended feat list (Deadly Aim, Point-Blank Shot, Weapon Finesse)",
+     "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+     "provenanceStatus": "resolved"
+    }
+   ]
   },
   {
    "id": "npc-rule.class-skill-bonus",

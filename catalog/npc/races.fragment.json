@@ -161,23 +161,61 @@
   {
    "id": "npc-race.elf",
    "name": "Elf",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-races",
-   "abilityAdjustments": null,
-   "sizeId": null,
-   "speed": null,
-   "senses": null,
-   "traits": null,
-   "languages": null,
+   "catalogStatus": "resolved",
+   "subtype": "elf",
+   "abilityAdjustments": {
+    "dexterity": 2,
+    "intelligence": 2,
+    "constitution": -2
+   },
+   "sizeId": "size.medium",
+   "sizeModifiers": {
+    "ac": 0,
+    "attack": 0,
+    "cmb": 0,
+    "cmd": 0
+   },
+   "speed": {
+    "land": 30
+   },
+   "senses": [
+    "Low-Light Vision"
+   ],
+   "traits": [
+    "Elven Immunities",
+    "Elven Magic",
+    "Keen Senses",
+    "Weapon Familiarity"
+   ],
+   "skillBonuses": {
+    "skill.perception": 2
+   },
+   "languages": [
+    "Common",
+    "Elven"
+   ],
+   "bonusLanguages": [
+    "Celestial",
+    "Draconic",
+    "Gnoll",
+    "Gnome",
+    "Goblin",
+    "Orc",
+    "Sylvan"
+   ],
+   "choiceSlots": [],
+   "featSlots": [],
+   "skillSelectionsBonus": 0,
    "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
+    "sourceId": "source.aon-core-races",
+    "section": "Elf Racial Traits",
     "txtLines": [
-     20,
-     20
+     28,
+     37
     ],
-    "entry": "Seven Core races",
-    "provenanceStatus": "catalog-gap"
+    "entry": "Standard Elf racial traits; the +2 saving throw bonus against enchantment stays conditional in the Elven Immunities trait text",
+    "officialUrl": "https://legacy.aonprd.com/coreRulebook/races.html",
+    "provenanceStatus": "resolved"
    }
   },
   {

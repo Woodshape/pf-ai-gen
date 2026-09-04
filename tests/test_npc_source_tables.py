@@ -180,8 +180,19 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual((halfling["sizeId"], halfling["speed"]), ("size.small", {"land": 20}))
         self.assertEqual(halfling["saveBonuses"], {"fortitude": 1, "reflex": 1, "will": 1})
         self.assertEqual(halfling["skillBonuses"], {"skill.perception": 2, "skill.acrobatics": 2, "skill.climb": 2, "skill.stealth": 4})
+        elf = self.catalog["races"]["npc-race.elf"]
+        self.assertEqual(elf["catalogStatus"], "resolved")
+        self.assertEqual(elf["abilityAdjustments"], {"dexterity": 2, "intelligence": 2, "constitution": -2})
+        self.assertEqual((elf["sizeId"], elf["speed"]), ("size.medium", {"land": 30}))
+        self.assertEqual(elf["senses"], ["Low-Light Vision"])
+        self.assertEqual(elf["skillBonuses"], {"skill.perception": 2})
+        # The +2 bonus against enchantment is conditional and stays in the Elven
+        # Immunities trait text; no unconditional saveBonuses may appear.
+        self.assertNotIn("saveBonuses", elf)
+        self.assertEqual(elf["languages"], ["Common", "Elven"])
+        self.assertEqual(elf["bonusLanguages"], ["Celestial", "Draconic", "Gnoll", "Gnome", "Goblin", "Orc", "Sylvan"])
         for race_id, race in self.catalog["races"].items():
-            if race_id not in {"npc-race.human", "npc-race.goblin", "npc-race.halfling"}:
+            if race_id not in {"npc-race.human", "npc-race.goblin", "npc-race.halfling", "npc-race.elf"}:
                 self.assertEqual(race["catalogStatus"], "gap")
 
     def test_sixteen_classes_keep_only_production_levels_resolved(self):
@@ -216,6 +227,39 @@ class CatalogCompletenessTests(unittest.TestCase):
                 self.assertEqual(record["levels"]["1"]["spellsPerDay"], {"1": 1})
                 self.assertEqual(record["levels"]["3"]["spellsKnown"], {"0": 6, "1": 4})
                 self.assertTrue(all(record["levels"][str(level)]["catalogStatus"] == "gap" for level in range(1, 21) if level > 3))
+            elif class_id == "npc-class.ranger":
+                self.assertEqual(record["catalogStatus"], "resolved")
+                self.assertEqual(record["hitDie"], "d10")
+                self.assertEqual(record["skillSelections"], 6)
+                self.assertEqual(record["castingAbility"], "wisdom")
+                self.assertEqual(record["castingMode"], "prepared")
+                self.assertEqual(record["supportedLevels"], [1, 2, 3, 4])
+                self.assertEqual(record["classSkills"], [
+                    "skill.climb", "skill.craft", "skill.handle-animal", "skill.heal", "skill.intimidate",
+                    "skill.knowledge-dungeoneering", "skill.knowledge-geography", "skill.knowledge-nature",
+                    "skill.perception", "skill.profession", "skill.ride", "skill.spellcraft", "skill.stealth",
+                    "skill.survival", "skill.swim",
+                ])
+                expected_ranger_rows = {
+                    1: (1, 2, 2, 0), 2: (2, 3, 3, 0), 3: (3, 3, 3, 1), 4: (4, 4, 4, 1),
+                }
+                for level, (bab, fort, refx, will) in expected_ranger_rows.items():
+                    row = record["levels"][str(level)]
+                    self.assertEqual(row["catalogStatus"], "resolved")
+                    self.assertEqual((row["bab"], row["fortitude"], row["reflex"], row["will"]), (bab, fort, refx, will))
+                self.assertEqual(record["levels"]["4"]["spellsPerDay"], {"1": 0})
+                self.assertTrue(all(record["levels"][str(level)]["catalogStatus"] == "gap" for level in range(5, 21)))
+            elif class_id == "npc-class.rogue":
+                self.assertEqual(record["catalogStatus"], "resolved")
+                self.assertEqual(record["hitDie"], "d8")
+                self.assertEqual(record["skillSelections"], 8)
+                self.assertEqual(record["supportedLevels"], [1, 2])
+                self.assertEqual(record["levels"]["1"]["catalogStatus"], "resolved")
+                self.assertEqual(record["levels"]["1"]["bab"], 0)
+                self.assertEqual((record["levels"]["1"]["fortitude"], record["levels"]["1"]["reflex"], record["levels"]["1"]["will"]), (0, 2, 0))
+                self.assertEqual(record["levels"]["2"]["catalogStatus"], "resolved")
+                self.assertEqual((record["levels"]["2"]["bab"], record["levels"]["2"]["fortitude"], record["levels"]["2"]["reflex"], record["levels"]["2"]["will"]), (1, 0, 3, 0))
+                self.assertTrue(all(record["levels"][str(level)]["catalogStatus"] == "gap" for level in range(3, 21)))
             else:
                 self.assertEqual(record["catalogStatus"], "gap")
 
@@ -223,9 +267,9 @@ class CatalogCompletenessTests(unittest.TestCase):
         features = self.catalog["classFeatures"]
         kinds = [record["kind"] for record in features.values()]
         self.assertEqual(kinds.count("feat-slot"), 6)
-        self.assertEqual(kinds.count("choice-slot"), 11)
+        self.assertEqual(kinds.count("choice-slot"), 14)
         self.assertEqual(kinds.count("archetype"), 1)
-        self.assertEqual(kinds.count("automatic"), 24)
+        self.assertEqual(kinds.count("automatic"), 33)
         resolved = {record_id for record_id, record in features.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
             "npc-class-feature.warrior-proficiencies", "npc-class-feature.sorcerer-spellcasting",
@@ -239,6 +283,13 @@ class CatalogCompletenessTests(unittest.TestCase):
             "npc-class-feature.bardic-knowledge", "npc-class-feature.bardic-performance", "npc-class-feature.countersong",
             "npc-class-feature.distraction", "npc-class-feature.fascinate", "npc-class-feature.inspire-courage",
             "npc-class-feature.versatile-performance", "npc-class-feature.well-versed", "npc-class-feature.inspire-competence",
+            "npc-class-feature.ranger-proficiencies", "npc-class-feature.rogue-proficiencies",
+            "npc-class-feature.ranger-favored-enemy", "npc-class-feature.ranger-track",
+            "npc-class-feature.ranger-wild-empathy", "npc-class-feature.ranger-combat-styles",
+            "npc-class-feature.ranger-endurance", "npc-class-feature.ranger-favored-terrain",
+            "npc-class-feature.ranger-hunters-bond", "npc-class-feature.ranger-spellcasting",
+            "npc-class-feature.rogue-sneak-attack", "npc-class-feature.rogue-trapfinding",
+            "npc-class-feature.rogue-evasion", "npc-class-feature.rogue-talents",
         })
 
     def test_thirty_five_core_skills_keep_slice_selection_resolved(self):
@@ -249,22 +300,41 @@ class CatalogCompletenessTests(unittest.TestCase):
             "skill.climb", "skill.intimidate", "skill.bluff", "skill.spellcraft", "skill.use-magic-device",
             "skill.heal", "skill.knowledge-nature", "skill.survival",
             "skill.perform", "skill.perception", "skill.diplomacy",
+            "skill.escape-artist", "skill.knowledge-geography", "skill.stealth", "skill.swim",
         }
         self.assertEqual(self.catalog["skills"]["skill.heal"]["keyAbility"], "wisdom")
         self.assertEqual(self.catalog["skills"]["skill.knowledge-nature"]["keyAbility"], "intelligence")
         self.assertEqual(self.catalog["skills"]["skill.perform"]["keyAbility"], "charisma")
         self.assertEqual(self.catalog["skills"]["skill.perception"]["keyAbility"], "wisdom")
+        self.assertEqual(self.catalog["skills"]["skill.escape-artist"]["keyAbility"], "dexterity")
+        self.assertEqual(self.catalog["skills"]["skill.knowledge-geography"]["keyAbility"], "intelligence")
+        self.assertEqual(self.catalog["skills"]["skill.stealth"]["keyAbility"], "dexterity")
+        self.assertEqual(self.catalog["skills"]["skill.swim"]["keyAbility"], "strength")
+        self.assertEqual(self.catalog["skills"]["skill.knowledge-geography"]["trainedOnly"], True)
         self.assertTrue(all(skill["catalogStatus"] == "gap" for skill_id, skill in self.catalog["skills"].items() if skill_id not in resolved))
 
-    def test_four_source_backed_general_feats_are_resolved(self):
+    def test_source_backed_feats_are_resolved(self):
         feats = self.catalog["feats"]
         resolved = {record_id for record_id, record in feats.items() if record["catalogStatus"] == "resolved"}
-        self.assertEqual(resolved, {"feat.endurance", "feat.improved-initiative", "feat.iron-will", "feat.lightning-reflexes", "feat.weapon-finesse"})
+        self.assertEqual(resolved, {
+            "feat.endurance", "feat.improved-initiative", "feat.iron-will", "feat.lightning-reflexes",
+            "feat.weapon-finesse", "feat.deadly-aim", "feat.point-blank-shot", "feat.rapid-shot",
+        })
         self.assertTrue(all(record["category"] == "general" for record in feats.values()))
+        self.assertEqual(feats["feat.deadly-aim"]["prerequisites"], {"all": [{"abilityAtLeast": {"dexterity": 13}}, {"babAtLeast": 1}]})
+        self.assertEqual(feats["feat.deadly-aim"]["effects"], {})
+        self.assertEqual(feats["feat.point-blank-shot"]["prerequisites"], {"all": []})
+        self.assertEqual(feats["feat.point-blank-shot"]["effects"], {})
+        self.assertEqual(feats["feat.rapid-shot"]["prerequisites"], {"all": [{"abilityAtLeast": {"dexterity": 13}}, {"hasFeat": "feat.point-blank-shot"}]})
+        self.assertEqual(feats["feat.rapid-shot"]["effects"], {})
+        rule = self.catalog["derivedRules"]["npc-rule.general-feat-slots"]
+        self.assertIn("feat.deadly-aim", rule["allowedFeatIds"])
+        self.assertIn("feat.point-blank-shot", rule["allowedFeatIds"])
+        self.assertNotIn("feat.rapid-shot", rule["allowedFeatIds"])
 
     def test_only_production_items_are_resolved(self):
         items = self.catalog["items"]
-        self.assertEqual(len(items), 67)
+        self.assertEqual(len(items), 73)
         self.assertTrue(all(item["category"] in ITEM_CATEGORIES for item in items.values()))
         resolved = {record_id for record_id, record in items.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
@@ -272,10 +342,29 @@ class CatalogCompletenessTests(unittest.TestCase):
             "item.wand-of-burning-hands", "item.cloak-of-resistance-1",
             "item.sickle", "item.leather-armor", "item.heavy-wooden-shield",
             "item.rapier", "item.shortsword", "item.chainmail", "item.studded-leather-armor", "item.sling",
+            "item.longbow", "item.rapier-masterwork", "item.longbow-plus-1",
+            "item.studded-leather-plus-1", "item.potion-of-cure-moderate-wounds",
+            "item.potion-of-invisibility", "item.arrows-20",
         })
         self.assertEqual(self.catalog["items"]["item.shortsword"]["effects"]["damageDieBySize"], {"small": "1d4", "medium": "1d6"})
         self.assertEqual(self.catalog["items"]["item.studded-leather-armor"]["effects"], {"armorBonus": 3, "maxDex": 5, "armorCheckPenalty": -1})
         self.assertEqual(self.catalog["items"]["item.chainmail"]["priceCp"], 15000)
+        self.assertEqual(self.catalog["items"]["item.longbow"]["priceCp"], 7500)
+        self.assertEqual(self.catalog["items"]["item.longbow"]["effects"]["noStrengthToDamage"], True)
+        self.assertEqual(self.catalog["items"]["item.longbow-plus-1"]["priceCp"], 237500)
+        self.assertEqual(self.catalog["items"]["item.longbow-plus-1"]["effects"]["attackBonus"], 1)
+        self.assertEqual(self.catalog["items"]["item.longbow-plus-1"]["effects"]["damageBonus"], 1)
+        self.assertEqual(self.catalog["items"]["item.rapier-masterwork"]["priceCp"], 32000)
+        self.assertEqual(self.catalog["items"]["item.rapier-masterwork"]["effects"]["attackBonus"], 1)
+        self.assertEqual(self.catalog["items"]["item.rapier-masterwork"]["effects"]["critRange"], 18)
+        self.assertEqual(self.catalog["items"]["item.studded-leather-plus-1"]["priceCp"], 117500)
+        self.assertEqual(self.catalog["items"]["item.studded-leather-plus-1"]["effects"], {"armorBonus": 4, "maxDex": 5, "armorCheckPenalty": 0})
+        self.assertEqual(self.catalog["items"]["item.potion-of-cure-moderate-wounds"]["priceCp"], 30000)
+        self.assertEqual(self.catalog["items"]["item.potion-of-cure-moderate-wounds"]["npcGearCategory"], "limitedUse")
+        self.assertEqual(self.catalog["items"]["item.potion-of-invisibility"]["priceCp"], 40000)
+        self.assertEqual(self.catalog["items"]["item.potion-of-invisibility"]["npcGearCategory"], "limitedUse")
+        self.assertEqual(self.catalog["items"]["item.arrows-20"]["priceCp"], 100)
+        self.assertEqual(self.catalog["items"]["item.arrows-20"]["weightLb"], 3)
 
     def test_all_nine_gear_profiles_remain_but_only_phase_two_rows_are_resolved(self):
         budgets = self.catalog["gearBudgets"]
@@ -286,7 +375,12 @@ class CatalogCompletenessTests(unittest.TestCase):
         resolved = budgets["npc-gear.medium.normal"]
         self.assertEqual(resolved["catalogStatus"], "resolved")
         self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "basic"], [1, 2, 3, 4, 5])
-        self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "heroic"], [1, 2, 3, 5, 6])
+        self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "heroic"], [1, 2, 3, 4, 5, 6])
+        self.assertEqual(next(row for row in resolved["rows"] if row["npcCategory"] == "heroic" and row["level"] == 4)["budgetCp"], 240000)
+        self.assertEqual(
+            next(row for row in resolved["rows"] if row["npcCategory"] == "heroic" and row["level"] == 4)["categories"],
+            {"weapons": 90000, "protection": 100000, "magic": 0, "limitedUse": 30000, "gear": 20000},
+        )
         self.assertEqual(next(row for row in resolved["rows"] if row["npcCategory"] == "heroic" and row["level"] == 1)["budgetCp"], 39000)
         self.assertEqual(next(row for row in resolved["rows"] if row["npcCategory"] == "heroic" and row["level"] == 2)["budgetCp"], 78000)
         self.assertEqual(next(row for row in resolved["rows"] if row["npcCategory"] == "heroic" and row["level"] == 3)["budgetCp"], 165000)
@@ -307,6 +401,23 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(equipment[340], "Shield, heavy wooden\t7 gp\t+2\t—\t–2\t15%\t—\t—\t10 lbs.")
         self.assertEqual(self.catalog["classes"]["npc-class.warrior"]["levels"]["3"]["bab"], 3)
         self.assertEqual(self.catalog["classes"]["npc-class.druid"]["levels"]["3"]["bab"], 2)
+        ranger = (ROOT / "sources/npc/aonprd/ranger.txt").read_text(encoding="utf-8").splitlines()
+        rogue = (ROOT / "sources/npc/aonprd/rogue.txt").read_text(encoding="utf-8").splitlines()
+        self.assertEqual(ranger[13], "1st\t+1\t+2\t+2\t+0\t1st favored enemy, track, wild empathy\t-\t-\t-\t-")
+        self.assertEqual(ranger[16], "4th\t+4\t+4\t+4\t+1\tHunter's bond\t0\t-\t-\t-")
+        self.assertEqual(rogue[12], "1st\t+0\t+0\t+2\t+0\tSneak attack +1d6, trapfinding")
+        self.assertEqual(rogue[13], "2nd\t+1\t+0\t+3\t+0\tEvasion, rogue talent")
+        classes = self.catalog["classes"]
+        self.assertEqual(classes["npc-class.ranger"]["levels"]["4"]["bab"], 4)
+        self.assertEqual((classes["npc-class.ranger"]["levels"]["4"]["fortitude"], classes["npc-class.ranger"]["levels"]["4"]["reflex"], classes["npc-class.ranger"]["levels"]["4"]["will"]), (4, 4, 1))
+        self.assertEqual((classes["npc-class.rogue"]["levels"]["2"]["bab"], classes["npc-class.rogue"]["levels"]["2"]["reflex"]), (1, 3))
+        presets = self.catalog["abilityArrays"]
+        self.assertEqual(presets["npc-ability-array.basic"]["presets"]["ranged"], {
+            "strength": 11, "dexterity": 13, "constitution": 12, "intelligence": 10, "wisdom": 9, "charisma": 8,
+        })
+        self.assertEqual(presets["npc-ability-array.heroic"]["presets"]["ranged"], {
+            "strength": 13, "dexterity": 15, "constitution": 14, "intelligence": 12, "wisdom": 10, "charisma": 8,
+        })
         self.assertEqual(self.catalog["items"]["item.longsword"]["priceCp"], 1500)
         self.assertEqual(self.catalog["items"]["item.sickle"]["effects"]["damageDieBySize"], {"small": "1d4", "medium": "1d6"})
         self.assertEqual(self.catalog["items"]["item.sickle"]["weightLbBySize"], {"small": 1, "medium": 2})

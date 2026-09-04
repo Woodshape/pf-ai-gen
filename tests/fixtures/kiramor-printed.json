@@ -1,0 +1,518 @@
+{
+  "oracle": "printed",
+  "name": {
+    "value": "Kiramor, The Forest Shadow",
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [109, 109],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "identity": {
+    "raceId": "npc-race.elf",
+    "classProgression": [
+      {"classId": "npc-class.ranger", "levels": 4},
+      {"classId": "npc-class.rogue", "levels": 2}
+    ],
+    "alignment": "N",
+    "size": "Medium",
+    "creatureType": "humanoid (elf)",
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [110, 111],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "initiative": {
+    "value": 4,
+    "conditionalForestValue": 6,
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [112, 112],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "senses": {
+    "values": ["low-light vision"],
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [112, 112],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "armorClass": {
+    "normal": 18,
+    "touch": 14,
+    "flatFooted": 14,
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [114, 114],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "hitPoints": {
+    "value": 39,
+    "hitDiceExpression": "4d10+2d8+6",
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [115, 115],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "saves": {
+    "fortitude": 6,
+    "reflex": 12,
+    "will": 2,
+    "conditionalEnchantmentBonus": 2,
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [116, 116],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "defensiveAbilities": {
+    "values": ["evasion"],
+    "immunities": ["sleep"],
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [117, 117],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "speed": {
+    "land": 30,
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [119, 119],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "attacks": {
+    "rapier": {
+      "attackBonus": 10,
+      "damage": "1d6+1",
+      "critical": "18-20",
+      "sourceRef": {
+        "sourceId": "source.aon-creating-npcs",
+        "section": "Example: Kiramor, the Forest Shadow",
+        "txtLines": [120, 120],
+        "provenanceStatus": "resolved"
+      }
+    },
+    "longbow": {
+      "attackBonus": 10,
+      "damage": "1d8+1",
+      "critical": "x3",
+      "sourceRef": {
+        "sourceId": "source.aon-creating-npcs",
+        "section": "Example: Kiramor, the Forest Shadow",
+        "txtLines": [121, 121],
+        "provenanceStatus": "resolved"
+      }
+    },
+    "rapidShot": {
+      "attackBonuses": [8, 8],
+      "damage": "1d8+1",
+      "critical": "x3",
+      "sourceRef": {
+        "sourceId": "source.aon-creating-npcs",
+        "section": "Example: Kiramor, the Forest Shadow",
+        "txtLines": [122, 122],
+        "provenanceStatus": "resolved"
+      }
+    }
+  },
+  "specialAttacks": {
+    "values": [
+      "favored enemy (humanoid [orc])",
+      "favored terrain (forest)",
+      "rogue talents (bleeding attack)",
+      "sneak attack (1d6)"
+    ],
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [123, 123],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "abilities": {
+    "strength": 13,
+    "dexterity": 18,
+    "constitution": 12,
+    "intelligence": 14,
+    "wisdom": 10,
+    "charisma": 8,
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [125, 125],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "combatManeuvers": {
+    "bab": 5,
+    "cmb": 6,
+    "cmd": 20,
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [126, 126],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "feats": {
+    "values": [
+      "Deadly Aim",
+      "Endurance",
+      "Point Blank Shot",
+      "Rapid Shot",
+      "Weapon Finesse"
+    ],
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [127, 127],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "skills": {
+    "values": {
+      "Acrobatics": 13,
+      "Climb": 10,
+      "Escape Artist": 9,
+      "Heal": 9,
+      "Knowledge (geography)": 11,
+      "Knowledge (nature)": 11,
+      "Perception": 11,
+      "Stealth": 13,
+      "Survival": 9,
+      "Swim": 6
+    },
+    "conditionalValues": {
+      "Perception (forests)": 13,
+      "Survival (following tracks)": 11
+    },
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [128, 128],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "languages": {
+    "values": ["Common", "Elven", "Orc", "Sylvan"],
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [129, 129],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "specialQualities": {
+    "values": ["nature bond (wolf)", "track", "trapfinding +1"],
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [130, 130],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "gear": {
+    "values": [
+      "potion of cure moderate wounds",
+      "potion of invisibility",
+      "+1 longbow with 40 arrows",
+      "masterwork rapier",
+      "+1 studded leather armor",
+      "gear and coins worth 200 gp"
+    ],
+    "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Example: Kiramor, the Forest Shadow",
+      "txtLines": [131, 133],
+      "provenanceStatus": "resolved"
+    }
+  },
+  "agreements": [
+    {
+      "field": "abilities",
+      "rulesDerived": {"strength": 13, "dexterity": 18, "constitution": 12, "intelligence": 14, "wisdom": 10, "charisma": 8},
+      "printed": {"strength": 13, "dexterity": 18, "constitution": 12, "intelligence": 14, "wisdom": 10, "charisma": 8},
+      "sourceRefs": [
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Table 14-6: NPC Ability Scores; Example: Kiramor, the Forest Shadow",
+          "txtLines": [19, 24],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Example: Kiramor, the Forest Shadow",
+          "txtLines": [125, 125],
+          "provenanceStatus": "resolved"
+        }
+      ]
+    },
+    {
+      "field": "rangerSpellAccess",
+      "rulesDerived": {"casterLevel": 1, "prepared": {}},
+      "printed": "no spells listed",
+      "classification": "source-consistent omission",
+      "sourceRefs": [
+        {
+          "sourceId": "source.aon-ranger",
+          "section": "Spells",
+          "txtLines": [96, 100],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-getting-started",
+          "section": "Bonus Spells per Day",
+          "txtLines": [92, 100],
+          "provenanceStatus": "resolved"
+        }
+      ]
+    }
+  ],
+  "classifiedDeltas": [
+    {
+      "field": "saves.fortitude",
+      "rulesDerived": 5,
+      "printed": 6,
+      "printedMinusRules": 1,
+      "classification": "unresolved printed-statblock discrepancy",
+      "hypotheses": ["unlisted +1 resistance bonus", "printed arithmetic error"],
+      "sourceRefs": [
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Example: Kiramor, the Forest Shadow",
+          "txtLines": [116, 116],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-ranger",
+          "section": "Table: Ranger, 4th level",
+          "txtLines": [17, 17],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-rogue",
+          "section": "Class Features, 2nd level",
+          "txtLines": [14, 14],
+          "provenanceStatus": "resolved"
+        }
+      ]
+    },
+    {
+      "field": "saves.reflex",
+      "rulesDerived": 11,
+      "printed": 12,
+      "printedMinusRules": 1,
+      "classification": "unresolved printed-statblock discrepancy",
+      "hypotheses": ["unlisted +1 resistance bonus", "printed arithmetic error"],
+      "sourceRefs": [
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Example: Kiramor, the Forest Shadow",
+          "txtLines": [116, 116],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-ranger",
+          "section": "Table: Ranger, 4th level",
+          "txtLines": [17, 17],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-rogue",
+          "section": "Class Features, 2nd level",
+          "txtLines": [14, 14],
+          "provenanceStatus": "resolved"
+        }
+      ]
+    },
+    {
+      "field": "saves.will",
+      "rulesDerived": 1,
+      "printed": 2,
+      "printedMinusRules": 1,
+      "classification": "unresolved printed-statblock discrepancy",
+      "hypotheses": ["unlisted +1 resistance bonus", "printed arithmetic error"],
+      "sourceRefs": [
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Example: Kiramor, the Forest Shadow",
+          "txtLines": [116, 116],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-ranger",
+          "section": "Table: Ranger, 4th level",
+          "txtLines": [17, 17],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-rogue",
+          "section": "Class Features, 2nd level",
+          "txtLines": [14, 14],
+          "provenanceStatus": "resolved"
+        }
+      ]
+    },
+    {
+      "field": "hitPoints",
+      "rulesDerived": 40,
+      "printed": 39,
+      "printedMinusRules": -1,
+      "classification": "unresolved averaging discrepancy",
+      "hypotheses": ["the example floors each later die's base average before adding the printed +6 Constitution term", "printed arithmetic error"],
+      "sourceRefs": [
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Step 7: Details",
+          "txtLines": [105, 105],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Example: Kiramor, the Forest Shadow",
+          "txtLines": [115, 115],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-getting-started",
+          "section": "Hit Points (hp)",
+          "txtLines": [30, 30],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-getting-started",
+          "section": "Rounding",
+          "txtLines": [45, 45],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-getting-started",
+          "section": "Constitution",
+          "txtLines": [137, 137],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-ranger",
+          "section": "Hit Die",
+          "txtLines": [6, 6],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-rogue",
+          "section": "Hit Die",
+          "txtLines": [6, 6],
+          "provenanceStatus": "resolved"
+        }
+      ]
+    },
+    {
+      "field": "skillSelections",
+      "rulesDerived": {
+        "rangerAtSixRanks": ["Climb", "Heal", "Intimidate", "Knowledge (geography)", "Knowledge (nature)", "Perception", "Stealth", "Survival"],
+        "rogueAtTwoRanks": ["Escape Artist", "Swim"]
+      },
+      "printed": {
+        "listedInsteadOfIntimidate": "Acrobatics +13"
+      },
+      "classification": "printed skill-allocation inconsistency",
+      "explanation": "Acrobatics is not a ranger class skill. Two rogue ranks would produce +9, while the printed +13 corresponds to six ranks. The fixture uses the source-backed 8+2 procedure and does not absorb the discrepancy.",
+      "sourceRefs": [
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Step 3: Skills; Example: Kiramor, the Forest Shadow",
+          "txtLines": [38, 42],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Example: Kiramor, the Forest Shadow",
+          "txtLines": [108, 108],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Example: Kiramor, the Forest Shadow",
+          "txtLines": [128, 128],
+          "provenanceStatus": "resolved"
+        }
+      ]
+    },
+    {
+      "field": "languages",
+      "rulesDerived": ["Common", "Elven"],
+      "printed": ["Common", "Elven", "Orc", "Sylvan"],
+      "classification": "unmodeled source-consistent bonus-language selections",
+      "sourceRefs": [
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Example: Kiramor, the Forest Shadow",
+          "txtLines": [129, 129],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-getting-started",
+          "section": "Step 2: Pick Your Race",
+          "txtLines": [50, 50],
+          "provenanceStatus": "resolved"
+        }
+      ]
+    },
+    {
+      "field": "huntersBond",
+      "rulesDerived": "companion-bond",
+      "printed": "nature bond (wolf)",
+      "classification": "deliberate bounded-slice selection difference",
+      "sourceRefs": [
+        {
+          "sourceId": "source.aon-ranger",
+          "section": "Hunter's Bond",
+          "txtLines": [93, 95],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Example: Kiramor, the Forest Shadow",
+          "txtLines": [130, 130],
+          "provenanceStatus": "resolved"
+        }
+      ]
+    },
+    {
+      "field": "initiative.forest",
+      "rulesDerived": 4,
+      "printed": 6,
+      "printedMinusRules": 2,
+      "classification": "conditional favored-terrain value excluded from the unconditional total",
+      "sourceRefs": [
+        {
+          "sourceId": "source.aon-ranger",
+          "section": "Favored Terrain",
+          "txtLines": [90, 92],
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-creating-npcs",
+          "section": "Example: Kiramor, the Forest Shadow",
+          "txtLines": [112, 112],
+          "provenanceStatus": "resolved"
+        }
+      ]
+    }
+  ]
+}

@@ -475,6 +475,41 @@
    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Message",
    "retrievedAt": "2026-09-03T20:21:09Z",
    "description": "Official current Archives of Nethys Message spell page."
+  },
+  "aon-ranger-html": {
+   "file": "sources/reference/aonprd/ranger.html",
+   "sha256": "b39215ce203d2d9f5b84b500ecba0e349d62f539987954522e6f8e067648700e",
+   "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Ranger",
+   "retrievedAt": "2026-09-03T22:08:48Z",
+   "description": "Official current Archives of Nethys Ranger class page, progression, and class features."
+  },
+  "aon-rogue-html": {
+   "file": "sources/reference/aonprd/rogue.html",
+   "sha256": "7491503729198852a574b7d6a33cebbf5eb3f1cdd319d564c3268a7b61e7a8cb",
+   "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Rogue",
+   "retrievedAt": "2026-09-03T22:08:48Z",
+   "description": "Official current Archives of Nethys Rogue class page, progression, and class features."
+  },
+  "aon-magic-weapons-html": {
+   "file": "sources/reference/aonprd/magic-weapons.html",
+   "sha256": "6e32564328fc9ad637ec6ecf7db3cc35f209c604fc2016546d93215d1200e33d",
+   "officialUrl": "https://aonprd.com/Rules.aspx?Name=Magic%20Weapons&Category=Magic%20Items",
+   "retrievedAt": "2026-09-03T22:08:48Z",
+   "description": "Official current Archives of Nethys Core magic weapon enhancement rules and Table 15-8."
+  },
+  "aon-magic-armor-html": {
+   "file": "sources/reference/aonprd/magic-armor.html",
+   "sha256": "1ef08b84eff5af24395ac9f525c035a9fc2c8c737d9d568afd358e0f020db5cb",
+   "officialUrl": "https://aonprd.com/Rules.aspx?Name=Magic%20Armor&Category=Magic%20Items",
+   "retrievedAt": "2026-09-03T22:08:48Z",
+   "description": "Official current Archives of Nethys Core magic armor enhancement rules and Table 15-3."
+  },
+  "aon-potions-html": {
+   "file": "sources/reference/aonprd/potions.html",
+   "sha256": "10efd24489a956fe19e8ed342acd7cf70feaadb49ef1b02e3f07162cdad737b1",
+   "officialUrl": "https://aonprd.com/Rules.aspx?Name=Potions&Category=Magic%20Items",
+   "retrievedAt": "2026-09-03T22:08:48Z",
+   "description": "Official current Archives of Nethys Core potion rules and Table 15-12."
   }
  },
  "extracts": {
@@ -1258,6 +1293,66 @@
    ],
    "contents": "Official current Archives of Nethys Message spell description (base text; variants below remain uncurated).",
    "catalogUse": "Bard level-0 known-spell option for the halfling bard slice."
+  },
+  "aon-ranger": {
+   "file": "sources/npc/aonprd/ranger.txt",
+   "sha256": "00e2acdec62f4a3a0f28761a75d374f8ed3d244867b073be1973b2db3c08e398",
+   "derivedFrom": "aon-ranger-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    170
+   ],
+   "contents": "Official current Archives of Nethys Ranger class page, progression, and class features.",
+   "catalogUse": "Kiramor elf ranger 4/rogue 2 source-gated production slice."
+  },
+  "aon-rogue": {
+   "file": "sources/npc/aonprd/rogue.txt",
+   "sha256": "375bf78b62c6cd1d25dc3c0d9e0b53c1807035cc541932daf693c604501af167",
+   "derivedFrom": "aon-rogue-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    111
+   ],
+   "contents": "Official current Archives of Nethys Rogue class page, progression, and class features.",
+   "catalogUse": "Kiramor elf ranger 4/rogue 2 source-gated production slice."
+  },
+  "aon-magic-weapons": {
+   "file": "sources/npc/aonprd/magic-weapons.txt",
+   "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
+   "derivedFrom": "aon-magic-weapons-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    36
+   ],
+   "contents": "Official current Archives of Nethys Core magic weapon enhancement rules and Table 15-8.",
+   "catalogUse": "Kiramor +1 longbow magic-item gear slice."
+  },
+  "aon-magic-armor": {
+   "file": "sources/npc/aonprd/magic-armor.txt",
+   "sha256": "9e193130fedd7f2e6f8e6792a1b44a2339d42e4af3f5cb32785f44f267d3b90d",
+   "derivedFrom": "aon-magic-armor-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    37
+   ],
+   "contents": "Official current Archives of Nethys Core magic armor enhancement rules and Table 15-3.",
+   "catalogUse": "Kiramor +1 studded leather magic-item gear slice."
+  },
+  "aon-potions": {
+   "file": "sources/npc/aonprd/potions.txt",
+   "sha256": "b1c01c8030aba37147c156a389ae9ae0cc2732b7aef764d0918a0fe340a361cd",
+   "derivedFrom": "aon-potions-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [
+    1,
+    24
+   ],
+   "contents": "Official current Archives of Nethys Core potion rules and Table 15-12.",
+   "catalogUse": "Kiramor potion combat-gear slice."
   }
  },
  "fragments": {

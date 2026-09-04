@@ -1,91 +1,150 @@
-# Kiramor Rules-versus-Print Worksheet (Phase 0)
+# Kiramor Rules-versus-Print Worksheet (Phase 4)
 
-Kiramor, the Forest Shadow — elf ranger 4 / rogue 2 — is the plan's principal
-acceptance fixture (NPC_MODE_PLAN.md §12). This worksheet separates what is derivable
-by rule from what is printed, classifies every delta, and fixes how the engine treats
-them. It will be consumed by task 6.a (`tests/test_kiramor.py`,
-`tests/fixtures/kiramor-npc.json`, `tests/fixtures/kiramor-printed.json`).
+Kiramor, the Forest Shadow, an elf ranger 4/rogue 2, is the bounded acceptance
+fixture from `NPC_MODE_PLAN.md` §12. This worksheet keeps the engine's
+source-derived result separate from the Core Rulebook's printed example. Printed
+values are never introduced into the calculation as hidden bonuses.
 
 ## 1. Provenance of the two oracles
 
 | Oracle | Local carrier | Anchor status |
 |--------|---------------|---------------|
-| Printed statblock values (+6/+12/+2 saves, 39 hp, 4d10+2d8+6, Dex +4 / Con +1 / Wis 0) | `NPC_MODE_PLAN.md` §12 | Hash-anchored to the plan document (`sources/npc/MANIFEST.json` → `npc-mode-plan`), **not** to any game source. The underlying Core Rulebook example page is not locally present (gap #15 in `docs/npc-source-gap-matrix.md`). |
-| Rules-derived values | Ranger 4 / rogue 2 class data | **GAP** until class tables are anchored (gap #5). The arithmetic below is the computation contract; the class-table inputs must become source-anchored before the fixture can assert "rules-derived" status. |
+| Printed example | `sources/npc/aonprd/creating-npcs.txt` lines 106–133 | **anchored** as `source.aon-creating-npcs`; the narrative is line 108 and statblock fields are lines 109–133. |
+| Rules-derived result | The anchored NPC workflow, elf, ranger, rogue, equipment, feat, skill, spell, and combat extracts | **anchored for this bounded slice**. Ranger levels 1–4 and rogue levels 1–2 are the only newly supported class rows. |
+| Errata adjudication | No local official errata snapshot | **GAP**. Printed discrepancies remain classified rather than normalized. |
 
-The plan document itself is a local project artifact. Recording its numbers as the
-printed oracle is honest provenance for the fixture, but it does not satisfy the plan's
-"no numeric rule depends solely on memory" exit criterion; the CRB example page must be
-added to `sources/npc/` before task 6.a finalizes the fixture.
+## 2. Rules-derived computation contract
 
-## 2. Rules-derived computation (computation contract)
+### Ability scores
 
-Inputs from the plan's printed description: ranger 4, rogue 2, abilities include
-Dex +4, Con +1, Wis 0 (Wisdom 10).
+Table 14-6's heroic ranged row is Str 13, Dex 15, Con 14, Int 12, Wis 10,
+Cha 8 (`creating-npcs.txt` lines 19–24). Apply the elf adjustments from Table
+14-7, then the level-4 increase to Dexterity:
 
-### Base saves from class level rows
+| Ability | Heroic ranged | Elf | Level increase | Result |
+|---------|---------------|-----|----------------|--------|
+| Strength | 13 | +0 | — | **13** |
+| Dexterity | 15 | +2 | +1 | **18** |
+| Constitution | 14 | −2 | — | **12** |
+| Intelligence | 12 | +2 | — | **14** |
+| Wisdom | 10 | +0 | — | **10** |
+| Charisma | 8 | +0 | — | **8** |
 
-| Component | Fort | Ref | Will |
-|-----------|------|-----|------|
-| ranger 4 | +4 | +4 | +1 |
-| rogue 2 | +0 | +3 | +0 |
-| Multiclass sum | **+4** | **+7** | **+1** |
+These values agree with the printed statblock at `creating-npcs.txt` line 125.
+The earlier worksheet's Int 12/Wis 12 premise transcribed the ranged row
+incorrectly and is superseded.
 
-### Ability modifiers
+### BAB and saves
 
-| Component | Fort | Ref | Will |
-|-----------|------|-----|------|
-| Constitution +1 | +1 | — | — |
-| Dexterity +4 | — | +4 | — |
-| Wisdom 0 | — | — | +0 |
-| **Rules-derived total** | **+5** | **+11** | **+1** |
+| Component | BAB | Fort | Ref | Will |
+|-----------|-----|------|-----|------|
+| ranger 4 | +4 | +4 | +4 | +1 |
+| rogue 2 | +1 | +0 | +3 | +0 |
+| Class-row sum | **+5** | **+4** | **+7** | **+1** |
+| Ability modifier | — | Con +1 | Dex +4 | Wis +0 |
+| **Rules-derived total** | **+5** | **+5** | **+11** | **+1** |
+
+The class rows are `ranger.txt` line 17 and `rogue.txt` line 14. Multiclass
+BAB and save bonuses add under `character-classes.txt` lines 42–44.
 
 ### Hit points
 
-Average per die under ordinary averaging (max/2 + ½): d10 → 5.5, d8 → 4.5.
+The bounded mission contract treats the maximum first PC-class Hit Die as a
+fixed die-size term, averages later Hit Dice with Constitution, and rounds down
+once. This preserves the brief's established Kiramor expectation without
+changing existing single-class slices.
 
+```text
+maximum first ranger Hit Die term = 10
+remaining ranger Hit Dice = 3 × (5.5 + 1)
+rogue Hit Dice = 2 × (4.5 + 1)
+floor(10 + 19.5 + 11) = 40
 ```
-4d10  → 4 × 5.5 = 22
-2d8   → 2 × 4.5 = 9
-Con +1 × 6 HD = 6
-Total = 37
-```
 
-**Rules-derived HP: 37.**
+**Rules-derived HP: 40; Hit Dice expression: `4d10+2d8+6`.** The printed 39
+remains a visible −1 delta. Per-die flooring would produce 39, but no archived
+text states that the example uses that convention, and changing the established
+engine convention would alter existing NPC slices.
 
-### Wisdom gate on ranger spellcasting
+### Two-class simplified skills
 
-Ranger 4 grants 1st-level ranger spells, but casting requires Wisdom 10 + spell level.
-With Wisdom 10 the character cannot cast 1st-level ranger spells (0-level-equivalent
-access only, and the ranger list has none). This is a real rules difference the engine
-must expose rather than paper over: the class has reached spellcasting level, the
-ability has not. It is a meaningful Kiramor outcome independent of the save/HP deltas.
+Kiramor's Intelligence 14 gives a +2 modifier. Ranger therefore supplies eight
+selections at six ranks each. Rogue's base budget exceeds ranger's by two, so it
+supplies two new selections at two ranks each (`creating-npcs.txt` lines 38–42
+and the worked narrative at line 108).
+
+| Group | Selections | Ranks | Derived totals |
+|-------|------------|-------|----------------|
+| Ranger | Climb, Heal, Intimidate, Knowledge (geography), Knowledge (nature), Perception, Stealth, Survival | 6 each | +10, +9, +8, +11, +11, +11, +13, +9 |
+| Rogue | Escape Artist, Swim | 2 each | +9, +6 |
+
+The first eight are ranger class skills. The final two are new rogue class
+skills. Studded leather +1 has armor check penalty 0, so it does not change
+Climb, Escape Artist, Stealth, or Swim.
+
+The printed list substitutes Acrobatics +13 for Intimidate +8. Acrobatics is not
+a ranger class skill, and two rogue ranks would produce +9 rather than +13.
+That allocation is classified as a printed-example inconsistency, not copied
+into the canonical fixture.
+
+### Ranger spell access
+
+Ranger 4 has a `0` in the 1st-level spells-per-day column (`ranger.txt` line 17),
+so it receives only a Wisdom bonus slot. Wisdom 10 receives no 1st-level bonus
+spell (`getting-started.txt` lines 92–100) and cannot prepare or cast a
+1st-level spell because the minimum is Wisdom 11 (`ranger.txt` lines 96–99).
+The fixture therefore uses `spellLoadout.prepared: {}`. Ranger caster level is
+`4 − 3 = 1` (`ranger.txt` line 100). No prepared spell or DC is synthesized.
+
+### Gear and unconditional attacks
+
+The fixture selects the printed +1 longbow, masterwork rapier, studded leather
++1, 40 arrows, two potions, and no unpriced generic gear. Catalog price is
+457,200 cp against the heroic level-6 budget of 465,000 cp, so the existing
+`npc.gear-budget-approximate` warning is expected. The canonical unconditional
+attacks are masterwork rapier +10, +1 longbow +10, and the Rapid
+Shot full attack +8/+8. Favored enemy, favored terrain, Point-Blank Shot, and
+Deadly Aim are conditional or voluntary and do not alter those totals.
 
 ## 3. Delta classification
 
-| Field | Rules-derived | Printed | Delta | Classification |
-|-------|--------------|---------|-------|----------------|
-| Fortitude | +5 | +6 | +1 | **Unresolved discrepancy** — hypothesis A: unlisted +1 resistance bonus on the example; hypothesis B: example arithmetic error. Not distinguishable locally (gap #16). |
-| Reflex | +11 | +12 | +1 | Same as Fortitude; a uniform +1 across all three saves fits a resistance bonus, per hypothesis A. |
-| Will | +1 | +2 | +1 | Same as above. |
-| HP | 37 | 39 | +2 | **Unresolved discrepancy** — hypothesis A: human favored-class bonus (+1 hp per ranger/rogue level for the favored class) partially applied; the allocation that yields exactly +2 is not stated in any local source. Hypothesis B: example uses a different averaging convention or an error. |
+| Field | Rules-derived | Printed | Classification |
+|-------|---------------|---------|----------------|
+| Abilities | 13/18/12/14/10/8 | 13/18/12/14/10/8 | Agreement after correcting the Table 14-6 transcription. |
+| Fortitude / Reflex / Will | +5 / +11 / +1 | +6 / +12 / +2 | Uniform printed +1. An unlisted resistance bonus and printed arithmetic error remain hypotheses; neither is absorbed without an errata source. |
+| HP | 40 | 39 | Printed −1. The bounded first-term convention is explicit; standard per-die flooring is a hypothesis for how print reached 39, not an engine rule. |
+| Skill allocation | Eight ranger skills at 6 ranks plus Escape Artist and Swim at 2 ranks | Acrobatics +13 appears instead of Intimidate | Printed allocation does not follow the anchored two-class procedure. |
+| Languages | Common, Elven in the current engine slice | Common, Elven, Orc, Sylvan | Orc and Sylvan are source-consistent Intelligence bonus-language choices, but language choice is not modeled in this slice. |
+| Hunter's bond | companion-bond | nature bond (wolf) | Deliberate bounded-slice selection difference. Wolf companion statistics remain outside the resolved slice. |
+| Initiative | +4 unconditional | +4, +6 in forests | Agreement. The forest value is conditional feature text, not a global bonus. |
+| Ranger spells | CL 1, no prepared spells | No spells printed | Source-consistent omission at Wisdom 10. |
 
-The uniform +1 save delta and the +2 hp delta are recorded, never absorbed. Inserting
-hidden bonuses to force equality is prohibited by the plan (§12) and by ADR-0001 D7.
+The exact printed values and field-level line anchors live in
+`tests/fixtures/kiramor-printed.json`. Its `classifiedDeltas` array is the
+machine-readable audit contract.
 
-## 4. Fixture contract for task 6.a
+## 4. Fixture contract
 
-`tests/test_kiramor.py` must assert all three of:
+`tests/fixtures/kiramor-npc.json` contains only selections:
 
-1. **Rules-derived expected result** — computed by the engine from anchored class rows
-   and the selections in `tests/fixtures/kiramor-npc.json` (elf, ranger 4/rogue 2,
-   ranged-preset abilities).
-2. **Printed example result** — the values in `tests/fixtures/kiramor-printed.json`,
-   each annotated with `npc-mode-plan` provenance until a game-source anchor exists.
-3. **Classified delta** — the two discrepancies above with their hypotheses and
-   provenance, emitted as visible annotations/audit data.
+1. Elf with ordered ranger 4 then rogue 2 progression.
+2. Heroic ranged preset and the level-4 Dexterity increase.
+3. Eight ranger skills followed positionally by two new rogue skills.
+4. Point-Blank Shot, Deadly Aim, and Weapon Finesse in general feat slots.
+5. Humanoid (orc), archery, forest, companion-bond, and bleeding-attack class choices.
+6. An empty prepared spell map because Wisdom 10 provides no usable slot.
+7. Medium/normal heroic gear totaling 457,200 cp.
 
-The engine reproduces every mechanically derivable value or emits an explicit
-documented source discrepancy. If later anchoring shows the printed page (with errata
-status), the classification is updated in this worksheet and the fixture annotations;
-the derivation trace itself never changes to match print.
+`tests/fixtures/kiramor-printed.json` contains the independent printed oracle,
+source agreement records, and classified deltas. Integration tests must assert
+the canonical result and printed result separately.
+
+## 5. Acceptance invariants
+
+1. Canonical abilities are Str 13, Dex 18, Con 12, Int 14, Wis 10, Cha 8.
+2. Canonical BAB/saves/HP are +5, +5/+11/+1, and 40.
+3. The eight-plus-two skill contract and empty ranger preparation are enforced.
+4. Printed 39 hp and +6/+12/+2 saves remain fixture data, never hidden effects.
+5. Conditional bonuses do not enter unconditional totals.
+6. `catalog/catalog.json`, Simple Monster implementation/tests, and
+   `NPC_MODE_PLAN.md` remain unchanged.
