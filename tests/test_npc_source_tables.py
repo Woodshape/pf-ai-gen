@@ -179,7 +179,8 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(halfling["abilityAdjustments"], {"strength": -2, "dexterity": 2, "charisma": 2})
         self.assertEqual((halfling["sizeId"], halfling["speed"]), ("size.small", {"land": 20}))
         self.assertEqual(halfling["saveBonuses"], {"fortitude": 1, "reflex": 1, "will": 1})
-        self.assertEqual(halfling["skillBonuses"], {"skill.perception": 2, "skill.acrobatics": 2, "skill.climb": 2, "skill.stealth": 4})
+        self.assertEqual(halfling["skillBonuses"], {"skill.perception": 2, "skill.acrobatics": 2, "skill.climb": 2})
+        self.assertEqual(halfling["sizeSkillBonuses"], {"skill.stealth": 4, "skill.fly": 2})
         elf = self.catalog["races"]["npc-race.elf"]
         self.assertEqual(elf["catalogStatus"], "resolved")
         self.assertEqual(elf["abilityAdjustments"], {"dexterity": 2, "intelligence": 2, "constitution": -2})
@@ -296,12 +297,6 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(set(self.catalog["skills"]), EXACT_IDS["skills"])
         self.assertEqual(self.catalog["skills"]["skill.climb"]["keyAbility"], "strength")
         self.assertEqual(self.catalog["skills"]["skill.intimidate"]["keyAbility"], "charisma")
-        resolved = {
-            "skill.climb", "skill.intimidate", "skill.bluff", "skill.spellcraft", "skill.use-magic-device",
-            "skill.heal", "skill.knowledge-nature", "skill.survival",
-            "skill.perform", "skill.perception", "skill.diplomacy",
-            "skill.escape-artist", "skill.knowledge-geography", "skill.stealth", "skill.swim",
-        }
         self.assertEqual(self.catalog["skills"]["skill.heal"]["keyAbility"], "wisdom")
         self.assertEqual(self.catalog["skills"]["skill.knowledge-nature"]["keyAbility"], "intelligence")
         self.assertEqual(self.catalog["skills"]["skill.perform"]["keyAbility"], "charisma")
@@ -311,14 +306,15 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(self.catalog["skills"]["skill.stealth"]["keyAbility"], "dexterity")
         self.assertEqual(self.catalog["skills"]["skill.swim"]["keyAbility"], "strength")
         self.assertEqual(self.catalog["skills"]["skill.knowledge-geography"]["trainedOnly"], True)
-        self.assertTrue(all(skill["catalogStatus"] == "gap" for skill_id, skill in self.catalog["skills"].items() if skill_id not in resolved))
+        self.assertTrue(all(skill["catalogStatus"] == "resolved" and skill["keyAbility"] and isinstance(skill["armorCheckPenalty"], bool)
+                            for skill in self.catalog["skills"].values()))
 
     def test_source_backed_feats_are_resolved(self):
         feats = self.catalog["feats"]
         resolved = {record_id for record_id, record in feats.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
             "feat.endurance", "feat.improved-initiative", "feat.iron-will", "feat.lightning-reflexes",
-            "feat.weapon-finesse", "feat.deadly-aim", "feat.point-blank-shot", "feat.rapid-shot",
+            "feat.weapon-finesse", "feat.deadly-aim", "feat.point-blank-shot", "feat.rapid-shot", "feat.martial-weapon-proficiency",
         })
         self.assertTrue(all(record["category"] == "general" for record in feats.values()))
         self.assertEqual(feats["feat.deadly-aim"]["prerequisites"], {"all": [{"abilityAtLeast": {"dexterity": 13}}, {"babAtLeast": 1}]})
@@ -332,7 +328,7 @@ class CatalogCompletenessTests(unittest.TestCase):
 
     def test_only_production_items_are_resolved(self):
         items = self.catalog["items"]
-        self.assertEqual(len(items), 73)
+        self.assertEqual(len(items), 74)
         self.assertTrue(all(item["category"] in ITEM_CATEGORIES for item in items.values()))
         resolved = {record_id for record_id, record in items.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
@@ -342,13 +338,13 @@ class CatalogCompletenessTests(unittest.TestCase):
             "item.rapier", "item.shortsword", "item.chainmail", "item.studded-leather-armor", "item.sling",
             "item.longbow", "item.rapier-masterwork", "item.longbow-plus-1",
             "item.studded-leather-plus-1", "item.potion-of-cure-moderate-wounds",
-            "item.potion-of-invisibility", "item.arrows-20",
+            "item.potion-of-invisibility", "item.arrows-20", "item.dogslicer", "item.shortbow", "item.whip",
         })
         self.assertEqual(self.catalog["items"]["item.shortsword"]["effects"]["damageDieBySize"], {"small": "1d4", "medium": "1d6"})
-        self.assertEqual(self.catalog["items"]["item.studded-leather-armor"]["effects"], {"armorBonus": 3, "maxDex": 5, "armorCheckPenalty": -1})
+        self.assertEqual(self.catalog["items"]["item.studded-leather-armor"]["effects"], {"armorBonus": 3, "maxDex": 5, "armorCheckPenalty": -1, "armorCategory": "light"})
         self.assertEqual(self.catalog["items"]["item.chainmail"]["priceCp"], 15000)
         self.assertEqual(self.catalog["items"]["item.longbow"]["priceCp"], 7500)
-        self.assertEqual(self.catalog["items"]["item.longbow"]["effects"]["noStrengthToDamage"], True)
+        self.assertEqual(self.catalog["items"]["item.longbow"]["effects"]["strengthDamage"], "penalty-only")
         self.assertEqual(self.catalog["items"]["item.longbow-plus-1"]["priceCp"], 237500)
         self.assertEqual(self.catalog["items"]["item.longbow-plus-1"]["effects"]["attackBonus"], 1)
         self.assertEqual(self.catalog["items"]["item.longbow-plus-1"]["effects"]["damageBonus"], 1)
@@ -356,7 +352,7 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(self.catalog["items"]["item.rapier-masterwork"]["effects"]["attackBonus"], 1)
         self.assertEqual(self.catalog["items"]["item.rapier-masterwork"]["effects"]["critRange"], 18)
         self.assertEqual(self.catalog["items"]["item.studded-leather-plus-1"]["priceCp"], 117500)
-        self.assertEqual(self.catalog["items"]["item.studded-leather-plus-1"]["effects"], {"armorBonus": 4, "maxDex": 5, "armorCheckPenalty": 0})
+        self.assertEqual(self.catalog["items"]["item.studded-leather-plus-1"]["effects"], {"armorBonus": 4, "maxDex": 5, "armorCheckPenalty": 0, "armorCategory": "light"})
         self.assertEqual(self.catalog["items"]["item.potion-of-cure-moderate-wounds"]["priceCp"], 30000)
         self.assertEqual(self.catalog["items"]["item.potion-of-cure-moderate-wounds"]["npcGearCategory"], "limitedUse")
         self.assertEqual(self.catalog["items"]["item.potion-of-invisibility"]["priceCp"], 40000)

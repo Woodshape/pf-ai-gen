@@ -3,7 +3,7 @@
   "concept": {
     "name": "Goblin Warchanter",
     "role": "inspiring support performer",
-    "description": "Goblin bard 1 transcribed from the supplied photograph. BLOCKED conversion candidate, not a validated finished NPC. See docs/goblin-warchanter-assessment.md."
+    "description": "Goblin bard 1 from the supplied photograph, represented as an unbuffed base statblock. Printed temporary bonuses and discrepancies are documented in docs/goblin-warchanter-assessment.md."
   },
   "selections": {
     "statblockUse": "full",
@@ -17,9 +17,12 @@
     },
     "skillGeneration": {
       "method": "simplified",
-      "skills": ["skill.acrobatics", "skill.linguistics", "skill.perception", "skill.perform", "skill.stealth"]
+      "skills": ["skill.acrobatics", "skill.linguistics", "skill.perception", "skill.perform", "skill.stealth"],
+      "includeUntrained": ["skill.ride"],
+      "specialties": {"skill.perform": "sing"},
+      "languages": ["Common"]
     },
-    "feats": [{"slotId": "general-1", "featId": "feat.martial-weapon-proficiency"}],
+    "feats": [{"slotId": "general-1", "featId": "feat.martial-weapon-proficiency", "weaponId": "item.dogslicer"}],
     "spellLoadout": {
       "known": {
         "0": ["spell.daze", "spell.ghost-sound", "spell.mage-hand", "spell.message"],
@@ -29,14 +32,16 @@
     "gearProfile": {"experienceProgression": "medium", "fantasyLevel": "normal"},
     "gear": [
       {"itemId": "item.studded-leather-armor"},
+      {"itemId": "item.dogslicer"},
       {"itemId": "item.shortbow"},
       {"itemId": "item.arrows-20"},
       {"itemId": "item.whip"},
-      {"itemId": "item.potion-of-cure-light-wounds"}
+      "potion of cure light wounds",
+      "20 gp"
     ],
     "details": {
       "alignment": "NE",
-      "sourceNotes": "Not an exact or complete executable conversion. Dogslicer is absent from the NPC catalog; preserve it here, not as an invented item ID. Martial Weapon Proficiency targets dogslicer, but feat selections cannot encode that target. Perform specialty is sing. Common is learned with the Linguistics rank; racial language is Goblin. Ride is unranked (printed +8; armored value should be +7). Carry 20 gp in addition to listed gear. Printed attacks and fear/charm bonus apparently include active inspire courage +1; printed shortbow damage still omits the Strength penalty.",
+      "sourceNotes": "Base statistics exclude temporary performance bonuses. Printed attacks and fear/charm bonus apparently include inspire courage +1. Printed shortbow damage omits the Strength penalty; unbuffed damage is 1d4-1. Armored Ride is +7, not the printed +8. The potion and coins are descriptive inventory and supply no automatic base-statblock effects or prices.",
       "tactics": "Continue bardic performance, use whip to trip PCs, cast hideous laughter on a dangerous PC, and cure light wounds on herself after first being wounded.",
       "morale": "Fights to the death."
     }

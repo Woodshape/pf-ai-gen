@@ -72,8 +72,22 @@ round each die's average down; heroic NPCs maximize the first die and round
 later averages up. Constitution is added once per Hit Die. Class categories,
 not the selected ability array, determine basic/heroic status.
 
+Skill modifiers share one calculation from Core skill metadata: ranks, class bonus,
+ability, armor, size, racial and permanent feature bonuses. Use simplified allocation
+for one or two classes, or `skillGeneration: {"method":"precise","ranks":{"skill.perception":1}}`.
+Three or more classes require precise ranks. Specialties, displayed untrained skills
+and Linguistics languages are explicit choices; see the [Warchanter input](docs/goblin-warchanter-draft.json).
+Spell choices require class-list/level metadata, not implemented spell descriptions.
+Known/prepared counts, class lists, spell levels and casting abilities are still validated.
+
+Equipment can mix mechanical catalog objects with plain descriptive strings. Strings
+have no automatic effects or prices—even when they name weapons or magic items.
+Base statistics exclude temporary buffs; performance rounds and concentration are
+shown without activating a performance. See the [valid Warchanter export](docs/goblin-warchanter.md)
+and its [printed-stat discrepancies](docs/goblin-warchanter-assessment.md).
+
 See [the composition audit](docs/npc-composition-audit.md) for removed gates
-and remaining implementation gaps. Duplicate an older
+and [BACKLOG.md](BACKLOG.md) for remaining work. Duplicate an older
 saved NPC to evaluate it against the updated catalog without changing its
 original snapshot.
 

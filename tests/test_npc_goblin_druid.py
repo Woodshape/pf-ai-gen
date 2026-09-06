@@ -116,7 +116,7 @@ class GoblinDruidTests(unittest.TestCase):
 
         self.assertEqual(canonical["attacks"][0], {
             "name": "Sickle", "itemId": "item.sickle", "attackBonuses": [3],
-            "attackBonusExpression": "+3", "attackType": "melee",
+            "attackBonusExpression": "+3", "attackType": "melee", "proficient": True,
             "damageExpression": "1d4", "damageType": "S",
         })
         self.assertEqual(canonical["attacks"][1]["name"], "Fire Bolt")
@@ -132,7 +132,7 @@ class GoblinDruidTests(unittest.TestCase):
         self.assertEqual(budgets["spells"], {"required": True, "classId": "npc-class.druid", "mode": "prepared", "levels": SLOT_BUDGET})
         self.assertEqual(budgets["gear"]["budgetCp"], 165000)
         self.assertEqual(budgets["gear"]["spentCp"], 2300)
-        self.assertEqual(budgets["skills"], {"method": "simplified", "count": 4, "selected": 4})
+        self.assertEqual(budgets["skills"], {"method": "simplified", "count": 4, "selected": 4, "rankBudget": 12, "maxRanks": 3, "ranksAssigned": 0})
         self.assertEqual([slot["slotId"] for slot in budgets["feats"]["slots"]], ["general-1", "general-3"])
         paths = {item["path"]: item for item in requirements["result"]["requirements"]}
         self.assertEqual(paths["/selections/classFeatureChoices/natureBond"]["values"], ["fire-domain"])
@@ -180,15 +180,13 @@ class GoblinDruidTests(unittest.TestCase):
         issue = next(issue for issue in evaluation["issues"] if issue["code"] == "npc.casting-ability-insufficient")
         self.assertEqual((issue["details"]["actual"], issue["details"]["required"]), (10, 12))
 
-    def test_unresolved_spell_record_is_a_catalog_gap(self):
+    def test_prepared_spells_need_only_list_metadata(self):
         draft = copy.deepcopy(FIXTURE)
         draft["selections"]["spellLoadout"]["prepared"]["0"][0] = "spell.guidance"
         evaluation, error = evaluation_for(draft, "goblin-druid-gap-spell")
         self.assertIsNone(error)
-        self.assertEqual(evaluation["status"], "invalid")
-        issue = next(issue for issue in evaluation["issues"] if issue["code"] == "npc.catalog-gap")
-        self.assertEqual(issue["path"], "/selections/spellLoadout/prepared/0/0")
-        self.assertEqual(issue["details"]["recordId"], "spell.guidance")
+        self.assertEqual(evaluation["status"], "valid", evaluation["issues"])
+        self.assertEqual(evaluation["canonical"]["spells"]["prepared"]["0"][0], "spell.guidance")
 
     def test_unknown_spells_and_computed_values_are_public_boundary_errors(self):
         draft = copy.deepcopy(FIXTURE)

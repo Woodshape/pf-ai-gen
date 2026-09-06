@@ -1752,20 +1752,23 @@
   {
    "id": "feat.martial-weapon-proficiency",
    "name": "Martial Weapon Proficiency",
-   "catalogStatus": "gap",
-   "gapCode": "core-rulebook-feats",
+   "catalogStatus": "resolved",
    "category": "general",
-   "prerequisites": null,
-   "effects": null,
+   "prerequisites": {
+    "all": []
+   },
+   "effects": {
+    "weaponProficiencyCategory": "martial"
+   },
    "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
+    "sourceId": "source.aon-feats",
+    "section": "Martial Weapon Proficiency",
     "txtLines": [
-     25,
-     25
+     769,
+     774
     ],
-    "entry": "Core feats",
-    "provenanceStatus": "catalog-gap"
+    "entry": "Martial Weapon Proficiency",
+    "provenanceStatus": "resolved"
    }
   },
   {

@@ -1,5 +1,7 @@
 # NPC composition audit
 
+> **Follow-up completed:** precise/shared skill calculations, Small size bonuses, Linguistics/specialties/untrained displays, metadata-only spell selection, weapon-targeted proficiency, bard knowledge/performance rounds and descriptive equipment now support the [valid unbuffed Warchanter](goblin-warchanter.md). Fractional NPC CRs and concentration are also derived. Items 4, 7 and 8 below, plus the proficiency/knowledge/rounds portions of item 6, describe historical gaps now addressed. Temporary buffs remain excluded by policy. Remaining priorities 4–7 are in [BACKLOG.md](../BACKLOG.md); the original audit/check counts below are retained as history.
+
 ## Fixed in this change
 
 The NPC evaluator no longer contains an approved race/class/level list or a named-character execution path. Race rules and each selected class's own level rows are evaluated independently. Missing rules are reported against the missing selection/data, rather than declaring the combination unsupported.

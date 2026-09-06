@@ -134,7 +134,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:ef63fb07e2b8ffe6c6363a3f0864ef8d296178a3fa28f1edc2a4078fd333d551",
+  "catalogVersion": "sha256:07c59de895e4d9a0f7a35d1df688f4b7f9c8257914cfb9d94d50f42b88829cb0",
   "classFeatures": {
     "npc-class-feature.bard-cantrips": {
       "catalogStatus": "resolved",
@@ -158,21 +158,35 @@
     },
     "npc-class-feature.bard-proficiencies": {
       "catalogStatus": "resolved",
-      "effects": {},
+      "effects": {
+        "armorProficiencies": [
+          "light"
+        ],
+        "shieldProficiencies": "shields except tower shields",
+        "weaponProficiencies": [
+          "simple",
+          "longsword",
+          "rapier",
+          "sap",
+          "shortsword",
+          "shortbow",
+          "whip"
+        ]
+      },
       "id": "npc-class-feature.bard-proficiencies",
       "kind": "automatic",
       "name": "Bard proficiencies",
       "sourceRef": {
         "entry": "Bard proficiencies",
-        "file": "sources/npc/aonprd/bard.txt",
+        "file": "sources/npc/aonprd/bard-base-features.txt",
         "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
         "provenanceStatus": "resolved",
-        "section": "Bard",
-        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
-        "sourceId": "source.aon-bard",
+        "section": "Bard proficiencies",
+        "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+        "sourceId": "source.aon-bard-base-features",
         "txtLines": [
-          6,
-          6
+          4,
+          4
         ]
       }
     },
@@ -201,41 +215,50 @@
     },
     "npc-class-feature.bardic-knowledge": {
       "catalogStatus": "resolved",
-      "effects": {},
+      "effects": {
+        "knowledgeBonus": {
+          "levelDivisor": 2,
+          "minimum": 1
+        }
+      },
       "id": "npc-class-feature.bardic-knowledge",
       "kind": "automatic",
       "name": "Bardic knowledge",
       "sourceRef": {
         "entry": "Bardic knowledge",
-        "file": "sources/npc/aonprd/bard.txt",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "file": "sources/npc/aonprd/bard-base-features.txt",
         "provenanceStatus": "resolved",
-        "section": "Class Features; Table: Bard (Special)",
-        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
-        "sourceId": "source.aon-bard",
+        "section": "Bardic knowledge",
+        "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+        "sourceId": "source.aon-bard-base-features",
         "txtLines": [
-          14,
-          14
+          5,
+          5
         ]
       }
     },
     "npc-class-feature.bardic-performance": {
       "catalogStatus": "resolved",
-      "effects": {},
+      "effects": {
+        "dailyRounds": {
+          "ability": "charisma",
+          "base": 4,
+          "perAdditionalLevel": 2
+        }
+      },
       "id": "npc-class-feature.bardic-performance",
       "kind": "automatic",
       "name": "Bardic performance",
       "sourceRef": {
         "entry": "Bardic performance",
-        "file": "sources/npc/aonprd/bard.txt",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+        "file": "sources/npc/aonprd/bard-base-features.txt",
         "provenanceStatus": "resolved",
-        "section": "Class Features; Table: Bard (Special)",
-        "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
-        "sourceId": "source.aon-bard",
+        "section": "Bardic performance",
+        "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+        "sourceId": "source.aon-bard-base-features",
         "txtLines": [
-          14,
-          14
+          6,
+          6
         ]
       }
     },
@@ -2408,11 +2431,11 @@
         "shieldProficiencies": "none",
         "weaponProficiencies": [
           "simple",
-          "hand crossbow",
+          "hand-crossbow",
           "rapier",
           "sap",
           "shortbow",
-          "short sword"
+          "shortsword"
         ]
       },
       "id": "npc-class-feature.rogue-proficiencies",
@@ -2659,25 +2682,44 @@
     "npc-class-feature.sorcerer-spellcasting": {
       "catalogStatus": "resolved",
       "effects": {
+        "armorProficiencies": [],
         "castingAbility": "charisma",
-        "castingMode": "spontaneous"
+        "castingMode": "spontaneous",
+        "shieldProficiencies": "none",
+        "weaponProficiencies": [
+          "simple"
+        ]
       },
       "id": "npc-class-feature.sorcerer-spellcasting",
       "kind": "automatic",
       "name": "Sorcerer spellcasting",
-      "sourceRef": {
-        "entry": "Sorcerer spontaneous spellcasting",
-        "file": "sources/npc/aonprd/sorcerer.txt",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer",
-        "provenanceStatus": "resolved",
-        "section": "Spells; Cantrips",
-        "sha256": "ebe8943d2e0582ba82f0a180d35ab9ba56e2e9f2f9fb24a9f29d4b8d58fb80af",
-        "sourceId": "source.aon-sorcerer",
-        "txtLines": [
-          57,
-          65
-        ]
-      }
+      "sourceRef": [
+        {
+          "entry": "Sorcerer spontaneous spellcasting",
+          "file": "sources/npc/aonprd/sorcerer.txt",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer",
+          "provenanceStatus": "resolved",
+          "section": "Spells; Cantrips",
+          "sha256": "ebe8943d2e0582ba82f0a180d35ab9ba56e2e9f2f9fb24a9f29d4b8d58fb80af",
+          "sourceId": "source.aon-sorcerer",
+          "txtLines": [
+            57,
+            65
+          ]
+        },
+        {
+          "entry": "Sorcerer proficiencies",
+          "file": "sources/npc/aonprd/sorcerer.txt",
+          "provenanceStatus": "resolved",
+          "section": "Sorcerer proficiencies",
+          "sha256": "ebe8943d2e0582ba82f0a180d35ab9ba56e2e9f2f9fb24a9f29d4b8d58fb80af",
+          "sourceId": "source.aon-sorcerer",
+          "txtLines": [
+            56,
+            56
+          ]
+        }
+      ]
     },
     "npc-class-feature.versatile-performance": {
       "catalogStatus": "resolved",
@@ -2701,21 +2743,31 @@
     },
     "npc-class-feature.warrior-proficiencies": {
       "catalogStatus": "resolved",
-      "effects": {},
+      "effects": {
+        "armorProficiencies": [
+          "light",
+          "medium",
+          "heavy"
+        ],
+        "shieldProficiencies": "all",
+        "weaponProficiencies": [
+          "simple",
+          "martial"
+        ]
+      },
       "id": "npc-class-feature.warrior-proficiencies",
       "kind": "automatic",
       "name": "Warrior weapon and armor proficiencies",
       "sourceRef": {
-        "entry": "Weapon and Armor Proficiency",
+        "entry": "Warrior proficiencies",
         "file": "sources/npc/aonprd/npc-classes.txt",
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/NPCClasses.html#warrior",
         "provenanceStatus": "resolved",
-        "section": "Warrior Class Features",
+        "section": "Warrior proficiencies",
         "sha256": "17c52d1bc3df506a81c3d077fa252350b98301db9479fd282a7e4f1f28af2f3f",
         "sourceId": "source.aon-npc-classes",
         "txtLines": [
-          169,
-          172
+          171,
+          171
         ]
       }
     },
@@ -11362,6 +11414,13 @@
       "value": 3
     },
     "npc-rule.classed-npc-cr": {
+      "belowOneProgression": [
+        "1/2",
+        "1/3",
+        "1/4",
+        "1/6",
+        "1/8"
+      ],
       "catalogStatus": "resolved",
       "id": "npc-rule.classed-npc-cr",
       "kind": "classed-npc-cr",
@@ -13366,23 +13425,26 @@
       }
     },
     "feat.martial-weapon-proficiency": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "general",
-      "effects": null,
-      "gapCode": "core-rulebook-feats",
+      "effects": {
+        "weaponProficiencyCategory": "martial"
+      },
       "id": "feat.martial-weapon-proficiency",
       "name": "Martial Weapon Proficiency",
-      "prerequisites": null,
+      "prerequisites": {
+        "all": []
+      },
       "sourceRef": {
-        "entry": "Core feats",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Martial Weapon Proficiency",
+        "file": "sources/npc/aonprd/feats.txt",
+        "provenanceStatus": "resolved",
+        "section": "Martial Weapon Proficiency",
+        "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+        "sourceId": "source.aon-feats",
         "txtLines": [
-          25,
-          25
+          769,
+          774
         ]
       }
     },
@@ -15356,6 +15418,7 @@
       "category": "armor",
       "effects": {
         "armorBonus": 4,
+        "armorCategory": "light",
         "armorCheckPenalty": -2,
         "maxDex": 4
       },
@@ -15382,6 +15445,7 @@
       "category": "armor",
       "effects": {
         "armorBonus": 6,
+        "armorCategory": "medium",
         "armorCheckPenalty": -5,
         "maxDex": 2
       },
@@ -15512,6 +15576,42 @@
         ]
       },
       "weightLb": null
+    },
+    "item.dogslicer": {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "critMultiplier": 2,
+        "critRange": 19,
+        "damageDieBySize": {
+          "medium": "1d6",
+          "small": "1d4"
+        },
+        "damageType": "S",
+        "lightWeapon": true,
+        "special": [
+          "fragile"
+        ],
+        "weaponCategory": "martial",
+        "weaponType": "dogslicer"
+      },
+      "id": "item.dogslicer",
+      "name": "Dogslicer",
+      "priceCp": 800,
+      "sourceRef": {
+        "entry": "Dogslicer",
+        "file": "sources/npc/aonprd/weapon-dogslicer.txt",
+        "officialUrl": "https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=Dogslicer",
+        "provenanceStatus": "resolved",
+        "section": "Dogslicer",
+        "sha256": "f92b88748f07e5d9bb3e822793548c384335cd8958477ee2795b715de34d9263",
+        "sourceId": "source.aon-weapon-dogslicer",
+        "txtLines": [
+          3,
+          8
+        ]
+      },
+      "weightLb": 1
     },
     "item.explorers-outfit": {
       "catalogStatus": "gap",
@@ -15826,7 +15926,8 @@
       "category": "shield",
       "effects": {
         "armorCheckPenalty": -2,
-        "shieldBonus": 2
+        "shieldBonus": 2,
+        "shieldCategory": "shield"
       },
       "id": "item.heavy-wooden-shield",
       "name": "Heavy Wooden Shield",
@@ -15958,6 +16059,7 @@
       "category": "armor",
       "effects": {
         "armorBonus": 2,
+        "armorCategory": "light",
         "armorCheckPenalty": 0,
         "maxDex": 6
       },
@@ -16069,7 +16171,8 @@
       "category": "shield",
       "effects": {
         "armorCheckPenalty": -1,
-        "shieldBonus": 1
+        "shieldBonus": 1,
+        "shieldCategory": "shield"
       },
       "id": "item.light-steel-shield",
       "name": "Light Steel Shield",
@@ -16099,8 +16202,10 @@
           "small": "1d6"
         },
         "damageType": "P",
-        "noStrengthToDamage": true,
-        "rangeIncrement": 100
+        "rangeIncrement": 100,
+        "strengthDamage": "penalty-only",
+        "weaponCategory": "martial",
+        "weaponType": "longbow"
       },
       "id": "item.longbow",
       "name": "Longbow",
@@ -16144,6 +16249,18 @@
             250,
             250
           ]
+        },
+        {
+          "entry": "Strength penalties apply to non-composite bows",
+          "file": "sources/npc/aonprd/combat.txt",
+          "provenanceStatus": "resolved",
+          "section": "Damage — Strength Bonus",
+          "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+          "sourceId": "source.aon-combat",
+          "txtLines": [
+            60,
+            60
+          ]
         }
       ],
       "weightLb": 3
@@ -16160,8 +16277,10 @@
           "small": "1d6"
         },
         "damageType": "P",
-        "noStrengthToDamage": true,
-        "rangeIncrement": 100
+        "rangeIncrement": 100,
+        "strengthDamage": "penalty-only",
+        "weaponCategory": "martial",
+        "weaponType": "longbow"
       },
       "id": "item.longbow-plus-1",
       "name": "+1 longbow",
@@ -16218,6 +16337,18 @@
             4,
             4
           ]
+        },
+        {
+          "entry": "Strength penalties apply to non-composite bows",
+          "file": "sources/npc/aonprd/combat.txt",
+          "provenanceStatus": "resolved",
+          "section": "Damage — Strength Bonus",
+          "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+          "sourceId": "source.aon-combat",
+          "txtLines": [
+            60,
+            60
+          ]
         }
       ],
       "weightLb": 3
@@ -16227,7 +16358,9 @@
       "category": "weapon",
       "effects": {
         "damageDie": "1d8",
-        "damageType": "S"
+        "damageType": "S",
+        "weaponCategory": "martial",
+        "weaponType": "longsword"
       },
       "id": "item.longsword",
       "name": "Longsword",
@@ -16394,7 +16527,9 @@
           "small": "1d4"
         },
         "damageType": "P",
-        "finesseWeapon": true
+        "finesseWeapon": true,
+        "weaponCategory": "martial",
+        "weaponType": "rapier"
       },
       "id": "item.rapier",
       "name": "Rapier",
@@ -16430,7 +16565,9 @@
           "small": "1d4"
         },
         "damageType": "P",
-        "finesseWeapon": true
+        "finesseWeapon": true,
+        "weaponCategory": "martial",
+        "weaponType": "rapier"
       },
       "id": "item.rapier-masterwork",
       "name": "mwk rapier",
@@ -16558,26 +16695,54 @@
       "weightLb": null
     },
     "item.shortbow": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "weapon",
-      "effects": null,
-      "gapCode": "core-rulebook-equipment",
+      "effects": {
+        "critMultiplier": 3,
+        "damageDieBySize": {
+          "medium": "1d6",
+          "small": "1d4"
+        },
+        "damageType": "P",
+        "rangeIncrement": 60,
+        "strengthDamage": "penalty-only",
+        "weaponCategory": "martial",
+        "weaponType": "shortbow"
+      },
       "id": "item.shortbow",
       "name": "Shortbow",
-      "priceCp": null,
-      "sourceRef": {
-        "entry": "Mundane weapons",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
-        "txtLines": [
-          26,
-          26
-        ]
-      },
-      "weightLb": null
+      "priceCp": 3000,
+      "sourceRef": [
+        {
+          "entry": "Table: Weapons — Shortbow",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons — Shortbow",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            180,
+            182
+          ]
+        },
+        {
+          "entry": "Strength penalties apply to non-composite bows",
+          "file": "sources/npc/aonprd/combat.txt",
+          "provenanceStatus": "resolved",
+          "section": "Damage — Strength Bonus",
+          "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+          "sourceId": "source.aon-combat",
+          "txtLines": [
+            60,
+            60
+          ]
+        }
+      ],
+      "weightLb": 2,
+      "weightLbBySize": {
+        "medium": 2,
+        "small": 1.0
+      }
     },
     "item.shortsword": {
       "catalogStatus": "resolved",
@@ -16588,7 +16753,9 @@
           "small": "1d4"
         },
         "damageType": "P",
-        "lightWeapon": true
+        "lightWeapon": true,
+        "weaponCategory": "martial",
+        "weaponType": "shortsword"
       },
       "id": "item.shortsword",
       "name": "Shortsword",
@@ -16621,7 +16788,9 @@
           "medium": "1d6",
           "small": "1d4"
         },
-        "damageType": "S"
+        "damageType": "S",
+        "weaponCategory": "simple",
+        "weaponType": "sickle"
       },
       "id": "item.sickle",
       "name": "Sickle",
@@ -16668,7 +16837,9 @@
           "medium": "1d4",
           "small": "1d3"
         },
-        "damageType": "B"
+        "damageType": "B",
+        "weaponCategory": "simple",
+        "weaponType": "sling"
       },
       "id": "item.sling",
       "name": "Sling",
@@ -16785,6 +16956,7 @@
       "category": "armor",
       "effects": {
         "armorBonus": 3,
+        "armorCategory": "light",
         "armorCheckPenalty": -1,
         "maxDex": 5
       },
@@ -16815,6 +16987,7 @@
       "category": "armor",
       "effects": {
         "armorBonus": 4,
+        "armorCategory": "light",
         "armorCheckPenalty": 0,
         "maxDex": 5
       },
@@ -17081,26 +17254,61 @@
       "weightLb": null
     },
     "item.whip": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "weapon",
-      "effects": null,
-      "gapCode": "core-rulebook-equipment",
+      "effects": {
+        "critMultiplier": 2,
+        "damageDieBySize": {
+          "medium": "1d3",
+          "small": "1d2"
+        },
+        "damageType": "S",
+        "finesseWeapon": true,
+        "nonlethal": true,
+        "reach": 15,
+        "special": [
+          "disarm",
+          "nonlethal",
+          "reach",
+          "trip"
+        ],
+        "weaponCategory": "exotic",
+        "weaponType": "whip"
+      },
       "id": "item.whip",
       "name": "Whip",
-      "priceCp": null,
-      "sourceRef": {
-        "entry": "Core weapons, armor, goods, and required magic items",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
-        "txtLines": [
-          26,
-          26
-        ]
-      },
-      "weightLb": null
+      "priceCp": 100,
+      "sourceRef": [
+        {
+          "entry": "Table: Weapons — Whip",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons — Whip",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            193,
+            193
+          ]
+        },
+        {
+          "entry": "Whip",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Whip",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            290,
+            292
+          ]
+        }
+      ],
+      "weightLb": 2,
+      "weightLbBySize": {
+        "medium": 2,
+        "small": 1.0
+      }
     },
     "item.wooden-holy-symbol": {
       "catalogStatus": "gap",
@@ -17247,6 +17455,14 @@
         "Elven Magic",
         "Keen Senses",
         "Weapon Familiarity"
+      ],
+      "weaponProficiencies": [
+        "longbow",
+        "composite-longbow",
+        "longsword",
+        "rapier",
+        "shortbow",
+        "composite-shortbow"
       ]
     },
     "npc-race.gnome": {
@@ -17306,24 +17522,42 @@
         "cmb": -1,
         "cmd": -1
       },
+      "sizeSkillBonuses": {
+        "skill.fly": 2,
+        "skill.stealth": 4
+      },
       "skillBonuses": {
         "skill.ride": 4,
         "skill.stealth": 4
       },
       "skillSelectionsBonus": 0,
-      "sourceRef": {
-        "entry": "Standard Goblin racial traits",
-        "file": "sources/npc/aonprd/goblin-race.txt",
-        "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
-        "provenanceStatus": "resolved",
-        "section": "Goblin Racial Traits",
-        "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
-        "sourceId": "source.aon-goblin-race",
-        "txtLines": [
-          15,
-          22
-        ]
-      },
+      "sourceRef": [
+        {
+          "entry": "Standard Goblin racial traits",
+          "file": "sources/npc/aonprd/goblin-race.txt",
+          "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+          "provenanceStatus": "resolved",
+          "section": "Goblin Racial Traits",
+          "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+          "sourceId": "source.aon-goblin-race",
+          "txtLines": [
+            15,
+            22
+          ]
+        },
+        {
+          "entry": "Fly — size modifiers",
+          "file": "sources/npc/aonprd/skill-fly-size.txt",
+          "provenanceStatus": "resolved",
+          "section": "Size modifiers",
+          "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+          "sourceId": "source.aon-fly-size",
+          "txtLines": [
+            4,
+            4
+          ]
+        }
+      ],
       "speed": {
         "land": 30
       },
@@ -17416,26 +17650,43 @@
         "cmb": -1,
         "cmd": -1
       },
+      "sizeSkillBonuses": {
+        "skill.fly": 2,
+        "skill.stealth": 4
+      },
       "skillBonuses": {
         "skill.acrobatics": 2,
         "skill.climb": 2,
-        "skill.perception": 2,
-        "skill.stealth": 4
+        "skill.perception": 2
       },
       "skillSelectionsBonus": 0,
-      "sourceRef": {
-        "entry": "Standard Halfling racial traits",
-        "file": "sources/npc/aonprd/halfling.txt",
-        "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Halfling",
-        "provenanceStatus": "resolved",
-        "section": "Halfling Racial Traits",
-        "sha256": "2a9d00a27d461db36b20b545eb04f1a18ee8e363c6396f7e4e73ce142db0f501",
-        "sourceId": "source.aon-halfling",
-        "txtLines": [
-          18,
-          27
-        ]
-      },
+      "sourceRef": [
+        {
+          "entry": "Standard Halfling racial traits",
+          "file": "sources/npc/aonprd/halfling.txt",
+          "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Halfling",
+          "provenanceStatus": "resolved",
+          "section": "Halfling Racial Traits",
+          "sha256": "2a9d00a27d461db36b20b545eb04f1a18ee8e363c6396f7e4e73ce142db0f501",
+          "sourceId": "source.aon-halfling",
+          "txtLines": [
+            18,
+            27
+          ]
+        },
+        {
+          "entry": "Fly — size modifiers",
+          "file": "sources/npc/aonprd/skill-fly-size.txt",
+          "provenanceStatus": "resolved",
+          "section": "Size modifiers",
+          "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+          "sourceId": "source.aon-fly-size",
+          "txtLines": [
+            4,
+            4
+          ]
+        }
+      ],
       "speed": {
         "land": 20
       },
@@ -17447,6 +17698,9 @@
         "Keen Senses",
         "Sure-Footed",
         "Weapon Familiarity"
+      ],
+      "weaponProficiencies": [
+        "sling"
       ]
     },
     "npc-race.human": {
@@ -17594,46 +17848,44 @@
   "schemaVersion": "1",
   "skills": {
     "skill.acrobatics": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": true,
+      "catalogStatus": "resolved",
       "id": "skill.acrobatics",
-      "keyAbility": null,
+      "keyAbility": "dexterity",
       "name": "Acrobatics",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          5,
+          5
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": false
     },
     "skill.appraise": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
       "id": "skill.appraise",
-      "keyAbility": null,
+      "keyAbility": "intelligence",
       "name": "Appraise",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          6,
+          6
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": false
     },
     "skill.bluff": {
       "armorCheckPenalty": false,
@@ -17642,16 +17894,15 @@
       "keyAbility": "charisma",
       "name": "Bluff",
       "sourceRef": {
-        "entry": "Bluff",
-        "file": "sources/npc/aonprd/skill-bluff.txt",
-        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Bluff",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
         "provenanceStatus": "resolved",
-        "section": "Bluff",
-        "sha256": "f79d3c05889b0e2b54f3c48d1fd9c64a09ba705bf4f89a07dc095ecc155ef73d",
-        "sourceId": "source.aon-skill-bluff",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          1,
-          33
+          7,
+          7
         ]
       },
       "trainedOnly": false
@@ -17663,9 +17914,8 @@
       "keyAbility": "strength",
       "name": "Climb",
       "sourceRef": {
-        "entry": "Climb",
+        "entry": "Table: Skill Summary",
         "file": "sources/npc/aonprd/skill-descriptions.txt",
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#climb",
         "provenanceStatus": "resolved",
         "section": "Table: Skill Summary",
         "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
@@ -17678,25 +17928,25 @@
       "trainedOnly": false
     },
     "skill.craft": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
+      "hasSpecialty": true,
       "id": "skill.craft",
-      "keyAbility": null,
+      "keyAbility": "intelligence",
       "name": "Craft",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          9,
+          9
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": false
     },
     "skill.diplomacy": {
       "armorCheckPenalty": false,
@@ -17705,61 +17955,58 @@
       "keyAbility": "charisma",
       "name": "Diplomacy",
       "sourceRef": {
-        "entry": "Diplomacy (CHA)",
-        "file": "sources/npc/aonprd/skill-diplomacy.txt",
-        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Diplomacy",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
         "provenanceStatus": "resolved",
-        "section": "Diplomacy",
-        "sha256": "5fbe4a2ef25ca81fef5ce5842aa431c6924a34253fe520a193ebf135ebe3ee93",
-        "sourceId": "source.aon-skill-diplomacy",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          1,
-          1
+          10,
+          10
         ]
       },
       "trainedOnly": false
     },
     "skill.disable-device": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": true,
+      "catalogStatus": "resolved",
       "id": "skill.disable-device",
-      "keyAbility": null,
+      "keyAbility": "dexterity",
       "name": "Disable Device",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          11,
+          11
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": true
     },
     "skill.disguise": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
       "id": "skill.disguise",
-      "keyAbility": null,
+      "keyAbility": "charisma",
       "name": "Disguise",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          12,
+          12
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": false
     },
     "skill.escape-artist": {
       "armorCheckPenalty": true,
@@ -17767,77 +18014,59 @@
       "id": "skill.escape-artist",
       "keyAbility": "dexterity",
       "name": "Escape Artist",
-      "sourceRef": [
-        {
-          "entry": "Skill summary header: class columns, untrained use, and key ability",
-          "file": "sources/npc/aonprd/skill-descriptions.txt",
-          "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html",
-          "provenanceStatus": "resolved",
-          "section": "Table: Skill Summary",
-          "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
-          "sourceId": "source.aon-skill-descriptions",
-          "txtLines": [
-            4,
-            4
-          ]
-        },
-        {
-          "entry": "Escape Artist (DEX*)",
-          "file": "sources/npc/aonprd/skill-descriptions.txt",
-          "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html",
-          "provenanceStatus": "resolved",
-          "section": "Table: Skill Summary",
-          "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
-          "sourceId": "source.aon-skill-descriptions",
-          "txtLines": [
-            13,
-            13
-          ]
-        }
-      ],
+      "sourceRef": {
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
+        "txtLines": [
+          13,
+          13
+        ]
+      },
       "trainedOnly": false
     },
     "skill.fly": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": true,
+      "catalogStatus": "resolved",
       "id": "skill.fly",
-      "keyAbility": null,
+      "keyAbility": "dexterity",
       "name": "Fly",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          14,
+          14
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": false
     },
     "skill.handle-animal": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
       "id": "skill.handle-animal",
-      "keyAbility": null,
+      "keyAbility": "charisma",
       "name": "Handle Animal",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          15,
+          15
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": true
     },
     "skill.heal": {
       "armorCheckPenalty": false,
@@ -17846,9 +18075,8 @@
       "keyAbility": "wisdom",
       "name": "Heal",
       "sourceRef": {
-        "entry": "Heal",
+        "entry": "Table: Skill Summary",
         "file": "sources/npc/aonprd/skill-descriptions.txt",
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#heal",
         "provenanceStatus": "resolved",
         "section": "Table: Skill Summary",
         "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
@@ -17867,9 +18095,8 @@
       "keyAbility": "charisma",
       "name": "Intimidate",
       "sourceRef": {
-        "entry": "Intimidate",
+        "entry": "Table: Skill Summary",
         "file": "sources/npc/aonprd/skill-descriptions.txt",
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#intimidate",
         "provenanceStatus": "resolved",
         "section": "Table: Skill Summary",
         "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
@@ -17882,156 +18109,141 @@
       "trainedOnly": false
     },
     "skill.knowledge-arcana": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
+      "group": "knowledge",
       "id": "skill.knowledge-arcana",
-      "keyAbility": null,
+      "keyAbility": "intelligence",
       "name": "Knowledge (Arcana)",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          18,
+          18
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": true
     },
     "skill.knowledge-dungeoneering": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
+      "group": "knowledge",
       "id": "skill.knowledge-dungeoneering",
-      "keyAbility": null,
+      "keyAbility": "intelligence",
       "name": "Knowledge (Dungeoneering)",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          19,
+          19
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": true
     },
     "skill.knowledge-engineering": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
+      "group": "knowledge",
       "id": "skill.knowledge-engineering",
-      "keyAbility": null,
+      "keyAbility": "intelligence",
       "name": "Knowledge (Engineering)",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          20,
+          20
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": true
     },
     "skill.knowledge-geography": {
       "armorCheckPenalty": false,
       "catalogStatus": "resolved",
+      "group": "knowledge",
       "id": "skill.knowledge-geography",
       "keyAbility": "intelligence",
       "name": "Knowledge (Geography)",
-      "sourceRef": [
-        {
-          "entry": "Skill summary header: class columns, untrained use, and key ability",
-          "file": "sources/npc/aonprd/skill-descriptions.txt",
-          "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html",
-          "provenanceStatus": "resolved",
-          "section": "Table: Skill Summary",
-          "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
-          "sourceId": "source.aon-skill-descriptions",
-          "txtLines": [
-            4,
-            4
-          ]
-        },
-        {
-          "entry": "Knowledge (Geography) (INT)",
-          "file": "sources/npc/aonprd/skill-descriptions.txt",
-          "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html",
-          "provenanceStatus": "resolved",
-          "section": "Table: Skill Summary",
-          "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
-          "sourceId": "source.aon-skill-descriptions",
-          "txtLines": [
-            21,
-            21
-          ]
-        }
-      ],
+      "sourceRef": {
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
+        "txtLines": [
+          21,
+          21
+        ]
+      },
       "trainedOnly": true
     },
     "skill.knowledge-history": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
+      "group": "knowledge",
       "id": "skill.knowledge-history",
-      "keyAbility": null,
+      "keyAbility": "intelligence",
       "name": "Knowledge (History)",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          22,
+          22
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": true
     },
     "skill.knowledge-local": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
+      "group": "knowledge",
       "id": "skill.knowledge-local",
-      "keyAbility": null,
+      "keyAbility": "intelligence",
       "name": "Knowledge (Local)",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          23,
+          23
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": true
     },
     "skill.knowledge-nature": {
       "armorCheckPenalty": false,
       "catalogStatus": "resolved",
+      "group": "knowledge",
       "id": "skill.knowledge-nature",
       "keyAbility": "intelligence",
       "name": "Knowledge (Nature)",
       "sourceRef": {
-        "entry": "Knowledge (nature)",
+        "entry": "Table: Skill Summary",
         "file": "sources/npc/aonprd/skill-descriptions.txt",
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#knowledge",
         "provenanceStatus": "resolved",
         "section": "Table: Skill Summary",
         "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
@@ -18044,88 +18256,102 @@
       "trainedOnly": true
     },
     "skill.knowledge-nobility": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
+      "group": "knowledge",
       "id": "skill.knowledge-nobility",
-      "keyAbility": null,
+      "keyAbility": "intelligence",
       "name": "Knowledge (Nobility)",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          25,
+          25
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": true
     },
     "skill.knowledge-planes": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
+      "group": "knowledge",
       "id": "skill.knowledge-planes",
-      "keyAbility": null,
+      "keyAbility": "intelligence",
       "name": "Knowledge (Planes)",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          26,
+          26
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": true
     },
     "skill.knowledge-religion": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
+      "group": "knowledge",
       "id": "skill.knowledge-religion",
-      "keyAbility": null,
+      "keyAbility": "intelligence",
       "name": "Knowledge (Religion)",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          27,
+          27
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": true
     },
     "skill.linguistics": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
       "id": "skill.linguistics",
-      "keyAbility": null,
+      "keyAbility": "intelligence",
       "name": "Linguistics",
-      "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
-        "txtLines": [
-          24,
-          24
-        ]
-      },
-      "trainedOnly": null
+      "sourceRef": [
+        {
+          "entry": "Table: Skill Summary",
+          "file": "sources/npc/aonprd/skill-descriptions.txt",
+          "provenanceStatus": "resolved",
+          "section": "Table: Skill Summary",
+          "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+          "sourceId": "source.aon-skill-descriptions",
+          "txtLines": [
+            28,
+            28
+          ]
+        },
+        {
+          "entry": "Learn a Language",
+          "file": "sources/npc/aonprd/skill-linguistics-language.txt",
+          "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Linguistics",
+          "provenanceStatus": "resolved",
+          "section": "Learn a Language",
+          "sha256": "88e813194405d152682d913cd1e6f9d943024f977c78b0f7ae328c97c3c2e031",
+          "sourceId": "source.aon-linguistics-language",
+          "txtLines": [
+            1,
+            5
+          ]
+        }
+      ],
+      "trainedOnly": true
     },
     "skill.perception": {
       "armorCheckPenalty": false,
@@ -18134,16 +18360,15 @@
       "keyAbility": "wisdom",
       "name": "Perception",
       "sourceRef": {
-        "entry": "Perception (WIS)",
-        "file": "sources/npc/aonprd/skill-perception.txt",
-        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Perception",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
         "provenanceStatus": "resolved",
-        "section": "Perception",
-        "sha256": "eb254ef704191e6199067fbe7c53a532b9b4475ca667d4911b86e5f932f24996",
-        "sourceId": "source.aon-skill-perception",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          1,
-          1
+          29,
+          29
         ]
       },
       "trainedOnly": false
@@ -18151,107 +18376,104 @@
     "skill.perform": {
       "armorCheckPenalty": false,
       "catalogStatus": "resolved",
+      "hasSpecialty": true,
       "id": "skill.perform",
       "keyAbility": "charisma",
       "name": "Perform",
       "sourceRef": {
-        "entry": "Perform (CHA)",
-        "file": "sources/npc/aonprd/skill-perform.txt",
-        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Perform",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
         "provenanceStatus": "resolved",
-        "section": "Perform",
-        "sha256": "06a025bab1ba9bfa8450da7b4b4aaf515929dc694874c9f67a49c128e53244e7",
-        "sourceId": "source.aon-skill-perform",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          1,
-          1
+          30,
+          30
         ]
       },
       "trainedOnly": false
     },
     "skill.profession": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
+      "hasSpecialty": true,
       "id": "skill.profession",
-      "keyAbility": null,
+      "keyAbility": "wisdom",
       "name": "Profession",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          31,
+          31
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": true
     },
     "skill.ride": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": true,
+      "catalogStatus": "resolved",
       "id": "skill.ride",
-      "keyAbility": null,
+      "keyAbility": "dexterity",
       "name": "Ride",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          32,
+          32
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": false
     },
     "skill.sense-motive": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": false,
+      "catalogStatus": "resolved",
       "id": "skill.sense-motive",
-      "keyAbility": null,
+      "keyAbility": "wisdom",
       "name": "Sense Motive",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          33,
+          33
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": false
     },
     "skill.sleight-of-hand": {
-      "armorCheckPenalty": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-skills",
+      "armorCheckPenalty": true,
+      "catalogStatus": "resolved",
       "id": "skill.sleight-of-hand",
-      "keyAbility": null,
+      "keyAbility": "dexterity",
       "name": "Sleight of Hand",
       "sourceRef": {
-        "entry": "Core skill list",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          24,
-          24
+          34,
+          34
         ]
       },
-      "trainedOnly": null
+      "trainedOnly": true
     },
     "skill.spellcraft": {
       "armorCheckPenalty": false,
@@ -18260,16 +18482,15 @@
       "keyAbility": "intelligence",
       "name": "Spellcraft",
       "sourceRef": {
-        "entry": "Spellcraft",
-        "file": "sources/npc/aonprd/skill-spellcraft.txt",
-        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Spellcraft",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
         "provenanceStatus": "resolved",
-        "section": "Spellcraft",
-        "sha256": "31d7d09a88421c45a45cf4d5a2452e1d6de4a75ac027d7f271b9ae0be223e7c7",
-        "sourceId": "source.aon-skill-spellcraft",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          1,
-          31
+          35,
+          35
         ]
       },
       "trainedOnly": true
@@ -18280,34 +18501,18 @@
       "id": "skill.stealth",
       "keyAbility": "dexterity",
       "name": "Stealth",
-      "sourceRef": [
-        {
-          "entry": "Skill summary header: class columns, untrained use, and key ability",
-          "file": "sources/npc/aonprd/skill-descriptions.txt",
-          "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html",
-          "provenanceStatus": "resolved",
-          "section": "Table: Skill Summary",
-          "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
-          "sourceId": "source.aon-skill-descriptions",
-          "txtLines": [
-            4,
-            4
-          ]
-        },
-        {
-          "entry": "Stealth (DEX*)",
-          "file": "sources/npc/aonprd/skill-descriptions.txt",
-          "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html",
-          "provenanceStatus": "resolved",
-          "section": "Table: Skill Summary",
-          "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
-          "sourceId": "source.aon-skill-descriptions",
-          "txtLines": [
-            36,
-            36
-          ]
-        }
-      ],
+      "sourceRef": {
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
+        "txtLines": [
+          36,
+          36
+        ]
+      },
       "trainedOnly": false
     },
     "skill.survival": {
@@ -18317,9 +18522,8 @@
       "keyAbility": "wisdom",
       "name": "Survival",
       "sourceRef": {
-        "entry": "Survival",
+        "entry": "Table: Skill Summary",
         "file": "sources/npc/aonprd/skill-descriptions.txt",
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html#survival",
         "provenanceStatus": "resolved",
         "section": "Table: Skill Summary",
         "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
@@ -18337,34 +18541,18 @@
       "id": "skill.swim",
       "keyAbility": "strength",
       "name": "Swim",
-      "sourceRef": [
-        {
-          "entry": "Skill summary header: class columns, untrained use, and key ability",
-          "file": "sources/npc/aonprd/skill-descriptions.txt",
-          "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html",
-          "provenanceStatus": "resolved",
-          "section": "Table: Skill Summary",
-          "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
-          "sourceId": "source.aon-skill-descriptions",
-          "txtLines": [
-            4,
-            4
-          ]
-        },
-        {
-          "entry": "Swim (STR*)",
-          "file": "sources/npc/aonprd/skill-descriptions.txt",
-          "officialUrl": "https://legacy.aonprd.com/coreRulebook/skillDescriptions.html",
-          "provenanceStatus": "resolved",
-          "section": "Table: Skill Summary",
-          "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
-          "sourceId": "source.aon-skill-descriptions",
-          "txtLines": [
-            38,
-            38
-          ]
-        }
-      ],
+      "sourceRef": {
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
+        "txtLines": [
+          38,
+          38
+        ]
+      },
       "trainedOnly": false
     },
     "skill.use-magic-device": {
@@ -18374,16 +18562,15 @@
       "keyAbility": "charisma",
       "name": "Use Magic Device",
       "sourceRef": {
-        "entry": "Use Magic Device",
-        "file": "sources/npc/aonprd/use-magic-device.txt",
-        "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Use%20Magic%20Device",
+        "entry": "Table: Skill Summary",
+        "file": "sources/npc/aonprd/skill-descriptions.txt",
         "provenanceStatus": "resolved",
-        "section": "Use Magic Device",
-        "sha256": "61c5d6abf9956fd07978213a34375b1255cf8d1b8a26ae350b74242457ea314c",
-        "sourceId": "source.aon-use-magic-device",
+        "section": "Table: Skill Summary",
+        "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+        "sourceId": "source.aon-skill-descriptions",
         "txtLines": [
-          1,
-          40
+          39,
+          39
         ]
       },
       "trainedOnly": true
@@ -18395,6 +18582,12 @@
       "file": "sources/npc/aonprd/bard.txt",
       "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
       "sourceId": "source.aon-bard"
+    },
+    "source.aon-bard-base-features": {
+      "description": "Bard proficiencies, knowledge, and daily performance rounds",
+      "file": "sources/npc/aonprd/bard-base-features.txt",
+      "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+      "sourceId": "source.aon-bard-base-features"
     },
     "source.aon-caster-level": {
       "description": "Official AoN caster-level rule for spellcasting characters",
@@ -18425,6 +18618,12 @@
       "file": "sources/npc/aonprd/combat.txt",
       "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
       "sourceId": "source.aon-combat"
+    },
+    "source.aon-concentration": {
+      "description": "Concentration uses caster level and casting ability",
+      "file": "sources/npc/aonprd/spellcasting-concentration.txt",
+      "sha256": "503a4db06d3b806ee9e7e351502a7abbc5628f59c82acd2d009fa2bc6e127ee7",
+      "sourceId": "source.aon-concentration"
     },
     "source.aon-core-races": {
       "description": "Official AoN Core race rules",
@@ -18510,6 +18709,12 @@
       "sha256": "fe6873fb95ecacb37198240a888c9453b4198a974a1294eec4585cb2c7eca2ab",
       "sourceId": "source.aon-fire-domain"
     },
+    "source.aon-fly-size": {
+      "description": "Fly skill size modifiers",
+      "file": "sources/npc/aonprd/skill-fly-size.txt",
+      "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+      "sourceId": "source.aon-fly-size"
+    },
     "source.aon-getting-started": {
       "description": "Official AoN rounding and ability rules",
       "file": "sources/npc/aonprd/getting-started.txt",
@@ -18527,6 +18732,12 @@
       "file": "sources/npc/aonprd/halfling.txt",
       "sha256": "2a9d00a27d461db36b20b545eb04f1a18ee8e363c6396f7e4e73ce142db0f501",
       "sourceId": "source.aon-halfling"
+    },
+    "source.aon-linguistics-language": {
+      "description": "Official Linguistics language-learning rule",
+      "file": "sources/npc/aonprd/skill-linguistics-language.txt",
+      "sha256": "88e813194405d152682d913cd1e6f9d943024f977c78b0f7ae328c97c3c2e031",
+      "sourceId": "source.aon-linguistics-language"
     },
     "source.aon-magic-armor": {
       "description": "Official current AoN Core magic armor enhancement rules and Table 15-3",
@@ -18797,6 +19008,12 @@
       "file": "sources/npc/aonprd/wands.txt",
       "sha256": "70ffb82a3ded2be78064d7cc10bb5d7895ad4f679732a1fb9b06374a69cf7957",
       "sourceId": "source.aon-wands"
+    },
+    "source.aon-weapon-dogslicer": {
+      "description": "Official AoN Dogslicer weapon statistics",
+      "file": "sources/npc/aonprd/weapon-dogslicer.txt",
+      "sha256": "f92b88748f07e5d9bb3e822793548c384335cd8958477ee2795b715de34d9263",
+      "sourceId": "source.aon-weapon-dogslicer"
     },
     "source.npc-adr": {
       "description": "Accepted creation-system and NPC catalog decisions",

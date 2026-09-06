@@ -1,0 +1,8 @@
+Dogslicer
+https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=Dogslicer
+Source Ultimate Equipment pg. 18; Rise of the Runelords Player's Guide pg. 11; Pathfinder Campaign Setting pg. 209; Inner Sea World Guide pg. 290; Adventurer's Armory pg. 0; Advanced Race Guide pg. 117
+Cost 8 gp; Weight 1 lb.
+Damage 1d4 (small), 1d6 (medium); Critical 19-20/x2; Range —; Type S; Special fragile
+Category Light; Proficiency Martial
+Weapon Groups Blades, Light
+This short, curved blade was created by goblins, who often drill numerous holes into it in an attempt to reduce its weight. Most dogslicers are sized for Small creatures.

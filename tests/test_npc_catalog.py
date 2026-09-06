@@ -225,7 +225,7 @@ class NpcCatalogTests(unittest.TestCase):
 
         items = catalog["items"]
         self.assertEqual(items["item.longbow-plus-1"]["priceCp"], 237500)
-        self.assertEqual(items["item.longbow-plus-1"]["effects"]["noStrengthToDamage"], True)
+        self.assertEqual(items["item.longbow-plus-1"]["effects"]["strengthDamage"], "penalty-only")
         self.assertEqual(items["item.rapier-masterwork"]["effects"]["finesseWeapon"], True)
         self.assertEqual(items["item.studded-leather-plus-1"]["effects"]["armorBonus"], 4)
         # Every composed price cites each component with its own sourceRef.

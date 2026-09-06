@@ -179,7 +179,7 @@ class HalflingBardTests(unittest.TestCase):
                 "Init +7; Perception +7",
                 "Skills Perform +8, Use Magic Device +8, Bluff +8, Diplomacy +8, Spellcraft +6, Intimidate +8",
                 "Feats Improved Initiative",
-                "Class Features Bard spellcasting, Bard cantrips, Bardic knowledge, Bardic performance, Countersong, Distraction, Fascinate, Inspire courage +1, Versatile performance, Well-versed",
+                "Class Features Bard spellcasting, Bard cantrips, Bardic knowledge +1, Bardic performance (9 rounds/day), Countersong, Distraction, Fascinate, Inspire courage +1, Versatile performance, Well-versed",
                 "Languages Common, Halfling",
             ):
                 self.assertIn(expected, markdown)

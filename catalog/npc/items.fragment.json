@@ -188,7 +188,8 @@
       "effects": {
         "armorBonus": 4,
         "armorCheckPenalty": -2,
-        "maxDex": 4
+        "maxDex": 4,
+        "armorCategory": "light"
       },
       "id": "item.chain-shirt",
       "name": "Chain Shirt",
@@ -212,7 +213,8 @@
       "effects": {
         "armorBonus": 6,
         "armorCheckPenalty": -5,
-        "maxDex": 2
+        "maxDex": 2,
+        "armorCategory": "medium"
       },
       "id": "item.chainmail",
       "name": "Chainmail",
@@ -615,7 +617,8 @@
       "category": "shield",
       "effects": {
         "armorCheckPenalty": -2,
-        "shieldBonus": 2
+        "shieldBonus": 2,
+        "shieldCategory": "shield"
       },
       "id": "item.heavy-wooden-shield",
       "name": "Heavy Wooden Shield",
@@ -736,7 +739,8 @@
       "effects": {
         "armorBonus": 2,
         "armorCheckPenalty": 0,
-        "maxDex": 6
+        "maxDex": 6,
+        "armorCategory": "light"
       },
       "id": "item.leather-armor",
       "name": "Leather Armor",
@@ -836,7 +840,8 @@
       "category": "shield",
       "effects": {
         "armorCheckPenalty": -1,
-        "shieldBonus": 1
+        "shieldBonus": 1,
+        "shieldCategory": "shield"
       },
       "id": "item.light-steel-shield",
       "name": "Light Steel Shield",
@@ -864,8 +869,10 @@
           "small": "1d6"
         },
         "damageType": "P",
-        "noStrengthToDamage": true,
-        "rangeIncrement": 100
+        "rangeIncrement": 100,
+        "weaponType": "longbow",
+        "weaponCategory": "martial",
+        "strengthDamage": "penalty-only"
       },
       "id": "item.longbow",
       "name": "Longbow",
@@ -903,6 +910,16 @@
             250,
             250
           ]
+        },
+        {
+          "sourceId": "source.aon-combat",
+          "section": "Damage — Strength Bonus",
+          "txtLines": [
+            60,
+            60
+          ],
+          "entry": "Strength penalties apply to non-composite bows",
+          "provenanceStatus": "resolved"
         }
       ],
       "weightLb": 3
@@ -919,8 +936,10 @@
           "small": "1d6"
         },
         "damageType": "P",
-        "noStrengthToDamage": true,
-        "rangeIncrement": 100
+        "rangeIncrement": 100,
+        "weaponType": "longbow",
+        "weaponCategory": "martial",
+        "strengthDamage": "penalty-only"
       },
       "id": "item.longbow-plus-1",
       "name": "+1 longbow",
@@ -969,6 +988,16 @@
             4,
             4
           ]
+        },
+        {
+          "sourceId": "source.aon-combat",
+          "section": "Damage — Strength Bonus",
+          "txtLines": [
+            60,
+            60
+          ],
+          "entry": "Strength penalties apply to non-composite bows",
+          "provenanceStatus": "resolved"
         }
       ],
       "weightLb": 3
@@ -978,7 +1007,9 @@
       "category": "weapon",
       "effects": {
         "damageDie": "1d8",
-        "damageType": "S"
+        "damageType": "S",
+        "weaponType": "longsword",
+        "weaponCategory": "martial"
       },
       "id": "item.longsword",
       "name": "Longsword",
@@ -1129,7 +1160,9 @@
           "small": "1d4"
         },
         "damageType": "P",
-        "finesseWeapon": true
+        "finesseWeapon": true,
+        "weaponType": "rapier",
+        "weaponCategory": "martial"
       },
       "id": "item.rapier",
       "name": "Rapier",
@@ -1163,7 +1196,9 @@
           "small": "1d4"
         },
         "damageType": "P",
-        "finesseWeapon": true
+        "finesseWeapon": true,
+        "weaponType": "rapier",
+        "weaponCategory": "martial"
       },
       "id": "item.rapier-masterwork",
       "name": "mwk rapier",
@@ -1279,24 +1314,50 @@
       "weightLb": null
     },
     {
-      "catalogStatus": "gap",
-      "category": "weapon",
-      "effects": null,
-      "gapCode": "core-rulebook-equipment",
       "id": "item.shortbow",
       "name": "Shortbow",
-      "priceCp": null,
-      "sourceRef": {
-        "entry": "Mundane weapons",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sourceId": "source.npc-gap-matrix",
-        "txtLines": [
-          26,
-          26
-        ]
+      "category": "weapon",
+      "catalogStatus": "resolved",
+      "priceCp": 3000,
+      "weightLb": 2,
+      "effects": {
+        "rangeIncrement": 60,
+        "critMultiplier": 3,
+        "damageType": "P",
+        "strengthDamage": "penalty-only",
+        "weaponCategory": "martial",
+        "weaponType": "shortbow",
+        "damageDieBySize": {
+          "small": "1d4",
+          "medium": "1d6"
+        }
       },
-      "weightLb": null
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-equipment",
+          "section": "Table: Weapons — Shortbow",
+          "txtLines": [
+            180,
+            182
+          ],
+          "entry": "Table: Weapons — Shortbow",
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-combat",
+          "section": "Damage — Strength Bonus",
+          "txtLines": [
+            60,
+            60
+          ],
+          "entry": "Strength penalties apply to non-composite bows",
+          "provenanceStatus": "resolved"
+        }
+      ],
+      "weightLbBySize": {
+        "small": 1.0,
+        "medium": 2
+      }
     },
     {
       "catalogStatus": "resolved",
@@ -1307,7 +1368,9 @@
           "small": "1d4"
         },
         "damageType": "P",
-        "lightWeapon": true
+        "lightWeapon": true,
+        "weaponType": "shortsword",
+        "weaponCategory": "martial"
       },
       "id": "item.shortsword",
       "name": "Shortsword",
@@ -1338,7 +1401,9 @@
           "medium": "1d6",
           "small": "1d4"
         },
-        "damageType": "S"
+        "damageType": "S",
+        "weaponType": "sickle",
+        "weaponCategory": "simple"
       },
       "id": "item.sickle",
       "name": "Sickle",
@@ -1381,7 +1446,9 @@
           "medium": "1d4",
           "small": "1d3"
         },
-        "damageType": "B"
+        "damageType": "B",
+        "weaponType": "sling",
+        "weaponCategory": "simple"
       },
       "id": "item.sling",
       "name": "Sling",
@@ -1489,7 +1556,8 @@
       "effects": {
         "armorBonus": 3,
         "armorCheckPenalty": -1,
-        "maxDex": 5
+        "maxDex": 5,
+        "armorCategory": "light"
       },
       "id": "item.studded-leather-armor",
       "name": "Studded Leather",
@@ -1517,7 +1585,8 @@
       "effects": {
         "armorBonus": 4,
         "armorCheckPenalty": 0,
-        "maxDex": 5
+        "maxDex": 5,
+        "armorCategory": "light"
       },
       "id": "item.studded-leather-plus-1",
       "name": "+1 studded leather armor",
@@ -1756,24 +1825,57 @@
       "weightLb": null
     },
     {
-      "catalogStatus": "gap",
-      "category": "weapon",
-      "effects": null,
-      "gapCode": "core-rulebook-equipment",
       "id": "item.whip",
       "name": "Whip",
-      "priceCp": null,
-      "sourceRef": {
-        "entry": "Core weapons, armor, goods, and required magic items",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sourceId": "source.npc-gap-matrix",
-        "txtLines": [
-          26,
-          26
-        ]
+      "category": "weapon",
+      "catalogStatus": "resolved",
+      "priceCp": 100,
+      "weightLb": 2,
+      "effects": {
+        "critMultiplier": 2,
+        "damageType": "S",
+        "nonlethal": true,
+        "reach": 15,
+        "finesseWeapon": true,
+        "special": [
+          "disarm",
+          "nonlethal",
+          "reach",
+          "trip"
+        ],
+        "weaponCategory": "exotic",
+        "weaponType": "whip",
+        "damageDieBySize": {
+          "small": "1d2",
+          "medium": "1d3"
+        }
       },
-      "weightLb": null
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-equipment",
+          "section": "Table: Weapons — Whip",
+          "txtLines": [
+            193,
+            193
+          ],
+          "entry": "Table: Weapons — Whip",
+          "provenanceStatus": "resolved"
+        },
+        {
+          "sourceId": "source.aon-equipment",
+          "section": "Whip",
+          "txtLines": [
+            290,
+            292
+          ],
+          "entry": "Whip",
+          "provenanceStatus": "resolved"
+        }
+      ],
+      "weightLbBySize": {
+        "small": 1.0,
+        "medium": 2
+      }
     },
     {
       "catalogStatus": "gap",
@@ -1794,6 +1896,40 @@
         ]
       },
       "weightLb": null
+    },
+    {
+      "id": "item.dogslicer",
+      "name": "Dogslicer",
+      "category": "weapon",
+      "catalogStatus": "resolved",
+      "priceCp": 800,
+      "weightLb": 1,
+      "effects": {
+        "critRange": 19,
+        "critMultiplier": 2,
+        "damageType": "S",
+        "lightWeapon": true,
+        "special": [
+          "fragile"
+        ],
+        "weaponCategory": "martial",
+        "weaponType": "dogslicer",
+        "damageDieBySize": {
+          "small": "1d4",
+          "medium": "1d6"
+        }
+      },
+      "sourceRef": {
+        "sourceId": "source.aon-weapon-dogslicer",
+        "section": "Dogslicer",
+        "txtLines": [
+          3,
+          8
+        ],
+        "entry": "Dogslicer",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=Dogslicer"
+      }
     }
   ],
   "section": "items"

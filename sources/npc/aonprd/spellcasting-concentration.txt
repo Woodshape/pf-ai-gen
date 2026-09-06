@@ -1,0 +1,4 @@
+Concentration
+https://aonprd.com/Rules.aspx?ID=205
+Source PRPG Core Rulebook pg. 206
+When you make a concentration check, you roll d20 and add your caster level and the ability score modifier used to determine bonus spells of the same type.

@@ -86,13 +86,11 @@ class NpcCompositionTests(unittest.TestCase):
                 hp_trace = next(entry for entry in result["derivationTrace"] if entry["path"] == "/canonical/hp")
                 self.assertTrue(any(ref["provenanceStatus"] == "product-policy" for ref in hp_trace["sourceRefs"]))
 
-    def test_warchanter_reports_specific_missing_records_not_a_combination_gate(self):
+    def test_warchanter_uses_shared_rules_without_catalog_gaps(self):
         draft = json.loads((ROOT / "docs/goblin-warchanter-draft.json").read_text())
         result = evaluate(draft)
-        self.assertEqual(result["status"], "invalid")
-        self.assertEqual({issue["code"] for issue in result["issues"]}, {"npc.catalog-gap"})
-        self.assertTrue(all(not issue["path"].startswith("/selections/classProgression") for issue in result["issues"]))
-        self.assertIn("item.shortbow", {issue["details"]["recordId"] for issue in result["issues"]})
+        self.assertEqual(result["status"], "valid", result["issues"])
+        self.assertEqual(result["issues"], [])
 
     def test_goblin_can_use_existing_bard_rules(self):
         draft = json.loads((ROOT / "tests/fixtures/halfling-bard-2.json").read_text())

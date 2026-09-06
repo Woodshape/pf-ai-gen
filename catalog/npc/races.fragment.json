@@ -248,6 +248,14 @@
         "Elven Magic",
         "Keen Senses",
         "Weapon Familiarity"
+      ],
+      "weaponProficiencies": [
+        "longbow",
+        "composite-longbow",
+        "longsword",
+        "rapier",
+        "shortbow",
+        "composite-shortbow"
       ]
     },
     {
@@ -353,21 +361,32 @@
       "skillBonuses": {
         "skill.acrobatics": 2,
         "skill.climb": 2,
-        "skill.perception": 2,
-        "skill.stealth": 4
+        "skill.perception": 2
       },
       "skillSelectionsBonus": 0,
-      "sourceRef": {
-        "entry": "Standard Halfling racial traits",
-        "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Halfling",
-        "provenanceStatus": "resolved",
-        "section": "Halfling Racial Traits",
-        "sourceId": "source.aon-halfling",
-        "txtLines": [
-          18,
-          27
-        ]
-      },
+      "sourceRef": [
+        {
+          "entry": "Standard Halfling racial traits",
+          "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Halfling",
+          "provenanceStatus": "resolved",
+          "section": "Halfling Racial Traits",
+          "sourceId": "source.aon-halfling",
+          "txtLines": [
+            18,
+            27
+          ]
+        },
+        {
+          "sourceId": "source.aon-fly-size",
+          "section": "Size modifiers",
+          "txtLines": [
+            4,
+            4
+          ],
+          "entry": "Fly — size modifiers",
+          "provenanceStatus": "resolved"
+        }
+      ],
       "speed": {
         "land": 20
       },
@@ -379,6 +398,13 @@
         "Keen Senses",
         "Sure-Footed",
         "Weapon Familiarity"
+      ],
+      "sizeSkillBonuses": {
+        "skill.stealth": 4,
+        "skill.fly": 2
+      },
+      "weaponProficiencies": [
+        "sling"
       ]
     },
     {
@@ -419,17 +445,29 @@
         "skill.stealth": 4
       },
       "skillSelectionsBonus": 0,
-      "sourceRef": {
-        "entry": "Standard Goblin racial traits",
-        "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
-        "provenanceStatus": "resolved",
-        "section": "Goblin Racial Traits",
-        "sourceId": "source.aon-goblin-race",
-        "txtLines": [
-          15,
-          22
-        ]
-      },
+      "sourceRef": [
+        {
+          "entry": "Standard Goblin racial traits",
+          "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+          "provenanceStatus": "resolved",
+          "section": "Goblin Racial Traits",
+          "sourceId": "source.aon-goblin-race",
+          "txtLines": [
+            15,
+            22
+          ]
+        },
+        {
+          "sourceId": "source.aon-fly-size",
+          "section": "Size modifiers",
+          "txtLines": [
+            4,
+            4
+          ],
+          "entry": "Fly — size modifiers",
+          "provenanceStatus": "resolved"
+        }
+      ],
       "speed": {
         "land": 30
       },
@@ -438,7 +476,11 @@
         "Fast",
         "Darkvision",
         "Skilled"
-      ]
+      ],
+      "sizeSkillBonuses": {
+        "skill.stealth": 4,
+        "skill.fly": 2
+      }
     }
   ],
   "section": "races"

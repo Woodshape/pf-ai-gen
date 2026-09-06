@@ -37,7 +37,7 @@ class NpcExportTests(unittest.TestCase):
         model = structured_sheet(snapshot)
 
         self.assertEqual(model["creationSystem"], "npc")
-        self.assertEqual(model["header"]["label"], "Human Warrior 3 Level 3")
+        self.assertEqual(model["header"]["label"], "Human Warrior 3 CR 1/Level 3")
         fields = {field["key"]: field for field in model["statistics"]["fields"]}
         for key in ("abilityScores", "bab", "classProgression", "feats", "gear", "languages"):
             self.assertEqual(fields[key]["value"], snapshot["result"][key])

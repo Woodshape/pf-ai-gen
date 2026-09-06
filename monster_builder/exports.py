@@ -723,6 +723,8 @@ def _npc_offense_lines(model: Mapping[str, Any]) -> list[str]:
             crit = f"x{attack['critMultiplier']}"
         damage = str(attack.get("damageExpression", ""))
         inside = damage + (f"/{crit}" if crit else "")
+        if attack.get("nonlethal"):
+            inside += " nonlethal"
         damage_type = str(attack.get("damageType") or "")
         if damage_type and damage_type not in {"P", "S", "B"}:
             inside += f" {damage_type}" if inside else damage_type
@@ -730,7 +732,9 @@ def _npc_offense_lines(model: Mapping[str, Any]) -> list[str]:
         if inside:
             text += f" ({inside})"
         uses = attack.get("usesPerDay")
-        tail = [str(value) for value in (attack.get("range"), f"{uses}/day" if isinstance(uses, int) else uses) if uses is not None]
+        tail = [str(value) for value in (attack.get("range"), f"{uses}/day" if isinstance(uses, int) else uses) if value is not None]
+        if attack.get("reach") is not None:
+            tail.append(f"{attack['reach']} ft. reach")
         if tail:
             text += ", " + ", ".join(tail)
         lines.append(" ".join(text.split()))
@@ -959,6 +963,8 @@ def _spell_lines(statistics: Mapping[str, Any]) -> list[str]:
         ability = {"charisma": "Cha-based", "intelligence": "Int-based", "wisdom": "Wis-based"}.get(spells.get("castingAbility"), _human(spells.get("castingAbility", "")))
         caster_level = int(spells.get("casterLevel", 0))
         lines = [f"{class_name} Spells (CL {caster_level}{_ordinal_suffix(caster_level)}; {ability})"]
+        if spells.get("concentration") is not None:
+            lines[0] += f"; concentration {_signed(spells['concentration'])}"
         per_day = spells.get("perDay", {})
         dcs = spells.get("saveDcByLevel", {})
         for level in sorted(known, key=int, reverse=True):
@@ -1005,6 +1011,8 @@ def _prepared_spell_lines(spells: Mapping[str, Any]) -> list[str]:
     ability = {"charisma": "Cha-based", "intelligence": "Int-based", "wisdom": "Wis-based"}.get(spells.get("castingAbility"), _human(spells.get("castingAbility", "")))
     caster_level = int(spells.get("casterLevel", 0))
     lines = [f"{class_name} Spells (CL {caster_level}{_ordinal_suffix(caster_level)}; {ability})"]
+    if spells.get("concentration") is not None:
+        lines[0] += f"; concentration {_signed(spells['concentration'])}"
     prepared = spells["prepared"]
     domain_prepared = spells.get("domainPrepared", {})
     has_domain = any(isinstance(level_spells, list) and level_spells for level_spells in domain_prepared.values()) if isinstance(domain_prepared, Mapping) else False

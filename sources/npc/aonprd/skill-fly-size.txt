@@ -1,0 +1,4 @@
+Fly (Dex; Armor Check Penalty)
+https://aonprd.com/Skills.aspx?ItemName=Fly
+Source PRPG Core Rulebook pg. 96
+A creature larger or smaller than Medium takes a size bonus or penalty on Fly checks depending on its size category: Fine +8, Diminutive +6, Tiny +4, Small +2, Large –2, Huge –4, Gargantuan –6, Colossal –8.

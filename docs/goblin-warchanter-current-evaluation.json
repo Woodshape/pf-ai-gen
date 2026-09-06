@@ -1,262 +1,4311 @@
 {
-  "status": "invalid",
-  "mode": "strict",
-  "canonical": null,
-  "effective": null,
-  "issues": [
-    {
-      "code": "npc.catalog-gap",
-      "severity": "error",
-      "kind": "catalog-data",
-      "message": "catalog data required for this selection is not source-resolved",
-      "path": "/selections/feats/0/featId",
-      "details": {
-        "recordId": "feat.martial-weapon-proficiency",
-        "catalogStatus": "gap"
+  "ok": true,
+  "requestId": "warchanter-complete-draft.create",
+  "result": {
+    "draft": {
+      "schemaVersion": "1",
+      "creationSystem": "npc",
+      "draftId": "draft-af9d7ba8b6bb41939f3e10f6ba4e4754",
+      "catalogVersion": "sha256:07c59de895e4d9a0f7a35d1df688f4b7f9c8257914cfb9d94d50f42b88829cb0",
+      "revision": 0,
+      "status": "active",
+      "concept": {
+        "name": "Goblin Warchanter",
+        "role": "inspiring support performer",
+        "description": "Goblin bard 1 from the supplied photograph, represented as an unbuffed base statblock. Printed temporary bonuses and discrepancies are documented in docs/goblin-warchanter-assessment.md."
       },
-      "sourceRefs": [
+      "selections": {
+        "statblockUse": "full",
+        "raceId": "npc-race.goblin",
+        "racialChoices": {},
+        "classProgression": [
+          {
+            "classId": "npc-class.bard",
+            "levels": 1
+          }
+        ],
+        "abilityGeneration": {
+          "method": "assigned-array",
+          "arrayId": "npc-ability-array.heroic",
+          "assignments": {
+            "strength": 10,
+            "dexterity": 14,
+            "constitution": 13,
+            "intelligence": 8,
+            "wisdom": 12,
+            "charisma": 15
+          }
+        },
+        "skillGeneration": {
+          "method": "simplified",
+          "skills": [
+            "skill.acrobatics",
+            "skill.linguistics",
+            "skill.perception",
+            "skill.perform",
+            "skill.stealth"
+          ],
+          "includeUntrained": [
+            "skill.ride"
+          ],
+          "specialties": {
+            "skill.perform": "sing"
+          },
+          "languages": [
+            "Common"
+          ]
+        },
+        "feats": [
+          {
+            "slotId": "general-1",
+            "featId": "feat.martial-weapon-proficiency",
+            "weaponId": "item.dogslicer"
+          }
+        ],
+        "spellLoadout": {
+          "known": {
+            "0": [
+              "spell.daze",
+              "spell.ghost-sound",
+              "spell.mage-hand",
+              "spell.message"
+            ],
+            "1": [
+              "spell.cure-light-wounds",
+              "spell.hideous-laughter"
+            ]
+          }
+        },
+        "gearProfile": {
+          "experienceProgression": "medium",
+          "fantasyLevel": "normal"
+        },
+        "gear": [
+          {
+            "itemId": "item.studded-leather-armor"
+          },
+          {
+            "itemId": "item.dogslicer"
+          },
+          {
+            "itemId": "item.shortbow"
+          },
+          {
+            "itemId": "item.arrows-20"
+          },
+          {
+            "itemId": "item.whip"
+          },
+          "potion of cure light wounds",
+          "20 gp"
+        ],
+        "details": {
+          "alignment": "NE",
+          "sourceNotes": "Base statistics exclude temporary performance bonuses. Printed attacks and fear/charm bonus apparently include inspire courage +1. Printed shortbow damage omits the Strength penalty; unbuffed damage is 1d4-1. Armored Ride is +7, not the printed +8. The potion and coins are descriptive inventory and supply no automatic base-statblock effects or prices.",
+          "tactics": "Continue bardic performance, use whip to trip PCs, cast hideous laughter on a dangerous PC, and cure light wounds on herself after first being wounded.",
+          "morale": "Fights to the death."
+        }
+      },
+      "fingerprint": "5ffca22e05fd58d1a0664c2b4035f9d8cf06511923f713569c0ebf411f5d842f"
+    },
+    "evaluation": {
+      "status": "valid",
+      "mode": "strict",
+      "canonical": {
+        "name": "Goblin Warchanter",
+        "creationSystem": "npc",
+        "statblockUse": "full",
+        "level": 1,
+        "totalLevel": 1,
+        "cr": "1/2",
+        "npcCategory": "heroic",
+        "raceId": "npc-race.goblin",
+        "raceName": "Goblin",
+        "classProgression": [
+          {
+            "classId": "npc-class.bard",
+            "className": "Bard",
+            "levels": 1
+          }
+        ],
+        "abilityScores": {
+          "strength": 8,
+          "dexterity": 18,
+          "constitution": 13,
+          "intelligence": 8,
+          "wisdom": 12,
+          "charisma": 13
+        },
+        "abilityModifiers": {
+          "strength": -1,
+          "dexterity": 4,
+          "constitution": 1,
+          "intelligence": -1,
+          "wisdom": 1,
+          "charisma": 1
+        },
+        "hitDiceExpression": "1d8+1",
+        "hp": 9,
+        "bab": 0,
+        "defenses": {
+          "ac": 18,
+          "touch": 15,
+          "flatFooted": 14,
+          "fortitude": 1,
+          "reflex": 6,
+          "will": 3,
+          "acBreakdown": {
+            "armor": 3,
+            "dexterity": 4,
+            "size": 1
+          }
+        },
+        "initiative": 4,
+        "attacks": [
+          {
+            "name": "Dogslicer",
+            "itemId": "item.dogslicer",
+            "attackBonuses": [
+              0
+            ],
+            "attackBonusExpression": "+0",
+            "attackType": "melee",
+            "proficient": true,
+            "damageExpression": "1d4-1",
+            "damageType": "S",
+            "critical": "19-20/x2",
+            "critRange": 19,
+            "critMultiplier": 2
+          },
+          {
+            "name": "Shortbow",
+            "itemId": "item.shortbow",
+            "attackBonuses": [
+              5
+            ],
+            "attackBonusExpression": "+5",
+            "attackType": "ranged",
+            "proficient": true,
+            "damageExpression": "1d4-1",
+            "damageType": "P",
+            "critical": "x3",
+            "critMultiplier": 3,
+            "range": "60 ft.",
+            "rangeIncrement": 60
+          },
+          {
+            "name": "Whip",
+            "itemId": "item.whip",
+            "attackBonuses": [
+              0
+            ],
+            "attackBonusExpression": "+0",
+            "attackType": "melee",
+            "proficient": true,
+            "nonlethal": true,
+            "reach": 15,
+            "damageExpression": "1d2-1",
+            "damageType": "S",
+            "critical": "x2",
+            "critMultiplier": 2
+          }
+        ],
+        "cmb": -2,
+        "cmd": 12,
+        "skills": [
+          {
+            "skillId": "skill.acrobatics",
+            "name": "Acrobatics",
+            "ability": "dexterity",
+            "ranks": 1,
+            "classSkill": true,
+            "armorCheckPenalty": -1,
+            "total": 7,
+            "sourceRefs": [
+              {
+                "entry": "Table: Skill Summary",
+                "file": "sources/npc/aonprd/skill-descriptions.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Skill Summary",
+                "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                "sourceId": "source.aon-skill-descriptions",
+                "txtLines": [
+                  5,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "skillId": "skill.linguistics",
+            "name": "Linguistics",
+            "ability": "intelligence",
+            "ranks": 1,
+            "classSkill": true,
+            "armorCheckPenalty": 0,
+            "total": 3,
+            "sourceRefs": [
+              {
+                "entry": "Table: Skill Summary",
+                "file": "sources/npc/aonprd/skill-descriptions.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Skill Summary",
+                "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                "sourceId": "source.aon-skill-descriptions",
+                "txtLines": [
+                  28,
+                  28
+                ]
+              },
+              {
+                "entry": "Learn a Language",
+                "file": "sources/npc/aonprd/skill-linguistics-language.txt",
+                "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Linguistics",
+                "provenanceStatus": "resolved",
+                "section": "Learn a Language",
+                "sha256": "88e813194405d152682d913cd1e6f9d943024f977c78b0f7ae328c97c3c2e031",
+                "sourceId": "source.aon-linguistics-language",
+                "txtLines": [
+                  1,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "skillId": "skill.perception",
+            "name": "Perception",
+            "ability": "wisdom",
+            "ranks": 1,
+            "classSkill": true,
+            "armorCheckPenalty": 0,
+            "total": 5,
+            "sourceRefs": [
+              {
+                "entry": "Table: Skill Summary",
+                "file": "sources/npc/aonprd/skill-descriptions.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Skill Summary",
+                "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                "sourceId": "source.aon-skill-descriptions",
+                "txtLines": [
+                  29,
+                  29
+                ]
+              }
+            ]
+          },
+          {
+            "skillId": "skill.perform",
+            "name": "Perform (sing)",
+            "ability": "charisma",
+            "ranks": 1,
+            "classSkill": true,
+            "armorCheckPenalty": 0,
+            "total": 5,
+            "sourceRefs": [
+              {
+                "entry": "Table: Skill Summary",
+                "file": "sources/npc/aonprd/skill-descriptions.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Skill Summary",
+                "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                "sourceId": "source.aon-skill-descriptions",
+                "txtLines": [
+                  30,
+                  30
+                ]
+              }
+            ]
+          },
+          {
+            "skillId": "skill.stealth",
+            "name": "Stealth",
+            "ability": "dexterity",
+            "ranks": 1,
+            "classSkill": true,
+            "armorCheckPenalty": -1,
+            "raceBonus": 4,
+            "sizeBonus": 4,
+            "total": 15,
+            "sourceRefs": [
+              {
+                "entry": "Table: Skill Summary",
+                "file": "sources/npc/aonprd/skill-descriptions.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Skill Summary",
+                "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                "sourceId": "source.aon-skill-descriptions",
+                "txtLines": [
+                  36,
+                  36
+                ]
+              },
+              {
+                "entry": "Standard Goblin racial traits",
+                "file": "sources/npc/aonprd/goblin-race.txt",
+                "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+                "provenanceStatus": "resolved",
+                "section": "Goblin Racial Traits",
+                "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+                "sourceId": "source.aon-goblin-race",
+                "txtLines": [
+                  15,
+                  22
+                ]
+              },
+              {
+                "entry": "Fly — size modifiers",
+                "file": "sources/npc/aonprd/skill-fly-size.txt",
+                "provenanceStatus": "resolved",
+                "section": "Size modifiers",
+                "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+                "sourceId": "source.aon-fly-size",
+                "txtLines": [
+                  4,
+                  4
+                ]
+              }
+            ]
+          },
+          {
+            "skillId": "skill.ride",
+            "name": "Ride",
+            "ability": "dexterity",
+            "ranks": 0,
+            "classSkill": false,
+            "armorCheckPenalty": -1,
+            "raceBonus": 4,
+            "total": 7,
+            "sourceRefs": [
+              {
+                "entry": "Table: Skill Summary",
+                "file": "sources/npc/aonprd/skill-descriptions.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Skill Summary",
+                "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                "sourceId": "source.aon-skill-descriptions",
+                "txtLines": [
+                  32,
+                  32
+                ]
+              },
+              {
+                "entry": "Standard Goblin racial traits",
+                "file": "sources/npc/aonprd/goblin-race.txt",
+                "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+                "provenanceStatus": "resolved",
+                "section": "Goblin Racial Traits",
+                "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+                "sourceId": "source.aon-goblin-race",
+                "txtLines": [
+                  15,
+                  22
+                ]
+              },
+              {
+                "entry": "Fly — size modifiers",
+                "file": "sources/npc/aonprd/skill-fly-size.txt",
+                "provenanceStatus": "resolved",
+                "section": "Size modifiers",
+                "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+                "sourceId": "source.aon-fly-size",
+                "txtLines": [
+                  4,
+                  4
+                ]
+              }
+            ]
+          }
+        ],
+        "feats": [
+          {
+            "slotId": "general-1",
+            "featId": "feat.martial-weapon-proficiency",
+            "name": "Martial Weapon Proficiency (Dogslicer)",
+            "weaponId": "item.dogslicer",
+            "sourceRefs": [
+              {
+                "entry": "Martial Weapon Proficiency",
+                "file": "sources/npc/aonprd/feats.txt",
+                "provenanceStatus": "resolved",
+                "section": "Martial Weapon Proficiency",
+                "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+                "sourceId": "source.aon-feats",
+                "txtLines": [
+                  769,
+                  774
+                ]
+              }
+            ]
+          }
+        ],
+        "classFeatures": [
+          {
+            "featureId": "npc-class-feature.bard-proficiencies",
+            "name": "Bard proficiencies",
+            "sourceRefs": [
+              {
+                "entry": "Bard proficiencies",
+                "file": "sources/npc/aonprd/bard-base-features.txt",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                "provenanceStatus": "resolved",
+                "section": "Bard proficiencies",
+                "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+                "sourceId": "source.aon-bard-base-features",
+                "txtLines": [
+                  4,
+                  4
+                ]
+              }
+            ],
+            "effects": {
+              "armorProficiencies": [
+                "light"
+              ],
+              "shieldProficiencies": "shields except tower shields",
+              "weaponProficiencies": [
+                "simple",
+                "longsword",
+                "rapier",
+                "sap",
+                "shortsword",
+                "shortbow",
+                "whip"
+              ]
+            }
+          },
+          {
+            "featureId": "npc-class-feature.bard-spellcasting",
+            "name": "Bard spellcasting",
+            "sourceRefs": [
+              {
+                "entry": "Bard spellcasting",
+                "file": "sources/npc/aonprd/bard.txt",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                "provenanceStatus": "resolved",
+                "section": "Bard",
+                "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                "sourceId": "source.aon-bard",
+                "txtLines": [
+                  11,
+                  12
+                ]
+              }
+            ],
+            "effects": {
+              "castingAbility": "charisma",
+              "castingMode": "spontaneous"
+            }
+          },
+          {
+            "featureId": "npc-class-feature.bard-cantrips",
+            "name": "Bard cantrips",
+            "sourceRefs": [
+              {
+                "entry": "Bard cantrips",
+                "file": "sources/npc/aonprd/bard.txt",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                "provenanceStatus": "resolved",
+                "section": "Class Features; Table: Bard (Special)",
+                "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                "sourceId": "source.aon-bard",
+                "txtLines": [
+                  14,
+                  14
+                ]
+              }
+            ]
+          },
+          {
+            "featureId": "npc-class-feature.bardic-knowledge",
+            "name": "Bardic knowledge +1",
+            "sourceRefs": [
+              {
+                "entry": "Bardic knowledge",
+                "file": "sources/npc/aonprd/bard-base-features.txt",
+                "provenanceStatus": "resolved",
+                "section": "Bardic knowledge",
+                "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+                "sourceId": "source.aon-bard-base-features",
+                "txtLines": [
+                  5,
+                  5
+                ]
+              }
+            ],
+            "effects": {
+              "knowledgeBonus": {
+                "levelDivisor": 2,
+                "minimum": 1
+              }
+            },
+            "knowledgeBonus": 1
+          },
+          {
+            "featureId": "npc-class-feature.bardic-performance",
+            "name": "Bardic performance (5 rounds/day)",
+            "sourceRefs": [
+              {
+                "entry": "Bardic performance",
+                "file": "sources/npc/aonprd/bard-base-features.txt",
+                "provenanceStatus": "resolved",
+                "section": "Bardic performance",
+                "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+                "sourceId": "source.aon-bard-base-features",
+                "txtLines": [
+                  6,
+                  6
+                ]
+              }
+            ],
+            "effects": {
+              "dailyRounds": {
+                "ability": "charisma",
+                "base": 4,
+                "perAdditionalLevel": 2
+              }
+            },
+            "roundsPerDay": 5
+          },
+          {
+            "featureId": "npc-class-feature.countersong",
+            "name": "Countersong",
+            "sourceRefs": [
+              {
+                "entry": "Countersong",
+                "file": "sources/npc/aonprd/bard.txt",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                "provenanceStatus": "resolved",
+                "section": "Class Features; Table: Bard (Special)",
+                "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                "sourceId": "source.aon-bard",
+                "txtLines": [
+                  14,
+                  14
+                ]
+              }
+            ]
+          },
+          {
+            "featureId": "npc-class-feature.distraction",
+            "name": "Distraction",
+            "sourceRefs": [
+              {
+                "entry": "Distraction",
+                "file": "sources/npc/aonprd/bard.txt",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                "provenanceStatus": "resolved",
+                "section": "Class Features; Table: Bard (Special)",
+                "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                "sourceId": "source.aon-bard",
+                "txtLines": [
+                  14,
+                  14
+                ]
+              }
+            ]
+          },
+          {
+            "featureId": "npc-class-feature.fascinate",
+            "name": "Fascinate",
+            "sourceRefs": [
+              {
+                "entry": "Fascinate",
+                "file": "sources/npc/aonprd/bard.txt",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                "provenanceStatus": "resolved",
+                "section": "Class Features; Table: Bard (Special)",
+                "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                "sourceId": "source.aon-bard",
+                "txtLines": [
+                  14,
+                  14
+                ]
+              }
+            ]
+          },
+          {
+            "featureId": "npc-class-feature.inspire-courage",
+            "name": "Inspire courage +1",
+            "sourceRefs": [
+              {
+                "entry": "Inspire courage +1",
+                "file": "sources/npc/aonprd/bard.txt",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                "provenanceStatus": "resolved",
+                "section": "Class Features; Table: Bard (Special)",
+                "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                "sourceId": "source.aon-bard",
+                "txtLines": [
+                  14,
+                  14
+                ]
+              }
+            ]
+          }
+        ],
+        "spells": {
+          "className": "Bard",
+          "casterLevel": 1,
+          "castingAbility": "charisma",
+          "castingAbilityModifier": 1,
+          "perDay": {
+            "0": "at-will",
+            "1": 2
+          },
+          "saveDcByLevel": {
+            "0": 11,
+            "1": 12
+          },
+          "known": {
+            "0": [
+              "spell.daze",
+              "spell.ghost-sound",
+              "spell.mage-hand",
+              "spell.message"
+            ],
+            "1": [
+              "spell.cure-light-wounds",
+              "spell.hideous-laughter"
+            ]
+          },
+          "bloodlineSpells": [],
+          "concentration": 2
+        },
+        "gearBudget": {
+          "gearBudgetId": "npc-gear.medium.normal",
+          "level": 1,
+          "effectiveLevel": 1,
+          "npcCategory": "heroic",
+          "budgetCp": 39000,
+          "categories": {
+            "gear": 10000,
+            "limitedUse": 4000,
+            "magic": 0,
+            "protection": 15000,
+            "weapons": 10000
+          },
+          "spentCp": 6500,
+          "remainingCp": null,
+          "descriptiveEquipmentUnpriced": true
+        },
+        "gear": [
+          {
+            "itemId": "item.studded-leather-armor",
+            "name": "Studded Leather",
+            "category": "armor",
+            "mechanical": true,
+            "npcGearCategory": null,
+            "quantity": 1,
+            "equipped": true,
+            "priceCp": 2500,
+            "weightLb": 10,
+            "effects": {
+              "armorBonus": 3,
+              "armorCategory": "light",
+              "armorCheckPenalty": -1,
+              "maxDex": 5
+            },
+            "sourceRefs": [
+              {
+                "entry": "Studded leather",
+                "file": "sources/npc/aonprd/equipment.txt",
+                "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+                "provenanceStatus": "resolved",
+                "section": "Table: Armor and Shields",
+                "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+                "sourceId": "source.aon-equipment",
+                "txtLines": [
+                  325,
+                  325
+                ]
+              }
+            ]
+          },
+          {
+            "itemId": "item.dogslicer",
+            "name": "Dogslicer",
+            "category": "weapon",
+            "mechanical": true,
+            "npcGearCategory": null,
+            "quantity": 1,
+            "equipped": true,
+            "priceCp": 800,
+            "weightLb": 1,
+            "effects": {
+              "critMultiplier": 2,
+              "critRange": 19,
+              "damageDieBySize": {
+                "medium": "1d6",
+                "small": "1d4"
+              },
+              "damageType": "S",
+              "lightWeapon": true,
+              "special": [
+                "fragile"
+              ],
+              "weaponCategory": "martial",
+              "weaponType": "dogslicer",
+              "damageDie": "1d4"
+            },
+            "sourceRefs": [
+              {
+                "entry": "Dogslicer",
+                "file": "sources/npc/aonprd/weapon-dogslicer.txt",
+                "officialUrl": "https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=Dogslicer",
+                "provenanceStatus": "resolved",
+                "section": "Dogslicer",
+                "sha256": "f92b88748f07e5d9bb3e822793548c384335cd8958477ee2795b715de34d9263",
+                "sourceId": "source.aon-weapon-dogslicer",
+                "txtLines": [
+                  3,
+                  8
+                ]
+              }
+            ]
+          },
+          {
+            "itemId": "item.shortbow",
+            "name": "Shortbow",
+            "category": "weapon",
+            "mechanical": true,
+            "npcGearCategory": null,
+            "quantity": 1,
+            "equipped": true,
+            "priceCp": 3000,
+            "weightLb": 1.0,
+            "effects": {
+              "critMultiplier": 3,
+              "damageDieBySize": {
+                "medium": "1d6",
+                "small": "1d4"
+              },
+              "damageType": "P",
+              "rangeIncrement": 60,
+              "strengthDamage": "penalty-only",
+              "weaponCategory": "martial",
+              "weaponType": "shortbow",
+              "damageDie": "1d4"
+            },
+            "sourceRefs": [
+              {
+                "entry": "Table: Weapons — Shortbow",
+                "file": "sources/npc/aonprd/equipment.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Weapons — Shortbow",
+                "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+                "sourceId": "source.aon-equipment",
+                "txtLines": [
+                  180,
+                  182
+                ]
+              },
+              {
+                "entry": "Strength penalties apply to non-composite bows",
+                "file": "sources/npc/aonprd/combat.txt",
+                "provenanceStatus": "resolved",
+                "section": "Damage — Strength Bonus",
+                "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+                "sourceId": "source.aon-combat",
+                "txtLines": [
+                  60,
+                  60
+                ]
+              }
+            ]
+          },
+          {
+            "itemId": "item.arrows-20",
+            "name": "arrows (20)",
+            "category": "goods",
+            "mechanical": true,
+            "npcGearCategory": null,
+            "quantity": 1,
+            "equipped": true,
+            "priceCp": 100,
+            "weightLb": 3,
+            "effects": {},
+            "sourceRefs": [
+              {
+                "entry": "Arrows (20): 1 gp, 3 lbs.",
+                "file": "sources/npc/aonprd/equipment.txt",
+                "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+                "provenanceStatus": "resolved",
+                "section": "Table: Weapons",
+                "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+                "sourceId": "source.aon-equipment",
+                "txtLines": [
+                  177,
+                  177
+                ]
+              }
+            ]
+          },
+          {
+            "itemId": "item.whip",
+            "name": "Whip",
+            "category": "weapon",
+            "mechanical": true,
+            "npcGearCategory": null,
+            "quantity": 1,
+            "equipped": true,
+            "priceCp": 100,
+            "weightLb": 1.0,
+            "effects": {
+              "critMultiplier": 2,
+              "damageDieBySize": {
+                "medium": "1d3",
+                "small": "1d2"
+              },
+              "damageType": "S",
+              "finesseWeapon": true,
+              "nonlethal": true,
+              "reach": 15,
+              "special": [
+                "disarm",
+                "nonlethal",
+                "reach",
+                "trip"
+              ],
+              "weaponCategory": "exotic",
+              "weaponType": "whip",
+              "damageDie": "1d2"
+            },
+            "sourceRefs": [
+              {
+                "entry": "Table: Weapons — Whip",
+                "file": "sources/npc/aonprd/equipment.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Weapons — Whip",
+                "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+                "sourceId": "source.aon-equipment",
+                "txtLines": [
+                  193,
+                  193
+                ]
+              },
+              {
+                "entry": "Whip",
+                "file": "sources/npc/aonprd/equipment.txt",
+                "provenanceStatus": "resolved",
+                "section": "Whip",
+                "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+                "sourceId": "source.aon-equipment",
+                "txtLines": [
+                  290,
+                  292
+                ]
+              }
+            ]
+          },
+          {
+            "name": "potion of cure light wounds",
+            "mechanical": false,
+            "category": "gear",
+            "quantity": 1,
+            "equipped": false,
+            "effects": {},
+            "priceCp": null,
+            "sourceRefs": []
+          },
+          {
+            "name": "20 gp",
+            "mechanical": false,
+            "category": "gear",
+            "quantity": 1,
+            "equipped": false,
+            "effects": {},
+            "priceCp": null,
+            "sourceRefs": []
+          }
+        ],
+        "speed": {
+          "land": 30
+        },
+        "senses": [
+          "darkvision 60 ft."
+        ],
+        "languages": [
+          "Goblin",
+          "Common"
+        ],
+        "size": {
+          "id": "size.small",
+          "name": "Small"
+        },
+        "creatureType": "humanoid (goblinoid)",
+        "alignment": "NE",
+        "resistances": {},
+        "immunities": [],
+        "conditionalSaves": null,
+        "details": {
+          "alignment": "NE",
+          "sourceNotes": "Base statistics exclude temporary performance bonuses. Printed attacks and fear/charm bonus apparently include inspire courage +1. Printed shortbow damage omits the Strength penalty; unbuffed damage is 1d4-1. Armored Ride is +7, not the printed +8. The potion and coins are descriptive inventory and supply no automatic base-statblock effects or prices.",
+          "tactics": "Continue bardic performance, use whip to trip PCs, cast hideous laughter on a dangerous PC, and cure light wounds on herself after first being wounded.",
+          "morale": "Fights to the death."
+        }
+      },
+      "effective": {
+        "name": "Goblin Warchanter",
+        "creationSystem": "npc",
+        "statblockUse": "full",
+        "level": 1,
+        "totalLevel": 1,
+        "cr": "1/2",
+        "npcCategory": "heroic",
+        "raceId": "npc-race.goblin",
+        "raceName": "Goblin",
+        "classProgression": [
+          {
+            "classId": "npc-class.bard",
+            "className": "Bard",
+            "levels": 1
+          }
+        ],
+        "abilityScores": {
+          "strength": 8,
+          "dexterity": 18,
+          "constitution": 13,
+          "intelligence": 8,
+          "wisdom": 12,
+          "charisma": 13
+        },
+        "abilityModifiers": {
+          "strength": -1,
+          "dexterity": 4,
+          "constitution": 1,
+          "intelligence": -1,
+          "wisdom": 1,
+          "charisma": 1
+        },
+        "hitDiceExpression": "1d8+1",
+        "hp": 9,
+        "bab": 0,
+        "defenses": {
+          "ac": 18,
+          "touch": 15,
+          "flatFooted": 14,
+          "fortitude": 1,
+          "reflex": 6,
+          "will": 3,
+          "acBreakdown": {
+            "armor": 3,
+            "dexterity": 4,
+            "size": 1
+          }
+        },
+        "initiative": 4,
+        "attacks": [
+          {
+            "name": "Dogslicer",
+            "itemId": "item.dogslicer",
+            "attackBonuses": [
+              0
+            ],
+            "attackBonusExpression": "+0",
+            "attackType": "melee",
+            "proficient": true,
+            "damageExpression": "1d4-1",
+            "damageType": "S",
+            "critical": "19-20/x2",
+            "critRange": 19,
+            "critMultiplier": 2
+          },
+          {
+            "name": "Shortbow",
+            "itemId": "item.shortbow",
+            "attackBonuses": [
+              5
+            ],
+            "attackBonusExpression": "+5",
+            "attackType": "ranged",
+            "proficient": true,
+            "damageExpression": "1d4-1",
+            "damageType": "P",
+            "critical": "x3",
+            "critMultiplier": 3,
+            "range": "60 ft.",
+            "rangeIncrement": 60
+          },
+          {
+            "name": "Whip",
+            "itemId": "item.whip",
+            "attackBonuses": [
+              0
+            ],
+            "attackBonusExpression": "+0",
+            "attackType": "melee",
+            "proficient": true,
+            "nonlethal": true,
+            "reach": 15,
+            "damageExpression": "1d2-1",
+            "damageType": "S",
+            "critical": "x2",
+            "critMultiplier": 2
+          }
+        ],
+        "cmb": -2,
+        "cmd": 12,
+        "skills": [
+          {
+            "skillId": "skill.acrobatics",
+            "name": "Acrobatics",
+            "ability": "dexterity",
+            "ranks": 1,
+            "classSkill": true,
+            "armorCheckPenalty": -1,
+            "total": 7,
+            "sourceRefs": [
+              {
+                "entry": "Table: Skill Summary",
+                "file": "sources/npc/aonprd/skill-descriptions.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Skill Summary",
+                "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                "sourceId": "source.aon-skill-descriptions",
+                "txtLines": [
+                  5,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "skillId": "skill.linguistics",
+            "name": "Linguistics",
+            "ability": "intelligence",
+            "ranks": 1,
+            "classSkill": true,
+            "armorCheckPenalty": 0,
+            "total": 3,
+            "sourceRefs": [
+              {
+                "entry": "Table: Skill Summary",
+                "file": "sources/npc/aonprd/skill-descriptions.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Skill Summary",
+                "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                "sourceId": "source.aon-skill-descriptions",
+                "txtLines": [
+                  28,
+                  28
+                ]
+              },
+              {
+                "entry": "Learn a Language",
+                "file": "sources/npc/aonprd/skill-linguistics-language.txt",
+                "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Linguistics",
+                "provenanceStatus": "resolved",
+                "section": "Learn a Language",
+                "sha256": "88e813194405d152682d913cd1e6f9d943024f977c78b0f7ae328c97c3c2e031",
+                "sourceId": "source.aon-linguistics-language",
+                "txtLines": [
+                  1,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "skillId": "skill.perception",
+            "name": "Perception",
+            "ability": "wisdom",
+            "ranks": 1,
+            "classSkill": true,
+            "armorCheckPenalty": 0,
+            "total": 5,
+            "sourceRefs": [
+              {
+                "entry": "Table: Skill Summary",
+                "file": "sources/npc/aonprd/skill-descriptions.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Skill Summary",
+                "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                "sourceId": "source.aon-skill-descriptions",
+                "txtLines": [
+                  29,
+                  29
+                ]
+              }
+            ]
+          },
+          {
+            "skillId": "skill.perform",
+            "name": "Perform (sing)",
+            "ability": "charisma",
+            "ranks": 1,
+            "classSkill": true,
+            "armorCheckPenalty": 0,
+            "total": 5,
+            "sourceRefs": [
+              {
+                "entry": "Table: Skill Summary",
+                "file": "sources/npc/aonprd/skill-descriptions.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Skill Summary",
+                "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                "sourceId": "source.aon-skill-descriptions",
+                "txtLines": [
+                  30,
+                  30
+                ]
+              }
+            ]
+          },
+          {
+            "skillId": "skill.stealth",
+            "name": "Stealth",
+            "ability": "dexterity",
+            "ranks": 1,
+            "classSkill": true,
+            "armorCheckPenalty": -1,
+            "raceBonus": 4,
+            "sizeBonus": 4,
+            "total": 15,
+            "sourceRefs": [
+              {
+                "entry": "Table: Skill Summary",
+                "file": "sources/npc/aonprd/skill-descriptions.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Skill Summary",
+                "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                "sourceId": "source.aon-skill-descriptions",
+                "txtLines": [
+                  36,
+                  36
+                ]
+              },
+              {
+                "entry": "Standard Goblin racial traits",
+                "file": "sources/npc/aonprd/goblin-race.txt",
+                "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+                "provenanceStatus": "resolved",
+                "section": "Goblin Racial Traits",
+                "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+                "sourceId": "source.aon-goblin-race",
+                "txtLines": [
+                  15,
+                  22
+                ]
+              },
+              {
+                "entry": "Fly — size modifiers",
+                "file": "sources/npc/aonprd/skill-fly-size.txt",
+                "provenanceStatus": "resolved",
+                "section": "Size modifiers",
+                "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+                "sourceId": "source.aon-fly-size",
+                "txtLines": [
+                  4,
+                  4
+                ]
+              }
+            ]
+          },
+          {
+            "skillId": "skill.ride",
+            "name": "Ride",
+            "ability": "dexterity",
+            "ranks": 0,
+            "classSkill": false,
+            "armorCheckPenalty": -1,
+            "raceBonus": 4,
+            "total": 7,
+            "sourceRefs": [
+              {
+                "entry": "Table: Skill Summary",
+                "file": "sources/npc/aonprd/skill-descriptions.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Skill Summary",
+                "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                "sourceId": "source.aon-skill-descriptions",
+                "txtLines": [
+                  32,
+                  32
+                ]
+              },
+              {
+                "entry": "Standard Goblin racial traits",
+                "file": "sources/npc/aonprd/goblin-race.txt",
+                "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+                "provenanceStatus": "resolved",
+                "section": "Goblin Racial Traits",
+                "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+                "sourceId": "source.aon-goblin-race",
+                "txtLines": [
+                  15,
+                  22
+                ]
+              },
+              {
+                "entry": "Fly — size modifiers",
+                "file": "sources/npc/aonprd/skill-fly-size.txt",
+                "provenanceStatus": "resolved",
+                "section": "Size modifiers",
+                "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+                "sourceId": "source.aon-fly-size",
+                "txtLines": [
+                  4,
+                  4
+                ]
+              }
+            ]
+          }
+        ],
+        "feats": [
+          {
+            "slotId": "general-1",
+            "featId": "feat.martial-weapon-proficiency",
+            "name": "Martial Weapon Proficiency (Dogslicer)",
+            "weaponId": "item.dogslicer",
+            "sourceRefs": [
+              {
+                "entry": "Martial Weapon Proficiency",
+                "file": "sources/npc/aonprd/feats.txt",
+                "provenanceStatus": "resolved",
+                "section": "Martial Weapon Proficiency",
+                "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+                "sourceId": "source.aon-feats",
+                "txtLines": [
+                  769,
+                  774
+                ]
+              }
+            ]
+          }
+        ],
+        "classFeatures": [
+          {
+            "featureId": "npc-class-feature.bard-proficiencies",
+            "name": "Bard proficiencies",
+            "sourceRefs": [
+              {
+                "entry": "Bard proficiencies",
+                "file": "sources/npc/aonprd/bard-base-features.txt",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                "provenanceStatus": "resolved",
+                "section": "Bard proficiencies",
+                "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+                "sourceId": "source.aon-bard-base-features",
+                "txtLines": [
+                  4,
+                  4
+                ]
+              }
+            ],
+            "effects": {
+              "armorProficiencies": [
+                "light"
+              ],
+              "shieldProficiencies": "shields except tower shields",
+              "weaponProficiencies": [
+                "simple",
+                "longsword",
+                "rapier",
+                "sap",
+                "shortsword",
+                "shortbow",
+                "whip"
+              ]
+            }
+          },
+          {
+            "featureId": "npc-class-feature.bard-spellcasting",
+            "name": "Bard spellcasting",
+            "sourceRefs": [
+              {
+                "entry": "Bard spellcasting",
+                "file": "sources/npc/aonprd/bard.txt",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                "provenanceStatus": "resolved",
+                "section": "Bard",
+                "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                "sourceId": "source.aon-bard",
+                "txtLines": [
+                  11,
+                  12
+                ]
+              }
+            ],
+            "effects": {
+              "castingAbility": "charisma",
+              "castingMode": "spontaneous"
+            }
+          },
+          {
+            "featureId": "npc-class-feature.bard-cantrips",
+            "name": "Bard cantrips",
+            "sourceRefs": [
+              {
+                "entry": "Bard cantrips",
+                "file": "sources/npc/aonprd/bard.txt",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                "provenanceStatus": "resolved",
+                "section": "Class Features; Table: Bard (Special)",
+                "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                "sourceId": "source.aon-bard",
+                "txtLines": [
+                  14,
+                  14
+                ]
+              }
+            ]
+          },
+          {
+            "featureId": "npc-class-feature.bardic-knowledge",
+            "name": "Bardic knowledge +1",
+            "sourceRefs": [
+              {
+                "entry": "Bardic knowledge",
+                "file": "sources/npc/aonprd/bard-base-features.txt",
+                "provenanceStatus": "resolved",
+                "section": "Bardic knowledge",
+                "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+                "sourceId": "source.aon-bard-base-features",
+                "txtLines": [
+                  5,
+                  5
+                ]
+              }
+            ],
+            "effects": {
+              "knowledgeBonus": {
+                "levelDivisor": 2,
+                "minimum": 1
+              }
+            },
+            "knowledgeBonus": 1
+          },
+          {
+            "featureId": "npc-class-feature.bardic-performance",
+            "name": "Bardic performance (5 rounds/day)",
+            "sourceRefs": [
+              {
+                "entry": "Bardic performance",
+                "file": "sources/npc/aonprd/bard-base-features.txt",
+                "provenanceStatus": "resolved",
+                "section": "Bardic performance",
+                "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+                "sourceId": "source.aon-bard-base-features",
+                "txtLines": [
+                  6,
+                  6
+                ]
+              }
+            ],
+            "effects": {
+              "dailyRounds": {
+                "ability": "charisma",
+                "base": 4,
+                "perAdditionalLevel": 2
+              }
+            },
+            "roundsPerDay": 5
+          },
+          {
+            "featureId": "npc-class-feature.countersong",
+            "name": "Countersong",
+            "sourceRefs": [
+              {
+                "entry": "Countersong",
+                "file": "sources/npc/aonprd/bard.txt",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                "provenanceStatus": "resolved",
+                "section": "Class Features; Table: Bard (Special)",
+                "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                "sourceId": "source.aon-bard",
+                "txtLines": [
+                  14,
+                  14
+                ]
+              }
+            ]
+          },
+          {
+            "featureId": "npc-class-feature.distraction",
+            "name": "Distraction",
+            "sourceRefs": [
+              {
+                "entry": "Distraction",
+                "file": "sources/npc/aonprd/bard.txt",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                "provenanceStatus": "resolved",
+                "section": "Class Features; Table: Bard (Special)",
+                "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                "sourceId": "source.aon-bard",
+                "txtLines": [
+                  14,
+                  14
+                ]
+              }
+            ]
+          },
+          {
+            "featureId": "npc-class-feature.fascinate",
+            "name": "Fascinate",
+            "sourceRefs": [
+              {
+                "entry": "Fascinate",
+                "file": "sources/npc/aonprd/bard.txt",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                "provenanceStatus": "resolved",
+                "section": "Class Features; Table: Bard (Special)",
+                "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                "sourceId": "source.aon-bard",
+                "txtLines": [
+                  14,
+                  14
+                ]
+              }
+            ]
+          },
+          {
+            "featureId": "npc-class-feature.inspire-courage",
+            "name": "Inspire courage +1",
+            "sourceRefs": [
+              {
+                "entry": "Inspire courage +1",
+                "file": "sources/npc/aonprd/bard.txt",
+                "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                "provenanceStatus": "resolved",
+                "section": "Class Features; Table: Bard (Special)",
+                "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                "sourceId": "source.aon-bard",
+                "txtLines": [
+                  14,
+                  14
+                ]
+              }
+            ]
+          }
+        ],
+        "spells": {
+          "className": "Bard",
+          "casterLevel": 1,
+          "castingAbility": "charisma",
+          "castingAbilityModifier": 1,
+          "perDay": {
+            "0": "at-will",
+            "1": 2
+          },
+          "saveDcByLevel": {
+            "0": 11,
+            "1": 12
+          },
+          "known": {
+            "0": [
+              "spell.daze",
+              "spell.ghost-sound",
+              "spell.mage-hand",
+              "spell.message"
+            ],
+            "1": [
+              "spell.cure-light-wounds",
+              "spell.hideous-laughter"
+            ]
+          },
+          "bloodlineSpells": [],
+          "concentration": 2
+        },
+        "gearBudget": {
+          "gearBudgetId": "npc-gear.medium.normal",
+          "level": 1,
+          "effectiveLevel": 1,
+          "npcCategory": "heroic",
+          "budgetCp": 39000,
+          "categories": {
+            "gear": 10000,
+            "limitedUse": 4000,
+            "magic": 0,
+            "protection": 15000,
+            "weapons": 10000
+          },
+          "spentCp": 6500,
+          "remainingCp": null,
+          "descriptiveEquipmentUnpriced": true
+        },
+        "gear": [
+          {
+            "itemId": "item.studded-leather-armor",
+            "name": "Studded Leather",
+            "category": "armor",
+            "mechanical": true,
+            "npcGearCategory": null,
+            "quantity": 1,
+            "equipped": true,
+            "priceCp": 2500,
+            "weightLb": 10,
+            "effects": {
+              "armorBonus": 3,
+              "armorCategory": "light",
+              "armorCheckPenalty": -1,
+              "maxDex": 5
+            },
+            "sourceRefs": [
+              {
+                "entry": "Studded leather",
+                "file": "sources/npc/aonprd/equipment.txt",
+                "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+                "provenanceStatus": "resolved",
+                "section": "Table: Armor and Shields",
+                "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+                "sourceId": "source.aon-equipment",
+                "txtLines": [
+                  325,
+                  325
+                ]
+              }
+            ]
+          },
+          {
+            "itemId": "item.dogslicer",
+            "name": "Dogslicer",
+            "category": "weapon",
+            "mechanical": true,
+            "npcGearCategory": null,
+            "quantity": 1,
+            "equipped": true,
+            "priceCp": 800,
+            "weightLb": 1,
+            "effects": {
+              "critMultiplier": 2,
+              "critRange": 19,
+              "damageDieBySize": {
+                "medium": "1d6",
+                "small": "1d4"
+              },
+              "damageType": "S",
+              "lightWeapon": true,
+              "special": [
+                "fragile"
+              ],
+              "weaponCategory": "martial",
+              "weaponType": "dogslicer",
+              "damageDie": "1d4"
+            },
+            "sourceRefs": [
+              {
+                "entry": "Dogslicer",
+                "file": "sources/npc/aonprd/weapon-dogslicer.txt",
+                "officialUrl": "https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=Dogslicer",
+                "provenanceStatus": "resolved",
+                "section": "Dogslicer",
+                "sha256": "f92b88748f07e5d9bb3e822793548c384335cd8958477ee2795b715de34d9263",
+                "sourceId": "source.aon-weapon-dogslicer",
+                "txtLines": [
+                  3,
+                  8
+                ]
+              }
+            ]
+          },
+          {
+            "itemId": "item.shortbow",
+            "name": "Shortbow",
+            "category": "weapon",
+            "mechanical": true,
+            "npcGearCategory": null,
+            "quantity": 1,
+            "equipped": true,
+            "priceCp": 3000,
+            "weightLb": 1.0,
+            "effects": {
+              "critMultiplier": 3,
+              "damageDieBySize": {
+                "medium": "1d6",
+                "small": "1d4"
+              },
+              "damageType": "P",
+              "rangeIncrement": 60,
+              "strengthDamage": "penalty-only",
+              "weaponCategory": "martial",
+              "weaponType": "shortbow",
+              "damageDie": "1d4"
+            },
+            "sourceRefs": [
+              {
+                "entry": "Table: Weapons — Shortbow",
+                "file": "sources/npc/aonprd/equipment.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Weapons — Shortbow",
+                "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+                "sourceId": "source.aon-equipment",
+                "txtLines": [
+                  180,
+                  182
+                ]
+              },
+              {
+                "entry": "Strength penalties apply to non-composite bows",
+                "file": "sources/npc/aonprd/combat.txt",
+                "provenanceStatus": "resolved",
+                "section": "Damage — Strength Bonus",
+                "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+                "sourceId": "source.aon-combat",
+                "txtLines": [
+                  60,
+                  60
+                ]
+              }
+            ]
+          },
+          {
+            "itemId": "item.arrows-20",
+            "name": "arrows (20)",
+            "category": "goods",
+            "mechanical": true,
+            "npcGearCategory": null,
+            "quantity": 1,
+            "equipped": true,
+            "priceCp": 100,
+            "weightLb": 3,
+            "effects": {},
+            "sourceRefs": [
+              {
+                "entry": "Arrows (20): 1 gp, 3 lbs.",
+                "file": "sources/npc/aonprd/equipment.txt",
+                "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+                "provenanceStatus": "resolved",
+                "section": "Table: Weapons",
+                "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+                "sourceId": "source.aon-equipment",
+                "txtLines": [
+                  177,
+                  177
+                ]
+              }
+            ]
+          },
+          {
+            "itemId": "item.whip",
+            "name": "Whip",
+            "category": "weapon",
+            "mechanical": true,
+            "npcGearCategory": null,
+            "quantity": 1,
+            "equipped": true,
+            "priceCp": 100,
+            "weightLb": 1.0,
+            "effects": {
+              "critMultiplier": 2,
+              "damageDieBySize": {
+                "medium": "1d3",
+                "small": "1d2"
+              },
+              "damageType": "S",
+              "finesseWeapon": true,
+              "nonlethal": true,
+              "reach": 15,
+              "special": [
+                "disarm",
+                "nonlethal",
+                "reach",
+                "trip"
+              ],
+              "weaponCategory": "exotic",
+              "weaponType": "whip",
+              "damageDie": "1d2"
+            },
+            "sourceRefs": [
+              {
+                "entry": "Table: Weapons — Whip",
+                "file": "sources/npc/aonprd/equipment.txt",
+                "provenanceStatus": "resolved",
+                "section": "Table: Weapons — Whip",
+                "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+                "sourceId": "source.aon-equipment",
+                "txtLines": [
+                  193,
+                  193
+                ]
+              },
+              {
+                "entry": "Whip",
+                "file": "sources/npc/aonprd/equipment.txt",
+                "provenanceStatus": "resolved",
+                "section": "Whip",
+                "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+                "sourceId": "source.aon-equipment",
+                "txtLines": [
+                  290,
+                  292
+                ]
+              }
+            ]
+          },
+          {
+            "name": "potion of cure light wounds",
+            "mechanical": false,
+            "category": "gear",
+            "quantity": 1,
+            "equipped": false,
+            "effects": {},
+            "priceCp": null,
+            "sourceRefs": []
+          },
+          {
+            "name": "20 gp",
+            "mechanical": false,
+            "category": "gear",
+            "quantity": 1,
+            "equipped": false,
+            "effects": {},
+            "priceCp": null,
+            "sourceRefs": []
+          }
+        ],
+        "speed": {
+          "land": 30
+        },
+        "senses": [
+          "darkvision 60 ft."
+        ],
+        "languages": [
+          "Goblin",
+          "Common"
+        ],
+        "size": {
+          "id": "size.small",
+          "name": "Small"
+        },
+        "creatureType": "humanoid (goblinoid)",
+        "alignment": "NE",
+        "resistances": {},
+        "immunities": [],
+        "conditionalSaves": null,
+        "details": {
+          "alignment": "NE",
+          "sourceNotes": "Base statistics exclude temporary performance bonuses. Printed attacks and fear/charm bonus apparently include inspire courage +1. Printed shortbow damage omits the Strength penalty; unbuffed damage is 1d4-1. Armored Ride is +7, not the printed +8. The potion and coins are descriptive inventory and supply no automatic base-statblock effects or prices.",
+          "tactics": "Continue bardic performance, use whip to trip PCs, cast hideous laughter on a dangerous PC, and cure light wounds on herself after first being wounded.",
+          "morale": "Fights to the death."
+        }
+      },
+      "issues": [],
+      "warnings": [
         {
-          "entry": "Core feats",
-          "file": "docs/npc-source-gap-matrix.md",
-          "provenanceStatus": "catalog-gap",
-          "section": "NPC Source-Gap Matrix",
-          "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-          "sourceId": "source.npc-gap-matrix",
-          "txtLines": [
-            25,
-            25
+          "code": "npc.gear-budget-approximate",
+          "severity": "warning",
+          "kind": "validation",
+          "message": "priced mechanical gear does not spend the full NPC gear budget; descriptive inventory is unpriced",
+          "path": "/selections/gear",
+          "details": {
+            "budgetCp": 39000,
+            "spentCp": 6500
+          },
+          "sourceRefs": [
+            {
+              "entry": "Heroic level 1",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Table 14-9: NPC Gear",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                83,
+                83
+              ]
+            }
           ]
         }
-      ]
-    },
-    {
-      "code": "npc.catalog-gap",
-      "severity": "error",
-      "kind": "catalog-data",
-      "message": "catalog data required for this selection is not source-resolved",
-      "path": "/selections/gear/1/itemId",
-      "details": {
-        "recordId": "item.shortbow",
-        "catalogStatus": "gap"
-      },
-      "sourceRefs": [
+      ],
+      "derivationTrace": [
         {
-          "entry": "Mundane weapons",
-          "file": "docs/npc-source-gap-matrix.md",
-          "provenanceStatus": "catalog-gap",
-          "section": "NPC Source-Gap Matrix",
-          "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-          "sourceId": "source.npc-gap-matrix",
-          "txtLines": [
-            26,
-            26
+          "path": "/canonical/level",
+          "value": 1,
+          "calculation": "sum selected class levels",
+          "sourceRefs": [
+            {
+              "entry": "Bard",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard; Class Skills; Class Features",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                1,
+                55
+              ]
+            },
+            {
+              "entry": "Bard level 1",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Table: Bard",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            }
           ]
-        }
-      ]
-    },
-    {
-      "code": "npc.catalog-gap",
-      "severity": "error",
-      "kind": "catalog-data",
-      "message": "catalog data required for this selection is not source-resolved",
-      "path": "/selections/gear/3/itemId",
-      "details": {
-        "recordId": "item.whip",
-        "catalogStatus": "gap"
-      },
-      "sourceRefs": [
+        },
         {
-          "entry": "Core weapons, armor, goods, and required magic items",
-          "file": "docs/npc-source-gap-matrix.md",
-          "provenanceStatus": "catalog-gap",
-          "section": "NPC Source-Gap Matrix",
-          "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-          "sourceId": "source.npc-gap-matrix",
-          "txtLines": [
-            26,
-            26
+          "path": "/canonical/cr",
+          "value": "1/2",
+          "calculation": "class levels − 1 for heroic NPCs, − 2 for basic NPCs; step through fractional CRs below 1",
+          "sourceRefs": [
+            {
+              "entry": "Class levels without racial Hit Dice determine NPC CR",
+              "file": "sources/npc/aonprd/designing-encounters.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?ID=252",
+              "provenanceStatus": "resolved",
+              "section": "Adding NPCs",
+              "sha256": "fcfea8b5b372ba39e132818cbe9c1c46e2d556ec3bb6ce73cee6ec2c686d3716",
+              "sourceId": "source.aon-designing-encounters",
+              "txtLines": [
+                1,
+                1
+              ]
+            }
           ]
-        }
-      ]
-    },
-    {
-      "code": "npc.catalog-gap",
-      "severity": "error",
-      "kind": "catalog-data",
-      "message": "catalog data required for this selection is not source-resolved",
-      "path": "/selections/gear/4/itemId",
-      "details": {
-        "recordId": "item.potion-of-cure-light-wounds",
-        "catalogStatus": "gap"
-      },
-      "sourceRefs": [
+        },
         {
-          "entry": "Core weapons, armor, goods, and required magic items",
-          "file": "docs/npc-source-gap-matrix.md",
-          "provenanceStatus": "catalog-gap",
-          "section": "NPC Source-Gap Matrix",
-          "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-          "sourceId": "source.npc-gap-matrix",
-          "txtLines": [
-            26,
-            26
+          "path": "/canonical/abilityScores",
+          "value": {
+            "strength": 8,
+            "dexterity": 18,
+            "constitution": 13,
+            "intelligence": 8,
+            "wisdom": 12,
+            "charisma": 13
+          },
+          "calculation": "apply the NPC array, racial adjustments, and level increases",
+          "sourceRefs": [
+            {
+              "entry": "Heroic NPC array and Charisma-based arcane preset",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Step 2: Determine Ability Scores; Table 14-6",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                12,
+                32
+              ]
+            },
+            {
+              "entry": "Standard Goblin racial traits",
+              "file": "sources/npc/aonprd/goblin-race.txt",
+              "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+              "provenanceStatus": "resolved",
+              "section": "Goblin Racial Traits",
+              "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+              "sourceId": "source.aon-goblin-race",
+              "txtLines": [
+                15,
+                22
+              ]
+            },
+            {
+              "entry": "Fly — size modifiers",
+              "file": "sources/npc/aonprd/skill-fly-size.txt",
+              "provenanceStatus": "resolved",
+              "section": "Size modifiers",
+              "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+              "sourceId": "source.aon-fly-size",
+              "txtLines": [
+                4,
+                4
+              ]
+            },
+            {
+              "entry": "Ability Score",
+              "file": "sources/npc/aonprd/character-classes.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+              "provenanceStatus": "resolved",
+              "section": "Table: Character Advancement and Level-Dependent Bonuses",
+              "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
+              "sourceId": "source.aon-character-classes",
+              "txtLines": [
+                19,
+                40
+              ]
+            }
           ]
-        }
-      ]
-    },
-    {
-      "code": "npc.catalog-gap",
-      "severity": "error",
-      "kind": "catalog-data",
-      "message": "catalog data required for this selection is not source-resolved",
-      "path": "/selections/skillGeneration/skills/0",
-      "details": {
-        "recordId": "skill.acrobatics",
-        "catalogStatus": "gap"
-      },
-      "sourceRefs": [
+        },
         {
-          "entry": "Core skill list",
-          "file": "docs/npc-source-gap-matrix.md",
-          "provenanceStatus": "catalog-gap",
-          "section": "NPC Source-Gap Matrix",
-          "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-          "sourceId": "source.npc-gap-matrix",
-          "txtLines": [
-            24,
-            24
+          "path": "/canonical/hp",
+          "value": 9,
+          "calculation": "house rule: ceil each die average; maximize first die; add Constitution once per level",
+          "sourceRefs": [
+            {
+              "entry": "Bard",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard; Class Skills; Class Features",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                1,
+                55
+              ]
+            },
+            {
+              "entry": "Bard level 1",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Table: Bard",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "User-approved per-die rounding, heroic first-die maximum, and Constitution once per Hit Die",
+              "file": "docs/npc-hit-points-policy.md",
+              "provenanceStatus": "product-policy",
+              "section": "NPC hit-point policy",
+              "sha256": "03717e0ba6acb206c181111d9fc697f6ffdc4c2fdeb922b6fd5bff8a7bcc6e70",
+              "sourceId": "source.npc-hp-policy",
+              "txtLines": [
+                3,
+                12
+              ]
+            },
+            {
+              "entry": "Heroic NPC array and Charisma-based arcane preset",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Step 2: Determine Ability Scores; Table 14-6",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                12,
+                32
+              ]
+            },
+            {
+              "entry": "Standard Goblin racial traits",
+              "file": "sources/npc/aonprd/goblin-race.txt",
+              "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+              "provenanceStatus": "resolved",
+              "section": "Goblin Racial Traits",
+              "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+              "sourceId": "source.aon-goblin-race",
+              "txtLines": [
+                15,
+                22
+              ]
+            },
+            {
+              "entry": "Fly — size modifiers",
+              "file": "sources/npc/aonprd/skill-fly-size.txt",
+              "provenanceStatus": "resolved",
+              "section": "Size modifiers",
+              "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+              "sourceId": "source.aon-fly-size",
+              "txtLines": [
+                4,
+                4
+              ]
+            },
+            {
+              "entry": "Ability Score",
+              "file": "sources/npc/aonprd/character-classes.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+              "provenanceStatus": "resolved",
+              "section": "Table: Character Advancement and Level-Dependent Bonuses",
+              "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
+              "sourceId": "source.aon-character-classes",
+              "txtLines": [
+                19,
+                40
+              ]
+            }
           ]
-        }
-      ]
-    },
-    {
-      "code": "npc.catalog-gap",
-      "severity": "error",
-      "kind": "catalog-data",
-      "message": "catalog data required for this selection is not source-resolved",
-      "path": "/selections/skillGeneration/skills/1",
-      "details": {
-        "recordId": "skill.linguistics",
-        "catalogStatus": "gap"
-      },
-      "sourceRefs": [
+        },
         {
-          "entry": "Core skill list",
-          "file": "docs/npc-source-gap-matrix.md",
-          "provenanceStatus": "catalog-gap",
-          "section": "NPC Source-Gap Matrix",
-          "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-          "sourceId": "source.npc-gap-matrix",
-          "txtLines": [
-            24,
-            24
+          "path": "/canonical/bab",
+          "value": 0,
+          "calculation": "sum the selected class level rows",
+          "sourceRefs": [
+            {
+              "entry": "Bard",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard; Class Skills; Class Features",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                1,
+                55
+              ]
+            },
+            {
+              "entry": "Bard level 1",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Table: Bard",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            }
           ]
-        }
-      ]
-    },
-    {
-      "code": "npc.catalog-gap",
-      "severity": "error",
-      "kind": "catalog-data",
-      "message": "catalog data required for this selection is not source-resolved",
-      "path": "/selections/spellLoadout/known/0/0",
-      "details": {
-        "recordId": "spell.daze",
-        "catalogStatus": "partial"
-      },
-      "sourceRefs": [
+        },
         {
-          "entry": "Daze",
-          "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
-          "provenanceStatus": "list-membership-resolved",
-          "section": "Core Rulebook class spell lists",
-          "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
-          "sourceId": "source.npc-crb-spell-lists",
-          "txtLines": [
-            33,
-            33
+          "path": "/canonical/defenses",
+          "value": {
+            "ac": 18,
+            "touch": 15,
+            "flatFooted": 14,
+            "fortitude": 1,
+            "reflex": 6,
+            "will": 3,
+            "acBreakdown": {
+              "armor": 3,
+              "dexterity": 4,
+              "size": 1
+            }
+          },
+          "calculation": "combine class saves, abilities, armor, shield, and feat bonuses",
+          "sourceRefs": [
+            {
+              "entry": "Bard",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard; Class Skills; Class Features",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                1,
+                55
+              ]
+            },
+            {
+              "entry": "Bard level 1",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Table: Bard",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Heroic NPC array and Charisma-based arcane preset",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Step 2: Determine Ability Scores; Table 14-6",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                12,
+                32
+              ]
+            },
+            {
+              "entry": "Standard Goblin racial traits",
+              "file": "sources/npc/aonprd/goblin-race.txt",
+              "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+              "provenanceStatus": "resolved",
+              "section": "Goblin Racial Traits",
+              "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+              "sourceId": "source.aon-goblin-race",
+              "txtLines": [
+                15,
+                22
+              ]
+            },
+            {
+              "entry": "Fly — size modifiers",
+              "file": "sources/npc/aonprd/skill-fly-size.txt",
+              "provenanceStatus": "resolved",
+              "section": "Size modifiers",
+              "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+              "sourceId": "source.aon-fly-size",
+              "txtLines": [
+                4,
+                4
+              ]
+            },
+            {
+              "entry": "Ability Score",
+              "file": "sources/npc/aonprd/character-classes.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+              "provenanceStatus": "resolved",
+              "section": "Table: Character Advancement and Level-Dependent Bonuses",
+              "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
+              "sourceId": "source.aon-character-classes",
+              "txtLines": [
+                19,
+                40
+              ]
+            },
+            {
+              "entry": "Heroic level 1",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Table 14-9: NPC Gear",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                83,
+                83
+              ]
+            },
+            {
+              "entry": "Studded leather",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+              "provenanceStatus": "resolved",
+              "section": "Table: Armor and Shields",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                325,
+                325
+              ]
+            },
+            {
+              "entry": "Dogslicer",
+              "file": "sources/npc/aonprd/weapon-dogslicer.txt",
+              "officialUrl": "https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=Dogslicer",
+              "provenanceStatus": "resolved",
+              "section": "Dogslicer",
+              "sha256": "f92b88748f07e5d9bb3e822793548c384335cd8958477ee2795b715de34d9263",
+              "sourceId": "source.aon-weapon-dogslicer",
+              "txtLines": [
+                3,
+                8
+              ]
+            },
+            {
+              "entry": "Table: Weapons — Shortbow",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "provenanceStatus": "resolved",
+              "section": "Table: Weapons — Shortbow",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                180,
+                182
+              ]
+            },
+            {
+              "entry": "Strength penalties apply to non-composite bows",
+              "file": "sources/npc/aonprd/combat.txt",
+              "provenanceStatus": "resolved",
+              "section": "Damage — Strength Bonus",
+              "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+              "sourceId": "source.aon-combat",
+              "txtLines": [
+                60,
+                60
+              ]
+            },
+            {
+              "entry": "Arrows (20): 1 gp, 3 lbs.",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+              "provenanceStatus": "resolved",
+              "section": "Table: Weapons",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                177,
+                177
+              ]
+            },
+            {
+              "entry": "Table: Weapons — Whip",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "provenanceStatus": "resolved",
+              "section": "Table: Weapons — Whip",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                193,
+                193
+              ]
+            },
+            {
+              "entry": "Whip",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "provenanceStatus": "resolved",
+              "section": "Whip",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                290,
+                292
+              ]
+            },
+            {
+              "entry": "Bard proficiencies",
+              "file": "sources/npc/aonprd/bard-base-features.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard proficiencies",
+              "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+              "sourceId": "source.aon-bard-base-features",
+              "txtLines": [
+                4,
+                4
+              ]
+            },
+            {
+              "entry": "Bard spellcasting",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                11,
+                12
+              ]
+            },
+            {
+              "entry": "Bard cantrips",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Bardic knowledge",
+              "file": "sources/npc/aonprd/bard-base-features.txt",
+              "provenanceStatus": "resolved",
+              "section": "Bardic knowledge",
+              "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+              "sourceId": "source.aon-bard-base-features",
+              "txtLines": [
+                5,
+                5
+              ]
+            },
+            {
+              "entry": "Bardic performance",
+              "file": "sources/npc/aonprd/bard-base-features.txt",
+              "provenanceStatus": "resolved",
+              "section": "Bardic performance",
+              "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+              "sourceId": "source.aon-bard-base-features",
+              "txtLines": [
+                6,
+                6
+              ]
+            },
+            {
+              "entry": "Countersong",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Distraction",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Fascinate",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Inspire courage +1",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Martial Weapon Proficiency",
+              "file": "sources/npc/aonprd/feats.txt",
+              "provenanceStatus": "resolved",
+              "section": "Martial Weapon Proficiency",
+              "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+              "sourceId": "source.aon-feats",
+              "txtLines": [
+                769,
+                774
+              ]
+            },
+            {
+              "sourceId": "source.aon-combat",
+              "file": "sources/npc/aonprd/combat.txt",
+              "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+              "section": "Combat Statistics",
+              "txtLines": [
+                24,
+                58
+              ],
+              "provenanceStatus": "resolved"
+            },
+            {
+              "sourceId": "source.aon-equipment",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "section": "Weapon nonproficiency",
+              "txtLines": [
+                49,
+                49
+              ],
+              "provenanceStatus": "resolved"
+            },
+            {
+              "sourceId": "source.aon-equipment",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "section": "Armor check penalties and nonproficiency",
+              "txtLines": [
+                308,
+                310
+              ],
+              "provenanceStatus": "resolved"
+            }
           ]
-        }
-      ]
-    },
-    {
-      "code": "npc.catalog-gap",
-      "severity": "error",
-      "kind": "catalog-data",
-      "message": "catalog data required for this selection is not source-resolved",
-      "path": "/selections/spellLoadout/known/0/1",
-      "details": {
-        "recordId": "spell.ghost-sound",
-        "catalogStatus": "partial"
-      },
-      "sourceRefs": [
+        },
         {
-          "entry": "Ghost Sound",
-          "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
-          "provenanceStatus": "list-membership-resolved",
-          "section": "Core Rulebook class spell lists",
-          "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
-          "sourceId": "source.npc-crb-spell-lists",
-          "txtLines": [
-            36,
-            36
+          "path": "/canonical/initiative",
+          "value": 4,
+          "calculation": "Dexterity modifier plus feat bonuses",
+          "sourceRefs": [
+            {
+              "entry": "Heroic NPC array and Charisma-based arcane preset",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Step 2: Determine Ability Scores; Table 14-6",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                12,
+                32
+              ]
+            },
+            {
+              "entry": "Standard Goblin racial traits",
+              "file": "sources/npc/aonprd/goblin-race.txt",
+              "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+              "provenanceStatus": "resolved",
+              "section": "Goblin Racial Traits",
+              "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+              "sourceId": "source.aon-goblin-race",
+              "txtLines": [
+                15,
+                22
+              ]
+            },
+            {
+              "entry": "Fly — size modifiers",
+              "file": "sources/npc/aonprd/skill-fly-size.txt",
+              "provenanceStatus": "resolved",
+              "section": "Size modifiers",
+              "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+              "sourceId": "source.aon-fly-size",
+              "txtLines": [
+                4,
+                4
+              ]
+            },
+            {
+              "entry": "Ability Score",
+              "file": "sources/npc/aonprd/character-classes.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+              "provenanceStatus": "resolved",
+              "section": "Table: Character Advancement and Level-Dependent Bonuses",
+              "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
+              "sourceId": "source.aon-character-classes",
+              "txtLines": [
+                19,
+                40
+              ]
+            },
+            {
+              "entry": "Martial Weapon Proficiency",
+              "file": "sources/npc/aonprd/feats.txt",
+              "provenanceStatus": "resolved",
+              "section": "Martial Weapon Proficiency",
+              "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+              "sourceId": "source.aon-feats",
+              "txtLines": [
+                769,
+                774
+              ]
+            },
+            {
+              "entry": "Dogslicer",
+              "file": "sources/npc/aonprd/weapon-dogslicer.txt",
+              "officialUrl": "https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=Dogslicer",
+              "provenanceStatus": "resolved",
+              "section": "Dogslicer",
+              "sha256": "f92b88748f07e5d9bb3e822793548c384335cd8958477ee2795b715de34d9263",
+              "sourceId": "source.aon-weapon-dogslicer",
+              "txtLines": [
+                3,
+                8
+              ]
+            },
+            {
+              "sourceId": "source.aon-combat",
+              "file": "sources/npc/aonprd/combat.txt",
+              "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+              "section": "Combat Statistics",
+              "txtLines": [
+                24,
+                58
+              ],
+              "provenanceStatus": "resolved"
+            }
           ]
-        }
-      ]
-    },
-    {
-      "code": "npc.catalog-gap",
-      "severity": "error",
-      "kind": "catalog-data",
-      "message": "catalog data required for this selection is not source-resolved",
-      "path": "/selections/spellLoadout/known/1/1",
-      "details": {
-        "recordId": "spell.hideous-laughter",
-        "catalogStatus": "partial"
-      },
-      "sourceRefs": [
+        },
         {
-          "entry": "Hideous Laughter",
-          "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
-          "provenanceStatus": "list-membership-resolved",
-          "section": "Core Rulebook class spell lists",
-          "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
-          "sourceId": "source.npc-crb-spell-lists",
-          "txtLines": [
-            67,
-            67
+          "path": "/canonical/attacks",
+          "value": [
+            {
+              "name": "Dogslicer",
+              "itemId": "item.dogslicer",
+              "attackBonuses": [
+                0
+              ],
+              "attackBonusExpression": "+0",
+              "attackType": "melee",
+              "proficient": true,
+              "damageExpression": "1d4-1",
+              "damageType": "S",
+              "critical": "19-20/x2",
+              "critRange": 19,
+              "critMultiplier": 2
+            },
+            {
+              "name": "Shortbow",
+              "itemId": "item.shortbow",
+              "attackBonuses": [
+                5
+              ],
+              "attackBonusExpression": "+5",
+              "attackType": "ranged",
+              "proficient": true,
+              "damageExpression": "1d4-1",
+              "damageType": "P",
+              "critical": "x3",
+              "critMultiplier": 3,
+              "range": "60 ft.",
+              "rangeIncrement": 60
+            },
+            {
+              "name": "Whip",
+              "itemId": "item.whip",
+              "attackBonuses": [
+                0
+              ],
+              "attackBonusExpression": "+0",
+              "attackType": "melee",
+              "proficient": true,
+              "nonlethal": true,
+              "reach": 15,
+              "damageExpression": "1d2-1",
+              "damageType": "S",
+              "critical": "x2",
+              "critMultiplier": 2
+            }
+          ],
+          "calculation": "base attacks: BAB, ability, size, equipment and nonproficiency; bows apply Strength penalties but not bonuses; no temporary buffs",
+          "sourceRefs": [
+            {
+              "entry": "Bard",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard; Class Skills; Class Features",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                1,
+                55
+              ]
+            },
+            {
+              "entry": "Bard level 1",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Table: Bard",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Heroic NPC array and Charisma-based arcane preset",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Step 2: Determine Ability Scores; Table 14-6",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                12,
+                32
+              ]
+            },
+            {
+              "entry": "Standard Goblin racial traits",
+              "file": "sources/npc/aonprd/goblin-race.txt",
+              "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+              "provenanceStatus": "resolved",
+              "section": "Goblin Racial Traits",
+              "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+              "sourceId": "source.aon-goblin-race",
+              "txtLines": [
+                15,
+                22
+              ]
+            },
+            {
+              "entry": "Fly — size modifiers",
+              "file": "sources/npc/aonprd/skill-fly-size.txt",
+              "provenanceStatus": "resolved",
+              "section": "Size modifiers",
+              "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+              "sourceId": "source.aon-fly-size",
+              "txtLines": [
+                4,
+                4
+              ]
+            },
+            {
+              "entry": "Ability Score",
+              "file": "sources/npc/aonprd/character-classes.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+              "provenanceStatus": "resolved",
+              "section": "Table: Character Advancement and Level-Dependent Bonuses",
+              "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
+              "sourceId": "source.aon-character-classes",
+              "txtLines": [
+                19,
+                40
+              ]
+            },
+            {
+              "entry": "Heroic level 1",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Table 14-9: NPC Gear",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                83,
+                83
+              ]
+            },
+            {
+              "entry": "Studded leather",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+              "provenanceStatus": "resolved",
+              "section": "Table: Armor and Shields",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                325,
+                325
+              ]
+            },
+            {
+              "entry": "Dogslicer",
+              "file": "sources/npc/aonprd/weapon-dogslicer.txt",
+              "officialUrl": "https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=Dogslicer",
+              "provenanceStatus": "resolved",
+              "section": "Dogslicer",
+              "sha256": "f92b88748f07e5d9bb3e822793548c384335cd8958477ee2795b715de34d9263",
+              "sourceId": "source.aon-weapon-dogslicer",
+              "txtLines": [
+                3,
+                8
+              ]
+            },
+            {
+              "entry": "Table: Weapons — Shortbow",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "provenanceStatus": "resolved",
+              "section": "Table: Weapons — Shortbow",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                180,
+                182
+              ]
+            },
+            {
+              "entry": "Strength penalties apply to non-composite bows",
+              "file": "sources/npc/aonprd/combat.txt",
+              "provenanceStatus": "resolved",
+              "section": "Damage — Strength Bonus",
+              "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+              "sourceId": "source.aon-combat",
+              "txtLines": [
+                60,
+                60
+              ]
+            },
+            {
+              "entry": "Arrows (20): 1 gp, 3 lbs.",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+              "provenanceStatus": "resolved",
+              "section": "Table: Weapons",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                177,
+                177
+              ]
+            },
+            {
+              "entry": "Table: Weapons — Whip",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "provenanceStatus": "resolved",
+              "section": "Table: Weapons — Whip",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                193,
+                193
+              ]
+            },
+            {
+              "entry": "Whip",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "provenanceStatus": "resolved",
+              "section": "Whip",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                290,
+                292
+              ]
+            },
+            {
+              "entry": "Bard proficiencies",
+              "file": "sources/npc/aonprd/bard-base-features.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard proficiencies",
+              "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+              "sourceId": "source.aon-bard-base-features",
+              "txtLines": [
+                4,
+                4
+              ]
+            },
+            {
+              "entry": "Bard spellcasting",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                11,
+                12
+              ]
+            },
+            {
+              "entry": "Bard cantrips",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Bardic knowledge",
+              "file": "sources/npc/aonprd/bard-base-features.txt",
+              "provenanceStatus": "resolved",
+              "section": "Bardic knowledge",
+              "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+              "sourceId": "source.aon-bard-base-features",
+              "txtLines": [
+                5,
+                5
+              ]
+            },
+            {
+              "entry": "Bardic performance",
+              "file": "sources/npc/aonprd/bard-base-features.txt",
+              "provenanceStatus": "resolved",
+              "section": "Bardic performance",
+              "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+              "sourceId": "source.aon-bard-base-features",
+              "txtLines": [
+                6,
+                6
+              ]
+            },
+            {
+              "entry": "Countersong",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Distraction",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Fascinate",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Inspire courage +1",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Martial Weapon Proficiency",
+              "file": "sources/npc/aonprd/feats.txt",
+              "provenanceStatus": "resolved",
+              "section": "Martial Weapon Proficiency",
+              "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+              "sourceId": "source.aon-feats",
+              "txtLines": [
+                769,
+                774
+              ]
+            },
+            {
+              "sourceId": "source.aon-combat",
+              "file": "sources/npc/aonprd/combat.txt",
+              "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+              "section": "Combat Statistics",
+              "txtLines": [
+                24,
+                58
+              ],
+              "provenanceStatus": "resolved"
+            },
+            {
+              "sourceId": "source.aon-equipment",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "section": "Weapon nonproficiency",
+              "txtLines": [
+                49,
+                49
+              ],
+              "provenanceStatus": "resolved"
+            },
+            {
+              "sourceId": "source.aon-equipment",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "section": "Armor check penalties and nonproficiency",
+              "txtLines": [
+                308,
+                310
+              ],
+              "provenanceStatus": "resolved"
+            }
+          ]
+        },
+        {
+          "path": "/canonical/cmb",
+          "value": -2,
+          "calculation": "BAB + Strength modifier + size modifier",
+          "sourceRefs": [
+            {
+              "entry": "Bard",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard; Class Skills; Class Features",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                1,
+                55
+              ]
+            },
+            {
+              "entry": "Bard level 1",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Table: Bard",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Heroic NPC array and Charisma-based arcane preset",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Step 2: Determine Ability Scores; Table 14-6",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                12,
+                32
+              ]
+            },
+            {
+              "entry": "Standard Goblin racial traits",
+              "file": "sources/npc/aonprd/goblin-race.txt",
+              "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+              "provenanceStatus": "resolved",
+              "section": "Goblin Racial Traits",
+              "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+              "sourceId": "source.aon-goblin-race",
+              "txtLines": [
+                15,
+                22
+              ]
+            },
+            {
+              "entry": "Fly — size modifiers",
+              "file": "sources/npc/aonprd/skill-fly-size.txt",
+              "provenanceStatus": "resolved",
+              "section": "Size modifiers",
+              "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+              "sourceId": "source.aon-fly-size",
+              "txtLines": [
+                4,
+                4
+              ]
+            },
+            {
+              "entry": "Ability Score",
+              "file": "sources/npc/aonprd/character-classes.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+              "provenanceStatus": "resolved",
+              "section": "Table: Character Advancement and Level-Dependent Bonuses",
+              "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
+              "sourceId": "source.aon-character-classes",
+              "txtLines": [
+                19,
+                40
+              ]
+            },
+            {
+              "sourceId": "source.aon-combat",
+              "file": "sources/npc/aonprd/combat.txt",
+              "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+              "section": "Combat Maneuvers",
+              "txtLines": [
+                536,
+                544
+              ],
+              "provenanceStatus": "resolved"
+            }
+          ]
+        },
+        {
+          "path": "/canonical/cmd",
+          "value": 12,
+          "calculation": "10 + BAB + Strength modifier + Dexterity modifier + size modifier",
+          "sourceRefs": [
+            {
+              "entry": "Bard",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard; Class Skills; Class Features",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                1,
+                55
+              ]
+            },
+            {
+              "entry": "Bard level 1",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Table: Bard",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Heroic NPC array and Charisma-based arcane preset",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Step 2: Determine Ability Scores; Table 14-6",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                12,
+                32
+              ]
+            },
+            {
+              "entry": "Standard Goblin racial traits",
+              "file": "sources/npc/aonprd/goblin-race.txt",
+              "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+              "provenanceStatus": "resolved",
+              "section": "Goblin Racial Traits",
+              "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+              "sourceId": "source.aon-goblin-race",
+              "txtLines": [
+                15,
+                22
+              ]
+            },
+            {
+              "entry": "Fly — size modifiers",
+              "file": "sources/npc/aonprd/skill-fly-size.txt",
+              "provenanceStatus": "resolved",
+              "section": "Size modifiers",
+              "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+              "sourceId": "source.aon-fly-size",
+              "txtLines": [
+                4,
+                4
+              ]
+            },
+            {
+              "entry": "Ability Score",
+              "file": "sources/npc/aonprd/character-classes.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+              "provenanceStatus": "resolved",
+              "section": "Table: Character Advancement and Level-Dependent Bonuses",
+              "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
+              "sourceId": "source.aon-character-classes",
+              "txtLines": [
+                19,
+                40
+              ]
+            },
+            {
+              "sourceId": "source.aon-combat",
+              "file": "sources/npc/aonprd/combat.txt",
+              "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+              "section": "Combat Maneuvers",
+              "txtLines": [
+                536,
+                544
+              ],
+              "provenanceStatus": "resolved"
+            }
+          ]
+        },
+        {
+          "path": "/canonical/skills",
+          "value": [
+            {
+              "skillId": "skill.acrobatics",
+              "name": "Acrobatics",
+              "ability": "dexterity",
+              "ranks": 1,
+              "classSkill": true,
+              "armorCheckPenalty": -1,
+              "total": 7,
+              "sourceRefs": [
+                {
+                  "entry": "Table: Skill Summary",
+                  "file": "sources/npc/aonprd/skill-descriptions.txt",
+                  "provenanceStatus": "resolved",
+                  "section": "Table: Skill Summary",
+                  "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                  "sourceId": "source.aon-skill-descriptions",
+                  "txtLines": [
+                    5,
+                    5
+                  ]
+                }
+              ]
+            },
+            {
+              "skillId": "skill.linguistics",
+              "name": "Linguistics",
+              "ability": "intelligence",
+              "ranks": 1,
+              "classSkill": true,
+              "armorCheckPenalty": 0,
+              "total": 3,
+              "sourceRefs": [
+                {
+                  "entry": "Table: Skill Summary",
+                  "file": "sources/npc/aonprd/skill-descriptions.txt",
+                  "provenanceStatus": "resolved",
+                  "section": "Table: Skill Summary",
+                  "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                  "sourceId": "source.aon-skill-descriptions",
+                  "txtLines": [
+                    28,
+                    28
+                  ]
+                },
+                {
+                  "entry": "Learn a Language",
+                  "file": "sources/npc/aonprd/skill-linguistics-language.txt",
+                  "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Linguistics",
+                  "provenanceStatus": "resolved",
+                  "section": "Learn a Language",
+                  "sha256": "88e813194405d152682d913cd1e6f9d943024f977c78b0f7ae328c97c3c2e031",
+                  "sourceId": "source.aon-linguistics-language",
+                  "txtLines": [
+                    1,
+                    5
+                  ]
+                }
+              ]
+            },
+            {
+              "skillId": "skill.perception",
+              "name": "Perception",
+              "ability": "wisdom",
+              "ranks": 1,
+              "classSkill": true,
+              "armorCheckPenalty": 0,
+              "total": 5,
+              "sourceRefs": [
+                {
+                  "entry": "Table: Skill Summary",
+                  "file": "sources/npc/aonprd/skill-descriptions.txt",
+                  "provenanceStatus": "resolved",
+                  "section": "Table: Skill Summary",
+                  "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                  "sourceId": "source.aon-skill-descriptions",
+                  "txtLines": [
+                    29,
+                    29
+                  ]
+                }
+              ]
+            },
+            {
+              "skillId": "skill.perform",
+              "name": "Perform (sing)",
+              "ability": "charisma",
+              "ranks": 1,
+              "classSkill": true,
+              "armorCheckPenalty": 0,
+              "total": 5,
+              "sourceRefs": [
+                {
+                  "entry": "Table: Skill Summary",
+                  "file": "sources/npc/aonprd/skill-descriptions.txt",
+                  "provenanceStatus": "resolved",
+                  "section": "Table: Skill Summary",
+                  "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                  "sourceId": "source.aon-skill-descriptions",
+                  "txtLines": [
+                    30,
+                    30
+                  ]
+                }
+              ]
+            },
+            {
+              "skillId": "skill.stealth",
+              "name": "Stealth",
+              "ability": "dexterity",
+              "ranks": 1,
+              "classSkill": true,
+              "armorCheckPenalty": -1,
+              "raceBonus": 4,
+              "sizeBonus": 4,
+              "total": 15,
+              "sourceRefs": [
+                {
+                  "entry": "Table: Skill Summary",
+                  "file": "sources/npc/aonprd/skill-descriptions.txt",
+                  "provenanceStatus": "resolved",
+                  "section": "Table: Skill Summary",
+                  "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                  "sourceId": "source.aon-skill-descriptions",
+                  "txtLines": [
+                    36,
+                    36
+                  ]
+                },
+                {
+                  "entry": "Standard Goblin racial traits",
+                  "file": "sources/npc/aonprd/goblin-race.txt",
+                  "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+                  "provenanceStatus": "resolved",
+                  "section": "Goblin Racial Traits",
+                  "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+                  "sourceId": "source.aon-goblin-race",
+                  "txtLines": [
+                    15,
+                    22
+                  ]
+                },
+                {
+                  "entry": "Fly — size modifiers",
+                  "file": "sources/npc/aonprd/skill-fly-size.txt",
+                  "provenanceStatus": "resolved",
+                  "section": "Size modifiers",
+                  "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+                  "sourceId": "source.aon-fly-size",
+                  "txtLines": [
+                    4,
+                    4
+                  ]
+                }
+              ]
+            },
+            {
+              "skillId": "skill.ride",
+              "name": "Ride",
+              "ability": "dexterity",
+              "ranks": 0,
+              "classSkill": false,
+              "armorCheckPenalty": -1,
+              "raceBonus": 4,
+              "total": 7,
+              "sourceRefs": [
+                {
+                  "entry": "Table: Skill Summary",
+                  "file": "sources/npc/aonprd/skill-descriptions.txt",
+                  "provenanceStatus": "resolved",
+                  "section": "Table: Skill Summary",
+                  "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+                  "sourceId": "source.aon-skill-descriptions",
+                  "txtLines": [
+                    32,
+                    32
+                  ]
+                },
+                {
+                  "entry": "Standard Goblin racial traits",
+                  "file": "sources/npc/aonprd/goblin-race.txt",
+                  "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+                  "provenanceStatus": "resolved",
+                  "section": "Goblin Racial Traits",
+                  "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+                  "sourceId": "source.aon-goblin-race",
+                  "txtLines": [
+                    15,
+                    22
+                  ]
+                },
+                {
+                  "entry": "Fly — size modifiers",
+                  "file": "sources/npc/aonprd/skill-fly-size.txt",
+                  "provenanceStatus": "resolved",
+                  "section": "Size modifiers",
+                  "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+                  "sourceId": "source.aon-fly-size",
+                  "txtLines": [
+                    4,
+                    4
+                  ]
+                }
+              ]
+            }
+          ],
+          "calculation": "simplified or precise ranks plus trained class-skill bonus, ability, armor, size, racial and permanent class-feature modifiers",
+          "sourceRefs": [
+            {
+              "entry": "Bard",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard; Class Skills; Class Features",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                1,
+                55
+              ]
+            },
+            {
+              "sourceId": "source.aon-creating-npcs",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "section": "Step 3: Skills",
+              "txtLines": [
+                36,
+                38
+              ],
+              "provenanceStatus": "resolved"
+            },
+            {
+              "sourceId": "source.aon-skills",
+              "file": "sources/npc/aonprd/skills.txt",
+              "sha256": "56cdedfa6a3ae326bf8531f45fa9cfc93ecb1aa1a60e767819c7f259cb5ec18a",
+              "section": "Acquiring Skills",
+              "txtLines": [
+                3,
+                4
+              ],
+              "provenanceStatus": "resolved"
+            },
+            {
+              "entry": "Table: Skill Summary",
+              "file": "sources/npc/aonprd/skill-descriptions.txt",
+              "provenanceStatus": "resolved",
+              "section": "Table: Skill Summary",
+              "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+              "sourceId": "source.aon-skill-descriptions",
+              "txtLines": [
+                5,
+                5
+              ]
+            },
+            {
+              "entry": "Table: Skill Summary",
+              "file": "sources/npc/aonprd/skill-descriptions.txt",
+              "provenanceStatus": "resolved",
+              "section": "Table: Skill Summary",
+              "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+              "sourceId": "source.aon-skill-descriptions",
+              "txtLines": [
+                28,
+                28
+              ]
+            },
+            {
+              "entry": "Learn a Language",
+              "file": "sources/npc/aonprd/skill-linguistics-language.txt",
+              "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Linguistics",
+              "provenanceStatus": "resolved",
+              "section": "Learn a Language",
+              "sha256": "88e813194405d152682d913cd1e6f9d943024f977c78b0f7ae328c97c3c2e031",
+              "sourceId": "source.aon-linguistics-language",
+              "txtLines": [
+                1,
+                5
+              ]
+            },
+            {
+              "entry": "Table: Skill Summary",
+              "file": "sources/npc/aonprd/skill-descriptions.txt",
+              "provenanceStatus": "resolved",
+              "section": "Table: Skill Summary",
+              "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+              "sourceId": "source.aon-skill-descriptions",
+              "txtLines": [
+                29,
+                29
+              ]
+            },
+            {
+              "entry": "Table: Skill Summary",
+              "file": "sources/npc/aonprd/skill-descriptions.txt",
+              "provenanceStatus": "resolved",
+              "section": "Table: Skill Summary",
+              "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+              "sourceId": "source.aon-skill-descriptions",
+              "txtLines": [
+                30,
+                30
+              ]
+            },
+            {
+              "entry": "Table: Skill Summary",
+              "file": "sources/npc/aonprd/skill-descriptions.txt",
+              "provenanceStatus": "resolved",
+              "section": "Table: Skill Summary",
+              "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+              "sourceId": "source.aon-skill-descriptions",
+              "txtLines": [
+                36,
+                36
+              ]
+            },
+            {
+              "entry": "Standard Goblin racial traits",
+              "file": "sources/npc/aonprd/goblin-race.txt",
+              "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+              "provenanceStatus": "resolved",
+              "section": "Goblin Racial Traits",
+              "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+              "sourceId": "source.aon-goblin-race",
+              "txtLines": [
+                15,
+                22
+              ]
+            },
+            {
+              "entry": "Fly — size modifiers",
+              "file": "sources/npc/aonprd/skill-fly-size.txt",
+              "provenanceStatus": "resolved",
+              "section": "Size modifiers",
+              "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+              "sourceId": "source.aon-fly-size",
+              "txtLines": [
+                4,
+                4
+              ]
+            },
+            {
+              "entry": "Table: Skill Summary",
+              "file": "sources/npc/aonprd/skill-descriptions.txt",
+              "provenanceStatus": "resolved",
+              "section": "Table: Skill Summary",
+              "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+              "sourceId": "source.aon-skill-descriptions",
+              "txtLines": [
+                32,
+                32
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/canonical/feats",
+          "value": [
+            {
+              "slotId": "general-1",
+              "featId": "feat.martial-weapon-proficiency",
+              "name": "Martial Weapon Proficiency (Dogslicer)",
+              "weaponId": "item.dogslicer",
+              "sourceRefs": [
+                {
+                  "entry": "Martial Weapon Proficiency",
+                  "file": "sources/npc/aonprd/feats.txt",
+                  "provenanceStatus": "resolved",
+                  "section": "Martial Weapon Proficiency",
+                  "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+                  "sourceId": "source.aon-feats",
+                  "txtLines": [
+                    769,
+                    774
+                  ]
+                }
+              ]
+            }
+          ],
+          "calculation": "fill granted feat slots",
+          "sourceRefs": [
+            {
+              "entry": "Martial Weapon Proficiency",
+              "file": "sources/npc/aonprd/feats.txt",
+              "provenanceStatus": "resolved",
+              "section": "Martial Weapon Proficiency",
+              "sha256": "774e17eb566199e984f1dcaf5508a0a1f80b85f212c5ecd0929f610dab7b3bff",
+              "sourceId": "source.aon-feats",
+              "txtLines": [
+                769,
+                774
+              ]
+            },
+            {
+              "entry": "Dogslicer",
+              "file": "sources/npc/aonprd/weapon-dogslicer.txt",
+              "officialUrl": "https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=Dogslicer",
+              "provenanceStatus": "resolved",
+              "section": "Dogslicer",
+              "sha256": "f92b88748f07e5d9bb3e822793548c384335cd8958477ee2795b715de34d9263",
+              "sourceId": "source.aon-weapon-dogslicer",
+              "txtLines": [
+                3,
+                8
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/canonical/classFeatures",
+          "value": [
+            {
+              "featureId": "npc-class-feature.bard-proficiencies",
+              "name": "Bard proficiencies",
+              "sourceRefs": [
+                {
+                  "entry": "Bard proficiencies",
+                  "file": "sources/npc/aonprd/bard-base-features.txt",
+                  "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                  "provenanceStatus": "resolved",
+                  "section": "Bard proficiencies",
+                  "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+                  "sourceId": "source.aon-bard-base-features",
+                  "txtLines": [
+                    4,
+                    4
+                  ]
+                }
+              ],
+              "effects": {
+                "armorProficiencies": [
+                  "light"
+                ],
+                "shieldProficiencies": "shields except tower shields",
+                "weaponProficiencies": [
+                  "simple",
+                  "longsword",
+                  "rapier",
+                  "sap",
+                  "shortsword",
+                  "shortbow",
+                  "whip"
+                ]
+              }
+            },
+            {
+              "featureId": "npc-class-feature.bard-spellcasting",
+              "name": "Bard spellcasting",
+              "sourceRefs": [
+                {
+                  "entry": "Bard spellcasting",
+                  "file": "sources/npc/aonprd/bard.txt",
+                  "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                  "provenanceStatus": "resolved",
+                  "section": "Bard",
+                  "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                  "sourceId": "source.aon-bard",
+                  "txtLines": [
+                    11,
+                    12
+                  ]
+                }
+              ],
+              "effects": {
+                "castingAbility": "charisma",
+                "castingMode": "spontaneous"
+              }
+            },
+            {
+              "featureId": "npc-class-feature.bard-cantrips",
+              "name": "Bard cantrips",
+              "sourceRefs": [
+                {
+                  "entry": "Bard cantrips",
+                  "file": "sources/npc/aonprd/bard.txt",
+                  "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                  "provenanceStatus": "resolved",
+                  "section": "Class Features; Table: Bard (Special)",
+                  "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                  "sourceId": "source.aon-bard",
+                  "txtLines": [
+                    14,
+                    14
+                  ]
+                }
+              ]
+            },
+            {
+              "featureId": "npc-class-feature.bardic-knowledge",
+              "name": "Bardic knowledge +1",
+              "sourceRefs": [
+                {
+                  "entry": "Bardic knowledge",
+                  "file": "sources/npc/aonprd/bard-base-features.txt",
+                  "provenanceStatus": "resolved",
+                  "section": "Bardic knowledge",
+                  "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+                  "sourceId": "source.aon-bard-base-features",
+                  "txtLines": [
+                    5,
+                    5
+                  ]
+                }
+              ],
+              "effects": {
+                "knowledgeBonus": {
+                  "levelDivisor": 2,
+                  "minimum": 1
+                }
+              },
+              "knowledgeBonus": 1
+            },
+            {
+              "featureId": "npc-class-feature.bardic-performance",
+              "name": "Bardic performance (5 rounds/day)",
+              "sourceRefs": [
+                {
+                  "entry": "Bardic performance",
+                  "file": "sources/npc/aonprd/bard-base-features.txt",
+                  "provenanceStatus": "resolved",
+                  "section": "Bardic performance",
+                  "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+                  "sourceId": "source.aon-bard-base-features",
+                  "txtLines": [
+                    6,
+                    6
+                  ]
+                }
+              ],
+              "effects": {
+                "dailyRounds": {
+                  "ability": "charisma",
+                  "base": 4,
+                  "perAdditionalLevel": 2
+                }
+              },
+              "roundsPerDay": 5
+            },
+            {
+              "featureId": "npc-class-feature.countersong",
+              "name": "Countersong",
+              "sourceRefs": [
+                {
+                  "entry": "Countersong",
+                  "file": "sources/npc/aonprd/bard.txt",
+                  "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                  "provenanceStatus": "resolved",
+                  "section": "Class Features; Table: Bard (Special)",
+                  "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                  "sourceId": "source.aon-bard",
+                  "txtLines": [
+                    14,
+                    14
+                  ]
+                }
+              ]
+            },
+            {
+              "featureId": "npc-class-feature.distraction",
+              "name": "Distraction",
+              "sourceRefs": [
+                {
+                  "entry": "Distraction",
+                  "file": "sources/npc/aonprd/bard.txt",
+                  "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                  "provenanceStatus": "resolved",
+                  "section": "Class Features; Table: Bard (Special)",
+                  "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                  "sourceId": "source.aon-bard",
+                  "txtLines": [
+                    14,
+                    14
+                  ]
+                }
+              ]
+            },
+            {
+              "featureId": "npc-class-feature.fascinate",
+              "name": "Fascinate",
+              "sourceRefs": [
+                {
+                  "entry": "Fascinate",
+                  "file": "sources/npc/aonprd/bard.txt",
+                  "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                  "provenanceStatus": "resolved",
+                  "section": "Class Features; Table: Bard (Special)",
+                  "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                  "sourceId": "source.aon-bard",
+                  "txtLines": [
+                    14,
+                    14
+                  ]
+                }
+              ]
+            },
+            {
+              "featureId": "npc-class-feature.inspire-courage",
+              "name": "Inspire courage +1",
+              "sourceRefs": [
+                {
+                  "entry": "Inspire courage +1",
+                  "file": "sources/npc/aonprd/bard.txt",
+                  "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+                  "provenanceStatus": "resolved",
+                  "section": "Class Features; Table: Bard (Special)",
+                  "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+                  "sourceId": "source.aon-bard",
+                  "txtLines": [
+                    14,
+                    14
+                  ]
+                }
+              ]
+            }
+          ],
+          "calculation": "apply automatic features and selected class-feature options at each class's level",
+          "sourceRefs": [
+            {
+              "entry": "Bard",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard; Class Skills; Class Features",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                1,
+                55
+              ]
+            },
+            {
+              "entry": "Bard level 1",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Table: Bard",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Bard proficiencies",
+              "file": "sources/npc/aonprd/bard-base-features.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard proficiencies",
+              "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+              "sourceId": "source.aon-bard-base-features",
+              "txtLines": [
+                4,
+                4
+              ]
+            },
+            {
+              "entry": "Bard spellcasting",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                11,
+                12
+              ]
+            },
+            {
+              "entry": "Bard cantrips",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Bardic knowledge",
+              "file": "sources/npc/aonprd/bard-base-features.txt",
+              "provenanceStatus": "resolved",
+              "section": "Bardic knowledge",
+              "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+              "sourceId": "source.aon-bard-base-features",
+              "txtLines": [
+                5,
+                5
+              ]
+            },
+            {
+              "entry": "Bardic performance",
+              "file": "sources/npc/aonprd/bard-base-features.txt",
+              "provenanceStatus": "resolved",
+              "section": "Bardic performance",
+              "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
+              "sourceId": "source.aon-bard-base-features",
+              "txtLines": [
+                6,
+                6
+              ]
+            },
+            {
+              "entry": "Countersong",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Distraction",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Fascinate",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Inspire courage +1",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Class Features; Table: Bard (Special)",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Heroic NPC array and Charisma-based arcane preset",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Step 2: Determine Ability Scores; Table 14-6",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                12,
+                32
+              ]
+            },
+            {
+              "entry": "Standard Goblin racial traits",
+              "file": "sources/npc/aonprd/goblin-race.txt",
+              "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+              "provenanceStatus": "resolved",
+              "section": "Goblin Racial Traits",
+              "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+              "sourceId": "source.aon-goblin-race",
+              "txtLines": [
+                15,
+                22
+              ]
+            },
+            {
+              "entry": "Fly — size modifiers",
+              "file": "sources/npc/aonprd/skill-fly-size.txt",
+              "provenanceStatus": "resolved",
+              "section": "Size modifiers",
+              "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+              "sourceId": "source.aon-fly-size",
+              "txtLines": [
+                4,
+                4
+              ]
+            },
+            {
+              "entry": "Ability Score",
+              "file": "sources/npc/aonprd/character-classes.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+              "provenanceStatus": "resolved",
+              "section": "Table: Character Advancement and Level-Dependent Bonuses",
+              "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
+              "sourceId": "source.aon-character-classes",
+              "txtLines": [
+                19,
+                40
+              ]
+            },
+            {
+              "sourceId": "source.aon-combat",
+              "file": "sources/npc/aonprd/combat.txt",
+              "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+              "section": "Combat Statistics",
+              "txtLines": [
+                24,
+                58
+              ],
+              "provenanceStatus": "resolved"
+            }
+          ]
+        },
+        {
+          "path": "/canonical/spells",
+          "value": {
+            "className": "Bard",
+            "casterLevel": 1,
+            "castingAbility": "charisma",
+            "castingAbilityModifier": 1,
+            "perDay": {
+              "0": "at-will",
+              "1": 2
+            },
+            "saveDcByLevel": {
+              "0": 11,
+              "1": 12
+            },
+            "known": {
+              "0": [
+                "spell.daze",
+                "spell.ghost-sound",
+                "spell.mage-hand",
+                "spell.message"
+              ],
+              "1": [
+                "spell.cure-light-wounds",
+                "spell.hideous-laughter"
+              ]
+            },
+            "bloodlineSpells": [],
+            "concentration": 2
+          },
+          "calculation": "validate the casting class's loadout, slots, caster level, and casting ability",
+          "sourceRefs": [
+            {
+              "entry": "Bard",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard; Class Skills; Class Features",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                1,
+                55
+              ]
+            },
+            {
+              "entry": "Daze",
+              "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
+              "provenanceStatus": "list-membership-resolved",
+              "section": "Core Rulebook class spell lists",
+              "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
+              "sourceId": "source.npc-crb-spell-lists",
+              "txtLines": [
+                33,
+                33
+              ]
+            },
+            {
+              "entry": "Ghost Sound",
+              "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
+              "provenanceStatus": "list-membership-resolved",
+              "section": "Core Rulebook class spell lists",
+              "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
+              "sourceId": "source.npc-crb-spell-lists",
+              "txtLines": [
+                36,
+                36
+              ]
+            },
+            {
+              "entry": "Mage Hand",
+              "file": "sources/npc/aonprd/spell-mage-hand.txt",
+              "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Hand",
+              "provenanceStatus": "resolved",
+              "section": "Spell description",
+              "sha256": "5361d41fdbaf39a6baebcee3e4d26d38cee5f710bb806f36510b8e15c86fa7ff",
+              "sourceId": "source.aon-spell-mage-hand",
+              "txtLines": [
+                1,
+                13
+              ]
+            },
+            {
+              "entry": "Message",
+              "file": "sources/npc/aonprd/spell-message.txt",
+              "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Message",
+              "provenanceStatus": "resolved",
+              "section": "Spell description",
+              "sha256": "cc59bc3b1ec9c159e08642885b237d2e8fd92c8215e9021c2792d0416a6d8a1f",
+              "sourceId": "source.aon-spell-message",
+              "txtLines": [
+                1,
+                13
+              ]
+            },
+            {
+              "entry": "Cure Light Wounds spell description",
+              "file": "sources/npc/aonprd/spell-cure-light-wounds.txt",
+              "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Cure%20Light%20Wounds",
+              "provenanceStatus": "resolved",
+              "section": "Cure Light Wounds",
+              "sha256": "19f70b0f4de69b30266dc74ab0ee1d8fda5a4fe54850c846e1e6445090dc20e0",
+              "sourceId": "source.aon-spell-cure-light-wounds",
+              "txtLines": [
+                1,
+                13
+              ]
+            },
+            {
+              "entry": "Hideous Laughter",
+              "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
+              "provenanceStatus": "list-membership-resolved",
+              "section": "Core Rulebook class spell lists",
+              "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
+              "sourceId": "source.npc-crb-spell-lists",
+              "txtLines": [
+                67,
+                67
+              ]
+            },
+            {
+              "sourceId": "source.aon-getting-started",
+              "file": "sources/npc/aonprd/getting-started.txt",
+              "sha256": "2a59a8c5aaf2c1bc734c1ed47efaccecc037e3c703fe26f09e1b29c57535d78d",
+              "section": "Table: Ability Modifiers and Bonus Spells",
+              "txtLines": [
+                89,
+                101
+              ],
+              "provenanceStatus": "resolved"
+            },
+            {
+              "sourceId": "source.aon-concentration",
+              "file": "sources/npc/aonprd/spellcasting-concentration.txt",
+              "sha256": "503a4db06d3b806ee9e7e351502a7abbc5628f59c82acd2d009fa2bc6e127ee7",
+              "section": "Concentration",
+              "txtLines": [
+                4,
+                4
+              ],
+              "provenanceStatus": "resolved"
+            },
+            {
+              "entry": "Heroic NPC array and Charisma-based arcane preset",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Step 2: Determine Ability Scores; Table 14-6",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                12,
+                32
+              ]
+            },
+            {
+              "entry": "Standard Goblin racial traits",
+              "file": "sources/npc/aonprd/goblin-race.txt",
+              "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+              "provenanceStatus": "resolved",
+              "section": "Goblin Racial Traits",
+              "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+              "sourceId": "source.aon-goblin-race",
+              "txtLines": [
+                15,
+                22
+              ]
+            },
+            {
+              "entry": "Fly — size modifiers",
+              "file": "sources/npc/aonprd/skill-fly-size.txt",
+              "provenanceStatus": "resolved",
+              "section": "Size modifiers",
+              "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+              "sourceId": "source.aon-fly-size",
+              "txtLines": [
+                4,
+                4
+              ]
+            },
+            {
+              "entry": "Ability Score",
+              "file": "sources/npc/aonprd/character-classes.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/classes.html#advancing-your-character",
+              "provenanceStatus": "resolved",
+              "section": "Table: Character Advancement and Level-Dependent Bonuses",
+              "sha256": "59f233a5c24016641e79548fd2e48c6307cd21dcb27ee5a61800e013049840ba",
+              "sourceId": "source.aon-character-classes",
+              "txtLines": [
+                19,
+                40
+              ]
+            },
+            {
+              "entry": "Bard level 1",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Table: Bard",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                14,
+                14
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/canonical/languages",
+          "value": [
+            "Goblin",
+            "Common"
+          ],
+          "calculation": "racial and class languages plus languages selected with Linguistics ranks",
+          "sourceRefs": [
+            {
+              "entry": "Standard Goblin racial traits",
+              "file": "sources/npc/aonprd/goblin-race.txt",
+              "officialUrl": "https://aonprd.com/RacesDisplay.aspx?ItemName=Goblin",
+              "provenanceStatus": "resolved",
+              "section": "Goblin Racial Traits",
+              "sha256": "e3d55616753d522e9b15ef16185021a70b22dc4bdf4cb9cc2e37850c9a2173ae",
+              "sourceId": "source.aon-goblin-race",
+              "txtLines": [
+                15,
+                22
+              ]
+            },
+            {
+              "entry": "Fly — size modifiers",
+              "file": "sources/npc/aonprd/skill-fly-size.txt",
+              "provenanceStatus": "resolved",
+              "section": "Size modifiers",
+              "sha256": "5252853128d3a3bcfd4c4d16e0099cae0fab724a2f2bbadbab93b732468a113c",
+              "sourceId": "source.aon-fly-size",
+              "txtLines": [
+                4,
+                4
+              ]
+            },
+            {
+              "entry": "Table: Skill Summary",
+              "file": "sources/npc/aonprd/skill-descriptions.txt",
+              "provenanceStatus": "resolved",
+              "section": "Table: Skill Summary",
+              "sha256": "282a51968a31188fefc4767062e0c272b26da5f4789a917e05de7208ecc64697",
+              "sourceId": "source.aon-skill-descriptions",
+              "txtLines": [
+                28,
+                28
+              ]
+            },
+            {
+              "entry": "Learn a Language",
+              "file": "sources/npc/aonprd/skill-linguistics-language.txt",
+              "officialUrl": "https://aonprd.com/Skills.aspx?ItemName=Linguistics",
+              "provenanceStatus": "resolved",
+              "section": "Learn a Language",
+              "sha256": "88e813194405d152682d913cd1e6f9d943024f977c78b0f7ae328c97c3c2e031",
+              "sourceId": "source.aon-linguistics-language",
+              "txtLines": [
+                1,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/canonical/gearBudget",
+          "value": {
+            "gearBudgetId": "npc-gear.medium.normal",
+            "level": 1,
+            "effectiveLevel": 1,
+            "npcCategory": "heroic",
+            "budgetCp": 39000,
+            "categories": {
+              "gear": 10000,
+              "limitedUse": 4000,
+              "magic": 0,
+              "protection": 15000,
+              "weapons": 10000
+            },
+            "spentCp": 6500,
+            "remainingCp": null,
+            "descriptiveEquipmentUnpriced": true
+          },
+          "calculation": "read the NPC category and level row from Table 14-9; descriptive gear is unpriced",
+          "sourceRefs": [
+            {
+              "entry": "Heroic level 1",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Table 14-9: NPC Gear",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                83,
+                83
+              ]
+            },
+            {
+              "entry": "Studded leather",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+              "provenanceStatus": "resolved",
+              "section": "Table: Armor and Shields",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                325,
+                325
+              ]
+            },
+            {
+              "entry": "Dogslicer",
+              "file": "sources/npc/aonprd/weapon-dogslicer.txt",
+              "officialUrl": "https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=Dogslicer",
+              "provenanceStatus": "resolved",
+              "section": "Dogslicer",
+              "sha256": "f92b88748f07e5d9bb3e822793548c384335cd8958477ee2795b715de34d9263",
+              "sourceId": "source.aon-weapon-dogslicer",
+              "txtLines": [
+                3,
+                8
+              ]
+            },
+            {
+              "entry": "Table: Weapons — Shortbow",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "provenanceStatus": "resolved",
+              "section": "Table: Weapons — Shortbow",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                180,
+                182
+              ]
+            },
+            {
+              "entry": "Strength penalties apply to non-composite bows",
+              "file": "sources/npc/aonprd/combat.txt",
+              "provenanceStatus": "resolved",
+              "section": "Damage — Strength Bonus",
+              "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
+              "sourceId": "source.aon-combat",
+              "txtLines": [
+                60,
+                60
+              ]
+            },
+            {
+              "entry": "Arrows (20): 1 gp, 3 lbs.",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html",
+              "provenanceStatus": "resolved",
+              "section": "Table: Weapons",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                177,
+                177
+              ]
+            },
+            {
+              "entry": "Table: Weapons — Whip",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "provenanceStatus": "resolved",
+              "section": "Table: Weapons — Whip",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                193,
+                193
+              ]
+            },
+            {
+              "entry": "Whip",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "provenanceStatus": "resolved",
+              "section": "Whip",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                290,
+                292
+              ]
+            }
           ]
         }
       ]
     }
-  ],
-  "warnings": [
-    {
-      "code": "npc.gear-budget-approximate",
-      "severity": "warning",
-      "kind": "validation",
-      "message": "selected mundane gear does not spend the full NPC gear budget",
-      "path": "/selections/gear",
-      "details": {
-        "budgetCp": 39000,
-        "spentCp": 2600
-      },
-      "sourceRefs": [
-        {
-          "entry": "Heroic level 1",
-          "file": "sources/npc/aonprd/creating-npcs.txt",
-          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
-          "provenanceStatus": "resolved",
-          "section": "Table 14-9: NPC Gear",
-          "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
-          "sourceId": "source.aon-creating-npcs",
-          "txtLines": [
-            83,
-            83
-          ]
-        }
-      ]
-    }
-  ],
-  "derivationTrace": []
+  }
 }

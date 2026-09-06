@@ -566,20 +566,30 @@
     },
     {
       "catalogStatus": "resolved",
-      "effects": {},
+      "effects": {
+        "weaponProficiencies": [
+          "simple",
+          "martial"
+        ],
+        "armorProficiencies": [
+          "light",
+          "medium",
+          "heavy"
+        ],
+        "shieldProficiencies": "all"
+      },
       "id": "npc-class-feature.warrior-proficiencies",
       "kind": "automatic",
       "name": "Warrior weapon and armor proficiencies",
       "sourceRef": {
-        "entry": "Weapon and Armor Proficiency",
-        "officialUrl": "https://legacy.aonprd.com/coreRulebook/NPCClasses.html#warrior",
-        "provenanceStatus": "resolved",
-        "section": "Warrior Class Features",
         "sourceId": "source.aon-npc-classes",
+        "section": "Warrior proficiencies",
         "txtLines": [
-          169,
-          172
-        ]
+          171,
+          171
+        ],
+        "entry": "Warrior proficiencies",
+        "provenanceStatus": "resolved"
       }
     },
     {
@@ -604,22 +614,39 @@
       "catalogStatus": "resolved",
       "effects": {
         "castingAbility": "charisma",
-        "castingMode": "spontaneous"
+        "castingMode": "spontaneous",
+        "weaponProficiencies": [
+          "simple"
+        ],
+        "armorProficiencies": [],
+        "shieldProficiencies": "none"
       },
       "id": "npc-class-feature.sorcerer-spellcasting",
       "kind": "automatic",
       "name": "Sorcerer spellcasting",
-      "sourceRef": {
-        "entry": "Sorcerer spontaneous spellcasting",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer",
-        "provenanceStatus": "resolved",
-        "section": "Spells; Cantrips",
-        "sourceId": "source.aon-sorcerer",
-        "txtLines": [
-          57,
-          65
-        ]
-      }
+      "sourceRef": [
+        {
+          "entry": "Sorcerer spontaneous spellcasting",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer",
+          "provenanceStatus": "resolved",
+          "section": "Spells; Cantrips",
+          "sourceId": "source.aon-sorcerer",
+          "txtLines": [
+            57,
+            65
+          ]
+        },
+        {
+          "sourceId": "source.aon-sorcerer",
+          "section": "Sorcerer proficiencies",
+          "txtLines": [
+            56,
+            56
+          ],
+          "entry": "Sorcerer proficiencies",
+          "provenanceStatus": "resolved"
+        }
+      ]
     },
     {
       "catalogStatus": "resolved",
@@ -1829,20 +1856,34 @@
     },
     {
       "catalogStatus": "resolved",
-      "effects": {},
+      "effects": {
+        "weaponProficiencies": [
+          "simple",
+          "longsword",
+          "rapier",
+          "sap",
+          "shortsword",
+          "shortbow",
+          "whip"
+        ],
+        "armorProficiencies": [
+          "light"
+        ],
+        "shieldProficiencies": "shields except tower shields"
+      },
       "id": "npc-class-feature.bard-proficiencies",
       "kind": "automatic",
       "name": "Bard proficiencies",
       "sourceRef": {
-        "entry": "Bard proficiencies",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
-        "provenanceStatus": "resolved",
-        "section": "Bard",
-        "sourceId": "source.aon-bard",
+        "sourceId": "source.aon-bard-base-features",
+        "section": "Bard proficiencies",
         "txtLines": [
-          6,
-          6
-        ]
+          4,
+          4
+        ],
+        "entry": "Bard proficiencies",
+        "provenanceStatus": "resolved",
+        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard"
       }
     },
     {
@@ -1886,38 +1927,47 @@
     },
     {
       "catalogStatus": "resolved",
-      "effects": {},
+      "effects": {
+        "knowledgeBonus": {
+          "minimum": 1,
+          "levelDivisor": 2
+        }
+      },
       "id": "npc-class-feature.bardic-knowledge",
       "kind": "automatic",
       "name": "Bardic knowledge",
       "sourceRef": {
-        "entry": "Bardic knowledge",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
-        "provenanceStatus": "resolved",
-        "section": "Class Features; Table: Bard (Special)",
-        "sourceId": "source.aon-bard",
+        "sourceId": "source.aon-bard-base-features",
+        "section": "Bardic knowledge",
         "txtLines": [
-          14,
-          14
-        ]
+          5,
+          5
+        ],
+        "entry": "Bardic knowledge",
+        "provenanceStatus": "resolved"
       }
     },
     {
       "catalogStatus": "resolved",
-      "effects": {},
+      "effects": {
+        "dailyRounds": {
+          "base": 4,
+          "ability": "charisma",
+          "perAdditionalLevel": 2
+        }
+      },
       "id": "npc-class-feature.bardic-performance",
       "kind": "automatic",
       "name": "Bardic performance",
       "sourceRef": {
-        "entry": "Bardic performance",
-        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
-        "provenanceStatus": "resolved",
-        "section": "Class Features; Table: Bard (Special)",
-        "sourceId": "source.aon-bard",
+        "sourceId": "source.aon-bard-base-features",
+        "section": "Bardic performance",
         "txtLines": [
-          14,
-          14
-        ]
+          6,
+          6
+        ],
+        "entry": "Bardic performance",
+        "provenanceStatus": "resolved"
       }
     },
     {
@@ -2085,11 +2135,11 @@
         "shieldProficiencies": "none",
         "weaponProficiencies": [
           "simple",
-          "hand crossbow",
+          "hand-crossbow",
           "rapier",
           "sap",
           "shortbow",
-          "short sword"
+          "shortsword"
         ]
       },
       "id": "npc-class-feature.rogue-proficiencies",

@@ -106,18 +106,18 @@ class KiramorTests(unittest.TestCase):
             {"classId": "npc-class.rogue", "className": "Rogue", "levels": 2},
         ])
         self.assertEqual(
-            [(skill["skillId"], skill["ranks"], skill["classId"], skill["total"]) for skill in canonical["skills"]],
+            [(skill["skillId"], skill["ranks"], skill["classSkill"], skill["total"]) for skill in canonical["skills"]],
             [
-                ("skill.climb", 6, "npc-class.ranger", 10),
-                ("skill.heal", 6, "npc-class.ranger", 9),
-                ("skill.intimidate", 6, "npc-class.ranger", 8),
-                ("skill.knowledge-geography", 6, "npc-class.ranger", 11),
-                ("skill.knowledge-nature", 6, "npc-class.ranger", 11),
-                ("skill.perception", 6, "npc-class.ranger", 11),
-                ("skill.stealth", 6, "npc-class.ranger", 13),
-                ("skill.survival", 6, "npc-class.ranger", 9),
-                ("skill.escape-artist", 2, "npc-class.rogue", 9),
-                ("skill.swim", 2, "npc-class.rogue", 6),
+                ("skill.climb", 6, True, 10),
+                ("skill.heal", 6, True, 9),
+                ("skill.intimidate", 6, True, 8),
+                ("skill.knowledge-geography", 6, True, 11),
+                ("skill.knowledge-nature", 6, True, 11),
+                ("skill.perception", 6, True, 11),
+                ("skill.stealth", 6, True, 13),
+                ("skill.survival", 6, True, 9),
+                ("skill.escape-artist", 2, True, 9),
+                ("skill.swim", 2, True, 6),
             ],
         )
 

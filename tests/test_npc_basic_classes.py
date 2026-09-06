@@ -44,7 +44,7 @@ class NpcBasicClassTests(unittest.TestCase):
         self.assertTrue(response["ok"], response)
         codes = {issue["code"] for issue in response["result"]["evaluation"]["issues"]}
         self.assertIn("npc.catalog-gap", codes)
-        self.assertNotIn("npc.simplified-skills-multiclass", codes)
+        self.assertIn("npc.simplified-skills-multiclass", codes)
 
     def test_target_cr_is_not_derived_into_basic_npc_statistics(self):
         draft = fixture("npc-commoner-1.json")
