@@ -140,7 +140,7 @@ class ElementalAllyValidEvaluationTests(unittest.TestCase):
             "strength": 10, "dexterity": 12, "constitution": 14,
             "intelligence": 10, "wisdom": 15, "charisma": 11,
         })
-        self.assertEqual((canonical["hp"], canonical["hitDiceExpression"], canonical["bab"]), (27, "3d8+6", 2))
+        self.assertEqual((canonical["hp"], canonical["hitDiceExpression"], canonical["bab"]), (24, "3d8+6", 2))
         self.assertEqual(canonical["defenses"], {
             "ac": 16, "touch": 12, "flatFooted": 15,
             "fortitude": 5, "reflex": 2, "will": 7,
@@ -261,16 +261,16 @@ class ElementalAllyRejectionTests(unittest.TestCase):
         self.assertEqual(evaluation["status"], "invalid")
         issues = {(issue["code"], issue.get("path")) for issue in evaluation["issues"]}
         self.assertIn(("npc.catalog-gap", "/selections/archetypeId"), issues)
-        self.assertIn(("npc.slice-unsupported", "/selections/archetypeId"), issues)
 
-    def test_archetype_outside_druid_level_3_is_rejected(self):
+    def test_missing_lower_level_linked_creature_row_is_reported(self):
         selections = archetype_selections()
         selections["classProgression"] = [{"classId": "npc-class.druid", "levels": 2}]
         selections["spellLoadout"]["prepared"] = {"0": ["spell.detect-magic", "spell.light", "spell.flare", "spell.detect-magic"], "1": ["spell.produce-flame", "spell.entangle"]}
         evaluation = self.evaluation_for(selections)
         self.assertEqual(evaluation["status"], "invalid")
         issues = {(issue["code"], issue.get("path")) for issue in evaluation["issues"]}
-        self.assertIn(("npc.slice-unsupported", "/selections/classProgression"), issues)
+        self.assertIn(("npc.catalog-gap", "/selections/archetypeId"), issues)
+        self.assertFalse(any(path == "/selections/classProgression" for _, path in issues))
 
     def test_archetype_plus_nature_bond_conflict_is_rejected(self):
         selections = archetype_selections()
@@ -300,7 +300,7 @@ class ElementalAllyRequirementsAndExportTests(unittest.TestCase):
         self.assertNotIn("/selections/spellLoadout/domainPrepared", paths)
         self.assertIn("/selections/spellLoadout/prepared", paths)
         self.assertEqual(requirements["result"]["selectionBudgets"]["spells"],
-                         {"required": True, "mode": "prepared", "levels": ARCHETYPE_BUDGET})
+                         {"required": True, "classId": "npc-class.druid", "mode": "prepared", "levels": ARCHETYPE_BUDGET})
         baseline = Engine().execute(request("fd-requirements", "draft.choiceRequirements", {"draft": copy.deepcopy(FIRE_DOMAIN_FIXTURE)}))
         self.assertTrue(baseline["ok"], baseline)
         self.assertEqual(requirements["result"]["selectionBudgets"]["gear"],

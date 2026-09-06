@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "requestId": "goblin-warchanter-create",
+  "result": {
+    "draft": {
+      "schemaVersion": "1",
+      "creationSystem": "npc",
+      "draftId": "draft-f9702971f85a47c7b46a4bb849b5392d",
+      "catalogVersion": "sha256:11791885adc6a12958eb0a9ddefe54bcd4534402e6baaae32a902c99d98cda30",
+      "revision": 0,
+      "status": "active",
+      "concept": {
+        "name": "Goblin Warchanter",
+        "role": "inspiring support performer",
+        "description": "Goblin bard 1 transcribed from the supplied photograph. BLOCKED conversion candidate, not a validated finished NPC. See docs/goblin-warchanter-assessment.md."
+      },
+      "selections": {
+        "statblockUse": "full",
+        "raceId": "npc-race.goblin",
+        "racialChoices": {},
+        "classProgression": [
+          {
+            "classId": "npc-class.bard",
+            "levels": 1
+          }
+        ],
+        "abilityGeneration": {
+          "method": "assigned-array",
+          "arrayId": "npc-ability-array.heroic",
+          "assignments": {
+            "strength": 10,
+            "dexterity": 14,
+            "constitution": 13,
+            "intelligence": 8,
+            "wisdom": 12,
+            "charisma": 15
+          }
+        },
+        "skillGeneration": {
+          "method": "simplified",
+          "skills": [
+            "skill.acrobatics",
+            "skill.linguistics",
+            "skill.perception",
+            "skill.perform",
+            "skill.stealth"
+          ]
+        },
+        "feats": [
+          {
+            "slotId": "general-1",
+            "featId": "feat.martial-weapon-proficiency"
+          }
+        ],
+        "spellLoadout": {
+          "known": {
+            "0": [
+              "spell.daze",
+              "spell.ghost-sound",
+              "spell.mage-hand",
+              "spell.message"
+            ],
+            "1": [
+              "spell.cure-light-wounds",
+              "spell.hideous-laughter"
+            ]
+          }
+        },
+        "gearProfile": {
+          "experienceProgression": "medium",
+          "fantasyLevel": "normal"
+        },
+        "gear": [
+          {
+            "itemId": "item.studded-leather-armor"
+          },
+          {
+            "itemId": "item.shortbow"
+          },
+          {
+            "itemId": "item.arrows-20"
+          },
+          {
+            "itemId": "item.whip"
+          },
+          {
+            "itemId": "item.potion-of-cure-light-wounds"
+          }
+        ],
+        "details": {
+          "alignment": "NE",
+          "sourceNotes": "Not an exact or complete executable conversion. Dogslicer is absent from the NPC catalog; preserve it here, not as an invented item ID. Martial Weapon Proficiency targets dogslicer, but feat selections cannot encode that target. Perform specialty is sing. Common is learned with the Linguistics rank; racial language is Goblin. Ride is unranked (printed +8; armored value should be +7). Carry 20 gp in addition to listed gear. Printed attacks and fear/charm bonus apparently include active inspire courage +1; printed shortbow damage still omits the Strength penalty.",
+          "tactics": "Continue bardic performance, use whip to trip PCs, cast hideous laughter on a dangerous PC, and cure light wounds on herself after first being wounded.",
+          "morale": "Fights to the death."
+        }
+      },
+      "fingerprint": "31eee2921d90602ec9bb7e6051c9c3dd58ce1f1dde3107f02ce74d754432633e"
+    },
+    "evaluation": {
+      "status": "invalid",
+      "mode": "strict",
+      "canonical": null,
+      "effective": null,
+      "issues": [
+        {
+          "code": "npc.slice-unsupported",
+          "severity": "error",
+          "kind": "validation",
+          "message": "production evaluation supports human warriors 1\u20135, goblin sorcerers at levels 5\u20136, goblin druids at level 3, halfling bards at levels 1\u20133, and the bounded elf ranger/rogue slice",
+          "path": "/selections/classProgression",
+          "sourceRefs": [
+            {
+              "entry": "Bard",
+              "file": "sources/npc/aonprd/bard.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Bard",
+              "provenanceStatus": "resolved",
+              "section": "Bard; Class Skills; Class Features",
+              "sha256": "51126b9974f0c4571bc543e3ff8b73489f872926ab46f41bdbf08fe3b8f2f45c",
+              "sourceId": "source.aon-bard",
+              "txtLines": [
+                1,
+                55
+              ]
+            }
+          ]
+        }
+      ],
+      "warnings": [],
+      "derivationTrace": []
+    }
+  }
+}

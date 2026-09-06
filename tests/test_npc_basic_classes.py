@@ -36,14 +36,15 @@ class NpcBasicClassTests(unittest.TestCase):
             self.assertTrue(any(issue["code"] == "npc.catalog-gap" for issue in evaluation["issues"]), name)
             self.assertTrue(all(issue.get("sourceRefs") for issue in evaluation["issues"] if issue["kind"] == "catalog-data"), name)
 
-    def test_three_classes_require_precise_skills_through_execute(self):
+    def test_three_classes_report_missing_rules_not_a_combination_ban(self):
         draft = fixture("npc-multiclass.json")
         draft["selections"]["classProgression"].append({"classId": "npc-class.warrior", "levels": 1})
         draft["selections"]["skillGeneration"] = {"method": "simplified", "skills": []}
         response = Engine().execute(request("three-class", "draft.create", {"draft": draft}))
         self.assertTrue(response["ok"], response)
         codes = {issue["code"] for issue in response["result"]["evaluation"]["issues"]}
-        self.assertIn("npc.simplified-skills-multiclass", codes)
+        self.assertIn("npc.catalog-gap", codes)
+        self.assertNotIn("npc.simplified-skills-multiclass", codes)
 
     def test_target_cr_is_not_derived_into_basic_npc_statistics(self):
         draft = fixture("npc-commoner-1.json")

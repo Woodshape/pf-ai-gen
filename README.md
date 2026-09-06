@@ -58,5 +58,24 @@ The Witch graft is deliberately rejected
 because its source omits the rank of Knowledge (arcana); unsupported natural-attack
 dice remain explicit source gaps rather than guesses.
 
+## Class-based NPC coverage
+
+NPC race and class rules compose; there is no approved race/class/level list.
+Resolved progressions currently cover Warrior 1–5, Sorcerer 1–6, Druid 1–3,
+Bard 1–3, Ranger 1–4, and Rogue 1–2 with any resolved race. Multiclass
+statistics use each class's own levels. Every resolved level requires all
+lower levels to be resolved. Missing feature, companion, spell, or equipment
+rules remain explicit gaps, not invented combination restrictions.
+
+HP uses our [approved house rule](docs/npc-hit-points-policy.md): basic NPCs
+round each die's average down; heroic NPCs maximize the first die and round
+later averages up. Constitution is added once per Hit Die. Class categories,
+not the selected ability array, determine basic/heroic status.
+
+See [the composition audit](docs/npc-composition-audit.md) for removed gates
+and remaining implementation gaps. Duplicate an older
+saved NPC to evaluate it against the updated catalog without changing its
+original snapshot.
+
 Core runtime is Python/stdlib plus the checked-in bundled browser assets. The optional Pi adapter requires Node.js 22.19+ and the optional npm packages installed by `npm ci`; frontend builds use Preact, TypeScript, and Vite. Regenerating the checked-in catalog additionally
 requires the `pdftotext` executable for source table coordinates.

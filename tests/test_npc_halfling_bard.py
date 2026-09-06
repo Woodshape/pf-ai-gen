@@ -67,7 +67,7 @@ class HalflingBardTests(unittest.TestCase):
         for level, expected in (
             (1, {"hp": 9, "bab": 0, "known": {"0": 4, "1": 2}, "perDay": {"0": "at-will", "1": 2},
                  "saves": (3, 7, 4), "ac": 14}),
-            (3, {"hp": 22, "bab": 2, "known": {"0": 6, "1": 4}, "perDay": {"0": "at-will", "1": 4},
+            (3, {"hp": 21, "bab": 2, "known": {"0": 6, "1": 4}, "perDay": {"0": "at-will", "1": 4},
                  "saves": (4, 8, 7), "ac": 14}),
         ):
             draft = copy.deepcopy(FIXTURE)
@@ -94,7 +94,7 @@ class HalflingBardTests(unittest.TestCase):
             self.assertEqual(canonical["spells"]["perDay"], expected["perDay"])
             self.assertEqual({level_key: len(ids) for level_key, ids in canonical["spells"]["known"].items()}, expected["known"])
 
-    def test_slice_gate_rejects_out_of_scope_combinations(self):
+    def test_missing_class_rows_and_missing_racial_choices_are_reported(self):
         engine = Engine()
         cases = []
         level_four = copy.deepcopy(FIXTURE)
@@ -109,7 +109,7 @@ class HalflingBardTests(unittest.TestCase):
             evaluation = response["result"]["evaluation"]
             self.assertEqual(evaluation["status"], "invalid")
             codes = [issue["code"] for issue in evaluation["issues"]]
-            self.assertIn("npc.slice-unsupported", codes)
+            self.assertIn("npc.catalog-gap" if index == 0 else "npc.selection-required", codes)
 
     def test_weapon_finesse_applies_dexterity_to_light_and_rapier_attacks(self):
         draft = copy.deepcopy(FIXTURE)

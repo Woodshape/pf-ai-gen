@@ -213,10 +213,10 @@ class CatalogCompletenessTests(unittest.TestCase):
                 self.assertEqual(record["skillSelections"], 4)
                 self.assertEqual(record["castingAbility"], "wisdom")
                 self.assertEqual(record["castingMode"], "prepared")
-                self.assertEqual(record["supportedLevels"], [3])
+                self.assertEqual(record["supportedLevels"], [1, 2, 3])
                 self.assertEqual(record["levels"]["3"]["catalogStatus"], "resolved")
                 self.assertEqual(record["levels"]["3"]["spellsPerDay"], {"0": 4, "1": 2, "2": 1})
-                self.assertTrue(all(record["levels"][str(level)]["catalogStatus"] == "gap" for level in range(1, 21) if level != 3))
+                self.assertTrue(all(record["levels"][str(level)]["catalogStatus"] == "gap" for level in range(4, 21)))
             elif class_id == "npc-class.bard":
                 self.assertEqual(record["catalogStatus"], "resolved")
                 self.assertEqual(record["hitDie"], "d8")
@@ -328,9 +328,7 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(feats["feat.rapid-shot"]["prerequisites"], {"all": [{"abilityAtLeast": {"dexterity": 13}}, {"hasFeat": "feat.point-blank-shot"}]})
         self.assertEqual(feats["feat.rapid-shot"]["effects"], {})
         rule = self.catalog["derivedRules"]["npc-rule.general-feat-slots"]
-        self.assertIn("feat.deadly-aim", rule["allowedFeatIds"])
-        self.assertIn("feat.point-blank-shot", rule["allowedFeatIds"])
-        self.assertNotIn("feat.rapid-shot", rule["allowedFeatIds"])
+        self.assertNotIn("allowedFeatIds", rule)  # Availability comes from feat rules, not a second allowlist.
 
     def test_only_production_items_are_resolved(self):
         items = self.catalog["items"]

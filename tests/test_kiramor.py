@@ -35,7 +35,7 @@ class KiramorTests(unittest.TestCase):
             "strength": 13, "dexterity": 18, "constitution": 12,
             "intelligence": 14, "wisdom": 10, "charisma": 8,
         })
-        self.assertEqual(canonical["hp"], 40)
+        self.assertEqual(canonical["hp"], 44)
         self.assertEqual(canonical["bab"], 5)
         self.assertEqual(
             {key: canonical["defenses"][key] for key in ("fortitude", "reflex", "will")},
@@ -84,7 +84,7 @@ class KiramorTests(unittest.TestCase):
             {key: deltas[f"saves.{key}"]["printedMinusRules"] for key in ("fortitude", "reflex", "will")},
             {"fortitude": 1, "reflex": 1, "will": 1},
         )
-        self.assertEqual(deltas["hitPoints"]["printedMinusRules"], -1)
+        self.assertEqual(deltas["hitPoints"]["printedMinusRules"], -5)
         self.assertEqual(deltas["skillSelections"]["printed"]["listedInsteadOfIntimidate"], "Acrobatics +13")
         self.assertEqual(deltas["languages"]["classification"], "unmodeled source-consistent bonus-language selections")
         self.assertEqual(deltas["huntersBond"]["printed"], "nature bond (wolf)")
@@ -93,7 +93,7 @@ class KiramorTests(unittest.TestCase):
             self.assertTrue(delta["sourceRefs"], delta["field"])
             for ref in delta["sourceRefs"]:
                 self.assertTrue(ref["sourceId"].startswith("source."), ref)
-                self.assertEqual(ref["provenanceStatus"], "resolved", ref)
+                self.assertIn(ref["provenanceStatus"], {"resolved", "product-policy"}, ref)
                 self.assertEqual(len(ref["txtLines"]), 2, ref)
         self.assertNotEqual(canonical["hp"], PRINTED_FIXTURE["hitPoints"]["value"])
         self.assertTrue(all(len(ref["txtLines"]) == 2 for entry in result["derivationTrace"] for ref in entry["sourceRefs"]))
@@ -163,16 +163,10 @@ class KiramorTests(unittest.TestCase):
         result = engine.execute(request("kiramor-requirements", "draft.choiceRequirements", {"draft": copy.deepcopy(NPC_FIXTURE)}))
         self.assertTrue(result["ok"], result)
         requirements = {entry["path"]: entry for entry in result["result"]["requirements"]}
-        self.assertEqual(requirements["/selections/abilityGeneration/method"]["values"], ["ranged-preset", "assigned-array"])
-        self.assertEqual(
-            [entry["id"] for entry in requirements["/selections/classProgression/0/classId"]["values"]],
-            ["npc-class.ranger"],
-        )
+        self.assertEqual(set(requirements["/selections/abilityGeneration/method"]["values"]), {"arcane-preset", "divine-preset", "ranged-preset", "assigned-array"})
+        self.assertIn("npc-class.bard", [entry["id"] for entry in requirements["/selections/classProgression/0/classId"]["values"]])
         self.assertEqual(requirements["/selections/classProgression/0/levels"]["values"], [1, 2, 3, 4])
-        self.assertEqual(
-            [entry["id"] for entry in requirements["/selections/classProgression/1/classId"]["values"]],
-            ["npc-class.rogue"],
-        )
+        self.assertIn("npc-class.sorcerer", [entry["id"] for entry in requirements["/selections/classProgression/1/classId"]["values"]])
         self.assertEqual(requirements["/selections/classProgression/1/levels"]["values"], [1, 2])
         self.assertEqual(requirements["/selections/classFeatureChoices/combatStyle"]["values"], ["archery"])
         self.assertEqual(requirements["/selections/classFeatureChoices/favoredEnemy"]["values"], ["humanoid-orc"])
@@ -229,20 +223,21 @@ class KiramorTests(unittest.TestCase):
             self.assertEqual(result["evaluation"]["status"], "valid", result["evaluation"]["issues"])
             self.assertEqual(result["evaluation"]["canonical"]["bab"], bab)
 
-    def test_unsupported_class_order_and_levels_are_rejected(self):
+    def test_class_order_is_not_a_gate_but_missing_level_rules_are(self):
+        reversed_draft = copy.deepcopy(NPC_FIXTURE)
+        reversed_draft["selections"]["classProgression"].reverse()
+        reversed_result = self.create(Engine(), reversed_draft, "reverse-order")["evaluation"]
+        self.assertEqual(reversed_result["status"], "valid", reversed_result["issues"])
+        self.assertEqual(reversed_result["canonical"]["bab"], 5)
         scenarios = (
-            ("order", [
-                {"classId": "npc-class.rogue", "levels": 2},
-                {"classId": "npc-class.ranger", "levels": 4},
-            ], {"npc.multiclass-unsupported", "npc.slice-unsupported"}),
             ("ranger-level", [
                 {"classId": "npc-class.ranger", "levels": 5},
                 {"classId": "npc-class.rogue", "levels": 2},
-            ], {"npc.multiclass-unsupported", "npc.catalog-gap"}),
+            ], {"npc.catalog-gap"}),
             ("rogue-level", [
                 {"classId": "npc-class.ranger", "levels": 4},
                 {"classId": "npc-class.rogue", "levels": 3},
-            ], {"npc.multiclass-unsupported", "npc.catalog-gap"}),
+            ], {"npc.catalog-gap"}),
         )
         for name, progression, expected_codes in scenarios:
             with self.subTest(name=name):
@@ -314,7 +309,7 @@ class KiramorTests(unittest.TestCase):
             }))
             self.assertTrue(finalized["ok"], finalized)
             monster = finalized["result"]["monster"]
-            self.assertEqual(monster["result"]["hp"], 40)
+            self.assertEqual(monster["result"]["hp"], 44)
 
             for format_name in ("json", "markdown", "html"):
                 exported = engine.execute(request(

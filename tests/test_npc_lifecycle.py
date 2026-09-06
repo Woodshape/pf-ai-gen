@@ -38,7 +38,7 @@ class NpcLifecycleTests(unittest.TestCase):
             self.assertTrue(finalized["ok"], finalized)
             monster = finalized["result"]["monster"]
             self.assertEqual(monster["creationSystem"], "npc")
-            self.assertEqual(monster["result"]["hp"], 19)
+            self.assertEqual(monster["result"]["hp"], 18)
 
             reloaded = Engine(workspace=workspace)
             loaded_draft = reloaded.execute(request("npc-reload-draft", "draft.get", {"draftId": draft["draftId"]}))

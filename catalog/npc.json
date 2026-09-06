@@ -129,12 +129,12 @@
     "npcWorkflow": "resolved",
     "races": "partial",
     "skills": "partial",
-    "sourcePolicy": "source-backed-slice-with-explicit-gaps",
+    "sourcePolicy": "source-backed-rules-with-explicit-gaps",
     "spellListMembership": "resolved",
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:11791885adc6a12958eb0a9ddefe54bcd4534402e6baaae32a902c99d98cda30",
+  "catalogVersion": "sha256:ef63fb07e2b8ffe6c6363a3f0864ef8d296178a3fa28f1edc2a4078fd333d551",
   "classFeatures": {
     "npc-class-feature.bard-cantrips": {
       "catalogStatus": "resolved",
@@ -5931,28 +5931,56 @@
       "id": "npc-class.druid",
       "levels": {
         "1": {
-          "bab": null,
-          "catalogStatus": "gap",
-          "choiceSlots": null,
-          "featureGrants": null,
-          "fortitude": null,
-          "hitDie": null,
+          "bab": 0,
+          "catalogStatus": "resolved",
+          "choiceSlots": [],
+          "featureGrants": [
+            "npc-class-feature.druid-proficiencies",
+            "npc-class-feature.druid-spellcasting",
+            "npc-class-feature.druid-orisons",
+            "npc-class-feature.druid-nature-bond",
+            "npc-class-feature.druidic",
+            "npc-class-feature.druid-nature-sense",
+            "npc-class-feature.druid-wild-empathy"
+          ],
+          "fortitude": 2,
+          "hitDie": "d8",
           "level": 1,
-          "reflex": null,
-          "skillSelections": null,
-          "sourceRef": {
-            "entry": "Druid level 1",
-            "file": "docs/npc-source-gap-matrix.md",
-            "provenanceStatus": "catalog-gap",
-            "section": "NPC Source-Gap Matrix",
-            "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-            "sourceId": "source.npc-gap-matrix",
-            "txtLines": [
-              22,
-              22
-            ]
+          "reflex": 0,
+          "skillSelections": 4,
+          "sourceRef": [
+            {
+              "entry": "Druid level 1",
+              "file": "sources/npc/aonprd/druid.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid",
+              "provenanceStatus": "resolved",
+              "section": "Table: Druid",
+              "sha256": "c65a4408988886a02872be131428210a6e287e206b8f181717d170e62d34e944",
+              "sourceId": "source.aon-druid",
+              "txtLines": [
+                14,
+                14
+              ]
+            },
+            {
+              "entry": "Druid skill selections",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Step 3: Skills",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                40,
+                44
+              ]
+            }
+          ],
+          "spellsPerDay": {
+            "0": 3,
+            "1": 1
           },
-          "will": null
+          "will": 2
         },
         "10": {
           "bab": null,
@@ -6195,28 +6223,50 @@
           "will": null
         },
         "2": {
-          "bab": null,
-          "catalogStatus": "gap",
-          "choiceSlots": null,
-          "featureGrants": null,
-          "fortitude": null,
-          "hitDie": null,
+          "bab": 1,
+          "catalogStatus": "resolved",
+          "choiceSlots": [],
+          "featureGrants": [
+            "npc-class-feature.druid-woodland-stride"
+          ],
+          "fortitude": 3,
+          "hitDie": "d8",
           "level": 2,
-          "reflex": null,
-          "skillSelections": null,
-          "sourceRef": {
-            "entry": "Druid level 2",
-            "file": "docs/npc-source-gap-matrix.md",
-            "provenanceStatus": "catalog-gap",
-            "section": "NPC Source-Gap Matrix",
-            "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-            "sourceId": "source.npc-gap-matrix",
-            "txtLines": [
-              22,
-              22
-            ]
+          "reflex": 0,
+          "skillSelections": 4,
+          "sourceRef": [
+            {
+              "entry": "Druid level 2",
+              "file": "sources/npc/aonprd/druid.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid",
+              "provenanceStatus": "resolved",
+              "section": "Table: Druid",
+              "sha256": "c65a4408988886a02872be131428210a6e287e206b8f181717d170e62d34e944",
+              "sourceId": "source.aon-druid",
+              "txtLines": [
+                15,
+                15
+              ]
+            },
+            {
+              "entry": "Druid skill selections",
+              "file": "sources/npc/aonprd/creating-npcs.txt",
+              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "provenanceStatus": "resolved",
+              "section": "Step 3: Skills",
+              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+              "sourceId": "source.aon-creating-npcs",
+              "txtLines": [
+                40,
+                44
+              ]
+            }
+          ],
+          "spellsPerDay": {
+            "0": 4,
+            "1": 2
           },
-          "will": null
+          "will": 3
         },
         "20": {
           "bab": null,
@@ -6247,14 +6297,6 @@
           "catalogStatus": "resolved",
           "choiceSlots": [],
           "featureGrants": [
-            "npc-class-feature.druid-proficiencies",
-            "npc-class-feature.druid-spellcasting",
-            "npc-class-feature.druid-orisons",
-            "npc-class-feature.druid-nature-bond",
-            "npc-class-feature.druidic",
-            "npc-class-feature.druid-nature-sense",
-            "npc-class-feature.druid-wild-empathy",
-            "npc-class-feature.druid-woodland-stride",
             "npc-class-feature.druid-trackless-step"
           ],
           "fortitude": 3,
@@ -6473,6 +6515,8 @@
         }
       ],
       "supportedLevels": [
+        1,
+        2,
         3
       ]
     },
@@ -11268,66 +11312,34 @@
       }
     },
     "npc-rule.average-hp": {
-      "catalogStatus": "resolved",
+      "byNpcCategory": {
+        "basic": {
+          "firstLevelMax": false,
+          "rounding": "floor"
+        },
+        "heroic": {
+          "firstLevelMax": true,
+          "rounding": "ceil"
+        }
+      },
+      "catalogStatus": "policy",
       "constitutionPerLevel": true,
-      "firstLevelMax": true,
       "id": "npc-rule.average-hp",
       "kind": "average-hp",
-      "name": "Average NPC hit points",
-      "rounding": "floor",
-      "sourceRef": [
-        {
-          "entry": "Determine total hit points by assuming the average result",
-          "file": "sources/npc/aonprd/creating-npcs.txt",
-          "printedPages": [
-            454
-          ],
-          "provenanceStatus": "resolved",
-          "section": "Step 7: Details",
-          "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
-          "sourceId": "source.aon-creating-npcs",
-          "txtLines": [
-            103,
-            106
-          ]
-        },
-        {
-          "entry": "Always round down",
-          "file": "sources/npc/aonprd/getting-started.txt",
-          "provenanceStatus": "resolved",
-          "section": "Rounding; Constitution",
-          "sha256": "2a59a8c5aaf2c1bc734c1ed47efaccecc037e3c703fe26f09e1b29c57535d78d",
-          "sourceId": "source.aon-getting-started",
-          "txtLines": [
-            39,
-            39
-          ]
-        },
-        {
-          "entry": "Constitution modifier applies to each Hit Die",
-          "file": "sources/npc/aonprd/getting-started.txt",
-          "provenanceStatus": "resolved",
-          "section": "Constitution",
-          "sha256": "2a59a8c5aaf2c1bc734c1ed47efaccecc037e3c703fe26f09e1b29c57535d78d",
-          "sourceId": "source.aon-getting-started",
-          "txtLines": [
-            133,
-            138
-          ]
-        },
-        {
-          "entry": "A creature gains maximum hit points if its first Hit Die roll is for a character class level",
-          "file": "sources/npc/aonprd/getting-started.txt",
-          "provenanceStatus": "resolved",
-          "section": "Hit Points (hp)",
-          "sha256": "2a59a8c5aaf2c1bc734c1ed47efaccecc037e3c703fe26f09e1b29c57535d78d",
-          "sourceId": "source.aon-getting-started",
-          "txtLines": [
-            30,
-            30
-          ]
-        }
-      ]
+      "name": "Basic/heroic NPC hit points (house rule)",
+      "roundingScope": "each-hit-die",
+      "sourceRef": {
+        "entry": "User-approved per-die rounding, heroic first-die maximum, and Constitution once per Hit Die",
+        "file": "docs/npc-hit-points-policy.md",
+        "provenanceStatus": "product-policy",
+        "section": "NPC hit-point policy",
+        "sha256": "03717e0ba6acb206c181111d9fc697f6ffdc4c2fdeb922b6fd5bff8a7bcc6e70",
+        "sourceId": "source.npc-hp-policy",
+        "txtLines": [
+          3,
+          12
+        ]
+      }
     },
     "npc-rule.class-skill-bonus": {
       "catalogStatus": "resolved",
@@ -11373,15 +11385,6 @@
     "npc-rule.general-feat-slots": {
       "allowedCategories": [
         "general"
-      ],
-      "allowedFeatIds": [
-        "feat.deadly-aim",
-        "feat.endurance",
-        "feat.improved-initiative",
-        "feat.iron-will",
-        "feat.lightning-reflexes",
-        "feat.point-blank-shot",
-        "feat.weapon-finesse"
       ],
       "catalogStatus": "resolved",
       "id": "npc-rule.general-feat-slots",
@@ -18818,6 +18821,12 @@
       "file": "docs/npc-source-gap-matrix.md",
       "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
       "sourceId": "source.npc-gap-matrix"
+    },
+    "source.npc-hp-policy": {
+      "description": "User-approved basic/heroic NPC hit-point house rule",
+      "file": "docs/npc-hit-points-policy.md",
+      "sha256": "03717e0ba6acb206c181111d9fc697f6ffdc4c2fdeb922b6fd5bff8a7bcc6e70",
+      "sourceId": "source.npc-hp-policy"
     },
     "source.npc-manifest": {
       "description": "Hash manifest for the local NPC source foundation",

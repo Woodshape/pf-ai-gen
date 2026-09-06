@@ -43,6 +43,7 @@ SOURCE_FILES = (
     ("source.npc-manifest", "sources/npc/MANIFEST.json", "Hash manifest for the local NPC source foundation"),
     ("source.npc-gap-matrix", "docs/npc-source-gap-matrix.md", "Explicit source-gap classifications binding NPC catalog data"),
     ("source.npc-adr", "docs/adr/creation-system.md", "Accepted creation-system and NPC catalog decisions"),
+    ("source.npc-hp-policy", "docs/npc-hit-points-policy.md", "User-approved basic/heroic NPC hit-point house rule"),
     ("source.npc-mode-plan", "NPC_MODE_PLAN.md", "NPC creation plan and terminology"),
     ("source.npc-crb-spell-lists", "sources/npc/core-rulebook-extract.spell-lists.txt", "Hash-anchored Core Rulebook class spell lists (16-page local excerpt)"),
     ("source.npc-crb-extract", "sources/npc/core-rulebook-extract.txt", "Full pdftotext extraction of the local 16-page Core Rulebook excerpt"),
@@ -222,7 +223,7 @@ def build_catalog(root: Path = ROOT, fragment_dir: Path | None = None) -> dict[s
         # the final content hash is calculated.
         "catalogVersion": "sha256:" + "0" * 64,
         "catalogStatus": {
-            "sourcePolicy": "source-backed-slice-with-explicit-gaps",
+            "sourcePolicy": "source-backed-rules-with-explicit-gaps",
             "npcWorkflow": "resolved",
             "abilityArrays": "partial",
             "races": "partial",

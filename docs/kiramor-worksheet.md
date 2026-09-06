@@ -1,5 +1,7 @@
 # Kiramor Rules-versus-Print Worksheet (Phase 4)
 
+> **Historical worksheet.** The composition fix removed the named-character evaluator. The subsequently approved [HP house rule](npc-hit-points-policy.md) now gives **44 HP** (not the earlier 40 or 41); the printed 39 is unchanged. Remaining gaps are documented in [the composition audit](npc-composition-audit.md).
+
 Kiramor, the Forest Shadow, an elf ranger 4/rogue 2, is the bounded acceptance
 fixture from `NPC_MODE_PLAN.md` §12. This worksheet keeps the engine's
 source-derived result separate from the Core Rulebook's printed example. Printed

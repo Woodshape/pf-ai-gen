@@ -1,0 +1,262 @@
+{
+  "status": "invalid",
+  "mode": "strict",
+  "canonical": null,
+  "effective": null,
+  "issues": [
+    {
+      "code": "npc.catalog-gap",
+      "severity": "error",
+      "kind": "catalog-data",
+      "message": "catalog data required for this selection is not source-resolved",
+      "path": "/selections/feats/0/featId",
+      "details": {
+        "recordId": "feat.martial-weapon-proficiency",
+        "catalogStatus": "gap"
+      },
+      "sourceRefs": [
+        {
+          "entry": "Core feats",
+          "file": "docs/npc-source-gap-matrix.md",
+          "provenanceStatus": "catalog-gap",
+          "section": "NPC Source-Gap Matrix",
+          "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
+          "sourceId": "source.npc-gap-matrix",
+          "txtLines": [
+            25,
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "code": "npc.catalog-gap",
+      "severity": "error",
+      "kind": "catalog-data",
+      "message": "catalog data required for this selection is not source-resolved",
+      "path": "/selections/gear/1/itemId",
+      "details": {
+        "recordId": "item.shortbow",
+        "catalogStatus": "gap"
+      },
+      "sourceRefs": [
+        {
+          "entry": "Mundane weapons",
+          "file": "docs/npc-source-gap-matrix.md",
+          "provenanceStatus": "catalog-gap",
+          "section": "NPC Source-Gap Matrix",
+          "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
+          "sourceId": "source.npc-gap-matrix",
+          "txtLines": [
+            26,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "code": "npc.catalog-gap",
+      "severity": "error",
+      "kind": "catalog-data",
+      "message": "catalog data required for this selection is not source-resolved",
+      "path": "/selections/gear/3/itemId",
+      "details": {
+        "recordId": "item.whip",
+        "catalogStatus": "gap"
+      },
+      "sourceRefs": [
+        {
+          "entry": "Core weapons, armor, goods, and required magic items",
+          "file": "docs/npc-source-gap-matrix.md",
+          "provenanceStatus": "catalog-gap",
+          "section": "NPC Source-Gap Matrix",
+          "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
+          "sourceId": "source.npc-gap-matrix",
+          "txtLines": [
+            26,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "code": "npc.catalog-gap",
+      "severity": "error",
+      "kind": "catalog-data",
+      "message": "catalog data required for this selection is not source-resolved",
+      "path": "/selections/gear/4/itemId",
+      "details": {
+        "recordId": "item.potion-of-cure-light-wounds",
+        "catalogStatus": "gap"
+      },
+      "sourceRefs": [
+        {
+          "entry": "Core weapons, armor, goods, and required magic items",
+          "file": "docs/npc-source-gap-matrix.md",
+          "provenanceStatus": "catalog-gap",
+          "section": "NPC Source-Gap Matrix",
+          "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
+          "sourceId": "source.npc-gap-matrix",
+          "txtLines": [
+            26,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "code": "npc.catalog-gap",
+      "severity": "error",
+      "kind": "catalog-data",
+      "message": "catalog data required for this selection is not source-resolved",
+      "path": "/selections/skillGeneration/skills/0",
+      "details": {
+        "recordId": "skill.acrobatics",
+        "catalogStatus": "gap"
+      },
+      "sourceRefs": [
+        {
+          "entry": "Core skill list",
+          "file": "docs/npc-source-gap-matrix.md",
+          "provenanceStatus": "catalog-gap",
+          "section": "NPC Source-Gap Matrix",
+          "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
+          "sourceId": "source.npc-gap-matrix",
+          "txtLines": [
+            24,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "code": "npc.catalog-gap",
+      "severity": "error",
+      "kind": "catalog-data",
+      "message": "catalog data required for this selection is not source-resolved",
+      "path": "/selections/skillGeneration/skills/1",
+      "details": {
+        "recordId": "skill.linguistics",
+        "catalogStatus": "gap"
+      },
+      "sourceRefs": [
+        {
+          "entry": "Core skill list",
+          "file": "docs/npc-source-gap-matrix.md",
+          "provenanceStatus": "catalog-gap",
+          "section": "NPC Source-Gap Matrix",
+          "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
+          "sourceId": "source.npc-gap-matrix",
+          "txtLines": [
+            24,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "code": "npc.catalog-gap",
+      "severity": "error",
+      "kind": "catalog-data",
+      "message": "catalog data required for this selection is not source-resolved",
+      "path": "/selections/spellLoadout/known/0/0",
+      "details": {
+        "recordId": "spell.daze",
+        "catalogStatus": "partial"
+      },
+      "sourceRefs": [
+        {
+          "entry": "Daze",
+          "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
+          "provenanceStatus": "list-membership-resolved",
+          "section": "Core Rulebook class spell lists",
+          "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
+          "sourceId": "source.npc-crb-spell-lists",
+          "txtLines": [
+            33,
+            33
+          ]
+        }
+      ]
+    },
+    {
+      "code": "npc.catalog-gap",
+      "severity": "error",
+      "kind": "catalog-data",
+      "message": "catalog data required for this selection is not source-resolved",
+      "path": "/selections/spellLoadout/known/0/1",
+      "details": {
+        "recordId": "spell.ghost-sound",
+        "catalogStatus": "partial"
+      },
+      "sourceRefs": [
+        {
+          "entry": "Ghost Sound",
+          "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
+          "provenanceStatus": "list-membership-resolved",
+          "section": "Core Rulebook class spell lists",
+          "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
+          "sourceId": "source.npc-crb-spell-lists",
+          "txtLines": [
+            36,
+            36
+          ]
+        }
+      ]
+    },
+    {
+      "code": "npc.catalog-gap",
+      "severity": "error",
+      "kind": "catalog-data",
+      "message": "catalog data required for this selection is not source-resolved",
+      "path": "/selections/spellLoadout/known/1/1",
+      "details": {
+        "recordId": "spell.hideous-laughter",
+        "catalogStatus": "partial"
+      },
+      "sourceRefs": [
+        {
+          "entry": "Hideous Laughter",
+          "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
+          "provenanceStatus": "list-membership-resolved",
+          "section": "Core Rulebook class spell lists",
+          "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
+          "sourceId": "source.npc-crb-spell-lists",
+          "txtLines": [
+            67,
+            67
+          ]
+        }
+      ]
+    }
+  ],
+  "warnings": [
+    {
+      "code": "npc.gear-budget-approximate",
+      "severity": "warning",
+      "kind": "validation",
+      "message": "selected mundane gear does not spend the full NPC gear budget",
+      "path": "/selections/gear",
+      "details": {
+        "budgetCp": 39000,
+        "spentCp": 2600
+      },
+      "sourceRefs": [
+        {
+          "entry": "Heroic level 1",
+          "file": "sources/npc/aonprd/creating-npcs.txt",
+          "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+          "provenanceStatus": "resolved",
+          "section": "Table 14-9: NPC Gear",
+          "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
+          "sourceId": "source.aon-creating-npcs",
+          "txtLines": [
+            83,
+            83
+          ]
+        }
+      ]
+    }
+  ],
+  "derivationTrace": []
+}

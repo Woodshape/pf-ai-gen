@@ -88,58 +88,22 @@
   },
   {
    "id": "npc-rule.average-hp",
-   "name": "Average NPC hit points",
+   "name": "Basic/heroic NPC hit points (house rule)",
    "kind": "average-hp",
-   "firstLevelMax": true,
-   "rounding": "floor",
+   "byNpcCategory": {
+    "basic": {"firstLevelMax": false, "rounding": "floor"},
+    "heroic": {"firstLevelMax": true, "rounding": "ceil"}
+   },
+   "roundingScope": "each-hit-die",
    "constitutionPerLevel": true,
-   "catalogStatus": "resolved",
-   "sourceRef": [
-    {
-     "sourceId": "source.aon-creating-npcs",
-     "section": "Step 7: Details",
-     "txtLines": [
-      103,
-      106
-     ],
-     "printedPages": [
-      454
-     ],
-     "entry": "Determine total hit points by assuming the average result",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.aon-getting-started",
-     "section": "Rounding; Constitution",
-     "txtLines": [
-      39,
-      39
-     ],
-     "entry": "Always round down",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "sourceId": "source.aon-getting-started",
-     "section": "Constitution",
-     "txtLines": [
-      133,
-      138
-     ],
-     "entry": "Constitution modifier applies to each Hit Die",
-     "provenanceStatus": "resolved"
-    },
-    {
-     "entry": "A creature gains maximum hit points if its first Hit Die roll is for a character class level",
-     "file": "sources/npc/aonprd/getting-started.txt",
-     "provenanceStatus": "resolved",
-     "section": "Hit Points (hp)",
-     "sourceId": "source.aon-getting-started",
-     "txtLines": [
-      30,
-      30
-     ]
-    }
-   ]
+   "catalogStatus": "policy",
+   "sourceRef": {
+    "sourceId": "source.npc-hp-policy",
+    "section": "NPC hit-point policy",
+    "txtLines": [3, 12],
+    "entry": "User-approved per-die rounding, heroic first-die maximum, and Constitution once per Hit Die",
+    "provenanceStatus": "product-policy"
+   }
   },
   {
    "id": "npc-rule.general-feat-slots",
@@ -156,15 +120,6 @@
     15,
     17,
     19
-   ],
-   "allowedFeatIds": [
-    "feat.deadly-aim",
-    "feat.endurance",
-    "feat.improved-initiative",
-    "feat.iron-will",
-    "feat.lightning-reflexes",
-    "feat.point-blank-shot",
-    "feat.weapon-finesse"
    ],
    "allowedCategories": [
     "general"

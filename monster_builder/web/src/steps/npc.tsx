@@ -94,7 +94,6 @@ function NpcClassStep({ draft, catalog, step, choiceRequirements, onPreview, onS
 }
 
 const ABILITIES = ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"] as const;
-const METHOD_OPTIONS = ["melee-preset", "arcane-preset", "assigned-array", "divine-preset"] as const;
 function abilityLabel(value: string): string { return value.charAt(0).toUpperCase() + value.slice(1); }
 function abilityEntryValue(value: unknown, fallback: JsonObject): JsonObject {
   const map = objectValue(value);
@@ -111,9 +110,7 @@ function increaseRows(value: unknown): Array<{ level: string; ability: string }>
 
 function NpcAbilityStep({ draft, catalog, step, onSave, onBack }: Props) {
   const current = objectValue(draft.selections.abilityGeneration);
-  const primaryClass = Array.isArray(draft.selections.classProgression) && draft.selections.classProgression.length > 0 && typeof (draft.selections.classProgression as JsonObject[])[0]?.classId === "string" ? String((draft.selections.classProgression as JsonObject[])[0].classId) : "";
-  const isDruid = primaryClass === "npc-class.druid";
-  const [method, setMethod] = useState(typeof current.method === "string" && (METHOD_OPTIONS as readonly string[]).includes(current.method) ? String(current.method) : "assigned-array");
+  const [method, setMethod] = useState(typeof current.method === "string" ? current.method : "assigned-array");
   const [arrayId, setArrayId] = useState(String(current.arrayId || "npc-ability-array.heroic"));
   const array = catalog.abilityArrays[arrayId];
   const pool = Array.isArray(array?.scores) ? [...(array.scores as number[])].sort((a, b) => b - a) : [];
@@ -140,7 +137,7 @@ function NpcAbilityStep({ draft, catalog, step, onSave, onBack }: Props) {
   };
   return <StepFrame step={step} onBack={onBack} onApply={submit}><div class="grid">
     <Select label="Ability generation" value={method} onChange={(value) => { setMethod(value); setScores(value === "assigned-array" ? poolMap(array?.scores) : {}); setArrayIdTouched(true); }}>
-      <option value="melee-preset">Melee preset</option><option value="arcane-preset">Arcane preset</option><option value="assigned-array">Assigned array</option>{isDruid ? <option value="divine-preset">Divine preset</option> : null}
+      {Object.keys(objectValue(array?.presets)).map((name) => <option value={`${name}-preset`} key={name}>{humanize(name)} preset</option>)}<option value="assigned-array">Assigned array</option>
     </Select>
     {method === "assigned-array" ? <CatalogSelect label="NPC ability array" records={catalog.abilityArrays} value={arrayId} onChange={(value) => { setArrayId(value); setArrayIdTouched(true); setScores(poolMap(catalog.abilityArrays[value]?.scores)); }} /> : <div class="field"><label>NPC ability array</label><span class="hint">{(catalog.abilityArrays[arrayId]?.name || arrayId)} — the {method.replace("-preset", "")} preset assigns these scores automatically.</span></div>}
     {method === "assigned-array" && <section class="field full"><div class="builder-head"><div><span class="label">Assigned ability scores</span><small>Assign each of the array's {pool.length} values to an ability; values already taken are hidden from the other selects.</small></div></div><div class="grid three">{ABILITIES.map((ability) => {
@@ -182,19 +179,14 @@ function NpcSkillsFeatsStep({ draft, catalog, step, selectionBudgets, onSave, on
   </div><p class="hint">The engine supplies automatic class skills, enforces simplified multiclass limits, validates precise rank budgets, and checks feat prerequisites.</p></StepFrame>;
 }
 
-function NpcSpellsGearStep({ draft, catalog, step, selectionBudgets, onSave, onBack }: Props) {
+function NpcSpellsGearStep({ draft, catalog, step, choiceRequirements, selectionBudgets, onSave, onBack }: Props) {
   const loadout = objectValue(draft.selections.spellLoadout);
   const profile = objectValue(draft.selections.gearProfile);
-  const classId = Array.isArray(draft.selections.classProgression) && draft.selections.classProgression.length > 0 && typeof (draft.selections.classProgression as JsonObject[])[0]?.classId === "string" ? String((draft.selections.classProgression as JsonObject[])[0].classId) : "";
+  const classId = selectionBudgets?.spells?.classId || "";
   const classKey = classId.replace("npc-class.", "");
-  const isSorcerer = classId === "npc-class.sorcerer";
-  const isDruid = classId === "npc-class.druid";
-  const isBard = classId === "npc-class.bard";
-  const sections: Array<{ field: string; label: string; hint: string }> = isSorcerer || isBard
-    ? [{ field: "known", label: isBard ? "Spells known (bard)" : "Spells known", hint: "Choose the spells the caster knows." }]
-    : isDruid
-      ? [{ field: "prepared", label: "Prepared druid spells", hint: "Choose the spells the druid prepares." }, { field: "domainPrepared", label: "Prepared fire-domain spells", hint: "Optional extra domain spells; the engine validates domain membership." }]
-      : [];
+  const sections: Array<{ field: string; label: string; hint: string }> = choiceRequirements
+    .filter((entry) => entry.path.startsWith("/selections/spellLoadout/"))
+    .map((entry) => ({ field: entry.path.split("/").at(-1)!, label: entry.label, hint: "Choose spells for the source-defined slots." }));
   const [progression, setProgression] = useState(String(profile.experienceProgression || "medium"));
   const [fantasy, setFantasy] = useState(String(profile.fantasyLevel || "normal"));
   const gear = Array.isArray(draft.selections.gear) ? draft.selections.gear.filter((item): item is JsonObject => Boolean(item && typeof item === "object" && typeof (item as JsonObject).itemId === "string")) : [];

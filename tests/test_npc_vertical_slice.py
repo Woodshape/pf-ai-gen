@@ -34,7 +34,7 @@ class NpcVerticalSliceTests(unittest.TestCase):
         canonical = evaluation["canonical"]
         self.assertEqual(canonical["abilityScores"]["strength"], 15)
         self.assertEqual(canonical["bab"], 3)
-        self.assertEqual(canonical["hp"], 19)
+        self.assertEqual(canonical["hp"], 18)
         self.assertEqual(canonical["defenses"]["ac"], 15)
         self.assertEqual(canonical["defenses"]["will"], 3)
         self.assertEqual(canonical["attacks"][0]["damageExpression"], "1d8+2")
@@ -44,10 +44,10 @@ class NpcVerticalSliceTests(unittest.TestCase):
     def test_production_catalog_supports_human_warrior_levels_one_through_five(self):
         expected = {
             1: (1, 6, 26000),
-            2: (2, 13, 39000),
-            3: (3, 19, 78000),
-            4: (4, 26, 165000),
-            5: (5, 32, 240000),
+            2: (2, 12, 39000),
+            3: (3, 18, 78000),
+            4: (4, 24, 165000),
+            5: (5, 30, 240000),
         }
         for level, (bab, hp, budget_cp) in expected.items():
             draft = copy.deepcopy(FIXTURE)

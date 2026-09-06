@@ -46,7 +46,7 @@ class GoblinDruidTests(unittest.TestCase):
             "strength": 0, "dexterity": 1, "constitution": 2,
             "intelligence": 0, "wisdom": 2, "charisma": 0,
         })
-        self.assertEqual((canonical["hp"], canonical["hitDiceExpression"], canonical["bab"]), (27, "3d8+6", 2))
+        self.assertEqual((canonical["hp"], canonical["hitDiceExpression"], canonical["bab"]), (24, "3d8+6", 2))
         self.assertEqual(canonical["defenses"], {
             "ac": 16, "touch": 12, "flatFooted": 15,
             "fortitude": 5, "reflex": 2, "will": 7,
@@ -129,7 +129,7 @@ class GoblinDruidTests(unittest.TestCase):
         requirements = Engine().execute(request("goblin-druid-requirements", "draft.choiceRequirements", {"draft": copy.deepcopy(FIXTURE)}))
         self.assertTrue(requirements["ok"], requirements)
         budgets = requirements["result"]["selectionBudgets"]
-        self.assertEqual(budgets["spells"], {"required": True, "mode": "prepared", "levels": SLOT_BUDGET})
+        self.assertEqual(budgets["spells"], {"required": True, "classId": "npc-class.druid", "mode": "prepared", "levels": SLOT_BUDGET})
         self.assertEqual(budgets["gear"]["budgetCp"], 165000)
         self.assertEqual(budgets["gear"]["spentCp"], 2300)
         self.assertEqual(budgets["skills"], {"method": "simplified", "count": 4, "selected": 4})
@@ -147,7 +147,7 @@ class GoblinDruidTests(unittest.TestCase):
             ("wrong-domain-spell", lambda selections: selections["spellLoadout"]["domainPrepared"]["1"].__setitem__(0, "spell.entangle"), "npc.domain-spell-invalid"),
             ("missing-domain-level", lambda selections: selections["spellLoadout"]["domainPrepared"].pop("2"), "npc.spell-levels-invalid"),
             ("extra-loadout-field", lambda selections: selections["spellLoadout"].update({"known": {}}), "npc.spell-loadout-invalid"),
-            ("wrong-nature-bond", lambda selections: selections["classFeatureChoices"].__setitem__("natureBond", "animal-companion"), "npc.choice-invalid"),
+            ("unresolved-nature-bond", lambda selections: selections["classFeatureChoices"].__setitem__("natureBond", "animal-companion"), "npc.catalog-gap"),
         ]
         for request_id, mutate, expected_code in cases:
             with self.subTest(request_id=request_id):
@@ -246,7 +246,7 @@ class GoblinDruidTests(unittest.TestCase):
                 "NE Small humanoid (goblinoid)",
                 "## Defense",
                 "AC 16, touch 12, flat-footed 15 (+2 armor, +2 shield, +1 Dex, +1 size)",
-                "hp 27 (3d8+6)",
+                "hp 24 (3d8+6)",
                 "Fort +5, Ref +2, Will +7",
                 "## Offense",
                 "Speed 30 ft.",

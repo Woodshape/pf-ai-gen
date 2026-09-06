@@ -304,6 +304,9 @@ def _validate_sections(data: dict[str, Any], root: Path) -> None:
                             raise _error(f"{self_level_context}.{field} must be an array of strings or null")
                     if "choiceSlots" in level and level["choiceSlots"] is not None and (not isinstance(level["choiceSlots"], list) or any(not isinstance(value, dict) for value in level["choiceSlots"])):
                         raise _error(f"{self_level_context}.choiceSlots must be an array of objects or null")
+                resolved_levels = sorted(int(key) for key, row in levels.items() if row.get("catalogStatus") == "resolved")
+                if resolved_levels and resolved_levels != list(range(1, resolved_levels[-1] + 1)):
+                    raise _error(f"{context}.levels: a resolved level requires every lower level to be resolved")
             if section == "gearBudgets":
                 if record.get("progression") not in {"slow", "medium", "fast"}:
                     raise _error(f"{context}.progression is invalid")

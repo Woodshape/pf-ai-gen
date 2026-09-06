@@ -110,12 +110,12 @@ class NpcCatalogTests(unittest.TestCase):
         self.assertEqual(druid["skillSelections"], 4)
         self.assertEqual(druid["castingAbility"], "wisdom")
         self.assertEqual(druid["castingMode"], "prepared")
-        self.assertEqual(druid["supportedLevels"], [3])
+        self.assertEqual(druid["supportedLevels"], [1, 2, 3])
         self.assertEqual(druid["levels"]["3"]["catalogStatus"], "resolved")
         self.assertEqual(druid["levels"]["3"]["bab"], 2)
         self.assertEqual(druid["levels"]["3"]["spellsPerDay"], {"0": 4, "1": 2, "2": 1})
-        self.assertTrue(all(druid["levels"][str(level)]["catalogStatus"] == "gap" for level in range(1, 21) if level != 3))
-        self.assertIn("npc-class-feature.druidic", druid["levels"]["3"]["featureGrants"])
+        self.assertTrue(all(druid["levels"][str(level)]["catalogStatus"] == "gap" for level in range(4, 21)))
+        self.assertIn("npc-class-feature.druidic", druid["levels"]["1"]["featureGrants"])
 
         nature_bond = catalog["classFeatures"]["npc-class-feature.druid-nature-bond"]
         self.assertEqual(nature_bond["allowedValues"], ["fire-domain"])
@@ -138,7 +138,7 @@ class NpcCatalogTests(unittest.TestCase):
         self.assertEqual(proficiencies["effects"]["armorProficiencies"], ["light", "medium"])
         self.assertIn(
             "npc-class-feature.druid-proficiencies",
-            catalog["classes"]["npc-class.druid"]["levels"]["3"]["featureGrants"],
+            catalog["classes"]["npc-class.druid"]["levels"]["1"]["featureGrants"],
         )
         orisons = catalog["classFeatures"]["npc-class-feature.druid-orisons"]
         self.assertEqual(orisons["catalogStatus"], "resolved")

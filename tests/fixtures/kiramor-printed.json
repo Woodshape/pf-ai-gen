@@ -371,12 +371,17 @@
     },
     {
       "field": "hitPoints",
-      "rulesDerived": 40,
+      "rulesDerived": 44,
       "printed": 39,
-      "printedMinusRules": -1,
-      "classification": "unresolved averaging discrepancy",
-      "hypotheses": ["the example floors each later die's base average before adding the printed +6 Constitution term", "printed arithmetic error"],
+      "printedMinusRules": -5,
+      "classification": "intentional house-rule difference",
       "sourceRefs": [
+        {
+          "sourceId": "source.npc-hp-policy",
+          "section": "NPC hit-point policy",
+          "txtLines": [3, 12],
+          "provenanceStatus": "product-policy"
+        },
         {
           "sourceId": "source.aon-creating-npcs",
           "section": "Step 7: Details",
