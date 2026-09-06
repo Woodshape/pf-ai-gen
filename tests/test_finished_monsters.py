@@ -175,6 +175,25 @@ class FinishedMonsterTests(unittest.TestCase):
         self.assertEqual([entry["step"] for entry in content["audit"]["creationDecisions"]], list(range(1, 10)))
         self.assertTrue(content["audit"]["sources"])
 
+    def test_valid_draft_export_projects_current_evaluation_without_finalizing(self):
+        engine = Engine()
+        created = self.create(engine)
+        exported = engine.execute(request("draft-export", "draft.export", {
+            "draftId": created["draft"]["draftId"], "format": "markdown", "profile": "sheet",
+        }))
+        self.assertTrue(exported["ok"], exported)
+        self.assertEqual(exported["result"]["draftId"], created["draft"]["draftId"])
+        self.assertIn("Worg", exported["result"]["content"])
+
+    def test_invalid_draft_export_is_rejected(self):
+        engine = Engine()
+        created = self.create(engine, {"concept": {"name": "Incomplete"}})
+        exported = engine.execute(request("invalid-draft-export", "draft.export", {
+            "draftId": created["draft"]["draftId"], "format": "markdown", "profile": "sheet",
+        }))
+        self.assertFalse(exported["ok"])
+        self.assertEqual(exported["error"]["code"], "export.draft-invalid")
+
     def test_markdown_and_html_exports_project_strict_medusa_snapshot(self):
         raw = copy.deepcopy(MEDUSA_DRAFT)
         raw["concept"]["name"] = "Medusa <script>"

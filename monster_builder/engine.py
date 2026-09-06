@@ -132,6 +132,8 @@ class Engine:
                 result = self._apply_changes(payload)
             elif operation == "draft.evaluate":
                 result = self._evaluate_request(payload)
+            elif operation == "draft.export":
+                result = self._export_draft(payload)
             elif operation == "proposal.validate":
                 result = self._proposal_validate(payload)
             elif operation == "proposal.create":
@@ -798,8 +800,20 @@ class Engine:
         self._set_finished_status(monster["monsterId"], status, "active")
         return {"monster": self._finished_view(monster, "active")}
 
+    def _export_draft(self, payload: dict[str, Any]) -> dict[str, Any]:
+        draft = self._stored_draft(payload)
+        evaluation = self._evaluate(draft)
+        if evaluation.get("status") != "valid":
+            raise BoundaryError("export.draft-invalid", "only valid drafts can be exported", "/payload/draftId", kind="conflict")
+        result = self._export_content(self._build_finished(draft, evaluation), payload)
+        return {"draftId": draft["draftId"], **result}
+
     def _export_monster(self, payload: dict[str, Any]) -> dict[str, Any]:
         monster, _ = self._stored_monster(payload)
+        return {"monsterId": monster["monsterId"], **self._export_content(monster, payload)}
+
+    @staticmethod
+    def _export_content(monster: dict[str, Any], payload: dict[str, Any]) -> dict[str, Any]:
         format_name = payload.get("format", "json")
         profile = payload.get("profile", "sheet")
         if format_name not in {"json", "markdown", "html"}:
@@ -811,7 +825,7 @@ class Engine:
         else:
             from .exports import render_html, render_markdown
             content = render_html(monster, profile) if format_name == "html" else render_markdown(monster, profile)
-        return {"monsterId": monster["monsterId"], "format": format_name, "profile": profile, "content": content}
+        return {"format": format_name, "profile": profile, "content": content}
 
     def _build_finished(self, draft: dict[str, Any], evaluation: dict[str, Any]) -> dict[str, Any]:
         source = {"draftId": draft["draftId"], "revision": draft["revision"], "fingerprint": draft["fingerprint"]}

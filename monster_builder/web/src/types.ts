@@ -153,6 +153,7 @@ export interface Draft {
   fingerprint: string;
   status: string;
   monsterId?: string;
+  derivedFrom?: { type?: string; monsterId?: string; draftId?: string; revision?: number; fingerprint?: string };
   concept: JsonObject;
   selections: JsonObject;
 }

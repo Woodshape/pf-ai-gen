@@ -101,7 +101,8 @@ export function App() {
     }
     setMonster(undefined); setProposal(undefined); setAiError(undefined);
     accept(result);
-    if (result.draft?.monsterId) accept(await execute("monster.get", { monsterId: result.draft.monsterId }));
+    const fallbackMonsterId = result.draft?.monsterId || result.draft?.derivedFrom?.monsterId;
+    if (fallbackMonsterId) accept(await execute("monster.get", { monsterId: fallbackMonsterId }));
   }
   function show(text: string, good = false) {
     setMessage({ text, good });
@@ -235,8 +236,18 @@ export function App() {
     try { accept(await execute("monster.finalize", guard())); show("Immutable FinishedMonster created.", true); } catch (error) { show(error instanceof Error ? error.message : String(error)); }
   }
   async function exportMonster(format: string, profile: string) {
-    if (!monster) return;
-    const result = await execute("monster.export", { monsterId: monster.monsterId, format, profile });
+    let result: EngineResult;
+    if (evaluation?.status === "valid") {
+      try {
+        result = await execute("draft.export", { draftId: draft!.draftId, format, profile });
+      } catch (error) {
+        if (!monster) throw error;
+        result = await execute("monster.export", { monsterId: monster.monsterId, format, profile });
+      }
+    } else {
+      if (!monster) return;
+      result = await execute("monster.export", { monsterId: monster.monsterId, format, profile });
+    }
     const text = typeof result.content === "string" ? result.content : JSON.stringify(result.content, null, 2);
     const url = URL.createObjectURL(new Blob([text], { type: format === "html" ? "text/html" : format === "json" ? "application/json" : "text/markdown" }));
     const anchor = document.createElement("a"); anchor.href = url; anchor.download = `${String(draft!.concept.name || "monster").replace(/[^a-z0-9]+/gi, "-").toLowerCase()}.${format === "markdown" ? "md" : format}`; anchor.click(); URL.revokeObjectURL(url);
@@ -246,13 +257,13 @@ export function App() {
   const editorProps: EditorProps = { draft, catalog, evaluation, choiceRequirements, automaticSelections, selectionBudgets, onPreview: previewChoiceRequirements, onSave: save, onBack: () => setStep((current) => Math.max(0, current - 1)) };
   const side = <Side draft={draft} evaluation={evaluation} monster={monster} proposal={proposal} busy={busy} aiRunning={aiRunning} aiError={aiError} setStep={setStep} issueStep={draft.creationSystem === "npc" ? npcStepForPath : undefined} onGenerate={generateProposal} onAccept={acceptProposal} onClearProposal={() => setProposal(undefined)} />;
   if (draft.creationSystem === "npc") {
-    return <><Header draft={draft} monster={monster} busy={busy} creationSystem="npc" onNew={createDraft} onNewNpc={createNpcDraft} onResume={resume} onFinalize={finalize} onExport={exportMonster} />
+    return <><Header draft={draft} evaluation={evaluation} monster={monster} busy={busy} creationSystem="npc" onNew={createDraft} onNewNpc={createNpcDraft} onResume={resume} onFinalize={finalize} onExport={exportMonster} />
       <main class="app"><div class="summary"><span class={`pill ${evaluation.status}`}>NPC: {evaluation.status}</span><span class="pill">Revision {draft.revision}</span><span class="pill">{draft.status}</span><span class="pill mono">{draft.draftId}</span>{busy && <span class="pill incomplete">Working…</span>}</div>
         <div class="layout npc-layout"><NpcWorkflow draft={draft} catalog={npcCatalog} evaluation={evaluation} step={step} setStep={setStep} choiceRequirements={choiceRequirements} automaticSelections={automaticSelections} selectionBudgets={selectionBudgets} onPreview={previewChoiceRequirements} onSave={save} onBack={() => setStep((current) => Math.max(0, current - 1))} />{side}</div>
       </main>{library && <LibraryModal library={library} currentDraftId={draft.draftId} onClose={() => setLibrary(undefined)} onSelect={openSaved} onDelete={deleteEntry} />}{message && <div class={`toast ${message.good ? "good" : ""}`}>{message.text}</div>}</>;
   }
   const editors = [<ConceptStep {...editorProps} />, <ArrayStep {...editorProps} />, <PrimaryGraftStep {...editorProps} />, <SubtypeStep {...editorProps} />, <TemplateStep {...editorProps} />, <SizeStep {...editorProps} />, <SpellStep {...editorProps} />, <OptionsStep {...editorProps} />, <SkillsStep {...editorProps} />, <DamageStep {...editorProps} />];
-  return <><Header draft={draft} monster={monster} busy={busy} creationSystem="simple-monster" onNew={createDraft} onNewNpc={createNpcDraft} onResume={resume} onFinalize={finalize} onExport={exportMonster} />
+  return <><Header draft={draft} evaluation={evaluation} monster={monster} busy={busy} creationSystem="simple-monster" onNew={createDraft} onNewNpc={createNpcDraft} onResume={resume} onFinalize={finalize} onExport={exportMonster} />
     <main class="app"><div class="summary"><span class={`pill ${evaluation.status}`}>Strict: {evaluation.status}</span><span class="pill">Revision {draft.revision}</span><span class="pill">{draft.status}</span><span class="pill mono">{draft.draftId}</span>{busy && <span class="pill incomplete">Working…</span>}</div>
       <div class="layout"><Rail draft={draft} evaluation={evaluation} step={step} setStep={setStep} /><section class="panel workspace"><div class="step-head"><div class="kicker">{step === 0 ? "Before you begin" : `Step ${step}`}</div><h2>{STEPS[step].label}</h2><p>{STEPS[step].desc}</p></div><div key={`${draft.draftId}-${step}-${draft.revision}`}>{editors[step]}</div></section>{side}</div>
     </main>{library && <LibraryModal library={library} currentDraftId={draft.draftId} onClose={() => setLibrary(undefined)} onSelect={openSaved} onDelete={deleteEntry} />}{message && <div class={`toast ${message.good ? "good" : ""}`}>{message.text}</div>}</>;
@@ -293,10 +304,10 @@ function LibraryModal(props: { library: { drafts: LibraryEntry[]; monsters: Libr
   </div>;
 }
 
-function Header(props: { draft: Draft; monster?: FinishedMonster; busy: boolean; creationSystem: "simple-monster" | "npc"; onNew: () => void; onNewNpc: () => void; onResume: () => void; onFinalize: () => void; onExport: (format: string, profile: string) => void }) {
+function Header(props: { draft: Draft; evaluation: Evaluation; monster?: FinishedMonster; busy: boolean; creationSystem: "simple-monster" | "npc"; onNew: () => void; onNewNpc: () => void; onResume: () => void; onFinalize: () => void; onExport: (format: string, profile: string) => void }) {
   const [format, setFormat] = useState("markdown"); const [profile, setProfile] = useState("sheet");
   const npc = props.creationSystem === "npc";
-  return <header class="top"><div class="top-inner"><div class="brand"><small>Pathfinder Unchained · {npc ? "Class-based NPC Creation" : "Simple Monster Creation"}</small><h1>{String(props.draft.concept.name || (npc ? "Guided-Rail NPC Builder" : "Guided-Rail Monster Builder"))}</h1></div><div class="actions"><button class="btn dark" onClick={props.onNew}>New Simple Monster</button><button class="btn dark" onClick={props.onNewNpc}>New NPC</button><button class="btn dark" onClick={props.onResume}>Open saved</button><select class="btn" value={format} onChange={(event) => setFormat(event.currentTarget.value)}><option value="markdown">Markdown</option><option value="html">HTML / Print</option><option value="json">JSON</option></select><select class="btn" value={profile} onChange={(event) => setProfile(event.currentTarget.value)}><option value="sheet">Sheet</option><option value="audit">Sheet + audit</option></select><button class="btn" disabled={!props.monster} onClick={() => props.onExport(format, profile)}>Export</button><button class="btn primary" disabled={props.busy || props.draft.status !== "active"} onClick={props.onFinalize}>Finalize</button></div></div></header>;
+  return <header class="top"><div class="top-inner"><div class="brand"><small>Pathfinder Unchained · {npc ? "Class-based NPC Creation" : "Simple Monster Creation"}</small><h1>{String(props.draft.concept.name || (npc ? "Guided-Rail NPC Builder" : "Guided-Rail Monster Builder"))}</h1></div><div class="actions"><button class="btn dark" onClick={props.onNew}>New Simple Monster</button><button class="btn dark" onClick={props.onNewNpc}>New NPC</button><button class="btn dark" onClick={props.onResume}>Open saved</button><select class="btn" value={format} onChange={(event) => setFormat(event.currentTarget.value)}><option value="markdown">Markdown</option><option value="html">HTML / Print</option><option value="json">JSON</option></select><select class="btn" value={profile} onChange={(event) => setProfile(event.currentTarget.value)}><option value="sheet">Sheet</option><option value="audit">Sheet + audit</option></select><button class="btn" disabled={props.evaluation.status !== "valid" && !props.monster} title={props.evaluation.status === "valid" ? "Export the current valid draft" : props.monster ? "Export the latest finalized FinishedMonster" : "Export unavailable until a valid draft or finished monster exists"} onClick={() => props.onExport(format, profile)}>Export</button><button class="btn primary" disabled={props.busy || props.draft.status !== "active"} onClick={props.onFinalize}>Finalize</button></div></div></header>;
 }
 
 function Rail(props: { draft: Draft; evaluation: Evaluation; step: number; setStep: (step: number) => void }) {

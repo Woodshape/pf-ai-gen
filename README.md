@@ -37,7 +37,8 @@ history/restore, duplication, and archive/restore; at most 20 older revisions
 are retained. Valid Strict Drafts can be finalized as immutable FinishedMonster
 snapshots, then fetched, duplicated, archived/restored, or exported through
 `monster.export` as JSON, Markdown, or standalone HTML/print with `sheet` and
-`audit` profiles. With no workspace configured, `Engine` remains process-local.
+`audit` profiles. Valid drafts can also be projected without finalization via
+`draft.export`; with no workspace configured, `Engine` remains process-local.
 The current slice covers the versioned catalog, Worg CR 2, Griffon CR 4,
 the strict pre-Reality-Check Medusa CR 7 path, and catalogs all source-listed
 class, subtype, and template grafts. Required arrays, highest-only class CR entries,
