@@ -1,6 +1,24 @@
 # NPC feat support audit
 
-Audited against runtime/catalog commit `3f8c29f`. This is a **coverage report, not an implementation claim**; no NPC rules were changed by this audit.
+The original audit below describes runtime/catalog commit `3f8c29f`. Its historical counts and checklist are retained; current implementation progress follows.
+
+## Implementation status
+
+`python3 tools/audit_npc_feats.py` now reports all **99 source-resolved** recommendations: **51 calculated**, **33 intentionally GM-handled** (including metamagic ownership), **1 partial**, and **14 selection-only**. Source resolution is deliberately separate from mechanical support; selection-only feats cannot finalize an NPC.
+
+Implemented in this pass:
+
+- Source-backed records, full-text rules, typed prerequisites, required choices and three transitive prerequisite records. Prerequisites receive acquisition-level abilities/BAB/class levels, skill ranks, caster level, features and grants. Required school targets match their prerequisite chain.
+- Permanent HP, saves, initiative, dodge/shield AC, proficiency, skill/weapon bonuses and threat ranges; labelled conditional bonuses; individual spell-school DCs. Individual archived spell headers supply metadata, not simulated spell effects.
+- Both reproduced defects pass public Engine regressions: proficient-shield Finesse **+4**, BAB +6 Rapid Shot **+6/+6/+1**. Full-attack thresholds also run through public Engine checks at BAB +6/+11/+16/+20.
+- Optional combat previews and explicit `selections.combatOptions` requests: `{weaponId, offHandWeaponId?, action: "attack" | "full-attack", options: [feat IDs]}`. Shared routines handle Power Attack, Deadly Aim, Rapid Shot, Manyshot, two-weapon chains/Double Slice, Vital Strike chains, several unarmed actions, Cleave, Combat Expertise, Arcane Strike, Pinpoint Targeting and Whirlwind Attack. Conditions, costs and defense changes remain separate from base statistics. Incompatible action combinations are rejected. Pair routines currently support resolved melee weapons; shield-equipped, thrown-weapon and double-weapon pairs remain unsupported rather than inheriting incorrect base attack/defense numbers.
+- Generic feat choices and optional routines survive draft persistence/finalization and appear in UI, structured, Markdown and HTML exports. Exact gear-budget rows and Warrior progression reach level 20. Druid 4 supplies Wild Shape qualification without applying its temporary form to base statistics.
+
+**Not complete:** Channel Smite, Command Undead, Deadly Stroke, Extra Channel, Improved Channel, Rapid Reload, Run, Shield Master, Shield Slam, Spirited Charge, Trample, Turn Undead, Two-Weapon Defense and Two-Weapon Rend remain explicitly selection-only. Weapon Focus's virtual unarmed/grapple/ray targets are not yet selectable (catalog weapon targets are calculated). Greater Weapon Focus has the corresponding transitive-target limitation. Selected metamagic spell variants remain unsupported; ownership and slot-adjustment metadata do not imply activation support. Wizard, cleric, monk, fighter and paladin progression/grant/waiver gaps remain; cleric source metadata is explicitly a gap, not a valid spell-less cleric. These limitations prevent claiming the entire backlog milestone complete.
+
+Reproduction: `python3 tools/build_feat_fragment.py`, `python3 tools/enrich_npc_spell_metadata.py`, `python3 tools/enrich_npc_weapon_metadata.py`, then `python3 tools/build_npc_catalog.py`. Public checks live in `tests/test_npc_feat_coverage.py`, `tests/test_npc_combat.py`, and `tests/test_npc_class_dependencies.py`.
+
+## Original audit
 
 ## Answer
 

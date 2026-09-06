@@ -1931,31 +1931,87 @@
    "catalogStatus": "gap",
    "gapCode": "core-rulebook-class-tables",
    "category": "pc",
-   "hitDie": null,
-   "classSkills": null,
-   "skillSelections": null,
+   "hitDie": "d8",
+   "classSkills": [
+    "skill.appraise",
+    "skill.craft",
+    "skill.diplomacy",
+    "skill.heal",
+    "skill.knowledge-arcana",
+    "skill.knowledge-history",
+    "skill.knowledge-nobility",
+    "skill.knowledge-planes",
+    "skill.knowledge-religion",
+    "skill.linguistics",
+    "skill.profession",
+    "skill.sense-motive",
+    "skill.spellcraft"
+   ],
+   "skillSelections": 2,
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-cleric",
+     "section": "Cleric; Class Skills",
+     "txtLines": [
+      1,
+      12
+     ],
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+     "provenanceStatus": "resolved",
+     "entry": "Cleric class description, class skills, and skill points; level rows remain catalog gaps"
+    },
+    {
+     "sourceId": "source.npc-gap-matrix",
+     "section": "NPC Source-Gap Matrix",
+     "txtLines": [
+      22,
+      22
+     ],
+     "entry": "Eleven Core PC class tables through level 20",
+     "provenanceStatus": "catalog-gap"
+    }
+   ],
+   "castingAbility": "wisdom",
+   "castingMode": "prepared",
    "levels": {
     "1": {
      "level": 1,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
+     "bab": 0,
+     "fortitude": 2,
+     "reflex": 0,
+     "will": 2,
+     "hitDie": "d8",
+     "skillSelections": 2,
      "featureGrants": null,
      "choiceSlots": null,
+     "spellsPerDay": {
+      "0": 3,
+      "1": 1
+     },
      "catalogStatus": "gap",
-     "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
-      "txtLines": [
-       22,
-       22
-      ],
-      "entry": "Cleric level 1",
-      "provenanceStatus": "catalog-gap"
-     }
+     "sourceRef": [
+      {
+       "sourceId": "source.aon-cleric",
+       "section": "Table: Cleric",
+       "txtLines": [
+        14,
+        15
+       ],
+       "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+       "provenanceStatus": "resolved",
+       "entry": "Cleric level 1 base attack, saves, and base spells per day (domain slot granted separately by the chosen domains)"
+      },
+      {
+       "sourceId": "source.npc-gap-matrix",
+       "section": "NPC Source-Gap Matrix",
+       "txtLines": [
+        22,
+        22
+       ],
+       "provenanceStatus": "catalog-gap",
+       "entry": "Cleric level 1 remains a catalog gap: divine prepared casting runtime, domain choices, and channel energy type are unimplemented"
+      }
+     ]
     },
     "2": {
      "level": 2,
@@ -2375,16 +2431,6 @@
       "provenanceStatus": "catalog-gap"
      }
     }
-   },
-   "sourceRef": {
-    "sourceId": "source.npc-gap-matrix",
-    "section": "NPC Source-Gap Matrix",
-    "txtLines": [
-     22,
-     22
-    ],
-    "entry": "Eleven Core PC class tables through level 20",
-    "provenanceStatus": "catalog-gap"
    }
   },
   {
@@ -3007,25 +3053,47 @@
     },
     "4": {
      "level": 4,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
-     "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
-      "txtLines": [
-       22,
-       22
-      ],
-      "entry": "Druid level 4",
-      "provenanceStatus": "catalog-gap"
-     }
+     "bab": 3,
+     "fortitude": 4,
+     "reflex": 1,
+     "will": 4,
+     "hitDie": "d8",
+     "skillSelections": 4,
+     "featureGrants": [
+      "npc-class-feature.druid-resist-natures-lure",
+      "npc-class-feature.druid-wild-shape"
+     ],
+     "choiceSlots": [],
+     "spellsPerDay": {
+      "0": 4,
+      "1": 3,
+      "2": 2
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": [
+      {
+       "entry": "Druid level 4",
+       "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid",
+       "provenanceStatus": "resolved",
+       "section": "Table: Druid",
+       "sourceId": "source.aon-druid",
+       "txtLines": [
+        13,
+        17
+       ]
+      },
+      {
+       "entry": "Druid skill selections",
+       "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+       "provenanceStatus": "resolved",
+       "section": "Step 3: Skills",
+       "sourceId": "source.aon-creating-npcs",
+       "txtLines": [
+        40,
+        44
+       ]
+      }
+     ]
     },
     "5": {
      "level": 5,
@@ -3409,7 +3477,8 @@
    "supportedLevels": [
     1,
     2,
-    3
+    3,
+    4
    ]
   },
   {
@@ -6876,7 +6945,22 @@
     2,
     3,
     4,
-    5
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
    ],
    "levels": {
     "1": {
@@ -6993,332 +7077,332 @@
     },
     "6": {
      "level": 6,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 6,
+     "fortitude": 5,
+     "reflex": 2,
+     "will": 2,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       154,
+       154
       ],
       "entry": "Warrior level 6",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     },
     "7": {
      "level": 7,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 7,
+     "fortitude": 5,
+     "reflex": 2,
+     "will": 2,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       155,
+       155
       ],
       "entry": "Warrior level 7",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     },
     "8": {
      "level": 8,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 8,
+     "fortitude": 6,
+     "reflex": 2,
+     "will": 2,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       156,
+       156
       ],
       "entry": "Warrior level 8",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     },
     "9": {
      "level": 9,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 9,
+     "fortitude": 6,
+     "reflex": 3,
+     "will": 3,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       157,
+       157
       ],
       "entry": "Warrior level 9",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     },
     "10": {
      "level": 10,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 10,
+     "fortitude": 7,
+     "reflex": 3,
+     "will": 3,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       158,
+       158
       ],
       "entry": "Warrior level 10",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     },
     "11": {
      "level": 11,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 11,
+     "fortitude": 7,
+     "reflex": 3,
+     "will": 3,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       159,
+       159
       ],
       "entry": "Warrior level 11",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     },
     "12": {
      "level": 12,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 12,
+     "fortitude": 8,
+     "reflex": 4,
+     "will": 4,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       160,
+       160
       ],
       "entry": "Warrior level 12",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     },
     "13": {
      "level": 13,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 13,
+     "fortitude": 8,
+     "reflex": 4,
+     "will": 4,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       161,
+       161
       ],
       "entry": "Warrior level 13",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     },
     "14": {
      "level": 14,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 14,
+     "fortitude": 9,
+     "reflex": 4,
+     "will": 4,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       162,
+       162
       ],
       "entry": "Warrior level 14",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     },
     "15": {
      "level": 15,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 15,
+     "fortitude": 9,
+     "reflex": 5,
+     "will": 5,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       163,
+       163
       ],
       "entry": "Warrior level 15",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     },
     "16": {
      "level": 16,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 16,
+     "fortitude": 10,
+     "reflex": 5,
+     "will": 5,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       164,
+       164
       ],
       "entry": "Warrior level 16",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     },
     "17": {
      "level": 17,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 17,
+     "fortitude": 10,
+     "reflex": 5,
+     "will": 5,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       165,
+       165
       ],
       "entry": "Warrior level 17",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     },
     "18": {
      "level": 18,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 18,
+     "fortitude": 11,
+     "reflex": 6,
+     "will": 6,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       166,
+       166
       ],
       "entry": "Warrior level 18",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     },
     "19": {
      "level": 19,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 19,
+     "fortitude": 11,
+     "reflex": 6,
+     "will": 6,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       167,
+       167
       ],
       "entry": "Warrior level 19",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     },
     "20": {
      "level": 20,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 20,
+     "fortitude": 12,
+     "reflex": 6,
+     "will": 6,
+     "hitDie": "d10",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-npc-classes",
+      "section": "Table: Warrior",
       "txtLines": [
-       21,
-       21
+       168,
+       168
       ],
       "entry": "Warrior level 20",
-      "provenanceStatus": "catalog-gap"
+      "provenanceStatus": "resolved"
      }
     }
    },

@@ -123,6 +123,20 @@ def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dic
             specials.append({"name": str(value.get("name", value.get("graftId", "Ability"))), "text": str(value.get("text", value.get("ruleText", "")))})
     if creation_system == "npc":
         specials.extend(_npc_specials(result.get("classFeatures", [])))
+        for feat in result.get("feats", []):
+            if feat.get("rulesText"):
+                specials.append({"name": feat["name"], "text": feat["rulesText"] +
+                                 (f" Limitation: {feat['supportLimitations']}" if feat.get("supportLimitations") else "")})
+        for modifier in result.get("conditionalModifiers", []):
+            specials.append({"name": "Conditional modifier", "text":
+                f"{_signed(modifier['bonus'])} {modifier['stat']}: {modifier['condition']}"})
+        for routine in result.get("combatRoutines", []):
+            parts = [_attack(attack, index, {})["text"] for index, attack in enumerate(routine["attacks"])]
+            if routine.get("state"):
+                parts.append(_value_text(routine["state"]))
+            parts.extend(routine.get("notes", []))
+            specials.append({"name": "Optional routine: " + ", ".join(_human(feat) for feat in routine["feats"]),
+                             "text": "; ".join(parts), "routine": copy.deepcopy(routine)})
 
     statistic_fields = []
     if creation_system == "npc" and isinstance(result.get("abilityScores"), Mapping) and result["abilityScores"]:
@@ -405,6 +419,12 @@ def _npc_specials(features: Any) -> list[dict[str, Any]]:
     for feature in features if isinstance(features, list) else []:
         if not isinstance(feature, Mapping):
             continue
+        if feature.get("rulesText"):
+            text = feature["rulesText"]
+            if feature.get("wildShape"):
+                shape = feature["wildShape"]
+                text = f"{shape['usesPerDay']}/day, {shape['hoursPerUse']} hours/use. {text}"
+            result.append({"name": feature["name"], "text": text})
         arcana = feature.get("arcana")
         if isinstance(arcana, Mapping):
             result.append({"name": str(arcana.get("name", "Bloodline Arcana")), "text": str(arcana.get("effect", ""))})
@@ -868,6 +888,8 @@ def _npc_sheet_lines(model: Mapping[str, Any]) -> list[str]:
     lines.extend(["## Offense", *_npc_offense_lines(model), ""])
     lines.extend(["## Statistics", *_npc_statistics_lines(model)])
     lines.extend(_npc_spell_lines(model))
+    if model.get("specialAbilities"):
+        lines.extend(["", "## Special Abilities", *[f"**{value['name']}:** {value['text']}" for value in model["specialAbilities"]]])
     if model.get("linkedCreature"):
         lines.extend(["", "## LINKED CREATURE", *_linked_creature_lines(model["linkedCreature"])])
     if model.get("catalogVersion"):
@@ -892,6 +914,8 @@ def _npc_html(model: Mapping[str, Any]) -> str:
     parts.append(_html_section("Defense", defense))
     parts.append(_html_section("Offense", offense))
     parts.append(_html_section("Statistics", statistics))
+    if model.get("specialAbilities"):
+        parts.append(_html_section("Special Abilities", [f"{value['name']}: {value['text']}" for value in model["specialAbilities"]]))
     if model.get("linkedCreature"):
         parts.append(_html_section("LINKED CREATURE", _linked_creature_lines(model["linkedCreature"])))
     if model.get("catalogVersion"):
@@ -950,6 +974,11 @@ def _speed(value: Any) -> str:
 _SPELL_LEVEL_NUMERALS = {1: "I", 2: "II", 3: "III", 4: "IV", 5: "V", 6: "VI", 7: "VII", 8: "VIII", 9: "IX"}
 
 
+def _npc_spell_name(spell_id: str, spells: Mapping[str, Any]) -> str:
+    dc = spells.get("saveDcBySpell", {}).get(spell_id)
+    return _human(spell_id) + (f" (DC {dc})" if dc is not None else "")
+
+
 def _spell_lines(statistics: Mapping[str, Any]) -> list[str]:
     spells = statistics["spells"]
     if isinstance(spells, Mapping):
@@ -968,7 +997,7 @@ def _spell_lines(statistics: Mapping[str, Any]) -> list[str]:
         per_day = spells.get("perDay", {})
         dcs = spells.get("saveDcByLevel", {})
         for level in sorted(known, key=int, reverse=True):
-            names = ", ".join(_human(spell_id) + ("ᴮ" if spell_id in bloodline else "") for spell_id in known[level])
+            names = ", ".join(_npc_spell_name(spell_id, spells) + ("ᴮ" if spell_id in bloodline else "") for spell_id in known[level])
             frequency = per_day.get(level)
             frequency_text = "at will" if frequency == "at-will" else f"{frequency}/day"
             label = "0" if level == "0" else f"{level}{_ordinal_suffix(int(level))}"
@@ -1022,9 +1051,9 @@ def _prepared_spell_lines(spells: Mapping[str, Any]) -> list[str]:
         slots = slots_by_level.get(level, {}) if isinstance(slots_by_level, Mapping) else {}
         parts = [f"{slots[key]} {label}" for key, label in (("base", "base"), ("wisdomBonus", "Wis"), ("domain", "domain")) if slots.get(key)]
         total = slots.get("total", len(prepared[level]))
-        names = ", ".join(_human(spell_id) for spell_id in prepared[level])
+        names = ", ".join(_npc_spell_name(spell_id, spells) for spell_id in prepared[level])
         if isinstance(domain_prepared, Mapping) and domain_prepared.get(level):
-            names = (names + ", " if names else "") + ", ".join(_human(spell_id) + "ᴰ" for spell_id in domain_prepared[level])
+            names = (names + ", " if names else "") + ", ".join(_npc_spell_name(spell_id, spells) + "ᴰ" for spell_id in domain_prepared[level])
         label = "0" if level == "0" else f"{level}{_ordinal_suffix(int(level))}"
         lines.append(f"{label} ({total} slots: {', '.join(parts)}, DC {dcs.get(level)})—{names}")
     if has_domain:

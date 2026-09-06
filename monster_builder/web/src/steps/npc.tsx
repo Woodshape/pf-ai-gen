@@ -151,8 +151,12 @@ function NpcAbilityStep({ draft, catalog, step, onSave, onBack }: Props) {
   </div></StepFrame>;
 }
 
-function NpcSkillsFeatsStep({ draft, catalog, step, selectionBudgets, onSave, onBack }: Props) {
+function NpcSkillsFeatsStep({ draft, catalog, step, selectionBudgets, choiceRequirements, onSave, onBack }: Props) {
   const generation = objectValue(draft.selections.skillGeneration);
+  const [combatOptions, setCombatOptions] = useState<JsonObject[]>(Array.isArray(draft.selections.combatOptions) ? draft.selections.combatOptions.map(objectValue) : []);
+  const routineFeats = choiceRequirements.find((entry) => entry.path === "/selections/combatOptions")?.values || [];
+  const weaponChoices = Object.values(catalog.items).filter((item) => item.category === "weapon" && item.catalogStatus === "resolved");
+  const updateRoutine = (index: number, field: string, value: unknown) => setCombatOptions((current) => current.map((row, i) => i === index ? { ...row, [field]: value } : row));
   const [method, setMethod] = useState(String(generation.method || "simplified"));
   const [skills, setSkills] = useState<string[]>(Array.isArray(generation.skills) ? generation.skills.filter((value): value is string => typeof value === "string") : []);
   const storedRanks = objectValue(generation.ranks);
@@ -163,7 +167,24 @@ function NpcSkillsFeatsStep({ draft, catalog, step, selectionBudgets, onSave, on
   const [specialties, setSpecialties] = useState<JsonObject>(objectValue(generation.specialties));
   const [untrained, setUntrained] = useState<string[]>(Array.isArray(generation.includeUntrained) ? generation.includeUntrained as string[] : []);
   const [languages, setLanguages] = useState(Array.isArray(generation.languages) ? generation.languages.join(", ") : "");
-  const [weaponsBySlot, setWeaponsBySlot] = useState<JsonObject>(Object.fromEntries(selectedFeats.map((item) => [String(item.slotId), item.weaponId ?? ""])));
+  const [choicesBySlot, setChoicesBySlot] = useState<JsonObject>(Object.fromEntries(selectedFeats.map((item) => [String(item.slotId), item])));
+  const featChoice = (slotId: string) => {
+    const feat = catalog.feats[String(featsBySlot[slotId])];
+    const category = objectValue(feat?.effects).weaponProficiencyCategory;
+    const choice = objectValue(feat?.choice);
+    return { feat, field: String(choice.field || (category ? "weaponId" : "")), category, values: choice.values };
+  };
+  const choiceControl = (slotId: string) => {
+    const { feat, field, category, values } = featChoice(slotId);
+    const stored = objectValue(choicesBySlot[slotId])[field];
+    const update = (value: unknown) => setChoicesBySlot((current) => ({ ...current, [slotId]: { ...objectValue(current[slotId]), [field]: value } }));
+    const records = field === "weaponId" ? Object.values(catalog.items).filter((item) => item.catalogStatus === "resolved" && item.category === "weapon" && (!category || objectValue(item.effects).weaponCategory === category))
+      : field === "skillId" ? Object.values(catalog.skills) : field === "spellIds" ? Object.values(catalog.spells) : [];
+    return <>{feat && <details><summary>{String(feat.supportStatus || "Feat rules")}{Array.isArray(feat.treatments) ? ` · ${feat.treatments.join(" / ")}` : ""}</summary><p>{String(feat.rulesText || "")}</p>{Boolean(feat.supportLimitations) && <p class="hint">{String(feat.supportLimitations)}</p>}</details>}
+      {field && (field === "spellIds" ? <div class="field"><label for={`feat-${slotId}`}>Spells</label><select id={`feat-${slotId}`} multiple onChange={(event) => update(Array.from(event.currentTarget.selectedOptions, (option) => option.value))}>{records.map((record) => <option value={record.id} selected={Array.isArray(stored) && stored.includes(record.id)}>{record.name}</option>)}</select></div>
+        : <Select label={humanize(field)} value={String(stored ?? "")} onChange={update}><option value="">Choose…</option>{records.map((record) => <option value={record.id}>{record.name}</option>)}{Array.isArray(values) && values.map((value) => <option value={String(value)}>{humanize(String(value))}</option>)}</Select>)}
+    </>;
+  };
   const skillBudget = objectValue(selectionBudgets?.skills);
   const specialtyField = (id: string) => catalog.skills[id]?.hasSpecialty ? <Field label={`${catalog.skills[id].name} specialty`} value={String(specialties[id] ?? "")} onInput={(value) => setSpecialties((current) => ({ ...current, [id]: value }))} /> : null;
   const slots = Array.isArray(selectionBudgets?.feats?.slots) ? selectionBudgets.feats.slots : [];
@@ -171,12 +192,16 @@ function NpcSkillsFeatsStep({ draft, catalog, step, selectionBudgets, onSave, on
   const available = Object.values(catalog.skills).filter((skill) => !skills.includes(skill.id)).sort((a, b) => a.name.localeCompare(b.name));
   const submit = (next: boolean) => {
     const numericRanks = Object.fromEntries(Object.entries(ranks).filter(([, rank]) => rank !== "" && Number(rank) > 0).map(([skill, rank]) => [skill, Number(rank)]));
-    const feats = slots.filter((slot) => featsBySlot[slot.slotId]).map((slot) => ({ slotId: slot.slotId, featId: featsBySlot[slot.slotId],
-      ...(objectValue(catalog.feats[String(featsBySlot[slot.slotId])]?.effects).weaponProficiencyCategory && weaponsBySlot[slot.slotId] ? { weaponId: weaponsBySlot[slot.slotId] } : {}) }));
+    const feats = slots.filter((slot) => featsBySlot[slot.slotId]).map((slot) => {
+      const { field } = featChoice(slot.slotId);
+      const value = objectValue(choicesBySlot[slot.slotId])[field];
+      return { slotId: slot.slotId, featId: featsBySlot[slot.slotId], ...(field && value ? { [field]: value } : {}) };
+    });
     const displayed = new Set([...(method === "precise" ? Object.keys(numericRanks) : skills), ...untrained]);
     const selectedSpecialties = Object.fromEntries(Object.entries(specialties).filter(([id, value]) => displayed.has(id) && String(value).trim()));
     onSave({ skillGeneration: { method, ...(method === "precise" ? { ranks: numericRanks } : { skills }),
-      includeUntrained: untrained, specialties: selectedSpecialties, languages: languages.split(",").map((value) => value.trim()).filter(Boolean) }, feats }, {}, next);
+      includeUntrained: untrained, specialties: selectedSpecialties, languages: languages.split(",").map((value) => value.trim()).filter(Boolean) }, feats,
+      combatOptions: combatOptions.map((row) => Object.fromEntries(Object.entries(row).filter(([, value]) => value !== ""))) }, {}, next);
   };
   return <StepFrame step={step} onBack={onBack} onApply={submit}><div class="grid">
     <Select label="Skill method" value={method} onChange={setMethod}><option value="simplified">Simplified skills (one or two classes)</option><option value="precise">Precise skill ranks</option></Select>
@@ -186,10 +211,20 @@ function NpcSkillsFeatsStep({ draft, catalog, step, selectionBudgets, onSave, on
     {method === "simplified" ? <div class="field"><label>Add simplified skill</label><div class="add-row"><select value={addSkill} onChange={(event) => setAddSkill(event.currentTarget.value)}><option value="">Choose a skill…</option>{available.map((skill) => <option value={skill.id}>{skill.name}</option>)}</select><button type="button" class="btn" disabled={!addSkill} onClick={() => { setSkills([...skills, addSkill]); setAddSkill(""); }}>Add</button></div></div> : <div class="field"><label>Precise skill ranks</label><span class="hint">Set a rank value for each trained skill; the engine validates the class rank budget on review.</span></div>}
     {method === "simplified" ? <div class="field full"><div class="builder-list">{skills.map((id) => <div class="builder-card"><div class="builder-head"><strong>{catalog.skills[id]?.name || id}</strong><button type="button" class="btn small" onClick={() => setSkills(skills.filter((value) => value !== id))}>Remove</button></div>{specialtyField(id)}</div>)}</div>{!skills.length && <div class="empty">No simplified skills. Pick from the list to add class skills.</div>}</div>
       : <section class="field full"><div class="builder-head"><div><span class="label">Skill ranks</span><small>Ranks assigned to skills. Leave 0 for untrained skills.</small></div></div><div class="builder-list">{Object.values(catalog.skills).sort((a, b) => a.name.localeCompare(b.name)).map((skill) => <div class="builder-card"><div class="builder-fields"><div class="field"><label>{skill.name}</label><input type="number" min="0" value={String(ranks[skill.id] ?? "")} onInput={(event) => setRanks((current) => (event.currentTarget.value === "" ? Object.fromEntries(Object.entries(current).filter(([key]) => key !== skill.id)) : { ...current, [skill.id]: event.currentTarget.value }))} /></div>{specialtyField(skill.id)}</div></div>)}</div></section>}
-    <section class="field full"><div class="builder-head"><div><span class="label">Feats</span><small>{slots.length} feat slot(s). Pick a feat for each; prerequisites are enforced by the engine on review.</small></div></div>
-      <div class="builder-list">{slots.length ? slots.map((slot) => <div class="builder-card" key={slot.slotId}><div class="builder-fields"><div class="field"><label>{humanize(slot.slotId)}</label><select value={String(featsBySlot[slot.slotId] ?? "")} onChange={(event) => setFeatsBySlot((current) => (event.currentTarget.value === "" ? Object.fromEntries(Object.entries(current).filter(([key]) => key !== slot.slotId)) : { ...current, [slot.slotId]: event.currentTarget.value }))}><option value="">Choose a feat…</option>{allFeats.map((feat) => { const unresolved = feat.catalogStatus !== undefined && feat.catalogStatus !== "resolved"; return <option value={feat.id} key={feat.id} disabled={unresolved}>{feat.name}{unresolved ? " — not yet source-resolved" : ""}</option>; })}</select></div>
-        {Boolean(objectValue(catalog.feats[String(featsBySlot[slot.slotId])]?.effects).weaponProficiencyCategory) && <Select label="Weapon proficiency" value={String(weaponsBySlot[slot.slotId] ?? "")} onChange={(value) => setWeaponsBySlot((current) => ({ ...current, [slot.slotId]: value }))}><option value="">Choose a weapon…</option>{Object.values(catalog.items).filter((item) => item.catalogStatus === "resolved" && objectValue(item.effects).weaponCategory === objectValue(catalog.feats[String(featsBySlot[slot.slotId])]?.effects).weaponProficiencyCategory).map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}</Select>}
+    <section class="field full"><div class="builder-head"><div><span class="label">Feats</span><small>{slots.length} feat slot(s). Prerequisites are checked at acquisition level. B: base modifier; R: conditional; A: optional routine; GM: rules permission; M: metamagic ownership.</small></div></div>
+      <div class="builder-list">{slots.length ? slots.map((slot) => <div class="builder-card" key={slot.slotId}><div class="builder-fields"><div class="field"><label>{humanize(slot.slotId)}</label><select value={String(featsBySlot[slot.slotId] ?? "")} onChange={(event) => setFeatsBySlot((current) => (event.currentTarget.value === "" ? Object.fromEntries(Object.entries(current).filter(([key]) => key !== slot.slotId)) : { ...current, [slot.slotId]: event.currentTarget.value }))}><option value="">Choose a feat…</option>{allFeats.map((feat) => { const unresolved = feat.catalogStatus !== undefined && feat.catalogStatus !== "resolved"; const missingEffects = feat.supportStatus === "selection-only"; return <option value={feat.id} key={feat.id} disabled={unresolved || missingEffects}>{feat.name}{unresolved ? " — not yet source-resolved" : missingEffects ? " — calculation not implemented" : ""}</option>; })}</select></div>
+        {choiceControl(slot.slotId)}
       </div></div>) : <div class="empty">No feat slots for the current level.</div>}</div>
+    </section>
+    <section class="field full"><h3>Optional combat routines</h3><p class="hint">These never replace base statistics. Choose equipped weapons and owned feats. Selecting Point-Blank Shot describes a routine within 30 feet. Incompatible combinations are rejected on review.</p>
+      {combatOptions.map((row, index) => <div class="builder-card" key={index}><div class="builder-fields">
+        <Select label="Weapon / primary hand" value={String(row.weaponId || "")} onChange={(value) => updateRoutine(index, "weaponId", value)}><option value="">Choose…</option><option value="unarmed-strike">Unarmed strike (requires Improved Unarmed Strike)</option>{weaponChoices.map((item) => <option value={item.id}>{item.name}</option>)}</Select>
+        <Select label="Off-hand weapon (two-weapon routine only)" value={String(row.offHandWeaponId || "")} onChange={(value) => updateRoutine(index, "offHandWeaponId", value)}><option value="">None</option><option value="unarmed-strike">Unarmed strike</option>{weaponChoices.map((item) => <option value={item.id}>{item.name}</option>)}</Select>
+        <Select label="Action" value={String(row.action || "attack")} onChange={(value) => updateRoutine(index, "action", value)}><option value="attack">Single attack</option><option value="full-attack">Full attack</option></Select>
+        <div class="field"><label for={`routine-options-${index}`}>Combine feat options</label><select id={`routine-options-${index}`} multiple onChange={(event) => updateRoutine(index, "options", Array.from(event.currentTarget.selectedOptions, (option) => option.value))}>{routineFeats.map((feat) => <option value={feat.value} selected={Array.isArray(row.options) && row.options.includes(feat.value)}>{feat.label}</option>)}</select></div>
+        <button type="button" class="btn" onClick={() => setCombatOptions(combatOptions.filter((_, i) => i !== index))}>Remove routine</button>
+      </div></div>)}
+      <button type="button" class="btn" onClick={() => setCombatOptions([...combatOptions, { weaponId: "", action: "attack", options: [] }])}>Add combat routine</button>
     </section>
   </div><p class="hint">One shared skill calculation applies ranks, class bonuses, abilities, size, racial modifiers and armor penalties. Three or more classes require precise ranks.</p></StepFrame>;
 }

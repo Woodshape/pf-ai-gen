@@ -11,6 +11,7 @@ from monster_builder.catalog import CatalogError
 from monster_builder.creation_systems.base import NPC, CreationSystem
 from monster_builder.errors import BoundaryError
 from monster_builder.npc.prerequisites import evaluate_prerequisite
+from monster_builder.npc.combat import OPTION_FEATS, calculate_routine, combat_routines
 from monster_builder.npc_catalog import NpcCatalog
 
 ABILITIES = ("strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma")
@@ -19,7 +20,7 @@ COMPUTED_FIELDS = {
     "level", "totalLevel", "npcCategory", "abilityScores", "abilityModifiers", "hp", "bab",
     "defenses", "initiative", "attacks", "cmb", "cmd", "skills", "speed", "senses", "languages",
     "size", "classFeatures", "spells", "gearBudget", "canonical", "effective", "derivationTrace",
-    "evaluation", "cr", "ac", "fortitude", "reflex", "will", "linkedCreature",
+    "evaluation", "cr", "ac", "fortitude", "reflex", "will", "linkedCreature", "combatRoutines", "conditionalModifiers",
 }
 
 
@@ -72,7 +73,7 @@ class NpcCreation(CreationSystem):
     selection_fields = frozenset({
         "statblockUse", "raceId", "racialChoices", "classProgression", "abilityGeneration",
         "levelIncreases", "skillGeneration", "feats", "classFeatureChoices", "spellLoadout",
-        "gearProfile", "gear", "details", "archetypeId",
+        "gearProfile", "gear", "details", "archetypeId", "combatOptions",
     })
     computed_selection_fields = frozenset(COMPUTED_FIELDS)
 
@@ -203,6 +204,18 @@ class NpcCreation(CreationSystem):
                     [{"id": item["id"], "name": item["name"], "catalogStatus": item["catalogStatus"]}
                      for item in self.catalog.entries("item").values()
                      if item.get("catalogStatus") == "resolved" and item.get("effects", {}).get("weaponCategory") == category]))
+            choice = record.get("choice", {})
+            field = choice.get("field")
+            if field and not category:
+                record_type = {"weaponId": "item", "skillId": "skill", "spellIds": "spell"}.get(field)
+                values = self._catalog_values(record_type) if record_type else choice.get("values", [])
+                if field == "weaponId":
+                    values = [entry for entry in values if self._record("item", entry["id"]).get("category") == "weapon"]
+                requirements.append(self._requirement(f"/selections/feats/{index}/{field}", record["name"],
+                    "catalog-id-array" if field == "spellIds" else "catalog-id" if record_type else "enum", values))
+        requirements.append(self._requirement("/selections/combatOptions", "Optional combat routines", "combat-routine-array",
+            [{"value": feat_id, "label": self._record("feat", feat_id)["name"]} for feat_id in sorted(OPTION_FEATS)]))
+        requirements[-1]["required"] = False
         gear = selections.get("gear", []) if isinstance(selections.get("gear"), list) else []
         return {
             "creationSystem": NPC,
@@ -246,7 +259,7 @@ class NpcCreation(CreationSystem):
             (1, ("statblockUse", "raceId", "racialChoices", "classProgression", "archetypeId")),
             (2, ("abilityGeneration", "levelIncreases")),
             (3, ("skillGeneration",)),
-            (4, ("feats",)),
+            (4, ("feats", "combatOptions")),
             (5, ("classFeatureChoices",)),
             (6, ("spellLoadout",)),
             (7, ("gearProfile", "gear")),
@@ -325,14 +338,11 @@ class NpcCreation(CreationSystem):
         gear_result, gear_refs, gear_issues, gear_warnings = self._gear(selections, total_level, race.get("sizeId"))
         issues.extend(gear_issues)
         warnings.extend(gear_warnings)
-        feats, feat_effects, feat_refs, feat_issues = self._feats(selections, race, total_level, scores, bab=row["bab"])
-        issues.extend(feat_issues)
         modifiers = {ability: _ability_modifier(score) for ability, score in scores.items()}
         class_features, feature_refs, feature_issues, granted_feats = self._progression_features(
             selections, race, progression, class_records, rows, modifiers, archetype,
         )
         issues.extend(feature_issues)
-        feats.extend(granted_feats)
         skills, skill_refs, skill_issues = self._skills(selections, race, progression, class_records, total_level, scores, gear_result, class_features)
         issues.extend(skill_issues)
         languages, language_refs, language_issues = self._languages(selections, race, class_features, skills)
@@ -342,9 +352,36 @@ class NpcCreation(CreationSystem):
         )
         issues.extend(spell_issues)
         warnings.extend(spell_warnings)
+        feats, feat_effects, feat_refs, feat_issues = self._feats(
+            selections, race, total_level, scores, bab=row["bab"], skills=skills,
+            features=class_features, spells=spells, granted_feats=granted_feats,
+        )
+        issues.extend(feat_issues)
+        feats.extend(granted_feats)
+        for feature in class_features:
+            feature_effects = self._record("classFeature", feature["featureId"]).get("effects") or {}
+            feat_effects.setdefault("conditionalModifiers", []).extend(copy.deepcopy(feature_effects.get("conditionalModifiers", [])))
+        for skill in skills:
+            if skill["skillId"] in feat_effects.get("skillFocus", []):
+                bonus = 6 if skill["ranks"] >= 10 else 3
+                skill["total"] += bonus
+                skill["featBonus"] = bonus
+                skill["sourceRefs"] = _dedupe_refs(skill.get("sourceRefs", []), feat_refs)
+        skill_refs = _dedupe_refs(skill_refs, feat_refs) if feat_effects.get("skillFocus") else skill_refs
         if spells:
             spells["concentration"] = spells["casterLevel"] + modifiers[spells["castingAbility"]]
             spell_refs = _dedupe_refs(spell_refs, [self._source_ref("source.aon-concentration", "Concentration", [4, 4])])
+            if feat_effects.get("schoolDCBonus"):
+                spells["saveDcBySpell"] = {}
+                for field in ("known", "prepared", "domainPrepared"):
+                    for spell_level, spell_ids in spells.get(field, {}).items():
+                        for spell_id in spell_ids:
+                            spell = self._record("spell", spell_id)
+                            school = (spell.get("school") or "").split(" (")[0].lower()
+                            if not school:
+                                issues.append(self._gap(spell, "/selections/spellLoadout"))
+                            spells["saveDcBySpell"][spell_id] = 10 + int(spell_level) + modifiers[spells["castingAbility"]] + feat_effects["schoolDCBonus"].get(school, 0)
+                spell_refs = _dedupe_refs(spell_refs, feat_refs)
         linked_creature, linked_refs, linked_issues = None, [], []
         if archetype is not None:
             linked_creature, linked_refs, linked_issues = self._linked_creature(archetype, archetype_level)
@@ -367,11 +404,15 @@ class NpcCreation(CreationSystem):
         first_die = int(class_record["hitDie"][1:])
         if hp_policy["firstLevelMax"]:
             hp += first_die - round_die((first_die + 1) / 2)
+        hp += max(feat_effects.get("hpPerLevelMinimum", 0), total_level) if feat_effects.get("hpPerLevelMinimum") else 0
         bab = row["bab"]
         size_modifiers = race.get("sizeModifiers", {})
         equipped = [entry for entry in gear_result["items"] if entry["equipped"]]
         armor_bonus = sum(entry["effects"].get("armorBonus", 0) for entry in equipped)
         shield_bonus = sum(entry["effects"].get("shieldBonus", 0) for entry in equipped)
+        if shield_bonus:
+            shield_bonus += feat_effects.get("shieldAC", 0)
+        dodge_bonus = feat_effects.get("dodgeAC", 0)
         max_dex_values = [entry["effects"]["maxDex"] for entry in equipped if "maxDex" in entry["effects"]]
         dex_to_ac = min([modifiers["dexterity"], *max_dex_values]) if max_dex_values else modifiers["dexterity"]
         feat_saves = feat_effects.get("saves", {})
@@ -379,14 +420,14 @@ class NpcCreation(CreationSystem):
         race_saves = race.get("saveBonuses", {}) if isinstance(race.get("saveBonuses"), dict) else {}
         ac_breakdown = {
             key: value for key, value in (
-                ("armor", armor_bonus), ("shield", shield_bonus),
+                ("armor", armor_bonus), ("shield", shield_bonus), ("dodge", dodge_bonus),
                 ("dexterity", dex_to_ac), ("size", size_modifiers.get("ac", 0)),
             ) if value
         }
         defenses = {
-            "ac": 10 + armor_bonus + shield_bonus + dex_to_ac + size_modifiers.get("ac", 0),
-            "touch": 10 + modifiers["dexterity"] + size_modifiers.get("ac", 0),
-            "flatFooted": 10 + armor_bonus + shield_bonus + size_modifiers.get("ac", 0),
+            "ac": 10 + armor_bonus + shield_bonus + dex_to_ac + size_modifiers.get("ac", 0) + dodge_bonus,
+            "touch": 10 + dex_to_ac + size_modifiers.get("ac", 0) + dodge_bonus,
+            "flatFooted": 10 + armor_bonus + shield_bonus + size_modifiers.get("ac", 0) + min(0, dex_to_ac),
             "fortitude": row["fortitude"] + modifiers["constitution"] + feat_saves.get("fortitude", 0) + resistance_bonus + race_saves.get("fortitude", 0),
             "reflex": row["reflex"] + modifiers["dexterity"] + feat_saves.get("reflex", 0) + resistance_bonus + race_saves.get("reflex", 0),
             "will": row["will"] + modifiers["wisdom"] + feat_saves.get("will", 0) + resistance_bonus + race_saves.get("will", 0),
@@ -396,10 +437,17 @@ class NpcCreation(CreationSystem):
         armor_attack_penalty = sum(item["effects"].get("armorCheckPenalty", 0) for item in equipped
                                    if (item["effects"].get("armorCategory") and item["effects"]["armorCategory"] not in proficiencies["armor"])
                                    or (item["effects"].get("shieldCategory") and item["effects"]["shieldCategory"] not in proficiencies["shields"]))
+        if any(feat["featId"] == "feat.improved-unarmed-strike" for feat in feats):
+            equipped.append({"itemId": "unarmed-strike", "name": "Unarmed strike (lethal or nonlethal)",
+                             "category": "weapon", "effects": {"weaponType": "unarmed-strike", "weaponCategory": "simple",
+                             "damageDie": "1d2" if race.get("sizeId") == "size.small" else "1d3",
+                             "damageType": "B", "lightWeapon": True}})
+            proficiencies["weapons"].add("unarmed-strike")
         attacks = self._attacks(equipped, bab, modifiers, size_modifiers, race.get("sizeId"),
                                 weapon_proficiencies=proficiencies["weapons"], armor_penalty=armor_attack_penalty,
                                 finesse=any(feat.get("featId") == "feat.weapon-finesse" for feat in feats),
-                                rapid_shot=any(feat.get("featId") == "feat.rapid-shot" for feat in feats))
+                                rapid_shot=any(feat.get("featId") == "feat.rapid-shot" for feat in feats),
+                                feat_effects=feat_effects)
         resistances: dict[str, int] = {}
         for feature in class_features:
             for power in feature.get("powers", []):
@@ -413,18 +461,39 @@ class NpcCreation(CreationSystem):
                         "range": power.get("range"), "usesPerDay": power.get("usesPerDay"),
                     })
                 resistances.update(power.get("resistance", {}))
+        routine_modifiers = {**modifiers, "characterLevel": total_level,
+                             "casterLevel": max((item["levels"] for item in progression
+                                 if item["classId"] in {"npc-class.bard", "npc-class.sorcerer", "npc-class.wizard"}), default=0),
+                             "monkLevels": next((item["levels"] for item in progression if item["classId"] == "npc-class.monk"), 0)}
+        feat_ids = [feat["featId"] for feat in feats]
+        routines = combat_routines(equipped, attacks, feat_ids, bab, routine_modifiers)
+        for index, request in enumerate(selections.get("combatOptions", [])):
+            try:
+                routine = calculate_routine(equipped, attacks, feat_ids, bab, routine_modifiers, request)
+                routine["selected"] = True
+                routines.append(routine)
+            except ValueError as error:
+                issues.append(self._issue("npc.combat-option-invalid", str(error), path=f"/selections/combatOptions/{index}", source_refs=feat_refs))
+        if issues:
+            return self._evaluation("invalid", mode, issues, warnings)
+        for routine in routines:
+            routine["sourceRefs"] = _dedupe_refs(feat_refs, gear_refs,
+                [self._source_ref("source.aon-equipment", "Weapon handedness and Strength multipliers", [58, 62]),
+                 self._source_ref("source.aon-combat", "Two-Weapon Fighting", [592, 596])])
         cmb = bab + modifiers["strength"] + size_modifiers.get("cmb", 0)
-        cmd = 10 + bab + modifiers["strength"] + modifiers["dexterity"] + size_modifiers.get("cmd", 0)
+        cmd = 10 + bab + modifiers["strength"] + modifiers["dexterity"] + size_modifiers.get("cmd", 0) + dodge_bonus
         source_groups = {
             "abilities": ability_refs,
             "class": class_refs,
-            "hp": _dedupe_refs(class_refs, _refs(hp_rule), ability_refs),
+            "hp": _dedupe_refs(class_refs, _refs(hp_rule), ability_refs, feat_refs),
             "gear": gear_refs,
             "feats": feat_refs,
             "skills": skill_refs,
             "combat": _dedupe_refs(class_refs, ability_refs, gear_refs, feature_refs, feat_refs,
                                   [combat_ref, self._source_ref("source.aon-equipment", "Weapon nonproficiency", [49, 49]),
-                                   self._source_ref("source.aon-equipment", "Armor check penalties and nonproficiency", [308, 310])]),
+                                   self._source_ref("source.aon-equipment", "Armor check penalties and nonproficiency", [308, 310]),
+                                   self._source_ref("source.aon-equipment", "Unarmed weapon damage and handedness", [58, 62]),
+                                   self._source_ref("source.aon-equipment", "Table: Weapons", [108, 112])]),
             "maneuvers": _dedupe_refs(class_refs, ability_refs, [maneuver_ref]),
             "features": _dedupe_refs(feature_refs, ability_refs, class_refs, [combat_ref]),
             "spells": _dedupe_refs(spell_refs, ability_refs, class_refs),
@@ -451,10 +520,12 @@ class NpcCreation(CreationSystem):
             "defenses": defenses,
             "initiative": modifiers["dexterity"] + feat_effects.get("initiative", 0),
             "attacks": attacks,
+            "combatRoutines": routines,
             "cmb": cmb,
             "cmd": cmd,
             "skills": skills,
             "feats": feats,
+            "conditionalModifiers": feat_effects.get("conditionalModifiers", []),
             "classFeatures": class_features,
             **({"linkedCreature": linked_creature} if linked_creature is not None else {}),
             "spells": spells,
@@ -492,16 +563,18 @@ class NpcCreation(CreationSystem):
             self._trace("/canonical/hp", hp,
                         f"house rule: {hp_policy['rounding']} each die average; "
                         + ("maximize first die; " if hp_policy["firstLevelMax"] else "no maximized die; ")
-                        + "add Constitution once per level", source_groups["hp"]),
+                        + "add Constitution once per level and permanent feat HP bonuses", source_groups["hp"]),
             self._trace("/canonical/bab", bab, "sum the selected class level rows", class_refs),
             self._trace("/canonical/defenses", defenses, "combine class saves, abilities, armor, shield, and feat bonuses", source_groups["combat"]),
             self._trace("/canonical/initiative", canonical["initiative"], "Dexterity modifier plus feat bonuses", _dedupe_refs(ability_refs, feat_refs, [combat_ref])),
             self._trace("/canonical/attacks", attacks, "base attacks: BAB, ability, size, equipment and nonproficiency; bows apply Strength penalties but not bonuses; no temporary buffs", source_groups["combat"]),
+            self._trace("/canonical/combatRoutines", routines, "optional feat routines composed from base attacks; conditions and state costs never change base statistics", _dedupe_refs(source_groups["combat"], *[routine["sourceRefs"] for routine in routines])),
             self._trace("/canonical/cmb", cmb, "BAB + Strength modifier + size modifier", source_groups["maneuvers"]),
-            self._trace("/canonical/cmd", cmd, "10 + BAB + Strength modifier + Dexterity modifier + size modifier", source_groups["maneuvers"]),
+            self._trace("/canonical/cmd", cmd, "10 + BAB + Strength modifier + Dexterity modifier + size modifier + dodge bonuses", _dedupe_refs(source_groups["maneuvers"], feat_refs)),
+            self._trace("/canonical/conditionalModifiers", canonical["conditionalModifiers"], "conditional feat and feature modifiers; never applied to base totals", _dedupe_refs(feat_refs, feature_refs)),
             self._trace(
                 "/canonical/skills", skills,
-                "simplified or precise ranks plus trained class-skill bonus, ability, armor, size, racial and permanent class-feature modifiers",
+                "simplified or precise ranks plus trained class-skill bonus, ability, armor, size, racial and permanent class-feature and feat modifiers",
                 skill_refs,
             ),
             self._trace("/canonical/feats", feats, "fill granted feat slots", feat_refs),
@@ -624,9 +697,26 @@ class NpcCreation(CreationSystem):
                 path = f"/selections/feats/{index}"
                 if not isinstance(item, dict) or not isinstance(item.get("slotId"), str) or not isinstance(item.get("featId"), str):
                     raise BoundaryError("selection.type-invalid", "each feat requires slotId and featId", path)
-                self._reject_unknown(item, {"slotId", "featId", "weaponId"}, path)
-                if "weaponId" in item and not isinstance(item["weaponId"], str):
-                    raise BoundaryError("selection.type-invalid", "weaponId must be a catalog item ID", f"{path}/weaponId")
+                self._reject_unknown(item, {"slotId", "featId", "weaponId", "skillId", "school", "subtype", "spellIds"}, path)
+                for field in ("weaponId", "skillId", "school", "subtype"):
+                    if field in item and (not isinstance(item[field], str) or not item[field]):
+                        raise BoundaryError("selection.type-invalid", f"{field} must be a nonempty string", f"{path}/{field}")
+                if "spellIds" in item and (not isinstance(item["spellIds"], list) or any(not isinstance(value, str) or not value for value in item["spellIds"])):
+                    raise BoundaryError("selection.type-invalid", "spellIds must be an array of IDs", f"{path}/spellIds")
+
+        combat_options = selections.get("combatOptions", [])
+        if not isinstance(combat_options, list):
+            raise BoundaryError("selection.type-invalid", "combatOptions must be an array", "/selections/combatOptions")
+        for index, option in enumerate(combat_options):
+            path = f"/selections/combatOptions/{index}"
+            if not isinstance(option, dict):
+                raise BoundaryError("selection.type-invalid", "combat option must be an object", path)
+            self._reject_unknown(option, {"weaponId", "offHandWeaponId", "action", "options"}, path)
+            for field in ("weaponId", "offHandWeaponId", "action"):
+                if field in option and (not isinstance(option[field], str) or not option[field]):
+                    raise BoundaryError("selection.type-invalid", f"{field} must be a nonempty string", f"{path}/{field}")
+            if not isinstance(option.get("options"), list) or any(not isinstance(value, str) for value in option["options"]):
+                raise BoundaryError("selection.type-invalid", "options must be an array of feat IDs", f"{path}/options")
 
         profile = selections.get("gearProfile")
         if profile is not None:
@@ -686,6 +776,9 @@ class NpcCreation(CreationSystem):
         for index, item in enumerate(selections.get("feats", [])):
             lookups.append(("feat", item["featId"], f"/selections/feats/{index}/featId"))
             lookups.append(("item", item.get("weaponId"), f"/selections/feats/{index}/weaponId"))
+            lookups.append(("skill", item.get("skillId"), f"/selections/feats/{index}/skillId"))
+            for spell_index, spell_id in enumerate(item.get("spellIds", [])):
+                lookups.append(("spell", spell_id, f"/selections/feats/{index}/spellIds/{spell_index}"))
         spell_loadout = selections.get("spellLoadout", {})
         if isinstance(spell_loadout, dict):
             for field in ("known", "prepared", "domainPrepared"):
@@ -818,6 +911,10 @@ class NpcCreation(CreationSystem):
                      for index, skill_id in enumerate(selected)}
         for skill_id in generation.get("includeUntrained", []):
             ranks.setdefault(skill_id, 0)
+        for feat in selections.get("feats", []):
+            skill_id = feat.get("skillId")
+            if skill_id and not self._record("skill", skill_id).get("trainedOnly"):
+                ranks.setdefault(skill_id, 0)
         specialties = generation.get("specialties", {})
         if set(specialties) - set(ranks):
             issues.append(self._issue("npc.skill-specialty-invalid", "specialties must refer to displayed skills", path="/selections/skillGeneration/specialties"))
@@ -1133,7 +1230,12 @@ class NpcCreation(CreationSystem):
                     local, [item], [record], [row], modifiers,
                 )
             for entry in entries:
-                effects = self._record("classFeature", entry["featureId"]).get("effects", {})
+                feature_record = self._record("classFeature", entry["featureId"])
+                effects = feature_record.get("effects") or {}
+                if feature_record.get("rulesText"):
+                    entry["rulesText"] = feature_record["rulesText"]
+                if effects.get("wildShape"):
+                    entry["wildShape"] = copy.deepcopy(effects["wildShape"])
                 if effects.get("knowledgeBonus"):
                     entry["knowledgeBonus"] = max(effects["knowledgeBonus"]["minimum"], item["levels"] // effects["knowledgeBonus"]["levelDivisor"])
                     entry["name"] += f" +{entry['knowledgeBonus']}"
@@ -1680,6 +1782,7 @@ class NpcCreation(CreationSystem):
 
     def _feats(
         self, selections: dict[str, Any], race: dict[str, Any], level: int, scores: dict[str, int], *, bab: int,
+        skills=(), features=(), spells=None, granted_feats=(),
     ) -> tuple[list[dict[str, Any]], dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]:
         slots = self._feat_slots(level, race)
         selected = selections["feats"]
@@ -1688,6 +1791,7 @@ class NpcCreation(CreationSystem):
         actual_slots = [item["slotId"] for item in selected]
         if set(actual_slots) != expected_slots or len(actual_slots) != len(set(actual_slots)):
             issues.append(self._issue("npc.feat-slots-invalid", "each required feat slot must be filled exactly once", path="/selections/feats", details={"expectedSlots": sorted(expected_slots)}, source_refs=_dedupe_refs(*[_refs(slot) for slot in slots])))
+        slot_levels = {slot["slotId"]: slot.get("grantedAtLevel", 1) for slot in slots}
         feat_keys = set()
         results: list[dict[str, Any]] = []
         effects: dict[str, Any] = {"initiative": 0, "saves": {}}
@@ -1698,13 +1802,62 @@ class NpcCreation(CreationSystem):
             if record.get("catalogStatus") != "resolved":
                 issues.append(self._gap(record, f"/selections/feats/{index}/featId"))
                 continue
+            acquired = slot_levels.get(item["slotId"], level)
+            remaining = acquired
+            class_levels, acquired_features, acquired_bab, caster_level = {}, set(), 0, 0
+            for entry in selections["classProgression"]:
+                count = min(remaining, entry["levels"])
+                remaining -= count
+                if not count:
+                    break
+                cls = self._record("class", entry["classId"])
+                class_levels[cls["id"]] = count
+                class_row = cls["levels"][str(count)]
+                acquired_bab += class_row["bab"]
+                acquired_features.update(feature["featureId"] for feature in self._class_features(cls, count))
+                class_caster_level = class_row.get("casterLevel")
+                if class_caster_level is None:
+                    class_caster_level = max(0, count - 3) if cls["id"] == "npc-class.ranger" else (count if class_row.get("spellsPerDay") else 0)
+                caster_level = max(caster_level, class_caster_level)
+            acquired_scores = scores.copy()
+            for increase, ability in selections["abilityGeneration"].get("levelIncreases", selections.get("levelIncreases", {})).items():
+                if int(increase) > acquired:
+                    acquired_scores[ability] -= 1
+            available_feats = {entry["featId"] for entry in selected
+                               if entry is not item and slot_levels.get(entry["slotId"], level) <= acquired}
+            available_feats.update(entry["featId"] for entry in granted_feats if entry.get("grantedBy") in acquired_features)
+            # Class proficiency grants satisfy the equivalent feat prerequisite.
+            proficiencies = self._proficiencies(
+                [feature for feature in features if feature["featureId"] in acquired_features], {}, race)
+            available_feats.update(f"feat.armor-proficiency-{category}" for category in proficiencies["armor"])
+            if "shield" in proficiencies["shields"]:
+                available_feats.add("feat.shield-proficiency")
             prerequisite = evaluate_prerequisite(
-                record.get("prerequisites", {"all": []}), ability_scores=scores, bab=bab, character_level=level,
-                feats={entry.get("featId") for entry in selected if isinstance(entry, dict)},
+                record.get("prerequisites", {"all": []}), ability_scores=acquired_scores,
+                bab=acquired_bab, character_level=acquired, feats=available_feats,
+                class_levels=class_levels, skill_ranks={skill["skillId"]: min(acquired, skill["ranks"]) for skill in skills},
+                class_features=acquired_features, caster_level=caster_level,
+                race_id=race["id"], alignment=selections.get("details", {}).get("alignment"),
             )
             if prerequisite is not True:
                 issues.append(self._issue("npc.feat-prerequisite", "feat prerequisites are not met", path=f"/selections/feats/{index}/featId", source_refs=_refs(record)))
-            feat_effect = record.get("effects", {})
+            feat_effect = record.get("effects") or {}
+            if record.get("supportStatus") == "selection-only":
+                issues.append(self._issue("npc.feat-effect-unimplemented", "source and acquisition rules are catalogued, but this feat's calculation is not implemented",
+                                          path=f"/selections/feats/{index}/featId", source_refs=_refs(record)))
+            choice = record.get("choice", {})
+            choice_field = choice.get("field")
+            provided = set(item) & {"weaponId", "skillId", "school", "subtype", "spellIds"}
+            allowed_fields = {choice_field} if choice_field else ({"weaponId"} if feat_effect.get("weaponProficiencyCategory") else set())
+            if provided - allowed_fields or (choice_field and not item.get(choice_field)):
+                issues.append(self._issue("npc.feat-choice-invalid", "supply exactly the feat's required choice", path=f"/selections/feats/{index}"))
+            if choice.get("values") and item.get(choice_field) not in choice["values"]:
+                issues.append(self._issue("npc.feat-choice-invalid", "the selected choice is not allowed", path=f"/selections/feats/{index}/{choice_field}"))
+            if choice_field == "spellIds":
+                known = {spell for values in selections.get("spellLoadout", {}).get("known", {}).values() for spell in values}
+                chosen = item.get("spellIds", [])
+                if len(chosen) != len(set(chosen)) or len(chosen) > max(0, _ability_modifier(acquired_scores["intelligence"])) or set(chosen) - known:
+                    issues.append(self._issue("npc.feat-choice-invalid", "select distinct known spells up to the Intelligence modifier", path=f"/selections/feats/{index}/spellIds"))
             weapon = self._optional("item", item.get("weaponId"))
             weapon_effects = (weapon or {}).get("effects") or {}
             weapon_type = weapon_effects.get("weaponType")
@@ -1718,18 +1871,51 @@ class NpcCreation(CreationSystem):
                 else:
                     effects.setdefault("weaponProficiencies", []).append(weapon_type)
                     refs = _dedupe_refs(refs, _refs(weapon))
-            elif "weaponId" in item:
-                issues.append(self._issue("npc.feat-weapon-invalid", "this feat has no weapon choice", path=f"/selections/feats/{index}/weaponId"))
-            key = (record["id"], weapon_type if category else None)
-            if key in feat_keys:
+            elif choice_field == "weaponId":
+                if not weapon or weapon.get("catalogStatus") != "resolved" or weapon.get("category") != "weapon":
+                    issues.append(self._issue("npc.feat-weapon-invalid", "select a resolved weapon", path=f"/selections/feats/{index}/weaponId"))
+                elif record.get("requiredWeaponProficiency") and not (weapon_type in proficiencies["weapons"] or weapon_effects.get("weaponCategory") in proficiencies["weapons"] or any(
+                    entry.get("featId") == "feat.martial-weapon-proficiency" and
+                    slot_levels.get(entry["slotId"], level) <= acquired and
+                    (self._optional("item", entry.get("weaponId")) or {}).get("effects", {}).get("weaponType") == weapon_type for entry in selected)):
+                    issues.append(self._issue("npc.feat-prerequisite", "the chosen weapon requires proficiency", path=f"/selections/feats/{index}/weaponId"))
+            for prerequisite_id in {"feat.weapon-focus", "feat.spell-focus"}:
+                if record["id"] == "feat.greater-" + prerequisite_id.removeprefix("feat."):
+                    candidates = [entry for entry in selected if entry["featId"] == prerequisite_id
+                                  and slot_levels.get(entry["slotId"], level) <= acquired]
+                    matches = [((self._optional("item", entry.get("weaponId")) or {}).get("effects", {}).get("weaponType") == weapon_type)
+                               if choice_field == "weaponId" else entry.get(choice_field) == item.get(choice_field)
+                               for entry in candidates]
+                    if not any(matches):
+                        issues.append(self._issue("npc.feat-prerequisite", "prerequisite feat must have the same target", path=f"/selections/feats/{index}"))
+            key = (record["id"], weapon_type if category or choice_field == "weaponId" else _canonical_json(item.get(choice_field)))
+            if key in feat_keys and not record.get("repeatable"):
                 issues.append(self._issue("npc.feat-duplicate", "the same feat and choice cannot be selected twice", path=f"/selections/feats/{index}"))
             feat_keys.add(key)
             effects["initiative"] += feat_effect.get("initiative", 0)
             for save in ("fortitude", "reflex", "will"):
                 effects["saves"][save] = effects["saves"].get(save, 0) + feat_effect.get(save, 0)
-            results.append({"slotId": item["slotId"], "featId": record["id"],
-                            "name": record["name"] + (f" ({weapon['name']})" if category and weapon else ""),
-                            **({"weaponId": weapon["id"]} if category and weapon else {}), "sourceRefs": _refs(record)})
+            for field in ("dodgeAC", "shieldAC", "hpPerLevelMinimum"):
+                effects[field] = effects.get(field, 0) + feat_effect.get(field, 0)
+            for field in ("armorProficiencies", "shieldProficiencies", "conditionalModifiers"):
+                effects.setdefault(field, []).extend(copy.deepcopy(feat_effect.get(field, [])))
+            if feat_effect.get("skillFocus") and item.get("skillId"):
+                effects.setdefault("skillFocus", []).append(item["skillId"])
+            for field in ("weaponAttackBonus", "doubleThreatRange", "schoolDCBonus"):
+                if feat_effect.get(field):
+                    target = weapon_type if field != "schoolDCBonus" else item.get("school")
+                    effects.setdefault(field, {})[target] = effects.get(field, {}).get(target, 0) + feat_effect[field]
+            label = weapon["name"] if weapon else item.get(choice_field)
+            if choice_field == "skillId" and label:
+                label = self._record("skill", label)["name"]
+            if isinstance(label, list):
+                label = ", ".join(self._record("spell", value)["name"] for value in label)
+            results.append({**copy.deepcopy(item),
+                            "name": record["name"] + (f" ({label})" if label else ""),
+                            **{field: copy.deepcopy(record[field]) for field in ("treatments", "supportStatus", "supportLimitations", "rulesText") if field in record},
+                            **({"skillBonus": 6 if next((skill["ranks"] for skill in skills if skill["skillId"] == item.get("skillId")), 0) >= 10 else 3}
+                               if feat_effect.get("skillFocus") else {}),
+                            "sourceRefs": _refs(record)})
         return results, effects, refs, issues
 
     def _gear(
@@ -1790,7 +1976,7 @@ class NpcCreation(CreationSystem):
 
     def _proficiencies(self, features, feats, race):
         result = {"weapons": set(race.get("weaponProficiencies", [])) | set(feats.get("weaponProficiencies", [])),
-                  "armor": set(), "shields": set()}
+                  "armor": set(feats.get("armorProficiencies", [])), "shields": set(feats.get("shieldProficiencies", []))}
         for feature in features:
             effects = self._record("classFeature", feature["featureId"]).get("effects", {})
             result["weapons"].update(effects.get("weaponProficiencies", []))
@@ -1806,8 +1992,9 @@ class NpcCreation(CreationSystem):
     def _attacks(
         items: list[dict[str, Any]], bab: int, modifiers: dict[str, int], size_modifiers: dict[str, int],
         size_id: str | None, *, weapon_proficiencies: set[str], armor_penalty: int = 0,
-        finesse: bool = False, rapid_shot: bool = False,
+        finesse: bool = False, rapid_shot: bool = False, feat_effects=None,
     ) -> list[dict[str, Any]]:
+        feat_effects = feat_effects or {}
         attacks = []
         ranged_bases: list[dict[str, Any]] = []
         for item in items:
@@ -1822,34 +2009,49 @@ class NpcCreation(CreationSystem):
             # Ranged weapons use Dexterity for attack rolls. Weapon Finesse is
             # 'may use Dex instead of Str' for eligible melee weapons.
             ranged = effects.get("rangeIncrement") is not None
-            finesse_eligible = finesse and (effects.get("lightWeapon") or effects.get("finesseWeapon"))
-            hit_ability = modifiers["dexterity"] if ranged or (finesse_eligible and modifiers["dexterity"] > modifiers["strength"]) else modifiers["strength"]
+            finesse_eligible = finesse and not ranged and (effects.get("lightWeapon") or effects.get("finesseWeapon"))
+            hit_ability = modifiers["dexterity"] if ranged else modifiers["strength"]
+            if finesse_eligible:
+                # Finesse is optional; include shield ACP before choosing Dex.
+                shield_acp = sum(shield["effects"].get("armorCheckPenalty", 0)
+                                 for shield in items if shield["effects"].get("shieldCategory"))
+                hit_ability = max(hit_ability, modifiers["dexterity"] + shield_acp)
             proficient = effects.get("weaponType") in weapon_proficiencies or effects.get("weaponCategory") in weapon_proficiencies
             attack_bonus = bab + hit_ability + size_modifiers.get("attack", 0) + effects.get("attackBonus", 0) + armor_penalty + (0 if proficient else -4)
+            attack_bonus += feat_effects.get("weaponAttackBonus", {}).get(effects.get("weaponType"), 0)
+            bonuses = [attack_bonus - step for step in range(0, min(16, max(1, bab)), 5)]
+            if effects.get("reloadAction") in {"move", "full-round"}:
+                bonuses = bonuses[:1]
             damage_bonus = 0 if effects.get("noStrengthToDamage") else modifiers["strength"]
             if effects.get("strengthDamage") == "penalty-only":
                 damage_bonus = min(0, modifiers["strength"])
+            elif not ranged and effects.get("twoHanded") and damage_bonus > 0:
+                damage_bonus = damage_bonus * 3 // 2
             damage_bonus += effects.get("damageBonus", 0)
             attack = {
-                "name": item["name"], "itemId": item["itemId"], "attackBonuses": [attack_bonus],
-                "attackBonusExpression": _bonus(attack_bonus),
+                "name": item["name"], "itemId": item["itemId"], "attackBonuses": bonuses,
+                "attackBonusExpression": "/".join(_bonus(value) for value in bonuses),
                 "attackType": "ranged" if ranged else "melee", "proficient": proficient,
                 **({"nonlethal": True} if effects.get("nonlethal") else {}),
                 **({"reach": effects["reach"]} if effects.get("reach") else {}),
                 "damageExpression": f"{damage_die}{_bonus(damage_bonus) if damage_bonus else ''}",
                 "damageType": effects.get("damageType"),
             }
-            if effects.get("critRange") is not None:
+            if effects.get("critRange", 20) < 20:
                 attack["critical"] = f"{effects['critRange']}-20/x{effects.get('critMultiplier', 2)}"
                 attack["critRange"] = effects["critRange"]
-            elif effects.get("critMultiplier") is not None:
+            elif effects.get("critMultiplier", 2) != 2:
                 attack["critical"] = f"x{effects['critMultiplier']}"
-            if effects.get("critMultiplier") is not None:
-                attack["critMultiplier"] = effects["critMultiplier"]
+            if "critical" in attack:
+                attack["critMultiplier"] = effects.get("critMultiplier", 2)
+            if feat_effects.get("doubleThreatRange", {}).get(effects.get("weaponType")):
+                threat = 21 - 2 * (21 - effects.get("critRange", 20))
+                attack.update(critRange=threat, critical=f"{threat}-20/x{effects.get('critMultiplier', 2)}")
             if effects.get("rangeIncrement") is not None:
                 attack["range"] = f"{effects['rangeIncrement']} ft."
                 attack["rangeIncrement"] = effects["rangeIncrement"]
-                ranged_bases.append({"item": item, "attack": attack})
+                if effects.get("reloadAction") not in {"move", "full-round"}:
+                    ranged_bases.append({"item": item, "attack": attack})
             attacks.append(attack)
 
         if rapid_shot:
@@ -1858,8 +2060,8 @@ class NpcCreation(CreationSystem):
                 penalty_bonuses = [bonus - 2 for bonus in attack["attackBonuses"]]
                 attack.update({
                     "name": f"{base['item']['name']} (Rapid Shot)",
-                    "attackBonuses": [penalty_bonuses[0], penalty_bonuses[0]],
-                    "attackBonusExpression": "/".join(_bonus(value) for value in [penalty_bonuses[0], penalty_bonuses[0]]),
+                    "attackBonuses": [penalty_bonuses[0], *penalty_bonuses],
+                    "attackBonusExpression": "/".join(_bonus(value) for value in [penalty_bonuses[0], *penalty_bonuses]),
                     "rapidShot": True,
                     "fullAttack": True,
                 })
@@ -2002,7 +2204,7 @@ class NpcCreation(CreationSystem):
         slots = [{
             "slotId": f"general-{value}", "kind": "general", "grantedAtLevel": value,
             "required": True, "allowedCategories": copy.deepcopy(rule.get("allowedCategories", ["general"])),
-            "allowedFeatIds": [record["id"] for record in self.catalog.entries("feat").values() if record.get("catalogStatus") == "resolved"],
+            "allowedFeatIds": [record["id"] for record in self.catalog.entries("feat").values() if record.get("catalogStatus") == "resolved" and record.get("supportStatus") != "selection-only"],
             "sourceRef": copy.deepcopy(rule.get("sourceRef")),
         } for value in rule.get("levels", []) if value <= level]
         slots.extend(copy.deepcopy((race or {}).get("featSlots", [])))
@@ -2028,10 +2230,14 @@ class NpcCreation(CreationSystem):
         progression = selections.get("classProgression", [])
         npc_category = "heroic" if any((self._optional("class", item.get("classId")) or {}).get("category") == "pc"
                                        for item in progression if isinstance(item, dict)) else "basic"
-        for row in record.get("rows", []):
-            if row.get("level") == level and row.get("npcCategory") == npc_category:
+        rows = [row for row in record.get("rows", []) if row.get("npcCategory") == npc_category]
+        for row in rows:
+            if row.get("level") == level:
                 return {"gearBudgetId": record["id"], **copy.deepcopy(row)}
-        return record
+        # No source-backed row for this level: report an explicit catalog gap.
+        # Never approximate from a lower row; _gear turns the gap status into a
+        # catalog-gap issue instead of crashing on budget["gearBudgetId"].
+        return {**record, "catalogStatus": "gap"}
 
     def _preview_ability(
         self, selections: dict[str, Any], race: dict[str, Any] | None, ability_name: str,

@@ -205,7 +205,7 @@ class CatalogCompletenessTests(unittest.TestCase):
             if class_id in {"npc-class.warrior", "npc-class.sorcerer"}:
                 self.assertEqual(record["catalogStatus"], "resolved")
                 for level in range(1, 21):
-                    maximum = 6 if class_id == "npc-class.sorcerer" else 5
+                    maximum = 6 if class_id == "npc-class.sorcerer" else 20
                     expected = "resolved" if level <= maximum else "gap"
                     self.assertEqual(record["levels"][str(level)]["catalogStatus"], expected)
             elif class_id == "npc-class.druid":
@@ -214,10 +214,16 @@ class CatalogCompletenessTests(unittest.TestCase):
                 self.assertEqual(record["skillSelections"], 4)
                 self.assertEqual(record["castingAbility"], "wisdom")
                 self.assertEqual(record["castingMode"], "prepared")
-                self.assertEqual(record["supportedLevels"], [1, 2, 3])
+                self.assertEqual(record["supportedLevels"], [1, 2, 3, 4])
                 self.assertEqual(record["levels"]["3"]["catalogStatus"], "resolved")
                 self.assertEqual(record["levels"]["3"]["spellsPerDay"], {"0": 4, "1": 2, "2": 1})
-                self.assertTrue(all(record["levels"][str(level)]["catalogStatus"] == "gap" for level in range(4, 21)))
+                self.assertEqual(record["levels"]["4"]["catalogStatus"], "resolved")
+                self.assertEqual((record["levels"]["4"]["bab"], record["levels"]["4"]["fortitude"],
+                                  record["levels"]["4"]["reflex"], record["levels"]["4"]["will"]), (3, 4, 1, 4))
+                self.assertEqual(record["levels"]["4"]["spellsPerDay"], {"0": 4, "1": 3, "2": 2})
+                self.assertEqual(record["levels"]["4"]["featureGrants"],
+                                 ["npc-class-feature.druid-resist-natures-lure", "npc-class-feature.druid-wild-shape"])
+                self.assertTrue(all(record["levels"][str(level)]["catalogStatus"] == "gap" for level in range(5, 21)))
             elif class_id == "npc-class.bard":
                 self.assertEqual(record["catalogStatus"], "resolved")
                 self.assertEqual(record["hitDie"], "d8")
@@ -270,7 +276,7 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(kinds.count("feat-slot"), 6)
         self.assertEqual(kinds.count("choice-slot"), 14)
         self.assertEqual(kinds.count("archetype"), 1)
-        self.assertEqual(kinds.count("automatic"), 33)
+        self.assertEqual(kinds.count("automatic"), 36)
         resolved = {record_id for record_id, record in features.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
             "npc-class-feature.warrior-proficiencies", "npc-class-feature.sorcerer-spellcasting",
@@ -278,6 +284,8 @@ class CatalogCompletenessTests(unittest.TestCase):
             "npc-class-feature.druid-spellcasting", "npc-class-feature.druid-nature-bond",
             "npc-class-feature.druidic", "npc-class-feature.druid-nature-sense", "npc-class-feature.druid-wild-empathy",
             "npc-class-feature.druid-woodland-stride", "npc-class-feature.druid-trackless-step",
+            "npc-class-feature.druid-resist-natures-lure", "npc-class-feature.druid-wild-shape",
+            "npc-class-feature.cleric-channel-energy",
             "npc-class-feature.druid-proficiencies", "npc-class-feature.druid-orisons",
             "npc-class-feature.fire-domain", "npc-class-feature.druid-elemental-ally",
             "npc-class-feature.bard-proficiencies", "npc-class-feature.bard-spellcasting", "npc-class-feature.bard-cantrips",
@@ -312,17 +320,17 @@ class CatalogCompletenessTests(unittest.TestCase):
     def test_source_backed_feats_are_resolved(self):
         feats = self.catalog["feats"]
         resolved = {record_id for record_id, record in feats.items() if record["catalogStatus"] == "resolved"}
-        self.assertEqual(resolved, {
-            "feat.endurance", "feat.improved-initiative", "feat.iron-will", "feat.lightning-reflexes",
-            "feat.weapon-finesse", "feat.deadly-aim", "feat.point-blank-shot", "feat.rapid-shot", "feat.martial-weapon-proficiency",
+        from tools.audit_npc_feats import inventory
+        self.assertEqual(resolved, {row["id"] for row in inventory()} | {
+            "feat.endurance", "feat.greater-weapon-focus", "feat.improved-precise-shot", "feat.improved-shield-bash",
         })
         self.assertTrue(all(record["category"] == "general" for record in feats.values()))
         self.assertEqual(feats["feat.deadly-aim"]["prerequisites"], {"all": [{"abilityAtLeast": {"dexterity": 13}}, {"babAtLeast": 1}]})
-        self.assertEqual(feats["feat.deadly-aim"]["effects"], {})
+        self.assertEqual(feats["feat.deadly-aim"]["effects"], {"combatOption": "deadly-aim"})
         self.assertEqual(feats["feat.point-blank-shot"]["prerequisites"], {"all": []})
-        self.assertEqual(feats["feat.point-blank-shot"]["effects"], {})
+        self.assertEqual(len(feats["feat.point-blank-shot"]["effects"]["conditionalModifiers"]), 2)
         self.assertEqual(feats["feat.rapid-shot"]["prerequisites"], {"all": [{"abilityAtLeast": {"dexterity": 13}}, {"hasFeat": "feat.point-blank-shot"}]})
-        self.assertEqual(feats["feat.rapid-shot"]["effects"], {})
+        self.assertEqual(feats["feat.rapid-shot"]["effects"], {"combatOption": "rapid-shot"})
         rule = self.catalog["derivedRules"]["npc-rule.general-feat-slots"]
         self.assertNotIn("allowedFeatIds", rule)  # Availability comes from feat rules, not a second allowlist.
 
@@ -332,7 +340,7 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertTrue(all(item["category"] in ITEM_CATEGORIES for item in items.values()))
         resolved = {record_id for record_id, record in items.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
-            "item.longsword", "item.chain-shirt", "item.light-steel-shield",
+            "item.longsword", "item.greatsword", "item.chain-shirt", "item.light-steel-shield",
             "item.wand-of-burning-hands", "item.cloak-of-resistance-1",
             "item.sickle", "item.leather-armor", "item.heavy-wooden-shield",
             "item.rapier", "item.shortsword", "item.chainmail", "item.studded-leather-armor", "item.sling",
@@ -368,8 +376,8 @@ class CatalogCompletenessTests(unittest.TestCase):
         )
         resolved = budgets["npc-gear.medium.normal"]
         self.assertEqual(resolved["catalogStatus"], "resolved")
-        self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "basic"], [1, 2, 3, 4, 5])
-        self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "heroic"], [1, 2, 3, 4, 5, 6])
+        self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "basic"], list(range(1, 21)))
+        self.assertEqual([row["level"] for row in resolved["rows"] if row["npcCategory"] == "heroic"], list(range(1, 21)))
         self.assertEqual(next(row for row in resolved["rows"] if row["npcCategory"] == "heroic" and row["level"] == 4)["budgetCp"], 240000)
         self.assertEqual(
             next(row for row in resolved["rows"] if row["npcCategory"] == "heroic" and row["level"] == 4)["categories"],

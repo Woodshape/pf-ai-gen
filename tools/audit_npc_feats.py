@@ -43,6 +43,8 @@ def inventory():
     for name in sorted(names):
         record = records.get(normalized(name), {})
         rows.append({"name": name, "id": record.get("id"), "catalogStatus": record.get("catalogStatus", "absent"),
+                     "supportStatus": record.get("supportStatus", "unspecified"),
+                     "treatments": record.get("treatments", []),
                      "sourceLine": headers[normalized(name)]})
     return rows
 
@@ -84,4 +86,5 @@ def probes():
 if __name__ == "__main__":
     rows = inventory()
     print(json.dumps({"count": len(rows), "catalogCounts": dict(Counter(row["catalogStatus"] for row in rows)),
+                      "supportCounts": dict(Counter(row["supportStatus"] for row in rows)),
                       "feats": rows, "mechanicalProbes": probes()}, indent=2, ensure_ascii=False))

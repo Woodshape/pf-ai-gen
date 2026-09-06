@@ -324,30 +324,6 @@
      }
     },
     {
-     "npcCategory": "basic",
-     "level": 5,
-     "effectiveLevel": 5,
-     "budgetCp": 240000,
-     "categories": {
-      "weapons": 90000,
-      "protection": 100000,
-      "magic": 0,
-      "limitedUse": 30000,
-      "gear": 20000
-     },
-     "catalogStatus": "resolved",
-     "sourceRef": {
-      "sourceId": "source.aon-creating-npcs",
-      "section": "Table 14-9: NPC Gear",
-      "txtLines": [
-       86,
-       86
-      ],
-      "entry": "Basic level 5",
-      "provenanceStatus": "resolved"
-     }
-    },
-    {
      "npcCategory": "heroic",
      "level": 4,
      "effectiveLevel": 4,
@@ -369,6 +345,30 @@
       ],
       "entry": "Heroic level 4 (2,400 gp row)",
       "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 5,
+     "effectiveLevel": 5,
+     "budgetCp": 240000,
+     "categories": {
+      "weapons": 90000,
+      "protection": 100000,
+      "magic": 0,
+      "limitedUse": 30000,
+      "gear": 20000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       86,
+       86
+      ],
+      "entry": "Basic level 5",
       "provenanceStatus": "resolved"
      }
     },
@@ -398,6 +398,30 @@
      }
     },
     {
+     "npcCategory": "basic",
+     "level": 6,
+     "effectiveLevel": 6,
+     "budgetCp": 345000,
+     "categories": {
+      "weapons": 140000,
+      "protection": 140000,
+      "magic": 0,
+      "limitedUse": 45000,
+      "gear": 20000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       87,
+       87
+      ],
+      "entry": "Basic level 6",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
      "npcCategory": "heroic",
      "level": 6,
      "effectiveLevel": 6,
@@ -420,6 +444,692 @@
       "entry": "Heroic level 6",
       "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
       "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 7,
+     "effectiveLevel": 7,
+     "budgetCp": 465000,
+     "categories": {
+      "weapons": 235000,
+      "protection": 165000,
+      "magic": 0,
+      "limitedUse": 45000,
+      "gear": 20000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       88,
+       88
+      ],
+      "entry": "Basic level 7",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 7,
+     "effectiveLevel": 7,
+     "budgetCp": 600000,
+     "categories": {
+      "weapons": 270000,
+      "protection": 200000,
+      "magic": 50000,
+      "limitedUse": 60000,
+      "gear": 20000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       89,
+       89
+      ],
+      "entry": "Heroic level 7",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 8,
+     "effectiveLevel": 8,
+     "budgetCp": 600000,
+     "categories": {
+      "weapons": 270000,
+      "protection": 200000,
+      "magic": 50000,
+      "limitedUse": 60000,
+      "gear": 20000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       89,
+       89
+      ],
+      "entry": "Basic level 8",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 8,
+     "effectiveLevel": 8,
+     "budgetCp": 780000,
+     "categories": {
+      "weapons": 300000,
+      "protection": 250000,
+      "magic": 100000,
+      "limitedUse": 80000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       90,
+       90
+      ],
+      "entry": "Heroic level 8",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 9,
+     "effectiveLevel": 9,
+     "budgetCp": 780000,
+     "categories": {
+      "weapons": 300000,
+      "protection": 250000,
+      "magic": 100000,
+      "limitedUse": 80000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       90,
+       90
+      ],
+      "entry": "Basic level 9",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 9,
+     "effectiveLevel": 9,
+     "budgetCp": 1005000,
+     "categories": {
+      "weapons": 350000,
+      "protection": 300000,
+      "magic": 200000,
+      "limitedUse": 105000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       91,
+       91
+      ],
+      "entry": "Heroic level 9",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 10,
+     "effectiveLevel": 10,
+     "budgetCp": 1005000,
+     "categories": {
+      "weapons": 350000,
+      "protection": 300000,
+      "magic": 200000,
+      "limitedUse": 105000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       91,
+       91
+      ],
+      "entry": "Basic level 10",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 10,
+     "effectiveLevel": 10,
+     "budgetCp": 1275000,
+     "categories": {
+      "weapons": 400000,
+      "protection": 400000,
+      "magic": 300000,
+      "limitedUse": 125000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       92,
+       92
+      ],
+      "entry": "Heroic level 10",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 11,
+     "effectiveLevel": 11,
+     "budgetCp": 1275000,
+     "categories": {
+      "weapons": 400000,
+      "protection": 400000,
+      "magic": 300000,
+      "limitedUse": 125000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       92,
+       92
+      ],
+      "entry": "Basic level 11",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 11,
+     "effectiveLevel": 11,
+     "budgetCp": 1635000,
+     "categories": {
+      "weapons": 600000,
+      "protection": 450000,
+      "magic": 400000,
+      "limitedUse": 135000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       93,
+       93
+      ],
+      "entry": "Heroic level 11",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 12,
+     "effectiveLevel": 12,
+     "budgetCp": 1635000,
+     "categories": {
+      "weapons": 600000,
+      "protection": 450000,
+      "magic": 400000,
+      "limitedUse": 135000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       93,
+       93
+      ],
+      "entry": "Basic level 12",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 12,
+     "effectiveLevel": 12,
+     "budgetCp": 2100000,
+     "categories": {
+      "weapons": 850000,
+      "protection": 550000,
+      "magic": 500000,
+      "limitedUse": 150000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       94,
+       94
+      ],
+      "entry": "Heroic level 12",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 13,
+     "effectiveLevel": 13,
+     "budgetCp": 2100000,
+     "categories": {
+      "weapons": 850000,
+      "protection": 550000,
+      "magic": 500000,
+      "limitedUse": 150000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       94,
+       94
+      ],
+      "entry": "Basic level 13",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 13,
+     "effectiveLevel": 13,
+     "budgetCp": 2700000,
+     "categories": {
+      "weapons": 900000,
+      "protection": 800000,
+      "magic": 700000,
+      "limitedUse": 250000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       95,
+       95
+      ],
+      "entry": "Heroic level 13",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 14,
+     "effectiveLevel": 14,
+     "budgetCp": 2700000,
+     "categories": {
+      "weapons": 900000,
+      "protection": 800000,
+      "magic": 700000,
+      "limitedUse": 250000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       95,
+       95
+      ],
+      "entry": "Basic level 14",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 14,
+     "effectiveLevel": 14,
+     "budgetCp": 3480000,
+     "categories": {
+      "weapons": 1200000,
+      "protection": 1050000,
+      "magic": 900000,
+      "limitedUse": 280000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       96,
+       96
+      ],
+      "entry": "Heroic level 14",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 15,
+     "effectiveLevel": 15,
+     "budgetCp": 3480000,
+     "categories": {
+      "weapons": 1200000,
+      "protection": 1050000,
+      "magic": 900000,
+      "limitedUse": 280000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       96,
+       96
+      ],
+      "entry": "Basic level 15",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 15,
+     "effectiveLevel": 15,
+     "budgetCp": 4500000,
+     "categories": {
+      "weapons": 1700000,
+      "protection": 1350000,
+      "magic": 1100000,
+      "limitedUse": 300000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       97,
+       97
+      ],
+      "entry": "Heroic level 15",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 16,
+     "effectiveLevel": 16,
+     "budgetCp": 4500000,
+     "categories": {
+      "weapons": 1700000,
+      "protection": 1350000,
+      "magic": 1100000,
+      "limitedUse": 300000,
+      "gear": 50000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       97,
+       97
+      ],
+      "entry": "Basic level 16",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 16,
+     "effectiveLevel": 16,
+     "budgetCp": 5850000,
+     "categories": {
+      "weapons": 1900000,
+      "protection": 1800000,
+      "magic": 1600000,
+      "limitedUse": 400000,
+      "gear": 150000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       98,
+       98
+      ],
+      "entry": "Heroic level 16",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 17,
+     "effectiveLevel": 17,
+     "budgetCp": 5850000,
+     "categories": {
+      "weapons": 1900000,
+      "protection": 1800000,
+      "magic": 1600000,
+      "limitedUse": 400000,
+      "gear": 150000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       98,
+       98
+      ],
+      "entry": "Basic level 17",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 17,
+     "effectiveLevel": 17,
+     "budgetCp": 7500000,
+     "categories": {
+      "weapons": 2400000,
+      "protection": 2300000,
+      "magic": 2000000,
+      "limitedUse": 650000,
+      "gear": 150000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       99,
+       99
+      ],
+      "entry": "Heroic level 17",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 18,
+     "effectiveLevel": 18,
+     "budgetCp": 7500000,
+     "categories": {
+      "weapons": 2400000,
+      "protection": 2300000,
+      "magic": 2000000,
+      "limitedUse": 650000,
+      "gear": 150000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       99,
+       99
+      ],
+      "entry": "Basic level 18",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 18,
+     "effectiveLevel": 18,
+     "budgetCp": 9600000,
+     "categories": {
+      "weapons": 3000000,
+      "protection": 2800000,
+      "magic": 2800000,
+      "limitedUse": 800000,
+      "gear": 200000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       100,
+       100
+      ],
+      "entry": "Heroic level 18",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 19,
+     "effectiveLevel": 19,
+     "budgetCp": 9600000,
+     "categories": {
+      "weapons": 3000000,
+      "protection": 2800000,
+      "magic": 2800000,
+      "limitedUse": 800000,
+      "gear": 200000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       100,
+       100
+      ],
+      "entry": "Basic level 19",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 19,
+     "effectiveLevel": 19,
+     "budgetCp": 12300000,
+     "categories": {
+      "weapons": 4000000,
+      "protection": 3500000,
+      "magic": 3500000,
+      "limitedUse": 1100000,
+      "gear": 200000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       101,
+       101
+      ],
+      "entry": "Heroic level 19",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
+     }
+    },
+    {
+     "npcCategory": "basic",
+     "level": 20,
+     "effectiveLevel": 20,
+     "budgetCp": 12300000,
+     "categories": {
+      "weapons": 4000000,
+      "protection": 3500000,
+      "magic": 3500000,
+      "limitedUse": 1100000,
+      "gear": 200000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       101,
+       101
+      ],
+      "entry": "Basic level 20",
+      "provenanceStatus": "resolved"
+     }
+    },
+    {
+     "npcCategory": "heroic",
+     "level": 20,
+     "effectiveLevel": 20,
+     "budgetCp": 15900000,
+     "categories": {
+      "weapons": 5500000,
+      "protection": 4000000,
+      "magic": 4400000,
+      "limitedUse": 1800000,
+      "gear": 200000
+     },
+     "catalogStatus": "resolved",
+     "sourceRef": {
+      "sourceId": "source.aon-creating-npcs",
+      "section": "Table 14-9: NPC Gear",
+      "txtLines": [
+       102,
+       102
+      ],
+      "entry": "Heroic level 20",
+      "provenanceStatus": "resolved",
+      "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-"
      }
     }
    ],

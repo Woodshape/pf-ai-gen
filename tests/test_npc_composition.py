@@ -42,7 +42,9 @@ def draft_for(catalog, race_id, class_id, level):
     skills = [key for key in cls["classSkills"] if catalog["skills"][key]["catalogStatus"] == "resolved"]
     count = max(1, cls["skillSelections"] + (final["intelligence"] - 10) // 2) + race.get("skillSelectionsBonus", 0)
     slots = [f"general-{value}" for value in range(1, level + 1, 2)] + [slot["slotId"] for slot in race.get("featSlots", [])]
-    feat_ids = ["feat.improved-initiative", "feat.iron-will", "feat.lightning-reflexes", "feat.weapon-finesse"]
+    feat_ids = ["feat.improved-initiative", "feat.iron-will", "feat.lightning-reflexes", "feat.weapon-finesse",
+                "feat.endurance", "feat.great-fortitude", "feat.toughness", "feat.combat-casting",
+                "feat.combat-reflexes", "feat.eschew-materials", "feat.empower-spell"]
     loadout = {}
     class_key = class_id.removeprefix("npc-class.")
     if row.get("spellsKnown"):
@@ -142,7 +144,8 @@ class NpcCompositionTests(unittest.TestCase):
         draft = draft_for(catalog, "npc-race.goblin", "npc-class.bard", 2)
         draft["selections"]["feats"][0]["featId"] = "feat.deadly-aim"
         result = evaluate(draft)
-        self.assertEqual(result["status"], "valid", result["issues"])
+        # BAB gained at level 2 cannot qualify the level-1 acquisition slot.
+        self.assertIn("npc.feat-prerequisite", {issue["code"] for issue in result["issues"]})
 
     def test_general_rapid_shot_is_not_restricted_to_a_ranger_grant(self):
         catalog = json.loads((ROOT / "catalog/npc.json").read_text())

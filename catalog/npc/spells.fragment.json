@@ -85,8 +85,8 @@
    "id": "spell.acid-splash",
    "name": "Acid Splash",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "conjuration",
+   "components": "V, S",
    "levelsByClass": {
     "sorcerer": 0,
     "wizard": 0
@@ -109,17 +109,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-acid-splash",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     13
-    ],
-    "entry": "Acid Splash",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Acid%20Splash"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-acid-splash",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      13
+     ],
+     "entry": "Acid Splash",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Acid%20Splash"
+    },
+    {
+     "sourceId": "source.aon-spell-acid-splash",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Acid Splash: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Acid%20Splash"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "close (25 ft. + 5 ft./2 levels)",
+   "duration": "instantaneous"
   },
   {
    "id": "spell.aid",
@@ -1379,8 +1395,8 @@
    "id": "spell.barkskin",
    "name": "Barkskin",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "transmutation",
+   "components": "V, S, DF",
    "levelsByClass": {
     "druid": 2,
     "ranger": 2
@@ -1403,27 +1419,43 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-barkskin",
-    "section": "Barkskin",
-    "txtLines": [
-     1,
-     14
-    ],
-    "entry": "Barkskin spell description",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Barkskin"
-   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-barkskin",
+     "section": "Barkskin",
+     "txtLines": [
+      1,
+      14
+     ],
+     "entry": "Barkskin spell description",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Barkskin"
+    },
+    {
+     "sourceId": "source.aon-spell-barkskin",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Barkskin: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Barkskin"
+    }
+   ],
    "effects": {
     "naturalArmorBonus": 2,
     "maximumNaturalArmorBonus": 5,
     "scalingIntervalCasterLevels": 3,
     "scalingStartsAboveCasterLevel": 3
-   }
+   },
+   "castingTime": "1 standard action",
+   "range": "touch",
+   "duration": "10 min./level"
   },
   {
    "id": "spell.bear-s-endurance",
-   "name": "Bear\u2019s Endurance",
+   "name": "Bear’s Endurance",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -1484,13 +1516,13 @@
      311,
      311
     ],
-    "entry": "Bear\u2019s Endurance",
+    "entry": "Bear’s Endurance",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.bear-s-endurance-mass",
-   "name": "Bear\u2019s Endurance, Mass",
+   "name": "Bear’s Endurance, Mass",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -1542,7 +1574,7 @@
      522,
      522
     ],
-    "entry": "Bear\u2019s Endurance, Mass",
+    "entry": "Bear’s Endurance, Mass",
     "provenanceStatus": "list-membership-resolved"
    }
   },
@@ -2362,7 +2394,7 @@
   },
   {
    "id": "spell.bull-s-strength",
-   "name": "Bull\u2019s Strength",
+   "name": "Bull’s Strength",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -2423,13 +2455,13 @@
      312,
      312
     ],
-    "entry": "Bull\u2019s Strength",
+    "entry": "Bull’s Strength",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.bull-s-strength-mass",
-   "name": "Bull\u2019s Strength, Mass",
+   "name": "Bull’s Strength, Mass",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -2481,7 +2513,7 @@
      524,
      524
     ],
-    "entry": "Bull\u2019s Strength, Mass",
+    "entry": "Bull’s Strength, Mass",
     "provenanceStatus": "list-membership-resolved"
    }
   },
@@ -2489,8 +2521,8 @@
    "id": "spell.burning-hands",
    "name": "Burning Hands",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "evocation",
+   "components": "V, S",
    "levelsByClass": {
     "sorcerer": 1,
     "wizard": 1
@@ -2513,22 +2545,39 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-burning-hands",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     16
-    ],
-    "entry": "Burning Hands",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Burning%20Hands"
-   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-burning-hands",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      16
+     ],
+     "entry": "Burning Hands",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Burning%20Hands"
+    },
+    {
+     "sourceId": "source.aon-spell-burning-hands",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Burning Hands: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Burning%20Hands"
+    }
+   ],
    "effects": {
     "damage": "1d4 fire/caster level (maximum 5d4)",
     "area": "15-ft. cone",
     "save": "Reflex half"
-   }
+   },
+   "castingTime": "1 standard action",
+   "range": "15 ft.",
+   "area": "cone-shaped burst",
+   "duration": "instantaneous"
   },
   {
    "id": "spell.call-lightning",
@@ -2674,7 +2723,7 @@
   },
   {
    "id": "spell.cat-s-grace",
-   "name": "Cat\u2019s Grace",
+   "name": "Cat’s Grace",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -2735,13 +2784,13 @@
      90,
      90
     ],
-    "entry": "Cat\u2019s Grace",
+    "entry": "Cat’s Grace",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.cat-s-grace-mass",
-   "name": "Cat\u2019s Grace, Mass",
+   "name": "Cat’s Grace, Mass",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -2793,7 +2842,7 @@
      228,
      228
     ],
-    "entry": "Cat\u2019s Grace, Mass",
+    "entry": "Cat’s Grace, Mass",
     "provenanceStatus": "list-membership-resolved"
    }
   },
@@ -3099,8 +3148,8 @@
    "id": "spell.charm-person",
    "name": "Charm Person",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "enchantment",
+   "components": "V, S",
    "levelsByClass": {
     "bard": 1,
     "sorcerer": 1,
@@ -3132,17 +3181,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-charm-person",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     14
-    ],
-    "entry": "Charm Person",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Charm+Person",
-    "provenanceStatus": "resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-charm-person",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      14
+     ],
+     "entry": "Charm Person",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Charm+Person",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-spell-charm-person",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Charm Person: school, components, casting time, range, area and duration",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Charm+Person",
+     "provenanceStatus": "resolved"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "close (25 ft. + 5 ft./2 levels)",
+   "duration": "1 hour/level"
   },
   {
    "id": "spell.chill-metal",
@@ -4713,8 +4778,8 @@
    "id": "spell.cure-light-wounds",
    "name": "Cure Light Wounds",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "conjuration",
+   "components": "V, S",
    "levelsByClass": {
     "bard": 1,
     "cleric": 1,
@@ -4764,21 +4829,37 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-cure-light-wounds",
-    "section": "Cure Light Wounds",
-    "txtLines": [
-     1,
-     13
-    ],
-    "entry": "Cure Light Wounds spell description",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Cure%20Light%20Wounds"
-   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-cure-light-wounds",
+     "section": "Cure Light Wounds",
+     "txtLines": [
+      1,
+      13
+     ],
+     "entry": "Cure Light Wounds spell description",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Cure%20Light%20Wounds"
+    },
+    {
+     "sourceId": "source.aon-spell-cure-light-wounds",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Cure Light Wounds: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Cure%20Light%20Wounds"
+    }
+   ],
    "effects": {
     "healing": "1d8 + 1 per caster level (maximum +5)",
     "target": "living creature touched"
-   }
+   },
+   "castingTime": "1 standard action",
+   "range": "touch",
+   "duration": "instantaneous"
   },
   {
    "id": "spell.cure-light-wounds-mass",
@@ -5087,8 +5168,8 @@
    "id": "spell.dancing-lights",
    "name": "Dancing Lights",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "evocation",
+   "components": "V, S",
    "levelsByClass": {
     "bard": 0,
     "sorcerer": 0,
@@ -5120,17 +5201,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-dancing-lights",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     15
-    ],
-    "entry": "Dancing Lights",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Dancing+Lights",
-    "provenanceStatus": "resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-dancing-lights",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      15
+     ],
+     "entry": "Dancing Lights",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Dancing+Lights",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-spell-dancing-lights",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Dancing Lights: school, components, casting time, range, area and duration",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Dancing+Lights",
+     "provenanceStatus": "resolved"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "medium (100 ft. + 10 ft./level)",
+   "duration": "1 minute (D)"
   },
   {
    "id": "spell.darkness",
@@ -5888,8 +5985,8 @@
    "id": "spell.detect-magic",
    "name": "Detect Magic",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "divination",
+   "components": "V, S",
    "levelsByClass": {
     "bard": 0,
     "cleric": 0,
@@ -5939,17 +6036,34 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-detect-magic",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     58
-    ],
-    "entry": "Detect Magic",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Detect%20Magic"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-detect-magic",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      58
+     ],
+     "entry": "Detect Magic",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Detect%20Magic"
+    },
+    {
+     "sourceId": "source.aon-spell-detect-magic",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Detect Magic: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Detect%20Magic"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "60 ft.",
+   "area": "cone-shaped emanation",
+   "duration": "concentration, up to 1 min./level (D)"
   },
   {
    "id": "spell.detect-poison",
@@ -7377,7 +7491,7 @@
   },
   {
    "id": "spell.eagle-s-splendor",
-   "name": "Eagle\u2019s Splendor",
+   "name": "Eagle’s Splendor",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -7438,13 +7552,13 @@
      96,
      96
     ],
-    "entry": "Eagle\u2019s Splendor",
+    "entry": "Eagle’s Splendor",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.eagle-s-splendor-mass",
-   "name": "Eagle\u2019s Splendor, Mass",
+   "name": "Eagle’s Splendor, Mass",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -7496,7 +7610,7 @@
      232,
      232
     ],
-    "entry": "Eagle\u2019s Splendor, Mass",
+    "entry": "Eagle’s Splendor, Mass",
     "provenanceStatus": "list-membership-resolved"
    }
   },
@@ -7980,8 +8094,8 @@
    "id": "spell.entangle",
    "name": "Entangle",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "transmutation",
+   "components": "V, S, DF",
    "levelsByClass": {
     "druid": 1,
     "ranger": 1
@@ -8004,23 +8118,40 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-entangle",
-    "section": "Entangle",
-    "txtLines": [
-     1,
-     14
-    ],
-    "entry": "Entangle spell description",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Entangle"
-   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-entangle",
+     "section": "Entangle",
+     "txtLines": [
+      1,
+      14
+     ],
+     "entry": "Entangle spell description",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Entangle"
+    },
+    {
+     "sourceId": "source.aon-spell-entangle",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Entangle: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Entangle"
+    }
+   ],
    "effects": {
     "area": "plants in a 40-ft.-radius spread",
     "duration": "1 min./level (D)",
     "save": "Reflex partial",
     "condition": "entangled"
-   }
+   },
+   "castingTime": "1 standard action",
+   "range": "long (400 ft. + 40 ft./level)",
+   "area": "plants in a 40-ft.-radius spread",
+   "duration": "1 min./level (D)"
   },
   {
    "id": "spell.enthrall",
@@ -8591,8 +8722,8 @@
    "id": "spell.feather-fall",
    "name": "Feather Fall",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "transmutation",
+   "components": "V",
    "levelsByClass": {
     "bard": 1,
     "sorcerer": 1,
@@ -8624,17 +8755,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-feather-fall",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     16
-    ],
-    "entry": "Feather Fall",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Feather+Fall",
-    "provenanceStatus": "resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-feather-fall",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      16
+     ],
+     "entry": "Feather Fall",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Feather+Fall",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-spell-feather-fall",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Feather Fall: school, components, casting time, range, area and duration",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Feather+Fall",
+     "provenanceStatus": "resolved"
+    }
+   ],
+   "castingTime": "1 immediate action",
+   "range": "close (25 ft. + 5 ft./2 levels)",
+   "duration": "until landing or 1 round/level"
   },
   {
    "id": "spell.feeblemind",
@@ -8969,8 +9116,8 @@
    "id": "spell.fireball",
    "name": "Fireball",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "evocation",
+   "components": "V, S, M (a ball of bat guano and sulfur)",
    "levelsByClass": {
     "sorcerer": 3,
     "wizard": 3
@@ -8993,22 +9140,39 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-fireball",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     33
-    ],
-    "entry": "Fireball",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Fireball",
-    "provenanceStatus": "resolved"
-   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-fireball",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      33
+     ],
+     "entry": "Fireball",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Fireball",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-spell-fireball",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Fireball: school, components, casting time, range, area and duration",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Fireball",
+     "provenanceStatus": "resolved"
+    }
+   ],
    "effects": {
     "damage": "1d6 fire/caster level (maximum 10d6)",
     "area": "20-ft.-radius spread",
     "save": "Reflex half"
-   }
+   },
+   "castingTime": "1 standard action",
+   "range": "long (400 ft. + 40 ft./level)",
+   "area": "20-ft.-radius spread",
+   "duration": "instantaneous"
   },
   {
    "id": "spell.flame-arrow",
@@ -9125,8 +9289,8 @@
    "id": "spell.flaming-sphere",
    "name": "Flaming Sphere",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "evocation",
+   "components": "V, S, M/DF (tallow, brimstone, and powdered iron)",
    "levelsByClass": {
     "druid": 2,
     "sorcerer": 2,
@@ -9158,29 +9322,45 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-flaming-sphere",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     27
-    ],
-    "entry": "Flaming Sphere",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Flaming%20Sphere"
-   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-flaming-sphere",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      27
+     ],
+     "entry": "Flaming Sphere",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Flaming%20Sphere"
+    },
+    {
+     "sourceId": "source.aon-spell-flaming-sphere",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Flaming Sphere: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Flaming%20Sphere"
+    }
+   ],
    "effects": {
     "damage": "3d6 fire",
     "duration": "1 round/level",
     "save": "Reflex negates"
-   }
+   },
+   "castingTime": "1 standard action",
+   "range": "medium (100 ft. + 10 ft./level)",
+   "duration": "1 round/level"
   },
   {
    "id": "spell.flare",
    "name": "Flare",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "evocation",
+   "components": "V",
    "levelsByClass": {
     "bard": 0,
     "druid": 0,
@@ -9221,17 +9401,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-flare",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     26
-    ],
-    "entry": "Flare",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Flare",
-    "provenanceStatus": "resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-flare",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      26
+     ],
+     "entry": "Flare",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Flare",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-spell-flare",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Flare: school, components, casting time, range, area and duration",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Flare",
+     "provenanceStatus": "resolved"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "close (25 ft. + 5 ft./2 levels)",
+   "duration": "instantaneous"
   },
   {
    "id": "spell.flesh-to-stone",
@@ -9684,7 +9880,7 @@
   },
   {
    "id": "spell.fox-s-cunning",
-   "name": "Fox\u2019s Cunning",
+   "name": "Fox’s Cunning",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -9727,13 +9923,13 @@
      98,
      98
     ],
-    "entry": "Fox\u2019s Cunning",
+    "entry": "Fox’s Cunning",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.fox-s-cunning-mass",
-   "name": "Fox\u2019s Cunning, Mass",
+   "name": "Fox’s Cunning, Mass",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -9776,7 +9972,7 @@
      235,
      235
     ],
-    "entry": "Fox\u2019s Cunning, Mass",
+    "entry": "Fox’s Cunning, Mass",
     "provenanceStatus": "list-membership-resolved"
    }
   },
@@ -10709,8 +10905,8 @@
    "id": "spell.grease",
    "name": "Grease",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "conjuration",
+   "components": "V, S, M (butter)",
    "levelsByClass": {
     "bard": 1,
     "sorcerer": 1,
@@ -10742,17 +10938,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-grease",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     18
-    ],
-    "entry": "Grease",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Grease",
-    "provenanceStatus": "resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-grease",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      18
+     ],
+     "entry": "Grease",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Grease",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-spell-grease",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Grease: school, components, casting time, range, area and duration",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Grease",
+     "provenanceStatus": "resolved"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "close (25 ft. + 5 ft./2 levels)",
+   "duration": "1 min./level (D)"
   },
   {
    "id": "spell.guards-and-wards",
@@ -11258,7 +11470,7 @@
   },
   {
    "id": "spell.heroes-feast",
-   "name": "Heroes\u2019 Feast",
+   "name": "Heroes’ Feast",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -11292,7 +11504,7 @@
      237,
      237
     ],
-    "entry": "Heroes\u2019 Feast",
+    "entry": "Heroes’ Feast",
     "provenanceStatus": "list-membership-resolved"
    }
   },
@@ -13411,8 +13623,8 @@
    "id": "spell.light",
    "name": "Light",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "evocation",
+   "components": "V, M/DF (a firefly)",
    "levelsByClass": {
     "bard": 0,
     "cleric": 0,
@@ -13462,17 +13674,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-light",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     14
-    ],
-    "entry": "Light",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Light"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-light",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      14
+     ],
+     "entry": "Light",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Light"
+    },
+    {
+     "sourceId": "source.aon-spell-light",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Light: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Light"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "touch",
+   "duration": "10 min./level"
   },
   {
    "id": "spell.lightning-bolt",
@@ -13767,8 +13995,8 @@
    "id": "spell.mage-armor",
    "name": "Mage Armor",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "conjuration",
+   "components": "V, S, F (a piece of cured leather)",
    "levelsByClass": {
     "sorcerer": 1,
     "wizard": 1
@@ -13791,24 +14019,40 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-mage-armor",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     17
-    ],
-    "entry": "Mage Armor",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Armor"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-mage-armor",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      17
+     ],
+     "entry": "Mage Armor",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Armor"
+    },
+    {
+     "sourceId": "source.aon-spell-mage-armor",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Mage Armor: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Armor"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "touch",
+   "duration": "1 hour/level (D)"
   },
   {
    "id": "spell.mage-hand",
    "name": "Mage Hand",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "transmutation",
+   "components": "V, S",
    "levelsByClass": {
     "bard": 0,
     "sorcerer": 0,
@@ -13840,21 +14084,37 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-mage-hand",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     13
-    ],
-    "entry": "Mage Hand",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Hand"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-mage-hand",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      13
+     ],
+     "entry": "Mage Hand",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Hand"
+    },
+    {
+     "sourceId": "source.aon-spell-mage-hand",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Mage Hand: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mage%20Hand"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "close (25 ft. + 5 ft./2 levels)",
+   "duration": "concentration"
   },
   {
    "id": "spell.mage-s-disjunction",
-   "name": "Mage\u2019s Disjunction",
+   "name": "Mage’s Disjunction",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -13888,13 +14148,13 @@
      1615,
      1615
     ],
-    "entry": "Mage\u2019s Disjunction",
+    "entry": "Mage’s Disjunction",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.mage-s-faithful-hound",
-   "name": "Mage\u2019s Faithful Hound",
+   "name": "Mage’s Faithful Hound",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -13928,13 +14188,13 @@
      1333,
      1333
     ],
-    "entry": "Mage\u2019s Faithful Hound",
+    "entry": "Mage’s Faithful Hound",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.mage-s-lucubration",
-   "name": "Mage\u2019s Lucubration",
+   "name": "Mage’s Lucubration",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -13968,13 +14228,13 @@
      1494,
      1494
     ],
-    "entry": "Mage\u2019s Lucubration",
+    "entry": "Mage’s Lucubration",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.mage-s-magnificent-mansion",
-   "name": "Mage\u2019s Magnificent Mansion",
+   "name": "Mage’s Magnificent Mansion",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -14008,13 +14268,13 @@
      1458,
      1458
     ],
-    "entry": "Mage\u2019s Magnificent Mansion",
+    "entry": "Mage’s Magnificent Mansion",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.mage-s-private-sanctum",
-   "name": "Mage\u2019s Private Sanctum",
+   "name": "Mage’s Private Sanctum",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -14048,13 +14308,13 @@
      1325,
      1325
     ],
-    "entry": "Mage\u2019s Private Sanctum",
+    "entry": "Mage’s Private Sanctum",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.mage-s-sword",
-   "name": "Mage\u2019s Sword",
+   "name": "Mage’s Sword",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -14088,7 +14348,7 @@
      1525,
      1525
     ],
-    "entry": "Mage\u2019s Sword",
+    "entry": "Mage’s Sword",
     "provenanceStatus": "list-membership-resolved"
    }
   },
@@ -14345,8 +14605,8 @@
    "id": "spell.magic-missile",
    "name": "Magic Missile",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "evocation",
+   "components": "V, S",
    "levelsByClass": {
     "sorcerer": 1,
     "wizard": 1
@@ -14369,17 +14629,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-magic-missile",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     19
-    ],
-    "entry": "Magic Missile",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Magic%20Missile"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-magic-missile",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      19
+     ],
+     "entry": "Magic Missile",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Magic%20Missile"
+    },
+    {
+     "sourceId": "source.aon-spell-magic-missile",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Magic Missile: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Magic%20Missile"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "medium (100 ft. + 10 ft./level)",
+   "duration": "instantaneous"
   },
   {
    "id": "spell.magic-mouth",
@@ -14946,8 +15222,8 @@
    "id": "spell.message",
    "name": "Message",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "transmutation",
+   "components": "V, S, F (a piece of copper wire)",
    "levelsByClass": {
     "bard": 0,
     "sorcerer": 0,
@@ -14979,17 +15255,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-message",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     13
-    ],
-    "entry": "Message",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Message",
-    "provenanceStatus": "resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-message",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      13
+     ],
+     "entry": "Message",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Message",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-spell-message",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Message: school, components, casting time, range, area and duration",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Message",
+     "provenanceStatus": "resolved"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "medium (100 ft. + 10 ft./level)",
+   "duration": "10 min./level"
   },
   {
    "id": "spell.meteor-swarm",
@@ -15293,8 +15585,8 @@
    "id": "spell.mirror-image",
    "name": "Mirror Image",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "illusion",
+   "components": "V, S",
    "levelsByClass": {
     "bard": 2,
     "sorcerer": 2,
@@ -15326,17 +15618,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-mirror-image",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     17
-    ],
-    "entry": "Mirror Image",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mirror%20Image"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-mirror-image",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      17
+     ],
+     "entry": "Mirror Image",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mirror%20Image"
+    },
+    {
+     "sourceId": "source.aon-spell-mirror-image",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      10
+     ],
+     "entry": "Mirror Image: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Mirror%20Image"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "personal",
+   "duration": "1 min./level"
   },
   {
    "id": "spell.misdirection",
@@ -15968,7 +16276,7 @@
   },
   {
    "id": "spell.order-s-wrath",
-   "name": "Order\u2019s Wrath",
+   "name": "Order’s Wrath",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -15993,7 +16301,7 @@
      423,
      423
     ],
-    "entry": "Order\u2019s Wrath",
+    "entry": "Order’s Wrath",
     "provenanceStatus": "list-membership-resolved"
    }
   },
@@ -16039,7 +16347,7 @@
   },
   {
    "id": "spell.owl-s-wisdom",
-   "name": "Owl\u2019s Wisdom",
+   "name": "Owl’s Wisdom",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -16109,13 +16417,13 @@
      330,
      330
     ],
-    "entry": "Owl\u2019s Wisdom",
+    "entry": "Owl’s Wisdom",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.owl-s-wisdom-mass",
-   "name": "Owl\u2019s Wisdom, Mass",
+   "name": "Owl’s Wisdom, Mass",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -16167,7 +16475,7 @@
      466,
      466
     ],
-    "entry": "Owl\u2019s Wisdom, Mass",
+    "entry": "Owl’s Wisdom, Mass",
     "provenanceStatus": "list-membership-resolved"
    }
   },
@@ -17344,8 +17652,8 @@
    "id": "spell.prestidigitation",
    "name": "Prestidigitation",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "universal",
+   "components": "V, S",
    "levelsByClass": {
     "bard": 0,
     "sorcerer": 0,
@@ -17377,17 +17685,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-prestidigitation",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     13
-    ],
-    "entry": "Prestidigitation",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Prestidigitation"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-prestidigitation",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      13
+     ],
+     "entry": "Prestidigitation",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Prestidigitation"
+    },
+    {
+     "sourceId": "source.aon-spell-prestidigitation",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Prestidigitation: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Prestidigitation"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "10 ft.",
+   "duration": "1 hour"
   },
   {
    "id": "spell.prismatic-sphere",
@@ -17513,8 +17837,8 @@
    "id": "spell.produce-flame",
    "name": "Produce Flame",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "evocation",
+   "components": "V, S",
    "levelsByClass": {
     "druid": 1
    },
@@ -17528,22 +17852,38 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-produce-flame",
-    "section": "Produce Flame",
-    "txtLines": [
-     1,
-     15
-    ],
-    "entry": "Produce Flame spell description",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Produce%20Flame"
-   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-produce-flame",
+     "section": "Produce Flame",
+     "txtLines": [
+      1,
+      15
+     ],
+     "entry": "Produce Flame spell description",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Produce%20Flame"
+    },
+    {
+     "sourceId": "source.aon-spell-produce-flame",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Produce Flame: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Produce%20Flame"
+    }
+   ],
    "effects": {
     "damage": "1d6 + 1 per caster level (maximum +5)",
     "attack": "melee or ranged touch",
     "thrownRange": "120 ft."
-   }
+   },
+   "castingTime": "1 standard action",
+   "range": "0 ft.",
+   "duration": "1 min./level (D)"
   },
   {
    "id": "spell.programmed-image",
@@ -18323,8 +18663,8 @@
    "id": "spell.read-magic",
    "name": "Read Magic",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "divination",
+   "components": "V, S, F (a clear crystal or mineral prism)",
    "levelsByClass": {
     "bard": 0,
     "cleric": 0,
@@ -18392,17 +18732,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-read-magic",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     13
-    ],
-    "entry": "Read Magic",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Read%20Magic"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-read-magic",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      13
+     ],
+     "entry": "Read Magic",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Read%20Magic"
+    },
+    {
+     "sourceId": "source.aon-spell-read-magic",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      10
+     ],
+     "entry": "Read Magic: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Read%20Magic"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "personal",
+   "duration": "10 min./level"
   },
   {
    "id": "spell.reduce-animal",
@@ -19667,8 +20023,8 @@
    "id": "spell.scorching-ray",
    "name": "Scorching Ray",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "evocation",
+   "components": "V, S",
    "levelsByClass": {
     "sorcerer": 2,
     "wizard": 2
@@ -19691,22 +20047,38 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-scorching-ray",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     16
-    ],
-    "entry": "Scorching Ray",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Scorching%20Ray"
-   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-scorching-ray",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      16
+     ],
+     "entry": "Scorching Ray",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Scorching%20Ray"
+    },
+    {
+     "sourceId": "source.aon-spell-scorching-ray",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Scorching Ray: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Scorching%20Ray"
+    }
+   ],
    "effects": {
     "damage": "4d6 fire/ray",
     "attack": "ranged touch",
     "raysAtCasterLevel5": 1
-   }
+   },
+   "castingTime": "1 standard action",
+   "range": "close (25 ft. + 5 ft./2 levels)",
+   "duration": "instantaneous"
   },
   {
    "id": "spell.screen",
@@ -20727,8 +21099,8 @@
    "id": "spell.shield",
    "name": "Shield",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "abjuration",
+   "components": "V, S",
    "levelsByClass": {
     "sorcerer": 1,
     "wizard": 1
@@ -20751,17 +21123,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-shield",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     12
-    ],
-    "entry": "Shield",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Shield"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-shield",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      12
+     ],
+     "entry": "Shield",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Shield"
+    },
+    {
+     "sourceId": "source.aon-spell-shield",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      10
+     ],
+     "entry": "Shield: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Shield"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "personal",
+   "duration": "1 min./level (D)"
   },
   {
    "id": "spell.shield-other",
@@ -21118,8 +21506,8 @@
    "id": "spell.silent-image",
    "name": "Silent Image",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "illusion",
+   "components": "V, S, F (a bit of fleece)",
    "levelsByClass": {
     "bard": 1,
     "sorcerer": 0,
@@ -21151,17 +21539,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-silent-image",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     13
-    ],
-    "entry": "Silent Image",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Silent+Image",
-    "provenanceStatus": "resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-silent-image",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      13
+     ],
+     "entry": "Silent Image",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Silent+Image",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-spell-silent-image",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Silent Image: school, components, casting time, range, area and duration",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Silent+Image",
+     "provenanceStatus": "resolved"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "long (400 ft. + 40 ft./level)",
+   "duration": "concentration"
   },
   {
    "id": "spell.simulacrum",
@@ -21238,8 +21642,8 @@
    "id": "spell.sleep",
    "name": "Sleep",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "enchantment",
+   "components": "V, S, M (fine sand, rose petals, or a live cricket)",
    "levelsByClass": {
     "bard": 1,
     "sorcerer": 1,
@@ -21271,17 +21675,34 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-sleep",
-    "section": "Spell description",
-    "txtLines": [
-     1,
-     13
-    ],
-    "entry": "Sleep",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Sleep",
-    "provenanceStatus": "resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-sleep",
+     "section": "Spell description",
+     "txtLines": [
+      1,
+      13
+     ],
+     "entry": "Sleep",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Sleep",
+     "provenanceStatus": "resolved"
+    },
+    {
+     "sourceId": "source.aon-spell-sleep",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Sleep: school, components, casting time, range, area and duration",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Sleep",
+     "provenanceStatus": "resolved"
+    }
+   ],
+   "castingTime": "1 round",
+   "range": "medium (100 ft. + 10 ft./level)",
+   "area": "one or more living creatures within a 10-ft.-radius burst",
+   "duration": "1 min./level"
   },
   {
    "id": "spell.sleet-storm",
@@ -23091,10 +23512,10 @@
   },
   {
    "id": "spell.summon-nature-s-ally-i",
-   "name": "Summon Nature\u2019s Ally I",
+   "name": "Summon Nature’s Ally I",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "conjuration",
+   "components": "V, S, DF",
    "levelsByClass": {
     "druid": 1,
     "ranger": 1
@@ -23117,30 +23538,46 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-summon-natures-ally-i",
-    "section": "Summon Nature's Ally 1",
-    "txtLines": [
-     1,
-     16
-    ],
-    "entry": "Summon Nature's Ally I spell description",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%201"
-   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-summon-natures-ally-i",
+     "section": "Summon Nature's Ally 1",
+     "txtLines": [
+      1,
+      16
+     ],
+     "entry": "Summon Nature's Ally I spell description",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%201"
+    },
+    {
+     "sourceId": "source.aon-spell-summon-natures-ally-i",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Summon Nature’s Ally I: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%201"
+    }
+   ],
    "effects": {
     "summonCount": 1,
     "choiceTableLevel": 1,
     "choiceChangesEachCasting": true,
     "linkedStatblocks": false
-   }
+   },
+   "castingTime": "1 round",
+   "range": "close (25 ft. + 5 ft./2 levels)",
+   "duration": "1 round/level (D)"
   },
   {
    "id": "spell.summon-nature-s-ally-ii",
-   "name": "Summon Nature\u2019s Ally II",
+   "name": "Summon Nature’s Ally II",
    "catalogStatus": "resolved",
-   "school": null,
-   "components": null,
+   "school": "conjuration",
+   "components": "V, S, DF",
    "levelsByClass": {
     "druid": 2,
     "ranger": 2
@@ -23163,26 +23600,42 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.aon-spell-summon-natures-ally-ii",
-    "section": "Summon Nature's Ally 2",
-    "txtLines": [
-     1,
-     13
-    ],
-    "entry": "Summon Nature's Ally II spell description",
-    "provenanceStatus": "resolved",
-    "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%202"
-   },
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-summon-natures-ally-ii",
+     "section": "Summon Nature's Ally 2",
+     "txtLines": [
+      1,
+      13
+     ],
+     "entry": "Summon Nature's Ally II spell description",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%202"
+    },
+    {
+     "sourceId": "source.aon-spell-summon-natures-ally-ii",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Summon Nature’s Ally II: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Summon%20Nature%27s%20Ally%202"
+    }
+   ],
    "effects": {
     "oneHigherLevelCreature": 1,
     "oneLowerLevelCreatures": "1d3",
     "linkedStatblocks": false
-   }
+   },
+   "castingTime": "1 round",
+   "range": "close (25 ft. + 5 ft./2 levels)",
+   "duration": "1 round/level (D)"
   },
   {
    "id": "spell.summon-nature-s-ally-iii",
-   "name": "Summon Nature\u2019s Ally III",
+   "name": "Summon Nature’s Ally III",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -23216,13 +23669,13 @@
      698,
      698
     ],
-    "entry": "Summon Nature\u2019s Ally III",
+    "entry": "Summon Nature’s Ally III",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.summon-nature-s-ally-iv",
-   "name": "Summon Nature\u2019s Ally IV",
+   "name": "Summon Nature’s Ally IV",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -23256,13 +23709,13 @@
      738,
      738
     ],
-    "entry": "Summon Nature\u2019s Ally IV",
+    "entry": "Summon Nature’s Ally IV",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.summon-nature-s-ally-ix",
-   "name": "Summon Nature\u2019s Ally IX",
+   "name": "Summon Nature’s Ally IX",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -23287,13 +23740,13 @@
      820,
      820
     ],
-    "entry": "Summon Nature\u2019s Ally IX",
+    "entry": "Summon Nature’s Ally IX",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.summon-nature-s-ally-v",
-   "name": "Summon Nature\u2019s Ally V",
+   "name": "Summon Nature’s Ally V",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -23318,13 +23771,13 @@
      742,
      742
     ],
-    "entry": "Summon Nature\u2019s Ally V",
+    "entry": "Summon Nature’s Ally V",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.summon-nature-s-ally-vi",
-   "name": "Summon Nature\u2019s Ally VI",
+   "name": "Summon Nature’s Ally VI",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -23349,13 +23802,13 @@
      768,
      768
     ],
-    "entry": "Summon Nature\u2019s Ally VI",
+    "entry": "Summon Nature’s Ally VI",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.summon-nature-s-ally-vii",
-   "name": "Summon Nature\u2019s Ally VII",
+   "name": "Summon Nature’s Ally VII",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -23380,13 +23833,13 @@
      786,
      786
     ],
-    "entry": "Summon Nature\u2019s Ally VII",
+    "entry": "Summon Nature’s Ally VII",
     "provenanceStatus": "list-membership-resolved"
    }
   },
   {
    "id": "spell.summon-nature-s-ally-viii",
-   "name": "Summon Nature\u2019s Ally VIII",
+   "name": "Summon Nature’s Ally VIII",
    "catalogStatus": "partial",
    "gapCode": "core-rulebook-spell-descriptions",
    "school": null,
@@ -23411,7 +23864,7 @@
      802,
      802
     ],
-    "entry": "Summon Nature\u2019s Ally VIII",
+    "entry": "Summon Nature’s Ally VIII",
     "provenanceStatus": "list-membership-resolved"
    }
   },

@@ -53,8 +53,7 @@ class NpcCatalogTests(unittest.TestCase):
 
         warrior = catalog["classes"]["npc-class.warrior"]
         self.assertEqual(set(warrior["levels"]), {str(level) for level in range(1, 21)})
-        self.assertTrue(all(warrior["levels"][str(level)]["catalogStatus"] == "resolved" for level in range(1, 6)))
-        self.assertTrue(all(warrior["levels"][str(level)]["catalogStatus"] == "gap" for level in range(6, 21)))
+        self.assertTrue(all(warrior["levels"][str(level)]["catalogStatus"] == "resolved" for level in range(1, 21)))
         self.assertEqual(warrior["levels"]["5"]["bab"], 5)
 
         self.assertEqual(catalog["skills"]["skill.climb"]["keyAbility"], "strength")
@@ -63,7 +62,7 @@ class NpcCatalogTests(unittest.TestCase):
         self.assertEqual(catalog["items"]["item.longsword"]["priceCp"], 1500)
         self.assertEqual(catalog["items"]["item.chain-shirt"]["effects"]["armorBonus"], 4)
         budget = catalog["gearBudgets"]["npc-gear.medium.normal"]
-        self.assertEqual([row["budgetCp"] for row in budget["rows"] if row["npcCategory"] == "basic"], [26000, 39000, 78000, 165000, 240000])
+        self.assertEqual([row["budgetCp"] for row in budget["rows"] if row["npcCategory"] == "basic" and row["level"] <= 5], [26000, 39000, 78000, 165000, 240000])
 
     def test_goblin_sorcerer_levels_five_and_six_catalog_slice_is_resolved(self):
         catalog = NpcCatalog.load().data
@@ -110,11 +109,11 @@ class NpcCatalogTests(unittest.TestCase):
         self.assertEqual(druid["skillSelections"], 4)
         self.assertEqual(druid["castingAbility"], "wisdom")
         self.assertEqual(druid["castingMode"], "prepared")
-        self.assertEqual(druid["supportedLevels"], [1, 2, 3])
+        self.assertEqual(druid["supportedLevels"], [1, 2, 3, 4])
         self.assertEqual(druid["levels"]["3"]["catalogStatus"], "resolved")
         self.assertEqual(druid["levels"]["3"]["bab"], 2)
         self.assertEqual(druid["levels"]["3"]["spellsPerDay"], {"0": 4, "1": 2, "2": 1})
-        self.assertTrue(all(druid["levels"][str(level)]["catalogStatus"] == "gap" for level in range(4, 21)))
+        self.assertTrue(all(druid["levels"][str(level)]["catalogStatus"] == "gap" for level in range(5, 21)))
         self.assertIn("npc-class-feature.druidic", druid["levels"]["1"]["featureGrants"])
 
         nature_bond = catalog["classFeatures"]["npc-class-feature.druid-nature-bond"]

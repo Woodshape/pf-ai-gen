@@ -943,6 +943,60 @@
     },
     {
       "catalogStatus": "resolved",
+      "effects": {
+        "conditionalModifiers": [
+          {
+            "bonus": 4,
+            "condition": "saving throws against the spell-like and supernatural abilities of fey, and spells or effects that utilize or target plants",
+            "stat": "savingThrows"
+          }
+        ]
+      },
+      "id": "npc-class-feature.druid-resist-natures-lure",
+      "kind": "automatic",
+      "name": "Resist Nature's Lure",
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-druid",
+          "section": "Resist Nature's Lure",
+          "txtLines": [
+            57,
+            57
+          ],
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid",
+          "provenanceStatus": "resolved",
+          "entry": "+4 saving throws against fey spell-like and supernatural abilities and plant-targeting effects"
+        }
+      ]
+    },
+    {
+      "catalogStatus": "resolved",
+      "effects": {
+        "wildShape": {
+          "hoursPerUse": 4,
+          "usesPerDay": 1
+        }
+      },
+      "id": "npc-class-feature.druid-wild-shape",
+      "kind": "automatic",
+      "name": "Wild Shape",
+      "sourceRef": [
+        {
+          "sourceId": "source.aon-druid",
+          "section": "Wild Shape",
+          "txtLines": [
+            58,
+            61
+          ],
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Druid",
+          "provenanceStatus": "resolved",
+          "entry": "Wild Shape at 4th level: Small or Medium animal, 1/day, 1 hour per druid level, standard action"
+        }
+      ],
+      "rulesText": "At 4th level, a druid can turn herself into any Small or Medium animal and back again once per day; the form must be an animal with which the druid is familiar, functions like beast shape I except as noted, lasts 1 hour per druid level or until she changes back, is a standard action, does not provoke attacks of opportunity, and she cannot speak while in animal form. Additional uses per day at 6th level and every two levels thereafter (eight at 18th, at will at 20th). A temporary transformation; never applied to base statistics."
+    },
+    {
+      "catalogStatus": "resolved",
       "domainSpells": {
         "1": "spell.burning-hands",
         "2": "spell.produce-flame"
@@ -1007,6 +1061,36 @@
           "txtLines": [
             1,
             15
+          ]
+        }
+      ]
+    },
+    {
+      "catalogStatus": "resolved",
+      "effects": {
+        "channelActionCost": "standard",
+        "channelDamageDie": "1d6",
+        "channelDamageDieStepPerTwoLevels": 1,
+        "channelRadiusFeet": 30,
+        "channelSaveDCAbility": "charisma",
+        "channelSaveDCBase": 10,
+        "channelSaveDCPlusHalfClassLevel": true,
+        "channelUsesAbility": "charisma",
+        "channelUsesBase": 3
+      },
+      "id": "npc-class-feature.cleric-channel-energy",
+      "kind": "automatic",
+      "name": "Channel Energy",
+      "sourceRef": [
+        {
+          "entry": "Channel Energy: 1d6 plus 1d6 per two cleric levels beyond 1st; Will DC 10 + 1/2 cleric level + Cha; uses per day 3 + Cha; 30-foot burst; standard action; positive or negative energy per deity or alignment choice",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Channel Energy",
+          "sourceId": "source.aon-cleric",
+          "txtLines": [
+            41,
+            43
           ]
         }
       ]
