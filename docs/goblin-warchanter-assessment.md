@@ -85,7 +85,7 @@ Spells need only source-backed class-list membership and spell level. Partial de
 | Performance and knowledge | The relevant class features are present as names but have empty numeric `effects`. There is no active-performance selection deriving the buffed attacks/conditional saves, nor full mechanical output of performance rounds or the bardic knowledge modifier. Preserve those requirements explicitly rather than claiming names alone implement them. |
 | Language | The normal single-class canonical language output starts with racial languages and class-feature grants. It does not turn the Linguistics rank into Common. Source notes preserve the choice without overriding derived output. |
 
-Those additions now exist as reusable rules and catalog metadata. The **unchanged erroneous printed totals** still cannot be honestly derived from this gear/ability list. The remaining feature, companion, independent-caster and item-customization work is in [BACKLOG.md](../BACKLOG.md).
+Those additions now exist as reusable rules and catalog metadata. The **unchanged erroneous printed totals** still cannot be honestly derived from this gear/ability list. Remaining companion, independent-caster, and special-property/charge item work is tracked in [BACKLOG.md](../BACKLOG.md).
 
 ## Evidence and reproduction
 

@@ -78,6 +78,7 @@ function NpcRaceStep({ draft, catalog, step, choiceRequirements, onPreview, onSa
 }
 
 interface ClassRow { classId: string; levels: number }
+interface GearRow { itemId: string; quantity: string; masterwork: boolean; enhancementBonus: string }
 function NpcClassStep({ draft, catalog, step, choiceRequirements, onPreview, onSave, onBack }: Props) {
   const initial = Array.isArray(draft.selections.classProgression) ? draft.selections.classProgression.filter(isClassRow) : [];
   const [rows, setRows] = useState<ClassRow[]>(initial);
@@ -240,7 +241,7 @@ function NpcSpellsGearStep({ draft, catalog, step, choiceRequirements, selection
   const [progression, setProgression] = useState(String(profile.experienceProgression || "medium"));
   const [fantasy, setFantasy] = useState(String(profile.fantasyLevel || "normal"));
   const gear = Array.isArray(draft.selections.gear) ? draft.selections.gear.filter((item): item is JsonObject => Boolean(item && typeof item === "object" && typeof (item as JsonObject).itemId === "string")) : [];
-  const [gearRows, setGearRows] = useState<Array<{ itemId: string; quantity: string }>>(gear.map((item) => ({ itemId: String(item.itemId), quantity: String(item.quantity ?? 1) })));
+  const [gearRows, setGearRows] = useState<GearRow[]>(gear.map((item) => ({ itemId: String(item.itemId), quantity: String(item.quantity ?? 1), masterwork: item.masterwork === true, enhancementBonus: item.enhancementBonus === undefined ? "" : String(item.enhancementBonus) })));
   const [descriptiveGear, setDescriptiveGear] = useState(Array.isArray(draft.selections.gear) ? draft.selections.gear.filter((item): item is string => typeof item === "string").join("\n") : "");
   const [addGear, setAddGear] = useState("");
   const [addGearQty, setAddGearQty] = useState("1");
@@ -271,7 +272,13 @@ function NpcSpellsGearStep({ draft, catalog, step, choiceRequirements, selection
   };
   const submit = (next: boolean) => {
     const spellLoadout = Object.fromEntries(sections.map((section) => [section.field, objectValue(loadoutRows[section.field])]));
-    const cleanedGear = gearRows.filter((row) => row.itemId).map((row) => ({ itemId: row.itemId, quantity: Math.max(1, Number(row.quantity) || 1) }));
+    const cleanedGear = gearRows.filter((row) => row.itemId).map((row) => {
+      const item: JsonObject = { itemId: row.itemId, quantity: Math.max(1, Number(row.quantity) || 1) };
+      if (row.masterwork) item.masterwork = true;
+      const enhancement = Number(row.enhancementBonus);
+      if (Number.isInteger(enhancement) && enhancement > 0) item.enhancementBonus = enhancement;
+      return item;
+    });
     onSave({ spellLoadout: sections.length ? spellLoadout : undefined, gearProfile: { experienceProgression: progression, fantasyLevel: fantasy }, gear: [...cleanedGear, ...descriptiveGear.split("\n").map((name) => name.trim()).filter(Boolean)] }, {}, next);
   };
   return <StepFrame step={step} onBack={onBack} onApply={submit}><div class="grid">
@@ -284,8 +291,8 @@ function NpcSpellsGearStep({ draft, catalog, step, choiceRequirements, selection
     <Select label="Experience progression" value={progression} onChange={setProgression}><option value="slow">Slow</option><option value="medium">Medium</option><option value="fast">Fast</option></Select>
     <Select label="Fantasy level" value={fantasy} onChange={setFantasy}><option value="low">Low</option><option value="normal">Normal</option><option value="high">High</option></Select>
     <section class="field full"><div class="builder-head"><div><span class="label">Mechanical equipment</span><small>These catalog items contribute rules and prices to this statblock. Use descriptive equipment below for everything else.</small></div></div>
-      <div class="add-row"><select value={addGear} onChange={(event) => setAddGear(event.currentTarget.value)}><option value="">Choose an item…</option>{gearItems.filter((item) => !gearUsed.has(item.id)).map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}</select><input type="number" min="1" value={addGearQty} onInput={(event) => setAddGearQty(event.currentTarget.value)} /><button type="button" class="btn primary" disabled={!addGear} onClick={() => { if (!addGear) return; setGearRows((current) => [...current, { itemId: addGear, quantity: addGearQty || "1" }]); setAddGear(""); setAddGearQty("1"); }}>Add</button></div>
-      <div class="builder-list">{gearRows.length ? gearRows.map((row, index) => <div class="builder-card" key={`${row.itemId}-${index}`}><div class="builder-fields"><div class="field"><label>Item</label><span class="hint">{catalog.items[row.itemId]?.name || row.itemId}</span></div><div class="field"><label>Quantity</label><input type="number" min="1" value={row.quantity} onInput={(event) => setGearRows((current) => current.map((item, itemIndex) => itemIndex === index ? { ...item, quantity: event.currentTarget.value } : item))} /></div></div><button type="button" class="btn small" onClick={() => setGearRows((current) => current.filter((_, itemIndex) => itemIndex !== index))}>Remove</button></div>) : <div class="empty">No gear. Add catalog items with quantities.</div>}</div>
+      <div class="add-row"><select value={addGear} onChange={(event) => setAddGear(event.currentTarget.value)}><option value="">Choose an item…</option>{gearItems.filter((item) => !gearUsed.has(item.id)).map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}</select><input type="number" min="1" value={addGearQty} onInput={(event) => setAddGearQty(event.currentTarget.value)} /><button type="button" class="btn primary" disabled={!addGear} onClick={() => { if (!addGear) return; setGearRows((current) => [...current, { itemId: addGear, quantity: addGearQty || "1", masterwork: false, enhancementBonus: "" }]); setAddGear(""); setAddGearQty("1"); }}>Add</button></div>
+      <div class="builder-list">{gearRows.length ? gearRows.map((row, index) => { const record = catalog.items[row.itemId]; const customizable = record?.category === "weapon" || record?.category === "armor" || record?.category === "shield"; return <div class="builder-card" key={`${row.itemId}-${index}`}><div class="builder-fields"><div class="field"><label>Item</label><span class="hint">{record?.name || row.itemId}</span></div><div class="field"><label>Quantity</label><input type="number" min="1" value={row.quantity} onInput={(event) => setGearRows((current) => current.map((item, itemIndex) => itemIndex === index ? { ...item, quantity: event.currentTarget.value } : item))} /></div>{customizable && <><label class="field"><span>Masterwork</span><input type="checkbox" checked={row.masterwork} onChange={(event) => setGearRows((current) => current.map((item, itemIndex) => itemIndex === index ? { ...item, masterwork: event.currentTarget.checked } : item))} /></label><div class="field"><label>Enhancement</label><input type="number" min="0" max="5" value={row.enhancementBonus} onInput={(event) => setGearRows((current) => current.map((item, itemIndex) => itemIndex === index ? { ...item, enhancementBonus: event.currentTarget.value } : item))} /></div></>}</div><button type="button" class="btn small" onClick={() => setGearRows((current) => current.filter((_, itemIndex) => itemIndex !== index))}>Remove</button></div>; }) : <div class="empty">No gear. Add catalog items with quantities.</div>}</div>
     </section>
     <div class="field full"><label>Descriptive equipment — one item per line</label><textarea value={descriptiveGear} onInput={(event) => setDescriptiveGear(event.currentTarget.value)} /><small>No automatic effects or pricing, even if a line names a weapon or magic item.</small></div>
   </div><p class="hint">Use an empty spell loadout for noncasters. Gear prices, effects, category budgets, and copper-piece totals come from the NPC catalog only.</p></StepFrame>;

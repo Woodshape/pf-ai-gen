@@ -749,8 +749,8 @@ class NpcCreation(CreationSystem):
                     raise BoundaryError("selection.type-invalid", "equipped must be a boolean", f"{path}/equipped")
                 if "masterwork" in item and not isinstance(item["masterwork"], bool):
                     raise BoundaryError("selection.type-invalid", "masterwork must be a boolean", f"{path}/masterwork")
-                if "enhancementBonus" in item and (not _is_int(item["enhancementBonus"]) or item["enhancementBonus"] < 0):
-                    raise BoundaryError("selection.value-invalid", "enhancementBonus must be non-negative", f"{path}/enhancementBonus")
+                if "enhancementBonus" in item and (not _is_int(item["enhancementBonus"]) or not 0 <= item["enhancementBonus"] <= 5):
+                    raise BoundaryError("selection.value-invalid", "enhancementBonus must be an integer from 0 through 5", f"{path}/enhancementBonus")
                 for field in ("properties", "propertyIds"):
                     if field in item and (not isinstance(item[field], list) or any(not isinstance(value, str) or not value for value in item[field])):
                         raise BoundaryError("selection.type-invalid", f"{field} must be an array of IDs", f"{path}/{field}")
@@ -1918,6 +1918,66 @@ class NpcCreation(CreationSystem):
                             "sourceRefs": _refs(record)})
         return results, effects, refs, issues
 
+    def _apply_item_lenses(self, selected: dict[str, Any], record: dict[str, Any], effects: dict[str, Any]) -> dict[str, Any]:
+        """Apply reusable masterwork and enhancement lenses to a catalog item."""
+        masterwork = selected.get("masterwork", False)
+        enhancement = selected.get("enhancementBonus", 0)
+        category = record.get("category")
+        source_refs: list[dict[str, Any]] = []
+        price_cp = 0
+        issue = None
+        message = ""
+        name = record["name"]
+        lenses: dict[str, Any] = {}
+        if masterwork or enhancement:
+            if category not in {"weapon", "armor", "shield"}:
+                issue = "npc.item-lens-invalid"
+                message = "masterwork and enhancement lenses apply only to weapons, armor, and shields"
+            elif category == "weapon":
+                if enhancement:
+                    masterwork = True
+                    effects["attackBonus"] = effects.get("attackBonus", 0) + enhancement
+                    effects["damageBonus"] = effects.get("damageBonus", 0) + enhancement
+                    name = f"+{enhancement} {record['name']}"
+                    price_cp += 30_000 + enhancement * enhancement * 200_000
+                    source_refs.extend((
+                        self._source_ref("source.aon-magic-weapons", "Magic Weapons", [4, 4]),
+                        self._source_ref("source.aon-magic-weapons", "Table 15-8: Weapons", [21, 21]),
+                    ))
+                elif masterwork:
+                    effects["attackBonus"] = effects.get("attackBonus", 0) + 1
+                    name = f"mwk {record['name'].lower()}"
+                    price_cp += 30_000
+                if masterwork:
+                    source_refs.append(self._source_ref("source.aon-equipment", "Masterwork Weapons", [294, 295]))
+            else:
+                if enhancement:
+                    masterwork = True
+                    bonus_key = "armorBonus" if category == "armor" else "shieldBonus"
+                    effects[bonus_key] = effects.get(bonus_key, 0) + enhancement
+                    effects["armorCheckPenalty"] = min(0, effects.get("armorCheckPenalty", 0) + 1)
+                    name = f"+{enhancement} {record['name']}"
+                    price_cp += 15_000 + enhancement * enhancement * 200_000
+                    source_refs.extend((
+                        self._source_ref("source.aon-magic-armor", "Magic Armor", [3, 3]),
+                        self._source_ref("source.aon-magic-armor", "Table 15-3: Armor and Shields", [17, 17]),
+                    ))
+                elif masterwork:
+                    effects["armorCheckPenalty"] = min(0, effects.get("armorCheckPenalty", 0) + 1)
+                    name = f"mwk {record['name'].lower()}"
+                    price_cp += 15_000
+                if masterwork:
+                    source_refs.append(self._source_ref("source.aon-equipment", "Masterwork Armor", [381, 383]))
+            if masterwork:
+                lenses["masterwork"] = True
+            if enhancement:
+                lenses["enhancementBonus"] = enhancement
+        unsupported = set(selected) & {"properties", "propertyIds", "charges"}
+        if unsupported:
+            issue = "npc.item-customization-unimplemented"
+            message = "item properties and charges are not implemented; use masterwork or enhancement lenses only"
+        return {"name": name, "lenses": lenses, "priceCp": price_cp, "sourceRefs": source_refs, "issue": issue, "message": message}
+
     def _gear(
         self, selections: dict[str, Any], level: int, size_id: str | None,
     ) -> tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
@@ -1940,13 +2000,17 @@ class NpcCreation(CreationSystem):
             if record.get("catalogStatus") != "resolved":
                 issues.append(self._gap(record, f"/selections/gear/{index}/itemId"))
                 continue
-            unsupported = set(selected) & {"masterwork", "enhancementBonus", "properties", "propertyIds", "charges"}
-            if unsupported:
-                issues.append(self._issue("npc.item-customization-unimplemented", "item customization is not implemented; select a catalogued item variant", path=f"/selections/gear/{index}"))
             quantity = selected.get("quantity", 1)
-            cost = record["priceCp"] * quantity
-            spent += cost
             effects = copy.deepcopy(record.get("effects", {}))
+            lens_result = self._apply_item_lenses(selected, record, effects)
+            if lens_result["issue"]:
+                issues.append(self._issue(
+                    lens_result["issue"], lens_result["message"], path=f"/selections/gear/{index}",
+                    source_refs=lens_result["sourceRefs"],
+                ))
+            refs = _dedupe_refs(refs, lens_result["sourceRefs"])
+            cost = (record["priceCp"] + lens_result["priceCp"]) * quantity
+            spent += cost
             size_key = size_id.removeprefix("size.") if size_id else None
             damage_by_size = effects.get("damageDieBySize", {})
             if size_key in damage_by_size:
@@ -1954,11 +2018,12 @@ class NpcCreation(CreationSystem):
             weight_by_size = record.get("weightLbBySize", {})
             weight = weight_by_size.get(size_key, record.get("weightLb", 0))
             items.append({
-                "itemId": record["id"], "name": record["name"], "category": record["category"], "mechanical": True,
+                "itemId": record["id"], "name": lens_result["name"], "category": record["category"], "mechanical": True,
                 "npcGearCategory": record.get("npcGearCategory"),
                 "quantity": quantity, "equipped": selected.get("equipped", True), "priceCp": cost,
                 "weightLb": weight * quantity, "effects": effects,
-                "sourceRefs": _refs(record),
+                **({"lenses": lens_result["lenses"]} if lens_result["lenses"] else {}),
+                "sourceRefs": _dedupe_refs(_refs(record), lens_result["sourceRefs"]),
             })
         if spent != budget["budgetCp"]:
             warnings.append(self._issue(
