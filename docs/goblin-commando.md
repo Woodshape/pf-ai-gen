@@ -12,23 +12,23 @@ Fort +5, Ref +6, Will +1
 
 ## Offense
 Speed 30 ft.
-Melee Dogslicer +4 (1d4+1/19-20)
-Ranged mwk shortbow +7 (1d4/x3), 60 ft.
-Ranged mwk shortbow (Rapid Shot) +5/+5 (1d4/x3), 60 ft.
+Melee +1 keen Dogslicer +5 (1d4+2/17-20)
+Ranged +1 flaming Shortbow +7 (1d4+1/x3 plus 1d6 fire), 60 ft.
+Ranged +1 flaming Shortbow (Rapid Shot) +5/+5 (1d4+1/x3 plus 1d6 fire), 60 ft.
 Special Attacks favored enemy (humanoid [orc])
 
 ## Statistics
 Str 12, Dex 17, Con 15, Int 8, Wis 12, Cha 8
 Base Atk +2; CMB +2; CMD 15
 Feats Mounted Combat, Rapid Shot
-Skills Handle Animal +4, Ride +11, Stealth +15, Survival +6 (+7 following tracks)
+Skills Handle Animal +4, Ride +12, Stealth +16, Survival +6 (+7 following tracks)
 Languages Goblin
 SQ track
 Class Features Wild Empathy, Ranger combat styles (Archery)
-Other Gear Dogslicer, mwk shortbow, arrows (20) ×2, Studded Leather, trained goblin dog mount
+Other Gear +1 keen Dogslicer, +1 flaming Shortbow, arrows (20) ×2, mwk studded leather, trained goblin dog mount
 
 ## Special Abilities
 **Mounted Combat:** You are adept at guiding your mount through combat. Once per round when your mount is hit in combat, you may attempt a Ride check (as an immediate action) to negate the hit. The hit is negated if your Ride check result is greater than the opponent's attack roll.
-**Optional routine: Rapid Shot:** mwk shortbow +5/+5 ranged (1d4 P), 60 ft.
+**Optional routine: Rapid Shot:** +1 flaming Shortbow +5/+5 ranged (1d4+1 P; plus 1d6 fire), 60 ft.
 
-_Generated from catalog sha256:e3fdbfc486de778605a5239a1401e4ea8ed7bf69e9b96c6074bb578b2561d24f._
+_Generated from catalog sha256:64109a4f53a477f553a4dbec4d5d0e7e6016ef896dcfb468862082eec640a58a._

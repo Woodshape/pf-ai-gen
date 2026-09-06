@@ -346,6 +346,9 @@ def _attack(value: Mapping[str, Any], index: int, annotations: Mapping[str, Any]
         if damage and result.get("damageType"):
             damage += f" {result['damageType']}"
         details = [damage] if damage else []
+        for extra in result.get("additionalDamage", []):
+            if isinstance(extra, Mapping):
+                details.append(f"plus {extra.get('expression', '')} {extra.get('damageType', '')}".strip())
         name = str(result.get("name", "Attack"))
         text = name + (f" {bonus}" if bonus else "") + (f" {result['attackType']}" if result.get("attackType") else "") + (" (" + "; ".join(details) + ")" if details else "")
         if result.get("range"):
@@ -363,6 +366,9 @@ def _attack(value: Mapping[str, Any], index: int, annotations: Mapping[str, Any]
             details.append("average " + str(result["averageDamage"]))
         if result.get("damageType"):
             details.append(str(result["damageType"]))
+        for extra in result.get("additionalDamage", []):
+            if isinstance(extra, Mapping):
+                details.append(f"plus {extra.get('expression', '')} {extra.get('damageType', '')}".strip())
         name = str(result.get("name", "Attack"))
         if result.get("count") not in (None, 1):
             name += f" ×{result['count']}"
@@ -748,6 +754,9 @@ def _npc_offense_lines(model: Mapping[str, Any]) -> list[str]:
         damage_type = str(attack.get("damageType") or "")
         if damage_type and damage_type not in {"P", "S", "B"}:
             inside += f" {damage_type}" if inside else damage_type
+        for extra in attack.get("additionalDamage", []):
+            if isinstance(extra, Mapping):
+                inside += f" plus {extra.get('expression', '')} {extra.get('damageType', '')}".rstrip()
         text = f"{kind} {str(attack.get('name', '')).strip()} {bonus}"
         if inside:
             text += f" ({inside})"

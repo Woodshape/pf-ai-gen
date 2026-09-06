@@ -84,6 +84,8 @@ SOURCE_FILES = (
     ("source.aon-ranger", "sources/npc/aonprd/ranger.txt", "Official current AoN Ranger class rules and level progression"),
     ("source.aon-rogue", "sources/npc/aonprd/rogue.txt", "Official current AoN Rogue class rules and level progression"),
     ("source.aon-magic-weapons", "sources/npc/aonprd/magic-weapons.txt", "Official current AoN Core magic weapon enhancement rules and Table 15-8"),
+    ("source.aon-magic-weapon-flaming", "sources/npc/aonprd/magic-weapon-flaming.txt", "Official Archives of Nethys Flaming weapon quality extract"),
+    ("source.aon-magic-weapon-keen", "sources/npc/aonprd/magic-weapon-keen.txt", "Official Archives of Nethys Keen weapon quality extract"),
     ("source.aon-magic-armor", "sources/npc/aonprd/magic-armor.txt", "Official current AoN Core magic armor enhancement rules and Table 15-3"),
     ("source.aon-potions", "sources/npc/aonprd/potions.txt", "Official current AoN Core potion rules and Table 15-12"),
     ("source.aon-eidolon-unchained", "sources/npc/aonprd/eidolon-unchained.txt", "Official current AoN unchained Eidolon rules and Table 1-6 base statistics"),

@@ -134,7 +134,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:e3fdbfc486de778605a5239a1401e4ea8ed7bf69e9b96c6074bb578b2561d24f",
+  "catalogVersion": "sha256:64109a4f53a477f553a4dbec4d5d0e7e6016ef896dcfb468862082eec640a58a",
   "classFeatures": {
     "npc-class-feature.bard-cantrips": {
       "catalogStatus": "resolved",
@@ -23400,6 +23400,18 @@
       "sha256": "9e193130fedd7f2e6f8e6792a1b44a2339d42e4af3f5cb32785f44f267d3b90d",
       "sourceId": "source.aon-magic-armor"
     },
+    "source.aon-magic-weapon-flaming": {
+      "description": "Official Archives of Nethys Flaming weapon quality extract",
+      "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
+      "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
+      "sourceId": "source.aon-magic-weapon-flaming"
+    },
+    "source.aon-magic-weapon-keen": {
+      "description": "Official Archives of Nethys Keen weapon quality extract",
+      "file": "sources/npc/aonprd/magic-weapon-keen.txt",
+      "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
+      "sourceId": "source.aon-magic-weapon-keen"
+    },
     "source.aon-magic-weapons": {
       "description": "Official current AoN Core magic weapon enhancement rules and Table 15-8",
       "file": "sources/npc/aonprd/magic-weapons.txt",
@@ -23703,7 +23715,7 @@
     "source.npc-manifest": {
       "description": "Hash manifest for the local NPC source foundation",
       "file": "sources/npc/MANIFEST.json",
-      "sha256": "8263c390be221a3ce9e64785d14c4fcc27d84d0b9082550ab13eae56465f45ef",
+      "sha256": "47e32159b71949f2a41bf8924d25eccbb147fce2f3c39ee8447e2b153321fbe2",
       "sourceId": "source.npc-manifest"
     },
     "source.npc-mode-plan": {

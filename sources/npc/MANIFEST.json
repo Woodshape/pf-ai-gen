@@ -1330,6 +1330,30 @@
    "contents": "Official current Archives of Nethys Core magic weapon enhancement rules and Table 15-8.",
    "catalogUse": "Kiramor +1 longbow magic-item gear slice."
   },
+  "aon-magic-weapon-flaming": {
+   "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
+   "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
+   "derivedFrom": "aon-magic-weapon-flaming-url",
+   "command": "manually curated from the official Archives of Nethys entry",
+   "lines": [
+    1,
+    7
+   ],
+   "contents": "Official Archives of Nethys Flaming melee/ranged weapon quality extract.",
+   "catalogUse": "NPC reusable weapon-quality lens."
+  },
+  "aon-magic-weapon-keen": {
+   "file": "sources/npc/aonprd/magic-weapon-keen.txt",
+   "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
+   "derivedFrom": "aon-magic-weapon-keen-url",
+   "command": "manually curated from the official Archives of Nethys entry",
+   "lines": [
+    1,
+    7
+   ],
+   "contents": "Official Archives of Nethys Keen melee weapon quality extract.",
+   "catalogUse": "NPC reusable weapon-quality lens."
+  },
   "aon-magic-armor": {
    "file": "sources/npc/aonprd/magic-armor.txt",
    "sha256": "9e193130fedd7f2e6f8e6792a1b44a2339d42e4af3f5cb32785f44f267d3b90d",

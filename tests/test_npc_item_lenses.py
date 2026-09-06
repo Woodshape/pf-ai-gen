@@ -34,6 +34,43 @@ class NpcItemLensTests(unittest.TestCase):
         shield = gear["item.heavy-wooden-shield"]
         self.assertEqual((shield["name"], shield["priceCp"], shield["effects"]["shieldBonus"], shield["effects"]["armorCheckPenalty"], shield["lenses"]), ("+1 Heavy Wooden Shield", 215700, 3, -1, {"masterwork": True, "enhancementBonus": 1}))
 
+    def test_weapon_quality_lenses_add_flaming_damage_and_keen_threat_range(self):
+        draft = copy.deepcopy(FIXTURE)
+        draft["selections"]["gear"] = [
+            {"itemId": "item.shortbow", "enhancementBonus": 1, "properties": ["flaming"]},
+            {"itemId": "item.dogslicer", "properties": ["keen"]},
+        ]
+        response = Engine().execute(request("qualities", "draft.create", {"draft": draft}))
+        self.assertTrue(response["ok"], response)
+        evaluation = response["result"]["evaluation"]
+        self.assertEqual(evaluation["status"], "valid", evaluation["issues"])
+        gear = {entry["itemId"]: entry for entry in evaluation["canonical"]["gear"]}
+        self.assertEqual(gear["item.shortbow"]["name"], "+1 flaming Shortbow")
+        self.assertEqual(gear["item.shortbow"]["priceCp"], 833000)
+        self.assertEqual(gear["item.shortbow"]["lenses"], {"masterwork": True, "enhancementBonus": 1, "properties": ["flaming"]})
+        self.assertEqual(gear["item.dogslicer"]["name"], "+1 keen Dogslicer")
+        self.assertEqual(gear["item.dogslicer"]["priceCp"], 830800)
+        self.assertEqual(gear["item.dogslicer"]["effects"]["critRange"], 19)
+        attacks = {entry["itemId"]: entry for entry in evaluation["canonical"]["attacks"] if entry.get("itemId")}
+        self.assertEqual(attacks["item.shortbow"]["additionalDamage"], [{"expression": "1d6", "damageType": "fire", "multipliedOnCritical": False}])
+        self.assertEqual(attacks["item.dogslicer"]["critical"], "17-20/x2")
+        source_ids = {ref["sourceId"] for item in gear.values() for ref in item["sourceRefs"]}
+        self.assertTrue({"source.aon-magic-weapon-flaming", "source.aon-magic-weapon-keen"} <= source_ids)
+
+    def test_weapon_quality_lenses_reject_invalid_targets_and_unknown_properties(self):
+        cases = [
+            ({"itemId": "item.heavy-wooden-shield", "properties": ["flaming"]}, "npc.item-lens-invalid"),
+            ({"itemId": "item.shortbow", "properties": ["keen"]}, "npc.item-lens-invalid"),
+            ({"itemId": "item.sickle", "properties": ["vorpal"]}, "npc.item-property-invalid"),
+        ]
+        for index, (gear, code) in enumerate(cases):
+            with self.subTest(index=index):
+                draft = copy.deepcopy(FIXTURE)
+                draft["selections"]["gear"] = [gear]
+                response = Engine().execute(request(f"bad-quality-{index}", "draft.create", {"draft": draft}))
+                self.assertTrue(response["ok"], response)
+                self.assertIn(code, {issue["code"] for issue in response["result"]["evaluation"]["issues"]})
+
     def test_enhancement_lens_is_limited_to_plus_five(self):
         draft = copy.deepcopy(FIXTURE)
         draft["selections"]["gear"] = [{"itemId": "item.sickle", "enhancementBonus": 6}]

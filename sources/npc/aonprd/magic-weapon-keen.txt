@@ -1,0 +1,7 @@
+Keen
+Source: Ultimate Equipment pg. 144; PRPG Core Rulebook pg. 469
+Official URL: https://www.aonprd.com/MagicWeaponsDisplay.aspx?ItemName=Keen
+Slot: weapon quality
+Price: +1 bonus
+Description: This ability doubles the threat range of a weapon. Only piercing or slashing melee weapons can be keen.
+Restriction: Keen does not stack with other effects that expand a weapon's threat range.

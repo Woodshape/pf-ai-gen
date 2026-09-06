@@ -1919,7 +1919,7 @@ class NpcCreation(CreationSystem):
         return results, effects, refs, issues
 
     def _apply_item_lenses(self, selected: dict[str, Any], record: dict[str, Any], effects: dict[str, Any]) -> dict[str, Any]:
-        """Apply reusable masterwork and enhancement lenses to a catalog item."""
+        """Apply reusable masterwork, enhancement, and weapon-quality lenses."""
         masterwork = selected.get("masterwork", False)
         enhancement = selected.get("enhancementBonus", 0)
         category = record.get("category")
@@ -1929,6 +1929,24 @@ class NpcCreation(CreationSystem):
         message = ""
         name = record["name"]
         lenses: dict[str, Any] = {}
+        raw_properties = list(selected.get("properties", [])) + list(selected.get("propertyIds", []))
+        properties = list(dict.fromkeys(
+            next((value.lower().removeprefix(prefix) for prefix in ("weapon-quality.", "weapon-property.", "magic-weapon-property.") if value.lower().startswith(prefix)), value.lower())
+            for value in raw_properties
+        ))
+        known_properties = {"flaming", "keen"}
+        unknown = [value for value in properties if value not in known_properties]
+        if unknown:
+            issue = "npc.item-property-invalid"
+            message = f"unsupported weapon quality: {unknown[0]}"
+        if properties and category != "weapon":
+            issue = "npc.item-lens-invalid"
+            message = "weapon qualities apply only to weapons"
+        if "keen" in properties and (record.get("effects", {}).get("rangeIncrement") is not None or record.get("effects", {}).get("damageType") not in {"P", "S"}):
+            issue = "npc.item-lens-invalid"
+            message = "keen applies only to piercing or slashing melee weapons"
+        if properties and not enhancement:
+            enhancement = 1
         if masterwork or enhancement:
             if category not in {"weapon", "armor", "shield"}:
                 issue = "npc.item-lens-invalid"
@@ -1938,8 +1956,12 @@ class NpcCreation(CreationSystem):
                     masterwork = True
                     effects["attackBonus"] = effects.get("attackBonus", 0) + enhancement
                     effects["damageBonus"] = effects.get("damageBonus", 0) + enhancement
-                    name = f"+{enhancement} {record['name']}"
-                    price_cp += 30_000 + enhancement * enhancement * 200_000
+                    if properties:
+                        effects["weaponQualities"] = properties
+                    labels = " ".join(properties)
+                    name = f"+{enhancement} {labels + ' ' if labels else ''}{record['name']}"
+                    equivalent = enhancement + sum(1 for value in properties if value in known_properties)
+                    price_cp += 30_000 + equivalent * equivalent * 200_000
                     source_refs.extend((
                         self._source_ref("source.aon-magic-weapons", "Magic Weapons", [4, 4]),
                         self._source_ref("source.aon-magic-weapons", "Table 15-8: Weapons", [21, 21]),
@@ -1950,6 +1972,11 @@ class NpcCreation(CreationSystem):
                     price_cp += 30_000
                 if masterwork:
                     source_refs.append(self._source_ref("source.aon-equipment", "Masterwork Weapons", [294, 295]))
+                if "flaming" in properties:
+                    effects["additionalDamage"] = [{"expression": "1d6", "damageType": "fire", "multipliedOnCritical": False}]
+                    source_refs.append(self._source_ref("source.aon-magic-weapon-flaming", "Flaming", [1, 7]))
+                if "keen" in properties:
+                    source_refs.append(self._source_ref("source.aon-magic-weapon-keen", "Keen", [1, 7]))
             else:
                 if enhancement:
                     masterwork = True
@@ -1972,10 +1999,11 @@ class NpcCreation(CreationSystem):
                 lenses["masterwork"] = True
             if enhancement:
                 lenses["enhancementBonus"] = enhancement
-        unsupported = set(selected) & {"properties", "propertyIds", "charges"}
-        if unsupported:
+        if properties and not unknown and category == "weapon":
+            lenses["properties"] = properties
+        if "charges" in selected:
             issue = "npc.item-customization-unimplemented"
-            message = "item properties and charges are not implemented; use masterwork or enhancement lenses only"
+            message = "item charges are not implemented"
         return {"name": name, "lenses": lenses, "priceCp": price_cp, "sourceRefs": source_refs, "issue": issue, "message": message}
 
     def _gear(
@@ -2101,6 +2129,7 @@ class NpcCreation(CreationSystem):
                 **({"reach": effects["reach"]} if effects.get("reach") else {}),
                 "damageExpression": f"{damage_die}{_bonus(damage_bonus) if damage_bonus else ''}",
                 "damageType": effects.get("damageType"),
+                **({"additionalDamage": copy.deepcopy(effects["additionalDamage"])} if effects.get("additionalDamage") else {}),
             }
             if effects.get("critRange", 20) < 20:
                 attack["critical"] = f"{effects['critRange']}-20/x{effects.get('critMultiplier', 2)}"
@@ -2109,7 +2138,7 @@ class NpcCreation(CreationSystem):
                 attack["critical"] = f"x{effects['critMultiplier']}"
             if "critical" in attack:
                 attack["critMultiplier"] = effects.get("critMultiplier", 2)
-            if feat_effects.get("doubleThreatRange", {}).get(effects.get("weaponType")):
+            if "keen" in effects.get("weaponQualities", []) or feat_effects.get("doubleThreatRange", {}).get(effects.get("weaponType")):
                 threat = 21 - 2 * (21 - effects.get("critRange", 20))
                 attack.update(critRange=threat, critical=f"{threat}-20/x{effects.get('critMultiplier', 2)}")
             if effects.get("rangeIncrement") is not None:
@@ -2335,7 +2364,8 @@ class NpcCreation(CreationSystem):
                 continue
             record = self._optional("item", item.get("itemId"))
             if record and _is_int(record.get("priceCp")):
-                total += record["priceCp"] * item.get("quantity", 1)
+                lens = self._apply_item_lenses(item, record, copy.deepcopy(record.get("effects", {})))
+                total += (record["priceCp"] + lens["priceCp"]) * item.get("quantity", 1)
         return total
 
     def _source_ref(self, source_id: str, section: str, lines: list[int]) -> dict[str, Any]:

@@ -1,0 +1,7 @@
+Flaming
+Source: Ultimate Equipment pg. 141; PRPG Core Rulebook pg. 469
+Official URL: https://www.aonprd.com/MagicWeaponsDisplay.aspx?ItemName=Flaming
+Slot: weapon quality
+Price: +1 bonus
+Description: Upon command, a flaming weapon is sheathed in fire that deals an extra 1d6 points of fire damage on a successful hit. The fire does not harm the wielder.
+Special quality: Additional damage dice from flaming are not multiplied on a critical hit.
