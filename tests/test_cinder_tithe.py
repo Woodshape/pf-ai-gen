@@ -19,7 +19,7 @@ class CinderTitheTests(unittest.TestCase):
             self.assertTrue(response["ok"], response)
             return response["result"]
 
-        expected = {"varkesh": (2, 23, 13), "sootfinger": (1, 17, 17),
+        expected = {"varkesh": (2, 23, 17), "sootfinger": (1, 17, 17),
                     "goblin-warrior": ("1/3", 6, 16)}
         roster = json.loads((ENCOUNTER / "roster.json").read_text())
         self.assertEqual([npc["sheet"] for npc in roster["npcs"]],
@@ -33,6 +33,7 @@ class CinderTitheTests(unittest.TestCase):
                 canonical = evaluation["canonical"]
                 self.assertEqual((canonical["cr"], canonical["hp"], canonical["defenses"]["ac"]), (cr, hp, ac))
                 if slug == "varkesh":
+                    self.assertEqual(canonical["activeEffects"][0]["effectId"], "npc-effect.mage-armor")
                     self.assertEqual(canonical["abilityScores"]["dexterity"], 16)
                     self.assertEqual(canonical["abilityScores"]["constitution"], 15)
                     self.assertEqual(next(s for s in canonical["skills"] if s["skillId"] == "skill.stealth")["total"], 10)
@@ -50,6 +51,7 @@ class CinderTitheTests(unittest.TestCase):
                     self.assertIn(f"hp {hp} ({canonical['hitDiceExpression']})", sheet)
                     self.assertNotIn("gp in coins and gear", sheet)
                     if slug == "varkesh":
+                        self.assertIn("Active Effects", sheet)
                         self.assertIn("Fire resistance 10", sheet)
                         self.assertIn("Elemental Ray +4 (1d6+1 fire)", sheet)
                     if slug == "sootfinger":

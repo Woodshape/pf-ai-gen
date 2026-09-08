@@ -320,7 +320,7 @@ function npcStepForPath(path: string): number {
   if (path.startsWith("/selections/classProgression") || path.startsWith("/selections/classFeatureChoices")) return 2;
   if (path.startsWith("/selections/abilityGeneration") || path.startsWith("/selections/levelIncreases")) return 3;
   if (path.startsWith("/selections/skillGeneration") || path.startsWith("/selections/feats")) return 4;
-  if (path.startsWith("/selections/spellLoadout") || path.startsWith("/selections/gear" ) || path.startsWith("/selections/gearProfile")) return 5;
+  if (path.startsWith("/selections/spellLoadout") || path.startsWith("/selections/gear" ) || path.startsWith("/selections/gearProfile") || path.startsWith("/selections/activeEffects")) return 5;
   return 6;
 }
 

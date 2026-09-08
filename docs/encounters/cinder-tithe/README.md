@@ -16,7 +16,7 @@
 
 There are three distinct statblocks, each with a `.md` sheet, printable `.html` sheet, full immutable `.json` export, and editable `.draft.json` creation input in this directory. **Krik, Nib, and Zek share the warrior statblock in `goblin-warrior.*`; track their hit points and equipment separately.** Their individual names, roles, starting positions, and combat options below remain unchanged. [roster.json](roster.json) records their actual engine IDs. All five are finalized and stored in `.monster-builder`.
 
-**Use this guide alongside the sheets.** Engine sheets show unbuffed statistics; narrative tactics, expendable-item attack calculations, and encounter-start resources are recorded here and in the draft details. Incendiary goods are catalogued inventory, not automatically simulated attacks.
+**Use this guide alongside the sheets.** Engine sheets include selected Active Effects: **Varkesh's Mage Armor is already included in his printed AC 17; do not add it again.** Other buffs, including Shield, remain inactive. Narrative tactics, expendable-item attack calculations, and encounter-start resources are recorded here and in the draft details. Incendiary goods are catalogued inventory, not automatically simulated attacks.
 
 ## Scene and starting positions
 
@@ -38,7 +38,7 @@ The haycart is the only established blaze. Its occupied squares are not a safe p
 
 Varkesh is an unusual hobgoblin arcane outcast, not a typical representative of his people's distrust of magic. The goblins follow him because his hands genuinely burn.
 
-- **Before the raid:** one mage armor cast, lasting 3 hours. He carries its leather focus. Start with **5 of 6 first-level slots remaining**, 23 hp, and **5 elemental rays**.
+- **Before the raid:** one mage armor cast, lasting 3 hours, already active in his saved profile and displayed under **Active Effects**. He carries its leather focus. Start with **5 of 6 first-level slots remaining**, 23 hp, and **5 elemental rays**.
 - **Opening:** if threatened, cast shield on his own turn. Otherwise use an elemental ray and reposition behind Krik. Casting shield costs an action and another slot; it is not a free prebuff.
 - **Shield:** lasts 3 minutes; with mage armor, AC **21**, touch **13**, flat-footed **18**. Negates magic missile. CMD remains 13: armor/shield bonuses do not raise CMD.
 - **Burning hands:** 15-foot cone, **3d4 fire**, Reflex **DC 13 half**. Prefer a worthwhile angle against standing opponents, not allies or downed PCs. No heightened DC, metamagic, or mythic version.
@@ -93,4 +93,4 @@ Loot is the equipment actually carried, minus expended flasks and ammunition. **
 - Class-based CR: [Adding NPCs](../../../sources/npc/aonprd/designing-encounters.txt), line 1; encounter budget follows the CR/XP table on the archived [Designing Encounters page](../../../sources/reference/aonprd/designing-encounters.html).
 - Creation caught and fixed two shared issues: HP expressions now include Toughness, and sheet exports no longer invent treasure from unallocated gear budgets.
 
-Checks: `python3 -m unittest discover -s tests` — 289 tests run, 1 skipped, no failures. `python3 tools/build_npc_catalog.py --check` and `python3 tools/extract_npc_aon_sources.py --check` pass. The encounter regression is `python3 -m unittest discover -s tests -p test_cinder_tithe.py`.
+Original creation checks: `python3 -m unittest discover -s tests` — 289 tests run, 1 skipped, no failures. Active-effect calculations and persistence have additional regression coverage in `tests/test_npc_active_effects.py`. `python3 tools/build_npc_catalog.py --check` and `python3 tools/extract_npc_aon_sources.py --check` pass. The encounter regression is `python3 -m unittest discover -s tests -p test_cinder_tithe.py`.

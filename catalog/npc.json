@@ -118,6 +118,894 @@
       }
     }
   },
+  "activeEffects": {
+    "npc-effect.bless": {
+      "catalogStatus": "resolved",
+      "duration": "1 minute/level",
+      "id": "npc-effect.bless",
+      "kind": "spell",
+      "name": "Bless",
+      "parameters": [],
+      "restrictions": [],
+      "rulesText": "+1 morale to attack rolls and saves against fear. Counters and dispels bane. Mind-affecting; no damage bonus.",
+      "sourceRef": [
+        {
+          "file": "sources/npc/aonprd/spell-bless.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "af3714306958866bca68e01b8a1b9d82a67dd8a5c2bc8a52c0c4f11a4e676735",
+          "sourceId": "source.aon-spell-bless",
+          "txtLines": [
+            1,
+            14
+          ]
+        }
+      ],
+      "tiers": [
+        {
+          "level": 1,
+          "modifiers": [
+            {
+              "stat": "attack",
+              "type": "morale",
+              "value": 1
+            },
+            {
+              "condition": "against fear effects",
+              "stat": "saves",
+              "type": "morale",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    "npc-effect.heroism": {
+      "catalogStatus": "resolved",
+      "duration": "10 minutes/level",
+      "id": "npc-effect.heroism",
+      "kind": "spell",
+      "name": "Heroism",
+      "parameters": [],
+      "restrictions": [],
+      "rulesText": "+2 morale to attack rolls, saving throws and skill checks. Mind-affecting compulsion. Does not increase damage, initiative or concentration checks.",
+      "sourceRef": [
+        {
+          "file": "sources/npc/aonprd/spell-heroism.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "8cd792310aaa41a570082719fe268c6e05083280a99747c7c11a404af69e7500",
+          "sourceId": "source.aon-spell-heroism",
+          "txtLines": [
+            1,
+            13
+          ]
+        }
+      ],
+      "tiers": [
+        {
+          "level": 1,
+          "modifiers": [
+            {
+              "stat": "attack",
+              "type": "morale",
+              "value": 2
+            },
+            {
+              "stat": "saves",
+              "type": "morale",
+              "value": 2
+            },
+            {
+              "stat": "skills",
+              "type": "morale",
+              "value": 2
+            }
+          ]
+        }
+      ]
+    },
+    "npc-effect.inspire-competence": {
+      "catalogStatus": "resolved",
+      "duration": "While the ally hears the performance within 30 feet",
+      "id": "npc-effect.inspire-competence",
+      "kind": "class-ability",
+      "name": "Inspire Competence",
+      "parameters": [
+        "skillId"
+      ],
+      "restrictions": [],
+      "rulesText": "+2 competence to checks with the selected skill; +1 more at bard 7, 11, 15, 19. Does not grant training or ranks. The performer cannot target themself; the ally must hear the bard and be within 30 feet. Infeasible uses (such as Stealth) require GM adjudication. Source level is the supplying bard level.",
+      "sourceRef": [
+        {
+          "file": "sources/npc/aonprd/bard-performances.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "f818648a19f81758409bd80098e5aec1086920f2705943198e428967b5fd787e",
+          "sourceId": "source.aon-bard-performances",
+          "txtLines": [
+            8,
+            13
+          ]
+        },
+        {
+          "file": "sources/npc/aonprd/bard-performances.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "f818648a19f81758409bd80098e5aec1086920f2705943198e428967b5fd787e",
+          "sourceId": "source.aon-bard-performances",
+          "txtLines": [
+            20,
+            20
+          ]
+        }
+      ],
+      "tiers": [
+        {
+          "level": 3,
+          "modifiers": [
+            {
+              "stat": "skill",
+              "type": "competence",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "level": 7,
+          "modifiers": [
+            {
+              "stat": "skill",
+              "type": "competence",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "level": 11,
+          "modifiers": [
+            {
+              "stat": "skill",
+              "type": "competence",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "level": 15,
+          "modifiers": [
+            {
+              "stat": "skill",
+              "type": "competence",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "level": 19,
+          "modifiers": [
+            {
+              "stat": "skill",
+              "type": "competence",
+              "value": 6
+            }
+          ]
+        }
+      ]
+    },
+    "npc-effect.inspire-courage": {
+      "catalogStatus": "resolved",
+      "duration": "While the bard maintains a perceivable performance",
+      "id": "npc-effect.inspire-courage",
+      "kind": "class-ability",
+      "name": "Inspire Courage",
+      "parameters": [],
+      "restrictions": [],
+      "rulesText": "+1 competence to all attack rolls and weapon damage, +1 morale to saves against charm and fear. Increases at bard 5, 11 and 17 (maximum +4). Mind-affecting; recipient must perceive the performance. The bard selects audible or visual components. Can affect the performing bard. Source level is the supplying bard level, not the recipient level. No bonus to spell/ray damage.",
+      "sourceRef": [
+        {
+          "file": "sources/npc/aonprd/bard-performances.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "f818648a19f81758409bd80098e5aec1086920f2705943198e428967b5fd787e",
+          "sourceId": "source.aon-bard-performances",
+          "txtLines": [
+            8,
+            13
+          ]
+        },
+        {
+          "file": "sources/npc/aonprd/bard-performances.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "f818648a19f81758409bd80098e5aec1086920f2705943198e428967b5fd787e",
+          "sourceId": "source.aon-bard-performances",
+          "txtLines": [
+            19,
+            19
+          ]
+        }
+      ],
+      "tiers": [
+        {
+          "level": 1,
+          "modifiers": [
+            {
+              "stat": "attack",
+              "type": "competence",
+              "value": 1
+            },
+            {
+              "stat": "weaponDamage",
+              "type": "competence",
+              "value": 1
+            },
+            {
+              "condition": "against charm effects",
+              "stat": "saves",
+              "type": "morale",
+              "value": 1
+            },
+            {
+              "condition": "against fear effects",
+              "stat": "saves",
+              "type": "morale",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "level": 5,
+          "modifiers": [
+            {
+              "stat": "attack",
+              "type": "competence",
+              "value": 2
+            },
+            {
+              "stat": "weaponDamage",
+              "type": "competence",
+              "value": 2
+            },
+            {
+              "condition": "against charm effects",
+              "stat": "saves",
+              "type": "morale",
+              "value": 2
+            },
+            {
+              "condition": "against fear effects",
+              "stat": "saves",
+              "type": "morale",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "level": 11,
+          "modifiers": [
+            {
+              "stat": "attack",
+              "type": "competence",
+              "value": 3
+            },
+            {
+              "stat": "weaponDamage",
+              "type": "competence",
+              "value": 3
+            },
+            {
+              "condition": "against charm effects",
+              "stat": "saves",
+              "type": "morale",
+              "value": 3
+            },
+            {
+              "condition": "against fear effects",
+              "stat": "saves",
+              "type": "morale",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "level": 17,
+          "modifiers": [
+            {
+              "stat": "attack",
+              "type": "competence",
+              "value": 4
+            },
+            {
+              "stat": "weaponDamage",
+              "type": "competence",
+              "value": 4
+            },
+            {
+              "condition": "against charm effects",
+              "stat": "saves",
+              "type": "morale",
+              "value": 4
+            },
+            {
+              "condition": "against fear effects",
+              "stat": "saves",
+              "type": "morale",
+              "value": 4
+            }
+          ]
+        }
+      ]
+    },
+    "npc-effect.inspire-heroics": {
+      "catalogStatus": "resolved",
+      "duration": "While the targets witness the performance",
+      "id": "npc-effect.inspire-heroics",
+      "kind": "class-ability",
+      "name": "Inspire Heroics",
+      "parameters": [],
+      "restrictions": [],
+      "rulesText": "+4 morale on saving throws and +4 dodge AC (including touch and CMD; lost when Dexterity is denied). Requires a bard of at least level 15. Targets within 30 feet must see and hear the bard; mind-affecting. Can affect the performing bard. A single bard cannot maintain multiple performances simultaneously; multiple supplied effects require legal independent sources.",
+      "sourceRef": [
+        {
+          "file": "sources/npc/aonprd/bard-performances.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "f818648a19f81758409bd80098e5aec1086920f2705943198e428967b5fd787e",
+          "sourceId": "source.aon-bard-performances",
+          "txtLines": [
+            8,
+            13
+          ]
+        },
+        {
+          "file": "sources/npc/aonprd/bard-performances.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "f818648a19f81758409bd80098e5aec1086920f2705943198e428967b5fd787e",
+          "sourceId": "source.aon-bard-performances",
+          "txtLines": [
+            27,
+            27
+          ]
+        }
+      ],
+      "tiers": [
+        {
+          "level": 15,
+          "modifiers": [
+            {
+              "stat": "saves",
+              "type": "morale",
+              "value": 4
+            },
+            {
+              "stat": "ac",
+              "type": "dodge",
+              "value": 4
+            }
+          ]
+        }
+      ]
+    },
+    "npc-effect.mage-armor": {
+      "catalogStatus": "resolved",
+      "duration": "1 hour/level (D)",
+      "id": "npc-effect.mage-armor",
+      "kind": "spell",
+      "name": "Mage Armor",
+      "parameters": [],
+      "restrictions": [],
+      "rulesText": "+4 armor bonus to AC; overlaps worn armor, no armor check penalty or arcane spell failure. Force armor also protects against incorporeal touch attacks (not ordinary touch attacks).",
+      "sourceRef": [
+        {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
+          ]
+        }
+      ],
+      "tiers": [
+        {
+          "level": 1,
+          "modifiers": [
+            {
+              "stat": "ac",
+              "type": "armor",
+              "value": 4
+            }
+          ]
+        }
+      ]
+    },
+    "npc-effect.protection-from-chaos": {
+      "catalogStatus": "resolved",
+      "duration": "1 minute/level (D)",
+      "id": "npc-effect.protection-from-chaos",
+      "kind": "spell",
+      "name": "Protection from Chaos",
+      "parameters": [],
+      "restrictions": [],
+      "rulesText": "+2 deflection AC (including touch, flat-footed and CMD) and +2 resistance saves only against attacks made or effects created by chaotic creatures. New save against existing mental control from chaotic creatures/objects, with +2 morale; success suppresses control for the duration. Prevents new possession/mental control by those sources, subject to GM discretion. Blocks bodily contact by chaotic summoned creatures; spell resistance can bypass the contact barrier, and attacking or forcing the barrier against a blocked creature ends that contact protection. No blanket immunity to mind-affecting effects.",
+      "sourceRef": [
+        {
+          "file": "sources/npc/aonprd/spell-protection-from-evil.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "42f3ea6a5ae713c03b5e70f175647b76f32fab7fdf2dde50f3b1788fdc5861fe",
+          "sourceId": "source.aon-spell-protection-from-evil",
+          "txtLines": [
+            1,
+            16
+          ]
+        },
+        {
+          "file": "sources/npc/aonprd/spell-protection-from-chaos.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "fe8e0d2896f41fc24f3177bc6ac0b97672d4f729003245e67cd16898577539d3",
+          "sourceId": "source.aon-spell-protection-from-chaos",
+          "txtLines": [
+            1,
+            13
+          ]
+        }
+      ],
+      "tiers": [
+        {
+          "level": 1,
+          "modifiers": [
+            {
+              "condition": "against attacks made or effects created by chaotic creatures",
+              "stat": "ac",
+              "type": "deflection",
+              "value": 2
+            },
+            {
+              "condition": "against attacks made or effects created by chaotic creatures",
+              "stat": "saves",
+              "type": "resistance",
+              "value": 2
+            },
+            {
+              "condition": "on the new save against existing mental control by chaotic creatures/objects",
+              "stat": "saves",
+              "type": "morale",
+              "value": 2
+            }
+          ]
+        }
+      ]
+    },
+    "npc-effect.protection-from-energy": {
+      "catalogStatus": "resolved",
+      "duration": "10 minutes/level or until discharged",
+      "id": "npc-effect.protection-from-energy",
+      "kind": "spell",
+      "name": "Protection from Energy",
+      "parameters": [
+        "energyType"
+      ],
+      "restrictions": [],
+      "rulesText": "Absorbs the selected energy into a finite pool: 12 points/level, maximum 120. Not permanent immunity or ordinary resistance. Protection from Energy is used before Resist Energy; those spells do not reduce the same damage together. Pool expenditure is tracked in play.",
+      "sourceRef": [
+        {
+          "file": "sources/npc/aonprd/spell-protection-from-energy.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "aad618caf9c0189041381df32892b444b0c163b6aec4d7ecd4bad11ec887a7f8",
+          "sourceId": "source.aon-spell-protection-from-energy",
+          "txtLines": [
+            1,
+            14
+          ]
+        }
+      ],
+      "tiers": [
+        {
+          "absorptionMaximum": 120,
+          "absorptionPerLevel": 12,
+          "level": 1
+        }
+      ]
+    },
+    "npc-effect.protection-from-evil": {
+      "catalogStatus": "resolved",
+      "duration": "1 minute/level (D)",
+      "id": "npc-effect.protection-from-evil",
+      "kind": "spell",
+      "name": "Protection from Evil",
+      "parameters": [],
+      "restrictions": [],
+      "rulesText": "+2 deflection AC (including touch, flat-footed and CMD) and +2 resistance saves only against attacks made or effects created by evil creatures. New save against existing mental control from evil creatures/objects, with +2 morale; success suppresses control for the duration. Prevents new possession/mental control by those sources, subject to GM discretion. Blocks bodily contact by evil summoned creatures; spell resistance can bypass the contact barrier, and attacking or forcing the barrier against a blocked creature ends that contact protection. No blanket immunity to mind-affecting effects.",
+      "sourceRef": [
+        {
+          "file": "sources/npc/aonprd/spell-protection-from-evil.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "42f3ea6a5ae713c03b5e70f175647b76f32fab7fdf2dde50f3b1788fdc5861fe",
+          "sourceId": "source.aon-spell-protection-from-evil",
+          "txtLines": [
+            1,
+            16
+          ]
+        }
+      ],
+      "tiers": [
+        {
+          "level": 1,
+          "modifiers": [
+            {
+              "condition": "against attacks made or effects created by evil creatures",
+              "stat": "ac",
+              "type": "deflection",
+              "value": 2
+            },
+            {
+              "condition": "against attacks made or effects created by evil creatures",
+              "stat": "saves",
+              "type": "resistance",
+              "value": 2
+            },
+            {
+              "condition": "on the new save against existing mental control by evil creatures/objects",
+              "stat": "saves",
+              "type": "morale",
+              "value": 2
+            }
+          ]
+        }
+      ]
+    },
+    "npc-effect.protection-from-good": {
+      "catalogStatus": "resolved",
+      "duration": "1 minute/level (D)",
+      "id": "npc-effect.protection-from-good",
+      "kind": "spell",
+      "name": "Protection from Good",
+      "parameters": [],
+      "restrictions": [],
+      "rulesText": "+2 deflection AC (including touch, flat-footed and CMD) and +2 resistance saves only against attacks made or effects created by good creatures. New save against existing mental control from good creatures/objects, with +2 morale; success suppresses control for the duration. Prevents new possession/mental control by those sources, subject to GM discretion. Blocks bodily contact by good summoned creatures; spell resistance can bypass the contact barrier, and attacking or forcing the barrier against a blocked creature ends that contact protection. No blanket immunity to mind-affecting effects.",
+      "sourceRef": [
+        {
+          "file": "sources/npc/aonprd/spell-protection-from-evil.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "42f3ea6a5ae713c03b5e70f175647b76f32fab7fdf2dde50f3b1788fdc5861fe",
+          "sourceId": "source.aon-spell-protection-from-evil",
+          "txtLines": [
+            1,
+            16
+          ]
+        },
+        {
+          "file": "sources/npc/aonprd/spell-protection-from-good.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "1dbe1f3148f91f6350d89b9f73bdb5203fca6d3afe20f154b3193869b27c528b",
+          "sourceId": "source.aon-spell-protection-from-good",
+          "txtLines": [
+            1,
+            13
+          ]
+        }
+      ],
+      "tiers": [
+        {
+          "level": 1,
+          "modifiers": [
+            {
+              "condition": "against attacks made or effects created by good creatures",
+              "stat": "ac",
+              "type": "deflection",
+              "value": 2
+            },
+            {
+              "condition": "against attacks made or effects created by good creatures",
+              "stat": "saves",
+              "type": "resistance",
+              "value": 2
+            },
+            {
+              "condition": "on the new save against existing mental control by good creatures/objects",
+              "stat": "saves",
+              "type": "morale",
+              "value": 2
+            }
+          ]
+        }
+      ]
+    },
+    "npc-effect.protection-from-law": {
+      "catalogStatus": "resolved",
+      "duration": "1 minute/level (D)",
+      "id": "npc-effect.protection-from-law",
+      "kind": "spell",
+      "name": "Protection from Law",
+      "parameters": [],
+      "restrictions": [],
+      "rulesText": "+2 deflection AC (including touch, flat-footed and CMD) and +2 resistance saves only against attacks made or effects created by lawful creatures. New save against existing mental control from lawful creatures/objects, with +2 morale; success suppresses control for the duration. Prevents new possession/mental control by those sources, subject to GM discretion. Blocks bodily contact by lawful summoned creatures; spell resistance can bypass the contact barrier, and attacking or forcing the barrier against a blocked creature ends that contact protection. No blanket immunity to mind-affecting effects.",
+      "sourceRef": [
+        {
+          "file": "sources/npc/aonprd/spell-protection-from-evil.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "42f3ea6a5ae713c03b5e70f175647b76f32fab7fdf2dde50f3b1788fdc5861fe",
+          "sourceId": "source.aon-spell-protection-from-evil",
+          "txtLines": [
+            1,
+            16
+          ]
+        },
+        {
+          "file": "sources/npc/aonprd/spell-protection-from-law.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "2a03e8b6165b3475bb69191bc99e94685a5eab541c7b946f545d9c7f6d8d7f96",
+          "sourceId": "source.aon-spell-protection-from-law",
+          "txtLines": [
+            1,
+            13
+          ]
+        }
+      ],
+      "tiers": [
+        {
+          "level": 1,
+          "modifiers": [
+            {
+              "condition": "against attacks made or effects created by lawful creatures",
+              "stat": "ac",
+              "type": "deflection",
+              "value": 2
+            },
+            {
+              "condition": "against attacks made or effects created by lawful creatures",
+              "stat": "saves",
+              "type": "resistance",
+              "value": 2
+            },
+            {
+              "condition": "on the new save against existing mental control by lawful creatures/objects",
+              "stat": "saves",
+              "type": "morale",
+              "value": 2
+            }
+          ]
+        }
+      ]
+    },
+    "npc-effect.rage": {
+      "catalogStatus": "resolved",
+      "duration": "While raging; daily rounds tracked separately",
+      "id": "npc-effect.rage",
+      "kind": "class-ability",
+      "name": "Rage (Core barbarian)",
+      "parameters": [],
+      "restrictions": [
+        "No spellcasting or other abilities requiring patience or concentration while raging.",
+        "Cannot use Charisma-, Dexterity- or Intelligence-based skills except Acrobatics, Fly, Intimidate and Ride while raging."
+      ],
+      "rulesText": "Core barbarian Rage, not Unchained Rage or the rage spell. Morale Strength/Constitution +4 (+6 at barbarian 11, +8 at 20); morale Will +2/+3/+4; AC and CMD -2. Constitution raises HP, not temporary HP: the added HP disappear when rage ends. Free action to start/end; cannot start fatigued/exhausted; unconsciousness ends rage. Fatigued afterward for twice the rounds spent raging unless Tireless Rage (barbarian 17). Temporary Constitution does not grant more daily rage rounds. At barbarian 14, Indomitable Will adds +4 against enchantment spells while raging, stacking with other bonuses. The profile asserts this NPC has legally acquired the selected source-level Rage; it does not grant barbarian features.",
+      "sourceRef": [
+        {
+          "file": "sources/npc/aonprd/barbarian-rage.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "6a6d1021709ea87867b8dac6796dddb1547629c37bc4d610b22964207f7ad7a9",
+          "sourceId": "source.aon-barbarian-rage",
+          "txtLines": [
+            25,
+            27
+          ]
+        },
+        {
+          "file": "sources/npc/aonprd/barbarian-rage.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "6a6d1021709ea87867b8dac6796dddb1547629c37bc4d610b22964207f7ad7a9",
+          "sourceId": "source.aon-barbarian-rage",
+          "txtLines": [
+            36,
+            39
+          ]
+        }
+      ],
+      "tiers": [
+        {
+          "level": 1,
+          "modifiers": [
+            {
+              "stat": "strength",
+              "type": "morale",
+              "value": 4
+            },
+            {
+              "stat": "constitution",
+              "type": "morale",
+              "value": 4
+            },
+            {
+              "stat": "will",
+              "type": "morale",
+              "value": 2
+            },
+            {
+              "stat": "ac",
+              "type": "untyped",
+              "value": -2
+            }
+          ]
+        },
+        {
+          "level": 11,
+          "modifiers": [
+            {
+              "stat": "strength",
+              "type": "morale",
+              "value": 6
+            },
+            {
+              "stat": "constitution",
+              "type": "morale",
+              "value": 6
+            },
+            {
+              "stat": "will",
+              "type": "morale",
+              "value": 3
+            },
+            {
+              "stat": "ac",
+              "type": "untyped",
+              "value": -2
+            }
+          ]
+        },
+        {
+          "level": 14,
+          "modifiers": [
+            {
+              "stat": "strength",
+              "type": "morale",
+              "value": 6
+            },
+            {
+              "stat": "constitution",
+              "type": "morale",
+              "value": 6
+            },
+            {
+              "stat": "will",
+              "type": "morale",
+              "value": 3
+            },
+            {
+              "stat": "ac",
+              "type": "untyped",
+              "value": -2
+            },
+            {
+              "condition": "against enchantment spells while raging",
+              "stat": "will",
+              "type": "untyped",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "level": 20,
+          "modifiers": [
+            {
+              "stat": "strength",
+              "type": "morale",
+              "value": 8
+            },
+            {
+              "stat": "constitution",
+              "type": "morale",
+              "value": 8
+            },
+            {
+              "stat": "will",
+              "type": "morale",
+              "value": 4
+            },
+            {
+              "stat": "ac",
+              "type": "untyped",
+              "value": -2
+            },
+            {
+              "condition": "against enchantment spells while raging",
+              "stat": "will",
+              "type": "untyped",
+              "value": 4
+            }
+          ]
+        }
+      ]
+    },
+    "npc-effect.resist-energy": {
+      "catalogStatus": "resolved",
+      "duration": "10 minutes/level",
+      "id": "npc-effect.resist-energy",
+      "kind": "spell",
+      "name": "Resist Energy",
+      "parameters": [
+        "energyType"
+      ],
+      "restrictions": [],
+      "rulesText": "Resistance reduces each instance of the chosen energy damage, including damage to equipment; side effects may remain. Same-energy resistances overlap, never add. Protection from Energy absorbs damage before this spell is used, until its pool is exhausted.",
+      "sourceRef": [
+        {
+          "file": "sources/npc/aonprd/spell-resist-energy.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "f19fe7407d0dde639846f20e1c9fa654541b61ca88c8563b1216d60bd8eed75c",
+          "sourceId": "source.aon-spell-resist-energy",
+          "txtLines": [
+            1,
+            15
+          ]
+        }
+      ],
+      "tiers": [
+        {
+          "energyResistance": 10,
+          "level": 1
+        },
+        {
+          "energyResistance": 20,
+          "level": 7
+        },
+        {
+          "energyResistance": 30,
+          "level": 11
+        }
+      ]
+    },
+    "npc-effect.shield": {
+      "catalogStatus": "resolved",
+      "duration": "1 minute/level (D)",
+      "id": "npc-effect.shield",
+      "kind": "spell",
+      "name": "Shield",
+      "parameters": [],
+      "restrictions": [],
+      "rulesText": "+4 shield bonus to AC; overlaps an equipped shield. Negates magic missile. Force shield also protects against incorporeal touch attacks (not ordinary touch attacks). No armor check penalty or arcane spell failure.",
+      "sourceRef": [
+        {
+          "file": "sources/npc/aonprd/spell-shield.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "426fd2722e6ff650ef50163c2be7dd2a9b664d9071ebacef3e72bbd27b3511d0",
+          "sourceId": "source.aon-spell-shield",
+          "txtLines": [
+            1,
+            12
+          ]
+        }
+      ],
+      "tiers": [
+        {
+          "level": 1,
+          "modifiers": [
+            {
+              "stat": "ac",
+              "type": "shield",
+              "value": 4
+            }
+          ]
+        }
+      ]
+    }
+  },
   "catalogStatus": {
     "abilityArrays": "partial",
     "classFeatures": "partial",
@@ -134,7 +1022,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:4a3216b62ba5d06b86fee6a89fa7792f80b6f11fe7329009fd25ffa88397dd11",
+  "catalogVersion": "sha256:681b2466b39d2f0b285ca7ada0cb9af13732f95e9c97c0bc26fa670eb0dd121d",
   "classFeatures": {
     "npc-class-feature.bard-cantrips": {
       "catalogStatus": "resolved",
@@ -23389,6 +24277,18 @@
     }
   },
   "sources": {
+    "source.aon-barbarian-html": {
+      "description": "Archived official active-effect source page",
+      "file": "sources/reference/aonprd/barbarian.html",
+      "sha256": "f698519c82fc51ced7f5a6f99a68726ff9ba8b56ff8f342e95797bdbda6b3c3a",
+      "sourceId": "source.aon-barbarian-html"
+    },
+    "source.aon-barbarian-rage": {
+      "description": "Official rules for NPC active effects",
+      "file": "sources/npc/aonprd/barbarian-rage.txt",
+      "sha256": "6a6d1021709ea87867b8dac6796dddb1547629c37bc4d610b22964207f7ad7a9",
+      "sourceId": "source.aon-barbarian-rage"
+    },
     "source.aon-bard": {
       "description": "Official current AoN Bard class page, progression, spellcasting, and class features",
       "file": "sources/npc/aonprd/bard.txt",
@@ -23400,6 +24300,12 @@
       "file": "sources/npc/aonprd/bard-base-features.txt",
       "sha256": "15025b55de16e13169f0ab25c494d3736a020babcc3c27d5533b7aa39cb71072",
       "sourceId": "source.aon-bard-base-features"
+    },
+    "source.aon-bard-performances": {
+      "description": "Official rules for NPC active effects",
+      "file": "sources/npc/aonprd/bard-performances.txt",
+      "sha256": "f818648a19f81758409bd80098e5aec1086920f2705943198e428967b5fd787e",
+      "sourceId": "source.aon-bard-performances"
     },
     "source.aon-caster-level": {
       "description": "Official AoN caster-level rule for spellcasting characters",
@@ -23671,6 +24577,18 @@
       "sha256": "d6310e9e8d211d5d19892710f2e5aae5010aee137cedc0695596970540ae09fa",
       "sourceId": "source.aon-spell-barkskin"
     },
+    "source.aon-spell-bless": {
+      "description": "Official rules for NPC active effects",
+      "file": "sources/npc/aonprd/spell-bless.txt",
+      "sha256": "af3714306958866bca68e01b8a1b9d82a67dd8a5c2bc8a52c0c4f11a4e676735",
+      "sourceId": "source.aon-spell-bless"
+    },
+    "source.aon-spell-bless-html": {
+      "description": "Archived official active-effect source page",
+      "file": "sources/reference/aonprd/spell-bless.html",
+      "sha256": "3f42cfe6c448a2c201c5b49a5f00a3d8a6748ed47121a92dc83cc73dc068daad",
+      "sourceId": "source.aon-spell-bless-html"
+    },
     "source.aon-spell-burning-hands": {
       "description": "Official current AoN Burning Hands spell rules",
       "file": "sources/npc/aonprd/spell-burning-hands.txt",
@@ -23737,6 +24655,18 @@
       "sha256": "f5955826cec6d9c6be4ae6028266fab81797e90536d8d739b1172b1ffd8f899d",
       "sourceId": "source.aon-spell-grease"
     },
+    "source.aon-spell-heroism": {
+      "description": "Official rules for NPC active effects",
+      "file": "sources/npc/aonprd/spell-heroism.txt",
+      "sha256": "8cd792310aaa41a570082719fe268c6e05083280a99747c7c11a404af69e7500",
+      "sourceId": "source.aon-spell-heroism"
+    },
+    "source.aon-spell-heroism-html": {
+      "description": "Archived official active-effect source page",
+      "file": "sources/reference/aonprd/spell-heroism.html",
+      "sha256": "0c3fd3aadb5f6e9cb0d48fecc526ae3cca4d4af04d69fbd3627e0eb80c06ced0",
+      "sourceId": "source.aon-spell-heroism-html"
+    },
     "source.aon-spell-light": {
       "description": "Official current AoN Light spell rules",
       "file": "sources/npc/aonprd/spell-light.txt",
@@ -23785,11 +24715,83 @@
       "sha256": "6c1979ac5e2c1eaf905a5882c1256d3086ae6fae0a74222ace367eec7da480b9",
       "sourceId": "source.aon-spell-produce-flame"
     },
+    "source.aon-spell-protection-from-chaos": {
+      "description": "Official rules for NPC active effects",
+      "file": "sources/npc/aonprd/spell-protection-from-chaos.txt",
+      "sha256": "fe8e0d2896f41fc24f3177bc6ac0b97672d4f729003245e67cd16898577539d3",
+      "sourceId": "source.aon-spell-protection-from-chaos"
+    },
+    "source.aon-spell-protection-from-chaos-html": {
+      "description": "Archived official active-effect source page",
+      "file": "sources/reference/aonprd/spell-protection-from-chaos.html",
+      "sha256": "baff14f659ca03978176f986091718e33d4a219cc377c9e1ed29ec210258b777",
+      "sourceId": "source.aon-spell-protection-from-chaos-html"
+    },
+    "source.aon-spell-protection-from-energy": {
+      "description": "Official rules for NPC active effects",
+      "file": "sources/npc/aonprd/spell-protection-from-energy.txt",
+      "sha256": "aad618caf9c0189041381df32892b444b0c163b6aec4d7ecd4bad11ec887a7f8",
+      "sourceId": "source.aon-spell-protection-from-energy"
+    },
+    "source.aon-spell-protection-from-energy-html": {
+      "description": "Archived official active-effect source page",
+      "file": "sources/reference/aonprd/spell-protection-from-energy.html",
+      "sha256": "ea070e1a3e2ab2ada777ccce61b46047a6ac53cdcc9dda297d2f4947bd0b8687",
+      "sourceId": "source.aon-spell-protection-from-energy-html"
+    },
+    "source.aon-spell-protection-from-evil": {
+      "description": "Official rules for NPC active effects",
+      "file": "sources/npc/aonprd/spell-protection-from-evil.txt",
+      "sha256": "42f3ea6a5ae713c03b5e70f175647b76f32fab7fdf2dde50f3b1788fdc5861fe",
+      "sourceId": "source.aon-spell-protection-from-evil"
+    },
+    "source.aon-spell-protection-from-evil-html": {
+      "description": "Archived official active-effect source page",
+      "file": "sources/reference/aonprd/spell-protection-from-evil.html",
+      "sha256": "d0382c898e54f1a86db327ecdc04138ff848a031ae28301cf4c1471afe12335a",
+      "sourceId": "source.aon-spell-protection-from-evil-html"
+    },
+    "source.aon-spell-protection-from-good": {
+      "description": "Official rules for NPC active effects",
+      "file": "sources/npc/aonprd/spell-protection-from-good.txt",
+      "sha256": "1dbe1f3148f91f6350d89b9f73bdb5203fca6d3afe20f154b3193869b27c528b",
+      "sourceId": "source.aon-spell-protection-from-good"
+    },
+    "source.aon-spell-protection-from-good-html": {
+      "description": "Archived official active-effect source page",
+      "file": "sources/reference/aonprd/spell-protection-from-good.html",
+      "sha256": "b3dec4890647aa5c17a234494cdf132d58f353c8415ef67f471b7a344b85e8f5",
+      "sourceId": "source.aon-spell-protection-from-good-html"
+    },
+    "source.aon-spell-protection-from-law": {
+      "description": "Official rules for NPC active effects",
+      "file": "sources/npc/aonprd/spell-protection-from-law.txt",
+      "sha256": "2a03e8b6165b3475bb69191bc99e94685a5eab541c7b946f545d9c7f6d8d7f96",
+      "sourceId": "source.aon-spell-protection-from-law"
+    },
+    "source.aon-spell-protection-from-law-html": {
+      "description": "Archived official active-effect source page",
+      "file": "sources/reference/aonprd/spell-protection-from-law.html",
+      "sha256": "6ea5e644470b18d40e3f42a57381465db1b03ccfad263231c55ec137f52f1ff4",
+      "sourceId": "source.aon-spell-protection-from-law-html"
+    },
     "source.aon-spell-read-magic": {
       "description": "Official current AoN Read Magic spell rules",
       "file": "sources/npc/aonprd/spell-read-magic.txt",
       "sha256": "1e1b52a23fdb1453f5d976863127b7621ae5880a8d5a4024b05fad6d942ddf8f",
       "sourceId": "source.aon-spell-read-magic"
+    },
+    "source.aon-spell-resist-energy": {
+      "description": "Official rules for NPC active effects",
+      "file": "sources/npc/aonprd/spell-resist-energy.txt",
+      "sha256": "f19fe7407d0dde639846f20e1c9fa654541b61ca88c8563b1216d60bd8eed75c",
+      "sourceId": "source.aon-spell-resist-energy"
+    },
+    "source.aon-spell-resist-energy-html": {
+      "description": "Archived official active-effect source page",
+      "file": "sources/reference/aonprd/spell-resist-energy.html",
+      "sha256": "f7dbbc7e277f1d1bd5330dd617193c67dc264041cac167962b3c655c585e2903",
+      "sourceId": "source.aon-spell-resist-energy-html"
     },
     "source.aon-spell-scorching-ray": {
       "description": "Official current AoN Scorching Ray spell rules",

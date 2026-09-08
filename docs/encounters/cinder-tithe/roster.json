@@ -1,15 +1,17 @@
 {
-  "catalogVersion": "sha256:4a3216b62ba5d06b86fee6a89fa7792f80b6f11fe7329009fd25ffa88397dd11",
+  "catalogVersion": "sha256:681b2466b39d2f0b285ca7ada0cb9af13732f95e9c97c0bc26fa670eb0dd121d",
   "workspace": ".monster-builder",
   "xp": 1405,
   "npcs": [
     {
       "name": "Varkesh, the Ember-Tithe",
-      "draftId": "draft-e5325cee8703427385a7182543511739",
-      "monsterId": "monster-f0337df5c4b15d709409778c03e400ae",
+      "draftId": "draft-86b6c152f81c4f118abdd5e2871cc9f8",
+      "monsterId": "monster-6e00f462421f5e9dbdd7d66ef691c1df",
       "cr": 2,
       "sheet": "varkesh.md",
-      "status": "valid"
+      "status": "valid",
+      "catalogVersion": "sha256:681b2466b39d2f0b285ca7ada0cb9af13732f95e9c97c0bc26fa670eb0dd121d",
+      "supersedesMonsterId": "monster-f0337df5c4b15d709409778c03e400ae"
     },
     {
       "name": "Sootfinger",
@@ -17,7 +19,8 @@
       "monsterId": "monster-34f8cbf3892a57feb4732583aacf2028",
       "cr": 1,
       "sheet": "sootfinger.md",
-      "status": "valid"
+      "status": "valid",
+      "catalogVersion": "sha256:4a3216b62ba5d06b86fee6a89fa7792f80b6f11fe7329009fd25ffa88397dd11"
     },
     {
       "name": "Krik, Cinder-Raider",
@@ -25,7 +28,8 @@
       "monsterId": "monster-6cb130e99f5456e982cd42e04eab3b28",
       "cr": "1/3",
       "sheet": "goblin-warrior.md",
-      "status": "valid"
+      "status": "valid",
+      "catalogVersion": "sha256:4a3216b62ba5d06b86fee6a89fa7792f80b6f11fe7329009fd25ffa88397dd11"
     },
     {
       "name": "Nib, Cinder-Raider",
@@ -33,7 +37,8 @@
       "monsterId": "monster-4a1efa342e995e6aa42737bef1448311",
       "cr": "1/3",
       "sheet": "goblin-warrior.md",
-      "status": "valid"
+      "status": "valid",
+      "catalogVersion": "sha256:4a3216b62ba5d06b86fee6a89fa7792f80b6f11fe7329009fd25ffa88397dd11"
     },
     {
       "name": "Zek, Cinder-Raider",
@@ -41,7 +46,8 @@
       "monsterId": "monster-bfe31c27d36e5a7997ed788366f9bfff",
       "cr": "1/3",
       "sheet": "goblin-warrior.md",
-      "status": "valid"
+      "status": "valid",
+      "catalogVersion": "sha256:4a3216b62ba5d06b86fee6a89fa7792f80b6f11fe7329009fd25ffa88397dd11"
     }
   ]
 }

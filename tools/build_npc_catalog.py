@@ -78,6 +78,15 @@ SOURCE_FILES = (
     ("source.aon-elemental-ally", "sources/npc/aonprd/elemental-ally.txt", "Official current AoN Elemental Ally druid archetype (Monster Summoner's Handbook)"),
     ("source.aon-halfling", "sources/npc/aonprd/halfling.txt", "Official current AoN Halfling race page and standard racial traits"),
     ("source.aon-bard", "sources/npc/aonprd/bard.txt", "Official current AoN Bard class page, progression, spellcasting, and class features"),
+    *((f"source.aon-{name}", f"sources/npc/aonprd/{name}.txt", "Official rules for NPC active effects") for name in (
+        "bard-performances", "barbarian-rage", "spell-protection-from-evil", "spell-protection-from-good",
+        "spell-protection-from-chaos", "spell-protection-from-law", "spell-resist-energy",
+        "spell-protection-from-energy", "spell-heroism", "spell-bless",
+    )),
+    *((f"source.aon-{name}-html", f"sources/reference/aonprd/{name}.html", "Archived official active-effect source page") for name in (
+        "barbarian", "spell-protection-from-evil", "spell-protection-from-good", "spell-protection-from-chaos",
+        "spell-protection-from-law", "spell-resist-energy", "spell-protection-from-energy", "spell-heroism", "spell-bless",
+    )),
     ("source.aon-bard-base-features", "sources/npc/aonprd/bard-base-features.txt", "Bard proficiencies, knowledge, and daily performance rounds"),
     ("source.aon-weapon-dogslicer", "sources/npc/aonprd/weapon-dogslicer.txt", "Official AoN Dogslicer weapon statistics"),
     ("source.aon-weapon-fragile", "sources/npc/aonprd/weapon-fragile.txt", "Official Ultimate Combat fragile weapon breakage rule"),

@@ -143,6 +143,7 @@ export interface NpcCatalog {
   abilityArrays: Dict<CatalogEntry>;
   derivedRules?: Dict<CatalogEntry>;
   classFeatures?: Dict<CatalogEntry>;
+  activeEffects?: Dict<CatalogEntry>;
   [key: string]: unknown;
 }
 

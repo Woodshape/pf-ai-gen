@@ -12,6 +12,7 @@ from monster_builder.creation_systems.base import NPC, CreationSystem
 from monster_builder.errors import BoundaryError
 from monster_builder.npc.prerequisites import evaluate_prerequisite
 from monster_builder.npc.combat import OPTION_FEATS, calculate_routine, combat_routines
+from monster_builder.npc.effects import bonus as effect_bonus, conditional_modifiers, resolve as resolve_effects, validate_selections as validate_effects
 from monster_builder.npc_catalog import NpcCatalog
 
 ABILITIES = ("strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma")
@@ -73,7 +74,7 @@ class NpcCreation(CreationSystem):
     selection_fields = frozenset({
         "statblockUse", "raceId", "racialChoices", "classProgression", "abilityGeneration",
         "levelIncreases", "skillGeneration", "feats", "classFeatureChoices", "spellLoadout",
-        "gearProfile", "gear", "details", "archetypeId", "combatOptions",
+        "gearProfile", "gear", "details", "archetypeId", "combatOptions", "activeEffects",
     })
     computed_selection_fields = frozenset(COMPUTED_FIELDS)
 
@@ -216,6 +217,13 @@ class NpcCreation(CreationSystem):
         requirements.append(self._requirement("/selections/combatOptions", "Optional combat routines", "combat-routine-array",
             [{"value": feat_id, "label": self._record("feat", feat_id)["name"]} for feat_id in sorted(OPTION_FEATS)]))
         requirements[-1]["required"] = False
+        requirements.append(self._requirement("/selections/activeEffects", "Active Effects", "active-effect-array", [
+            {"id": record["id"], "name": record["name"], "catalogStatus": record["catalogStatus"],
+             "parameters": record.get("parameters", []), "minimumSourceLevel": record["tiers"][0]["level"],
+             "maximumSourceLevel": 20, "sourceRefs": _refs(record)}
+            for record in self.catalog.entries("activeEffect").values() if record.get("catalogStatus") == "resolved"
+        ]))
+        requirements[-1]["required"] = False
         gear = selections.get("gear", []) if isinstance(selections.get("gear"), list) else []
         return {
             "creationSystem": NPC,
@@ -263,7 +271,7 @@ class NpcCreation(CreationSystem):
             (5, ("classFeatureChoices",)),
             (6, ("spellLoadout",)),
             (7, ("gearProfile", "gear")),
-            (8, ("details",)),
+            (8, ("details", "activeEffects")),
         )
         source_refs = _dedupe_refs(*[entry.get("sourceRefs", []) for entry in trace])
         return [{
@@ -389,6 +397,25 @@ class NpcCreation(CreationSystem):
         if issues:
             return self._evaluation("invalid", mode, issues, warnings)
 
+        active_effects, active_modifiers, active_refs = resolve_effects(selections.get("activeEffects", []), self.catalog)
+        if active_effects:
+            old_modifiers = modifiers
+            scores = {ability: score + effect_bonus(active_modifiers, ability) for ability, score in scores.items()}
+            modifiers = {ability: _ability_modifier(score) for ability, score in scores.items()}
+            raging = any(effect["effectId"] == "npc-effect.rage" for effect in active_effects)
+            for skill in skills:
+                delta = modifiers[skill["ability"]] - old_modifiers[skill["ability"]] + effect_bonus(active_modifiers, skill["skillId"])
+                skill["total"] += delta
+                if delta:
+                    skill["activeEffectBonus"] = delta
+                if raging and skill["ability"] in {"charisma", "dexterity", "intelligence"} and skill["skillId"] not in {"skill.acrobatics", "skill.fly", "skill.intimidate", "skill.ride"}:
+                    skill.update(usable=False, restriction="unavailable while raging")
+                skill["sourceRefs"] = _dedupe_refs(skill.get("sourceRefs", []), active_refs)
+            if raging and spells:
+                spells["castingRestricted"] = "Cannot cast spells or use abilities requiring patience or concentration while raging."
+            ability_refs = _dedupe_refs(ability_refs, active_refs)
+            skill_refs = _dedupe_refs(skill_refs, active_refs)
+
         class_refs = _dedupe_refs(*[_refs(record) for record in class_records], *[_refs(entry) for entry in rows])
         combat_ref = self._source_ref("source.aon-combat", "Combat Statistics", [24, 58])
         maneuver_ref = self._source_ref("source.aon-combat", "Combat Maneuvers", [536, 544])
@@ -414,7 +441,10 @@ class NpcCreation(CreationSystem):
         shield_bonus = sum(entry["effects"].get("shieldBonus", 0) for entry in equipped)
         if shield_bonus:
             shield_bonus += feat_effects.get("shieldAC", 0)
-        dodge_bonus = feat_effects.get("dodgeAC", 0)
+        armor_bonus = effect_bonus(active_modifiers, "ac", "armor", armor_bonus)
+        shield_bonus = effect_bonus(active_modifiers, "ac", "shield", shield_bonus)
+        dodge_bonus = effect_bonus(active_modifiers, "ac", "dodge", feat_effects.get("dodgeAC", 0))
+        extra_ac = effect_bonus(active_modifiers, "ac") - sum(effect_bonus(active_modifiers, "ac", kind) for kind in ("armor", "shield", "dodge"))
         max_dex_values = [entry["effects"]["maxDex"] for entry in equipped if "maxDex" in entry["effects"]]
         dex_to_ac = min([modifiers["dexterity"], *max_dex_values]) if max_dex_values else modifiers["dexterity"]
         feat_saves = feat_effects.get("saves", {})
@@ -424,17 +454,22 @@ class NpcCreation(CreationSystem):
             key: value for key, value in (
                 ("armor", armor_bonus), ("shield", shield_bonus), ("dodge", dodge_bonus),
                 ("dexterity", dex_to_ac), ("size", size_modifiers.get("ac", 0)),
+                ("deflection", effect_bonus(active_modifiers, "ac", "deflection")),
+                ("active effects", extra_ac - effect_bonus(active_modifiers, "ac", "deflection")),
             ) if value
         }
         defenses = {
-            "ac": 10 + armor_bonus + shield_bonus + dex_to_ac + size_modifiers.get("ac", 0) + dodge_bonus,
-            "touch": 10 + dex_to_ac + size_modifiers.get("ac", 0) + dodge_bonus,
-            "flatFooted": 10 + armor_bonus + shield_bonus + size_modifiers.get("ac", 0) + min(0, dex_to_ac),
+            "ac": 10 + armor_bonus + shield_bonus + dex_to_ac + size_modifiers.get("ac", 0) + dodge_bonus + extra_ac,
+            "touch": 10 + dex_to_ac + size_modifiers.get("ac", 0) + dodge_bonus + extra_ac,
+            "flatFooted": 10 + armor_bonus + shield_bonus + size_modifiers.get("ac", 0) + min(0, dex_to_ac) + extra_ac,
             "fortitude": row["fortitude"] + modifiers["constitution"] + feat_saves.get("fortitude", 0) + resistance_bonus + race_saves.get("fortitude", 0),
             "reflex": row["reflex"] + modifiers["dexterity"] + feat_saves.get("reflex", 0) + resistance_bonus + race_saves.get("reflex", 0),
             "will": row["will"] + modifiers["wisdom"] + feat_saves.get("will", 0) + resistance_bonus + race_saves.get("will", 0),
             "acBreakdown": ac_breakdown,
         }
+        for save in ("fortitude", "reflex", "will"):
+            defenses[save] += effect_bonus(active_modifiers, save) - effect_bonus(active_modifiers, save, "resistance")
+            defenses[save] += effect_bonus(active_modifiers, save, "resistance", resistance_bonus) - resistance_bonus
         proficiencies = self._proficiencies(class_features, feat_effects, race)
         armor_attack_penalty = sum(item["effects"].get("armorCheckPenalty", 0) for item in equipped
                                    if (item["effects"].get("armorCategory") and item["effects"]["armorCategory"] not in proficiencies["armor"])
@@ -449,12 +484,13 @@ class NpcCreation(CreationSystem):
                                 weapon_proficiencies=proficiencies["weapons"], armor_penalty=armor_attack_penalty,
                                 finesse=any(feat.get("featId") == "feat.weapon-finesse" for feat in feats),
                                 rapid_shot=any(feat.get("featId") == "feat.rapid-shot" for feat in feats),
-                                feat_effects=feat_effects)
+                                feat_effects=feat_effects, active_attack_bonus=effect_bonus(active_modifiers, "attack"),
+                                active_damage_bonus=effect_bonus(active_modifiers, "weaponDamage"))
         resistances: dict[str, int] = {}
         for feature in class_features:
             for power in feature.get("powers", []):
                 if power.get("attackBonus") is not None:
-                    power["attackBonus"] += armor_attack_penalty
+                    power["attackBonus"] += armor_attack_penalty + effect_bonus(active_modifiers, "attack")
                 if power.get("damageExpression") and power.get("attackBonus") is not None:
                     attacks.append({
                         "name": power["name"], "attackBonuses": [power["attackBonus"]],
@@ -463,6 +499,10 @@ class NpcCreation(CreationSystem):
                         "range": power.get("range"), "usesPerDay": power.get("usesPerDay"),
                     })
                 resistances.update(power.get("resistance", {}))
+        for effect in active_effects:
+            if "energyResistance" in effect:
+                energy = effect["energyType"]
+                resistances[energy] = max(resistances.get(energy, 0), effect["energyResistance"])
         routine_modifiers = {**modifiers, "characterLevel": total_level,
                              "casterLevel": max((item["levels"] for item in progression
                                  if item["classId"] in {"npc-class.bard", "npc-class.sorcerer", "npc-class.wizard"}), default=0),
@@ -482,8 +522,8 @@ class NpcCreation(CreationSystem):
             routine["sourceRefs"] = _dedupe_refs(feat_refs, gear_refs,
                 [self._source_ref("source.aon-equipment", "Weapon handedness and Strength multipliers", [58, 62]),
                  self._source_ref("source.aon-combat", "Two-Weapon Fighting", [592, 596])])
-        cmb = bab + modifiers["strength"] + size_modifiers.get("cmb", 0)
-        cmd = 10 + bab + modifiers["strength"] + modifiers["dexterity"] + size_modifiers.get("cmd", 0) + dodge_bonus
+        cmb = bab + modifiers["strength"] + size_modifiers.get("cmb", 0) + effect_bonus(active_modifiers, "attack")
+        cmd = 10 + bab + modifiers["strength"] + modifiers["dexterity"] + size_modifiers.get("cmd", 0) + dodge_bonus + extra_ac
         source_groups = {
             "abilities": ability_refs,
             "class": class_refs,
@@ -527,7 +567,10 @@ class NpcCreation(CreationSystem):
             "cmd": cmd,
             "skills": skills,
             "feats": feats,
-            "conditionalModifiers": feat_effects.get("conditionalModifiers", []),
+            "conditionalModifiers": feat_effects.get("conditionalModifiers", []) + conditional_modifiers(active_modifiers, resistance_bonus),
+            **({"activeEffects": active_effects,
+                "energyProtection": {effect["energyType"]: effect["absorptionPool"] for effect in active_effects if "absorptionPool" in effect}}
+               if active_effects else {}),
             "classFeatures": class_features,
             **({"linkedCreature": linked_creature} if linked_creature is not None else {}),
             "spells": spells,
@@ -600,12 +643,21 @@ class NpcCreation(CreationSystem):
             self._trace("/canonical/languages", languages, "racial and class languages plus languages selected with Linguistics ranks", language_refs),
             self._trace("/canonical/gearBudget", gear_result["budget"], "read the NPC category and level row from Table 14-9; descriptive gear is unpriced", gear_refs),
         ]
+        if active_effects:
+            for entry in trace:
+                if entry["path"] in {"/canonical/abilityScores", "/canonical/hp", "/canonical/defenses", "/canonical/attacks", "/canonical/combatRoutines", "/canonical/cmb", "/canonical/cmd", "/canonical/skills", "/canonical/classFeatures", "/canonical/spells", "/canonical/conditionalModifiers"}:
+                    entry["sourceRefs"] = _dedupe_refs(entry["sourceRefs"], active_refs)
+                    entry["calculation"] = "Base rules plus selected active effects; typed bonuses overlap; conditional effects remain conditional."
+            trace.append(self._trace("/canonical/activeEffects", active_effects, "source-level active effect snapshot; no automatic duration or resource expenditure", active_refs))
+            trace.append(self._trace("/canonical/resistances", resistances, "highest same-energy resistance; Protection from Energy uses a separate finite pool", active_refs))
+            trace.append(self._trace("/canonical/energyProtection", canonical["energyProtection"], "12 per source caster level, capped at 120; track damage expenditure in play", active_refs))
         return self._evaluation("valid", mode, [], warnings, canonical, trace)
 
     # ------------------------------------------------------------------
     # Validation
     # ------------------------------------------------------------------
     def _validate_shapes(self, selections: dict[str, Any]) -> None:
+        validate_effects(selections.get("activeEffects", []), self.catalog)
         if "statblockUse" in selections and selections["statblockUse"] not in {"full", "encounter"}:
             raise BoundaryError("selection.value-invalid", "statblockUse must be full or encounter", "/selections/statblockUse")
         if "raceId" in selections and not isinstance(selections["raceId"], str):
@@ -2088,6 +2140,7 @@ class NpcCreation(CreationSystem):
         items: list[dict[str, Any]], bab: int, modifiers: dict[str, int], size_modifiers: dict[str, int],
         size_id: str | None, *, weapon_proficiencies: set[str], armor_penalty: int = 0,
         finesse: bool = False, rapid_shot: bool = False, feat_effects=None,
+        active_attack_bonus: int = 0, active_damage_bonus: int = 0,
     ) -> list[dict[str, Any]]:
         feat_effects = feat_effects or {}
         attacks = []
@@ -2113,7 +2166,7 @@ class NpcCreation(CreationSystem):
                 hit_ability = max(hit_ability, modifiers["dexterity"] + shield_acp)
             proficient = effects.get("weaponType") in weapon_proficiencies or effects.get("weaponCategory") in weapon_proficiencies
             attack_bonus = bab + hit_ability + size_modifiers.get("attack", 0) + effects.get("attackBonus", 0) + armor_penalty + (0 if proficient else -4)
-            attack_bonus += feat_effects.get("weaponAttackBonus", {}).get(effects.get("weaponType"), 0)
+            attack_bonus += feat_effects.get("weaponAttackBonus", {}).get(effects.get("weaponType"), 0) + active_attack_bonus
             bonuses = [attack_bonus - step for step in range(0, min(16, max(1, bab)), 5)]
             if effects.get("reloadAction") in {"move", "full-round"}:
                 bonuses = bonuses[:1]
@@ -2122,7 +2175,7 @@ class NpcCreation(CreationSystem):
                 damage_bonus = min(0, modifiers["strength"])
             elif not ranged and effects.get("twoHanded") and damage_bonus > 0:
                 damage_bonus = damage_bonus * 3 // 2
-            damage_bonus += effects.get("damageBonus", 0)
+            damage_bonus += effects.get("damageBonus", 0) + active_damage_bonus
             attack = {
                 "name": item["name"], "itemId": item["itemId"], "attackBonuses": bonuses,
                 "attackBonusExpression": "/".join(_bonus(value) for value in bonuses),

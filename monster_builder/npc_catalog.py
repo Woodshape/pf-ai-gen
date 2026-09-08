@@ -31,6 +31,7 @@ NPC_SECTIONS = (
     "items",
     "spells",
     "derivedRules",
+    "activeEffects",
 )
 SECTION_KINDS = {
     "abilityArray": "abilityArrays",
@@ -43,6 +44,7 @@ SECTION_KINDS = {
     "item": "items",
     "spell": "spells",
     "derivedRule": "derivedRules",
+    "activeEffect": "activeEffects",
 }
 CATALOG_STATUSES = {"resolved", "gap", "policy", "partial"}
 ABILITY_NAMES = {"strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"}
@@ -257,6 +259,12 @@ def _validate_sections(data: dict[str, Any], root: Path) -> None:
             _validate_money(record, context)
             if section == "feats" and "prerequisites" in record:
                 _validate_prerequisite(record["prerequisites"], f"{context}.prerequisites")
+            if section == "activeEffects":
+                from .npc.effects import validate_record
+                try:
+                    validate_record(record)
+                except (ValueError, TypeError, KeyError, AttributeError) as exc:
+                    raise _error(f"{context}: {exc}") from exc
             if section == "abilityArrays":
                 if not isinstance(record.get("method"), str) or not record["method"]:
                     raise _error(f"{context}.method must be a non-empty string")

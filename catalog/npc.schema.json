@@ -18,6 +18,7 @@
     "feats",
     "items",
     "spells",
+    "activeEffects",
     "derivedRules"
   ],
   "properties": {
@@ -63,6 +64,10 @@
     "spells": {
       "type": "object",
       "additionalProperties": {"$ref": "#/$defs/spell"}
+    },
+    "activeEffects": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/catalogRecord"}
     },
     "derivedRules": {
       "type": "object",

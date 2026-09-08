@@ -94,6 +94,17 @@
             ]
           },
           {
+            "file": "sources/npc/aonprd/spell-mage-armor.txt",
+            "provenanceStatus": "resolved",
+            "section": "Active effect rules",
+            "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+            "sourceId": "source.aon-spell-mage-armor",
+            "txtLines": [
+              1,
+              14
+            ]
+          },
+          {
             "entry": "User-approved per-die rounding, heroic first-die maximum, and Constitution once per Hit Die",
             "file": "docs/npc-hit-points-policy.md",
             "provenanceStatus": "product-policy",
@@ -759,6 +770,17 @@
             "txtLines": [
               19,
               40
+            ]
+          },
+          {
+            "file": "sources/npc/aonprd/spell-mage-armor.txt",
+            "provenanceStatus": "resolved",
+            "section": "Active effect rules",
+            "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+            "sourceId": "source.aon-spell-mage-armor",
+            "txtLines": [
+              1,
+              14
             ]
           },
           {
@@ -1429,6 +1451,17 @@
             ]
           },
           {
+            "file": "sources/npc/aonprd/spell-mage-armor.txt",
+            "provenanceStatus": "resolved",
+            "section": "Active effect rules",
+            "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+            "sourceId": "source.aon-spell-mage-armor",
+            "txtLines": [
+              1,
+              14
+            ]
+          },
+          {
             "entry": "User-approved per-die rounding, heroic first-die maximum, and Constitution once per Hit Die",
             "file": "docs/npc-hit-points-policy.md",
             "provenanceStatus": "product-policy",
@@ -2095,6 +2128,17 @@
             ]
           },
           {
+            "file": "sources/npc/aonprd/spell-mage-armor.txt",
+            "provenanceStatus": "resolved",
+            "section": "Active effect rules",
+            "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+            "sourceId": "source.aon-spell-mage-armor",
+            "txtLines": [
+              1,
+              14
+            ]
+          },
+          {
             "entry": "User-approved per-die rounding, heroic first-die maximum, and Constitution once per Hit Die",
             "file": "docs/npc-hit-points-policy.md",
             "provenanceStatus": "product-policy",
@@ -2751,6 +2795,17 @@
             "txtLines": [
               19,
               40
+            ]
+          },
+          {
+            "file": "sources/npc/aonprd/spell-mage-armor.txt",
+            "provenanceStatus": "resolved",
+            "section": "Active effect rules",
+            "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+            "sourceId": "source.aon-spell-mage-armor",
+            "txtLines": [
+              1,
+              14
             ]
           },
           {
@@ -3426,6 +3481,17 @@
             ]
           },
           {
+            "file": "sources/npc/aonprd/spell-mage-armor.txt",
+            "provenanceStatus": "resolved",
+            "section": "Active effect rules",
+            "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+            "sourceId": "source.aon-spell-mage-armor",
+            "txtLines": [
+              1,
+              14
+            ]
+          },
+          {
             "entry": "User-approved per-die rounding, heroic first-die maximum, and Constitution once per Hit Die",
             "file": "docs/npc-hit-points-policy.md",
             "provenanceStatus": "product-policy",
@@ -4092,6 +4158,17 @@
             ]
           },
           {
+            "file": "sources/npc/aonprd/spell-mage-armor.txt",
+            "provenanceStatus": "resolved",
+            "section": "Active effect rules",
+            "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+            "sourceId": "source.aon-spell-mage-armor",
+            "txtLines": [
+              1,
+              14
+            ]
+          },
+          {
             "entry": "User-approved per-die rounding, heroic first-die maximum, and Constitution once per Hit Die",
             "file": "docs/npc-hit-points-policy.md",
             "provenanceStatus": "product-policy",
@@ -4667,11 +4744,20 @@
       },
       {
         "selections": {
+          "activeEffects": [
+            {
+              "effectId": "npc-effect.mage-armor",
+              "enabled": true,
+              "remainingDuration": "3 hours at raid start",
+              "sourceLevel": 3,
+              "sourceName": "Varkesh"
+            }
+          ],
           "details": {
             "alignment": "LE",
             "morale": "At 8 hp or fewer, or when both Sootfinger and two warriors have fallen, withdraw toward the orchard. If cornered, offer stolen provisions for safe passage. Does not attack downed PCs.",
-            "sourceNotes": "Base sheet excludes temporary spells. NPC hp uses the repository's approved heroic-NPC house rule. Burning hands is the level-3 bloodline bonus spell, not a purchased extra known spell. Carries NPC-standard rather than PC-equivalent wealth; unspent gear budget is not treasure.",
-            "tactics": "Before the raid, cast mage armor once (3-hour duration): encounter-start AC 17, touch 13, flat-footed 14; 5 first-level slots remain. Do not also begin with shield active. On his first combat turn, cast shield if threatened (AC 21, touch 13, flat-footed 18 for 3 minutes), otherwise advance behind a warrior and use elemental ray. Burning hands deals 3d4 fire, DC 13 Reflex half, in a 15-ft. cone; use it on a worthwhile angle rather than allies or helpless targets. Elemental ray is a standard-action spell-like ranged touch attack at 30 ft., 1d6+1 fire, 5/day. Acid splash may deal fire through bloodline arcana; magic missile remains force damage. Do not grant fire immunity to his followers."
+            "sourceNotes": "Sheet includes the selected active Mage Armor; do not add its +4 armor bonus again. Other temporary spells are inactive. NPC hp uses the repository's approved heroic-NPC house rule. Burning hands is the level-3 bloodline bonus spell, not a purchased extra known spell. Carries NPC-standard rather than PC-equivalent wealth; unspent gear budget is not treasure.",
+            "tactics": "Mage Armor has already been cast once before the raid and is active in this profile (3-hour duration): the sheet's AC is already 17, touch 13, flat-footed 14; 5 first-level slots remain. Daily slot totals are capacity, not remaining resources. Do not also begin with shield active. On his first combat turn, cast shield if threatened (AC 21, touch 13, flat-footed 18 for 3 minutes), otherwise advance behind a warrior and use elemental ray. Burning hands deals 3d4 fire, DC 13 Reflex half, in a 15-ft. cone; use it on a worthwhile angle rather than allies or helpless targets. Elemental ray is a standard-action spell-like ranged touch attack at 30 ft., 1d6+1 fire, 5/day. Acid splash may deal fire through bloodline arcana; magic missile remains force damage. Do not grant fire immunity to his followers."
           }
         },
         "sourceRefs": [
@@ -4751,6 +4837,17 @@
             "txtLines": [
               19,
               40
+            ]
+          },
+          {
+            "file": "sources/npc/aonprd/spell-mage-armor.txt",
+            "provenanceStatus": "resolved",
+            "section": "Active effect rules",
+            "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+            "sourceId": "source.aon-spell-mage-armor",
+            "txtLines": [
+              1,
+              14
             ]
           },
           {
@@ -5408,6 +5505,17 @@
         ]
       },
       {
+        "file": "sources/npc/aonprd/spell-mage-armor.txt",
+        "provenanceStatus": "resolved",
+        "section": "Active effect rules",
+        "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+        "sourceId": "source.aon-spell-mage-armor",
+        "txtLines": [
+          1,
+          14
+        ]
+      },
+      {
         "entry": "User-approved per-die rounding, heroic first-die maximum, and Constitution once per Hit Die",
         "file": "docs/npc-hit-points-policy.md",
         "provenanceStatus": "product-policy",
@@ -5981,7 +6089,7 @@
     ],
     "validationFindings": []
   },
-  "catalogVersion": "sha256:4a3216b62ba5d06b86fee6a89fa7792f80b6f11fe7329009fd25ffa88397dd11",
+  "catalogVersion": "sha256:681b2466b39d2f0b285ca7ada0cb9af13732f95e9c97c0bc26fa670eb0dd121d",
   "concept": {
     "description": "A hobgoblin sorcerer 3 with the elemental fire bloodline. An outcast arcane practitioner who has recruited goblins to collect a self-proclaimed tithe from isolated farms.",
     "name": "Varkesh, the Ember-Tithe",
@@ -6043,7 +6151,7 @@
       "value": 2
     },
     {
-      "calculation": "apply the NPC array, racial adjustments, and level increases",
+      "calculation": "Base rules plus selected active effects; typed bonuses overlap; conditional effects remain conditional.",
       "path": "/canonical/abilityScores",
       "sourceRefs": [
         {
@@ -6084,6 +6192,17 @@
             19,
             40
           ]
+        },
+        {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
+          ]
         }
       ],
       "value": {
@@ -6096,7 +6215,7 @@
       }
     },
     {
-      "calculation": "house rule: ceil each die average; maximize first die; add Constitution once per level and permanent feat HP bonuses",
+      "calculation": "Base rules plus selected active effects; typed bonuses overlap; conditional effects remain conditional.",
       "path": "/canonical/hp",
       "sourceRefs": [
         {
@@ -6174,6 +6293,17 @@
           "txtLines": [
             19,
             40
+          ]
+        },
+        {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
           ]
         },
         {
@@ -6265,7 +6395,7 @@
       "value": 1
     },
     {
-      "calculation": "combine class saves, abilities, armor, shield, and feat bonuses",
+      "calculation": "Base rules plus selected active effects; typed bonuses overlap; conditional effects remain conditional.",
       "path": "/canonical/defenses",
       "sourceRefs": [
         {
@@ -6331,6 +6461,17 @@
           "txtLines": [
             19,
             40
+          ]
+        },
+        {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
           ]
         },
         {
@@ -6557,11 +6698,12 @@
         }
       ],
       "value": {
-        "ac": 13,
+        "ac": 17,
         "acBreakdown": {
+          "armor": 4,
           "dexterity": 3
         },
-        "flatFooted": 10,
+        "flatFooted": 14,
         "fortitude": 3,
         "reflex": 4,
         "touch": 13,
@@ -6609,6 +6751,17 @@
           "txtLines": [
             19,
             40
+          ]
+        },
+        {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
           ]
         },
         {
@@ -6678,7 +6831,7 @@
       "value": 3
     },
     {
-      "calculation": "base attacks: BAB, ability, size, equipment and nonproficiency; bows apply Strength penalties but not bonuses; no temporary buffs",
+      "calculation": "Base rules plus selected active effects; typed bonuses overlap; conditional effects remain conditional.",
       "path": "/canonical/attacks",
       "sourceRefs": [
         {
@@ -6744,6 +6897,17 @@
           "txtLines": [
             19,
             40
+          ]
+        },
+        {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
           ]
         },
         {
@@ -6997,7 +7161,7 @@
       ]
     },
     {
-      "calculation": "optional feat routines composed from base attacks; conditions and state costs never change base statistics",
+      "calculation": "Base rules plus selected active effects; typed bonuses overlap; conditional effects remain conditional.",
       "path": "/canonical/combatRoutines",
       "sourceRefs": [
         {
@@ -7063,6 +7227,17 @@
           "txtLines": [
             19,
             40
+          ]
+        },
+        {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
           ]
         },
         {
@@ -7291,7 +7466,7 @@
       "value": []
     },
     {
-      "calculation": "BAB + Strength modifier + size modifier",
+      "calculation": "Base rules plus selected active effects; typed bonuses overlap; conditional effects remain conditional.",
       "path": "/canonical/cmb",
       "sourceRefs": [
         {
@@ -7360,6 +7535,17 @@
           ]
         },
         {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
+          ]
+        },
+        {
           "file": "sources/npc/aonprd/combat.txt",
           "provenanceStatus": "resolved",
           "section": "Combat Maneuvers",
@@ -7374,7 +7560,7 @@
       "value": 0
     },
     {
-      "calculation": "10 + BAB + Strength modifier + Dexterity modifier + size modifier + dodge bonuses",
+      "calculation": "Base rules plus selected active effects; typed bonuses overlap; conditional effects remain conditional.",
       "path": "/canonical/cmd",
       "sourceRefs": [
         {
@@ -7440,6 +7626,17 @@
           "txtLines": [
             19,
             40
+          ]
+        },
+        {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
           ]
         },
         {
@@ -7509,7 +7706,7 @@
       "value": 13
     },
     {
-      "calculation": "conditional feat and feature modifiers; never applied to base totals",
+      "calculation": "Base rules plus selected active effects; typed bonuses overlap; conditional effects remain conditional.",
       "path": "/canonical/conditionalModifiers",
       "sourceRefs": [
         {
@@ -7640,6 +7837,17 @@
             66,
             66
           ]
+        },
+        {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
+          ]
         }
       ],
       "value": [
@@ -7651,7 +7859,7 @@
       ]
     },
     {
-      "calculation": "simplified or precise ranks plus trained class-skill bonus, ability, armor, size, racial and permanent class-feature and feat modifiers",
+      "calculation": "Base rules plus selected active effects; typed bonuses overlap; conditional effects remain conditional.",
       "path": "/canonical/skills",
       "sourceRefs": [
         {
@@ -7749,6 +7957,17 @@
             17,
             17
           ]
+        },
+        {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
+          ]
         }
       ],
       "value": [
@@ -7770,6 +7989,17 @@
               "txtLines": [
                 35,
                 35
+              ]
+            },
+            {
+              "file": "sources/npc/aonprd/spell-mage-armor.txt",
+              "provenanceStatus": "resolved",
+              "section": "Active effect rules",
+              "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+              "sourceId": "source.aon-spell-mage-armor",
+              "txtLines": [
+                1,
+                14
               ]
             }
           ],
@@ -7808,6 +8038,17 @@
                 1,
                 8
               ]
+            },
+            {
+              "file": "sources/npc/aonprd/spell-mage-armor.txt",
+              "provenanceStatus": "resolved",
+              "section": "Active effect rules",
+              "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+              "sourceId": "source.aon-spell-mage-armor",
+              "txtLines": [
+                1,
+                14
+              ]
             }
           ],
           "total": 10
@@ -7831,6 +8072,17 @@
                 29,
                 29
               ]
+            },
+            {
+              "file": "sources/npc/aonprd/spell-mage-armor.txt",
+              "provenanceStatus": "resolved",
+              "section": "Active effect rules",
+              "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+              "sourceId": "source.aon-spell-mage-armor",
+              "txtLines": [
+                1,
+                14
+              ]
             }
           ],
           "total": 1
@@ -7853,6 +8105,17 @@
               "txtLines": [
                 17,
                 17
+              ]
+            },
+            {
+              "file": "sources/npc/aonprd/spell-mage-armor.txt",
+              "provenanceStatus": "resolved",
+              "section": "Active effect rules",
+              "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+              "sourceId": "source.aon-spell-mage-armor",
+              "txtLines": [
+                1,
+                14
               ]
             }
           ],
@@ -7997,7 +8260,7 @@
       ]
     },
     {
-      "calculation": "apply automatic features and selected class-feature options at each class's level",
+      "calculation": "Base rules plus selected active effects; typed bonuses overlap; conditional effects remain conditional.",
       "path": "/canonical/classFeatures",
       "sourceRefs": [
         {
@@ -8114,6 +8377,17 @@
           "txtLines": [
             19,
             40
+          ]
+        },
+        {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
           ]
         },
         {
@@ -8255,7 +8529,7 @@
       ]
     },
     {
-      "calculation": "validate the casting class's loadout, slots, caster level, and casting ability",
+      "calculation": "Base rules plus selected active effects; typed bonuses overlap; conditional effects remain conditional.",
       "path": "/canonical/spells",
       "sourceRefs": [
         {
@@ -8593,6 +8867,17 @@
           ]
         },
         {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
+          ]
+        },
+        {
           "entry": "Sorcerer level 3",
           "file": "sources/npc/aonprd/sorcerer.txt",
           "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Sorcerer",
@@ -8736,13 +9021,103 @@
         "remainingCp": null,
         "spentCp": 600
       }
+    },
+    {
+      "calculation": "source-level active effect snapshot; no automatic duration or resource expenditure",
+      "path": "/canonical/activeEffects",
+      "sourceRefs": [
+        {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
+          ]
+        }
+      ],
+      "value": [
+        {
+          "duration": "1 hour/level (D)",
+          "effectId": "npc-effect.mage-armor",
+          "enabled": true,
+          "kind": "spell",
+          "modifiers": [
+            {
+              "effectId": "npc-effect.mage-armor",
+              "stat": "ac",
+              "type": "armor",
+              "value": 4
+            }
+          ],
+          "name": "Mage Armor",
+          "remainingDuration": "3 hours at raid start",
+          "restrictions": [],
+          "rulesText": "+4 armor bonus to AC; overlaps worn armor, no armor check penalty or arcane spell failure. Force armor also protects against incorporeal touch attacks (not ordinary touch attacks).",
+          "sourceLevel": 3,
+          "sourceName": "Varkesh",
+          "sourceRefs": [
+            {
+              "file": "sources/npc/aonprd/spell-mage-armor.txt",
+              "provenanceStatus": "resolved",
+              "section": "Active effect rules",
+              "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+              "sourceId": "source.aon-spell-mage-armor",
+              "txtLines": [
+                1,
+                14
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "calculation": "highest same-energy resistance; Protection from Energy uses a separate finite pool",
+      "path": "/canonical/resistances",
+      "sourceRefs": [
+        {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
+          ]
+        }
+      ],
+      "value": {
+        "fire": 10
+      }
+    },
+    {
+      "calculation": "12 per source caster level, capped at 120; track damage expenditure in play",
+      "path": "/canonical/energyProtection",
+      "sourceRefs": [
+        {
+          "file": "sources/npc/aonprd/spell-mage-armor.txt",
+          "provenanceStatus": "resolved",
+          "section": "Active effect rules",
+          "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+          "sourceId": "source.aon-spell-mage-armor",
+          "txtLines": [
+            1,
+            14
+          ]
+        }
+      ],
+      "value": {}
     }
   ],
   "fieldAnnotations": {},
-  "fingerprint": "85ce65ee5ecd8a239b6d284daafc8ef1196130c3c5e00b73b8d8c2703140d581",
+  "fingerprint": "ba5531da67cdaa579a6449b142334a15af4abfcd769cafb6013ce122aca8bb1d",
   "kind": "FinishedMonster",
   "mode": "strict",
-  "monsterId": "monster-f0337df5c4b15d709409778c03e400ae",
+  "monsterId": "monster-6e00f462421f5e9dbdd7d66ef691c1df",
   "result": {
     "abilityModifiers": {
       "charisma": 2,
@@ -8760,6 +9135,41 @@
       "strength": 8,
       "wisdom": 12
     },
+    "activeEffects": [
+      {
+        "duration": "1 hour/level (D)",
+        "effectId": "npc-effect.mage-armor",
+        "enabled": true,
+        "kind": "spell",
+        "modifiers": [
+          {
+            "effectId": "npc-effect.mage-armor",
+            "stat": "ac",
+            "type": "armor",
+            "value": 4
+          }
+        ],
+        "name": "Mage Armor",
+        "remainingDuration": "3 hours at raid start",
+        "restrictions": [],
+        "rulesText": "+4 armor bonus to AC; overlaps worn armor, no armor check penalty or arcane spell failure. Force armor also protects against incorporeal touch attacks (not ordinary touch attacks).",
+        "sourceLevel": 3,
+        "sourceName": "Varkesh",
+        "sourceRefs": [
+          {
+            "file": "sources/npc/aonprd/spell-mage-armor.txt",
+            "provenanceStatus": "resolved",
+            "section": "Active effect rules",
+            "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+            "sourceId": "source.aon-spell-mage-armor",
+            "txtLines": [
+              1,
+              14
+            ]
+          }
+        ]
+      }
+    ],
     "alignment": "LE",
     "attacks": [
       {
@@ -8922,11 +9332,12 @@
     "creationSystem": "npc",
     "creatureType": "humanoid (goblinoid)",
     "defenses": {
-      "ac": 13,
+      "ac": 17,
       "acBreakdown": {
+        "armor": 4,
         "dexterity": 3
       },
-      "flatFooted": 10,
+      "flatFooted": 14,
       "fortitude": 3,
       "reflex": 4,
       "touch": 13,
@@ -8935,9 +9346,10 @@
     "details": {
       "alignment": "LE",
       "morale": "At 8 hp or fewer, or when both Sootfinger and two warriors have fallen, withdraw toward the orchard. If cornered, offer stolen provisions for safe passage. Does not attack downed PCs.",
-      "sourceNotes": "Base sheet excludes temporary spells. NPC hp uses the repository's approved heroic-NPC house rule. Burning hands is the level-3 bloodline bonus spell, not a purchased extra known spell. Carries NPC-standard rather than PC-equivalent wealth; unspent gear budget is not treasure.",
-      "tactics": "Before the raid, cast mage armor once (3-hour duration): encounter-start AC 17, touch 13, flat-footed 14; 5 first-level slots remain. Do not also begin with shield active. On his first combat turn, cast shield if threatened (AC 21, touch 13, flat-footed 18 for 3 minutes), otherwise advance behind a warrior and use elemental ray. Burning hands deals 3d4 fire, DC 13 Reflex half, in a 15-ft. cone; use it on a worthwhile angle rather than allies or helpless targets. Elemental ray is a standard-action spell-like ranged touch attack at 30 ft., 1d6+1 fire, 5/day. Acid splash may deal fire through bloodline arcana; magic missile remains force damage. Do not grant fire immunity to his followers."
+      "sourceNotes": "Sheet includes the selected active Mage Armor; do not add its +4 armor bonus again. Other temporary spells are inactive. NPC hp uses the repository's approved heroic-NPC house rule. Burning hands is the level-3 bloodline bonus spell, not a purchased extra known spell. Carries NPC-standard rather than PC-equivalent wealth; unspent gear budget is not treasure.",
+      "tactics": "Mage Armor has already been cast once before the raid and is active in this profile (3-hour duration): the sheet's AC is already 17, touch 13, flat-footed 14; 5 first-level slots remain. Daily slot totals are capacity, not remaining resources. Do not also begin with shield active. On his first combat turn, cast shield if threatened (AC 21, touch 13, flat-footed 18 for 3 minutes), otherwise advance behind a warrior and use elemental ray. Burning hands deals 3d4 fire, DC 13 Reflex half, in a 15-ft. cone; use it on a worthwhile angle rather than allies or helpless targets. Elemental ray is a standard-action spell-like ranged touch attack at 30 ft., 1d6+1 fire, 5/day. Acid splash may deal fire through bloodline arcana; magic missile remains force damage. Do not grant fire immunity to his followers."
     },
+    "energyProtection": {},
     "feats": [
       {
         "featId": "feat.toughness",
@@ -9153,6 +9565,17 @@
               35,
               35
             ]
+          },
+          {
+            "file": "sources/npc/aonprd/spell-mage-armor.txt",
+            "provenanceStatus": "resolved",
+            "section": "Active effect rules",
+            "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+            "sourceId": "source.aon-spell-mage-armor",
+            "txtLines": [
+              1,
+              14
+            ]
           }
         ],
         "total": 6
@@ -9190,6 +9613,17 @@
               1,
               8
             ]
+          },
+          {
+            "file": "sources/npc/aonprd/spell-mage-armor.txt",
+            "provenanceStatus": "resolved",
+            "section": "Active effect rules",
+            "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+            "sourceId": "source.aon-spell-mage-armor",
+            "txtLines": [
+              1,
+              14
+            ]
           }
         ],
         "total": 10
@@ -9213,6 +9647,17 @@
               29,
               29
             ]
+          },
+          {
+            "file": "sources/npc/aonprd/spell-mage-armor.txt",
+            "provenanceStatus": "resolved",
+            "section": "Active effect rules",
+            "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+            "sourceId": "source.aon-spell-mage-armor",
+            "txtLines": [
+              1,
+              14
+            ]
           }
         ],
         "total": 1
@@ -9235,6 +9680,17 @@
             "txtLines": [
               17,
               17
+            ]
+          },
+          {
+            "file": "sources/npc/aonprd/spell-mage-armor.txt",
+            "provenanceStatus": "resolved",
+            "section": "Active effect rules",
+            "sha256": "813bd386725a606257e6df9f9df459659a5505b207e9440c5bec971c57942f07",
+            "sourceId": "source.aon-spell-mage-armor",
+            "txtLines": [
+              1,
+              14
             ]
           }
         ],
@@ -9294,6 +9750,15 @@
       },
       "method": "assigned-array"
     },
+    "activeEffects": [
+      {
+        "effectId": "npc-effect.mage-armor",
+        "enabled": true,
+        "remainingDuration": "3 hours at raid start",
+        "sourceLevel": 3,
+        "sourceName": "Varkesh"
+      }
+    ],
     "classFeatureChoices": {
       "bloodline": "elemental-fire"
     },
@@ -9306,8 +9771,8 @@
     "details": {
       "alignment": "LE",
       "morale": "At 8 hp or fewer, or when both Sootfinger and two warriors have fallen, withdraw toward the orchard. If cornered, offer stolen provisions for safe passage. Does not attack downed PCs.",
-      "sourceNotes": "Base sheet excludes temporary spells. NPC hp uses the repository's approved heroic-NPC house rule. Burning hands is the level-3 bloodline bonus spell, not a purchased extra known spell. Carries NPC-standard rather than PC-equivalent wealth; unspent gear budget is not treasure.",
-      "tactics": "Before the raid, cast mage armor once (3-hour duration): encounter-start AC 17, touch 13, flat-footed 14; 5 first-level slots remain. Do not also begin with shield active. On his first combat turn, cast shield if threatened (AC 21, touch 13, flat-footed 18 for 3 minutes), otherwise advance behind a warrior and use elemental ray. Burning hands deals 3d4 fire, DC 13 Reflex half, in a 15-ft. cone; use it on a worthwhile angle rather than allies or helpless targets. Elemental ray is a standard-action spell-like ranged touch attack at 30 ft., 1d6+1 fire, 5/day. Acid splash may deal fire through bloodline arcana; magic missile remains force damage. Do not grant fire immunity to his followers."
+      "sourceNotes": "Sheet includes the selected active Mage Armor; do not add its +4 armor bonus again. Other temporary spells are inactive. NPC hp uses the repository's approved heroic-NPC house rule. Burning hands is the level-3 bloodline bonus spell, not a purchased extra known spell. Carries NPC-standard rather than PC-equivalent wealth; unspent gear budget is not treasure.",
+      "tactics": "Mage Armor has already been cast once before the raid and is active in this profile (3-hour duration): the sheet's AC is already 17, touch 13, flat-footed 14; 5 first-level slots remain. Daily slot totals are capacity, not remaining resources. Do not also begin with shield active. On his first combat turn, cast shield if threatened (AC 21, touch 13, flat-footed 18 for 3 minutes), otherwise advance behind a warrior and use elemental ray. Burning hands deals 3d4 fire, DC 13 Reflex half, in a 15-ft. cone; use it on a worthwhile angle rather than allies or helpless targets. Elemental ray is a standard-action spell-like ranged touch attack at 30 ft., 1d6+1 fire, 5/day. Acid splash may deal fire through bloodline arcana; magic missile remains force damage. Do not grant fire immunity to his followers."
     },
     "feats": [
       {
@@ -9361,8 +9826,8 @@
     "statblockUse": "full"
   },
   "sourceDraft": {
-    "draftId": "draft-e5325cee8703427385a7182543511739",
-    "fingerprint": "1be62c612dfde32935d5fe2ec329678e0c587177928ad69ca766c418112e5b2a",
-    "revision": 0
+    "draftId": "draft-86b6c152f81c4f118abdd5e2871cc9f8",
+    "fingerprint": "7f863427b98d167927cfb752fd3e8cdb847d6e4f53ec52b6e6243ee44f42611e",
+    "revision": 2
   }
 }

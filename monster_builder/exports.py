@@ -217,6 +217,9 @@ def structured_sheet(snapshot: Mapping[str, Any], profile: str = "sheet") -> dic
     }
     if isinstance(linked_creature, Mapping):
         model["linkedCreature"] = copy.deepcopy(linked_creature)
+    if creation_system == "npc" and result.get("activeEffects"):
+        model["activeEffects"] = copy.deepcopy(result["activeEffects"])
+        sections.append({"id": "activeEffects", "title": "Active Effects", "effects": copy.deepcopy(result["activeEffects"])})
     if profile == "audit":
         audit = snapshot.get("audit") if isinstance(snapshot.get("audit"), Mapping) else {}
         model["audit"] = {
@@ -255,6 +258,7 @@ def render_markdown(snapshot: Mapping[str, Any], profile: str = "sheet") -> str:
     lines.extend(_spell_lines(model["statistics"]))
     if model["specialAbilities"]:
         lines.extend(["", "## SPECIAL ABILITIES", *[f"**{value['name']}:** {value['text']}" for value in model["specialAbilities"]]])
+    lines.extend(_active_effect_markdown(model))
     if model.get("linkedCreature"):
         lines.extend(["", "## LINKED CREATURE", *_linked_creature_lines(model["linkedCreature"])])
     if model.get("catalogVersion"):
@@ -282,6 +286,8 @@ def render_html(snapshot: Mapping[str, Any], profile: str = "sheet") -> str:
     parts.append(_html_section("STATISTICS", [_field_text(value) for value in model["statistics"]["fields"]] + _spell_lines(model["statistics"]), "Utility Options", model["statistics"]["options"]))
     if model["specialAbilities"]:
         parts.append(_html_section("SPECIAL ABILITIES", [f"{value['name']}: {value['text']}" for value in model["specialAbilities"]]))
+    if model.get("activeEffects"):
+        parts.append(_html_section("Active Effects", _active_effect_lines(model)))
     if model.get("linkedCreature"):
         parts.append(_html_section("LINKED CREATURE", _linked_creature_lines(model["linkedCreature"])))
     if model.get("catalogVersion"):
@@ -320,7 +326,7 @@ def _defense_text(key: str, value: Any, defenses: Mapping[str, Any]) -> str | No
         return f"{value} ({defenses['hitDiceExpression']})"
     if key != "ac" or not isinstance(defenses.get("acBreakdown"), Mapping):
         return None
-    labels = {"armor": "armor", "shield": "shield", "dexterity": "Dex", "size": "size"}
+    labels = {"armor": "armor", "shield": "shield", "dexterity": "Dex", "size": "size", "dodge": "dodge", "deflection": "deflection", "active effects": "active effects"}
     parts = [f"{_signed(defenses['acBreakdown'][source])} {label}" for source, label in labels.items() if source in defenses["acBreakdown"]]
     return f"{value} ({', '.join(parts)})" if parts else str(value)
 
@@ -701,7 +707,7 @@ def _npc_defense_lines(model: Mapping[str, Any]) -> list[str]:
     by_key = {field.get("key"): field for field in defenses.get("fields", [])}
     lines = []
     breakdown = defenses.get("acBreakdown") if isinstance(defenses.get("acBreakdown"), Mapping) else None
-    labels = {"armor": "armor", "shield": "shield", "dexterity": "Dex", "size": "size"}
+    labels = {"armor": "armor", "shield": "shield", "dexterity": "Dex", "size": "size", "dodge": "dodge", "deflection": "deflection", "active effects": "active effects"}
     parts = [f"{_signed(breakdown[source])} {label}" for source, label in labels.items() if isinstance(breakdown, Mapping) and source in breakdown]
     ac = defenses.get("ac")
     if ac is not None:
@@ -720,6 +726,8 @@ def _npc_defense_lines(model: Mapping[str, Any]) -> list[str]:
     defensive = _npc_defensive_parts(model)
     if defensive:
         lines.append(defensive)
+    if defenses.get("resistances"):
+        lines.append("Resist " + ", ".join(f"{energy} {amount}" for energy, amount in sorted(defenses["resistances"].items())))
     return [line for line in lines if line.strip()]
 
 
@@ -827,6 +835,8 @@ def _npc_statistics_lines(model: Mapping[str, Any]) -> list[str]:
                 continue  # rendered on the initiative/senses line
             name = re.sub(r"\(([A-Za-z ]+)\)", lambda match: f"({match.group(1).lower()})", str(entry.get("name", "")))
             text = f"{name} {_signed(entry.get('total'))}"
+            if entry.get("usable") is False:
+                text += f" ({entry.get('restriction', 'unavailable')})"
             rider = riders.get(skill_id)
             if rider and rider.get("condition") == "following tracks":
                 text += f" (+{_npc_rider_total(entry.get('total'), rider['bonus'])} {_npc_condition_text(rider['condition'])})"
@@ -893,11 +903,52 @@ def _npc_sheet_lines(model: Mapping[str, Any]) -> list[str]:
     lines.extend(_npc_spell_lines(model))
     if model.get("specialAbilities"):
         lines.extend(["", "## Special Abilities", *[f"**{value['name']}:** {value['text']}" for value in model["specialAbilities"]]])
+    lines.extend(_active_effect_markdown(model))
     if model.get("linkedCreature"):
         lines.extend(["", "## LINKED CREATURE", *_linked_creature_lines(model["linkedCreature"])])
     if model.get("catalogVersion"):
         lines.extend(["", f"_Generated from catalog {model['catalogVersion']}._"])
     return lines
+
+
+def _active_effect_lines(model: Mapping[str, Any]) -> list[str]:
+    lines = []
+    labels = {"ac": "AC", "attack": "attack rolls", "weaponDamage": "weapon damage", "fortitude": "Fortitude saves", "reflex": "Reflex saves", "will": "Will saves"}
+    for effect in model.get("activeEffects", []):
+        identity = effect["name"]
+        if effect.get("energyType"):
+            identity += f" ({effect['energyType']})"
+        if effect.get("skillId"):
+            identity += f" ({_human(effect['skillId'])})"
+        parts = [f"{identity} — source level {effect['sourceLevel']}"]
+        if effect.get("sourceName"):
+            parts.append(f"source: {effect['sourceName']}")
+        parts.append("duration: " + effect["duration"])
+        if effect.get("remainingDuration"):
+            parts.append("remaining (GM tracked): " + effect["remainingDuration"])
+        bonuses = [f"{_signed(m['value'])} {m['type']} to {labels.get(m['stat'], _human(m['stat']))}" + (f" {m['condition']}" if m.get("condition") else "") for m in effect.get("modifiers", [])]
+        if bonuses:
+            parts.append("before stacking: " + ", ".join(bonuses))
+        if "energyResistance" in effect:
+            parts.append(f"{effect['energyType']} resistance {effect['energyResistance']}")
+        if "absorptionPool" in effect:
+            parts.append(f"{effect['energyType']} absorption capacity {effect['absorptionPool']} (track remaining pool in play)")
+        parts.append(effect["rulesText"])
+        parts.extend(effect.get("restrictions", []))
+        lines.append("; ".join(parts))
+    return lines
+
+
+def _active_effect_markdown(model: Mapping[str, Any]) -> list[str]:
+    if not model.get("activeEffects"):
+        return []
+    escaped = []
+    for line in _active_effect_lines(model):
+        text = _esc(line).replace("\\", "\\\\")
+        for char in "`*_[]":
+            text = text.replace(char, "\\" + char)
+        escaped.append("- " + text.replace("\n", " "))
+    return ["", "## Active Effects", *escaped]
 
 
 def _npc_markdown(model: Mapping[str, Any]) -> str:
@@ -919,6 +970,8 @@ def _npc_html(model: Mapping[str, Any]) -> str:
     parts.append(_html_section("Statistics", statistics))
     if model.get("specialAbilities"):
         parts.append(_html_section("Special Abilities", [f"{value['name']}: {value['text']}" for value in model["specialAbilities"]]))
+    if model.get("activeEffects"):
+        parts.append(_html_section("Active Effects", _active_effect_lines(model)))
     if model.get("linkedCreature"):
         parts.append(_html_section("LINKED CREATURE", _linked_creature_lines(model["linkedCreature"])))
     if model.get("catalogVersion"):

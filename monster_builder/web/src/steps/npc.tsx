@@ -9,7 +9,7 @@ export const NPC_STEPS = [
   { label: "Class progression", desc: "Enter the ordered class levels and class feature choices." },
   { label: "Abilities", desc: "Choose an array method, level increases, and any custom rationale." },
   { label: "Skills and feats", desc: "Use simplified or precise skills and fill source-defined feat slots." },
-  { label: "Spells and gear", desc: "Configure Adept or other source-backed spells and the NPC gear budget." },
+  { label: "Spells, gear and effects", desc: "Configure spells, equipment, and source-backed active effects." },
   { label: "Review", desc: "Inspect engine requirements, warnings, trace inputs, and the canonical preview." },
 ] as const;
 
@@ -49,7 +49,7 @@ export function NpcWorkflow(props: Props) {
 }
 
 function npcPathPrefixes(step: number): string[] {
-  const prefixes = [["/concept", "/selections/statblockUse"], ["/selections/raceId", "/selections/racialChoices"], ["/selections/classProgression", "/selections/classFeatureChoices"], ["/selections/abilityGeneration", "/selections/levelIncreases"], ["/selections/skillGeneration", "/selections/feats"], ["/selections/spellLoadout", "/selections/gear", "/selections/gearProfile"], ["/selections/details"]];
+  const prefixes = [["/concept", "/selections/statblockUse"], ["/selections/raceId", "/selections/racialChoices"], ["/selections/classProgression", "/selections/classFeatureChoices"], ["/selections/abilityGeneration", "/selections/levelIncreases"], ["/selections/skillGeneration", "/selections/feats"], ["/selections/spellLoadout", "/selections/gear", "/selections/gearProfile", "/selections/activeEffects"], ["/selections/details"]];
   return prefixes[step] || ["/selections"];
 }
 
@@ -243,6 +243,19 @@ function NpcSpellsGearStep({ draft, catalog, step, choiceRequirements, selection
   const gear = Array.isArray(draft.selections.gear) ? draft.selections.gear.filter((item): item is JsonObject => Boolean(item && typeof item === "object" && typeof (item as JsonObject).itemId === "string")) : [];
   const [gearRows, setGearRows] = useState<GearRow[]>(gear.map((item) => ({ itemId: String(item.itemId), quantity: String(item.quantity ?? 1), masterwork: item.masterwork === true, enhancementBonus: item.enhancementBonus === undefined ? "" : String(item.enhancementBonus), properties: Array.isArray(item.properties) ? item.properties.join(", ") : Array.isArray(item.propertyIds) ? item.propertyIds.join(", ") : "" })));
   const [descriptiveGear, setDescriptiveGear] = useState(Array.isArray(draft.selections.gear) ? draft.selections.gear.filter((item): item is string => typeof item === "string").join("\n") : "");
+  const [activeEffects, setActiveEffects] = useState<JsonObject[]>(Array.isArray(draft.selections.activeEffects) ? draft.selections.activeEffects.map(objectValue) : []);
+  const effectRecords = catalog.activeEffects || {};
+  const setEffect = (index: number, change: JsonObject) => setActiveEffects((rows) => rows.map((row, i) => i === index ? { ...row, ...change } : row));
+  const selectEffect = (index: number, effectId: string) => {
+    const record = effectRecords[effectId];
+    const minimum = Number(objectValue((record?.tiers as unknown[] | undefined)?.[0]).level || 1);
+    setActiveEffects((rows) => rows.map((row, i) => i !== index ? row : {
+      effectId, sourceLevel: Math.max(Number(row.sourceLevel) || 1, minimum), enabled: row.enabled !== false,
+      sourceName: row.sourceName, remainingDuration: row.remainingDuration,
+      ...(Array.isArray(record?.parameters) && record.parameters.includes("energyType") ? { energyType: "fire" } : {}),
+      ...(Array.isArray(record?.parameters) && record.parameters.includes("skillId") ? { skillId: "skill.acrobatics" } : {}),
+    }));
+  };
   const [addGear, setAddGear] = useState("");
   const [addGearQty, setAddGearQty] = useState("1");
   const gearUsed = new Set(gearRows.map((row) => row.itemId));
@@ -281,7 +294,7 @@ function NpcSpellsGearStep({ draft, catalog, step, choiceRequirements, selection
       if (properties.length) item.properties = properties;
       return item;
     });
-    onSave({ spellLoadout: sections.length ? spellLoadout : undefined, gearProfile: { experienceProgression: progression, fantasyLevel: fantasy }, gear: [...cleanedGear, ...descriptiveGear.split("\n").map((name) => name.trim()).filter(Boolean)] }, {}, next);
+    onSave({ activeEffects, spellLoadout: sections.length ? spellLoadout : undefined, gearProfile: { experienceProgression: progression, fantasyLevel: fantasy }, gear: [...cleanedGear, ...descriptiveGear.split("\n").map((name) => name.trim()).filter(Boolean)] }, {}, next);
   };
   return <StepFrame step={step} onBack={onBack} onApply={submit}><div class="grid">
     {sections.length ? sections.map((section) => <section class="field full" key={section.field}><div class="builder-head"><div><span class="label">{section.label}</span><small>{section.hint}</small></div></div><div class="builder-list">{spellLevels.filter((level) => section.field !== "domainPrepared" || Number(slotCount(section.field, String(level))) > 0).map((level) => {
@@ -290,6 +303,22 @@ function NpcSpellsGearStep({ draft, catalog, step, choiceRequirements, selection
       const slots = slotCount(section.field, String(level));
       return <div class="builder-card" key={level}><div class="builder-head"><div><strong>Level {level}</strong><small>{ids.length} chosen{slots ? ` · ${slots} slot(s)` : ""}</small></div></div><div class="add-row"><select value={String(chosen)} onChange={(event) => setPicker(section.field, String(level), event.currentTarget.value)}><option value="">Choose a level-{level} spell…</option>{spellsForLevel(level).filter((spell) => section.field !== "known" || !ids.includes(spell.id)).map((spell) => <option value={spell.id} key={spell.id}>{spell.name}</option>)}</select><button type="button" class="btn" disabled={!chosen} onClick={() => { if (!chosen) return; setLoadout(section.field, String(level), [...ids, chosen]); setPicker(section.field, String(level), ""); }}>Add</button></div><div class="builder-list">{ids.map((id, index) => <div class="builder-card" key={`${id}-${index}`}><div class="builder-head"><div><strong>{catalog.spells[id]?.name || id}</strong></div><button type="button" class="btn small" onClick={() => setLoadout(section.field, String(level), ids.filter((_, position) => position !== index))}>Remove</button></div></div>)}</div></div>;
     })}</div></section>) : <div class="empty">The current class has no source-backed spell list; the loadout stays empty.</div>}
+    <section class="field full"><h3>Active Effects</h3><p class="hint">Effects are already active on this NPC. Use the supplying caster or class level, not necessarily the recipient's level. The GM verifies legal activation, targets and source ownership; this does not grant spells or class features. Duration, spell slots and performance/rage rounds are tracked in play. Same-type bonuses overlap.</p>
+      <div class="builder-list">{activeEffects.map((row, index) => {
+        const record = effectRecords[String(row.effectId)];
+        const parameters = Array.isArray(record?.parameters) ? record.parameters : [];
+        return <article class="builder-card" key={index}><div class="builder-fields">
+          <Select label={`Effect ${index + 1}`} value={String(row.effectId || "")} onChange={(id) => selectEffect(index, id)}>{Object.values(effectRecords).filter((effect) => effect.catalogStatus === "resolved").map((effect) => <option value={effect.id} key={effect.id}>{effect.name}</option>)}</Select>
+          <Field label="Source caster / class level (1–20)" type="number" value={String(row.sourceLevel ?? 1)} onInput={(value) => setEffect(index, { sourceLevel: Number(value) })} />
+          <label class="field"><span>Active</span><input type="checkbox" checked={row.enabled !== false} onChange={(event) => setEffect(index, { enabled: event.currentTarget.checked })} /></label>
+          {parameters.includes("energyType") && <Select label="Energy type" value={String(row.energyType || "fire")} onChange={(value) => setEffect(index, { energyType: value })}>{["acid", "cold", "electricity", "fire", "sonic"].map((energy) => <option value={energy}>{humanize(energy)}</option>)}</Select>}
+          {parameters.includes("skillId") && <CatalogSelect label="Affected skill" records={catalog.skills} value={String(row.skillId || "")} onChange={(value) => setEffect(index, { skillId: value })} />}
+          <Field label="Source name (optional)" value={String(row.sourceName || "")} onInput={(value) => setEffect(index, { sourceName: value || undefined })} />
+          <Field label="Remaining duration (GM tracked, optional)" value={String(row.remainingDuration || "")} onInput={(value) => setEffect(index, { remainingDuration: value || undefined })} />
+        </div><p class="hint">{String(record?.rulesText || "")}</p><button type="button" class="btn small" onClick={() => setActiveEffects((rows) => rows.filter((_, i) => i !== index))}>Remove effect</button></article>;
+      })}</div>
+      <button type="button" class="btn" onClick={() => setActiveEffects((rows) => [...rows, { effectId: "npc-effect.mage-armor", sourceLevel: 1, enabled: true }])}>Add active effect</button>
+    </section>
     <Select label="Experience progression" value={progression} onChange={setProgression}><option value="slow">Slow</option><option value="medium">Medium</option><option value="fast">Fast</option></Select>
     <Select label="Fantasy level" value={fantasy} onChange={setFantasy}><option value="low">Low</option><option value="normal">Normal</option><option value="high">High</option></Select>
     <section class="field full"><div class="builder-head"><div><span class="label">Mechanical equipment</span><small>These catalog items contribute rules and prices to this statblock. Use descriptive equipment below for everything else.</small></div></div>

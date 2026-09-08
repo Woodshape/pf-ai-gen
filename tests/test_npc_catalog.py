@@ -34,7 +34,7 @@ class NpcCatalogTests(unittest.TestCase):
             {
                 "schemaVersion", "catalogVersion", "catalogStatus", "sources",
                 "abilityArrays", "gearBudgets", "races", "classes", "classFeatures",
-                "skills", "feats", "items", "spells", "derivedRules",
+                "skills", "feats", "items", "spells", "derivedRules", "activeEffects",
             },
         )
 
@@ -275,7 +275,7 @@ class NpcCatalogTests(unittest.TestCase):
                 for child in value:
                     refs(child)
 
-        for section in ("abilityArrays", "gearBudgets", "races", "classes", "classFeatures", "skills", "feats", "items", "spells", "derivedRules"):
+        for section in ("abilityArrays", "gearBudgets", "races", "classes", "classFeatures", "skills", "feats", "items", "spells", "derivedRules", "activeEffects"):
             for record in catalog[section].values():
                 self.assertIn("sourceRef", record)
                 refs(record)

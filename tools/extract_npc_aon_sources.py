@@ -17,6 +17,8 @@ RAW = ROOT / "sources" / "reference" / "aonprd"
 HTML_SOURCE_ALIASES = {
     "rogue-talent-bleeding-attack": "rogue-talents",
     "weapon-fragile": "primitive-armor-and-weapons",
+    "bard-performances": "bard",
+    "barbarian-rage": "barbarian",
     "eidolon-base-forms-biped": "eidolon-base-forms",
     "eidolon-uc-base-forms-biped": "eidolon-uc-base-forms",
     "summoner-uc-evolutions-slam": "summoner-uc-evolutions",
@@ -48,6 +50,12 @@ SOURCES = {
     "druid": ("id", "MainContent_DataListTypes_LabelName_0"),
     "sorcerer": ("id", "MainContent_DataListTypes_LabelName_0"),
     "bard": ("id", "MainContent_DataListTypes_LabelName_0"),
+    "bard-performances": ("id", "MainContent_DataListTypes_LabelName_0"),
+    "barbarian-rage": ("heading", "Class Features"),
+    **{f"spell-{name.lower().replace(' ', '-')}": ("heading", name) for name in (
+        "Protection from Evil", "Protection from Good", "Protection from Chaos", "Protection from Law",
+        "Resist Energy", "Protection from Energy", "Heroism", "Bless",
+    )},
     "ranger": ("id", "MainContent_DataListTypes_LabelName_0"),
     "rogue": ("id", "MainContent_DataListTypes_LabelName_0"),
     "magic-weapons": ("id", "MainContent_DetailedOutput"),
@@ -100,7 +108,7 @@ SOURCES = {
 # Stop tag for heading-based extractions: the tag of the next titled entry.
 HEADING_STOPS = {
     "fire-domain": "h2", "eidolon-uc-subtypes": "h2", "eidolon-base-forms": "h2",
-    "eidolon-base-forms-biped": "h2",
+    "eidolon-base-forms-biped": "h2", "bard-performances": "h2", "barbarian-rage": "h2",
 }
 BLOCK_TAGS = {
     "address", "article", "aside", "blockquote", "dd", "div", "dl", "dt",
@@ -245,8 +253,8 @@ def extract_source(name: str, path: Path, attribute: str, value: str) -> str:
         parser.feed(f'<div id="adding-npcs">{html[start:end]}</div>')
         parser.close()
         return parser.extracted_text()
-    content = extract(path, attribute, value)
-    if name not in {"sorcerer", "druid"}:
+    content = "" if name == "bard-performances" else extract(path, attribute, value)
+    if name not in {"sorcerer", "druid", "bard-performances"}:
         return content
     start = html.find("<b>Weapon and Armor Proficiency</b>")
     end = html.find('<h2 class="title">Alternate Capstones</h2>', start)

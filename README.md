@@ -83,8 +83,11 @@ Known/prepared counts, class lists, spell levels and casting abilities are still
 
 Equipment can mix mechanical catalog objects with plain descriptive strings. Strings
 have no automatic effects or prices—even when they name weapons or magic items.
-Base statistics exclude temporary buffs; performance rounds and concentration are
-shown without activating a performance. See the [valid Warchanter export](docs/goblin-warchanter.md)
+Without active-effect selections, statistics exclude temporary buffs. Optional
+[Active Effects](docs/npc-active-effects.md) recalculate the NPC profile with typed
+bonus stacking and appear in Markdown/HTML exports. The browser supports these
+under **Spells, gear and effects**; activation eligibility and resource/time tracking
+remain GM responsibilities. See the [valid Warchanter export](docs/goblin-warchanter.md)
 and its [printed-stat discrepancies](docs/goblin-warchanter-assessment.md).
 
 See [the composition audit](docs/npc-composition-audit.md) for removed gates
