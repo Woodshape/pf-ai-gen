@@ -134,7 +134,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:64109a4f53a477f553a4dbec4d5d0e7e6016ef896dcfb468862082eec640a58a",
+  "catalogVersion": "sha256:4a3216b62ba5d06b86fee6a89fa7792f80b6f11fe7329009fd25ffa88397dd11",
   "classFeatures": {
     "npc-class-feature.bard-cantrips": {
       "catalogStatus": "resolved",
@@ -2599,23 +2599,23 @@
       "name": "Rogue talents",
       "options": {
         "bleeding-attack": {
-          "entry": "Text-only in this slice; no numeric effect.",
+          "entry": "On a sneak attack against a living opponent, may cause 1 bleed per sneak attack die at the start of each target turn. Does not stack with itself; bypasses damage reduction. A DC 15 Heal check or any hit-point healing stops it. Adjudicated during play, not added to base weapon damage.",
           "name": "Bleeding Attack",
           "sourceRef": [
             {
-              "entry": "Printed statblock lists rogue talents (bleeding attack); bounded provenance because the general rogue talent list is not locally archived",
-              "file": "sources/npc/aonprd/creating-npcs.txt",
-              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
+              "entry": "Complete talent rules",
+              "file": "sources/npc/aonprd/rogue-talent-bleeding-attack.txt",
+              "officialUrl": "https://www.aonprd.com/RogueTalents.aspx",
               "printedPages": [
-                454
+                68
               ],
               "provenanceStatus": "resolved",
-              "section": "Example: Kiramor, the Forest Shadow",
-              "sha256": "c1a97dfe38f5b04aede645227c42053204ba14b8719209b50be8459fbcc0cb84",
-              "sourceId": "source.aon-creating-npcs",
+              "section": "Bleeding Attack (Ex)",
+              "sha256": "4b5b18175fde17c80a2bb0cdab042cdc2e343167b574c86ea0db5cc74ec8be52",
+              "sourceId": "source.aon-rogue-talent-bleeding-attack",
               "txtLines": [
-                123,
-                123
+                1,
+                1
               ]
             }
           ]
@@ -2623,7 +2623,7 @@
       },
       "sourceRef": [
         {
-          "entry": "A rogue gains one rogue talent at 2nd level; the full talent list is not locally archived",
+          "entry": "A rogue gains one rogue talent at 2nd level",
           "file": "sources/npc/aonprd/rogue.txt",
           "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Rogue",
           "provenanceStatus": "resolved",
@@ -19697,6 +19697,42 @@
     }
   },
   "items": {
+    "item.alchemists-fire": {
+      "catalogStatus": "resolved",
+      "category": "goods",
+      "effects": {},
+      "id": "item.alchemists-fire",
+      "name": "Alchemist's fire (flask)",
+      "priceCp": 2000,
+      "ruleText": "Consumable splash weapon; ranged touch attack, 10-ft. range increment. Direct hit: 1d6 fire; splash: 1 fire within 5 ft. of impact. Direct target takes another 1d6 next round unless extinguished. Full-round action and DC 15 Reflex extinguishes; rolling gives +2; immersion or magical extinguishing succeeds automatically. Resolve splash targeting, misses, attacks of opportunity and resource expenditure in play; no automatic weapon attack is generated for this goods record.",
+      "sourceRef": [
+        {
+          "entry": "Alchemist's fire price and weight",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Goods and Services",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            527,
+            527
+          ]
+        },
+        {
+          "entry": "Alchemist's fire rules",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Special Substances and Items",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            678,
+            679
+          ]
+        }
+      ],
+      "weightLb": 1
+    },
     "item.amulet-of-natural-armor": {
       "catalogStatus": "gap",
       "category": "magic",
@@ -20082,19 +20118,33 @@
       "id": "item.dogslicer",
       "name": "Dogslicer",
       "priceCp": 800,
-      "sourceRef": {
-        "entry": "Dogslicer",
-        "file": "sources/npc/aonprd/weapon-dogslicer.txt",
-        "officialUrl": "https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=Dogslicer",
-        "provenanceStatus": "resolved",
-        "section": "Dogslicer",
-        "sha256": "f92b88748f07e5d9bb3e822793548c384335cd8958477ee2795b715de34d9263",
-        "sourceId": "source.aon-weapon-dogslicer",
-        "txtLines": [
-          3,
-          8
-        ]
-      },
+      "sourceRef": [
+        {
+          "entry": "Dogslicer",
+          "file": "sources/npc/aonprd/weapon-dogslicer.txt",
+          "officialUrl": "https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=Dogslicer",
+          "provenanceStatus": "resolved",
+          "section": "Dogslicer",
+          "sha256": "f92b88748f07e5d9bb3e822793548c384335cd8958477ee2795b715de34d9263",
+          "sourceId": "source.aon-weapon-dogslicer",
+          "txtLines": [
+            3,
+            8
+          ]
+        },
+        {
+          "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+          "file": "sources/npc/aonprd/weapon-fragile.txt",
+          "provenanceStatus": "resolved",
+          "section": "Fragile",
+          "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+          "sourceId": "source.aon-weapon-fragile",
+          "txtLines": [
+            1,
+            1
+          ]
+        }
+      ],
       "weightLb": 1
     },
     "item.explorers-outfit": {
@@ -20948,6 +20998,42 @@
       },
       "weightLb": null
     },
+    "item.oil": {
+      "catalogStatus": "resolved",
+      "category": "goods",
+      "effects": {},
+      "id": "item.oil",
+      "name": "Oil (1-pint flask)",
+      "priceCp": 10,
+      "ruleText": "Burns 6 hours in a lantern. As a splash weapon, use alchemist's fire rules but require a full-round action to prepare a fuse and a 50% ignition check after throwing. A pint spread on a smooth 5-ft. square burns 2 rounds for 1d3 fire to creatures in the area. No automatic weapon attack is generated for this goods record.",
+      "sourceRef": [
+        {
+          "entry": "Oil price and weight",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Goods and Services",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            496,
+            496
+          ]
+        },
+        {
+          "entry": "Oil rules",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Adventuring Gear",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            664,
+            665
+          ]
+        }
+      ],
+      "weightLb": 1
+    },
     "item.padded-armor": {
       "catalogStatus": "gap",
       "category": "armor",
@@ -21697,26 +21783,40 @@
       }
     },
     "item.torch": {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "goods",
-      "effects": null,
-      "gapCode": "core-rulebook-equipment",
+      "effects": {},
       "id": "item.torch",
       "name": "Torch",
-      "priceCp": null,
-      "sourceRef": {
-        "entry": "Core weapons, armor, goods, and required magic items",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
-        "txtLines": [
-          26,
-          26
-        ]
-      },
-      "weightLb": null
+      "priceCp": 1,
+      "ruleText": "Burns for 1 hour; normal light 20 ft., increased light level a further 20 ft. In combat, a one-handed improvised weapon dealing gauntlet bludgeoning damage for its size plus 1 fire. No automatic weapon attack is generated for this goods record.",
+      "sourceRef": [
+        {
+          "entry": "Torch price and weight",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Goods and Services",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            519,
+            519
+          ]
+        },
+        {
+          "entry": "Torch rules",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Adventuring Gear",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            672,
+            672
+          ]
+        }
+      ],
+      "weightLb": 1
     },
     "item.tower-shield": {
       "catalogStatus": "gap",
@@ -22356,6 +22456,63 @@
       ],
       "weaponProficiencies": [
         "sling"
+      ]
+    },
+    "npc-race.hobgoblin": {
+      "abilityAdjustments": {
+        "constitution": 2,
+        "dexterity": 2
+      },
+      "bonusLanguages": [
+        "Draconic",
+        "Dwarven",
+        "Infernal",
+        "Giant",
+        "Orc"
+      ],
+      "catalogStatus": "resolved",
+      "choiceSlots": [],
+      "featSlots": [],
+      "id": "npc-race.hobgoblin",
+      "languages": [
+        "Common",
+        "Goblin"
+      ],
+      "name": "Hobgoblin",
+      "senses": [
+        "darkvision 60 ft."
+      ],
+      "sizeId": "size.medium",
+      "sizeModifiers": {
+        "ac": 0,
+        "attack": 0,
+        "cmb": 0,
+        "cmd": 0
+      },
+      "skillBonuses": {
+        "skill.stealth": 4
+      },
+      "skillSelectionsBonus": 0,
+      "sourceRef": {
+        "entry": "Standard racial traits; no alternate traits",
+        "file": "sources/npc/aonprd/hobgoblin-race.txt",
+        "officialUrl": "https://www.aonprd.com/RacesDisplay.aspx?ItemName=Hobgoblin",
+        "provenanceStatus": "resolved",
+        "section": "Hobgoblin Racial Traits",
+        "sha256": "cc1261efc09210871a7d217a198704a9a867f603cafc6ddb9a6dddffc1bc481c",
+        "sourceId": "source.aon-hobgoblin-race",
+        "txtLines": [
+          1,
+          8
+        ]
+      },
+      "speed": {
+        "land": 30
+      },
+      "subtype": "goblinoid",
+      "traits": [
+        "Darkvision",
+        "Sneaky"
       ]
     },
     "npc-race.human": {
@@ -23388,6 +23545,12 @@
       "sha256": "2a9d00a27d461db36b20b545eb04f1a18ee8e363c6396f7e4e73ce142db0f501",
       "sourceId": "source.aon-halfling"
     },
+    "source.aon-hobgoblin-race": {
+      "description": "Official AoN standard Hobgoblin racial traits",
+      "file": "sources/npc/aonprd/hobgoblin-race.txt",
+      "sha256": "cc1261efc09210871a7d217a198704a9a867f603cafc6ddb9a6dddffc1bc481c",
+      "sourceId": "source.aon-hobgoblin-race"
+    },
     "source.aon-linguistics-language": {
       "description": "Official Linguistics language-learning rule",
       "file": "sources/npc/aonprd/skill-linguistics-language.txt",
@@ -23441,6 +23604,12 @@
       "file": "sources/npc/aonprd/rogue.txt",
       "sha256": "375bf78b62c6cd1d25dc3c0d9e0b53c1807035cc541932daf693c604501af167",
       "sourceId": "source.aon-rogue"
+    },
+    "source.aon-rogue-talent-bleeding-attack": {
+      "description": "Official AoN Bleeding Attack rogue talent, Core Rulebook p. 68",
+      "file": "sources/npc/aonprd/rogue-talent-bleeding-attack.txt",
+      "sha256": "4b5b18175fde17c80a2bb0cdab042cdc2e343167b574c86ea0db5cc74ec8be52",
+      "sourceId": "source.aon-rogue-talent-bleeding-attack"
     },
     "source.aon-skill-bluff": {
       "description": "Official current AoN Bluff skill rules",
@@ -23682,6 +23851,12 @@
       "sha256": "f92b88748f07e5d9bb3e822793548c384335cd8958477ee2795b715de34d9263",
       "sourceId": "source.aon-weapon-dogslicer"
     },
+    "source.aon-weapon-fragile": {
+      "description": "Official Ultimate Combat fragile weapon breakage rule",
+      "file": "sources/npc/aonprd/weapon-fragile.txt",
+      "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+      "sourceId": "source.aon-weapon-fragile"
+    },
     "source.npc-adr": {
       "description": "Accepted creation-system and NPC catalog decisions",
       "file": "docs/adr/creation-system.md",
@@ -23715,7 +23890,7 @@
     "source.npc-manifest": {
       "description": "Hash manifest for the local NPC source foundation",
       "file": "sources/npc/MANIFEST.json",
-      "sha256": "47e32159b71949f2a41bf8924d25eccbb147fce2f3c39ee8447e2b153321fbe2",
+      "sha256": "c6000d0156bc276685913a61ab2efd9e002b9ea1c96557b5b389a97299adfdc7",
       "sourceId": "source.npc-manifest"
     },
     "source.npc-mode-plan": {

@@ -1,6 +1,34 @@
 {
   "records": [
     {
+      "id": "item.alchemists-fire",
+      "name": "Alchemist's fire (flask)",
+      "catalogStatus": "resolved",
+      "category": "goods",
+      "effects": {},
+      "priceCp": 2000,
+      "weightLb": 1,
+      "ruleText": "Consumable splash weapon; ranged touch attack, 10-ft. range increment. Direct hit: 1d6 fire; splash: 1 fire within 5 ft. of impact. Direct target takes another 1d6 next round unless extinguished. Full-round action and DC 15 Reflex extinguishes; rolling gives +2; immersion or magical extinguishing succeeds automatically. Resolve splash targeting, misses, attacks of opportunity and resource expenditure in play; no automatic weapon attack is generated for this goods record.",
+      "sourceRef": [
+        {"sourceId": "source.aon-equipment", "section": "Goods and Services", "entry": "Alchemist's fire price and weight", "txtLines": [527, 527], "provenanceStatus": "resolved"},
+        {"sourceId": "source.aon-equipment", "section": "Special Substances and Items", "entry": "Alchemist's fire rules", "txtLines": [678, 679], "provenanceStatus": "resolved"}
+      ]
+    },
+    {
+      "id": "item.oil",
+      "name": "Oil (1-pint flask)",
+      "catalogStatus": "resolved",
+      "category": "goods",
+      "effects": {},
+      "priceCp": 10,
+      "weightLb": 1,
+      "ruleText": "Burns 6 hours in a lantern. As a splash weapon, use alchemist's fire rules but require a full-round action to prepare a fuse and a 50% ignition check after throwing. A pint spread on a smooth 5-ft. square burns 2 rounds for 1d3 fire to creatures in the area. No automatic weapon attack is generated for this goods record.",
+      "sourceRef": [
+        {"sourceId": "source.aon-equipment", "section": "Goods and Services", "entry": "Oil price and weight", "txtLines": [496, 496], "provenanceStatus": "resolved"},
+        {"sourceId": "source.aon-equipment", "section": "Adventuring Gear", "entry": "Oil rules", "txtLines": [664, 665], "provenanceStatus": "resolved"}
+      ]
+    },
+    {
       "catalogStatus": "gap",
       "category": "magic",
       "effects": null,
@@ -1784,24 +1812,18 @@
       }
     },
     {
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "goods",
-      "effects": null,
-      "gapCode": "core-rulebook-equipment",
+      "effects": {},
       "id": "item.torch",
       "name": "Torch",
-      "priceCp": null,
-      "sourceRef": {
-        "entry": "Core weapons, armor, goods, and required magic items",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sourceId": "source.npc-gap-matrix",
-        "txtLines": [
-          26,
-          26
-        ]
-      },
-      "weightLb": null
+      "priceCp": 1,
+      "weightLb": 1,
+      "ruleText": "Burns for 1 hour; normal light 20 ft., increased light level a further 20 ft. In combat, a one-handed improvised weapon dealing gauntlet bludgeoning damage for its size plus 1 fire. No automatic weapon attack is generated for this goods record.",
+      "sourceRef": [
+        {"sourceId": "source.aon-equipment", "section": "Goods and Services", "entry": "Torch price and weight", "txtLines": [519, 519], "provenanceStatus": "resolved"},
+        {"sourceId": "source.aon-equipment", "section": "Adventuring Gear", "entry": "Torch rules", "txtLines": [672, 672], "provenanceStatus": "resolved"}
+      ]
     },
     {
       "catalogStatus": "gap",
@@ -2069,17 +2091,20 @@
       "id": "item.dogslicer",
       "name": "Dogslicer",
       "priceCp": 800,
-      "sourceRef": {
+      "sourceRef": [{
         "entry": "Dogslicer",
         "officialUrl": "https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=Dogslicer",
         "provenanceStatus": "resolved",
         "section": "Dogslicer",
         "sourceId": "source.aon-weapon-dogslicer",
-        "txtLines": [
-          3,
-          8
-        ]
-      },
+        "txtLines": [3, 8]
+      }, {
+        "sourceId": "source.aon-weapon-fragile",
+        "section": "Fragile",
+        "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+        "txtLines": [1, 1],
+        "provenanceStatus": "resolved"
+      }],
       "weightLb": 1
     }
   ],

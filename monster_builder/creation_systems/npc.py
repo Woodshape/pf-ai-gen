@@ -404,7 +404,9 @@ class NpcCreation(CreationSystem):
         first_die = int(class_record["hitDie"][1:])
         if hp_policy["firstLevelMax"]:
             hp += first_die - round_die((first_die + 1) / 2)
-        hp += max(feat_effects.get("hpPerLevelMinimum", 0), total_level) if feat_effects.get("hpPerLevelMinimum") else 0
+        feat_hp = max(feat_effects["hpPerLevelMinimum"], total_level) if feat_effects.get("hpPerLevelMinimum") else 0
+        hp += feat_hp
+        hp_modifier = total_level * modifiers["constitution"] + feat_hp
         bab = row["bab"]
         size_modifiers = race.get("sizeModifiers", {})
         equipped = [entry for entry in gear_result["items"] if entry["equipped"]]
@@ -514,7 +516,7 @@ class NpcCreation(CreationSystem):
             "abilityScores": scores,
             "abilityModifiers": modifiers,
             "hitDiceExpression": "+".join(f"{item['levels']}{record['hitDie']}" for item, record in zip(progression, class_records))
-                                 + (_bonus(total_level * modifiers["constitution"]) if modifiers["constitution"] else ""),
+                                 + (_bonus(hp_modifier) if hp_modifier else ""),
             "hp": hp,
             "bab": bab,
             "defenses": defenses,

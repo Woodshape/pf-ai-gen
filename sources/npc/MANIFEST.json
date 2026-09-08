@@ -7,6 +7,24 @@
   "note": "Extract line ranges are stable because every parent file and derived text file is immutable and hash-anchored. Downstream code does not fetch live web pages or re-run PDF extraction."
  },
  "parentSources": {
+  "aon-primitive-armor-and-weapons-html": {
+   "file": "sources/reference/aonprd/primitive-armor-and-weapons.html",
+   "sha256": "6a470dd752db973d86e7e991eb6ad1e55b061ab0e9102a60ffc3532aa4119492",
+   "officialUrl": "https://legacy.aonprd.com/ultimateCombat/combat/primitiveArmorAndWeapons.html",
+   "description": "Official Ultimate Combat primitive equipment and fragile weapon rules."
+  },
+  "aon-hobgoblin-race-html": {
+   "file": "sources/reference/aonprd/hobgoblin-race.html",
+   "sha256": "64b728855f56e49b2cf4ebf39676316dd46507f3e976c058036b04497184693b",
+   "officialUrl": "https://www.aonprd.com/RacesDisplay.aspx?ItemName=Hobgoblin",
+   "description": "Official Hobgoblin race page; standard traits used for the Cinder-Tithe leader."
+  },
+  "aon-rogue-talents-html": {
+   "file": "sources/reference/aonprd/rogue-talents.html",
+   "sha256": "ee4637e29df17f608a728cd78064ef1c032aebfc03d22fca1b8435af2611f7e5",
+   "officialUrl": "https://www.aonprd.com/RogueTalents.aspx",
+   "description": "Official rogue talent rules, including Bleeding Attack (Core Rulebook p. 68)."
+  },
   "core-rulebook-pdf": {
    "file": "Pathfinder_RPG_Core_Rulebook.pdf",
    "sha256": "e1b520f1d8f1983741b56181d3d823d520c88eb9b888b342b90896dec9a5ccef",
@@ -513,6 +531,30 @@
   }
  },
  "extracts": {
+  "aon-weapon-fragile": {
+   "file": "sources/npc/aonprd/weapon-fragile.txt",
+   "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+   "derivedFrom": "aon-primitive-armor-and-weapons-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [1, 1],
+   "contents": "Fragile weapon breakage; used for ordinary, non-masterwork dogslicers only."
+  },
+  "aon-hobgoblin-race": {
+   "file": "sources/npc/aonprd/hobgoblin-race.txt",
+   "sha256": "cc1261efc09210871a7d217a198704a9a867f603cafc6ddb9a6dddffc1bc481c",
+   "derivedFrom": "aon-hobgoblin-race-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [1, 8],
+   "contents": "Standard Hobgoblin racial traits."
+  },
+  "aon-rogue-talent-bleeding-attack": {
+   "file": "sources/npc/aonprd/rogue-talent-bleeding-attack.txt",
+   "sha256": "4b5b18175fde17c80a2bb0cdab042cdc2e343167b574c86ea0db5cc74ec8be52",
+   "derivedFrom": "aon-rogue-talents-html",
+   "command": "python3 tools/extract_npc_aon_sources.py",
+   "lines": [1, 1],
+   "contents": "Complete Bleeding Attack rogue talent rules."
+  },
   "core-rulebook-extract": {
    "file": "sources/npc/core-rulebook-extract.txt",
    "sha256": "0871da03406f898a23be03dd0732392104a58d5978dd281270ffc729300b68e9",

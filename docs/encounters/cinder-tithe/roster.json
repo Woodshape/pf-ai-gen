@@ -1,0 +1,47 @@
+{
+  "catalogVersion": "sha256:4a3216b62ba5d06b86fee6a89fa7792f80b6f11fe7329009fd25ffa88397dd11",
+  "workspace": ".monster-builder",
+  "xp": 1405,
+  "npcs": [
+    {
+      "name": "Varkesh, the Ember-Tithe",
+      "draftId": "draft-e5325cee8703427385a7182543511739",
+      "monsterId": "monster-f0337df5c4b15d709409778c03e400ae",
+      "cr": 2,
+      "sheet": "varkesh.md",
+      "status": "valid"
+    },
+    {
+      "name": "Sootfinger",
+      "draftId": "draft-e61c92e61d454dcfa5bdd101ce0289ca",
+      "monsterId": "monster-34f8cbf3892a57feb4732583aacf2028",
+      "cr": 1,
+      "sheet": "sootfinger.md",
+      "status": "valid"
+    },
+    {
+      "name": "Krik, Cinder-Raider",
+      "draftId": "draft-375e13e341bb450a98145d1b690a5485",
+      "monsterId": "monster-6cb130e99f5456e982cd42e04eab3b28",
+      "cr": "1/3",
+      "sheet": "goblin-warrior.md",
+      "status": "valid"
+    },
+    {
+      "name": "Nib, Cinder-Raider",
+      "draftId": "draft-229ad8155dcd46b88dc7a58aad2140db",
+      "monsterId": "monster-4a1efa342e995e6aa42737bef1448311",
+      "cr": "1/3",
+      "sheet": "goblin-warrior.md",
+      "status": "valid"
+    },
+    {
+      "name": "Zek, Cinder-Raider",
+      "draftId": "draft-9c70693b39954367ab897f124c08c172",
+      "monsterId": "monster-bfe31c27d36e5a7997ed788366f9bfff",
+      "cr": "1/3",
+      "sheet": "goblin-warrior.md",
+      "status": "valid"
+    }
+  ]
+}

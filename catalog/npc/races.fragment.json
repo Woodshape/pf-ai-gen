@@ -1,6 +1,32 @@
 {
   "records": [
     {
+      "id": "npc-race.hobgoblin",
+      "name": "Hobgoblin",
+      "catalogStatus": "resolved",
+      "abilityAdjustments": {"dexterity": 2, "constitution": 2},
+      "sizeId": "size.medium",
+      "sizeModifiers": {"ac": 0, "attack": 0, "cmb": 0, "cmd": 0},
+      "speed": {"land": 30},
+      "subtype": "goblinoid",
+      "senses": ["darkvision 60 ft."],
+      "traits": ["Darkvision", "Sneaky"],
+      "languages": ["Common", "Goblin"],
+      "bonusLanguages": ["Draconic", "Dwarven", "Infernal", "Giant", "Orc"],
+      "skillBonuses": {"skill.stealth": 4},
+      "skillSelectionsBonus": 0,
+      "choiceSlots": [],
+      "featSlots": [],
+      "sourceRef": {
+        "sourceId": "source.aon-hobgoblin-race",
+        "section": "Hobgoblin Racial Traits",
+        "entry": "Standard racial traits; no alternate traits",
+        "officialUrl": "https://www.aonprd.com/RacesDisplay.aspx?ItemName=Hobgoblin",
+        "txtLines": [1, 8],
+        "provenanceStatus": "resolved"
+      }
+    },
+    {
       "abilityAdjustments": {
         "charisma": 0,
         "constitution": 0,

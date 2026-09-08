@@ -1,0 +1,39 @@
+{
+  "creationSystem": "npc",
+  "concept": {
+    "name": "Varkesh, the Ember-Tithe",
+    "role": "raid leader and fire spellcaster",
+    "description": "A hobgoblin sorcerer 3 with the elemental fire bloodline. An outcast arcane practitioner who has recruited goblins to collect a self-proclaimed tithe from isolated farms."
+  },
+  "selections": {
+    "statblockUse": "full",
+    "raceId": "npc-race.hobgoblin",
+    "racialChoices": {},
+    "classProgression": [{"classId": "npc-class.sorcerer", "levels": 3}],
+    "abilityGeneration": {"method": "assigned-array", "arrayId": "npc-ability-array.heroic", "assignments": {"strength": 8, "dexterity": 14, "constitution": 13, "intelligence": 10, "wisdom": 12, "charisma": 15}},
+    "skillGeneration": {
+      "method": "simplified",
+      "skills": ["skill.spellcraft", "skill.stealth"],
+      "includeUntrained": ["skill.perception", "skill.intimidate"]
+    },
+    "feats": [
+      {"slotId": "general-1", "featId": "feat.toughness"},
+      {"slotId": "general-3", "featId": "feat.combat-casting"}
+    ],
+    "classFeatureChoices": {"bloodline": "elemental-fire"},
+    "spellLoadout": {
+      "known": {
+        "0": ["spell.acid-splash", "spell.detect-magic", "spell.light", "spell.mage-hand", "spell.prestidigitation"],
+        "1": ["spell.mage-armor", "spell.shield", "spell.magic-missile"]
+      }
+    },
+    "gearProfile": {"experienceProgression": "medium", "fantasyLevel": "normal"},
+    "gear": [{"itemId": "item.sickle"}, "piece of cured leather (mage armor focus)"],
+    "details": {
+      "alignment": "LE",
+      "sourceNotes": "Base sheet excludes temporary spells. NPC hp uses the repository's approved heroic-NPC house rule. Burning hands is the level-3 bloodline bonus spell, not a purchased extra known spell. Carries NPC-standard rather than PC-equivalent wealth; unspent gear budget is not treasure.",
+      "tactics": "Before the raid, cast mage armor once (3-hour duration): encounter-start AC 17, touch 13, flat-footed 14; 5 first-level slots remain. Do not also begin with shield active. On his first combat turn, cast shield if threatened (AC 21, touch 13, flat-footed 18 for 3 minutes), otherwise advance behind a warrior and use elemental ray. Burning hands deals 3d4 fire, DC 13 Reflex half, in a 15-ft. cone; use it on a worthwhile angle rather than allies or helpless targets. Elemental ray is a standard-action spell-like ranged touch attack at 30 ft., 1d6+1 fire, 5/day. Acid splash may deal fire through bloodline arcana; magic missile remains force damage. Do not grant fire immunity to his followers.",
+      "morale": "At 8 hp or fewer, or when both Sootfinger and two warriors have fallen, withdraw toward the orchard. If cornered, offer stolen provisions for safe passage. Does not attack downed PCs."
+    }
+  }
+}

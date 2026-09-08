@@ -1,0 +1,33 @@
+{
+  "creationSystem": "npc",
+  "concept": {
+    "name": "Krik, Cinder-Raider",
+    "role": "goblin warrior and leader's screen",
+    "description": "Goblin warrior 1 with a soot-blackened dogslicer. Starts between Varkesh and the farm gate."
+  },
+  "selections": {
+    "statblockUse": "full",
+    "raceId": "npc-race.goblin",
+    "racialChoices": {},
+    "classProgression": [{"classId": "npc-class.warrior", "levels": 1}],
+    "abilityGeneration": {"method": "melee-preset", "arrayId": "npc-ability-array.basic"},
+    "skillGeneration": {"method": "simplified", "skills": ["skill.stealth"], "includeUntrained": ["skill.perception", "skill.ride"]},
+    "feats": [{"slotId": "general-1", "featId": "feat.weapon-finesse"}],
+    "gearProfile": {"experienceProgression": "medium", "fantasyLevel": "normal"},
+    "gear": [
+      {"itemId": "item.leather-armor"},
+      {"itemId": "item.light-steel-shield"},
+      {"itemId": "item.dogslicer"},
+      {"itemId": "item.shortbow"},
+      {"itemId": "item.arrows-20"},
+      {"itemId": "item.torch"},
+      {"itemId": "item.oil"}
+    ],
+    "details": {
+      "alignment": "NE",
+      "sourceNotes": "Basic-NPC hp uses the approved repository house rule. Sheet AC includes an equipped light steel shield. A bow needs two free hands: removing the shield costs a move action, and AC then drops by 1. Torch and dogslicer cannot occupy the same hand; fire-starting supplies are not free extra attacks. Dogslicer is fragile: an unbroken fragile weapon gains the broken condition on a natural 1 attack roll. Unspent gear allowance is not treasure.",
+      "tactics": "Starts with shield and dogslicer ready. Screen Varkesh in melee and seek a flank with Sootfinger, but do not ignore attacks of opportunity or difficult terrain. Torch is stowed during weapon combat. If switching to the bow, remove the shield and account for drawing the weapon; AC 15 without the shield. Ordinary oil is principally for arson, not a reliable instant grenade.",
+      "morale": "Flees if Varkesh falls or retreats, or if reduced to 2 hp or fewer. Does not attack unconscious PCs."
+    }
+  }
+}

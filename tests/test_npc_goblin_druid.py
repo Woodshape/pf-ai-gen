@@ -255,7 +255,7 @@ class GoblinDruidTests(unittest.TestCase):
                 "Feats Iron Will, Improved Initiative",
                 "Class Features Druid spellcasting, Orisons, Nature Bond (Fire domain), Druidic, Nature Sense, Wild Empathy, Woodland Stride, Trackless Step, Fire Domain",
                 "Languages Goblin, Druidic",
-                "Other Gear Sickle, Leather Armor, Heavy Wooden Shield, 1627 gp in coins and gear",
+                "Other Gear Sickle, Leather Armor, Heavy Wooden Shield",
                 "Druid Spells (CL 3rd; Wis-based)",
                 "2nd (3 slots: 1 base, 1 Wis, 1 domain, DC 14)—Flaming Sphere, Barkskin, Produce Flameᴰ",
                 "1st (4 slots: 2 base, 1 Wis, 1 domain, DC 13)—Produce Flame, Entangle, Cure Light Wounds, Burning Handsᴰ",

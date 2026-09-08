@@ -1,0 +1,8 @@
+Hobgoblin Racial Traits
++2 Dexterity, +2 Constitution: Hobgoblins are fast and hardy.
+Goblinoid: Hobgoblins are humanoids with the goblinoid subtype.
+Medium: Hobgoblins are Medium creatures and have no bonuses or penalties due to their size.
+Normal Speed: Hobgoblins have a base speed of 30 feet.
+Darkvision: Hobgoblins can see in the dark up to 60 feet.
+Sneaky: Hobgoblins receive a +4 racial bonus on Stealth checks.
+Languages: Hobgoblins begin play speaking Common and Goblin. Hobgoblins with high Intelligence scores can choose from the following languages: Draconic, Dwarven, Infernal, Giant, and Orc.

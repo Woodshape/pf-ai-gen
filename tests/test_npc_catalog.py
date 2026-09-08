@@ -48,7 +48,7 @@ class NpcCatalogTests(unittest.TestCase):
         human = catalog["races"]["npc-race.human"]
         self.assertEqual(human["catalogStatus"], "resolved")
         self.assertEqual(human["speed"], {"land": 30})
-        self.assertTrue(all(race["catalogStatus"] == "gap" for race_id, race in catalog["races"].items() if race_id not in {"npc-race.human", "npc-race.goblin", "npc-race.halfling", "npc-race.elf"}))
+        self.assertTrue(all(race["catalogStatus"] == "gap" for race_id, race in catalog["races"].items() if race_id not in {"npc-race.human", "npc-race.goblin", "npc-race.halfling", "npc-race.elf", "npc-race.hobgoblin"}))
         self.assertEqual(catalog["abilityArrays"]["npc-ability-array.basic"]["presets"]["ranged"]["intelligence"], 10)
 
         warrior = catalog["classes"]["npc-class.warrior"]

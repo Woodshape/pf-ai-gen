@@ -214,29 +214,22 @@
       "name": "Rogue talents",
       "options": {
         "bleeding-attack": {
-          "entry": "Text-only in this slice; no numeric effect.",
+          "entry": "On a sneak attack against a living opponent, may cause 1 bleed per sneak attack die at the start of each target turn. Does not stack with itself; bypasses damage reduction. A DC 15 Heal check or any hit-point healing stops it. Adjudicated during play, not added to base weapon damage.",
           "name": "Bleeding Attack",
-          "sourceRef": [
-            {
-              "entry": "Printed statblock lists rogue talents (bleeding attack); bounded provenance because the general rogue talent list is not locally archived",
-              "officialUrl": "https://aonprd.com/Rules.aspx?Name=Creating%20NPCs&Category=-",
-              "printedPages": [
-                454
-              ],
-              "provenanceStatus": "resolved",
-              "section": "Example: Kiramor, the Forest Shadow",
-              "sourceId": "source.aon-creating-npcs",
-              "txtLines": [
-                123,
-                123
-              ]
-            }
-          ]
+          "sourceRef": [{
+            "sourceId": "source.aon-rogue-talent-bleeding-attack",
+            "section": "Bleeding Attack (Ex)",
+            "entry": "Complete talent rules",
+            "officialUrl": "https://www.aonprd.com/RogueTalents.aspx",
+            "printedPages": [68],
+            "txtLines": [1, 1],
+            "provenanceStatus": "resolved"
+          }]
         }
       },
       "sourceRef": [
         {
-          "entry": "A rogue gains one rogue talent at 2nd level; the full talent list is not locally archived",
+          "entry": "A rogue gains one rogue talent at 2nd level",
           "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Rogue",
           "provenanceStatus": "resolved",
           "section": "Rogue Talents",

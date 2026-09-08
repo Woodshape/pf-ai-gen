@@ -61,7 +61,7 @@ TOTAL_SPELLS = 616
 EXACT_IDS = {
     "races": {
         "npc-race.dwarf", "npc-race.elf", "npc-race.gnome", "npc-race.half-elf",
-        "npc-race.half-orc", "npc-race.halfling", "npc-race.human", "npc-race.goblin",
+        "npc-race.half-orc", "npc-race.halfling", "npc-race.human", "npc-race.goblin", "npc-race.hobgoblin",
     },
     "skills": {
         "skill.acrobatics", "skill.appraise", "skill.bluff", "skill.climb",
@@ -168,7 +168,7 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(serialized_catalog(self.generated), NPC_PATH.read_bytes())
         self.assertEqual(self.catalog["catalogVersion"], self.generated["catalogVersion"])
 
-    def test_races_keep_only_the_two_production_selections_resolved(self):
+    def test_races_keep_only_source_backed_selections_resolved(self):
         self.assertEqual(set(self.catalog["races"]), EXACT_IDS["races"])
         human = self.catalog["races"]["npc-race.human"]
         self.assertEqual(human["catalogStatus"], "resolved")
@@ -193,7 +193,7 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(elf["languages"], ["Common", "Elven"])
         self.assertEqual(elf["bonusLanguages"], ["Celestial", "Draconic", "Gnoll", "Gnome", "Goblin", "Orc", "Sylvan"])
         for race_id, race in self.catalog["races"].items():
-            if race_id not in {"npc-race.human", "npc-race.goblin", "npc-race.halfling", "npc-race.elf"}:
+            if race_id not in {"npc-race.human", "npc-race.goblin", "npc-race.halfling", "npc-race.elf", "npc-race.hobgoblin"}:
                 self.assertEqual(race["catalogStatus"], "gap")
 
     def test_sixteen_classes_keep_only_production_levels_resolved(self):
@@ -336,7 +336,7 @@ class CatalogCompletenessTests(unittest.TestCase):
 
     def test_only_production_items_are_resolved(self):
         items = self.catalog["items"]
-        self.assertEqual(len(items), 74)
+        self.assertEqual(len(items), 76)
         self.assertTrue(all(item["category"] in ITEM_CATEGORIES for item in items.values()))
         resolved = {record_id for record_id, record in items.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
@@ -347,6 +347,7 @@ class CatalogCompletenessTests(unittest.TestCase):
             "item.longbow", "item.rapier-masterwork", "item.longbow-plus-1",
             "item.studded-leather-plus-1", "item.potion-of-cure-moderate-wounds",
             "item.potion-of-invisibility", "item.arrows-20", "item.dogslicer", "item.shortbow", "item.whip",
+            "item.alchemists-fire", "item.oil", "item.torch",
         })
         self.assertEqual(self.catalog["items"]["item.shortsword"]["effects"]["damageDieBySize"], {"small": "1d4", "medium": "1d6"})
         self.assertEqual(self.catalog["items"]["item.studded-leather-armor"]["effects"], {"armorBonus": 3, "maxDex": 5, "armorCheckPenalty": -1, "armorCategory": "light"})

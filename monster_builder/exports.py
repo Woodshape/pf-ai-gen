@@ -858,12 +858,6 @@ def _npc_gear_lines(model: Mapping[str, Any]) -> list[str]:
         quantity = item.get("quantity", 1)
         text = str(item.get("name", "")) + (f" \u00d7{quantity}" if isinstance(quantity, int) and quantity > 1 else "")
         (combat if item.get("npcGearCategory") == "limitedUse" else other).append(text)
-    budget = _npc_statblock_field(model, "gearBudget")
-    remaining = None
-    if budget and isinstance(budget.get("value"), Mapping):
-        remaining = budget["value"].get("remainingCp")
-    if isinstance(remaining, int) and remaining > 0:
-        other.append(f"{remaining // 100} gp in coins and gear")
     lines = []
     if combat:
         lines.append("Combat Gear " + ", ".join(combat))

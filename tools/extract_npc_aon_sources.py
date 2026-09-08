@@ -15,6 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "sources" / "reference" / "aonprd"
 # Sections extracted from an already-archived page: extract name -> archived HTML name.
 HTML_SOURCE_ALIASES = {
+    "rogue-talent-bleeding-attack": "rogue-talents",
+    "weapon-fragile": "primitive-armor-and-weapons",
     "eidolon-base-forms-biped": "eidolon-base-forms",
     "eidolon-uc-base-forms-biped": "eidolon-uc-base-forms",
     "summoner-uc-evolutions-slam": "summoner-uc-evolutions",
@@ -39,6 +41,9 @@ SOURCES = {
     "equipment": ("class", "body"),
     "combat": ("class", "body"),
     "goblin-race": ("id", "MainContent_DataListTypes_LabelName_0"),
+    "hobgoblin-race": ("heading", "Hobgoblin Racial Traits"),
+    "weapon-fragile": ("id", "fragile"),
+    "rogue-talent-bleeding-attack": ("id", "MainContent_DataListTypes_LabelName_2"),
     "halfling": ("id", "MainContent_DataListTypes_LabelName_0"),
     "druid": ("id", "MainContent_DataListTypes_LabelName_0"),
     "sorcerer": ("id", "MainContent_DataListTypes_LabelName_0"),

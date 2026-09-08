@@ -1,0 +1,37 @@
+{
+  "creationSystem": "npc",
+  "concept": {
+    "name": "Sootfinger",
+    "role": "goblin arsonist and flanking skirmisher",
+    "description": "A goblin rogue 2 who mistakes Varkesh's magic for divine favor. Carries one carefully hoarded flask of alchemist's fire and ordinary oil; has no alchemist class features."
+  },
+  "selections": {
+    "statblockUse": "full",
+    "raceId": "npc-race.goblin",
+    "racialChoices": {},
+    "classProgression": [{"classId": "npc-class.rogue", "levels": 2}],
+    "abilityGeneration": {"method": "assigned-array", "arrayId": "npc-ability-array.heroic", "assignments": {"strength": 13, "dexterity": 15, "constitution": 14, "intelligence": 10, "wisdom": 12, "charisma": 8}},
+    "skillGeneration": {
+      "method": "simplified",
+      "skills": ["skill.acrobatics", "skill.bluff", "skill.climb", "skill.escape-artist", "skill.perception", "skill.sense-motive", "skill.sleight-of-hand", "skill.stealth"]
+    },
+    "feats": [{"slotId": "general-1", "featId": "feat.weapon-finesse"}],
+    "classFeatureChoices": {"rogueTalent": "bleeding-attack"},
+    "gearProfile": {"experienceProgression": "medium", "fantasyLevel": "normal"},
+    "gear": [
+      {"itemId": "item.leather-armor"},
+      {"itemId": "item.shortsword"},
+      {"itemId": "item.shortbow"},
+      {"itemId": "item.arrows-20"},
+      {"itemId": "item.alchemists-fire", "quantity": 1},
+      {"itemId": "item.oil", "quantity": 2},
+      {"itemId": "item.torch", "quantity": 1}
+    ],
+    "details": {
+      "alignment": "NE",
+      "sourceNotes": "Alchemical goods have catalogued prices and source rules but no engine-generated attack routines. Alchemist's fire: ranged touch +6, 10-ft. increment, 1d6 fire direct, 1 splash within 5 ft.; direct target takes 1d6 again next round unless extinguished. Full-round action, DC 15 Reflex to extinguish; rolling gives +2; immersion or magical extinguishing is automatic. Oil requires a full-round fuse preparation and has only a 50% ignition chance when thrown. One flask of alchemist's fire total; no free refills or bombs. Unspent NPC gear allowance is not loot.",
+      "tactics": "Starts beside the barn, visibly pulling a stolen sack rather than hidden in ambush. Throw the single alchemist's fire at a standing opponent clear of allies, or use the bow if allies obstruct the shot. Then draw shortsword and seek a flank with a warrior; +1d6 sneak attack applies only when its conditions hold. Splash weapons cannot deal precision damage: do not add sneak attack or Bleeding Attack to alchemist's fire or oil. On a sneak attack against a living target, may inflict 1 bleed at the start of each target turn; this does not stack with itself and ends with a DC 15 Heal check or any hp healing. Evasion applies only to eligible Reflex-half attacks while in light or no armor and not helpless.",
+      "morale": "Flees at 6 hp or fewer or when Varkesh falls or retreats. Abandons loot rather than fighting to the death; does not finish off fallen PCs."
+    }
+  }
+}
