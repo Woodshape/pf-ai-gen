@@ -41,7 +41,7 @@ class ActiveEffectsTests(unittest.TestCase):
     def test_mage_armor_shield_and_permanent_armor_overlap(self):
         base = self.canonical([])
         buffed = self.canonical([effect('mage-armor'), effect('shield')])
-        self.assertEqual((buffed['defenses']['ac'], buffed['defenses']['touch'], buffed['defenses']['flatFooted']), (21, 13, 18))
+        self.assertEqual((buffed['defenses']['ac'], buffed['defenses']['touch'], buffed['defenses']['flatFooted']), (20, 12, 18))
         self.assertEqual(buffed['cmd'], base['cmd'])
         self.assertEqual(buffed['spells']['perDay'], base['spells']['perDay'])
         warrior = self.canonical([effect('mage-armor'), effect('shield')], 'goblin-warrior')
@@ -55,8 +55,8 @@ class ActiveEffectsTests(unittest.TestCase):
         draft = self.draft(effects=[effect('protection-from-evil')])
         draft['selections']['gear'].append({'itemId': 'item.cloak-of-resistance-1'})
         buffed = self.create(draft)['evaluation']['canonical']
-        self.assertEqual(buffed['defenses']['ac'], 13)
-        self.assertEqual(buffed['defenses']['will'], 5)
+        self.assertEqual(buffed['defenses']['ac'], 12)
+        self.assertEqual(buffed['defenses']['will'], 4)
         conditional = buffed['conditionalModifiers']
         self.assertTrue(any(m['stat'] == 'ac' and m['bonus'] == 2 and 'evil' in m['condition'] for m in conditional))
         self.assertTrue(any(m['stat'] == 'will' and m['bonus'] == 1 and m.get('bonusType') == 'resistance' for m in conditional))
@@ -86,30 +86,30 @@ class ActiveEffectsTests(unittest.TestCase):
         self.assertFalse(stealth['usable'])
         result = self.canonical([effect('rage', 20)])
         self.assertEqual(result['hp'], 35)
-        self.assertEqual(result['defenses']['will'], 8)
+        self.assertEqual(result['defenses']['will'], 7)
         self.assertTrue(result['spells']['castingRestricted'])
 
     def test_attack_bonuses_apply_to_rays_but_weapon_damage_bonuses_do_not(self):
         result = self.canonical([effect('heroism'), effect('bless'), effect('inspire-courage', 5)])
-        self.assertEqual(result['attacks'][0]['attackBonuses'], [4])
-        self.assertEqual(result['attacks'][0]['damageExpression'], '1d6+1')
+        self.assertEqual(result['attacks'][0]['attackBonuses'], [7])
+        self.assertEqual(result['attacks'][0]['damageExpression'], '1d6+4')
         ray = next(a for a in result['attacks'] if a['name'] == 'Elemental Ray')
-        self.assertEqual(ray['attackBonuses'], [8])
+        self.assertEqual(ray['attackBonuses'], [7])
         self.assertEqual(ray['damageExpression'], '1d6+1')
-        self.assertEqual(result['cmb'], 4)
-        self.assertEqual(result['defenses']['will'], 6)
+        self.assertEqual(result['cmb'], 7)
+        self.assertEqual(result['defenses']['will'], 5)
         self.assertEqual(result['spells']['concentration'], 5)
         self.assertFalse(any('fear' in m['condition'] for m in result['conditionalModifiers']))
-        spellcraft = next(s for s in result['skills'] if s['skillId'] == 'skill.spellcraft')
-        self.assertEqual(spellcraft['total'], 8)
+        stealth = next(s for s in result['skills'] if s['skillId'] == 'skill.stealth')
+        self.assertEqual(stealth['total'], 11)
 
     def test_other_performances_and_conditional_stacking(self):
-        result = self.canonical([effect('inspire-competence', 7, skillId='skill.spellcraft'), effect('heroism')])
-        self.assertEqual(next(s for s in result['skills'] if s['skillId'] == 'skill.spellcraft')['total'], 11)
+        result = self.canonical([effect('inspire-competence', 7, skillId='skill.stealth'), effect('heroism')])
+        self.assertEqual(next(s for s in result['skills'] if s['skillId'] == 'skill.stealth')['total'], 14)
         result = self.canonical([effect('inspire-heroics', 15), effect('heroism')])
-        self.assertEqual((result['defenses']['ac'], result['defenses']['touch'], result['defenses']['flatFooted']), (17, 17, 10))
-        self.assertEqual(result['cmd'], 17)
-        self.assertEqual(result['defenses']['will'], 8)
+        self.assertEqual((result['defenses']['ac'], result['defenses']['touch'], result['defenses']['flatFooted']), (16, 16, 10))
+        self.assertEqual(result['cmd'], 19)
+        self.assertEqual(result['defenses']['will'], 7)
         result = self.canonical([effect('rage', 1), effect('inspire-courage', 11)])
         self.assertTrue(any(m['stat'] == 'will' and m['bonus'] == 1 and 'fear' in m['condition'] for m in result['conditionalModifiers']))
 
@@ -128,7 +128,7 @@ class ActiveEffectsTests(unittest.TestCase):
             self.assertIn('Active Effects', text)
             self.assertIn('Mage Armor', text)
             self.assertIn('2 hours', text)
-            self.assertIn('AC 17, touch 13, flat-footed 14', text)
+            self.assertIn('AC 16, touch 12, flat-footed 14', text)
             self.assertNotIn('<script>caster</script>', text)
 
     def test_saved_profile_can_toggle_effects_without_changing_the_finished_snapshot(self):
@@ -144,10 +144,10 @@ class ActiveEffectsTests(unittest.TestCase):
                 'changes': [{'changeId': 'off', 'type': 'set-selection', 'field': 'activeEffects', 'value': [effect('mage-armor', enabled=False)]}],
             })
             self.assertTrue(changed['ok'], changed)
-            self.assertEqual(changed['result']['evaluation']['canonical']['defenses']['ac'], 13)
+            self.assertEqual(changed['result']['evaluation']['canonical']['defenses']['ac'], 12)
             self.engine = Engine(workspace=workspace)
             reloaded = self.call('draft.get', {'draftId': duplicate['draftId']})
-            self.assertEqual(reloaded['result']['evaluation']['canonical']['defenses']['ac'], 13)
+            self.assertEqual(reloaded['result']['evaluation']['canonical']['defenses']['ac'], 12)
             saved = self.call('monster.get', {'monsterId': monster['monsterId']})
             self.assertEqual(saved['result']['monster'], monster)
             requirements = self.call('draft.choiceRequirements', {'draftId': duplicate['draftId']})['result']

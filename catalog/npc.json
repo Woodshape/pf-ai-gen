@@ -1022,7 +1022,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:681b2466b39d2f0b285ca7ada0cb9af13732f95e9c97c0bc26fa670eb0dd121d",
+  "catalogVersion": "sha256:b33119e25260ca1443e985eb7a9e158684ab7a634b8c7f4599028c45a801bce2",
   "classFeatures": {
     "npc-class-feature.bard-cantrips": {
       "catalogStatus": "resolved",
@@ -24619,6 +24619,18 @@
       "sha256": "6d75ee9f310bdd3911eab59b8abceffc5f698ba3cef36a4200b1748dfda88ab6",
       "sourceId": "source.aon-spell-detect-magic"
     },
+    "source.aon-spell-enlarge-person": {
+      "description": "Official rules for NPC active effects",
+      "file": "sources/npc/aonprd/spell-enlarge-person.txt",
+      "sha256": "75a788f1a2b694d4c90197e42107532de1d11ef77cb419e660635ac8a9ba0767",
+      "sourceId": "source.aon-spell-enlarge-person"
+    },
+    "source.aon-spell-enlarge-person-html": {
+      "description": "Archived official active-effect source page",
+      "file": "sources/reference/aonprd/spell-enlarge-person.html",
+      "sha256": "07905ea8d111a0960e0227ae5eaa8e10791c351cb0ae2e17ffc480fefb0b9f8b",
+      "sourceId": "source.aon-spell-enlarge-person-html"
+    },
     "source.aon-spell-entangle": {
       "description": "Official current AoN Entangle spell rules",
       "file": "sources/npc/aonprd/spell-entangle.txt",
@@ -24892,7 +24904,7 @@
     "source.npc-manifest": {
       "description": "Hash manifest for the local NPC source foundation",
       "file": "sources/npc/MANIFEST.json",
-      "sha256": "c6000d0156bc276685913a61ab2efd9e002b9ea1c96557b5b389a97299adfdc7",
+      "sha256": "767120bf56c328eab8d0529f460ccb992585a96c5f64bb22080da327417fd031",
       "sourceId": "source.npc-manifest"
     },
     "source.npc-mode-plan": {

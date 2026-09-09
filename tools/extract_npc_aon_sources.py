@@ -54,7 +54,7 @@ SOURCES = {
     "barbarian-rage": ("heading", "Class Features"),
     **{f"spell-{name.lower().replace(' ', '-')}": ("heading", name) for name in (
         "Protection from Evil", "Protection from Good", "Protection from Chaos", "Protection from Law",
-        "Resist Energy", "Protection from Energy", "Heroism", "Bless",
+        "Resist Energy", "Protection from Energy", "Heroism", "Bless", "Enlarge Person",
     )},
     "ranger": ("id", "MainContent_DataListTypes_LabelName_0"),
     "rogue": ("id", "MainContent_DataListTypes_LabelName_0"),

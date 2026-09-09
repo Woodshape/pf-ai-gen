@@ -977,7 +977,7 @@ def _npc_html(model: Mapping[str, Any]) -> str:
     if model.get("catalogVersion"):
         parts.append(f'<footer>Generated from catalog {_esc(model["catalogVersion"])}</footer>')
     parts.append("</main>")
-    css = "body{font-family:serif;line-height:1.35;max-width:52rem;margin:2rem auto}h2{border-bottom:1px solid}@page{margin:1.5cm}@media print{body{margin:0;max-width:none}section{break-inside:avoid}}"
+    css = "body{font-family:serif;line-height:1.42;max-width:52rem;margin:2rem auto}h2{border-bottom:1px solid}ul{margin-top:.35em;margin-bottom:.6em}li{margin:.2em 0}@page{margin:1.5cm}@media print{body{margin:0;max-width:none}section{break-inside:avoid}}"
     title = _esc(model["header"]["label"])
     return f'<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title><style>{css}</style></head><body>{"".join(parts)}</body></html>\n'
 

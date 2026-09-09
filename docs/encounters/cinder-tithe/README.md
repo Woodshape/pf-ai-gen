@@ -8,7 +8,7 @@
 
 | NPC | Build | CR / XP | HP | AC / touch / flat-footed | Init | Main attacks |
 |---|---|---|---:|---|---:|---|
-| [Varkesh, the Ember-Tithe](varkesh.md) | Hobgoblin sorcerer 3; elemental fire | 2 / 600 | 23 | **17 / 13 / 14 with mage armor** | +3 | Elemental ray +4 touch, 1d6+1 fire; burning hands 3d4, Reflex DC 13 half |
+| [Varkesh, the Ember-Tithe](varkesh.md) | Hobgoblin sorcerer 3; elemental fire; melee-leaning array | 2 / 600 | 23 | **16 / 12 / 14 with mage armor** | +2 | Sickle +3, 1d6+2; elemental ray +3 touch, 1d6+1 fire; burning hands 3d4, Reflex DC 13 half |
 | [Sootfinger](sootfinger.md) | Goblin rogue 2; arsonist | 1 / 400 | 17 | 17 / 15 / 13 | +4 | Shortsword +6, 1d4/19–20; shortbow +6, 1d4/×3; sneak attack +1d6 |
 | [Krik](goblin-warrior.md) | Goblin warrior 1; bodyguard | 1/3 / 135 | 6 | 16 / 13 / 14 | +2 | Dogslicer +3, 1d4/19–20; shortbow +4, 1d4/×3 |
 | [Nib](goblin-warrior.md) | Goblin warrior 1; looter | 1/3 / 135 | 6 | 16 / 13 / 14 | +2 | As Krik |
@@ -16,7 +16,7 @@
 
 There are three distinct statblocks, each with a `.md` sheet, printable `.html` sheet, full immutable `.json` export, and editable `.draft.json` creation input in this directory. **Krik, Nib, and Zek share the warrior statblock in `goblin-warrior.*`; track their hit points and equipment separately.** Their individual names, roles, starting positions, and combat options below remain unchanged. [roster.json](roster.json) records their actual engine IDs. All five are finalized and stored in `.monster-builder`.
 
-**Use this guide alongside the sheets.** Engine sheets include selected Active Effects: **Varkesh's Mage Armor is already included in his printed AC 17; do not add it again.** Other buffs, including Shield, remain inactive. Narrative tactics, expendable-item attack calculations, and encounter-start resources are recorded here and in the draft details. Incendiary goods are catalogued inventory, not automatically simulated attacks.
+**Use this guide alongside the sheets.** Engine sheets include selected Active Effects: **Varkesh's Mage Armor is already included in his printed AC 16; do not add it again.** Other buffs, including Shield, remain inactive. Narrative tactics, expendable-item attack calculations, and encounter-start resources are recorded here and in the draft details. Incendiary goods are catalogued inventory, not automatically simulated attacks.
 
 ## Scene and starting positions
 
@@ -36,15 +36,15 @@ The haycart is the only established blaze. Its occupied squares are not a safe p
 
 ## Varkesh: spell and resource card
 
-Varkesh is an unusual hobgoblin arcane outcast, not a typical representative of his people's distrust of magic. The goblins follow him because his hands genuinely burn.
+Varkesh is an unusual hobgoblin arcane outcast, not a typical representative of his people's distrust of magic. The goblins follow him because his hands genuinely burn. His heroic array is melee-leaning — **Str 14, Dex 14, Con 15, Int 8, Wis 10, Cha 15** after racial adjustments — and with Int 8 his trained skills are **Stealth** only, keeping Perception and Intimidate untrained.
 
-- **Before the raid:** one mage armor cast, lasting 3 hours, already active in his saved profile and displayed under **Active Effects**. He carries its leather focus. Start with **5 of 6 first-level slots remaining**, 23 hp, and **5 elemental rays**.
-- **Opening:** if threatened, cast shield on his own turn. Otherwise use an elemental ray and reposition behind Krik. Casting shield costs an action and another slot; it is not a free prebuff.
-- **Shield:** lasts 3 minutes; with mage armor, AC **21**, touch **13**, flat-footed **18**. Negates magic missile. CMD remains 13: armor/shield bonuses do not raise CMD.
+- **Before the raid:** one mage armor cast, lasting 3 hours, already active in his saved profile and displayed under **Active Effects**. He carries its leather focus. Start with **5 of 6 first-level slots remaining**, 23 hp, and **5 elemental rays**. Start with **5 of 6 first-level slots remaining**, 23 hp, and **5 elemental rays**.
+- **Opening:** if threatened, cast shield on his own turn. Otherwise use an elemental ray or press in with the sickle (melee **+3, 1d6+2**; CMB +3, CMD 15) and reposition behind Krik. Casting shield costs an action and another slot; it is not a free prebuff.
+- **Shield:** lasts 3 minutes; with mage armor, AC **20**, touch **12**, flat-footed **18**. Negates magic missile. CMD remains 15: armor/shield bonuses do not raise CMD.
 - **Burning hands:** 15-foot cone, **3d4 fire**, Reflex **DC 13 half**. Prefer a worthwhile angle against standing opponents, not allies or downed PCs. No heightened DC, metamagic, or mythic version.
-- **Elemental ray (Sp):** standard action, **+4 ranged touch**, 30 feet, **1d6+1 fire**, 5/day, no saving throw. Treat it as a spell-like ability, not a supernatural power immune to interruption.
-- **Magic missile:** two missiles, each **1d4+1 force**, range 130 feet. One or two targets, no more than 15 feet apart if split. No save; spell resistance applies. Its damage is not converted to fire.
-- **Acid splash:** +4 ranged touch, range 30 feet, 1d3 acid; bloodline arcana can change this to **1d3 fire**. At will; no splash damage despite the spell's name.
+- **Elemental ray (Sp):** standard action, **+3 ranged touch**, 30 feet, **1d6+1 fire**, 5/day, no saving throw. Treat it as a spell-like ability, not a supernatural power immune to interruption.
+- **Enlarge person (1st-level slot, casting time 1 round, powdered iron):** enlarge one humanoid for **3 minutes** (1 min./level). Usually a prebuff on himself before contact: Large 10-ft reach, Str +2 size (sickle **2d6+3** at +3), CMB +6, CMD 17 — but AC **15**, touch **11**, and ray **+1** (Dex −2 size, −1 attack/AC size). Equipment enlarges; projectiles leave his hands normal-sized. Multiple size effects never stack.
+- **Acid splash:** +3 ranged touch, range 30 feet, 1d3 acid; bloodline arcana can change this to **1d3 fire**. At will; no splash damage despite the spell's name.
 - **Concentration:** +5 normally; **+9** casting defensively or while grappled through Combat Casting. Casting a 1st-level spell defensively is DC 17.
 - **Fire resistance 10** belongs to Varkesh alone. His goblin followers have no fire resistance.
 - **Morale:** withdraw at 8 hp or fewer, or after Sootfinger and two warriors fall. If cornered, bargain with the stolen supplies. He does not execute fallen characters.
@@ -93,4 +93,4 @@ Loot is the equipment actually carried, minus expended flasks and ammunition. **
 - Class-based CR: [Adding NPCs](../../../sources/npc/aonprd/designing-encounters.txt), line 1; encounter budget follows the CR/XP table on the archived [Designing Encounters page](../../../sources/reference/aonprd/designing-encounters.html).
 - Creation caught and fixed two shared issues: HP expressions now include Toughness, and sheet exports no longer invent treasure from unallocated gear budgets.
 
-Original creation checks: `python3 -m unittest discover -s tests` — 289 tests run, 1 skipped, no failures. Active-effect calculations and persistence have additional regression coverage in `tests/test_npc_active_effects.py`. `python3 tools/build_npc_catalog.py --check` and `python3 tools/extract_npc_aon_sources.py --check` pass. The encounter regression is `python3 -m unittest discover -s tests -p test_cinder_tithe.py`.
+Original creation checks: `python3 -m unittest discover -s tests` — 299 tests run, 1 skipped, no failures (including the melee array, Enlarge Person swap, and active-effect regressions). `python3 tools/build_npc_catalog.py --check` and `python3 tools/extract_npc_aon_sources.py --check` pass. The encounter regression is `python3 -m unittest discover -s tests -p test_cinder_tithe.py`.

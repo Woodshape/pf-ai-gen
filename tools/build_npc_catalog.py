@@ -81,11 +81,12 @@ SOURCE_FILES = (
     *((f"source.aon-{name}", f"sources/npc/aonprd/{name}.txt", "Official rules for NPC active effects") for name in (
         "bard-performances", "barbarian-rage", "spell-protection-from-evil", "spell-protection-from-good",
         "spell-protection-from-chaos", "spell-protection-from-law", "spell-resist-energy",
-        "spell-protection-from-energy", "spell-heroism", "spell-bless",
+        "spell-protection-from-energy", "spell-heroism", "spell-bless", "spell-enlarge-person",
     )),
     *((f"source.aon-{name}-html", f"sources/reference/aonprd/{name}.html", "Archived official active-effect source page") for name in (
         "barbarian", "spell-protection-from-evil", "spell-protection-from-good", "spell-protection-from-chaos",
         "spell-protection-from-law", "spell-resist-energy", "spell-protection-from-energy", "spell-heroism", "spell-bless",
+        "spell-enlarge-person",
     )),
     ("source.aon-bard-base-features", "sources/npc/aonprd/bard-base-features.txt", "Bard proficiencies, knowledge, and daily performance rounds"),
     ("source.aon-weapon-dogslicer", "sources/npc/aonprd/weapon-dogslicer.txt", "Official AoN Dogslicer weapon statistics"),

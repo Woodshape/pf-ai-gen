@@ -48,6 +48,9 @@ class NpcExportTests(unittest.TestCase):
         for expected in ("Ability Scores Str 15", "BAB +3", "Class Progression Warrior 3", "Gear Longsword"):
             self.assertIn(expected, markdown)
             self.assertIn(expected, html)
+        sheet_html = render_html(snapshot, "sheet")
+        self.assertIn("line-height:1.42", sheet_html)
+        self.assertIn("li{margin:.2em 0}", sheet_html)
 
     def test_npc_weapon_attack_projects_bonus_expression(self):
         snapshot = self.snapshot()

@@ -75,7 +75,7 @@ No arbitrary bonus fields or formula interpreter are accepted. New supported eff
 
 ## Dogfood: Varkesh
 
-[The Cinder-Tithe leader](encounters/cinder-tithe/varkesh.draft.json) has `npc-effect.mage-armor` active at source level 3. His sheet now directly shows **AC 17, touch 13, flat-footed 14**, plus the Active Effects entry. Turning it off restores AC 13/touch 13/flat-footed 10. Shield remains inactive; activating it would produce AC 21/touch 13/flat-footed 18.
+[The Cinder-Tithe leader](encounters/cinder-tithe/varkesh.draft.json) has `npc-effect.mage-armor` active at source level 3. His sheet now directly shows **AC 16, touch 12, flat-footed 14**, plus the Active Effects entry. Turning it off restores AC 12, touch 12, flat-footed 10. Shield remains inactive; activating it would produce AC 20, touch 12, flat-footed 18.
 
 The encounter guide still tracks the Mage Armor casting cost: **5 of 6 first-level slots remain**. Do not add its +4 armor bonus a second time.
 

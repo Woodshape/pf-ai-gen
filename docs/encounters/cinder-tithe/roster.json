@@ -1,17 +1,17 @@
 {
-  "catalogVersion": "sha256:681b2466b39d2f0b285ca7ada0cb9af13732f95e9c97c0bc26fa670eb0dd121d",
+  "catalogVersion": "sha256:b33119e25260ca1443e985eb7a9e158684ab7a634b8c7f4599028c45a801bce2",
   "workspace": ".monster-builder",
   "xp": 1405,
   "npcs": [
     {
       "name": "Varkesh, the Ember-Tithe",
-      "draftId": "draft-86b6c152f81c4f118abdd5e2871cc9f8",
-      "monsterId": "monster-6e00f462421f5e9dbdd7d66ef691c1df",
+      "draftId": "draft-27f903cf60464d8194ad9a2c67b63fc5",
+      "monsterId": "monster-2e1d45c76c135e4b99e1e7b7955a4007",
       "cr": 2,
       "sheet": "varkesh.md",
       "status": "valid",
-      "catalogVersion": "sha256:681b2466b39d2f0b285ca7ada0cb9af13732f95e9c97c0bc26fa670eb0dd121d",
-      "supersedesMonsterId": "monster-f0337df5c4b15d709409778c03e400ae"
+      "catalogVersion": "sha256:b33119e25260ca1443e985eb7a9e158684ab7a634b8c7f4599028c45a801bce2",
+      "supersedesMonsterId": "monster-6e00f462421f5e9dbdd7d66ef691c1df"
     },
     {
       "name": "Sootfinger",
@@ -20,7 +20,7 @@
       "cr": 1,
       "sheet": "sootfinger.md",
       "status": "valid",
-      "catalogVersion": "sha256:4a3216b62ba5d06b86fee6a89fa7792f80b6f11fe7329009fd25ffa88397dd11"
+      "catalogVersion": "sha256:b33119e25260ca1443e985eb7a9e158684ab7a634b8c7f4599028c45a801bce2"
     },
     {
       "name": "Krik, Cinder-Raider",
@@ -29,7 +29,7 @@
       "cr": "1/3",
       "sheet": "goblin-warrior.md",
       "status": "valid",
-      "catalogVersion": "sha256:4a3216b62ba5d06b86fee6a89fa7792f80b6f11fe7329009fd25ffa88397dd11"
+      "catalogVersion": "sha256:b33119e25260ca1443e985eb7a9e158684ab7a634b8c7f4599028c45a801bce2"
     },
     {
       "name": "Nib, Cinder-Raider",
@@ -38,7 +38,7 @@
       "cr": "1/3",
       "sheet": "goblin-warrior.md",
       "status": "valid",
-      "catalogVersion": "sha256:4a3216b62ba5d06b86fee6a89fa7792f80b6f11fe7329009fd25ffa88397dd11"
+      "catalogVersion": "sha256:b33119e25260ca1443e985eb7a9e158684ab7a634b8c7f4599028c45a801bce2"
     },
     {
       "name": "Zek, Cinder-Raider",
@@ -47,7 +47,7 @@
       "cr": "1/3",
       "sheet": "goblin-warrior.md",
       "status": "valid",
-      "catalogVersion": "sha256:4a3216b62ba5d06b86fee6a89fa7792f80b6f11fe7329009fd25ffa88397dd11"
+      "catalogVersion": "sha256:b33119e25260ca1443e985eb7a9e158684ab7a634b8c7f4599028c45a801bce2"
     }
   ]
 }

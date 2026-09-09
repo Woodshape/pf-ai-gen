@@ -19,7 +19,7 @@ class CinderTitheTests(unittest.TestCase):
             self.assertTrue(response["ok"], response)
             return response["result"]
 
-        expected = {"varkesh": (2, 23, 17), "sootfinger": (1, 17, 17),
+        expected = {"varkesh": (2, 23, 16), "sootfinger": (1, 17, 17),
                     "goblin-warrior": ("1/3", 6, 16)}
         roster = json.loads((ENCOUNTER / "roster.json").read_text())
         self.assertEqual([npc["sheet"] for npc in roster["npcs"]],
@@ -34,12 +34,15 @@ class CinderTitheTests(unittest.TestCase):
                 self.assertEqual((canonical["cr"], canonical["hp"], canonical["defenses"]["ac"]), (cr, hp, ac))
                 if slug == "varkesh":
                     self.assertEqual(canonical["activeEffects"][0]["effectId"], "npc-effect.mage-armor")
-                    self.assertEqual(canonical["abilityScores"]["dexterity"], 16)
-                    self.assertEqual(canonical["abilityScores"]["constitution"], 15)
-                    self.assertEqual(next(s for s in canonical["skills"] if s["skillId"] == "skill.stealth")["total"], 10)
+                    self.assertEqual(canonical["abilityScores"], {"strength": 14, "dexterity": 14, "constitution": 15, "intelligence": 8, "wisdom": 10, "charisma": 15})
+                    self.assertEqual(canonical["cmb"], 3)
+                    self.assertEqual(canonical["cmd"], 15)
+                    self.assertEqual(next(s for s in canonical["skills"] if s["skillId"] == "skill.stealth")["total"], 9)
                     self.assertEqual(canonical["hitDiceExpression"], "3d6+9")
                     self.assertEqual(canonical["spells"]["perDay"]["1"], 6)
                     self.assertIn("spell.burning-hands", canonical["spells"]["known"]["1"])
+                    self.assertIn("spell.enlarge-person", canonical["spells"]["known"]["1"])
+                    self.assertNotIn("spell.magic-missile", canonical["spells"]["known"]["1"])
                 draft = created["draft"]
                 monster = execute("monster.finalize", {"draftId": draft["draftId"], "baseRevision": draft["revision"],
                                                        "baseFingerprint": draft["fingerprint"]})["monster"]
@@ -53,7 +56,8 @@ class CinderTitheTests(unittest.TestCase):
                     if slug == "varkesh":
                         self.assertIn("Active Effects", sheet)
                         self.assertIn("Fire resistance 10", sheet)
-                        self.assertIn("Elemental Ray +4 (1d6+1 fire)", sheet)
+                        self.assertIn("Elemental Ray +3 (1d6+1 fire)", sheet)
+                        self.assertIn("Sickle +3 (1d6+2)", sheet)
                     if slug == "sootfinger":
                         self.assertIn("Shortsword +6 (1d4/19-20)", sheet)
                         self.assertIn("bleeding attack", sheet)
