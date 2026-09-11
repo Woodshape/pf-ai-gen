@@ -1,4 +1,8 @@
 __pycache__/
 *.py[cod]
-.monster-builder/
 node_modules/
+
+# Keep generated monster exports; ignore drafts, snapshots, and workspace state.
+.monster-builder/*
+!.monster-builder/exports/
+!.monster-builder/exports/**
