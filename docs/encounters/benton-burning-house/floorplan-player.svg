@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="900" viewBox="0 0 1000 900" role="img" aria-labelledby="title desc">
+<title id="title">Hof der Bentons — Haupthaus</title><desc id="desc">Drei Räume: Wohnküche vorne, Speisekammer hinten links, Schlafkammer hinten rechts. Eingang mit brennendem Vordach unten, Hintertür und Rettungsfenster oben. Ein Rasterfeld entspricht fünf Fuß.</desc>
+<defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse" x="160" y="140"><path d="M100 0H0V100" fill="none" stroke="#b7b0a1" stroke-width="1"/></pattern><pattern id="smoke" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M0 16L16 0" stroke="#555" stroke-width="2" opacity=".3"/></pattern></defs>
+<style>text{font-family:DejaVu Sans,sans-serif;fill:#24221e} .label{font-size:18px;font-weight:bold} .small{font-size:14px} .wall{fill:none;stroke:#292724;stroke-width:9;stroke-linecap:square} .furn{fill:#d1b992;stroke:#776047;stroke-width:2} .token{fill:#fff;stroke:#333;stroke-width:2}</style>
+<rect width="1000" height="900" fill="#faf7ee"/>
+<text x="50" y="45" font-size="28" font-weight="bold">HOF DER BENTONS · HAUPTHAUS</text>
+<text x="50" y="73" class="small">Neue Innenaufteilung · 30 × 25 ft · 1 Feld = 5 ft ≈ 1,5 m</text>
+<text x="160" y="110" class="label">GARTEN / RÜCKSEITE</text>
+<rect x="160" y="140" width="600" height="500" fill="#eee5d2"/>
+<rect x="160" y="140" width="200" height="200" fill="url(#smoke)"/>
+<rect x="160" y="540" width="600" height="100" fill="url(#smoke)"/>
+<g stroke="#b7b0a1" stroke-width="1"><path d="M260 140V640"/><path d="M360 140V640"/><path d="M460 140V640"/><path d="M560 140V640"/><path d="M660 140V640"/><path d="M160 240H760"/><path d="M160 340H760"/><path d="M160 440H760"/><path d="M160 540H760"/></g>
+<!-- Furniture leaves the central walking route clear. -->
+<rect class="furn" x="170" y="180" width="30" height="120"/><text x="178" y="255" class="small" transform="rotate(-90 178 255)">Regal</text>
+<circle class="furn" cx="329" cy="181" r="19"/><circle class="furn" cx="329" cy="225" r="19"/>
+<rect class="furn" x="659" y="170" width="80" height="145"/><rect x="663" y="175" width="72" height="30" fill="#eee" stroke="#776047"/>
+<rect class="furn" x="390" y="175" width="90" height="40"/><text x="400" y="201" class="small">Truhe</text>
+<rect class="furn" x="490" y="180" width="38" height="75"/><text x="491" y="269" class="small">Kinderlager</text>
+<rect class="furn" x="270" y="403" width="145" height="65"/><text x="313" y="441" class="small">Tisch</text>
+<rect class="furn" x="280" y="384" width="125" height="13"/><rect class="furn" x="280" y="475" width="125" height="13"/>
+<rect x="660" y="380" width="85" height="80" fill="#b8b0a3" stroke="#666" stroke-width="3"/><text x="674" y="425" class="small">Herd</text>
+<circle cx="635" cy="435" r="12" fill="#c7d8df" stroke="#555"/>
+<!-- Outer walls: back door, garden window and front door are genuine gaps. -->
+<path class="wall" d="M200 140H160V640H440 M500 640H760V140H650 M550 140H260"/>
+<path class="wall" d="M360 140V340 M160 340H240 M300 340H540 M600 340H760"/>
+<!-- Doors; C is closed and wedged. -->
+<path d="M200 140V85 M240 340V285 M440 640V590" fill="none" stroke="#776047" stroke-width="5"/>
+<path d="M540 340H600" stroke="#776047" stroke-width="6"/><rect class="furn" x="556" y="317" width="25" height="17"/>
+<path d="M550 130H650 M550 145H650" stroke="#437e9c" stroke-width="3"/>
+<text x="195" y="126" class="small">Tür</text><text x="540" y="119" class="small">offenes, niedriges Fenster</text>
+<text x="216" y="324" class="small">offen</text><text x="524" y="365" class="small">verkeilte Tür</text>
+<text x="207" y="163" class="label">B · VORRAT</text><text x="383" y="300" class="label">C · SCHLAFKAMMER</text>
+<text x="179" y="373" class="label">A · WOHNKÜCHE</text>
+<rect x="360" y="647" width="200" height="82" fill="#efba82" stroke="#b85227" stroke-width="3"/>
+<path d="M373 704l12-32 10 20 13-32 12 44 M516 708l12-35 8 15 12-27 5 44" stroke="#b64120" stroke-width="5" fill="none"/>
+<text x="365" y="754" class="label">BRENNENDES VORDACH</text>
+<text x="181" y="620" class="small">Dichter Rauch: vorderer 5-ft-Streifen</text>
+<text x="160" y="795" class="label">HOF / VORDERSEITE</text>
+<rect x="800" y="185" width="32" height="32" fill="url(#smoke)"/><text x="842" y="204" class="small">Rauch</text>
+<text x="799" y="236" class="small">20 % Verfehlchance</text><text x="799" y="257" class="small">Zähigkeit 15, 16, …</text>
+<text x="799" y="299" class="small">Massive Wände:</text><text x="799" y="320" class="small">Sicht blockiert</text>
+<path d="M160 832H260 M160 823V841 M260 823V841" stroke="#333" stroke-width="3"/><text x="184" y="861" class="small">5 Fuß</text>
+<text x="400" y="841" class="small">Spielerplan · ohne Figurenpositionen</text></svg>

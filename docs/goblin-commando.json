@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1",
   "kind": "FinishedMonster",
-  "monsterId": "monster-501cfa423f47583ab315d1b4e838ee97",
+  "monsterId": "monster-b259837473d9523b8f1c4a844fbb0280",
   "sourceDraft": {
-    "draftId": "draft-7ed87514ddc54db584cf5368e7a8b2d7",
+    "draftId": "draft-f7e775d3f05a447d973d3c65b8b3089a",
     "revision": 0,
-    "fingerprint": "1c417bc59bfcb25b9bef7bbfdcfbe04775c2705da1c9940c1d34a15ec1933e2d"
+    "fingerprint": "3ff3cc3c1feb66220364921e7313c0517aab1590e7e01152bdbdcc3931b59d8b"
   },
   "creationSystem": "npc",
-  "catalogVersion": "sha256:64109a4f53a477f553a4dbec4d5d0e7e6016ef896dcfb468862082eec640a58a",
+  "catalogVersion": "sha256:b33119e25260ca1443e985eb7a9e158684ab7a634b8c7f4599028c45a801bce2",
   "mode": "strict",
   "concept": {
     "description": "A Small goblin ranger trained to fight from a goblin dog mount, based on the supplied Pathfinder reference.",
@@ -49,17 +49,11 @@
     ],
     "gear": [
       {
-        "itemId": "item.dogslicer",
-        "properties": [
-          "keen"
-        ]
+        "itemId": "item.dogslicer"
       },
       {
         "itemId": "item.shortbow",
-        "enhancementBonus": 1,
-        "properties": [
-          "flaming"
-        ]
+        "masterwork": true
       },
       {
         "itemId": "item.arrows-20",
@@ -69,7 +63,8 @@
         "itemId": "item.studded-leather-armor",
         "masterwork": true
       },
-      "trained goblin dog mount"
+      "trained goblin dog mount",
+      "potion of cure light wounds (CL 1, 1d8+1 hp)"
     ],
     "gearProfile": {
       "experienceProgression": "medium",
@@ -142,22 +137,22 @@
     "initiative": 3,
     "attacks": [
       {
-        "name": "+1 keen Dogslicer",
+        "name": "Dogslicer",
         "itemId": "item.dogslicer",
         "attackBonuses": [
-          5
+          4
         ],
-        "attackBonusExpression": "+5",
+        "attackBonusExpression": "+4",
         "attackType": "melee",
         "proficient": true,
-        "damageExpression": "1d4+2",
+        "damageExpression": "1d4+1",
         "damageType": "S",
-        "critical": "17-20/x2",
-        "critRange": 17,
+        "critical": "19-20/x2",
+        "critRange": 19,
         "critMultiplier": 2
       },
       {
-        "name": "+1 flaming Shortbow",
+        "name": "mwk shortbow",
         "itemId": "item.shortbow",
         "attackBonuses": [
           7
@@ -165,22 +160,15 @@
         "attackBonusExpression": "+7",
         "attackType": "ranged",
         "proficient": true,
-        "damageExpression": "1d4+1",
+        "damageExpression": "1d4",
         "damageType": "P",
-        "additionalDamage": [
-          {
-            "expression": "1d6",
-            "damageType": "fire",
-            "multipliedOnCritical": false
-          }
-        ],
         "critical": "x3",
         "critMultiplier": 3,
         "range": "60 ft.",
         "rangeIncrement": 60
       },
       {
-        "name": "+1 flaming Shortbow (Rapid Shot)",
+        "name": "mwk shortbow (Rapid Shot)",
         "itemId": "item.shortbow",
         "attackBonuses": [
           5,
@@ -189,15 +177,8 @@
         "attackBonusExpression": "+5/+5",
         "attackType": "ranged",
         "proficient": true,
-        "damageExpression": "1d4+1",
+        "damageExpression": "1d4",
         "damageType": "P",
-        "additionalDamage": [
-          {
-            "expression": "1d6",
-            "damageType": "fire",
-            "multipliedOnCritical": false
-          }
-        ],
         "critical": "x3",
         "critMultiplier": 3,
         "range": "60 ft.",
@@ -222,7 +203,7 @@
         "fullAttack": true,
         "attacks": [
           {
-            "name": "+1 flaming Shortbow",
+            "name": "mwk shortbow",
             "itemId": "item.shortbow",
             "attackBonuses": [
               5,
@@ -231,15 +212,8 @@
             "attackBonusExpression": "+5/+5",
             "attackType": "ranged",
             "proficient": true,
-            "damageExpression": "1d4+1",
+            "damageExpression": "1d4",
             "damageType": "P",
-            "additionalDamage": [
-              {
-                "expression": "1d6",
-                "damageType": "fire",
-                "multipliedOnCritical": false
-              }
-            ],
             "critical": "x3",
             "critMultiplier": 3,
             "range": "60 ft.",
@@ -303,48 +277,16 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Magic Weapons",
-            "txtLines": [
-              4,
-              4
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Table 15-8: Weapons",
-            "txtLines": [
-              21,
-              21
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-equipment",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "section": "Masterwork Weapons",
-            "txtLines": [
-              294,
-              295
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapon-keen",
-            "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-            "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-            "section": "Keen",
+            "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+            "file": "sources/npc/aonprd/weapon-fragile.txt",
+            "provenanceStatus": "resolved",
+            "section": "Fragile",
+            "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+            "sourceId": "source.aon-weapon-fragile",
             "txtLines": [
               1,
-              7
-            ],
-            "provenanceStatus": "resolved"
+              1
+            ]
           },
           {
             "entry": "Table: Weapons — Shortbow",
@@ -383,13 +325,13 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapon-flaming",
-            "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-            "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-            "section": "Flaming",
+            "sourceId": "source.aon-equipment",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "section": "Masterwork Weapons",
             "txtLines": [
-              1,
-              7
+              294,
+              295
             ],
             "provenanceStatus": "resolved"
           },
@@ -892,20 +834,20 @@
         "protection": 20000,
         "weapons": 35000
       },
-      "spentCp": 1681500,
+      "spentCp": 51500,
       "remainingCp": null,
       "descriptiveEquipmentUnpriced": true
     },
     "gear": [
       {
         "itemId": "item.dogslicer",
-        "name": "+1 keen Dogslicer",
+        "name": "Dogslicer",
         "category": "weapon",
         "mechanical": true,
         "npcGearCategory": null,
         "quantity": 1,
         "equipped": true,
-        "priceCp": 830800,
+        "priceCp": 800,
         "weightLb": 1,
         "effects": {
           "critMultiplier": 2,
@@ -921,19 +863,7 @@
           ],
           "weaponCategory": "martial",
           "weaponType": "dogslicer",
-          "attackBonus": 1,
-          "damageBonus": 1,
-          "weaponQualities": [
-            "keen"
-          ],
           "damageDie": "1d4"
-        },
-        "lenses": {
-          "masterwork": true,
-          "enhancementBonus": 1,
-          "properties": [
-            "keen"
-          ]
         },
         "sourceRefs": [
           {
@@ -950,60 +880,28 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Magic Weapons",
-            "txtLines": [
-              4,
-              4
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Table 15-8: Weapons",
-            "txtLines": [
-              21,
-              21
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-equipment",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "section": "Masterwork Weapons",
-            "txtLines": [
-              294,
-              295
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapon-keen",
-            "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-            "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-            "section": "Keen",
+            "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+            "file": "sources/npc/aonprd/weapon-fragile.txt",
+            "provenanceStatus": "resolved",
+            "section": "Fragile",
+            "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+            "sourceId": "source.aon-weapon-fragile",
             "txtLines": [
               1,
-              7
-            ],
-            "provenanceStatus": "resolved"
+              1
+            ]
           }
         ]
       },
       {
         "itemId": "item.shortbow",
-        "name": "+1 flaming Shortbow",
+        "name": "mwk shortbow",
         "category": "weapon",
         "mechanical": true,
         "npcGearCategory": null,
         "quantity": 1,
         "equipped": true,
-        "priceCp": 833000,
+        "priceCp": 33000,
         "weightLb": 1.0,
         "effects": {
           "critMultiplier": 3,
@@ -1019,25 +917,10 @@
           "weaponCategory": "martial",
           "weaponType": "shortbow",
           "attackBonus": 1,
-          "damageBonus": 1,
-          "weaponQualities": [
-            "flaming"
-          ],
-          "additionalDamage": [
-            {
-              "expression": "1d6",
-              "damageType": "fire",
-              "multipliedOnCritical": false
-            }
-          ],
           "damageDie": "1d4"
         },
         "lenses": {
-          "masterwork": true,
-          "enhancementBonus": 1,
-          "properties": [
-            "flaming"
-          ]
+          "masterwork": true
         },
         "sourceRefs": [
           {
@@ -1077,28 +960,6 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Magic Weapons",
-            "txtLines": [
-              4,
-              4
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Table 15-8: Weapons",
-            "txtLines": [
-              21,
-              21
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
             "sourceId": "source.aon-equipment",
             "file": "sources/npc/aonprd/equipment.txt",
             "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
@@ -1106,17 +967,6 @@
             "txtLines": [
               294,
               295
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapon-flaming",
-            "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-            "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-            "section": "Flaming",
-            "txtLines": [
-              1,
-              7
             ],
             "provenanceStatus": "resolved"
           }
@@ -1197,6 +1047,16 @@
       },
       {
         "name": "trained goblin dog mount",
+        "mechanical": false,
+        "category": "gear",
+        "quantity": 1,
+        "equipped": false,
+        "effects": {},
+        "priceCp": null,
+        "sourceRefs": []
+      },
+      {
+        "name": "potion of cure light wounds (CL 1, 1d8+1 hp)",
         "mechanical": false,
         "category": "gear",
         "quantity": 1,
@@ -1624,48 +1484,16 @@
           ]
         },
         {
-          "sourceId": "source.aon-magic-weapons",
-          "file": "sources/npc/aonprd/magic-weapons.txt",
-          "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-          "section": "Magic Weapons",
-          "txtLines": [
-            4,
-            4
-          ],
-          "provenanceStatus": "resolved"
-        },
-        {
-          "sourceId": "source.aon-magic-weapons",
-          "file": "sources/npc/aonprd/magic-weapons.txt",
-          "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-          "section": "Table 15-8: Weapons",
-          "txtLines": [
-            21,
-            21
-          ],
-          "provenanceStatus": "resolved"
-        },
-        {
-          "sourceId": "source.aon-equipment",
-          "file": "sources/npc/aonprd/equipment.txt",
-          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-          "section": "Masterwork Weapons",
-          "txtLines": [
-            294,
-            295
-          ],
-          "provenanceStatus": "resolved"
-        },
-        {
-          "sourceId": "source.aon-magic-weapon-keen",
-          "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-          "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-          "section": "Keen",
+          "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+          "file": "sources/npc/aonprd/weapon-fragile.txt",
+          "provenanceStatus": "resolved",
+          "section": "Fragile",
+          "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+          "sourceId": "source.aon-weapon-fragile",
           "txtLines": [
             1,
-            7
-          ],
-          "provenanceStatus": "resolved"
+            1
+          ]
         },
         {
           "entry": "Table: Weapons — Shortbow",
@@ -1704,13 +1532,13 @@
           ]
         },
         {
-          "sourceId": "source.aon-magic-weapon-flaming",
-          "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-          "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-          "section": "Flaming",
+          "sourceId": "source.aon-equipment",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "section": "Masterwork Weapons",
           "txtLines": [
-            1,
-            7
+            294,
+            295
           ],
           "provenanceStatus": "resolved"
         },
@@ -2056,22 +1884,22 @@
       "path": "/canonical/attacks",
       "value": [
         {
-          "name": "+1 keen Dogslicer",
+          "name": "Dogslicer",
           "itemId": "item.dogslicer",
           "attackBonuses": [
-            5
+            4
           ],
-          "attackBonusExpression": "+5",
+          "attackBonusExpression": "+4",
           "attackType": "melee",
           "proficient": true,
-          "damageExpression": "1d4+2",
+          "damageExpression": "1d4+1",
           "damageType": "S",
-          "critical": "17-20/x2",
-          "critRange": 17,
+          "critical": "19-20/x2",
+          "critRange": 19,
           "critMultiplier": 2
         },
         {
-          "name": "+1 flaming Shortbow",
+          "name": "mwk shortbow",
           "itemId": "item.shortbow",
           "attackBonuses": [
             7
@@ -2079,22 +1907,15 @@
           "attackBonusExpression": "+7",
           "attackType": "ranged",
           "proficient": true,
-          "damageExpression": "1d4+1",
+          "damageExpression": "1d4",
           "damageType": "P",
-          "additionalDamage": [
-            {
-              "expression": "1d6",
-              "damageType": "fire",
-              "multipliedOnCritical": false
-            }
-          ],
           "critical": "x3",
           "critMultiplier": 3,
           "range": "60 ft.",
           "rangeIncrement": 60
         },
         {
-          "name": "+1 flaming Shortbow (Rapid Shot)",
+          "name": "mwk shortbow (Rapid Shot)",
           "itemId": "item.shortbow",
           "attackBonuses": [
             5,
@@ -2103,15 +1924,8 @@
           "attackBonusExpression": "+5/+5",
           "attackType": "ranged",
           "proficient": true,
-          "damageExpression": "1d4+1",
+          "damageExpression": "1d4",
           "damageType": "P",
-          "additionalDamage": [
-            {
-              "expression": "1d6",
-              "damageType": "fire",
-              "multipliedOnCritical": false
-            }
-          ],
           "critical": "x3",
           "critMultiplier": 3,
           "range": "60 ft.",
@@ -2226,48 +2040,16 @@
           ]
         },
         {
-          "sourceId": "source.aon-magic-weapons",
-          "file": "sources/npc/aonprd/magic-weapons.txt",
-          "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-          "section": "Magic Weapons",
-          "txtLines": [
-            4,
-            4
-          ],
-          "provenanceStatus": "resolved"
-        },
-        {
-          "sourceId": "source.aon-magic-weapons",
-          "file": "sources/npc/aonprd/magic-weapons.txt",
-          "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-          "section": "Table 15-8: Weapons",
-          "txtLines": [
-            21,
-            21
-          ],
-          "provenanceStatus": "resolved"
-        },
-        {
-          "sourceId": "source.aon-equipment",
-          "file": "sources/npc/aonprd/equipment.txt",
-          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-          "section": "Masterwork Weapons",
-          "txtLines": [
-            294,
-            295
-          ],
-          "provenanceStatus": "resolved"
-        },
-        {
-          "sourceId": "source.aon-magic-weapon-keen",
-          "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-          "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-          "section": "Keen",
+          "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+          "file": "sources/npc/aonprd/weapon-fragile.txt",
+          "provenanceStatus": "resolved",
+          "section": "Fragile",
+          "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+          "sourceId": "source.aon-weapon-fragile",
           "txtLines": [
             1,
-            7
-          ],
-          "provenanceStatus": "resolved"
+            1
+          ]
         },
         {
           "entry": "Table: Weapons — Shortbow",
@@ -2306,13 +2088,13 @@
           ]
         },
         {
-          "sourceId": "source.aon-magic-weapon-flaming",
-          "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-          "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-          "section": "Flaming",
+          "sourceId": "source.aon-equipment",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "section": "Masterwork Weapons",
           "txtLines": [
-            1,
-            7
+            294,
+            295
           ],
           "provenanceStatus": "resolved"
         },
@@ -2577,7 +2359,7 @@
           "fullAttack": true,
           "attacks": [
             {
-              "name": "+1 flaming Shortbow",
+              "name": "mwk shortbow",
               "itemId": "item.shortbow",
               "attackBonuses": [
                 5,
@@ -2586,15 +2368,8 @@
               "attackBonusExpression": "+5/+5",
               "attackType": "ranged",
               "proficient": true,
-              "damageExpression": "1d4+1",
+              "damageExpression": "1d4",
               "damageType": "P",
-              "additionalDamage": [
-                {
-                  "expression": "1d6",
-                  "damageType": "fire",
-                  "multipliedOnCritical": false
-                }
-              ],
               "critical": "x3",
               "critMultiplier": 3,
               "range": "60 ft.",
@@ -2658,48 +2433,16 @@
               ]
             },
             {
-              "sourceId": "source.aon-magic-weapons",
-              "file": "sources/npc/aonprd/magic-weapons.txt",
-              "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-              "section": "Magic Weapons",
-              "txtLines": [
-                4,
-                4
-              ],
-              "provenanceStatus": "resolved"
-            },
-            {
-              "sourceId": "source.aon-magic-weapons",
-              "file": "sources/npc/aonprd/magic-weapons.txt",
-              "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-              "section": "Table 15-8: Weapons",
-              "txtLines": [
-                21,
-                21
-              ],
-              "provenanceStatus": "resolved"
-            },
-            {
-              "sourceId": "source.aon-equipment",
-              "file": "sources/npc/aonprd/equipment.txt",
-              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-              "section": "Masterwork Weapons",
-              "txtLines": [
-                294,
-                295
-              ],
-              "provenanceStatus": "resolved"
-            },
-            {
-              "sourceId": "source.aon-magic-weapon-keen",
-              "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-              "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-              "section": "Keen",
+              "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+              "file": "sources/npc/aonprd/weapon-fragile.txt",
+              "provenanceStatus": "resolved",
+              "section": "Fragile",
+              "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+              "sourceId": "source.aon-weapon-fragile",
               "txtLines": [
                 1,
-                7
-              ],
-              "provenanceStatus": "resolved"
+                1
+              ]
             },
             {
               "entry": "Table: Weapons — Shortbow",
@@ -2738,13 +2481,13 @@
               ]
             },
             {
-              "sourceId": "source.aon-magic-weapon-flaming",
-              "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-              "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-              "section": "Flaming",
+              "sourceId": "source.aon-equipment",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "section": "Masterwork Weapons",
               "txtLines": [
-                1,
-                7
+                294,
+                295
               ],
               "provenanceStatus": "resolved"
             },
@@ -2916,48 +2659,16 @@
           ]
         },
         {
-          "sourceId": "source.aon-magic-weapons",
-          "file": "sources/npc/aonprd/magic-weapons.txt",
-          "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-          "section": "Magic Weapons",
-          "txtLines": [
-            4,
-            4
-          ],
-          "provenanceStatus": "resolved"
-        },
-        {
-          "sourceId": "source.aon-magic-weapons",
-          "file": "sources/npc/aonprd/magic-weapons.txt",
-          "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-          "section": "Table 15-8: Weapons",
-          "txtLines": [
-            21,
-            21
-          ],
-          "provenanceStatus": "resolved"
-        },
-        {
-          "sourceId": "source.aon-equipment",
-          "file": "sources/npc/aonprd/equipment.txt",
-          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-          "section": "Masterwork Weapons",
-          "txtLines": [
-            294,
-            295
-          ],
-          "provenanceStatus": "resolved"
-        },
-        {
-          "sourceId": "source.aon-magic-weapon-keen",
-          "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-          "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-          "section": "Keen",
+          "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+          "file": "sources/npc/aonprd/weapon-fragile.txt",
+          "provenanceStatus": "resolved",
+          "section": "Fragile",
+          "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+          "sourceId": "source.aon-weapon-fragile",
           "txtLines": [
             1,
-            7
-          ],
-          "provenanceStatus": "resolved"
+            1
+          ]
         },
         {
           "entry": "Table: Weapons — Shortbow",
@@ -2996,13 +2707,13 @@
           ]
         },
         {
-          "sourceId": "source.aon-magic-weapon-flaming",
-          "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-          "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-          "section": "Flaming",
+          "sourceId": "source.aon-equipment",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "section": "Masterwork Weapons",
           "txtLines": [
-            1,
-            7
+            294,
+            295
           ],
           "provenanceStatus": "resolved"
         },
@@ -4597,7 +4308,7 @@
           "protection": 20000,
           "weapons": 35000
         },
-        "spentCp": 1681500,
+        "spentCp": 51500,
         "remainingCp": null,
         "descriptiveEquipmentUnpriced": true
       },
@@ -4630,48 +4341,16 @@
           ]
         },
         {
-          "sourceId": "source.aon-magic-weapons",
-          "file": "sources/npc/aonprd/magic-weapons.txt",
-          "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-          "section": "Magic Weapons",
-          "txtLines": [
-            4,
-            4
-          ],
-          "provenanceStatus": "resolved"
-        },
-        {
-          "sourceId": "source.aon-magic-weapons",
-          "file": "sources/npc/aonprd/magic-weapons.txt",
-          "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-          "section": "Table 15-8: Weapons",
-          "txtLines": [
-            21,
-            21
-          ],
-          "provenanceStatus": "resolved"
-        },
-        {
-          "sourceId": "source.aon-equipment",
-          "file": "sources/npc/aonprd/equipment.txt",
-          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-          "section": "Masterwork Weapons",
-          "txtLines": [
-            294,
-            295
-          ],
-          "provenanceStatus": "resolved"
-        },
-        {
-          "sourceId": "source.aon-magic-weapon-keen",
-          "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-          "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-          "section": "Keen",
+          "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+          "file": "sources/npc/aonprd/weapon-fragile.txt",
+          "provenanceStatus": "resolved",
+          "section": "Fragile",
+          "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+          "sourceId": "source.aon-weapon-fragile",
           "txtLines": [
             1,
-            7
-          ],
-          "provenanceStatus": "resolved"
+            1
+          ]
         },
         {
           "entry": "Table: Weapons — Shortbow",
@@ -4710,13 +4389,13 @@
           ]
         },
         {
-          "sourceId": "source.aon-magic-weapon-flaming",
-          "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-          "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-          "section": "Flaming",
+          "sourceId": "source.aon-equipment",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "section": "Masterwork Weapons",
           "txtLines": [
-            1,
-            7
+            294,
+            295
           ],
           "provenanceStatus": "resolved"
         },
@@ -4932,48 +4611,16 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Magic Weapons",
-            "txtLines": [
-              4,
-              4
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Table 15-8: Weapons",
-            "txtLines": [
-              21,
-              21
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-equipment",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "section": "Masterwork Weapons",
-            "txtLines": [
-              294,
-              295
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapon-keen",
-            "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-            "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-            "section": "Keen",
+            "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+            "file": "sources/npc/aonprd/weapon-fragile.txt",
+            "provenanceStatus": "resolved",
+            "section": "Fragile",
+            "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+            "sourceId": "source.aon-weapon-fragile",
             "txtLines": [
               1,
-              7
-            ],
-            "provenanceStatus": "resolved"
+              1
+            ]
           },
           {
             "entry": "Table: Weapons — Shortbow",
@@ -5012,13 +4659,13 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapon-flaming",
-            "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-            "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-            "section": "Flaming",
+            "sourceId": "source.aon-equipment",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "section": "Masterwork Weapons",
             "txtLines": [
-              1,
-              7
+              294,
+              295
             ],
             "provenanceStatus": "resolved"
           },
@@ -5526,48 +5173,16 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Magic Weapons",
-            "txtLines": [
-              4,
-              4
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Table 15-8: Weapons",
-            "txtLines": [
-              21,
-              21
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-equipment",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "section": "Masterwork Weapons",
-            "txtLines": [
-              294,
-              295
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapon-keen",
-            "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-            "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-            "section": "Keen",
+            "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+            "file": "sources/npc/aonprd/weapon-fragile.txt",
+            "provenanceStatus": "resolved",
+            "section": "Fragile",
+            "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+            "sourceId": "source.aon-weapon-fragile",
             "txtLines": [
               1,
-              7
-            ],
-            "provenanceStatus": "resolved"
+              1
+            ]
           },
           {
             "entry": "Table: Weapons — Shortbow",
@@ -5606,13 +5221,13 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapon-flaming",
-            "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-            "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-            "section": "Flaming",
+            "sourceId": "source.aon-equipment",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "section": "Masterwork Weapons",
             "txtLines": [
-              1,
-              7
+              294,
+              295
             ],
             "provenanceStatus": "resolved"
           },
@@ -6118,48 +5733,16 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Magic Weapons",
-            "txtLines": [
-              4,
-              4
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Table 15-8: Weapons",
-            "txtLines": [
-              21,
-              21
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-equipment",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "section": "Masterwork Weapons",
-            "txtLines": [
-              294,
-              295
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapon-keen",
-            "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-            "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-            "section": "Keen",
+            "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+            "file": "sources/npc/aonprd/weapon-fragile.txt",
+            "provenanceStatus": "resolved",
+            "section": "Fragile",
+            "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+            "sourceId": "source.aon-weapon-fragile",
             "txtLines": [
               1,
-              7
-            ],
-            "provenanceStatus": "resolved"
+              1
+            ]
           },
           {
             "entry": "Table: Weapons — Shortbow",
@@ -6198,13 +5781,13 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapon-flaming",
-            "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-            "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-            "section": "Flaming",
+            "sourceId": "source.aon-equipment",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "section": "Masterwork Weapons",
             "txtLines": [
-              1,
-              7
+              294,
+              295
             ],
             "provenanceStatus": "resolved"
           },
@@ -6706,48 +6289,16 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Magic Weapons",
-            "txtLines": [
-              4,
-              4
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Table 15-8: Weapons",
-            "txtLines": [
-              21,
-              21
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-equipment",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "section": "Masterwork Weapons",
-            "txtLines": [
-              294,
-              295
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapon-keen",
-            "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-            "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-            "section": "Keen",
+            "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+            "file": "sources/npc/aonprd/weapon-fragile.txt",
+            "provenanceStatus": "resolved",
+            "section": "Fragile",
+            "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+            "sourceId": "source.aon-weapon-fragile",
             "txtLines": [
               1,
-              7
-            ],
-            "provenanceStatus": "resolved"
+              1
+            ]
           },
           {
             "entry": "Table: Weapons — Shortbow",
@@ -6786,13 +6337,13 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapon-flaming",
-            "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-            "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-            "section": "Flaming",
+            "sourceId": "source.aon-equipment",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "section": "Masterwork Weapons",
             "txtLines": [
-              1,
-              7
+              294,
+              295
             ],
             "provenanceStatus": "resolved"
           },
@@ -7292,48 +6843,16 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Magic Weapons",
-            "txtLines": [
-              4,
-              4
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Table 15-8: Weapons",
-            "txtLines": [
-              21,
-              21
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-equipment",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "section": "Masterwork Weapons",
-            "txtLines": [
-              294,
-              295
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapon-keen",
-            "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-            "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-            "section": "Keen",
+            "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+            "file": "sources/npc/aonprd/weapon-fragile.txt",
+            "provenanceStatus": "resolved",
+            "section": "Fragile",
+            "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+            "sourceId": "source.aon-weapon-fragile",
             "txtLines": [
               1,
-              7
-            ],
-            "provenanceStatus": "resolved"
+              1
+            ]
           },
           {
             "entry": "Table: Weapons — Shortbow",
@@ -7372,13 +6891,13 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapon-flaming",
-            "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-            "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-            "section": "Flaming",
+            "sourceId": "source.aon-equipment",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "section": "Masterwork Weapons",
             "txtLines": [
-              1,
-              7
+              294,
+              295
             ],
             "provenanceStatus": "resolved"
           },
@@ -7875,48 +7394,16 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Magic Weapons",
-            "txtLines": [
-              4,
-              4
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Table 15-8: Weapons",
-            "txtLines": [
-              21,
-              21
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-equipment",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "section": "Masterwork Weapons",
-            "txtLines": [
-              294,
-              295
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapon-keen",
-            "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-            "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-            "section": "Keen",
+            "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+            "file": "sources/npc/aonprd/weapon-fragile.txt",
+            "provenanceStatus": "resolved",
+            "section": "Fragile",
+            "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+            "sourceId": "source.aon-weapon-fragile",
             "txtLines": [
               1,
-              7
-            ],
-            "provenanceStatus": "resolved"
+              1
+            ]
           },
           {
             "entry": "Table: Weapons — Shortbow",
@@ -7955,13 +7442,13 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapon-flaming",
-            "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-            "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-            "section": "Flaming",
+            "sourceId": "source.aon-equipment",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "section": "Masterwork Weapons",
             "txtLines": [
-              1,
-              7
+              294,
+              295
             ],
             "provenanceStatus": "resolved"
           },
@@ -8306,17 +7793,11 @@
           },
           "gear": [
             {
-              "itemId": "item.dogslicer",
-              "properties": [
-                "keen"
-              ]
+              "itemId": "item.dogslicer"
             },
             {
               "itemId": "item.shortbow",
-              "enhancementBonus": 1,
-              "properties": [
-                "flaming"
-              ]
+              "masterwork": true
             },
             {
               "itemId": "item.arrows-20",
@@ -8326,7 +7807,8 @@
               "itemId": "item.studded-leather-armor",
               "masterwork": true
             },
-            "trained goblin dog mount"
+            "trained goblin dog mount",
+            "potion of cure light wounds (CL 1, 1d8+1 hp)"
           ]
         },
         "sourceRefs": [
@@ -8485,48 +7967,16 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Magic Weapons",
-            "txtLines": [
-              4,
-              4
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Table 15-8: Weapons",
-            "txtLines": [
-              21,
-              21
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-equipment",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "section": "Masterwork Weapons",
-            "txtLines": [
-              294,
-              295
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapon-keen",
-            "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-            "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-            "section": "Keen",
+            "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+            "file": "sources/npc/aonprd/weapon-fragile.txt",
+            "provenanceStatus": "resolved",
+            "section": "Fragile",
+            "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+            "sourceId": "source.aon-weapon-fragile",
             "txtLines": [
               1,
-              7
-            ],
-            "provenanceStatus": "resolved"
+              1
+            ]
           },
           {
             "entry": "Table: Weapons — Shortbow",
@@ -8565,13 +8015,13 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapon-flaming",
-            "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-            "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-            "section": "Flaming",
+            "sourceId": "source.aon-equipment",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "section": "Masterwork Weapons",
             "txtLines": [
-              1,
-              7
+              294,
+              295
             ],
             "provenanceStatus": "resolved"
           },
@@ -9070,48 +8520,16 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Magic Weapons",
-            "txtLines": [
-              4,
-              4
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapons",
-            "file": "sources/npc/aonprd/magic-weapons.txt",
-            "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-            "section": "Table 15-8: Weapons",
-            "txtLines": [
-              21,
-              21
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-equipment",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "section": "Masterwork Weapons",
-            "txtLines": [
-              294,
-              295
-            ],
-            "provenanceStatus": "resolved"
-          },
-          {
-            "sourceId": "source.aon-magic-weapon-keen",
-            "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-            "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-            "section": "Keen",
+            "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+            "file": "sources/npc/aonprd/weapon-fragile.txt",
+            "provenanceStatus": "resolved",
+            "section": "Fragile",
+            "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+            "sourceId": "source.aon-weapon-fragile",
             "txtLines": [
               1,
-              7
-            ],
-            "provenanceStatus": "resolved"
+              1
+            ]
           },
           {
             "entry": "Table: Weapons — Shortbow",
@@ -9150,13 +8568,13 @@
             ]
           },
           {
-            "sourceId": "source.aon-magic-weapon-flaming",
-            "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-            "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-            "section": "Flaming",
+            "sourceId": "source.aon-equipment",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "section": "Masterwork Weapons",
             "txtLines": [
-              1,
-              7
+              294,
+              295
             ],
             "provenanceStatus": "resolved"
           },
@@ -9650,48 +9068,16 @@
         ]
       },
       {
-        "sourceId": "source.aon-magic-weapons",
-        "file": "sources/npc/aonprd/magic-weapons.txt",
-        "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-        "section": "Magic Weapons",
-        "txtLines": [
-          4,
-          4
-        ],
-        "provenanceStatus": "resolved"
-      },
-      {
-        "sourceId": "source.aon-magic-weapons",
-        "file": "sources/npc/aonprd/magic-weapons.txt",
-        "sha256": "e6b389491f94a3a83ee2320c7ad3c551ed2a4d79f0613f4dea5f7398ddc15407",
-        "section": "Table 15-8: Weapons",
-        "txtLines": [
-          21,
-          21
-        ],
-        "provenanceStatus": "resolved"
-      },
-      {
-        "sourceId": "source.aon-equipment",
-        "file": "sources/npc/aonprd/equipment.txt",
-        "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-        "section": "Masterwork Weapons",
-        "txtLines": [
-          294,
-          295
-        ],
-        "provenanceStatus": "resolved"
-      },
-      {
-        "sourceId": "source.aon-magic-weapon-keen",
-        "file": "sources/npc/aonprd/magic-weapon-keen.txt",
-        "sha256": "042c9cf09c9ce857025598e7931086f36b76808c3dc8632616dca0be9503c6f5",
-        "section": "Keen",
+        "entry": "Ordinary dogslicers gain broken on natural 1; another natural 1 while broken destroys them. Resolve during play.",
+        "file": "sources/npc/aonprd/weapon-fragile.txt",
+        "provenanceStatus": "resolved",
+        "section": "Fragile",
+        "sha256": "4a074181d3e7b3dbeb577fa53da273ebd61f08ce9c8ca3c874cc4325a6e72bd1",
+        "sourceId": "source.aon-weapon-fragile",
         "txtLines": [
           1,
-          7
-        ],
-        "provenanceStatus": "resolved"
+          1
+        ]
       },
       {
         "entry": "Table: Weapons — Shortbow",
@@ -9730,13 +9116,13 @@
         ]
       },
       {
-        "sourceId": "source.aon-magic-weapon-flaming",
-        "file": "sources/npc/aonprd/magic-weapon-flaming.txt",
-        "sha256": "8f873f061631a7dc779b1415b7e9acadc4844aff97bc66c5e37b709e0e0fec5a",
-        "section": "Flaming",
+        "sourceId": "source.aon-equipment",
+        "file": "sources/npc/aonprd/equipment.txt",
+        "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+        "section": "Masterwork Weapons",
         "txtLines": [
-          1,
-          7
+          294,
+          295
         ],
         "provenanceStatus": "resolved"
       },
@@ -10072,6 +9458,5 @@
       }
     ]
   },
-  "fingerprint": "d953f984f39397b0f3eb4c6508d6e00441d568491c2b47a951f4a776db486870",
-  "status": "active"
+  "fingerprint": "1adfc63f0cac092d5c607cf636d69b0d88b4e545c52f7b3ad590c4cee708d90f"
 }
