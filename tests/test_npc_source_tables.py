@@ -336,14 +336,14 @@ class CatalogCompletenessTests(unittest.TestCase):
 
     def test_only_production_items_are_resolved(self):
         items = self.catalog["items"]
-        self.assertEqual(len(items), 76)
+        self.assertEqual(len(items), 77)
         self.assertTrue(all(item["category"] in ITEM_CATEGORIES for item in items.values()))
         resolved = {record_id for record_id, record in items.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
             "item.longsword", "item.greatsword", "item.chain-shirt", "item.light-steel-shield",
             "item.wand-of-burning-hands", "item.cloak-of-resistance-1",
             "item.sickle", "item.leather-armor", "item.heavy-wooden-shield",
-            "item.rapier", "item.shortsword", "item.chainmail", "item.studded-leather-armor", "item.sling",
+            "item.rapier", "item.shortsword", "item.chainmail", "item.studded-leather-armor", "item.sling", "item.composite-shortbow-strength-1",
             "item.longbow", "item.rapier-masterwork", "item.longbow-plus-1",
             "item.studded-leather-plus-1", "item.potion-of-cure-moderate-wounds",
             "item.potion-of-invisibility", "item.arrows-20", "item.dogslicer", "item.shortbow", "item.whip",
