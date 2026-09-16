@@ -2167,11 +2167,16 @@ class NpcCreation(CreationSystem):
             proficient = effects.get("weaponType") in weapon_proficiencies or effects.get("weaponCategory") in weapon_proficiencies
             attack_bonus = bab + hit_ability + size_modifiers.get("attack", 0) + effects.get("attackBonus", 0) + armor_penalty + (0 if proficient else -4)
             attack_bonus += feat_effects.get("weaponAttackBonus", {}).get(effects.get("weaponType"), 0) + active_attack_bonus
+            strength_rating = effects.get("strengthRating")
+            if strength_rating is not None and modifiers["strength"] < strength_rating:
+                attack_bonus -= 2
             bonuses = [attack_bonus - step for step in range(0, min(16, max(1, bab)), 5)]
             if effects.get("reloadAction") in {"move", "full-round"}:
                 bonuses = bonuses[:1]
             damage_bonus = 0 if effects.get("noStrengthToDamage") else modifiers["strength"]
-            if effects.get("strengthDamage") == "penalty-only":
+            if strength_rating is not None:
+                damage_bonus = min(modifiers["strength"], strength_rating)
+            elif effects.get("strengthDamage") == "penalty-only":
                 damage_bonus = min(0, modifiers["strength"])
             elif not ranged and effects.get("twoHanded") and damage_bonus > 0:
                 damage_bonus = damage_bonus * 3 // 2

@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1",
   "kind": "FinishedMonster",
-  "monsterId": "monster-b259837473d9523b8f1c4a844fbb0280",
+  "monsterId": "monster-d496ee966dcf5d19b34249afc0603c8a",
   "sourceDraft": {
-    "draftId": "draft-f7e775d3f05a447d973d3c65b8b3089a",
+    "draftId": "draft-f30732b2fbbe4892a7e1d3ce18dc5c0c",
     "revision": 0,
-    "fingerprint": "3ff3cc3c1feb66220364921e7313c0517aab1590e7e01152bdbdcc3931b59d8b"
+    "fingerprint": "e8ba8c416788a8649f644d9c5854e4221517fe998b78f699d6e6ad9d2bdb4419"
   },
   "creationSystem": "npc",
-  "catalogVersion": "sha256:b33119e25260ca1443e985eb7a9e158684ab7a634b8c7f4599028c45a801bce2",
+  "catalogVersion": "sha256:8d9845490463733d19545777d0f979238b9204c92e3ce143a00c1a49c21b219d",
   "mode": "strict",
   "concept": {
     "description": "A Small goblin ranger trained to fight from a goblin dog mount, based on the supplied Pathfinder reference.",
@@ -52,7 +52,7 @@
         "itemId": "item.dogslicer"
       },
       {
-        "itemId": "item.shortbow",
+        "itemId": "item.composite-shortbow-strength-1",
         "masterwork": true
       },
       {
@@ -152,24 +152,24 @@
         "critMultiplier": 2
       },
       {
-        "name": "mwk shortbow",
-        "itemId": "item.shortbow",
+        "name": "mwk composite shortbow (+1 str)",
+        "itemId": "item.composite-shortbow-strength-1",
         "attackBonuses": [
           7
         ],
         "attackBonusExpression": "+7",
         "attackType": "ranged",
         "proficient": true,
-        "damageExpression": "1d4",
+        "damageExpression": "1d4+1",
         "damageType": "P",
         "critical": "x3",
         "critMultiplier": 3,
-        "range": "60 ft.",
-        "rangeIncrement": 60
+        "range": "70 ft.",
+        "rangeIncrement": 70
       },
       {
-        "name": "mwk shortbow (Rapid Shot)",
-        "itemId": "item.shortbow",
+        "name": "mwk composite shortbow (+1 str) (Rapid Shot)",
+        "itemId": "item.composite-shortbow-strength-1",
         "attackBonuses": [
           5,
           5
@@ -177,12 +177,12 @@
         "attackBonusExpression": "+5/+5",
         "attackType": "ranged",
         "proficient": true,
-        "damageExpression": "1d4",
+        "damageExpression": "1d4+1",
         "damageType": "P",
         "critical": "x3",
         "critMultiplier": 3,
-        "range": "60 ft.",
-        "rangeIncrement": 60,
+        "range": "70 ft.",
+        "rangeIncrement": 70,
         "rapidShot": true,
         "fullAttack": true
       }
@@ -191,7 +191,7 @@
       {
         "id": "routine.requested",
         "request": {
-          "weaponId": "item.shortbow",
+          "weaponId": "item.composite-shortbow-strength-1",
           "action": "full-attack",
           "options": [
             "feat.rapid-shot"
@@ -203,8 +203,8 @@
         "fullAttack": true,
         "attacks": [
           {
-            "name": "mwk shortbow",
-            "itemId": "item.shortbow",
+            "name": "mwk composite shortbow (+1 str)",
+            "itemId": "item.composite-shortbow-strength-1",
             "attackBonuses": [
               5,
               5
@@ -212,12 +212,12 @@
             "attackBonusExpression": "+5/+5",
             "attackType": "ranged",
             "proficient": true,
-            "damageExpression": "1d4",
+            "damageExpression": "1d4+1",
             "damageType": "P",
             "critical": "x3",
             "critMultiplier": 3,
-            "range": "60 ft.",
-            "rangeIncrement": 60,
+            "range": "70 ft.",
+            "rangeIncrement": 70,
             "hand": "primary"
           }
         ],
@@ -289,39 +289,27 @@
             ]
           },
           {
-            "entry": "Table: Weapons — Shortbow",
+            "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
             "file": "sources/npc/aonprd/equipment.txt",
             "provenanceStatus": "resolved",
-            "section": "Table: Weapons — Shortbow",
+            "section": "Shortbow, Composite",
             "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
             "sourceId": "source.aon-equipment",
             "txtLines": [
-              180,
+              268,
+              269
+            ]
+          },
+          {
+            "entry": "Composite shortbow damage, range, critical multiplier and weight",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table: Weapons",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "sourceId": "source.aon-equipment",
+            "txtLines": [
+              182,
               182
-            ]
-          },
-          {
-            "entry": "Strength penalties apply to non-composite bows",
-            "file": "sources/npc/aonprd/combat.txt",
-            "provenanceStatus": "resolved",
-            "section": "Damage — Strength Bonus",
-            "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-            "sourceId": "source.aon-combat",
-            "txtLines": [
-              60,
-              60
-            ]
-          },
-          {
-            "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "provenanceStatus": "resolved",
-            "section": "Table: Weapons; attack metadata",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "sourceId": "source.aon-equipment",
-            "txtLines": [
-              175,
-              180
             ]
           },
           {
@@ -834,7 +822,7 @@
         "protection": 20000,
         "weapons": 35000
       },
-      "spentCp": 51500,
+      "spentCp": 63500,
       "remainingCp": null,
       "descriptiveEquipmentUnpriced": true
     },
@@ -894,26 +882,26 @@
         ]
       },
       {
-        "itemId": "item.shortbow",
-        "name": "mwk shortbow",
+        "itemId": "item.composite-shortbow-strength-1",
+        "name": "mwk composite shortbow (+1 str)",
         "category": "weapon",
         "mechanical": true,
         "npcGearCategory": null,
         "quantity": 1,
         "equipped": true,
-        "priceCp": 33000,
-        "weightLb": 1.0,
+        "priceCp": 45000,
+        "weightLb": 1,
         "effects": {
           "critMultiplier": 3,
-          "critRange": 20,
           "damageDieBySize": {
             "medium": "1d6",
             "small": "1d4"
           },
           "damageType": "P",
-          "handedness": "ranged",
-          "rangeIncrement": 60,
-          "strengthDamage": "penalty-only",
+          "handedness": "two-handed",
+          "rangeIncrement": 70,
+          "strengthRating": 1,
+          "twoHanded": true,
           "weaponCategory": "martial",
           "weaponType": "shortbow",
           "attackBonus": 1,
@@ -924,39 +912,27 @@
         },
         "sourceRefs": [
           {
-            "entry": "Table: Weapons — Shortbow",
+            "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
             "file": "sources/npc/aonprd/equipment.txt",
             "provenanceStatus": "resolved",
-            "section": "Table: Weapons — Shortbow",
+            "section": "Shortbow, Composite",
             "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
             "sourceId": "source.aon-equipment",
             "txtLines": [
-              180,
+              268,
+              269
+            ]
+          },
+          {
+            "entry": "Composite shortbow damage, range, critical multiplier and weight",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table: Weapons",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "sourceId": "source.aon-equipment",
+            "txtLines": [
+              182,
               182
-            ]
-          },
-          {
-            "entry": "Strength penalties apply to non-composite bows",
-            "file": "sources/npc/aonprd/combat.txt",
-            "provenanceStatus": "resolved",
-            "section": "Damage — Strength Bonus",
-            "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-            "sourceId": "source.aon-combat",
-            "txtLines": [
-              60,
-              60
-            ]
-          },
-          {
-            "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "provenanceStatus": "resolved",
-            "section": "Table: Weapons; attack metadata",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "sourceId": "source.aon-equipment",
-            "txtLines": [
-              175,
-              180
             ]
           },
           {
@@ -1496,39 +1472,27 @@
           ]
         },
         {
-          "entry": "Table: Weapons — Shortbow",
+          "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
           "file": "sources/npc/aonprd/equipment.txt",
           "provenanceStatus": "resolved",
-          "section": "Table: Weapons — Shortbow",
+          "section": "Shortbow, Composite",
           "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
           "sourceId": "source.aon-equipment",
           "txtLines": [
-            180,
+            268,
+            269
+          ]
+        },
+        {
+          "entry": "Composite shortbow damage, range, critical multiplier and weight",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            182,
             182
-          ]
-        },
-        {
-          "entry": "Strength penalties apply to non-composite bows",
-          "file": "sources/npc/aonprd/combat.txt",
-          "provenanceStatus": "resolved",
-          "section": "Damage — Strength Bonus",
-          "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-          "sourceId": "source.aon-combat",
-          "txtLines": [
-            60,
-            60
-          ]
-        },
-        {
-          "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-          "file": "sources/npc/aonprd/equipment.txt",
-          "provenanceStatus": "resolved",
-          "section": "Table: Weapons; attack metadata",
-          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-          "sourceId": "source.aon-equipment",
-          "txtLines": [
-            175,
-            180
           ]
         },
         {
@@ -1899,24 +1863,24 @@
           "critMultiplier": 2
         },
         {
-          "name": "mwk shortbow",
-          "itemId": "item.shortbow",
+          "name": "mwk composite shortbow (+1 str)",
+          "itemId": "item.composite-shortbow-strength-1",
           "attackBonuses": [
             7
           ],
           "attackBonusExpression": "+7",
           "attackType": "ranged",
           "proficient": true,
-          "damageExpression": "1d4",
+          "damageExpression": "1d4+1",
           "damageType": "P",
           "critical": "x3",
           "critMultiplier": 3,
-          "range": "60 ft.",
-          "rangeIncrement": 60
+          "range": "70 ft.",
+          "rangeIncrement": 70
         },
         {
-          "name": "mwk shortbow (Rapid Shot)",
-          "itemId": "item.shortbow",
+          "name": "mwk composite shortbow (+1 str) (Rapid Shot)",
+          "itemId": "item.composite-shortbow-strength-1",
           "attackBonuses": [
             5,
             5
@@ -1924,12 +1888,12 @@
           "attackBonusExpression": "+5/+5",
           "attackType": "ranged",
           "proficient": true,
-          "damageExpression": "1d4",
+          "damageExpression": "1d4+1",
           "damageType": "P",
           "critical": "x3",
           "critMultiplier": 3,
-          "range": "60 ft.",
-          "rangeIncrement": 60,
+          "range": "70 ft.",
+          "rangeIncrement": 70,
           "rapidShot": true,
           "fullAttack": true
         }
@@ -2052,39 +2016,27 @@
           ]
         },
         {
-          "entry": "Table: Weapons — Shortbow",
+          "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
           "file": "sources/npc/aonprd/equipment.txt",
           "provenanceStatus": "resolved",
-          "section": "Table: Weapons — Shortbow",
+          "section": "Shortbow, Composite",
           "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
           "sourceId": "source.aon-equipment",
           "txtLines": [
-            180,
+            268,
+            269
+          ]
+        },
+        {
+          "entry": "Composite shortbow damage, range, critical multiplier and weight",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            182,
             182
-          ]
-        },
-        {
-          "entry": "Strength penalties apply to non-composite bows",
-          "file": "sources/npc/aonprd/combat.txt",
-          "provenanceStatus": "resolved",
-          "section": "Damage — Strength Bonus",
-          "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-          "sourceId": "source.aon-combat",
-          "txtLines": [
-            60,
-            60
-          ]
-        },
-        {
-          "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-          "file": "sources/npc/aonprd/equipment.txt",
-          "provenanceStatus": "resolved",
-          "section": "Table: Weapons; attack metadata",
-          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-          "sourceId": "source.aon-equipment",
-          "txtLines": [
-            175,
-            180
           ]
         },
         {
@@ -2347,7 +2299,7 @@
         {
           "id": "routine.requested",
           "request": {
-            "weaponId": "item.shortbow",
+            "weaponId": "item.composite-shortbow-strength-1",
             "action": "full-attack",
             "options": [
               "feat.rapid-shot"
@@ -2359,8 +2311,8 @@
           "fullAttack": true,
           "attacks": [
             {
-              "name": "mwk shortbow",
-              "itemId": "item.shortbow",
+              "name": "mwk composite shortbow (+1 str)",
+              "itemId": "item.composite-shortbow-strength-1",
               "attackBonuses": [
                 5,
                 5
@@ -2368,12 +2320,12 @@
               "attackBonusExpression": "+5/+5",
               "attackType": "ranged",
               "proficient": true,
-              "damageExpression": "1d4",
+              "damageExpression": "1d4+1",
               "damageType": "P",
               "critical": "x3",
               "critMultiplier": 3,
-              "range": "60 ft.",
-              "rangeIncrement": 60,
+              "range": "70 ft.",
+              "rangeIncrement": 70,
               "hand": "primary"
             }
           ],
@@ -2445,39 +2397,27 @@
               ]
             },
             {
-              "entry": "Table: Weapons — Shortbow",
+              "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
               "file": "sources/npc/aonprd/equipment.txt",
               "provenanceStatus": "resolved",
-              "section": "Table: Weapons — Shortbow",
+              "section": "Shortbow, Composite",
               "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
               "sourceId": "source.aon-equipment",
               "txtLines": [
-                180,
+                268,
+                269
+              ]
+            },
+            {
+              "entry": "Composite shortbow damage, range, critical multiplier and weight",
+              "file": "sources/npc/aonprd/equipment.txt",
+              "provenanceStatus": "resolved",
+              "section": "Table: Weapons",
+              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+              "sourceId": "source.aon-equipment",
+              "txtLines": [
+                182,
                 182
-              ]
-            },
-            {
-              "entry": "Strength penalties apply to non-composite bows",
-              "file": "sources/npc/aonprd/combat.txt",
-              "provenanceStatus": "resolved",
-              "section": "Damage — Strength Bonus",
-              "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-              "sourceId": "source.aon-combat",
-              "txtLines": [
-                60,
-                60
-              ]
-            },
-            {
-              "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-              "file": "sources/npc/aonprd/equipment.txt",
-              "provenanceStatus": "resolved",
-              "section": "Table: Weapons; attack metadata",
-              "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-              "sourceId": "source.aon-equipment",
-              "txtLines": [
-                175,
-                180
               ]
             },
             {
@@ -2671,39 +2611,27 @@
           ]
         },
         {
-          "entry": "Table: Weapons — Shortbow",
+          "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
           "file": "sources/npc/aonprd/equipment.txt",
           "provenanceStatus": "resolved",
-          "section": "Table: Weapons — Shortbow",
+          "section": "Shortbow, Composite",
           "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
           "sourceId": "source.aon-equipment",
           "txtLines": [
-            180,
+            268,
+            269
+          ]
+        },
+        {
+          "entry": "Composite shortbow damage, range, critical multiplier and weight",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            182,
             182
-          ]
-        },
-        {
-          "entry": "Strength penalties apply to non-composite bows",
-          "file": "sources/npc/aonprd/combat.txt",
-          "provenanceStatus": "resolved",
-          "section": "Damage — Strength Bonus",
-          "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-          "sourceId": "source.aon-combat",
-          "txtLines": [
-            60,
-            60
-          ]
-        },
-        {
-          "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-          "file": "sources/npc/aonprd/equipment.txt",
-          "provenanceStatus": "resolved",
-          "section": "Table: Weapons; attack metadata",
-          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-          "sourceId": "source.aon-equipment",
-          "txtLines": [
-            175,
-            180
           ]
         },
         {
@@ -4308,7 +4236,7 @@
           "protection": 20000,
           "weapons": 35000
         },
-        "spentCp": 51500,
+        "spentCp": 63500,
         "remainingCp": null,
         "descriptiveEquipmentUnpriced": true
       },
@@ -4353,39 +4281,27 @@
           ]
         },
         {
-          "entry": "Table: Weapons — Shortbow",
+          "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
           "file": "sources/npc/aonprd/equipment.txt",
           "provenanceStatus": "resolved",
-          "section": "Table: Weapons — Shortbow",
+          "section": "Shortbow, Composite",
           "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
           "sourceId": "source.aon-equipment",
           "txtLines": [
-            180,
+            268,
+            269
+          ]
+        },
+        {
+          "entry": "Composite shortbow damage, range, critical multiplier and weight",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            182,
             182
-          ]
-        },
-        {
-          "entry": "Strength penalties apply to non-composite bows",
-          "file": "sources/npc/aonprd/combat.txt",
-          "provenanceStatus": "resolved",
-          "section": "Damage — Strength Bonus",
-          "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-          "sourceId": "source.aon-combat",
-          "txtLines": [
-            60,
-            60
-          ]
-        },
-        {
-          "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-          "file": "sources/npc/aonprd/equipment.txt",
-          "provenanceStatus": "resolved",
-          "section": "Table: Weapons; attack metadata",
-          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-          "sourceId": "source.aon-equipment",
-          "txtLines": [
-            175,
-            180
           ]
         },
         {
@@ -4623,39 +4539,27 @@
             ]
           },
           {
-            "entry": "Table: Weapons — Shortbow",
+            "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
             "file": "sources/npc/aonprd/equipment.txt",
             "provenanceStatus": "resolved",
-            "section": "Table: Weapons — Shortbow",
+            "section": "Shortbow, Composite",
             "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
             "sourceId": "source.aon-equipment",
             "txtLines": [
-              180,
+              268,
+              269
+            ]
+          },
+          {
+            "entry": "Composite shortbow damage, range, critical multiplier and weight",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table: Weapons",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "sourceId": "source.aon-equipment",
+            "txtLines": [
+              182,
               182
-            ]
-          },
-          {
-            "entry": "Strength penalties apply to non-composite bows",
-            "file": "sources/npc/aonprd/combat.txt",
-            "provenanceStatus": "resolved",
-            "section": "Damage — Strength Bonus",
-            "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-            "sourceId": "source.aon-combat",
-            "txtLines": [
-              60,
-              60
-            ]
-          },
-          {
-            "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "provenanceStatus": "resolved",
-            "section": "Table: Weapons; attack metadata",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "sourceId": "source.aon-equipment",
-            "txtLines": [
-              175,
-              180
             ]
           },
           {
@@ -5185,39 +5089,27 @@
             ]
           },
           {
-            "entry": "Table: Weapons — Shortbow",
+            "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
             "file": "sources/npc/aonprd/equipment.txt",
             "provenanceStatus": "resolved",
-            "section": "Table: Weapons — Shortbow",
+            "section": "Shortbow, Composite",
             "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
             "sourceId": "source.aon-equipment",
             "txtLines": [
-              180,
+              268,
+              269
+            ]
+          },
+          {
+            "entry": "Composite shortbow damage, range, critical multiplier and weight",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table: Weapons",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "sourceId": "source.aon-equipment",
+            "txtLines": [
+              182,
               182
-            ]
-          },
-          {
-            "entry": "Strength penalties apply to non-composite bows",
-            "file": "sources/npc/aonprd/combat.txt",
-            "provenanceStatus": "resolved",
-            "section": "Damage — Strength Bonus",
-            "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-            "sourceId": "source.aon-combat",
-            "txtLines": [
-              60,
-              60
-            ]
-          },
-          {
-            "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "provenanceStatus": "resolved",
-            "section": "Table: Weapons; attack metadata",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "sourceId": "source.aon-equipment",
-            "txtLines": [
-              175,
-              180
             ]
           },
           {
@@ -5745,39 +5637,27 @@
             ]
           },
           {
-            "entry": "Table: Weapons — Shortbow",
+            "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
             "file": "sources/npc/aonprd/equipment.txt",
             "provenanceStatus": "resolved",
-            "section": "Table: Weapons — Shortbow",
+            "section": "Shortbow, Composite",
             "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
             "sourceId": "source.aon-equipment",
             "txtLines": [
-              180,
+              268,
+              269
+            ]
+          },
+          {
+            "entry": "Composite shortbow damage, range, critical multiplier and weight",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table: Weapons",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "sourceId": "source.aon-equipment",
+            "txtLines": [
+              182,
               182
-            ]
-          },
-          {
-            "entry": "Strength penalties apply to non-composite bows",
-            "file": "sources/npc/aonprd/combat.txt",
-            "provenanceStatus": "resolved",
-            "section": "Damage — Strength Bonus",
-            "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-            "sourceId": "source.aon-combat",
-            "txtLines": [
-              60,
-              60
-            ]
-          },
-          {
-            "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "provenanceStatus": "resolved",
-            "section": "Table: Weapons; attack metadata",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "sourceId": "source.aon-equipment",
-            "txtLines": [
-              175,
-              180
             ]
           },
           {
@@ -6301,39 +6181,27 @@
             ]
           },
           {
-            "entry": "Table: Weapons — Shortbow",
+            "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
             "file": "sources/npc/aonprd/equipment.txt",
             "provenanceStatus": "resolved",
-            "section": "Table: Weapons — Shortbow",
+            "section": "Shortbow, Composite",
             "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
             "sourceId": "source.aon-equipment",
             "txtLines": [
-              180,
+              268,
+              269
+            ]
+          },
+          {
+            "entry": "Composite shortbow damage, range, critical multiplier and weight",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table: Weapons",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "sourceId": "source.aon-equipment",
+            "txtLines": [
+              182,
               182
-            ]
-          },
-          {
-            "entry": "Strength penalties apply to non-composite bows",
-            "file": "sources/npc/aonprd/combat.txt",
-            "provenanceStatus": "resolved",
-            "section": "Damage — Strength Bonus",
-            "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-            "sourceId": "source.aon-combat",
-            "txtLines": [
-              60,
-              60
-            ]
-          },
-          {
-            "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "provenanceStatus": "resolved",
-            "section": "Table: Weapons; attack metadata",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "sourceId": "source.aon-equipment",
-            "txtLines": [
-              175,
-              180
             ]
           },
           {
@@ -6855,39 +6723,27 @@
             ]
           },
           {
-            "entry": "Table: Weapons — Shortbow",
+            "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
             "file": "sources/npc/aonprd/equipment.txt",
             "provenanceStatus": "resolved",
-            "section": "Table: Weapons — Shortbow",
+            "section": "Shortbow, Composite",
             "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
             "sourceId": "source.aon-equipment",
             "txtLines": [
-              180,
+              268,
+              269
+            ]
+          },
+          {
+            "entry": "Composite shortbow damage, range, critical multiplier and weight",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table: Weapons",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "sourceId": "source.aon-equipment",
+            "txtLines": [
+              182,
               182
-            ]
-          },
-          {
-            "entry": "Strength penalties apply to non-composite bows",
-            "file": "sources/npc/aonprd/combat.txt",
-            "provenanceStatus": "resolved",
-            "section": "Damage — Strength Bonus",
-            "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-            "sourceId": "source.aon-combat",
-            "txtLines": [
-              60,
-              60
-            ]
-          },
-          {
-            "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "provenanceStatus": "resolved",
-            "section": "Table: Weapons; attack metadata",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "sourceId": "source.aon-equipment",
-            "txtLines": [
-              175,
-              180
             ]
           },
           {
@@ -7406,39 +7262,27 @@
             ]
           },
           {
-            "entry": "Table: Weapons — Shortbow",
+            "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
             "file": "sources/npc/aonprd/equipment.txt",
             "provenanceStatus": "resolved",
-            "section": "Table: Weapons — Shortbow",
+            "section": "Shortbow, Composite",
             "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
             "sourceId": "source.aon-equipment",
             "txtLines": [
-              180,
+              268,
+              269
+            ]
+          },
+          {
+            "entry": "Composite shortbow damage, range, critical multiplier and weight",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table: Weapons",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "sourceId": "source.aon-equipment",
+            "txtLines": [
+              182,
               182
-            ]
-          },
-          {
-            "entry": "Strength penalties apply to non-composite bows",
-            "file": "sources/npc/aonprd/combat.txt",
-            "provenanceStatus": "resolved",
-            "section": "Damage — Strength Bonus",
-            "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-            "sourceId": "source.aon-combat",
-            "txtLines": [
-              60,
-              60
-            ]
-          },
-          {
-            "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "provenanceStatus": "resolved",
-            "section": "Table: Weapons; attack metadata",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "sourceId": "source.aon-equipment",
-            "txtLines": [
-              175,
-              180
             ]
           },
           {
@@ -7796,7 +7640,7 @@
               "itemId": "item.dogslicer"
             },
             {
-              "itemId": "item.shortbow",
+              "itemId": "item.composite-shortbow-strength-1",
               "masterwork": true
             },
             {
@@ -7979,39 +7823,27 @@
             ]
           },
           {
-            "entry": "Table: Weapons — Shortbow",
+            "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
             "file": "sources/npc/aonprd/equipment.txt",
             "provenanceStatus": "resolved",
-            "section": "Table: Weapons — Shortbow",
+            "section": "Shortbow, Composite",
             "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
             "sourceId": "source.aon-equipment",
             "txtLines": [
-              180,
+              268,
+              269
+            ]
+          },
+          {
+            "entry": "Composite shortbow damage, range, critical multiplier and weight",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table: Weapons",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "sourceId": "source.aon-equipment",
+            "txtLines": [
+              182,
               182
-            ]
-          },
-          {
-            "entry": "Strength penalties apply to non-composite bows",
-            "file": "sources/npc/aonprd/combat.txt",
-            "provenanceStatus": "resolved",
-            "section": "Damage — Strength Bonus",
-            "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-            "sourceId": "source.aon-combat",
-            "txtLines": [
-              60,
-              60
-            ]
-          },
-          {
-            "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "provenanceStatus": "resolved",
-            "section": "Table: Weapons; attack metadata",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "sourceId": "source.aon-equipment",
-            "txtLines": [
-              175,
-              180
             ]
           },
           {
@@ -8532,39 +8364,27 @@
             ]
           },
           {
-            "entry": "Table: Weapons — Shortbow",
+            "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
             "file": "sources/npc/aonprd/equipment.txt",
             "provenanceStatus": "resolved",
-            "section": "Table: Weapons — Shortbow",
+            "section": "Shortbow, Composite",
             "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
             "sourceId": "source.aon-equipment",
             "txtLines": [
-              180,
+              268,
+              269
+            ]
+          },
+          {
+            "entry": "Composite shortbow damage, range, critical multiplier and weight",
+            "file": "sources/npc/aonprd/equipment.txt",
+            "provenanceStatus": "resolved",
+            "section": "Table: Weapons",
+            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+            "sourceId": "source.aon-equipment",
+            "txtLines": [
+              182,
               182
-            ]
-          },
-          {
-            "entry": "Strength penalties apply to non-composite bows",
-            "file": "sources/npc/aonprd/combat.txt",
-            "provenanceStatus": "resolved",
-            "section": "Damage — Strength Bonus",
-            "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-            "sourceId": "source.aon-combat",
-            "txtLines": [
-              60,
-              60
-            ]
-          },
-          {
-            "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-            "file": "sources/npc/aonprd/equipment.txt",
-            "provenanceStatus": "resolved",
-            "section": "Table: Weapons; attack metadata",
-            "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-            "sourceId": "source.aon-equipment",
-            "txtLines": [
-              175,
-              180
             ]
           },
           {
@@ -9080,39 +8900,27 @@
         ]
       },
       {
-        "entry": "Table: Weapons — Shortbow",
+        "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
         "file": "sources/npc/aonprd/equipment.txt",
         "provenanceStatus": "resolved",
-        "section": "Table: Weapons — Shortbow",
+        "section": "Shortbow, Composite",
         "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
         "sourceId": "source.aon-equipment",
         "txtLines": [
-          180,
+          268,
+          269
+        ]
+      },
+      {
+        "entry": "Composite shortbow damage, range, critical multiplier and weight",
+        "file": "sources/npc/aonprd/equipment.txt",
+        "provenanceStatus": "resolved",
+        "section": "Table: Weapons",
+        "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+        "sourceId": "source.aon-equipment",
+        "txtLines": [
+          182,
           182
-        ]
-      },
-      {
-        "entry": "Strength penalties apply to non-composite bows",
-        "file": "sources/npc/aonprd/combat.txt",
-        "provenanceStatus": "resolved",
-        "section": "Damage — Strength Bonus",
-        "sha256": "4273b16d66d145da13928faa12726418e736af0e8262108eeec4a1e1c86e2537",
-        "sourceId": "source.aon-combat",
-        "txtLines": [
-          60,
-          60
-        ]
-      },
-      {
-        "entry": "Shortbow\t30 gp\t1d4\t1d6\t×3\t60 ft.\t2 lbs.\tP\t—",
-        "file": "sources/npc/aonprd/equipment.txt",
-        "provenanceStatus": "resolved",
-        "section": "Table: Weapons; attack metadata",
-        "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
-        "sourceId": "source.aon-equipment",
-        "txtLines": [
-          175,
-          180
         ]
       },
       {
@@ -9458,5 +9266,5 @@
       }
     ]
   },
-  "fingerprint": "1adfc63f0cac092d5c607cf636d69b0d88b4e545c52f7b3ad590c4cee708d90f"
+  "fingerprint": "c920ae3ba4825c4de66b4608cd13b845334b609f96cb87ba3e6a6f55143ac797"
 }

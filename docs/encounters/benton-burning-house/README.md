@@ -17,19 +17,19 @@ Für die bisherige Gruppe aus vier SC der Stufe 2, gegebenenfalls mit Bardenbegl
 
 Das ist **kein offizieller Gesamt-HG inklusive Brand**. Rauch mit möglichen Zugverlusten kann selbst diesen kleinen Kampf deutlich erschweren. Ist ein SC schon kampfunfähig oder hat die Gruppe fast keine TP mehr, knurrt Kesselkratzer nur eine letzte Drohung auf Goblinisch und flieht bei Sichtkontakt; es bleibt eine Rettungsszene. Keine Verstärkung von draußen.
 
-Verwendet wird der neu evaluierte [Goblin Commando](../../goblin-commando.md): CR 1, gewöhnlicher Dogslicer, Meisterarbeits-Kurzbogen und ein Cure-Light-Wounds-Trank. Keine magischen Waffen. **Er kämpft hier zu Fuß; der im allgemeinen Statblock aufgeführte Goblinhund ist in dieser Begegnung nicht vorhanden.** Mounted Combat bleibt dadurch ungenutzt. Der Warchanter entfällt vollständig.
+Verwendet wird der neu evaluierte [Goblin Commando](../../goblin-commando.md): CR 1, gewöhnlicher Dogslicer, Meisterarbeits-Kompositkurzbogen (Stärkewertung +1) und ein Cure-Light-Wounds-Trank. Keine magischen Waffen. **Er kämpft hier zu Fuß; der im allgemeinen Statblock aufgeführte Goblinhund ist in dieser Begegnung nicht vorhanden.** Mounted Combat bleibt dadurch ungenutzt. Der Warchanter entfällt vollständig.
 
 | Figur | TP | RK / Berührung / auf falschem Fuß | Init | Zäh / Ref / Will | Angriffe |
 |---|---:|---|---:|---|---|
 | Warrior „Löffel“ | 6 | 16 / 13 / 14 | +2 | +3 / +2 / +0 | Dogslicer +3 (1W4/19–20), Kurzbogen +4 (1W4/×3) |
-| Kesselkratzer | 20 | 17 / 14 / 14 | +3 | +5 / +6 / +1 | Dogslicer +4 (1W4+1/19–20), Meisterarbeits-Kurzbogen +7 (1W4/×3) |
+| Kesselkratzer | 20 | 17 / 14 / 14 | +3 | +5 / +6 / +1 | Dogslicer +4 (1W4+1/19–20), Meisterarbeits-Kompositkurzbogen +7 (1W4+1/×3; 70 ft.) |
 
 Vollständige Regeln, Fertigkeiten und Ausrüstung siehe verlinkte Blätter. Kesselkratzer spricht **nur Goblinisch**; Verhandlungen ohne gemeinsame Sprache laufen über Gesten oder Übersetzung. Er hat einen Kochtopf als Beute und einen Bogen mit eingeritzten Kerben. Sein Erzfeind sind Orks, nicht pauschal Menschen oder die gesamte Gruppe.
 
 ### Kesselkratzer: einfacher Ablauf
 
 - **Erster Zug:** den Beutesack fallen lassen (freie Aktion), höchstens ein Bogenschuss auf einen bewaffneten Eindringling und zur Hintertür bewegen. Keine Überraschungsrunde allein wegen Rauch.
-- **Zweiter Zug:** weiter fliehen; höchstens ein einzelner Schuss auf einen Verfolger. **Rapid Shot (+5/+5, je 1W4) ist regeltechnisch vorhanden, wird aber nicht eingesetzt:** Er bleibt nicht für einen vollen Angriff stehen. Keine Bardenboni und keine Zauber.
+- **Zweiter Zug:** weiter fliehen; höchstens ein einzelner Schuss auf einen Verfolger. **Rapid Shot (+5/+5, je 1W4+1) ist regeltechnisch vorhanden, wird aber nicht eingesetzt:** Er bleibt nicht für einen vollen Angriff stehen. Keine Bardenboni und keine Zauber.
 - Bei erster Verwundung oder fallendem Warrior: Flucht priorisieren. Bei abgeschnittenem Weg: Bogen ablegen und ergeben statt bis zum Tod kämpfen. Keine Angriffe auf die Familie, keine Hinrichtungen.
 - Den Heiltrank (1W8+1 TP) nutzt er erst nach erfolgreicher Flucht; er kehrt danach nicht zurück. Bei Aufgabe ist der unbenutzte Trank verhandelbar.
 - Rauch betrifft beide Goblins normal, insbesondere ihre Angriffe und Zähigkeitswürfe. Der Warrior erhält keine zusätzlichen Angriffs- oder Schadensboni.

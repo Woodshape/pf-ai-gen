@@ -1022,7 +1022,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:b33119e25260ca1443e985eb7a9e158684ab7a634b8c7f4599028c45a801bce2",
+  "catalogVersion": "sha256:8d9845490463733d19545777d0f979238b9204c92e3ce143a00c1a49c21b219d",
   "classFeatures": {
     "npc-class-feature.bard-cantrips": {
       "catalogStatus": "resolved",
@@ -20962,6 +20962,58 @@
         ]
       },
       "weightLb": null
+    },
+    "item.composite-shortbow-strength-1": {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "critMultiplier": 3,
+        "damageDieBySize": {
+          "medium": "1d6",
+          "small": "1d4"
+        },
+        "damageType": "P",
+        "handedness": "two-handed",
+        "rangeIncrement": 70,
+        "strengthRating": 1,
+        "twoHanded": true,
+        "weaponCategory": "martial",
+        "weaponType": "shortbow"
+      },
+      "id": "item.composite-shortbow-strength-1",
+      "name": "Composite shortbow (+1 Str)",
+      "priceCp": 15000,
+      "sourceRef": [
+        {
+          "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Shortbow, Composite",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            268,
+            269
+          ]
+        },
+        {
+          "entry": "Composite shortbow damage, range, critical multiplier and weight",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            182,
+            182
+          ]
+        }
+      ],
+      "weightLb": 2,
+      "weightLbBySize": {
+        "medium": 2,
+        "small": 1
+      }
     },
     "item.dagger": {
       "catalogStatus": "gap",

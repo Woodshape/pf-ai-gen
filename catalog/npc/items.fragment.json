@@ -1,6 +1,39 @@
 {
   "records": [
     {
+      "id": "item.composite-shortbow-strength-1",
+      "name": "Composite shortbow (+1 Str)",
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "priceCp": 15000,
+      "weightLb": 2,
+      "weightLbBySize": {"medium": 2, "small": 1},
+      "effects": {
+        "weaponCategory": "martial",
+        "weaponType": "shortbow",
+        "handedness": "two-handed",
+        "twoHanded": true,
+        "rangeIncrement": 70,
+        "strengthRating": 1,
+        "damageDieBySize": {"medium": "1d6", "small": "1d4"},
+        "damageType": "P",
+        "critMultiplier": 3
+      },
+      "sourceRef": [{
+        "sourceId": "source.aon-equipment",
+        "section": "Shortbow, Composite",
+        "entry": "Composite shortbow: 75 gp plus 75 gp for Strength rating +1; capped Strength damage and -2 attack below rating; shortbow proficiency and feats apply",
+        "provenanceStatus": "resolved",
+        "txtLines": [268, 269]
+      }, {
+        "sourceId": "source.aon-equipment",
+        "section": "Table: Weapons",
+        "entry": "Composite shortbow damage, range, critical multiplier and weight",
+        "provenanceStatus": "resolved",
+        "txtLines": [182, 182]
+      }]
+    },
+    {
       "id": "item.alchemists-fire",
       "name": "Alchemist's fire (flask)",
       "catalogStatus": "resolved",
