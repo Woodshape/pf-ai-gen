@@ -1,0 +1,94 @@
+#!/usr/bin/env python3
+"""Build the Benton floorplans from the measured footprint.
+
+Real footprint from the sketch: 9 x 5 squares. One of the five depth squares is
+the front Vordach, so the interior is 9 x 4 squares (45 x 20 ft) plus a 5-ft
+full-width porch. One square = 5 ft = 80 px in this drawing.
+
+Layout: Wohnkueche A over the full front width (45 x 10) plus a back-right nook
+(20 x 10); Schlafkammer C back left (15 x 10, garden window); Speisekammer B
+back middle (10 x 10, garden door).
+
+    python3 .scratch/build_benton_floorplan.py
+"""
+
+from pathlib import Path
+
+OUT = Path(__file__).resolve().parents[1] / "docs/encounters/benton-burning-house"
+
+HEAD = """<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="740" viewBox="0 0 1000 740" role="img" aria-labelledby="title desc">
+<title id="title">Hof der Bentons — Haupthaus</title><desc id="desc">Gemessenes Hausraster neun auf fünf Felder: ein Feld Vordach an der Vorderseite. Die Wohnküche nimmt die ganze vordere Breite und die hintere rechte Ecke ein, hinten links liegt die Schlafkammer mit Gartenfenster, in der Mitte die Speisekammer mit Gartentür. Ein Rasterfeld entspricht fünf Fuß.</desc>
+<defs><pattern id="smoke" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M0 16L16 0" stroke="#555" stroke-width="2" opacity=".3"/></pattern></defs>
+<style>text{font-family:DejaVu Sans,sans-serif;fill:#24221e} .label{font-size:18px;font-weight:bold} .small{font-size:14px} .wall{fill:none;stroke:#292724;stroke-width:9;stroke-linecap:square} .furn{fill:#d1b992;stroke:#776047;stroke-width:2} .token{fill:#fff;stroke:#333;stroke-width:2}</style>
+<rect width="1000" height="740" fill="#faf7ee"/>
+<text x="50" y="45" font-size="28" font-weight="bold">HOF DER BENTONS · HAUPTHAUS</text>
+<text x="50" y="73" class="small">Gemessenes Raster 9 × 5 Felder = 45 × 25 ft · davon 1 Feld Vordach · 1 Feld = 5 ft ≈ 1,5 m</text>
+<text x="80" y="100" class="label">GARTEN / RÜCKSEITE</text>
+<rect x="80" y="120" width="720" height="320" fill="#eee5d2"/>
+<rect x="320" y="120" width="160" height="160" fill="url(#smoke)"/>
+<rect x="80" y="360" width="720" height="80" fill="url(#smoke)"/>
+<g stroke="#b7b0a1" stroke-width="1"><path d="M160 120V440"/><path d="M240 120V440"/><path d="M320 120V440"/><path d="M400 120V440"/><path d="M480 120V440"/><path d="M560 120V440"/><path d="M640 120V440"/><path d="M720 120V440"/><path d="M80 200H800"/><path d="M80 280H800"/><path d="M80 360H800"/></g>
+<rect x="80" y="440" width="720" height="80" fill="#e8d9b8" stroke="#776047" stroke-width="2"/>
+<rect x="360" y="440" width="160" height="80" fill="#efba82" stroke="#b85227" stroke-width="3"/>
+<path d="M380 500l12-32 10 20 13-32 12 44 M460 504l12-35 8 15 12-27 5 44" stroke="#b64120" stroke-width="5" fill="none"/>
+<!-- Furniture leaves the walking routes clear. -->
+<rect class="furn" x="92" y="155" width="90" height="115"/><rect x="96" y="160" width="82" height="26" fill="#eee" stroke="#776047"/>
+<rect class="furn" x="200" y="135" width="95" height="38"/><text x="212" y="161" class="small">Truhe</text>
+<rect class="furn" x="250" y="195" width="38" height="72"/><text x="253" y="190" class="small">Kind</text>
+<rect class="furn" x="330" y="150" width="28" height="110"/><text x="338" y="215" class="small" transform="rotate(-90 338 215)">Regal</text>
+<circle class="furn" cx="442" cy="158" r="18"/><circle class="furn" cx="442" cy="203" r="18"/>
+<rect class="furn" x="585" y="135" width="100" height="55"/><text x="600" y="168" class="small">Holz</text>
+<rect x="705" y="200" width="80" height="70" fill="#b8b0a3" stroke="#666" stroke-width="3"/><text x="719" y="242" class="small">Herd</text>
+<circle cx="640" cy="240" r="12" fill="#c7d8df" stroke="#555"/>
+<rect class="furn" x="320" y="300" width="145" height="65"/><text x="363" y="338" class="small">Tisch</text>
+<rect class="furn" x="330" y="281" width="125" height="13"/><rect class="furn" x="330" y="372" width="125" height="13"/>
+<!-- Outer walls: garden window, garden door and front door are genuine gaps. -->
+<path class="wall" d="M160 120H80V440H400 M460 440H800V120H424 M376 120H240"/>
+<path class="wall" d="M320 120V280 M480 120V280 M80 280H180 M240 280H360 M420 280H480"/>
+<!-- Doors; the bedroom door is closed and wedged. -->
+<path d="M376 120V70 M180 280V225 M400 440V390" fill="none" stroke="#776047" stroke-width="5"/>
+<path d="M360 280V225" fill="none" stroke="#776047" stroke-width="5"/>
+<rect class="furn" x="196" y="257" width="25" height="17"/>
+<path d="M160 110H240 M160 125H240" stroke="#437e9c" stroke-width="3"/>
+<text x="140" y="105" class="small">niedriges Fenster</text><text x="380" y="62" class="small">Tür</text>
+<text x="325" y="272" class="small">offen</text><text x="160" y="352" class="small">verkeilt</text>
+<text x="95" y="143" class="label">C · SCHLAFKAMMER</text><text x="330" y="143" class="label">B · VORRAT</text>
+<text x="95" y="320" class="label">A · WOHNKÜCHE</text>
+<text x="95" y="432" class="small">Dichter Rauch: vorderer 5-ft-Streifen von A</text>
+<text x="545" y="488" class="small">brennend</text>
+<text x="90" y="500" class="label">VORDACH · 5 ft tief</text>
+<text x="80" y="600" class="label">HOF / VORDERSEITE</text>
+<rect x="820" y="160" width="32" height="32" fill="url(#smoke)"/><text x="862" y="180" class="small">Rauch</text>
+<text x="820" y="212" class="small">20 % Verfehlchance</text><text x="820" y="233" class="small">Zähigkeit 15, 16, …</text>
+<text x="820" y="275" class="small">Massive Wände:</text><text x="820" y="296" class="small">Sicht blockiert</text>
+<path d="M80 650H160 M80 641V659 M160 641V659" stroke="#333" stroke-width="3"/><text x="104" y="679" class="small">5 Fuß</text>
+"""
+
+TOKENS = """<circle class="token" cx="400" cy="165" r="20"/><text x="391" y="171" class="label">K</text><circle class="token" cx="400" cy="235" r="20"/><text x="390" y="241" class="label">G</text><circle class="token" cx="137" cy="210" r="19"/><text x="128" y="216" class="label">V</text><circle class="token" cx="215" cy="235" r="19"/><text x="205" y="241" class="label">M</text><circle class="token" cx="269" cy="231" r="15"/><text x="264" y="236" class="small">k</text><text x="820" y="340" class="small">K: Kesselkratzer</text><text x="820" y="362" class="small">G: Goblin Warrior</text><text x="820" y="384" class="small">V: Vater · M: Mutter</text><text x="820" y="406" class="small">k: Kind</text>"""
+
+SL_TAIL = TOKENS + '<text x="400" y="679" class="small">SL-Plan · Figuren markieren Startpositionen</text></svg>\n'
+PLAYER_TAIL = '<text x="400" y="679" class="small">Spielerplan · ohne Figurenpositionen</text></svg>\n'
+
+
+def check():
+    """Guards the measured grid and keeps every figure inside its own room."""
+    scale, left, top = 80, 80, 120
+    assert (800 - left) / scale == 9, "house must be 9 five-foot squares wide"
+    assert (520 - top) / scale == 5, "house plus Vordach must be 5 squares deep"
+    assert (440 - top) / scale == 4, "interior depth is four squares, one is Vordach"
+    rooms = {"C": (80, 120, 320, 280), "B": (320, 120, 480, 280), "A": (80, 280, 800, 440)}
+    # C + B + the front room band + the nook must tile the whole interior.
+    area = ((320 - 80) + (480 - 320)) * (280 - 120) + (800 - 80) * (440 - 280) + (800 - 480) * (280 - 120)
+    assert area == (800 - 80) * (440 - 120), "rooms must cover the interior without gaps"
+    tokens = {"K": ((400, 165), 20, "B"), "G": ((400, 235), 20, "B"), "V": ((137, 210), 19, "C"),
+              "M": ((215, 235), 19, "C"), "k": ((269, 231), 15, "C")}
+    for name, ((cx, cy), r, room) in tokens.items():
+        x0, y0, x1, y1 = rooms[room]
+        assert x0 + r < cx < x1 - r and y0 + r < cy < y1 - r, f"{name} must sit clear of the walls"
+
+
+check()
+
+(OUT / "floorplan.svg").write_text(HEAD + SL_TAIL, encoding="utf-8")
+(OUT / "floorplan-player.svg").write_text(HEAD + PLAYER_TAIL, encoding="utf-8")
+print("wrote both floorplans")
