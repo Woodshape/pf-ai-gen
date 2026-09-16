@@ -2,7 +2,7 @@
 
 **Pathfinder 1e · kurze Rettungsbegegnung nach dem Hofkampf · etwa 20–30 Minuten Spielzeit.**
 
-Für die bisherige Gruppe aus vier SC der Stufe 2, gegebenenfalls mit Bardenbegleitung. Die SC sind angeschlagen: **Rettung statt zweiter Bosskampf.** Das Haus liegt rechts auf der Hofskizze; der Plan ist eine neue, vereinfachte Innenaufteilung, keine maßstabsgetreue Rekonstruktion der Zeichnung. „Commoner-like“ wird hier als schlichte bäuerliche Einrichtung verstanden.
+Für die bisherige Gruppe aus vier SC der Stufe 2, gegebenenfalls mit Bardenbegleitung. Die SC sind angeschlagen: **Rettung statt zweiter Bosskampf.** Das Haus liegt rechts auf der Hofskizze. Sein gemessenes Außenraster von **9 × 5 Feldern = 45 × 25 ft** ist übernommen; ein Feld der Tiefe ist das Vordach, es bleiben 45 × 20 ft Innenfläche. Die Aufteilung in drei Räume und die Einrichtung sind eine vereinfachte Szenenauslegung, keine maßstabsgetreue Rekonstruktion. „Commoner-like“ wird hier als schlichte bäuerliche Einrichtung verstanden.
 
 ## Dateien
 
@@ -40,13 +40,13 @@ Vollständige Regeln, Fertigkeiten und Ausrüstung siehe verlinkte Blätter. Kes
 
 Die Rufe sind **ohne Wahrnehmungswurf** hörbar. Das offene Kammerfenster und die Hintertür sind von außen auffindbar, ohne erst durch das Feuer laufen zu müssen.
 
-## Floorplan: drei Räume, 30 × 25 Fuß
+## Floorplan: drei Räume, 45 × 25 Fuß (9 × 5 Felder)
 
-**Ein Kästchen = 5 Fuß (ca. 1,5 m).** Vorderseite unten/zum Hof; Garten hinten/oben. Kein geografischer Nordpfeil aus der Vorlage abgeleitet.
+**Ein Kästchen = 5 Fuß (ca. 1,5 m).** Der vordere 5-ft-Streifen über die volle Breite ist das **Vordach**; nur der Abschnitt am Eingang brennt. Innen bleiben 45 × 20 ft: Die Wohnküche nimmt die volle vordere Breite und die hintere rechte Ecke ein, die beiden Kammern liegen hinten links und in der Mitte. Vorderseite unten/zum Hof; Garten hinten/oben. Kein geografischer Nordpfeil aus der Vorlage abgeleitet.
 
-1. **A – Wohnküche, 30 × 15 Fuß.** Ein grober Tisch, zwei Bänke, gemauerter Herd, Holzstapel, Wandhaken. Breiter freier Gang zur Tür der Schlafkammer. Der vordere 5-ft-Streifen ist dichter Rauch; ebenso die Speisekammer B. Im restlichen A hängen schwarze Schwaden unter der Decke, aber auf Atemhöhe gilt für diese kurze Szene kein schwerer Rauch. Der Eingang führt unter das brennende Vordach.
-2. **B – Speisekammer, 10 × 10 Fuß.** Regale, Säcke, zwei Fässer, Speck an Haken. Offene Hintertür in den Garten und Innentür nach A. Warrior und Commando plündern hier; der Warrior hat gerade ein Tuch mit einer Fackel versengt. Noch kein zusätzlicher flächiger Zimmerbrand. Ab Beginn der Szene erhalten alle Einatmer in B Rauchwürfe. Kesselkratzer steht einen Schritt vom Freien entfernt.
-3. **C – Schlafkammer, 20 × 10 Fuß.** Strohsackbett, Kinderlager, Truhe, ein einfacher Schemel. Mutter, Kind und Vater sind hier. Die Tür nach A ist geschlossen und von innen mit dem Schemel verkeilt; das niedrige Gartenfenster ist bereits offen. Rauchfreie Atemluft für die Dauer des kurzen Encounters ist eine bewusste Szenenfestlegung, nicht die Behauptung, Türen machten einen Brandraum dauerhaft sicher.
+1. **A – Wohnküche, L-förmig: 45 × 10 Fuß über die volle vordere Breite plus 20 × 10 Fuß hintere rechte Ecke.** Ein grober Tisch, zwei Bänke, gemauerter Herd, Holzstapel, Wasserfass. Freier Gang entlang der Vorderwand zu den Kammern; der Hauptraum ist bewusst kein schmaler Streifen. Der vordere 5-ft-Streifen ist dichter Rauch; ebenso die Speisekammer B. Im restlichen A hängen schwarze Schwaden unter der Decke, aber auf Atemhöhe gilt für diese kurze Szene kein schwerer Rauch. Der Eingang führt unter das brennende Vordach.
+2. **B – Speisekammer, 10 × 10 Fuß.** Regale, Säcke, zwei Fässer, Speck an Haken. Offene Hintertür in den Garten und offene Innentür nach A. Warrior und Commando plündern hier; der Warrior hat gerade ein Tuch mit einer Fackel versengt. Noch kein zusätzlicher flächiger Zimmerbrand. Ab Beginn der Szene erhalten alle Einatmer in B Rauchwürfe. Kesselkratzer steht einen Schritt vom Freien entfernt.
+3. **C – Schlafkammer, 15 × 10 Fuß, hinten links.** Strohsackbett, Kinderlager, Truhe, ein einfacher Schemel. Mutter, Kind und Vater sind hier. Die Tür nach A ist geschlossen und von innen mit dem Schemel verkeilt; das niedrige Gartenfenster ist bereits offen. Rauchfreie Atemluft für die Dauer des kurzen Encounters ist eine bewusste Szenenfestlegung, nicht die Behauptung, Türen machten einen Brandraum dauerhaft sicher.
 
 Möbel sind eingezeichnet, aber kein flächiges schwieriges Gelände. Wer über Tisch/Bett statt durch den freien Gang geht, behandelt dessen Felder als schwieriges Gelände (**SL-Festlegung**). Deckung nur, wenn die tatsächliche Sicht-/Angriffslinie und das Möbelstück sie rechtfertigen.
 

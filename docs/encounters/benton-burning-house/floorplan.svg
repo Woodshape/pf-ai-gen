@@ -1,43 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="900" viewBox="0 0 1000 900" role="img" aria-labelledby="title desc">
-<title id="title">Hof der Bentons — Haupthaus</title><desc id="desc">Drei Räume: Wohnküche vorne, Speisekammer hinten links, Schlafkammer hinten rechts. Eingang mit brennendem Vordach unten, Hintertür und Rettungsfenster oben. Ein Rasterfeld entspricht fünf Fuß.</desc>
-<defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse" x="160" y="140"><path d="M100 0H0V100" fill="none" stroke="#b7b0a1" stroke-width="1"/></pattern><pattern id="smoke" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M0 16L16 0" stroke="#555" stroke-width="2" opacity=".3"/></pattern></defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="740" viewBox="0 0 1000 740" role="img" aria-labelledby="title desc">
+<title id="title">Hof der Bentons — Haupthaus</title><desc id="desc">Gemessenes Hausraster neun auf fünf Felder: ein Feld Vordach an der Vorderseite. Die Wohnküche nimmt die ganze vordere Breite und die hintere rechte Ecke ein, hinten links liegt die Schlafkammer mit Gartenfenster, in der Mitte die Speisekammer mit Gartentür. Ein Rasterfeld entspricht fünf Fuß.</desc>
+<defs><pattern id="smoke" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M0 16L16 0" stroke="#555" stroke-width="2" opacity=".3"/></pattern></defs>
 <style>text{font-family:DejaVu Sans,sans-serif;fill:#24221e} .label{font-size:18px;font-weight:bold} .small{font-size:14px} .wall{fill:none;stroke:#292724;stroke-width:9;stroke-linecap:square} .furn{fill:#d1b992;stroke:#776047;stroke-width:2} .token{fill:#fff;stroke:#333;stroke-width:2}</style>
-<rect width="1000" height="900" fill="#faf7ee"/>
+<rect width="1000" height="740" fill="#faf7ee"/>
 <text x="50" y="45" font-size="28" font-weight="bold">HOF DER BENTONS · HAUPTHAUS</text>
-<text x="50" y="73" class="small">Neue Innenaufteilung · 30 × 25 ft · 1 Feld = 5 ft ≈ 1,5 m</text>
-<text x="160" y="110" class="label">GARTEN / RÜCKSEITE</text>
-<rect x="160" y="140" width="600" height="500" fill="#eee5d2"/>
-<rect x="160" y="140" width="200" height="200" fill="url(#smoke)"/>
-<rect x="160" y="540" width="600" height="100" fill="url(#smoke)"/>
-<g stroke="#b7b0a1" stroke-width="1"><path d="M260 140V640"/><path d="M360 140V640"/><path d="M460 140V640"/><path d="M560 140V640"/><path d="M660 140V640"/><path d="M160 240H760"/><path d="M160 340H760"/><path d="M160 440H760"/><path d="M160 540H760"/></g>
-<!-- Furniture leaves the central walking route clear. -->
-<rect class="furn" x="170" y="180" width="30" height="120"/><text x="178" y="255" class="small" transform="rotate(-90 178 255)">Regal</text>
-<circle class="furn" cx="329" cy="181" r="19"/><circle class="furn" cx="329" cy="225" r="19"/>
-<rect class="furn" x="659" y="170" width="80" height="145"/><rect x="663" y="175" width="72" height="30" fill="#eee" stroke="#776047"/>
-<rect class="furn" x="390" y="175" width="90" height="40"/><text x="400" y="201" class="small">Truhe</text>
-<rect class="furn" x="490" y="180" width="38" height="75"/><text x="491" y="269" class="small">Kinderlager</text>
-<rect class="furn" x="270" y="403" width="145" height="65"/><text x="313" y="441" class="small">Tisch</text>
-<rect class="furn" x="280" y="384" width="125" height="13"/><rect class="furn" x="280" y="475" width="125" height="13"/>
-<rect x="660" y="380" width="85" height="80" fill="#b8b0a3" stroke="#666" stroke-width="3"/><text x="674" y="425" class="small">Herd</text>
-<circle cx="635" cy="435" r="12" fill="#c7d8df" stroke="#555"/>
-<!-- Outer walls: back door, garden window and front door are genuine gaps. -->
-<path class="wall" d="M200 140H160V640H440 M500 640H760V140H650 M550 140H260"/>
-<path class="wall" d="M360 140V340 M160 340H240 M300 340H540 M600 340H760"/>
-<!-- Doors; C is closed and wedged. -->
-<path d="M200 140V85 M240 340V285 M440 640V590" fill="none" stroke="#776047" stroke-width="5"/>
-<path d="M540 340H600" stroke="#776047" stroke-width="6"/><rect class="furn" x="556" y="317" width="25" height="17"/>
-<path d="M550 130H650 M550 145H650" stroke="#437e9c" stroke-width="3"/>
-<text x="195" y="126" class="small">Tür</text><text x="540" y="119" class="small">offenes, niedriges Fenster</text>
-<text x="216" y="324" class="small">offen</text><text x="524" y="365" class="small">verkeilte Tür</text>
-<text x="207" y="163" class="label">B · VORRAT</text><text x="383" y="300" class="label">C · SCHLAFKAMMER</text>
-<text x="179" y="373" class="label">A · WOHNKÜCHE</text>
-<rect x="360" y="647" width="200" height="82" fill="#efba82" stroke="#b85227" stroke-width="3"/>
-<path d="M373 704l12-32 10 20 13-32 12 44 M516 708l12-35 8 15 12-27 5 44" stroke="#b64120" stroke-width="5" fill="none"/>
-<text x="365" y="754" class="label">BRENNENDES VORDACH</text>
-<text x="181" y="620" class="small">Dichter Rauch: vorderer 5-ft-Streifen</text>
-<text x="160" y="795" class="label">HOF / VORDERSEITE</text>
-<rect x="800" y="185" width="32" height="32" fill="url(#smoke)"/><text x="842" y="204" class="small">Rauch</text>
-<text x="799" y="236" class="small">20 % Verfehlchance</text><text x="799" y="257" class="small">Zähigkeit 15, 16, …</text>
-<text x="799" y="299" class="small">Massive Wände:</text><text x="799" y="320" class="small">Sicht blockiert</text>
-<path d="M160 832H260 M160 823V841 M260 823V841" stroke="#333" stroke-width="3"/><text x="184" y="861" class="small">5 Fuß</text>
-<circle class="token" cx="235" cy="195" r="20"/><text x="226" y="201" class="label">K</text><circle class="token" cx="270" cy="275" r="20"/><text x="260" y="281" class="label">G</text><circle class="token" cx="699" cy="252" r="19"/><text x="690" y="258" class="label">V</text><circle class="token" cx="614" cy="242" r="19"/><text x="604" y="248" class="label">M</text><circle class="token" cx="572" cy="236" r="15"/><text x="567" y="241" class="small">k</text><text x="799" y="380" class="small">K: Kesselkratzer</text><text x="799" y="402" class="small">G: Goblin Warrior</text><text x="799" y="424" class="small">V: Vater · M: Mutter</text><text x="799" y="446" class="small">k: Kind</text><text x="400" y="841" class="small">SL-Plan · Figuren markieren Startpositionen</text></svg>
+<text x="50" y="73" class="small">Gemessenes Raster 9 × 5 Felder = 45 × 25 ft · davon 1 Feld Vordach · 1 Feld = 5 ft ≈ 1,5 m</text>
+<text x="80" y="100" class="label">GARTEN / RÜCKSEITE</text>
+<rect x="80" y="120" width="720" height="320" fill="#eee5d2"/>
+<rect x="320" y="120" width="160" height="160" fill="url(#smoke)"/>
+<rect x="80" y="360" width="720" height="80" fill="url(#smoke)"/>
+<g stroke="#b7b0a1" stroke-width="1"><path d="M160 120V440"/><path d="M240 120V440"/><path d="M320 120V440"/><path d="M400 120V440"/><path d="M480 120V440"/><path d="M560 120V440"/><path d="M640 120V440"/><path d="M720 120V440"/><path d="M80 200H800"/><path d="M80 280H800"/><path d="M80 360H800"/></g>
+<rect x="80" y="440" width="720" height="80" fill="#e8d9b8" stroke="#776047" stroke-width="2"/>
+<rect x="360" y="440" width="160" height="80" fill="#efba82" stroke="#b85227" stroke-width="3"/>
+<path d="M380 500l12-32 10 20 13-32 12 44 M460 504l12-35 8 15 12-27 5 44" stroke="#b64120" stroke-width="5" fill="none"/>
+<!-- Furniture leaves the walking routes clear. -->
+<rect class="furn" x="92" y="155" width="90" height="115"/><rect x="96" y="160" width="82" height="26" fill="#eee" stroke="#776047"/>
+<rect class="furn" x="200" y="135" width="95" height="38"/><text x="212" y="161" class="small">Truhe</text>
+<rect class="furn" x="250" y="195" width="38" height="72"/><text x="253" y="190" class="small">Kind</text>
+<rect class="furn" x="330" y="150" width="28" height="110"/><text x="338" y="215" class="small" transform="rotate(-90 338 215)">Regal</text>
+<circle class="furn" cx="442" cy="158" r="18"/><circle class="furn" cx="442" cy="203" r="18"/>
+<rect class="furn" x="585" y="135" width="100" height="55"/><text x="600" y="168" class="small">Holz</text>
+<rect x="705" y="200" width="80" height="70" fill="#b8b0a3" stroke="#666" stroke-width="3"/><text x="719" y="242" class="small">Herd</text>
+<circle cx="640" cy="240" r="12" fill="#c7d8df" stroke="#555"/>
+<rect class="furn" x="320" y="300" width="145" height="65"/><text x="363" y="338" class="small">Tisch</text>
+<rect class="furn" x="330" y="281" width="125" height="13"/><rect class="furn" x="330" y="372" width="125" height="13"/>
+<!-- Outer walls: garden window, garden door and front door are genuine gaps. -->
+<path class="wall" d="M160 120H80V440H400 M460 440H800V120H424 M376 120H240"/>
+<path class="wall" d="M320 120V280 M480 120V280 M80 280H180 M240 280H360 M420 280H480"/>
+<!-- Doors; the bedroom door is closed and wedged. -->
+<path d="M376 120V70 M180 280V225 M400 440V390" fill="none" stroke="#776047" stroke-width="5"/>
+<path d="M360 280V225" fill="none" stroke="#776047" stroke-width="5"/>
+<rect class="furn" x="196" y="257" width="25" height="17"/>
+<path d="M160 110H240 M160 125H240" stroke="#437e9c" stroke-width="3"/>
+<text x="140" y="105" class="small">niedriges Fenster</text><text x="380" y="62" class="small">Tür</text>
+<text x="325" y="272" class="small">offen</text><text x="160" y="352" class="small">verkeilt</text>
+<text x="95" y="143" class="label">C · SCHLAFKAMMER</text><text x="330" y="143" class="label">B · VORRAT</text>
+<text x="95" y="320" class="label">A · WOHNKÜCHE</text>
+<text x="95" y="432" class="small">Dichter Rauch: vorderer 5-ft-Streifen von A</text>
+<text x="545" y="488" class="small">brennend</text>
+<text x="90" y="500" class="label">VORDACH · 5 ft tief</text>
+<text x="80" y="600" class="label">HOF / VORDERSEITE</text>
+<rect x="820" y="160" width="32" height="32" fill="url(#smoke)"/><text x="862" y="180" class="small">Rauch</text>
+<text x="820" y="212" class="small">20 % Verfehlchance</text><text x="820" y="233" class="small">Zähigkeit 15, 16, …</text>
+<text x="820" y="275" class="small">Massive Wände:</text><text x="820" y="296" class="small">Sicht blockiert</text>
+<path d="M80 650H160 M80 641V659 M160 641V659" stroke="#333" stroke-width="3"/><text x="104" y="679" class="small">5 Fuß</text>
+<circle class="token" cx="400" cy="165" r="20"/><text x="391" y="171" class="label">K</text><circle class="token" cx="400" cy="235" r="20"/><text x="390" y="241" class="label">G</text><circle class="token" cx="137" cy="210" r="19"/><text x="128" y="216" class="label">V</text><circle class="token" cx="215" cy="235" r="19"/><text x="205" y="241" class="label">M</text><circle class="token" cx="269" cy="231" r="15"/><text x="264" y="236" class="small">k</text><text x="820" y="340" class="small">K: Kesselkratzer</text><text x="820" y="362" class="small">G: Goblin Warrior</text><text x="820" y="384" class="small">V: Vater · M: Mutter</text><text x="820" y="406" class="small">k: Kind</text><text x="400" y="679" class="small">SL-Plan · Figuren markieren Startpositionen</text></svg>
