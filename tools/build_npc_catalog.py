@@ -65,6 +65,9 @@ SOURCE_FILES = (
     ("source.aon-druid", "sources/npc/aonprd/druid.txt", "Official current AoN Druid class rules and level progression"),
     ("source.aon-sorcerer", "sources/npc/aonprd/sorcerer.txt", "Official current AoN Sorcerer class rules"),
     ("source.aon-fire-domain", "sources/npc/aonprd/fire-domain.txt", "Official current AoN Fire domain powers and domain spell list"),
+    ("source.aon-water-domain", "sources/npc/aonprd/water-domain.txt", "Official current AoN Water domain powers and domain spell list"),
+    ("source.aon-travel-domain", "sources/npc/aonprd/travel-domain.txt", "Official current AoN Travel domain powers and domain spell list"),
+    ("source.aon-knowledge-domain", "sources/npc/aonprd/knowledge-domain.txt", "Official current AoN Knowledge domain powers and domain spell list"),
     ("source.aon-elemental-bloodline", "sources/npc/aonprd/elemental-bloodline.txt", "Official current AoN Elemental bloodline rules"),
     ("source.aon-wands", "sources/npc/aonprd/wands.txt", "Official current AoN Core wand rules"),
     ("source.aon-use-magic-device", "sources/npc/aonprd/use-magic-device.txt", "Official current AoN Use Magic Device rules"),
@@ -118,6 +121,7 @@ SOURCE_FILES = (
         "entangle", "produce-flame", "summon-natures-ally-i", "summon-natures-ally-ii",
         "charm-person", "sleep", "silent-image", "feather-fall",
         "dancing-lights", "message",
+        "guidance", "create-water", "longstrider", "obscuring-mist", "fog-cloud", "resist-energy",
     )),
 )
 

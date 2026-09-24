@@ -403,30 +403,133 @@
       ]
     },
     {
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
+      "allowedValues": [
+        "knowledge-travel"
+      ],
+      "catalogStatus": "resolved",
+      "choiceId": "domains",
       "id": "npc-class-feature.cleric-domains",
       "kind": "choice-slot",
       "name": "Cleric domains",
+      "options": {
+        "knowledge-travel": {
+          "domains": [
+            "npc-class-feature.knowledge-domain",
+            "npc-class-feature.travel-domain"
+          ],
+          "name": "Knowledge and Travel domains"
+        }
+      },
       "sourceRef": [
         {
-          "entry": "Five NPC class tables through level 20",
-          "provenanceStatus": "catalog-gap",
-          "section": "NPC Source-Gap Matrix",
-          "sourceId": "source.npc-gap-matrix",
+          "entry": "A cleric chooses two domains, gains one domain spell slot per castable level, and prepares one spell from either domain each day",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Domains",
+          "sourceId": "source.aon-cleric",
           "txtLines": [
-            21,
-            21
+            44,
+            46
+          ]
+        }
+      ]
+    },
+    {
+      "catalogStatus": "resolved",
+      "effects": {
+        "mayBePreparedMultipleTimes": true,
+        "notExpendedWhenCast": true
+      },
+      "id": "npc-class-feature.cleric-orisons",
+      "kind": "automatic",
+      "name": "Orisons",
+      "sourceRef": [
+        {
+          "entry": "Cleric orisons are 0-level spells that are not expended when cast",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Orisons",
+          "sourceId": "source.aon-cleric",
+          "txtLines": [
+            48,
+            48
+          ]
+        }
+      ]
+    },
+    {
+      "catalogStatus": "resolved",
+      "effects": {
+        "armorProficiencies": [
+          "light",
+          "medium"
+        ],
+        "shieldProficiencies": "shields except tower shields",
+        "weaponProficiencies": [
+          "simple"
+        ]
+      },
+      "id": "npc-class-feature.cleric-proficiencies",
+      "kind": "automatic",
+      "name": "Weapon and Armor Proficiency",
+      "sourceRef": [
+        {
+          "entry": "Clerics are proficient with all simple weapons, light armor, medium armor, and shields except tower shields",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Weapon and Armor Proficiency",
+          "sourceId": "source.aon-cleric",
+          "txtLines": [
+            35,
+            35
+          ]
+        }
+      ]
+    },
+    {
+      "catalogStatus": "resolved",
+      "effects": {
+        "castingAbility": "wisdom",
+        "castingMode": "prepared",
+        "spontaneousConversion": {
+          "excludesDomainSlots": true,
+          "from": "prepared",
+          "name": "Spontaneous Casting",
+          "spellIdsBySlotLevel": {
+            "1": [
+              "spell.cure-light-wounds"
+            ],
+            "2": [
+              "spell.cure-light-wounds",
+              "spell.cure-moderate-wounds"
+            ]
+          }
+        }
+      },
+      "id": "npc-class-feature.cleric-spellcasting",
+      "kind": "automatic",
+      "name": "Spells",
+      "sourceRef": [
+        {
+          "entry": "A cleric prepares divine spells in advance and uses Wisdom to determine bonus spells and save DCs",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Spells",
+          "sourceId": "source.aon-cleric",
+          "txtLines": [
+            37,
+            40
           ]
         },
         {
-          "entry": "Step 5: Class Features - choice slots",
-          "provenanceStatus": "structural-reference",
-          "section": "NPC_MODE_PLAN.md",
-          "sourceId": "source.npc-mode-plan",
+          "entry": "A good cleric can convert a prepared non-orison, non-domain spell into a cure spell of the same level or lower",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Spontaneous Casting",
+          "sourceId": "source.aon-cleric",
           "txtLines": [
-            501,
-            513
+            49,
+            49
           ]
         }
       ]
@@ -808,6 +911,10 @@
         "fire-domain": {
           "featureId": "npc-class-feature.fire-domain",
           "name": "Fire domain"
+        },
+        "water-domain": {
+          "featureId": "npc-class-feature.water-domain",
+          "name": "Water domain"
         }
       },
       "sourceRef": [
@@ -1054,6 +1161,150 @@
           "txtLines": [
             1,
             15
+          ]
+        }
+      ]
+    },
+    {
+      "catalogStatus": "resolved",
+      "domainSpells": {
+        "1": "spell.comprehend-languages",
+        "2": "spell.detect-thoughts"
+      },
+      "effects": {
+        "classSkillExpansion": "all-knowledge"
+      },
+      "id": "npc-class-feature.knowledge-domain",
+      "kind": "automatic",
+      "name": "Knowledge Domain",
+      "powers": [
+        {
+          "actionCost": "standard",
+          "attackType": "touch",
+          "level": 1,
+          "name": "Lore Keeper",
+          "skillCheckAbility": "wisdom",
+          "skillCheckBase": 15,
+          "skillCheckPlusClassLevel": true
+        }
+      ],
+      "slotsPerSpellLevel": 1,
+      "sourceRef": [
+        {
+          "entry": "Knowledge domain granted powers and first two domain spells",
+          "officialUrl": "https://aonprd.com/DomainDisplay.aspx?ItemName=Knowledge",
+          "provenanceStatus": "resolved",
+          "section": "Granted Powers; Domain Spells",
+          "sourceId": "source.aon-knowledge-domain",
+          "txtLines": [
+            4,
+            7
+          ]
+        },
+        {
+          "entry": "One domain slot per castable spell level",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Domains",
+          "sourceId": "source.aon-cleric",
+          "txtLines": [
+            45,
+            45
+          ]
+        }
+      ]
+    },
+    {
+      "catalogStatus": "resolved",
+      "domainSpells": {
+        "1": "spell.longstrider",
+        "2": "spell.locate-object"
+      },
+      "effects": {
+        "speedBonus": 10
+      },
+      "id": "npc-class-feature.travel-domain",
+      "kind": "automatic",
+      "name": "Travel Domain",
+      "powers": [
+        {
+          "actionCost": "free",
+          "level": 1,
+          "name": "Agile Feet",
+          "usesAbility": "wisdom",
+          "usesBase": 3
+        }
+      ],
+      "slotsPerSpellLevel": 1,
+      "sourceRef": [
+        {
+          "entry": "Travel domain grants +10 feet base speed, Agile Feet, and the first two domain spells",
+          "officialUrl": "https://aonprd.com/DomainDisplay.aspx?ItemName=Travel",
+          "provenanceStatus": "resolved",
+          "section": "Granted Powers; Domain Spells",
+          "sourceId": "source.aon-travel-domain",
+          "txtLines": [
+            4,
+            7
+          ]
+        },
+        {
+          "entry": "One domain slot per castable spell level",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Domains",
+          "sourceId": "source.aon-cleric",
+          "txtLines": [
+            45,
+            45
+          ]
+        }
+      ]
+    },
+    {
+      "catalogStatus": "resolved",
+      "domainSpells": {
+        "1": "spell.obscuring-mist",
+        "2": "spell.fog-cloud"
+      },
+      "id": "npc-class-feature.water-domain",
+      "kind": "automatic",
+      "name": "Water Domain",
+      "powers": [
+        {
+          "attackType": "ranged touch",
+          "damageBonusPerTwoLevels": 1,
+          "damageDie": "1d6",
+          "damageType": "cold",
+          "level": 1,
+          "name": "Icicle",
+          "range": "30 ft.",
+          "usesAbility": "wisdom",
+          "usesBase": 3
+        }
+      ],
+      "slotsPerSpellLevel": 1,
+      "sourceRef": [
+        {
+          "entry": "Water domain granted powers and first two domain spells",
+          "officialUrl": "https://aonprd.com/DomainDisplay.aspx?ItemName=Water",
+          "provenanceStatus": "resolved",
+          "section": "Granted Powers; Domain Spells",
+          "sourceId": "source.aon-water-domain",
+          "txtLines": [
+            4,
+            7
+          ]
+        },
+        {
+          "entry": "One domain slot per castable spell level",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Domains",
+          "sourceId": "source.aon-cleric",
+          "txtLines": [
+            45,
+            45
           ]
         }
       ]

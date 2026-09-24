@@ -59,7 +59,7 @@ Quelle: <https://naggaroth.daerma.com/prd/bestiary/mephit.html> (Bestiary 1)
 N Small outsider (fire)
 Init +6; Senses darkvision 60 ft.; Perception +6
 AC 17, touch 14, flat-footed 14 (+2 Dex, +1 dodge, +3 natural, +1 size)
-hp 19 (3d10+3); fast healing 2 (nur in Kontakt mit Feuer)
+hp 19 (3d10+3); fast healing 2 (only while in contact with fire)
 Fort +2, Ref +5, Will +3
 DR 5/magic; Immune fire; Weaknesses vulnerability to cold
 Speed 30 ft., fly 40 ft. (average)
@@ -143,7 +143,7 @@ N Tiny outsider (elemental, fire)
 AC 14; hp 19
 Melee 2 tendrils +9 (1d3+2 plus burn)
 Special Attacks burn (1d6, DC 14)
-Aura resonance (Su): +2 auf Angriff und Schaden für Feuerkreaturen im Umkreis von 30 ft.
+Aura resonance (Su): +2 on attack and damage rolls for fire creatures within 30 ft.
 ```
 
 **Einsatz:** Skalierungsoption, wenn die Gruppe die Herde zu leicht findet.

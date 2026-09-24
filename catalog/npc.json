@@ -1022,7 +1022,7 @@
     "spellRules": "gap",
     "typedPrerequisites": "policy-schema-ready"
   },
-  "catalogVersion": "sha256:8d9845490463733d19545777d0f979238b9204c92e3ce143a00c1a49c21b219d",
+  "catalogVersion": "sha256:d88b63f41be1a234971a296b3cc1dcb46492decbc06a4a29fdbd8f47de83373d",
   "classFeatures": {
     "npc-class-feature.bard-cantrips": {
       "catalogStatus": "resolved",
@@ -1216,34 +1216,143 @@
       ]
     },
     "npc-class-feature.cleric-domains": {
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-class-tables",
+      "allowedValues": [
+        "knowledge-travel"
+      ],
+      "catalogStatus": "resolved",
+      "choiceId": "domains",
       "id": "npc-class-feature.cleric-domains",
       "kind": "choice-slot",
       "name": "Cleric domains",
+      "options": {
+        "knowledge-travel": {
+          "domains": [
+            "npc-class-feature.knowledge-domain",
+            "npc-class-feature.travel-domain"
+          ],
+          "name": "Knowledge and Travel domains"
+        }
+      },
       "sourceRef": [
         {
-          "entry": "Five NPC class tables through level 20",
-          "file": "docs/npc-source-gap-matrix.md",
-          "provenanceStatus": "catalog-gap",
-          "section": "NPC Source-Gap Matrix",
-          "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-          "sourceId": "source.npc-gap-matrix",
+          "entry": "A cleric chooses two domains, gains one domain spell slot per castable level, and prepares one spell from either domain each day",
+          "file": "sources/npc/aonprd/cleric.txt",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Domains",
+          "sha256": "a31087ad6598a80d691dcb5b5759f8a8fd7dd67b2c7a14bdf5ddbef1421b849e",
+          "sourceId": "source.aon-cleric",
           "txtLines": [
-            21,
-            21
+            44,
+            46
+          ]
+        }
+      ]
+    },
+    "npc-class-feature.cleric-orisons": {
+      "catalogStatus": "resolved",
+      "effects": {
+        "mayBePreparedMultipleTimes": true,
+        "notExpendedWhenCast": true
+      },
+      "id": "npc-class-feature.cleric-orisons",
+      "kind": "automatic",
+      "name": "Orisons",
+      "sourceRef": [
+        {
+          "entry": "Cleric orisons are 0-level spells that are not expended when cast",
+          "file": "sources/npc/aonprd/cleric.txt",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Orisons",
+          "sha256": "a31087ad6598a80d691dcb5b5759f8a8fd7dd67b2c7a14bdf5ddbef1421b849e",
+          "sourceId": "source.aon-cleric",
+          "txtLines": [
+            48,
+            48
+          ]
+        }
+      ]
+    },
+    "npc-class-feature.cleric-proficiencies": {
+      "catalogStatus": "resolved",
+      "effects": {
+        "armorProficiencies": [
+          "light",
+          "medium"
+        ],
+        "shieldProficiencies": "shields except tower shields",
+        "weaponProficiencies": [
+          "simple"
+        ]
+      },
+      "id": "npc-class-feature.cleric-proficiencies",
+      "kind": "automatic",
+      "name": "Weapon and Armor Proficiency",
+      "sourceRef": [
+        {
+          "entry": "Clerics are proficient with all simple weapons, light armor, medium armor, and shields except tower shields",
+          "file": "sources/npc/aonprd/cleric.txt",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Weapon and Armor Proficiency",
+          "sha256": "a31087ad6598a80d691dcb5b5759f8a8fd7dd67b2c7a14bdf5ddbef1421b849e",
+          "sourceId": "source.aon-cleric",
+          "txtLines": [
+            35,
+            35
+          ]
+        }
+      ]
+    },
+    "npc-class-feature.cleric-spellcasting": {
+      "catalogStatus": "resolved",
+      "effects": {
+        "castingAbility": "wisdom",
+        "castingMode": "prepared",
+        "spontaneousConversion": {
+          "excludesDomainSlots": true,
+          "from": "prepared",
+          "name": "Spontaneous Casting",
+          "spellIdsBySlotLevel": {
+            "1": [
+              "spell.cure-light-wounds"
+            ],
+            "2": [
+              "spell.cure-light-wounds",
+              "spell.cure-moderate-wounds"
+            ]
+          }
+        }
+      },
+      "id": "npc-class-feature.cleric-spellcasting",
+      "kind": "automatic",
+      "name": "Spells",
+      "sourceRef": [
+        {
+          "entry": "A cleric prepares divine spells in advance and uses Wisdom to determine bonus spells and save DCs",
+          "file": "sources/npc/aonprd/cleric.txt",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Spells",
+          "sha256": "a31087ad6598a80d691dcb5b5759f8a8fd7dd67b2c7a14bdf5ddbef1421b849e",
+          "sourceId": "source.aon-cleric",
+          "txtLines": [
+            37,
+            40
           ]
         },
         {
-          "entry": "Step 5: Class Features - choice slots",
-          "file": "NPC_MODE_PLAN.md",
-          "provenanceStatus": "structural-reference",
-          "section": "NPC_MODE_PLAN.md",
-          "sha256": "934c509d33764d284d124597af2efd82c7d4a18b92605e47d13d56e424afe3b5",
-          "sourceId": "source.npc-mode-plan",
+          "entry": "A good cleric can convert a prepared non-orison, non-domain spell into a cure spell of the same level or lower",
+          "file": "sources/npc/aonprd/cleric.txt",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Spontaneous Casting",
+          "sha256": "a31087ad6598a80d691dcb5b5759f8a8fd7dd67b2c7a14bdf5ddbef1421b849e",
+          "sourceId": "source.aon-cleric",
           "txtLines": [
-            501,
-            513
+            49,
+            49
           ]
         }
       ]
@@ -2272,6 +2381,10 @@
         "fire-domain": {
           "featureId": "npc-class-feature.fire-domain",
           "name": "Fire domain"
+        },
+        "water-domain": {
+          "featureId": "npc-class-feature.water-domain",
+          "name": "Water domain"
         }
       },
       "sourceRef": [
@@ -2975,6 +3088,59 @@
           14
         ]
       }
+    },
+    "npc-class-feature.knowledge-domain": {
+      "catalogStatus": "resolved",
+      "domainSpells": {
+        "1": "spell.comprehend-languages",
+        "2": "spell.detect-thoughts"
+      },
+      "effects": {
+        "classSkillExpansion": "all-knowledge"
+      },
+      "id": "npc-class-feature.knowledge-domain",
+      "kind": "automatic",
+      "name": "Knowledge Domain",
+      "powers": [
+        {
+          "actionCost": "standard",
+          "attackType": "touch",
+          "level": 1,
+          "name": "Lore Keeper",
+          "skillCheckAbility": "wisdom",
+          "skillCheckBase": 15,
+          "skillCheckPlusClassLevel": true
+        }
+      ],
+      "slotsPerSpellLevel": 1,
+      "sourceRef": [
+        {
+          "entry": "Knowledge domain granted powers and first two domain spells",
+          "file": "sources/npc/aonprd/knowledge-domain.txt",
+          "officialUrl": "https://aonprd.com/DomainDisplay.aspx?ItemName=Knowledge",
+          "provenanceStatus": "resolved",
+          "section": "Granted Powers; Domain Spells",
+          "sha256": "949511ae32452fcb75ab13012fdd98f45b5e2ce2a8a4a57c086a3edde700a0b7",
+          "sourceId": "source.aon-knowledge-domain",
+          "txtLines": [
+            4,
+            7
+          ]
+        },
+        {
+          "entry": "One domain slot per castable spell level",
+          "file": "sources/npc/aonprd/cleric.txt",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Domains",
+          "sha256": "a31087ad6598a80d691dcb5b5759f8a8fd7dd67b2c7a14bdf5ddbef1421b849e",
+          "sourceId": "source.aon-cleric",
+          "txtLines": [
+            45,
+            45
+          ]
+        }
+      ]
     },
     "npc-class-feature.monk-bonus-feats": {
       "catalogStatus": "gap",
@@ -3699,6 +3865,57 @@
         }
       ]
     },
+    "npc-class-feature.travel-domain": {
+      "catalogStatus": "resolved",
+      "domainSpells": {
+        "1": "spell.longstrider",
+        "2": "spell.locate-object"
+      },
+      "effects": {
+        "speedBonus": 10
+      },
+      "id": "npc-class-feature.travel-domain",
+      "kind": "automatic",
+      "name": "Travel Domain",
+      "powers": [
+        {
+          "actionCost": "free",
+          "level": 1,
+          "name": "Agile Feet",
+          "usesAbility": "wisdom",
+          "usesBase": 3
+        }
+      ],
+      "slotsPerSpellLevel": 1,
+      "sourceRef": [
+        {
+          "entry": "Travel domain grants +10 feet base speed, Agile Feet, and the first two domain spells",
+          "file": "sources/npc/aonprd/travel-domain.txt",
+          "officialUrl": "https://aonprd.com/DomainDisplay.aspx?ItemName=Travel",
+          "provenanceStatus": "resolved",
+          "section": "Granted Powers; Domain Spells",
+          "sha256": "b0db844238bbde67ae3b533f627fd5a7aacd88c090b4739ff9f6765859391e6c",
+          "sourceId": "source.aon-travel-domain",
+          "txtLines": [
+            4,
+            7
+          ]
+        },
+        {
+          "entry": "One domain slot per castable spell level",
+          "file": "sources/npc/aonprd/cleric.txt",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Domains",
+          "sha256": "a31087ad6598a80d691dcb5b5759f8a8fd7dd67b2c7a14bdf5ddbef1421b849e",
+          "sourceId": "source.aon-cleric",
+          "txtLines": [
+            45,
+            45
+          ]
+        }
+      ]
+    },
     "npc-class-feature.versatile-performance": {
       "catalogStatus": "resolved",
       "effects": {},
@@ -3748,6 +3965,58 @@
           171
         ]
       }
+    },
+    "npc-class-feature.water-domain": {
+      "catalogStatus": "resolved",
+      "domainSpells": {
+        "1": "spell.obscuring-mist",
+        "2": "spell.fog-cloud"
+      },
+      "id": "npc-class-feature.water-domain",
+      "kind": "automatic",
+      "name": "Water Domain",
+      "powers": [
+        {
+          "attackType": "ranged touch",
+          "damageBonusPerTwoLevels": 1,
+          "damageDie": "1d6",
+          "damageType": "cold",
+          "level": 1,
+          "name": "Icicle",
+          "range": "30 ft.",
+          "usesAbility": "wisdom",
+          "usesBase": 3
+        }
+      ],
+      "slotsPerSpellLevel": 1,
+      "sourceRef": [
+        {
+          "entry": "Water domain granted powers and first two domain spells",
+          "file": "sources/npc/aonprd/water-domain.txt",
+          "officialUrl": "https://aonprd.com/DomainDisplay.aspx?ItemName=Water",
+          "provenanceStatus": "resolved",
+          "section": "Granted Powers; Domain Spells",
+          "sha256": "2466bffeeaaf0dba75256ca76fe467f1fd57ac81125ea89cc5202580dc22906e",
+          "sourceId": "source.aon-water-domain",
+          "txtLines": [
+            4,
+            7
+          ]
+        },
+        {
+          "entry": "One domain slot per castable spell level",
+          "file": "sources/npc/aonprd/cleric.txt",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Domains",
+          "sha256": "a31087ad6598a80d691dcb5b5759f8a8fd7dd67b2c7a14bdf5ddbef1421b849e",
+          "sourceId": "source.aon-cleric",
+          "txtLines": [
+            45,
+            45
+          ]
+        }
+      ]
     },
     "npc-class-feature.well-versed": {
       "catalogStatus": "resolved",
@@ -5932,7 +6201,7 @@
     "npc-class.cleric": {
       "castingAbility": "wisdom",
       "castingMode": "prepared",
-      "catalogStatus": "gap",
+      "catalogStatus": "resolved",
       "category": "pc",
       "classSkills": [
         "skill.appraise",
@@ -5955,9 +6224,15 @@
       "levels": {
         "1": {
           "bab": 0,
-          "catalogStatus": "gap",
-          "choiceSlots": null,
-          "featureGrants": null,
+          "catalogStatus": "resolved",
+          "choiceSlots": [],
+          "featureGrants": [
+            "npc-class-feature.cleric-proficiencies",
+            "npc-class-feature.cleric-spellcasting",
+            "npc-class-feature.cleric-orisons",
+            "npc-class-feature.cleric-channel-energy",
+            "npc-class-feature.cleric-domains"
+          ],
           "fortitude": 2,
           "hitDie": "d8",
           "level": 1,
@@ -5965,7 +6240,7 @@
           "skillSelections": 2,
           "sourceRef": [
             {
-              "entry": "Cleric level 1 base attack, saves, and base spells per day (domain slot granted separately by the chosen domains)",
+              "entry": "Cleric level 1 base attack, saves, and base spells per day; the +1 domain slot is granted separately by the chosen domains",
               "file": "sources/npc/aonprd/cleric.txt",
               "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
               "provenanceStatus": "resolved",
@@ -5974,19 +6249,20 @@
               "sourceId": "source.aon-cleric",
               "txtLines": [
                 14,
-                15
+                17
               ]
             },
             {
-              "entry": "Cleric level 1 remains a catalog gap: divine prepared casting runtime, domain choices, and channel energy type are unimplemented",
-              "file": "docs/npc-source-gap-matrix.md",
-              "provenanceStatus": "catalog-gap",
-              "section": "NPC Source-Gap Matrix",
-              "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-              "sourceId": "source.npc-gap-matrix",
+              "entry": "Cleric level 1 grants proficiencies, prepared divine casting, orisons, channel energy, and two domains",
+              "file": "sources/npc/aonprd/cleric.txt",
+              "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+              "provenanceStatus": "resolved",
+              "section": "Weapon and Armor Proficiency; Spells; Channel Energy; Domains; Orisons",
+              "sha256": "a31087ad6598a80d691dcb5b5759f8a8fd7dd67b2c7a14bdf5ddbef1421b849e",
+              "sourceId": "source.aon-cleric",
               "txtLines": [
-                22,
-                22
+                35,
+                51
               ]
             }
           ],
@@ -6237,28 +6513,33 @@
           "will": null
         },
         "2": {
-          "bab": null,
-          "catalogStatus": "gap",
-          "choiceSlots": null,
-          "featureGrants": null,
-          "fortitude": null,
-          "hitDie": null,
+          "bab": 1,
+          "catalogStatus": "resolved",
+          "choiceSlots": [],
+          "featureGrants": [],
+          "fortitude": 3,
+          "hitDie": "d8",
           "level": 2,
-          "reflex": null,
-          "skillSelections": null,
+          "reflex": 0,
+          "skillSelections": 2,
           "sourceRef": {
-            "entry": "Cleric level 2",
-            "file": "docs/npc-source-gap-matrix.md",
-            "provenanceStatus": "catalog-gap",
-            "section": "NPC Source-Gap Matrix",
-            "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-            "sourceId": "source.npc-gap-matrix",
+            "entry": "Cleric level 2 base attack, saves, and base spells per day",
+            "file": "sources/npc/aonprd/cleric.txt",
+            "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+            "provenanceStatus": "resolved",
+            "section": "Table: Cleric",
+            "sha256": "a31087ad6598a80d691dcb5b5759f8a8fd7dd67b2c7a14bdf5ddbef1421b849e",
+            "sourceId": "source.aon-cleric",
             "txtLines": [
-              22,
-              22
+              16,
+              16
             ]
           },
-          "will": null
+          "spellsPerDay": {
+            "0": 4,
+            "1": 2
+          },
+          "will": 3
         },
         "20": {
           "bab": null,
@@ -6285,28 +6566,34 @@
           "will": null
         },
         "3": {
-          "bab": null,
-          "catalogStatus": "gap",
-          "choiceSlots": null,
-          "featureGrants": null,
-          "fortitude": null,
-          "hitDie": null,
+          "bab": 2,
+          "catalogStatus": "resolved",
+          "choiceSlots": [],
+          "featureGrants": [],
+          "fortitude": 3,
+          "hitDie": "d8",
           "level": 3,
-          "reflex": null,
-          "skillSelections": null,
+          "reflex": 1,
+          "skillSelections": 2,
           "sourceRef": {
-            "entry": "Cleric level 3",
-            "file": "docs/npc-source-gap-matrix.md",
-            "provenanceStatus": "catalog-gap",
-            "section": "NPC Source-Gap Matrix",
-            "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-            "sourceId": "source.npc-gap-matrix",
+            "entry": "Cleric level 3 base attack, saves, and base spells per day",
+            "file": "sources/npc/aonprd/cleric.txt",
+            "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+            "provenanceStatus": "resolved",
+            "section": "Table: Cleric",
+            "sha256": "a31087ad6598a80d691dcb5b5759f8a8fd7dd67b2c7a14bdf5ddbef1421b849e",
+            "sourceId": "source.aon-cleric",
             "txtLines": [
-              22,
-              22
+              17,
+              17
             ]
           },
-          "will": null
+          "spellsPerDay": {
+            "0": 4,
+            "1": 2,
+            "2": 1
+          },
+          "will": 3
         },
         "4": {
           "bab": null,
@@ -6457,7 +6744,7 @@
       "skillSelections": 2,
       "sourceRef": [
         {
-          "entry": "Cleric class description, class skills, and skill points; level rows remain catalog gaps",
+          "entry": "Cleric class description, class skills, and skill points",
           "file": "sources/npc/aonprd/cleric.txt",
           "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
           "provenanceStatus": "resolved",
@@ -6470,17 +6757,23 @@
           ]
         },
         {
-          "entry": "Eleven Core PC class tables through level 20",
-          "file": "docs/npc-source-gap-matrix.md",
-          "provenanceStatus": "catalog-gap",
-          "section": "NPC Source-Gap Matrix",
-          "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-          "sourceId": "source.npc-gap-matrix",
+          "entry": "Cleric level rows, proficiencies, prepared divine casting, channel energy, domains, and orisons",
+          "file": "sources/npc/aonprd/cleric.txt",
+          "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+          "provenanceStatus": "resolved",
+          "section": "Table: Cleric; class features through level 3",
+          "sha256": "a31087ad6598a80d691dcb5b5759f8a8fd7dd67b2c7a14bdf5ddbef1421b849e",
+          "sourceId": "source.aon-cleric",
           "txtLines": [
-            22,
-            22
+            13,
+            51
           ]
         }
+      ],
+      "supportedLevels": [
+        1,
+        2,
+        3
       ]
     },
     "npc-class.commoner": {
@@ -21654,6 +21947,59 @@
       },
       "weightLb": null
     },
+    "item.light-mace": {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "critMultiplier": 2,
+        "critRange": 20,
+        "damageDieBySize": {
+          "medium": "1d6",
+          "small": "1d4"
+        },
+        "damageType": "B",
+        "handedness": "light",
+        "lightWeapon": true,
+        "weaponCategory": "simple",
+        "weaponType": "light-mace"
+      },
+      "id": "item.light-mace",
+      "name": "Light Mace",
+      "priceCp": 500,
+      "sourceRef": [
+        {
+          "entry": "Mace, light\t5 gp\t1d4\t1d6\t×2\t—\t4 lbs.\tB\t—",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons; Light Melee Weapons",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            113,
+            117
+          ]
+        },
+        {
+          "entry": "Armor fitted for Small characters weighs half as much",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+          "provenanceStatus": "resolved",
+          "section": "Weapon weight by size",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            117,
+            117
+          ]
+        }
+      ],
+      "weightLb": 4,
+      "weightLbBySize": {
+        "medium": 4,
+        "small": 2
+      }
+    },
     "item.light-steel-shield": {
       "catalogStatus": "resolved",
       "category": "shield",
@@ -21679,6 +22025,51 @@
         ]
       },
       "weightLb": 6
+    },
+    "item.light-wooden-shield": {
+      "catalogStatus": "resolved",
+      "category": "shield",
+      "effects": {
+        "armorCheckPenalty": -1,
+        "shieldBonus": 1,
+        "shieldCategory": "shield"
+      },
+      "id": "item.light-wooden-shield",
+      "name": "Light Wooden Shield",
+      "priceCp": 300,
+      "sourceRef": [
+        {
+          "entry": "Shield, light wooden\t3 gp\t+1\t—\t–1\t5%\t—\t—\t5 lbs.",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+          "provenanceStatus": "resolved",
+          "section": "Table: Armor and Shields",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            339,
+            339
+          ]
+        },
+        {
+          "entry": "Armor fitted for Small characters weighs half as much (shields share Table: Armor and Shields)",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+          "provenanceStatus": "resolved",
+          "section": "Armor Weight column",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            317,
+            317
+          ]
+        }
+      ],
+      "weightLb": 5,
+      "weightLbBySize": {
+        "medium": 5,
+        "small": 2
+      }
     },
     "item.longbow": {
       "catalogStatus": "resolved",
@@ -22089,6 +22480,47 @@
           ]
         }
       ]
+    },
+    "item.quarterstaff": {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "critMultiplier": 2,
+        "critRange": 20,
+        "damageDieBySize": {
+          "medium": "1d6",
+          "small": "1d4"
+        },
+        "damageType": "B",
+        "doubleWeapon": true,
+        "handedness": "two-handed",
+        "twoHanded": true,
+        "weaponCategory": "simple",
+        "weaponType": "quarterstaff"
+      },
+      "id": "item.quarterstaff",
+      "name": "Quarterstaff",
+      "priceCp": 0,
+      "sourceRef": [
+        {
+          "entry": "Quarterstaff\t—\t1d4/1d4\t1d6/1d6\t×2\t—\t4 lbs.\tB\tdouble, monk",
+          "file": "sources/npc/aonprd/equipment.txt",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons; Two-Handed Melee Weapons",
+          "sha256": "92e40cd32896f1633b9b705d51362b8badb4fd86715450ab496a685a66b8a44f",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            125,
+            126
+          ]
+        }
+      ],
+      "weightLb": 4,
+      "weightLbBySize": {
+        "medium": 4,
+        "small": 2
+      }
     },
     "item.rapier": {
       "catalogStatus": "resolved",
@@ -23161,28 +23593,92 @@
       ]
     },
     "npc-race.gnome": {
-      "abilityAdjustments": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-races",
+      "abilityAdjustments": {
+        "charisma": 2,
+        "constitution": 2,
+        "strength": -2
+      },
+      "bonusLanguages": [
+        "Draconic",
+        "Dwarven",
+        "Elven",
+        "Giant",
+        "Goblin",
+        "Orc"
+      ],
+      "catalogStatus": "resolved",
+      "choiceSlots": [],
+      "conditionalSaves": {
+        "will": {
+          "bonus": 2,
+          "condition": "against illusion spells or effects",
+          "sourceRef": {
+            "entry": "Standard Gnome racial traits; the +2 saving throw bonus against illusion spells or effects stays conditional in the Illusion Resistance trait text",
+            "file": "sources/npc/aonprd/core-races.txt",
+            "provenanceStatus": "resolved",
+            "section": "Gnome Racial Traits",
+            "sha256": "281a370dc1bff2a537f68449fcf808c2a6d8d8a131012e56522c1c5db60cab90",
+            "sourceId": "source.aon-core-races",
+            "txtLines": [
+              45,
+              57
+            ]
+          }
+        }
+      },
+      "featSlots": [],
       "id": "npc-race.gnome",
-      "languages": null,
+      "languages": [
+        "Common",
+        "Gnome",
+        "Sylvan"
+      ],
       "name": "Gnome",
-      "senses": null,
-      "sizeId": null,
+      "senses": [
+        "Low-Light Vision"
+      ],
+      "sizeId": "size.small",
+      "sizeModifiers": {
+        "ac": 1,
+        "attack": 1,
+        "cmb": -1,
+        "cmd": -1
+      },
+      "sizeSkillBonuses": {
+        "skill.fly": 2,
+        "skill.stealth": 4
+      },
+      "skillBonuses": {
+        "skill.perception": 2
+      },
+      "skillSelectionsBonus": 0,
       "sourceRef": {
-        "entry": "Seven Core races",
-        "file": "docs/npc-source-gap-matrix.md",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sha256": "4361c3f348b54ab562c3052153993195af2102faa202ef2df92784ea0eeba5f1",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Standard Gnome racial traits",
+        "file": "sources/npc/aonprd/core-races.txt",
+        "provenanceStatus": "resolved",
+        "section": "Gnome Racial Traits",
+        "sha256": "281a370dc1bff2a537f68449fcf808c2a6d8d8a131012e56522c1c5db60cab90",
+        "sourceId": "source.aon-core-races",
         "txtLines": [
-          20,
-          20
+          45,
+          57
         ]
       },
-      "speed": null,
-      "traits": null
+      "speed": {
+        "land": 20
+      },
+      "subtype": "gnome",
+      "traits": [
+        "Slow Speed",
+        "Defensive Training",
+        "Gnome Magic",
+        "Hatred",
+        "Illusion Resistance",
+        "Keen Senses",
+        "Obsessive",
+        "Weapon Familiarity"
+      ],
+      "weaponProficiencies": []
     },
     "npc-race.goblin": {
       "abilityAdjustments": {
@@ -24509,6 +25005,12 @@
       "sha256": "cc1261efc09210871a7d217a198704a9a867f603cafc6ddb9a6dddffc1bc481c",
       "sourceId": "source.aon-hobgoblin-race"
     },
+    "source.aon-knowledge-domain": {
+      "description": "Official current AoN Knowledge domain powers and domain spell list",
+      "file": "sources/npc/aonprd/knowledge-domain.txt",
+      "sha256": "949511ae32452fcb75ab13012fdd98f45b5e2ce2a8a4a57c086a3edde700a0b7",
+      "sourceId": "source.aon-knowledge-domain"
+    },
     "source.aon-linguistics-language": {
       "description": "Official Linguistics language-learning rule",
       "file": "sources/npc/aonprd/skill-linguistics-language.txt",
@@ -24653,6 +25155,12 @@
       "sha256": "6bb8a4176b05dc9dbe7b882db1603f5d3eebca55fedb6228126c921cd11a0b60",
       "sourceId": "source.aon-spell-charm-person"
     },
+    "source.aon-spell-create-water": {
+      "description": "Official current AoN Create Water spell rules",
+      "file": "sources/npc/aonprd/spell-create-water.txt",
+      "sha256": "481858454bcab48cd1fa05e344111ce7bde3b853a2e4eac7d74285873fe0fbf3",
+      "sourceId": "source.aon-spell-create-water"
+    },
     "source.aon-spell-cure-light-wounds": {
       "description": "Official current AoN Cure Light Wounds spell rules",
       "file": "sources/npc/aonprd/spell-cure-light-wounds.txt",
@@ -24713,11 +25221,23 @@
       "sha256": "3abf681f9013db7442803defbd14abb4606761273e6e92b35ea24823c164eda4",
       "sourceId": "source.aon-spell-flare"
     },
+    "source.aon-spell-fog-cloud": {
+      "description": "Official current AoN Fog Cloud spell rules",
+      "file": "sources/npc/aonprd/spell-fog-cloud.txt",
+      "sha256": "625ebf33fb61f793f7a7230a755cbe85d6f9dd575fca048c89c84a8cab6f9b10",
+      "sourceId": "source.aon-spell-fog-cloud"
+    },
     "source.aon-spell-grease": {
       "description": "Official current AoN Grease spell rules",
       "file": "sources/npc/aonprd/spell-grease.txt",
       "sha256": "f5955826cec6d9c6be4ae6028266fab81797e90536d8d739b1172b1ffd8f899d",
       "sourceId": "source.aon-spell-grease"
+    },
+    "source.aon-spell-guidance": {
+      "description": "Official current AoN Guidance spell rules",
+      "file": "sources/npc/aonprd/spell-guidance.txt",
+      "sha256": "75a03066b37f2412ab6c388a4db384080ec02fbc3926d47ab73d4452640a8461",
+      "sourceId": "source.aon-spell-guidance"
     },
     "source.aon-spell-heroism": {
       "description": "Official rules for NPC active effects",
@@ -24736,6 +25256,12 @@
       "file": "sources/npc/aonprd/spell-light.txt",
       "sha256": "3722f8addac74a7ba5774fdb273d4cae9542b0b162e55a7aa37be35132fc11e0",
       "sourceId": "source.aon-spell-light"
+    },
+    "source.aon-spell-longstrider": {
+      "description": "Official current AoN Longstrider spell rules",
+      "file": "sources/npc/aonprd/spell-longstrider.txt",
+      "sha256": "36a2a69518372dacbdca141d614698290c3bb6f85e418ed4aa296002ce5643be",
+      "sourceId": "source.aon-spell-longstrider"
     },
     "source.aon-spell-mage-armor": {
       "description": "Official current AoN Mage Armor spell rules",
@@ -24766,6 +25292,12 @@
       "file": "sources/npc/aonprd/spell-mirror-image.txt",
       "sha256": "8d4f9a05b6af81b8a434b08a024dd20468f099bb8e84aa916f894323ac9d994e",
       "sourceId": "source.aon-spell-mirror-image"
+    },
+    "source.aon-spell-obscuring-mist": {
+      "description": "Official current AoN Obscuring Mist spell rules",
+      "file": "sources/npc/aonprd/spell-obscuring-mist.txt",
+      "sha256": "1e2313bb7d77ab1b65b2b6ae3ce8f69af8a609ae4f69595b82ee6c0983fae86b",
+      "sourceId": "source.aon-spell-obscuring-mist"
     },
     "source.aon-spell-prestidigitation": {
       "description": "Official current AoN Prestidigitation spell rules",
@@ -24846,7 +25378,7 @@
       "sourceId": "source.aon-spell-read-magic"
     },
     "source.aon-spell-resist-energy": {
-      "description": "Official rules for NPC active effects",
+      "description": "Official current AoN Resist Energy spell rules",
       "file": "sources/npc/aonprd/spell-resist-energy.txt",
       "sha256": "f19fe7407d0dde639846f20e1c9fa654541b61ca88c8563b1216d60bd8eed75c",
       "sourceId": "source.aon-spell-resist-energy"
@@ -24899,6 +25431,12 @@
       "sha256": "96b9f3f7ee02aa03c90d16fa778e94e661c3b56b39535c0f4748edaa210b89b9",
       "sourceId": "source.aon-summoner-uc-evolutions-slam"
     },
+    "source.aon-travel-domain": {
+      "description": "Official current AoN Travel domain powers and domain spell list",
+      "file": "sources/npc/aonprd/travel-domain.txt",
+      "sha256": "b0db844238bbde67ae3b533f627fd5a7aacd88c090b4739ff9f6765859391e6c",
+      "sourceId": "source.aon-travel-domain"
+    },
     "source.aon-use-magic-device": {
       "description": "Official current AoN Use Magic Device rules",
       "file": "sources/npc/aonprd/use-magic-device.txt",
@@ -24910,6 +25448,12 @@
       "file": "sources/npc/aonprd/wands.txt",
       "sha256": "70ffb82a3ded2be78064d7cc10bb5d7895ad4f679732a1fb9b06374a69cf7957",
       "sourceId": "source.aon-wands"
+    },
+    "source.aon-water-domain": {
+      "description": "Official current AoN Water domain powers and domain spell list",
+      "file": "sources/npc/aonprd/water-domain.txt",
+      "sha256": "2466bffeeaaf0dba75256ca76fe467f1fd57ac81125ea89cc5202580dc22906e",
+      "sourceId": "source.aon-water-domain"
     },
     "source.aon-weapon-dogslicer": {
       "description": "Official AoN Dogslicer weapon statistics",
@@ -24956,7 +25500,7 @@
     "source.npc-manifest": {
       "description": "Hash manifest for the local NPC source foundation",
       "file": "sources/npc/MANIFEST.json",
-      "sha256": "767120bf56c328eab8d0529f460ccb992585a96c5f64bb22080da327417fd031",
+      "sha256": "440e7cad435771946f6622f765ab4bff0d1da212bcb7f168e235c5031e5b840f",
       "sourceId": "source.npc-manifest"
     },
     "source.npc-mode-plan": {
@@ -29699,9 +30243,10 @@
       }
     },
     "spell.create-water": {
-      "catalogStatus": "partial",
-      "components": null,
-      "gapCode": "core-rulebook-spell-descriptions",
+      "castingTime": "1 standard action",
+      "catalogStatus": "resolved",
+      "components": "V, S",
+      "duration": "instantaneous",
       "id": "spell.create-water",
       "levelsByClass": {
         "cleric": 0,
@@ -29735,19 +30280,36 @@
         }
       ],
       "name": "Create Water",
-      "school": null,
-      "sourceRef": {
-        "entry": "Create Water",
-        "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
-        "provenanceStatus": "list-membership-resolved",
-        "section": "Core Rulebook class spell lists",
-        "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
-        "sourceId": "source.npc-crb-spell-lists",
-        "txtLines": [
-          256,
-          256
-        ]
-      }
+      "range": "close (25 ft. + 5 ft./2 levels)",
+      "school": "conjuration",
+      "sourceRef": [
+        {
+          "entry": "Create Water spell description",
+          "file": "sources/npc/aonprd/spell-create-water.txt",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Create%20Water",
+          "provenanceStatus": "resolved",
+          "section": "Create Water",
+          "sha256": "481858454bcab48cd1fa05e344111ce7bde3b853a2e4eac7d74285873fe0fbf3",
+          "sourceId": "source.aon-spell-create-water",
+          "txtLines": [
+            1,
+            14
+          ]
+        },
+        {
+          "entry": "Create Water: school, components, casting time, range, area and duration",
+          "file": "sources/npc/aonprd/spell-create-water.txt",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Create%20Water",
+          "provenanceStatus": "resolved",
+          "section": "Spell metadata",
+          "sha256": "481858454bcab48cd1fa05e344111ce7bde3b853a2e4eac7d74285873fe0fbf3",
+          "sourceId": "source.aon-spell-create-water",
+          "txtLines": [
+            3,
+            11
+          ]
+        }
+      ]
     },
     "spell.creeping-doom": {
       "catalogStatus": "partial",
@@ -34966,9 +35528,10 @@
       }
     },
     "spell.fog-cloud": {
-      "catalogStatus": "partial",
-      "components": null,
-      "gapCode": "core-rulebook-spell-descriptions",
+      "castingTime": "1 standard action",
+      "catalogStatus": "resolved",
+      "components": "V, S",
+      "duration": "10 min./level",
       "id": "spell.fog-cloud",
       "levelsByClass": {
         "druid": 2,
@@ -35002,19 +35565,36 @@
         }
       ],
       "name": "Fog Cloud",
-      "school": null,
-      "sourceRef": {
-        "entry": "Fog Cloud",
-        "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
-        "provenanceStatus": "list-membership-resolved",
-        "section": "Core Rulebook class spell lists",
-        "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
-        "sourceId": "source.npc-crb-spell-lists",
-        "txtLines": [
-          648,
-          648
-        ]
-      }
+      "range": "medium (100 ft. + 10 ft./level)",
+      "school": "conjuration",
+      "sourceRef": [
+        {
+          "entry": "Fog Cloud spell description",
+          "file": "sources/npc/aonprd/spell-fog-cloud.txt",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Fog%20Cloud",
+          "provenanceStatus": "resolved",
+          "section": "Fog Cloud",
+          "sha256": "625ebf33fb61f793f7a7230a755cbe85d6f9dd575fca048c89c84a8cab6f9b10",
+          "sourceId": "source.aon-spell-fog-cloud",
+          "txtLines": [
+            1,
+            33
+          ]
+        },
+        {
+          "entry": "Fog Cloud: school, components, casting time, range, area and duration",
+          "file": "sources/npc/aonprd/spell-fog-cloud.txt",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Fog%20Cloud",
+          "provenanceStatus": "resolved",
+          "section": "Spell metadata",
+          "sha256": "625ebf33fb61f793f7a7230a755cbe85d6f9dd575fca048c89c84a8cab6f9b10",
+          "sourceId": "source.aon-spell-fog-cloud",
+          "txtLines": [
+            3,
+            11
+          ]
+        }
+      ]
     },
     "spell.forbiddance": {
       "catalogStatus": "partial",
@@ -36493,9 +37073,10 @@
       }
     },
     "spell.guidance": {
-      "catalogStatus": "partial",
-      "components": null,
-      "gapCode": "core-rulebook-spell-descriptions",
+      "castingTime": "1 standard action",
+      "catalogStatus": "resolved",
+      "components": "V, S",
+      "duration": "1 minute or until discharged",
       "id": "spell.guidance",
       "levelsByClass": {
         "cleric": 0,
@@ -36520,19 +37101,36 @@
         }
       ],
       "name": "Guidance",
-      "school": null,
-      "sourceRef": {
-        "entry": "Guidance",
-        "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
-        "provenanceStatus": "list-membership-resolved",
-        "section": "Core Rulebook class spell lists",
-        "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
-        "sourceId": "source.npc-crb-spell-lists",
-        "txtLines": [
-          259,
-          259
-        ]
-      }
+      "range": "touch",
+      "school": "divination",
+      "sourceRef": [
+        {
+          "entry": "Guidance spell description",
+          "file": "sources/npc/aonprd/spell-guidance.txt",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Guidance",
+          "provenanceStatus": "resolved",
+          "section": "Guidance",
+          "sha256": "75a03066b37f2412ab6c388a4db384080ec02fbc3926d47ab73d4452640a8461",
+          "sourceId": "source.aon-spell-guidance",
+          "txtLines": [
+            1,
+            13
+          ]
+        },
+        {
+          "entry": "Guidance: school, components, casting time, range, area and duration",
+          "file": "sources/npc/aonprd/spell-guidance.txt",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Guidance",
+          "provenanceStatus": "resolved",
+          "section": "Spell metadata",
+          "sha256": "75a03066b37f2412ab6c388a4db384080ec02fbc3926d47ab73d4452640a8461",
+          "sourceId": "source.aon-spell-guidance",
+          "txtLines": [
+            3,
+            11
+          ]
+        }
+      ]
     },
     "spell.gust-of-wind": {
       "catalogStatus": "partial",
@@ -39553,9 +40151,10 @@
       }
     },
     "spell.longstrider": {
-      "catalogStatus": "partial",
-      "components": null,
-      "gapCode": "core-rulebook-spell-descriptions",
+      "castingTime": "1 standard action",
+      "catalogStatus": "resolved",
+      "components": "V, S, M (a pinch of dirt)",
+      "duration": "1 hour/level (D)",
       "id": "spell.longstrider",
       "levelsByClass": {
         "druid": 1,
@@ -39580,19 +40179,36 @@
         }
       ],
       "name": "Longstrider",
-      "school": null,
-      "sourceRef": {
-        "entry": "Longstrider",
-        "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
-        "provenanceStatus": "list-membership-resolved",
-        "section": "Core Rulebook class spell lists",
-        "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
-        "sourceId": "source.npc-crb-spell-lists",
-        "txtLines": [
-          621,
-          621
-        ]
-      }
+      "range": "personal",
+      "school": "transmutation",
+      "sourceRef": [
+        {
+          "entry": "Longstrider spell description",
+          "file": "sources/npc/aonprd/spell-longstrider.txt",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Longstrider",
+          "provenanceStatus": "resolved",
+          "section": "Longstrider",
+          "sha256": "36a2a69518372dacbdca141d614698290c3bb6f85e418ed4aa296002ce5643be",
+          "sourceId": "source.aon-spell-longstrider",
+          "txtLines": [
+            1,
+            24
+          ]
+        },
+        {
+          "entry": "Longstrider: school, components, casting time, range, area and duration",
+          "file": "sources/npc/aonprd/spell-longstrider.txt",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Longstrider",
+          "provenanceStatus": "resolved",
+          "section": "Spell metadata",
+          "sha256": "36a2a69518372dacbdca141d614698290c3bb6f85e418ed4aa296002ce5643be",
+          "sourceId": "source.aon-spell-longstrider",
+          "txtLines": [
+            3,
+            10
+          ]
+        }
+      ]
     },
     "spell.lullaby": {
       "catalogStatus": "partial",
@@ -41908,9 +42524,10 @@
       }
     },
     "spell.obscuring-mist": {
-      "catalogStatus": "partial",
-      "components": null,
-      "gapCode": "core-rulebook-spell-descriptions",
+      "castingTime": "1 standard action",
+      "catalogStatus": "resolved",
+      "components": "V, S",
+      "duration": "1 min./level (D)",
       "id": "spell.obscuring-mist",
       "levelsByClass": {
         "cleric": 1,
@@ -41953,19 +42570,36 @@
         }
       ],
       "name": "Obscuring Mist",
-      "school": null,
-      "sourceRef": {
-        "entry": "Obscuring Mist",
-        "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
-        "provenanceStatus": "list-membership-resolved",
-        "section": "Core Rulebook class spell lists",
-        "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
-        "sourceId": "source.npc-crb-spell-lists",
-        "txtLines": [
-          296,
-          296
-        ]
-      }
+      "range": "20 ft.",
+      "school": "conjuration",
+      "sourceRef": [
+        {
+          "entry": "Obscuring Mist spell description",
+          "file": "sources/npc/aonprd/spell-obscuring-mist.txt",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Obscuring%20Mist",
+          "provenanceStatus": "resolved",
+          "section": "Obscuring Mist",
+          "sha256": "1e2313bb7d77ab1b65b2b6ae3ce8f69af8a609ae4f69595b82ee6c0983fae86b",
+          "sourceId": "source.aon-spell-obscuring-mist",
+          "txtLines": [
+            1,
+            20
+          ]
+        },
+        {
+          "entry": "Obscuring Mist: school, components, casting time, range, area and duration",
+          "file": "sources/npc/aonprd/spell-obscuring-mist.txt",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Obscuring%20Mist",
+          "provenanceStatus": "resolved",
+          "section": "Spell metadata",
+          "sha256": "1e2313bb7d77ab1b65b2b6ae3ce8f69af8a609ae4f69595b82ee6c0983fae86b",
+          "sourceId": "source.aon-spell-obscuring-mist",
+          "txtLines": [
+            3,
+            11
+          ]
+        }
+      ]
     },
     "spell.open-close": {
       "catalogStatus": "partial",
@@ -45342,9 +45976,10 @@
       }
     },
     "spell.resist-energy": {
-      "catalogStatus": "partial",
-      "components": null,
-      "gapCode": "core-rulebook-spell-descriptions",
+      "castingTime": "1 standard action",
+      "catalogStatus": "resolved",
+      "components": "V, S, DF",
+      "duration": "10 min./level",
       "id": "spell.resist-energy",
       "levelsByClass": {
         "cleric": 2,
@@ -45405,19 +46040,36 @@
         }
       ],
       "name": "Resist Energy",
-      "school": null,
-      "sourceRef": {
-        "entry": "Resist Energy",
-        "file": "sources/npc/core-rulebook-extract.spell-lists.txt",
-        "provenanceStatus": "list-membership-resolved",
-        "section": "Core Rulebook class spell lists",
-        "sha256": "9965d9d4ae5d3fbbb6ece131158d7bdc7c2479306b0bfb78d2c40ecda4174697",
-        "sourceId": "source.npc-crb-spell-lists",
-        "txtLines": [
-          334,
-          334
-        ]
-      }
+      "range": "touch",
+      "school": "abjuration",
+      "sourceRef": [
+        {
+          "entry": "Resist Energy spell description",
+          "file": "sources/npc/aonprd/spell-resist-energy.txt",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Resist%20Energy",
+          "provenanceStatus": "resolved",
+          "section": "Resist Energy",
+          "sha256": "f19fe7407d0dde639846f20e1c9fa654541b61ca88c8563b1216d60bd8eed75c",
+          "sourceId": "source.aon-spell-resist-energy",
+          "txtLines": [
+            1,
+            18
+          ]
+        },
+        {
+          "entry": "Resist Energy: school, components, casting time, range, area and duration",
+          "file": "sources/npc/aonprd/spell-resist-energy.txt",
+          "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Resist%20Energy",
+          "provenanceStatus": "resolved",
+          "section": "Spell metadata",
+          "sha256": "f19fe7407d0dde639846f20e1c9fa654541b61ca88c8563b1216d60bd8eed75c",
+          "sourceId": "source.aon-spell-resist-energy",
+          "txtLines": [
+            3,
+            11
+          ]
+        }
+      ]
     },
     "spell.resistance": {
       "catalogStatus": "partial",

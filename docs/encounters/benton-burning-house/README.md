@@ -19,10 +19,10 @@ Das ist **kein offizieller Gesamt-HG inklusive Brand**. Rauch mit möglichen Zug
 
 Verwendet wird der neu evaluierte [Goblin Commando](../../goblin-commando.md): CR 1, gewöhnlicher Dogslicer, Meisterarbeits-Kompositkurzbogen (Stärkewertung +1) und ein Cure-Light-Wounds-Trank. Keine magischen Waffen. **Er kämpft hier zu Fuß; der im allgemeinen Statblock aufgeführte Goblinhund ist in dieser Begegnung nicht vorhanden.** Mounted Combat bleibt dadurch ungenutzt. Der Warchanter entfällt vollständig.
 
-| Figur | TP | RK / Berührung / auf falschem Fuß | Init | Zäh / Ref / Will | Angriffe |
+| Creature | hp | AC / touch / flat-footed | Init | Fort / Ref / Will | Attacks |
 |---|---:|---|---:|---|---|
-| Warrior „Löffel“ | 6 | 16 / 13 / 14 | +2 | +3 / +2 / +0 | Dogslicer +3 (1W4/19–20), Kurzbogen +4 (1W4/×3) |
-| Kesselkratzer | 20 | 17 / 14 / 14 | +3 | +5 / +6 / +1 | Dogslicer +4 (1W4+1/19–20), Meisterarbeits-Kompositkurzbogen +7 (1W4+1/×3; 70 ft.) |
+| Warrior „Löffel“ | 6 | 16 / 13 / 14 | +2 | +3 / +2 / +0 | dogslicer +3 (1d4/19–20), shortbow +4 (1d4/×3) |
+| Kesselkratzer | 20 | 17 / 14 / 14 | +3 | +5 / +6 / +1 | dogslicer +4 (1d4+1/19–20), mwk composite shortbow +7 (1d4+1/×3; 70 ft.) |
 
 Vollständige Regeln, Fertigkeiten und Ausrüstung siehe verlinkte Blätter. Kesselkratzer spricht **nur Goblinisch**; Verhandlungen ohne gemeinsame Sprache laufen über Gesten oder Übersetzung. Er hat einen Kochtopf als Beute und einen Bogen mit eingeritzten Kerben. Sein Erzfeind sind Orks, nicht pauschal Menschen oder die gesamte Gruppe.
 

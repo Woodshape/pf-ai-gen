@@ -285,26 +285,88 @@
       ]
     },
     {
-      "abilityAdjustments": null,
-      "catalogStatus": "gap",
-      "gapCode": "core-rulebook-races",
+      "abilityAdjustments": {
+        "charisma": 2,
+        "constitution": 2,
+        "strength": -2
+      },
+      "bonusLanguages": [
+        "Draconic",
+        "Dwarven",
+        "Elven",
+        "Giant",
+        "Goblin",
+        "Orc"
+      ],
+      "catalogStatus": "resolved",
+      "choiceSlots": [],
+      "conditionalSaves": {
+        "will": {
+          "bonus": 2,
+          "condition": "against illusion spells or effects",
+          "sourceRef": {
+            "entry": "Standard Gnome racial traits; the +2 saving throw bonus against illusion spells or effects stays conditional in the Illusion Resistance trait text",
+            "provenanceStatus": "resolved",
+            "section": "Gnome Racial Traits",
+            "sourceId": "source.aon-core-races",
+            "txtLines": [
+              45,
+              57
+            ]
+          }
+        }
+      },
+      "featSlots": [],
       "id": "npc-race.gnome",
-      "languages": null,
+      "languages": [
+        "Common",
+        "Gnome",
+        "Sylvan"
+      ],
       "name": "Gnome",
-      "senses": null,
-      "sizeId": null,
+      "senses": [
+        "Low-Light Vision"
+      ],
+      "sizeId": "size.small",
+      "sizeModifiers": {
+        "ac": 1,
+        "attack": 1,
+        "cmb": -1,
+        "cmd": -1
+      },
+      "sizeSkillBonuses": {
+        "skill.fly": 2,
+        "skill.stealth": 4
+      },
+      "skillBonuses": {
+        "skill.perception": 2
+      },
+      "skillSelectionsBonus": 0,
       "sourceRef": {
-        "entry": "Seven Core races",
-        "provenanceStatus": "catalog-gap",
-        "section": "NPC Source-Gap Matrix",
-        "sourceId": "source.npc-gap-matrix",
+        "entry": "Standard Gnome racial traits",
+        "provenanceStatus": "resolved",
+        "section": "Gnome Racial Traits",
+        "sourceId": "source.aon-core-races",
         "txtLines": [
-          20,
-          20
+          45,
+          57
         ]
       },
-      "speed": null,
-      "traits": null
+      "speed": {
+        "land": 20
+      },
+      "subtype": "gnome",
+      "traits": [
+        "Slow Speed",
+        "Defensive Training",
+        "Gnome Magic",
+        "Hatred",
+        "Illusion Resistance",
+        "Keen Senses",
+        "Obsessive",
+        "Weapon Familiarity"
+      ],
+      "weaponProficiencies": []
     },
     {
       "abilityAdjustments": null,

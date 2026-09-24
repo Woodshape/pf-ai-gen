@@ -94,6 +94,8 @@ RESOLVED_SPELLS = {
     "spell.barkskin", "spell.cure-light-wounds", "spell.entangle", "spell.produce-flame",
     "spell.summon-nature-s-ally-i", "spell.summon-nature-s-ally-ii", "spell.charm-person", "spell.sleep",
     "spell.silent-image", "spell.feather-fall", "spell.dancing-lights", "spell.message",
+    "spell.guidance", "spell.create-water", "spell.longstrider", "spell.obscuring-mist",
+    "spell.fog-cloud", "spell.resist-energy",
 }
 
 
@@ -193,8 +195,17 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(elf["languages"], ["Common", "Elven"])
         self.assertEqual(elf["bonusLanguages"], ["Celestial", "Draconic", "Gnoll", "Gnome", "Goblin", "Orc", "Sylvan"])
         for race_id, race in self.catalog["races"].items():
-            if race_id not in {"npc-race.human", "npc-race.goblin", "npc-race.halfling", "npc-race.elf", "npc-race.hobgoblin"}:
+            if race_id not in {"npc-race.human", "npc-race.goblin", "npc-race.halfling", "npc-race.elf", "npc-race.hobgoblin", "npc-race.gnome"}:
                 self.assertEqual(race["catalogStatus"], "gap")
+        gnome = self.catalog["races"]["npc-race.gnome"]
+        self.assertEqual(gnome["catalogStatus"], "resolved")
+        self.assertEqual(gnome["abilityAdjustments"], {"strength": -2, "constitution": 2, "charisma": 2})
+        self.assertEqual((gnome["sizeId"], gnome["speed"]), ("size.small", {"land": 20}))
+        self.assertEqual(gnome["senses"], ["Low-Light Vision"])
+        self.assertEqual(gnome["skillBonuses"], {"skill.perception": 2})
+        self.assertEqual(gnome["conditionalSaves"]["will"]["bonus"], 2)
+        self.assertIn("illusion", gnome["conditionalSaves"]["will"]["condition"])
+        self.assertEqual(gnome["languages"], ["Common", "Gnome", "Sylvan"])
 
     def test_sixteen_classes_keep_only_production_levels_resolved(self):
         classes = self.catalog["classes"]
@@ -224,6 +235,19 @@ class CatalogCompletenessTests(unittest.TestCase):
                 self.assertEqual(record["levels"]["4"]["featureGrants"],
                                  ["npc-class-feature.druid-resist-natures-lure", "npc-class-feature.druid-wild-shape"])
                 self.assertTrue(all(record["levels"][str(level)]["catalogStatus"] == "gap" for level in range(5, 21)))
+            elif class_id == "npc-class.cleric":
+                self.assertEqual(record["catalogStatus"], "resolved")
+                self.assertEqual(record["hitDie"], "d8")
+                self.assertEqual(record["skillSelections"], 2)
+                self.assertEqual(record["castingAbility"], "wisdom")
+                self.assertEqual(record["castingMode"], "prepared")
+                self.assertEqual(record["supportedLevels"], [1, 2, 3])
+                self.assertEqual(record["levels"]["1"]["spellsPerDay"], {"0": 3, "1": 1})
+                self.assertEqual(record["levels"]["3"]["spellsPerDay"], {"0": 4, "1": 2, "2": 1})
+                self.assertTrue(all(record["levels"][str(level)]["catalogStatus"] == "resolved"
+                                    for level in (1, 2, 3)))
+                self.assertTrue(all(record["levels"][str(level)]["catalogStatus"] == "gap"
+                                    for level in range(4, 21)))
             elif class_id == "npc-class.bard":
                 self.assertEqual(record["catalogStatus"], "resolved")
                 self.assertEqual(record["hitDie"], "d8")
@@ -276,7 +300,7 @@ class CatalogCompletenessTests(unittest.TestCase):
         self.assertEqual(kinds.count("feat-slot"), 6)
         self.assertEqual(kinds.count("choice-slot"), 14)
         self.assertEqual(kinds.count("archetype"), 1)
-        self.assertEqual(kinds.count("automatic"), 36)
+        self.assertEqual(kinds.count("automatic"), 42)
         resolved = {record_id for record_id, record in features.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
             "npc-class-feature.warrior-proficiencies", "npc-class-feature.sorcerer-spellcasting",
@@ -286,6 +310,10 @@ class CatalogCompletenessTests(unittest.TestCase):
             "npc-class-feature.druid-woodland-stride", "npc-class-feature.druid-trackless-step",
             "npc-class-feature.druid-resist-natures-lure", "npc-class-feature.druid-wild-shape",
             "npc-class-feature.cleric-channel-energy",
+            "npc-class-feature.cleric-proficiencies", "npc-class-feature.cleric-spellcasting",
+            "npc-class-feature.cleric-orisons", "npc-class-feature.cleric-domains",
+            "npc-class-feature.knowledge-domain", "npc-class-feature.travel-domain",
+            "npc-class-feature.water-domain",
             "npc-class-feature.druid-proficiencies", "npc-class-feature.druid-orisons",
             "npc-class-feature.fire-domain", "npc-class-feature.druid-elemental-ally",
             "npc-class-feature.bard-proficiencies", "npc-class-feature.bard-spellcasting", "npc-class-feature.bard-cantrips",
@@ -336,7 +364,7 @@ class CatalogCompletenessTests(unittest.TestCase):
 
     def test_only_production_items_are_resolved(self):
         items = self.catalog["items"]
-        self.assertEqual(len(items), 77)
+        self.assertEqual(len(items), 80)
         self.assertTrue(all(item["category"] in ITEM_CATEGORIES for item in items.values()))
         resolved = {record_id for record_id, record in items.items() if record["catalogStatus"] == "resolved"}
         self.assertEqual(resolved, {
@@ -348,6 +376,7 @@ class CatalogCompletenessTests(unittest.TestCase):
             "item.studded-leather-plus-1", "item.potion-of-cure-moderate-wounds",
             "item.potion-of-invisibility", "item.arrows-20", "item.dogslicer", "item.shortbow", "item.whip",
             "item.alchemists-fire", "item.oil", "item.torch",
+            "item.light-mace", "item.quarterstaff", "item.light-wooden-shield",
         })
         self.assertEqual(self.catalog["items"]["item.shortsword"]["effects"]["damageDieBySize"], {"small": "1d4", "medium": "1d6"})
         self.assertEqual(self.catalog["items"]["item.studded-leather-armor"]["effects"], {"armorBonus": 3, "maxDex": 5, "armorCheckPenalty": -1, "armorCategory": "light"})

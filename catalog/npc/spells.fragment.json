@@ -4519,10 +4519,9 @@
   {
    "id": "spell.create-water",
    "name": "Create Water",
-   "catalogStatus": "partial",
-   "gapCode": "core-rulebook-spell-descriptions",
-   "school": null,
-   "components": null,
+   "catalogStatus": "resolved",
+   "school": "conjuration",
+   "components": "V, S",
    "levelsByClass": {
     "cleric": 0,
     "druid": 0,
@@ -4554,16 +4553,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.npc-crb-spell-lists",
-    "section": "Core Rulebook class spell lists",
-    "txtLines": [
-     256,
-     256
-    ],
-    "entry": "Create Water",
-    "provenanceStatus": "list-membership-resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-create-water",
+     "section": "Create Water",
+     "txtLines": [
+      1,
+      14
+     ],
+     "entry": "Create Water spell description",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Create%20Water"
+    },
+    {
+     "sourceId": "source.aon-spell-create-water",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Create Water: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Create%20Water"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "close (25 ft. + 5 ft./2 levels)",
+   "duration": "instantaneous"
   },
   {
    "id": "spell.creeping-doom",
@@ -9552,10 +9568,9 @@
   {
    "id": "spell.fog-cloud",
    "name": "Fog Cloud",
-   "catalogStatus": "partial",
-   "gapCode": "core-rulebook-spell-descriptions",
-   "school": null,
-   "components": null,
+   "catalogStatus": "resolved",
+   "school": "conjuration",
+   "components": "V, S",
    "levelsByClass": {
     "druid": 2,
     "sorcerer": 2,
@@ -9587,16 +9602,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.npc-crb-spell-lists",
-    "section": "Core Rulebook class spell lists",
-    "txtLines": [
-     648,
-     648
-    ],
-    "entry": "Fog Cloud",
-    "provenanceStatus": "list-membership-resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-fog-cloud",
+     "section": "Fog Cloud",
+     "txtLines": [
+      1,
+      33
+     ],
+     "entry": "Fog Cloud spell description",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Fog%20Cloud"
+    },
+    {
+     "sourceId": "source.aon-spell-fog-cloud",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Fog Cloud: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Fog%20Cloud"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "medium (100 ft. + 10 ft./level)",
+   "duration": "10 min./level"
   },
   {
    "id": "spell.forbiddance",
@@ -11009,10 +11041,9 @@
   {
    "id": "spell.guidance",
    "name": "Guidance",
-   "catalogStatus": "partial",
-   "gapCode": "core-rulebook-spell-descriptions",
-   "school": null,
-   "components": null,
+   "catalogStatus": "resolved",
+   "school": "divination",
+   "components": "V, S",
    "levelsByClass": {
     "cleric": 0,
     "druid": 0
@@ -11035,16 +11066,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.npc-crb-spell-lists",
-    "section": "Core Rulebook class spell lists",
-    "txtLines": [
-     259,
-     259
-    ],
-    "entry": "Guidance",
-    "provenanceStatus": "list-membership-resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-guidance",
+     "section": "Guidance",
+     "txtLines": [
+      1,
+      13
+     ],
+     "entry": "Guidance spell description",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Guidance"
+    },
+    {
+     "sourceId": "source.aon-spell-guidance",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Guidance: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Guidance"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "touch",
+   "duration": "1 minute or until discharged"
   },
   {
    "id": "spell.gust-of-wind",
@@ -13923,10 +13971,9 @@
   {
    "id": "spell.longstrider",
    "name": "Longstrider",
-   "catalogStatus": "partial",
-   "gapCode": "core-rulebook-spell-descriptions",
-   "school": null,
-   "components": null,
+   "catalogStatus": "resolved",
+   "school": "transmutation",
+   "components": "V, S, M (a pinch of dirt)",
    "levelsByClass": {
     "druid": 1,
     "ranger": 1
@@ -13949,16 +13996,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.npc-crb-spell-lists",
-    "section": "Core Rulebook class spell lists",
-    "txtLines": [
-     621,
-     621
-    ],
-    "entry": "Longstrider",
-    "provenanceStatus": "list-membership-resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-longstrider",
+     "section": "Longstrider",
+     "txtLines": [
+      1,
+      24
+     ],
+     "entry": "Longstrider spell description",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Longstrider"
+    },
+    {
+     "sourceId": "source.aon-spell-longstrider",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      10
+     ],
+     "entry": "Longstrider: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Longstrider"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "personal",
+   "duration": "1 hour/level (D)"
   },
   {
    "id": "spell.lullaby",
@@ -16170,10 +16234,9 @@
   {
    "id": "spell.obscuring-mist",
    "name": "Obscuring Mist",
-   "catalogStatus": "partial",
-   "gapCode": "core-rulebook-spell-descriptions",
-   "school": null,
-   "components": null,
+   "catalogStatus": "resolved",
+   "school": "conjuration",
+   "components": "V, S",
    "levelsByClass": {
     "cleric": 1,
     "druid": 1,
@@ -16214,16 +16277,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.npc-crb-spell-lists",
-    "section": "Core Rulebook class spell lists",
-    "txtLines": [
-     296,
-     296
-    ],
-    "entry": "Obscuring Mist",
-    "provenanceStatus": "list-membership-resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-obscuring-mist",
+     "section": "Obscuring Mist",
+     "txtLines": [
+      1,
+      20
+     ],
+     "entry": "Obscuring Mist spell description",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Obscuring%20Mist"
+    },
+    {
+     "sourceId": "source.aon-spell-obscuring-mist",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Obscuring Mist: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Obscuring%20Mist"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "20 ft.",
+   "duration": "1 min./level (D)"
   },
   {
    "id": "spell.open-close",
@@ -19448,10 +19528,9 @@
   {
    "id": "spell.resist-energy",
    "name": "Resist Energy",
-   "catalogStatus": "partial",
-   "gapCode": "core-rulebook-spell-descriptions",
-   "school": null,
-   "components": null,
+   "catalogStatus": "resolved",
+   "school": "abjuration",
+   "components": "V, S, DF",
    "levelsByClass": {
     "cleric": 2,
     "druid": 2,
@@ -19510,16 +19589,33 @@
      ]
     }
    ],
-   "sourceRef": {
-    "sourceId": "source.npc-crb-spell-lists",
-    "section": "Core Rulebook class spell lists",
-    "txtLines": [
-     334,
-     334
-    ],
-    "entry": "Resist Energy",
-    "provenanceStatus": "list-membership-resolved"
-   }
+   "sourceRef": [
+    {
+     "sourceId": "source.aon-spell-resist-energy",
+     "section": "Resist Energy",
+     "txtLines": [
+      1,
+      18
+     ],
+     "entry": "Resist Energy spell description",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Resist%20Energy"
+    },
+    {
+     "sourceId": "source.aon-spell-resist-energy",
+     "section": "Spell metadata",
+     "txtLines": [
+      3,
+      11
+     ],
+     "entry": "Resist Energy: school, components, casting time, range, area and duration",
+     "provenanceStatus": "resolved",
+     "officialUrl": "https://aonprd.com/SpellDisplay.aspx?ItemName=Resist%20Energy"
+    }
+   ],
+   "castingTime": "1 standard action",
+   "range": "touch",
+   "duration": "10 min./level"
   },
   {
    "id": "spell.resistance",

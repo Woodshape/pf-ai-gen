@@ -62,6 +62,9 @@ SOURCES = {
     "magic-armor": ("id", "MainContent_DetailedOutput"),
     "potions": ("id", "MainContent_DetailedOutput"),
     "fire-domain": ("heading", "Fire"),
+    "water-domain": ("heading", "Water"),
+    "travel-domain": ("heading", "Travel"),
+    "knowledge-domain": ("heading", "Knowledge"),
     "elemental-bloodline": ("id", "MainContent_DataListTypes_LabelName_0"),
     "wands": ("id", "MainContent_DetailedOutput"),
     "use-magic-device": ("id", "MainContent_DataListTalentsAll_LabelName_0"),
@@ -81,6 +84,7 @@ SOURCES = {
             "entangle", "produce-flame", "summon-natures-ally-i", "summon-natures-ally-ii",
             "charm-person", "sleep", "silent-image", "feather-fall",
             "dancing-lights", "message",
+            "guidance", "create-water", "longstrider", "obscuring-mist", "fog-cloud",
         )
     },
     "spell-fireball": ("id", "MainContent_DataListTypes_LabelName_1"),
@@ -107,7 +111,8 @@ SOURCES = {
 
 # Stop tag for heading-based extractions: the tag of the next titled entry.
 HEADING_STOPS = {
-    "fire-domain": "h2", "eidolon-uc-subtypes": "h2", "eidolon-base-forms": "h2",
+    "fire-domain": "h2", "water-domain": "h2", "travel-domain": "h2", "knowledge-domain": "h2",
+    "eidolon-uc-subtypes": "h2", "eidolon-base-forms": "h2",
     "eidolon-base-forms-biped": "h2", "bard-performances": "h2", "barbarian-rage": "h2",
 }
 BLOCK_TAGS = {

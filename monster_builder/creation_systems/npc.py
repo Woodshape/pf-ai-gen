@@ -587,6 +587,27 @@ class NpcCreation(CreationSystem):
             "conditionalSaves": copy.deepcopy(race.get("conditionalSaves")),
             "details": copy.deepcopy(selections.get("details", {})),
         }
+        channel_feature = next(
+            (feature for feature in class_features
+             if feature["featureId"] == "npc-class-feature.cleric-channel-energy" and "damageDice" in feature),
+            None,
+        )
+        if channel_feature is not None:
+            canonical["channelEnergy"] = {
+                "energyType": channel_feature["energyType"],
+                "damageDice": channel_feature["damageDice"],
+                "usesPerDay": channel_feature["usesPerDay"],
+                "saveDC": channel_feature["saveDC"],
+                "radiusFeet": channel_feature["radiusFeet"],
+                "sourceRefs": copy.deepcopy(channel_feature["sourceRefs"]),
+            }
+        domain_speed_bonus = sum(
+            (self._record("classFeature", feature["featureId"]).get("effects") or {}).get("speedBonus", 0)
+            for feature in class_features if feature["featureId"].endswith("-domain")
+        )
+        if domain_speed_bonus:
+            canonical["speed"] = copy.deepcopy(canonical["speed"])
+            canonical["speed"]["land"] = canonical["speed"].get("land", 30) + domain_speed_bonus
         if class_record["id"] == "npc-class.druid":
             feature_calculation = (
                 "apply cumulative Druid features and derive Fire Bolt damage, uses, and attack bonus"
@@ -1274,7 +1295,7 @@ class NpcCreation(CreationSystem):
             local_archetype = archetype if archetype and archetype.get("classId") == record["id"] else None
             if not local_archetype:
                 local.pop("archetypeId", None)
-            if record["id"] in {"npc-class.sorcerer", "npc-class.druid"}:
+            if record["id"] in {"npc-class.sorcerer", "npc-class.druid", "npc-class.cleric"}:
                 entries, entry_refs, entry_issues = self._selected_class_features(
                     local, race, record, item["levels"], modifiers, local_archetype,
                 )
@@ -1324,6 +1345,9 @@ class NpcCreation(CreationSystem):
         item, record, row = casters[0]
         if record["id"] == "npc-class.ranger":
             return self._ranger_spells(selections, record, row, item["levels"], scores, modifiers)
+        if record["id"] == "npc-class.cleric":
+            result, refs, issues = self._cleric_spells(selections, record, row, item["levels"], scores, modifiers)
+            return result, refs, issues, []
         result, refs, issues = self._spells(selections, record, row, item["levels"], scores, modifiers,
                                           archetype_id=archetype["id"] if archetype else None, archetype=archetype)
         return result, refs, issues, []
@@ -1446,6 +1470,76 @@ class NpcCreation(CreationSystem):
                 "sourceRefs": _refs(fire_domain),
             })
             return features, feature_refs, []
+
+        if class_record["id"] == "npc-class.cleric":
+            domains_feature = self._record("classFeature", "npc-class-feature.cleric-domains")
+            choice = choices.get("domains")
+            domains_refs = _dedupe_refs(refs, _refs(domains_feature))
+            if not choice or choice not in domains_feature.get("options", {}):
+                return features, domains_refs, [self._issue(
+                    "npc.catalog-gap" if choice else "npc.selection-required",
+                    "select two cleric domains with catalogued rules",
+                    path="/selections/classFeatureChoices/domains", source_refs=_refs(domains_feature),
+                )]
+            option = domains_feature["options"][choice]
+            domains = [self._record("classFeature", domain_id) for domain_id in option.get("domains", [])]
+            if len(domains) != 2 or any(domain.get("catalogStatus") != "resolved" for domain in domains):
+                return features, domains_refs, [self._issue(
+                    "npc.catalog-gap", "both selected cleric domains need catalogued rules", kind="catalog-data",
+                    path="/selections/classFeatureChoices/domains",
+                    details={"domainIds": [domain.get("id") for domain in domains]},
+                    source_refs=_refs(domains_feature),
+                )]
+            domains_refs = _dedupe_refs(domains_refs, *[_refs(domain) for domain in domains])
+            channel = self._record("classFeature", "npc-class-feature.cleric-channel-energy")
+            channel_effects = channel.get("effects", {})
+            channel_dice = 1 + (level - 1) // 2
+            channel_dc = channel_effects["channelSaveDCBase"] + modifiers[channel_effects["channelSaveDCAbility"]]
+            if channel_effects.get("channelSaveDCPlusHalfClassLevel"):
+                channel_dc += level // 2
+            for feature in features:
+                feature_id = feature["featureId"]
+                if feature_id in {"npc-class-feature.cleric-proficiencies", "npc-class-feature.cleric-orisons"}:
+                    feature["effects"] = copy.deepcopy(self._record("classFeature", feature_id).get("effects", {}))
+                elif feature_id == "npc-class-feature.cleric-domains":
+                    feature.update(choice=choice, name=option.get("name", "Cleric domains"))
+                elif feature_id == "npc-class-feature.cleric-channel-energy":
+                    feature.update(
+                        energyType="positive",
+                        damageDice=f"{channel_dice}d6",
+                        usesPerDay=channel_effects["channelUsesBase"] + modifiers[channel_effects["channelUsesAbility"]],
+                        saveDC=channel_dc,
+                        radiusFeet=channel_effects.get("channelRadiusFeet"),
+                    )
+            for domain in domains:
+                powers = []
+                for power in domain.get("powers", []):
+                    if power.get("level", 1) > level:
+                        continue
+                    selected = copy.deepcopy(power)
+                    if selected.get("damageDie") and selected.get("damageBonusPerTwoLevels") is not None:
+                        damage_bonus = (level // 2) * selected["damageBonusPerTwoLevels"]
+                        selected["damageExpression"] = selected["damageDie"] + (_bonus(damage_bonus) if damage_bonus else "")
+                    if selected.get("usesBase") is not None and selected.get("usesAbility"):
+                        selected["usesPerDay"] = selected["usesBase"] + modifiers[selected["usesAbility"]]
+                    if selected.get("skillCheckBase") is not None:
+                        selected["checkResult"] = selected["skillCheckBase"] + modifiers[selected.get("skillCheckAbility", "wisdom")]
+                        if selected.get("skillCheckPlusClassLevel"):
+                            selected["checkResult"] += level
+                    if selected.get("attackType") in {"ranged touch", "touch"} and selected.get("damageDie"):
+                        selected["attackBonus"] = (
+                            class_record["levels"][str(level)]["bab"] + modifiers["dexterity"]
+                            + race.get("sizeModifiers", {}).get("attack", 0)
+                        )
+                    powers.append(selected)
+                entry: dict[str, Any] = {
+                    "featureId": domain["id"], "name": domain["name"], "powers": powers,
+                    "sourceRefs": _refs(domain),
+                }
+                if domain.get("effects"):
+                    entry["effects"] = copy.deepcopy(domain["effects"])
+                features.append(entry)
+            return features, domains_refs, []
 
         issues = [self._issue(
             "npc.choice-invalid", "the selected class grants no such feature choice",
@@ -1642,6 +1736,17 @@ class NpcCreation(CreationSystem):
         choice = selections.get("classFeatureChoices", {}).get("natureBond")
         return self._optional("classFeature", bond.get("options", {}).get(choice, {}).get("featureId"))
 
+    def _selected_domains(self, selections) -> list[dict[str, Any]]:
+        record = self._record("classFeature", "npc-class-feature.cleric-domains")
+        choice = selections.get("classFeatureChoices", {}).get("domains")
+        option = record.get("options", {}).get(choice, {})
+        domains = []
+        for domain_id in option.get("domains", []):
+            domain = self._optional("classFeature", domain_id)
+            if domain is not None:
+                domains.append(domain)
+        return domains
+
     def _druid_spells(
         self, loadout: Any, class_record: dict[str, Any], row: dict[str, Any], level: int,
         scores: dict[str, int], modifiers: dict[str, int], *,
@@ -1832,6 +1937,167 @@ class NpcCreation(CreationSystem):
                 "saveDcByLevel": {spell_level: 10 + int(spell_level) + wisdom for spell_level in base_slots},
                 "spontaneousConversion": conversion,
             }
+        return result, refs, issues
+
+    def _cleric_spells(
+        self, selections: dict[str, Any], class_record: dict[str, Any], row: dict[str, Any], level: int,
+        scores: dict[str, int], modifiers: dict[str, int],
+    ) -> tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]:
+        loadout = selections.get("spellLoadout", {})
+        prepared = loadout.get("prepared", {}) if isinstance(loadout, dict) else {}
+        domain_prepared = loadout.get("domainPrepared", {}) if isinstance(loadout, dict) else {}
+        base_slots = row["spellsPerDay"]
+        spellcasting = self._record("classFeature", "npc-class-feature.cleric-spellcasting")
+        casting_effects = spellcasting.get("effects", {})
+        domains = self._selected_domains(selections)
+        cleric_ref = self._source_ref("source.aon-cleric", "Spells; Domains; Orisons; Spontaneous Casting", [37, 51])
+        repeat_ref = self._source_ref("source.aon-creating-npcs", "Step 5: Class Features", [70, 70])
+        caster_level_ref = self._source_ref("source.aon-caster-level", "Caster Level", [4, 6])
+        bonus_ref = self._source_ref("source.aon-getting-started", "Table: Ability Modifiers and Bonus Spells", [89, 101])
+        refs = _dedupe_refs(
+            _refs(class_record), _refs(row), _refs(spellcasting), [cleric_ref, repeat_ref, caster_level_ref, bonus_ref],
+            *[_refs(domain) for domain in domains],
+        )
+        issues: list[dict[str, Any]] = []
+        if len(domains) != 2:
+            issues.append(self._issue(
+                "npc.catalog-gap", "spellcasting requires two resolved cleric domains", kind="catalog-data",
+                path="/selections/classFeatureChoices/domains", source_refs=_refs(spellcasting),
+            ))
+        missing_rules = [
+            ("npc-class-feature.cleric-spellcasting.effects.castingMode", casting_effects.get("castingMode")),
+            ("npc-class-feature.cleric-spellcasting.effects.castingAbility", casting_effects.get("castingAbility")),
+            ("npc-class-feature.cleric-spellcasting.effects.spontaneousConversion", casting_effects.get("spontaneousConversion")),
+        ]
+        slots_per_spell_level = None
+        domain_spells: dict[str, list[str]] = {}
+        for domain in domains:
+            if domain.get("slotsPerSpellLevel") is None:
+                issues.append(self._gap({"id": f"{domain.get('id')}.slotsPerSpellLevel"}, "/selections/spellLoadout"))
+            else:
+                slots_per_spell_level = domain["slotsPerSpellLevel"]
+            if not domain.get("domainSpells"):
+                issues.append(self._gap({"id": f"{domain.get('id')}.domainSpells"}, "/selections/spellLoadout"))
+            for spell_level, spell_id in (domain.get("domainSpells") or {}).items():
+                domain_spells.setdefault(spell_level, []).append(spell_id)
+        for rule_id, value in missing_rules:
+            if value is None:
+                issues.append(self._gap({"id": rule_id}, "/selections/spellLoadout"))
+        conversion_catalog = casting_effects.get("spontaneousConversion")
+        if isinstance(conversion_catalog, dict):
+            for field in ("name", "from", "excludesDomainSlots", "spellIdsBySlotLevel"):
+                if conversion_catalog.get(field) is None:
+                    issues.append(self._gap({"id": f"npc-class-feature.cleric-spellcasting.effects.spontaneousConversion.{field}"}, "/selections/spellLoadout"))
+        if any(issue["code"] == "npc.catalog-gap" for issue in issues):
+            return {}, refs, issues
+        available_domain_spells = {
+            spell_level: spell_ids for spell_level, spell_ids in domain_spells.items()
+            if spell_level in base_slots and int(spell_level) > 0
+        }
+        unexpected_fields = set(loadout) - {"prepared", "domainPrepared"} if isinstance(loadout, dict) else set()
+        if unexpected_fields:
+            issues.append(self._issue(
+                "npc.spell-loadout-invalid", "the Cleric spell loadout accepts only prepared and domainPrepared spells",
+                path="/selections/spellLoadout", details={"unexpectedFields": sorted(unexpected_fields)}, source_refs=[cleric_ref],
+            ))
+        expected_levels = set(base_slots)
+        if set(prepared) != expected_levels:
+            issues.append(self._issue(
+                "npc.spell-levels-invalid", "prepared spells must include exactly the available Cleric spell levels",
+                path="/selections/spellLoadout/prepared", details={"expectedLevels": sorted(expected_levels, key=int)}, source_refs=_refs(row),
+            ))
+        expected_domain_levels = set(available_domain_spells)
+        if set(domain_prepared) != expected_domain_levels:
+            issues.append(self._issue(
+                "npc.spell-levels-invalid", "domain preparations must include exactly the available cleric domain spell levels",
+                path="/selections/spellLoadout/domainPrepared", details={"expectedLevels": sorted(expected_domain_levels, key=int)},
+                source_refs=[cleric_ref],
+            ))
+        wisdom = modifiers["wisdom"]
+        highest_level = max(map(int, base_slots))
+        wisdom_score = scores["wisdom"]
+        required_wisdom = 10 + highest_level
+        if wisdom_score < required_wisdom:
+            issues.append(self._issue(
+                "npc.casting-ability-insufficient", "Wisdom is too low to prepare the highest available Cleric spell level",
+                path="/selections/abilityGeneration", details={"actual": wisdom_score, "required": required_wisdom, "spellLevel": highest_level},
+                source_refs=[cleric_ref],
+            ))
+        slots_by_level: dict[str, dict[str, int]] = {}
+        resolved_prepared: dict[str, list[str]] = {}
+        for spell_level, base in base_slots.items():
+            numeric_level = int(spell_level)
+            wisdom_bonus = _bonus_spell_count(wisdom, numeric_level)
+            domain_count = slots_per_spell_level if spell_level in available_domain_spells else 0
+            slots_by_level[spell_level] = {
+                "base": base, "wisdomBonus": wisdom_bonus, "domain": domain_count, "total": base + wisdom_bonus + domain_count,
+            }
+            selected = prepared.get(spell_level, [])
+            expected_count = base + wisdom_bonus
+            if len(selected) != expected_count:
+                issues.append(self._issue(
+                    "npc.spell-count-invalid", "prepared spells must fill the base and Wisdom-bonus slots exactly",
+                    path=f"/selections/spellLoadout/prepared/{spell_level}",
+                    details={"expected": expected_count, "selected": len(selected), "base": base, "wisdomBonus": wisdom_bonus},
+                    source_refs=_dedupe_refs(_refs(row), [cleric_ref, bonus_ref]),
+                ))
+            resolved_prepared[spell_level] = []
+            for index, spell_id in enumerate(selected):
+                spell = self._record("spell", spell_id)
+                refs = _dedupe_refs(refs, _refs(spell))
+                path = f"/selections/spellLoadout/prepared/{spell_level}/{index}"
+                if not spell.get("levelsByClass"):
+                    issues.append(self._gap(spell, path))
+                elif spell.get("levelsByClass", {}).get("cleric") != numeric_level:
+                    issues.append(self._issue(
+                        "npc.spell-level-invalid", "spell is not a Cleric spell of the prepared level",
+                        path=path, source_refs=_refs(spell),
+                    ))
+                resolved_prepared[spell_level].append(spell["id"])
+        resolved_domain: dict[str, list[str]] = {}
+        for spell_level, allowed_ids in available_domain_spells.items():
+            selected = domain_prepared.get(spell_level, [])
+            if len(selected) != slots_per_spell_level:
+                issues.append(self._issue(
+                    "npc.spell-count-invalid", "each available cleric domain slot requires exactly one preparation",
+                    path=f"/selections/spellLoadout/domainPrepared/{spell_level}",
+                    details={"expected": slots_per_spell_level, "selected": len(selected)}, source_refs=[cleric_ref],
+                ))
+            resolved_domain[spell_level] = []
+            for index, spell_id in enumerate(selected):
+                spell = self._record("spell", spell_id)
+                refs = _dedupe_refs(refs, _refs(spell))
+                path = f"/selections/spellLoadout/domainPrepared/{spell_level}/{index}"
+                if not spell.get("levelsByClass"):
+                    issues.append(self._gap(spell, path))
+                elif spell["id"] not in allowed_ids:
+                    issues.append(self._issue(
+                        "npc.domain-spell-invalid", "spell is not granted by either selected cleric domain at this level",
+                        path=path, details={"expectedSpellIds": list(allowed_ids)}, source_refs=[cleric_ref],
+                    ))
+                resolved_domain[spell_level].append(spell["id"])
+        conversion_ids = {key: spell_ids for key, spell_ids in (conversion_catalog.get("spellIdsBySlotLevel") or {}).items()
+                          if key in base_slots and int(key) > 0}
+        for spell_id in dict.fromkeys(spell_id for spell_ids in conversion_ids.values() for spell_id in spell_ids):
+            spell = self._record("spell", spell_id)
+            refs = _dedupe_refs(refs, _refs(spell))
+            if not spell.get("levelsByClass"):
+                issues.append(self._gap(spell, "/selections/spellLoadout"))
+        conversion = {
+            "name": conversion_catalog["name"], "from": conversion_catalog["from"],
+            "excludesDomainSlots": conversion_catalog["excludesDomainSlots"],
+            "spellIdsBySlotLevel": copy.deepcopy(conversion_ids),
+        }
+        result = {
+            "className": class_record["name"], "castingMode": casting_effects["castingMode"],
+            "casterLevel": level, "castingAbility": casting_effects["castingAbility"],
+            "castingAbilityModifier": wisdom,
+            "domains": [domain["id"] for domain in domains],
+            "slotsByLevel": slots_by_level, "prepared": resolved_prepared,
+            "domainPrepared": resolved_domain,
+            "saveDcByLevel": {spell_level: 10 + int(spell_level) + wisdom for spell_level in base_slots},
+            "spontaneousConversion": conversion,
+        }
         return result, refs, issues
 
     def _feats(

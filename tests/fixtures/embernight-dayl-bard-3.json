@@ -1,0 +1,82 @@
+{
+    "creationSystem": "npc",
+    "concept": {
+        "name": "Dayl",
+        "role": "Unterstuetzer / Bruder von Yalana (Embernight)",
+        "description": "Dayl, Halbling-Barde 3 (HG 2), der einzige der drei Embernight-NSCs mit vollstaendig aufgeloestem Katalog.",
+        "targetCR": 2
+    },
+    "selections": {
+        "statblockUse": "full",
+        "raceId": "npc-race.halfling",
+        "racialChoices": {},
+        "classProgression": [
+            {
+                "classId": "npc-class.bard",
+                "levels": 3
+            }
+        ],
+        "abilityGeneration": {
+            "method": "arcane-preset",
+            "arrayId": "npc-ability-array.heroic"
+        },
+        "skillGeneration": {
+            "method": "simplified",
+            "skills": [
+                "skill.perform",
+                "skill.perception",
+                "skill.use-magic-device",
+                "skill.diplomacy",
+                "skill.knowledge-nobility",
+                "skill.sense-motive",
+                "skill.stealth"
+            ]
+        },
+        "feats": [
+            {
+                "slotId": "general-1",
+                "featId": "feat.weapon-finesse"
+            },
+            {
+                "slotId": "general-3",
+                "featId": "feat.improved-initiative"
+            }
+        ],
+        "spellLoadout": {
+            "known": {
+                "0": [
+                    "spell.detect-magic",
+                    "spell.light",
+                    "spell.mage-hand",
+                    "spell.message",
+                    "spell.prestidigitation",
+                    "spell.read-magic"
+                ],
+                "1": [
+                    "spell.cure-light-wounds",
+                    "spell.grease",
+                    "spell.charm-person",
+                    "spell.sleep"
+                ]
+            }
+        },
+        "gearProfile": {
+            "experienceProgression": "medium",
+            "fantasyLevel": "normal"
+        },
+        "gear": [
+            {
+                "itemId": "item.chain-shirt"
+            },
+            {
+                "itemId": "item.rapier"
+            },
+            {
+                "itemId": "item.sling"
+            }
+        ],
+        "details": {
+            "alignment": "N"
+        }
+    }
+}

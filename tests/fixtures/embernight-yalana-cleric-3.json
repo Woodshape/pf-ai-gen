@@ -1,0 +1,104 @@
+{
+    "creationSystem": "npc",
+    "concept": {
+        "name": "Yalana",
+        "role": "Halbling-Klerikerin des Oghma 3 (Embernight)",
+        "description": "Yalana, Halbling-Klerikerin 3 (HG 2) der Wissens- und Reisendomaenen, Wirtin der Green Rest.",
+        "targetCR": 2
+    },
+    "selections": {
+        "statblockUse": "full",
+        "raceId": "npc-race.halfling",
+        "racialChoices": {},
+        "classProgression": [
+            {
+                "classId": "npc-class.cleric",
+                "levels": 3
+            }
+        ],
+        "abilityGeneration": {
+            "method": "assigned-array",
+            "arrayId": "npc-ability-array.heroic",
+            "assignments": {
+                "strength": 10,
+                "dexterity": 8,
+                "constitution": 13,
+                "intelligence": 14,
+                "wisdom": 15,
+                "charisma": 12
+            }
+        },
+        "skillGeneration": {
+            "method": "simplified",
+            "skills": [
+                "skill.diplomacy",
+                "skill.knowledge-arcana",
+                "skill.knowledge-history",
+                "skill.knowledge-religion"
+            ],
+            "includeUntrained": [
+                "skill.sense-motive",
+                "skill.perception"
+            ]
+        },
+        "feats": [
+            {
+                "slotId": "general-1",
+                "featId": "feat.combat-casting"
+            },
+            {
+                "slotId": "general-3",
+                "featId": "feat.toughness"
+            }
+        ],
+        "classFeatureChoices": {
+            "domains": "knowledge-travel"
+        },
+        "spellLoadout": {
+            "prepared": {
+                "0": [
+                    "spell.detect-magic",
+                    "spell.guidance",
+                    "spell.light",
+                    "spell.stabilize"
+                ],
+                "1": [
+                    "spell.bless",
+                    "spell.cure-light-wounds",
+                    "spell.shield-of-faith"
+                ],
+                "2": [
+                    "spell.aid",
+                    "spell.restoration-lesser"
+                ]
+            },
+            "domainPrepared": {
+                "1": [
+                    "spell.comprehend-languages"
+                ],
+                "2": [
+                    "spell.locate-object"
+                ]
+            }
+        },
+        "gearProfile": {
+            "experienceProgression": "medium",
+            "fantasyLevel": "normal"
+        },
+        "gear": [
+            {
+                "itemId": "item.light-mace",
+                "equipped": true
+            },
+            {
+                "itemId": "item.light-wooden-shield",
+                "equipped": false
+            },
+            "holy symbol",
+            "bandages"
+        ],
+        "details": {
+            "alignment": "N"
+        }
+    }
+}

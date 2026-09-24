@@ -2,7 +2,7 @@
 
 Covers the class-expansion and gear-budget work recorded in docs/npc-feat-support-audit.md
 ("Dependencies outside the literal list"): every resolved class level composes, higher-level
-gear rows are source-backed instead of approximated, and cleric stays an explicit gap.
+gear rows are source-backed instead of approximated, and cleric levels 1-3 are resolved.
 """
 import json
 import unittest
@@ -163,26 +163,29 @@ class GearBudgetSourceRowsTests(unittest.TestCase):
         self.assertEqual(system._gear_budget(resolved, 0)["catalogStatus"], "gap")
 
 
-class ClericStaysExplicitGapTests(unittest.TestCase):
-    def test_cleric_class_and_levels_are_not_resolved(self):
+class ClericResolvedTests(unittest.TestCase):
+    def test_cleric_class_and_levels_are_resolved(self):
         cleric = CATALOG["classes"]["npc-class.cleric"]
-        self.assertEqual(cleric["catalogStatus"], "gap")
-        self.assertTrue(all(row["catalogStatus"] == "gap" for row in cleric["levels"].values()))
+        self.assertEqual(cleric["catalogStatus"], "resolved")
+        self.assertEqual(cleric["supportedLevels"], [1, 2, 3])
+        for level in (1, 2, 3):
+            self.assertEqual(cleric["levels"][str(level)]["catalogStatus"], "resolved")
+        for level in range(4, 21):
+            self.assertEqual(cleric["levels"][str(level)]["catalogStatus"], "gap")
 
-    def test_cleric_level_one_keeps_sourced_partial_metadata(self):
+    def test_cleric_level_one_row_is_resolved_with_feature_grants(self):
         row = CATALOG["classes"]["npc-class.cleric"]["levels"]["1"]
+        self.assertEqual(row["catalogStatus"], "resolved")
         self.assertEqual((row["bab"], row["fortitude"], row["reflex"], row["will"]), (0, 2, 0, 2))
         self.assertEqual(row["spellsPerDay"], {"0": 3, "1": 1})
-        self.assertIsNone(row["featureGrants"])
-        self.assertIsNone(row["choiceSlots"])
-        statuses = {ref["provenanceStatus"] for ref in row["sourceRef"]}
-        self.assertEqual(statuses, {"resolved", "catalog-gap"})
+        self.assertIn("npc-class-feature.cleric-domains", row["featureGrants"])
+        self.assertTrue(all(ref["provenanceStatus"] == "resolved" for ref in row["sourceRef"]))
 
-    def test_cleric_draft_is_rejected_not_silently_spell_less(self):
+    def test_cleric_draft_without_domain_spells_fails_loudly(self):
         draft = draft_for({"classId": "npc-class.cleric", "levels": 1})
         result = evaluate(draft)
         self.assertEqual(result["status"], "invalid")
-        self.assertIn("npc.catalog-gap", [issue["code"] for issue in result["issues"]])
+        self.assertIn("npc.domain-spell-invalid", [issue["code"] for issue in result["issues"]])
 
 
 class ClassFeatureDependencyTests(unittest.TestCase):

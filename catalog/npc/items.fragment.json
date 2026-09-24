@@ -1,6 +1,135 @@
 {
   "records": [
     {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "critMultiplier": 2,
+        "critRange": 20,
+        "damageDieBySize": {
+          "medium": "1d6",
+          "small": "1d4"
+        },
+        "damageType": "B",
+        "handedness": "light",
+        "lightWeapon": true,
+        "weaponCategory": "simple",
+        "weaponType": "light-mace"
+      },
+      "id": "item.light-mace",
+      "name": "Light Mace",
+      "priceCp": 500,
+      "sourceRef": [
+        {
+          "entry": "Mace, light\t5 gp\t1d4\t1d6\t×2\t—\t4 lbs.\tB\t—",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons; Light Melee Weapons",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            113,
+            117
+          ]
+        },
+        {
+          "entry": "Armor fitted for Small characters weighs half as much",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+          "provenanceStatus": "resolved",
+          "section": "Weapon weight by size",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            117,
+            117
+          ]
+        }
+      ],
+      "weightLb": 4,
+      "weightLbBySize": {
+        "medium": 4,
+        "small": 2
+      }
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "weapon",
+      "effects": {
+        "critMultiplier": 2,
+        "critRange": 20,
+        "damageDieBySize": {
+          "medium": "1d6",
+          "small": "1d4"
+        },
+        "damageType": "B",
+        "doubleWeapon": true,
+        "handedness": "two-handed",
+        "twoHanded": true,
+        "weaponCategory": "simple",
+        "weaponType": "quarterstaff"
+      },
+      "id": "item.quarterstaff",
+      "name": "Quarterstaff",
+      "priceCp": 0,
+      "sourceRef": [
+        {
+          "entry": "Quarterstaff\t—\t1d4/1d4\t1d6/1d6\t×2\t—\t4 lbs.\tB\tdouble, monk",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-weapons",
+          "provenanceStatus": "resolved",
+          "section": "Table: Weapons; Two-Handed Melee Weapons",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            125,
+            126
+          ]
+        }
+      ],
+      "weightLb": 4,
+      "weightLbBySize": {
+        "medium": 4,
+        "small": 2
+      }
+    },
+    {
+      "catalogStatus": "resolved",
+      "category": "shield",
+      "effects": {
+        "armorCheckPenalty": -1,
+        "shieldBonus": 1,
+        "shieldCategory": "shield"
+      },
+      "id": "item.light-wooden-shield",
+      "name": "Light Wooden Shield",
+      "priceCp": 300,
+      "sourceRef": [
+        {
+          "entry": "Shield, light wooden\t3 gp\t+1\t—\t–1\t5%\t—\t—\t5 lbs.",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+          "provenanceStatus": "resolved",
+          "section": "Table: Armor and Shields",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            339,
+            339
+          ]
+        },
+        {
+          "entry": "Armor fitted for Small characters weighs half as much (shields share Table: Armor and Shields)",
+          "officialUrl": "https://legacy.aonprd.com/coreRulebook/equipment.html#table-armor-and-shields",
+          "provenanceStatus": "resolved",
+          "section": "Armor Weight column",
+          "sourceId": "source.aon-equipment",
+          "txtLines": [
+            317,
+            317
+          ]
+        }
+      ],
+      "weightLb": 5,
+      "weightLbBySize": {
+        "medium": 5,
+        "small": 2
+      }
+    },
+    {
       "id": "item.composite-shortbow-strength-1",
       "name": "Composite shortbow (+1 Str)",
       "catalogStatus": "resolved",

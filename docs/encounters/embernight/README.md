@@ -211,8 +211,15 @@ später wiederaufgebaut (Hook).
    Obergeschoss betreten — dann wecken sie sie selbst. Sie gilt als NSC-Verbündete
    und bringt den Wasserelementar, **keine** zusätzliche Begegnungsstufe.
 
+## NSC-Statblocks
+
+Die vollständigen NSC-Werte und ihre Build-Annahmen stehen in
+[`npcs.md`](npcs.md). Monsterstatblocks und Quellenangaben stehen in
+[`statblocks.md`](statblocks.md).
+
 ## Quellen
 
-- Statblocks und Quellenangaben: `statblocks.md`
+- NSC-Statblocks und Quellenangaben: `npcs.md`
+- Monsterstatblocks und Quellenangaben: `statblocks.md`
 - Auswahl und Herkunft der Kreaturen: `feuer-ebene-bewohner.md`
 - Rauch-/Feuerregeln: `../benton-burning-house/rauch-und-feuer.md`

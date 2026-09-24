@@ -1,0 +1,105 @@
+{
+    "creationSystem": "npc",
+    "concept": {
+        "name": "Lili",
+        "role": "Gnomen-Druidin 3 (Embernight)",
+        "description": "Lili, Gnomen-Druidin 3 (HG 2) mit Wasserdomaene, Rettung aus dem Obergeschoss.",
+        "targetCR": 2
+    },
+    "selections": {
+        "statblockUse": "full",
+        "raceId": "npc-race.gnome",
+        "racialChoices": {},
+        "classProgression": [
+            {
+                "classId": "npc-class.druid",
+                "levels": 3
+            }
+        ],
+        "abilityGeneration": {
+            "method": "divine-preset",
+            "arrayId": "npc-ability-array.heroic"
+        },
+        "skillGeneration": {
+            "method": "simplified",
+            "skills": [
+                "skill.heal",
+                "skill.survival",
+                "skill.perception",
+                "skill.knowledge-nature"
+            ],
+            "includeUntrained": [
+                "skill.craft"
+            ],
+            "specialties": {
+                "skill.craft": "alchemy"
+            }
+        },
+        "feats": [
+            {
+                "slotId": "general-1",
+                "featId": "feat.combat-casting"
+            },
+            {
+                "slotId": "general-3",
+                "featId": "feat.spell-focus",
+                "school": "conjuration"
+            }
+        ],
+        "classFeatureChoices": {
+            "natureBond": "water-domain"
+        },
+        "spellLoadout": {
+            "prepared": {
+                "0": [
+                    "spell.create-water",
+                    "spell.detect-magic",
+                    "spell.guidance",
+                    "spell.light"
+                ],
+                "1": [
+                    "spell.cure-light-wounds",
+                    "spell.entangle",
+                    "spell.longstrider"
+                ],
+                "2": [
+                    "spell.barkskin",
+                    "spell.resist-energy"
+                ]
+            },
+            "domainPrepared": {
+                "1": [
+                    "spell.obscuring-mist"
+                ],
+                "2": [
+                    "spell.fog-cloud"
+                ]
+            }
+        },
+        "gearProfile": {
+            "experienceProgression": "medium",
+            "fantasyLevel": "normal"
+        },
+        "gear": [
+            {
+                "itemId": "item.quarterstaff",
+                "equipped": true
+            },
+            {
+                "itemId": "item.sling",
+                "equipped": false
+            },
+            {
+                "itemId": "item.leather-armor",
+                "equipped": false
+            },
+            {
+                "itemId": "item.light-wooden-shield",
+                "equipped": false
+            }
+        ],
+        "details": {
+            "alignment": "N"
+        }
+    }
+}

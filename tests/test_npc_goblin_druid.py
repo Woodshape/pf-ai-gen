@@ -135,7 +135,7 @@ class GoblinDruidTests(unittest.TestCase):
         self.assertEqual(budgets["skills"], {"method": "simplified", "count": 4, "selected": 4, "rankBudget": 12, "maxRanks": 3, "ranksAssigned": 0})
         self.assertEqual([slot["slotId"] for slot in budgets["feats"]["slots"]], ["general-1", "general-3"])
         paths = {item["path"]: item for item in requirements["result"]["requirements"]}
-        self.assertEqual(paths["/selections/classFeatureChoices/natureBond"]["values"], ["fire-domain"])
+        self.assertEqual(paths["/selections/classFeatureChoices/natureBond"]["values"], ["fire-domain", "water-domain"])
         self.assertIn("/selections/spellLoadout/prepared", paths)
         self.assertIn("/selections/spellLoadout/domainPrepared", paths)
 

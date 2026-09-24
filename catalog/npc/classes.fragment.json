@@ -1928,7 +1928,7 @@
   {
    "id": "npc-class.cleric",
    "name": "Cleric",
-   "catalogStatus": "gap",
+   "catalogStatus": "resolved",
    "gapCode": "core-rulebook-class-tables",
    "category": "pc",
    "hitDie": "d8",
@@ -1958,17 +1958,18 @@
      ],
      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
      "provenanceStatus": "resolved",
-     "entry": "Cleric class description, class skills, and skill points; level rows remain catalog gaps"
+     "entry": "Cleric class description, class skills, and skill points"
     },
     {
-     "sourceId": "source.npc-gap-matrix",
-     "section": "NPC Source-Gap Matrix",
+     "sourceId": "source.aon-cleric",
+     "section": "Table: Cleric; class features through level 3",
      "txtLines": [
-      22,
-      22
+      13,
+      51
      ],
-     "entry": "Eleven Core PC class tables through level 20",
-     "provenanceStatus": "catalog-gap"
+     "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+     "provenanceStatus": "resolved",
+     "entry": "Cleric level rows, proficiencies, prepared divine casting, channel energy, domains, and orisons"
     }
    ],
    "castingAbility": "wisdom",
@@ -1982,79 +1983,97 @@
      "will": 2,
      "hitDie": "d8",
      "skillSelections": 2,
-     "featureGrants": null,
-     "choiceSlots": null,
+     "featureGrants": [
+      "npc-class-feature.cleric-proficiencies",
+      "npc-class-feature.cleric-spellcasting",
+      "npc-class-feature.cleric-orisons",
+      "npc-class-feature.cleric-channel-energy",
+      "npc-class-feature.cleric-domains"
+     ],
+     "choiceSlots": [],
      "spellsPerDay": {
       "0": 3,
       "1": 1
      },
-     "catalogStatus": "gap",
+     "catalogStatus": "resolved",
      "sourceRef": [
       {
        "sourceId": "source.aon-cleric",
        "section": "Table: Cleric",
        "txtLines": [
         14,
-        15
+        17
        ],
        "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
        "provenanceStatus": "resolved",
-       "entry": "Cleric level 1 base attack, saves, and base spells per day (domain slot granted separately by the chosen domains)"
+       "entry": "Cleric level 1 base attack, saves, and base spells per day; the +1 domain slot is granted separately by the chosen domains"
       },
       {
-       "sourceId": "source.npc-gap-matrix",
-       "section": "NPC Source-Gap Matrix",
+       "sourceId": "source.aon-cleric",
+       "section": "Weapon and Armor Proficiency; Spells; Channel Energy; Domains; Orisons",
        "txtLines": [
-        22,
-        22
+        35,
+        51
        ],
-       "provenanceStatus": "catalog-gap",
-       "entry": "Cleric level 1 remains a catalog gap: divine prepared casting runtime, domain choices, and channel energy type are unimplemented"
+       "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+       "provenanceStatus": "resolved",
+       "entry": "Cleric level 1 grants proficiencies, prepared divine casting, orisons, channel energy, and two domains"
       }
      ]
     },
     "2": {
      "level": 2,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 1,
+     "fortitude": 3,
+     "reflex": 0,
+     "will": 3,
+     "hitDie": "d8",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "spellsPerDay": {
+      "0": 4,
+      "1": 2
+     },
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-cleric",
+      "section": "Table: Cleric",
       "txtLines": [
-       22,
-       22
+       16,
+       16
       ],
-      "entry": "Cleric level 2",
-      "provenanceStatus": "catalog-gap"
+      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+      "provenanceStatus": "resolved",
+      "entry": "Cleric level 2 base attack, saves, and base spells per day"
      }
     },
     "3": {
      "level": 3,
-     "bab": null,
-     "fortitude": null,
-     "reflex": null,
-     "will": null,
-     "hitDie": null,
-     "skillSelections": null,
-     "featureGrants": null,
-     "choiceSlots": null,
-     "catalogStatus": "gap",
+     "bab": 2,
+     "fortitude": 3,
+     "reflex": 1,
+     "will": 3,
+     "hitDie": "d8",
+     "skillSelections": 2,
+     "featureGrants": [],
+     "choiceSlots": [],
+     "spellsPerDay": {
+      "0": 4,
+      "1": 2,
+      "2": 1
+     },
+     "catalogStatus": "resolved",
      "sourceRef": {
-      "sourceId": "source.npc-gap-matrix",
-      "section": "NPC Source-Gap Matrix",
+      "sourceId": "source.aon-cleric",
+      "section": "Table: Cleric",
       "txtLines": [
-       22,
-       22
+       17,
+       17
       ],
-      "entry": "Cleric level 3",
-      "provenanceStatus": "catalog-gap"
+      "officialUrl": "https://aonprd.com/ClassDisplay.aspx?ItemName=Cleric",
+      "provenanceStatus": "resolved",
+      "entry": "Cleric level 3 base attack, saves, and base spells per day"
      }
     },
     "4": {
@@ -2431,7 +2450,12 @@
       "provenanceStatus": "catalog-gap"
      }
     }
-   }
+   },
+   "supportedLevels": [
+    1,
+    2,
+    3
+   ]
   },
   {
    "id": "npc-class.commoner",

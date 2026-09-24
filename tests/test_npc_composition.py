@@ -25,6 +25,8 @@ def draft_for(catalog, race_id, class_id, level):
               "intelligence": 13, "wisdom": 10, "charisma": 15}
     if class_id == "npc-class.druid":
         scores.update(wisdom=12, constitution=10)
+    if class_id == "npc-class.cleric":
+        scores.update(wisdom=12, constitution=10)
     if class_id == "npc-class.warrior":
         scores.update(intelligence=8, strength=13)
     racial_choices = {slot["choiceId"]: "wisdom" for slot in race.get("choiceSlots", [])}
@@ -63,7 +65,17 @@ def draft_for(catalog, race_id, class_id, level):
                             if spell["catalogStatus"] == "resolved" and spell.get("levelsByClass", {}).get(class_key) == number)
             loadout["prepared"][key] = [spell_id] * (base + bonus)
         if class_key == "druid":
-            loadout["domainPrepared"] = {key: [spell_id] for key, spell_id in catalog["classFeatures"]["npc-class-feature.fire-domain"]["domainSpells"].items()
+            domains = ["npc-class-feature.fire-domain"]
+        elif class_key == "cleric":
+            domains = catalog["classFeatures"]["npc-class-feature.cleric-domains"]["options"][choices["domains"]]["domains"]
+        else:
+            domains = []
+        if domains:
+            domain_spells = {}
+            for domain_id in domains:
+                for key, spell_id in catalog["classFeatures"][domain_id]["domainSpells"].items():
+                    domain_spells.setdefault(key, spell_id)
+            loadout["domainPrepared"] = {key: [spell_id] for key, spell_id in domain_spells.items()
                                          if key in row["spellsPerDay"] and int(key) > 0}
     return {"creationSystem": "npc", "concept": {"name": "Composition check"}, "selections": {
         "statblockUse": "full", "raceId": race_id, "racialChoices": racial_choices,
